@@ -1,0 +1,63 @@
+{
+  "session_id": "26021851-c835-401b-9319-5f4279c41288",
+  "run_stamp": "20260520_112125_19e463fa",
+  "stage": "migration_retrieval_plan_response",
+  "step_index": 1,
+  "created_at": "2026-05-20T11:21:29+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "output_schema": {
+      "abstract_requirement": "object, attribute, task_type, scene, constraints[]",
+      "retrieve_fields": "每项 field + queries[]（2-4 条）"
+    },
+    "used_fallback": false,
+    "output_raw": "{\n  \"abstract_requirement\": {\n    \"object\": \"头盔\",\n    \"attribute\": \"颜色\",\n    \"task_type\": \"分类识别\",\n    \"scene\": \"城市结构化人体属性检测\",\n    \"constraints\": [\n      \"多类别颜色（黑、白、灰、红、蓝、黄、绿、紫、迷彩）\",\n      \"目标人体属性检测模型\",\n      \"繁体中文/香港项目外部环境\"\n    ]\n  },\n  \"retrieve_fields\": [\n    {\n      \"field\": \"existing_models\",\n      \"queries\": [\n        \"人体属性结构化检测模型 pedestrian attribute structured detection model\",\n        \"城市人群特征识别检测模型 pedestrian feature recognition detection model\",\n        \"全身人体属性多模态检测模型 full body attribute multimodal detection model\"\n      ]\n    },\n    {\n      \"field\": \"similar_capabilities\",\n      \"queries\": [\n        \"目标部件属性迁移 安全帽 车辆 帽类分类 headgear attribute transfer helmet color classification\",\n        \"物体颜色特征迁移 工业缺陷颜色迁移 外观颜色一致性检测 color feature transfer industrial defect color migration surface color consistency inspection\",\n        \"多类别颜色分类迁移 非机动车 车辆颜色迁移 motion vehicle color classification motion attribute color transfer\"\n      ]\n    },\n    {\n      \"field\": \"performance_baseline\",\n      \"queries\": [\n        \"小样本颜色类别数量 0至10 类颜色识别准确率 mIoU mAP benchmark color classification accuracy multi-class\",\n        \"头骨视角遮挡容器颜色检测准确率 head occlusion container color detection accuracy image embedding similarity metric mIoU\",\n        \"姿态/部件遮挡下头部检测准确率 mAP mIoU detection accuracy wear occlusion head detection mAP mIoU\"\n      ]\n    },\n    {\n      \"field\": \"data_requirements\",\n      \"queries\": [\n        \"颜色小样本类少样本学习分类标注标注方案 color few-shot learning classification labeling scheme\",\n        \"自然场景光照变化颜色稳定性标注光照强度分布数据 forward illumination variation color stability labeled dataset\",\n        \"头盔结构遮挡腹内3D颜色渲染训练数据生成头盔3D渲染数据合成格式 helmet structure occlusion 3D neural rendering training data\"\n      ]\n    }\n  ]\n}",
+    "structured_output": {
+      "abstract_requirement": {
+        "object": "头盔",
+        "attribute": "颜色",
+        "task_type": "分类识别",
+        "scene": "城市结构化人体属性检测",
+        "constraints": [
+          "多类别颜色（黑、白、灰、红、蓝、黄、绿、紫、迷彩）",
+          "目标人体属性检测模型",
+          "繁体中文/香港项目外部环境"
+        ]
+      },
+      "retrieve_fields": [
+        {
+          "field": "existing_models",
+          "queries": [
+            "人体属性结构化检测模型 pedestrian attribute structured detection model",
+            "城市人群特征识别检测模型 pedestrian feature recognition detection model",
+            "全身人体属性多模态检测模型 full body attribute multimodal detection model"
+          ]
+        },
+        {
+          "field": "similar_capabilities",
+          "queries": [
+            "目标部件属性迁移 安全帽 车辆 帽类分类 headgear attribute transfer helmet color classification",
+            "物体颜色特征迁移 工业缺陷颜色迁移 外观颜色一致性检测 color feature transfer industrial defect color migra...",
+            "多类别颜色分类迁移 非机动车 车辆颜色迁移 motion vehicle color classification motion attribute color..."
+          ]
+        },
+        {
+          "field": "performance_baseline",
+          "queries": [
+            "小样本颜色类别数量 0至10 类颜色识别准确率 mIoU mAP benchmark color classification accuracy multi-c...",
+            "头骨视角遮挡容器颜色检测准确率 head occlusion container color detection accuracy image embeddin...",
+            "姿态/部件遮挡下头部检测准确率 mAP mIoU detection accuracy wear occlusion head detection mAP mI..."
+          ]
+        },
+        {
+          "field": "data_requirements",
+          "queries": [
+            "颜色小样本类少样本学习分类标注标注方案 color few-shot learning classification labeling scheme",
+            "自然场景光照变化颜色稳定性标注光照强度分布数据 forward illumination variation color stability labeled d...",
+            "头盔结构遮挡腹内3D颜色渲染训练数据生成头盔3D渲染数据合成格式 helmet structure occlusion 3D neural rendering..."
+          ]
+        }
+      ]
+    }
+  }
+}

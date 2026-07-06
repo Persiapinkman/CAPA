@@ -1,0 +1,98 @@
+{
+  "session_id": "e0433ccb-94e8-44d9-8728-327149cac24e",
+  "run_stamp": "20260526_174229_6972c5e7",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-05-26T17:44:30+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"用户需要监控画面中判断行人“短发、长发、光头、其他”的属性识别模型\",\n  \"direct_match\": {\n    \"exists\": false,\n    \"summary\": \"检索到的证据中没有直接针对‘行人发型（短发、长发、光头）’的检测模型\"\n  \t\t  \t\t  ,\n    \"evidence\": []\n  },\n  \"similar_assets\": [\n    {\n      \"model_or_solution\": \"行人属性大模型 2.21.1\",\n      \"label_schema\": \"Hair Style（发型）：证据中提及 `hair_style` 属性，但具体类别取值未在证据中明确列出短发/长发/光头等，可能包含多分类属性\",\n      \"training_data\": \"证据不足，仅提及包含 hair_style 属性\",\n      \"reported_metrics\": \"hair_style: ACC=0.84, mPrec=0.802, 阈值为0.9，Size Filter=60*120\",\n      \"covered_capability\": \"行人属性识别，包含发型属性\",\n      \"gap\": \"无法确认具体发型类别（短发、长发、光头、其他）是否与用户定义完全一致\"\n    \t\t  \t\t  ,\n      \"evidence\": [\n        \"c4f1d7f084a7f84ea5ed02c1\",\n        \"517065dfdf18c074588d32d5\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"行人属性大模型 2.21.0\",\n      \"label_schema\": \"Hair Style（发型）：证据中提及 `hair_style` 属性，具体类别未知\",\n      \"training_data\": \"证据不足\",\n      \"reported_metrics\": \"hair_style: ACC=0.84, mPrec=0.802, 阈值为0.9，Size Filter=60*120\",\n      \"covered_capability\": \"行人属性识别，包含发型属性\",\n      \"gap\": \"无法确认具体发型类别（短发、长发、光头、其他）是否与用户定义完全一致\"\n    \t\t  \t\t  ,\n      \"evidence\": [\n        \"517065dfdf18c074588d32d5\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"新中车工服-zc_uniform_v4\",\n      \"label_schema\": \"Hair Style（发型）：证据中提及 `hair_style` 属性，具体类别未知\",\n      \"training_data\": \"证据不足\",\n      \"reported_metrics\": \"hair_style: ACC=0.84, mPrec=0.802, 阈值为0.9，Size Filter=60*120\",\n      \"covered_capability\": \"行人属性识别，包含发型属性\",\n      \"gap\": \"无法确认具体发型类别（短发、长发、光头、其他）是否与用户定义完全一致\"\n    \t\t  \t\t  ,\n      \"evidence\": [\n        \"a5a2c413dd298f154c5215b8\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"SmallFace_448x800\",\n      \"label_schema\": \"仅支持人脸检测，未包含发型属性\",\n      \"training_data\": \"证据不足\",\n      \"reported_metrics\": \"mAP@IoU=0.5: 0.8941 (32 batch)\",\n      \"covered_capability\": \"人脸检测，不包含属性分析\",\n      \"gap\": \"仅检测人脸，无属性分析\"\n    \t\t  \t\t  ,\n      \"evidence\": [\n        \"a9ac8fe27d8396d480b3adf5\"\n      ]\n    }\n  ]\n  ,\n  \"migration_plan\": {\n    \"feasibility\": \"medium\",\n    \"approach\": \"1. 直接使用行人属性大模型中的 hair_style 字段，但需验证具体类别是否包含短发/长发/光头\\n2. 若类别不匹配，需重新训练模型，基于现有行人检测模型接入 hair_style 属性分支\",\n    \"data_requirements\": \"需准备行人头发清晰可见的训练样本，标注短发、长发、光头、其他\",\n    \"compute_requirements\": \"Ascend310/710 或 T4/P4，推理延迟参考 60*120 大小阈值下的速度\",\n    \"engineering_work\": \"1. 确认 hair_style 属性是否支持自定义分类\\n2. 若无，需训练新模型或调用 API 进行多分类识别\"\n  \t\t  \t\t  ,\n    \"estimated_timeline\": \"1-4 周（取决于模型是否支持自定义类别及数据准备速度）\",\n    \"estimated_cost\": \"若使用现有模型：低；若需训练：中等（取决于数据量和算力）\",\n    \"dependencies\": [\n      \"行人属性大模型 2.21.1 的 API 或模型权重\",\n      \"发型分类标注数据（至少 5000 张，覆盖不同光照/遮挡）\"\n    ]\n  \t\t  \t\t  ,\n    \"risks\": [\n      \"发型类别定义可能与现有模型不一致（如：短发 vs 长发边界模糊）\",\n      \"遮挡场景下（帽子、长发遮挡）识别率可能下降\",\n      \"模型可能不支持自定义类别，需重新训练\"\n    ]\n  }\n  ,\n  \"expected_performance\": {\n    \"baseline\": \"ACC 0.84, mPrec 0.802 (基于现有 hair_style 属性)\",\n    \"target\": \"需根据新类别重新标注数据后测试\"\n  \t\t  \t\t  ,\n    \"uncertainty\": \"若类别不一致，性能可能下降 5-15%\"\n  },\n  \"recommendation\": \"建议先查询行人属性大模型 2.21.1 文档中 `hair_style` 的具体类别定义。若包含用户所需类别，可直接使用；否则，建议基于该模型结构微调，或采用多模型组合（检测 + 属性识别）方案。\"\n}",
+    "structured_output": {
+      "requirement_summary": "用户需要监控画面中判断行人“短发、长发、光头、其他”的属性识别模型",
+      "direct_match": {
+        "exists": false,
+        "summary": "检索到的证据中没有直接针对‘行人发型（短发、长发、光头）’的检测模型",
+        "evidence": []
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "行人属性大模型 2.21.1",
+          "label_schema": "Hair Style（发型）：证据中提及 `hair_style` 属性，但具体类别取值未在证据中明确列出短发/长发/光头等，可能包含多分类属性",
+          "training_data": "证据不足，仅提及包含 hair_style 属性",
+          "reported_metrics": "hair_style: ACC=0.84, mPrec=0.802, 阈值为0.9，Size Filter=60*120",
+          "covered_capability": "行人属性识别，包含发型属性",
+          "gap": "无法确认具体发型类别（短发、长发、光头、其他）是否与用户定义完全一致",
+          "evidence": [
+            "c4f1d7f084a7f84ea5ed02c1",
+            "517065dfdf18c074588d32d5"
+          ]
+        },
+        {
+          "model_or_solution": "行人属性大模型 2.21.0",
+          "label_schema": "Hair Style（发型）：证据中提及 `hair_style` 属性，具体类别未知",
+          "training_data": "证据不足",
+          "reported_metrics": "hair_style: ACC=0.84, mPrec=0.802, 阈值为0.9，Size Filter=60*120",
+          "covered_capability": "行人属性识别，包含发型属性",
+          "gap": "无法确认具体发型类别（短发、长发、光头、其他）是否与用户定义完全一致",
+          "evidence": [
+            "517065dfdf18c074588d32d5"
+          ]
+        },
+        {
+          "model_or_solution": "新中车工服-zc_uniform_v4",
+          "label_schema": "Hair Style（发型）：证据中提及 `hair_style` 属性，具体类别未知",
+          "training_data": "证据不足",
+          "reported_metrics": "hair_style: ACC=0.84, mPrec=0.802, 阈值为0.9，Size Filter=60*120",
+          "covered_capability": "行人属性识别，包含发型属性",
+          "gap": "无法确认具体发型类别（短发、长发、光头、其他）是否与用户定义完全一致",
+          "evidence": [
+            "a5a2c413dd298f154c5215b8"
+          ]
+        },
+        {
+          "model_or_solution": "SmallFace_448x800",
+          "label_schema": "仅支持人脸检测，未包含发型属性",
+          "training_data": "证据不足",
+          "reported_metrics": "mAP@IoU=0.5: 0.8941 (32 batch)",
+          "covered_capability": "人脸检测，不包含属性分析",
+          "gap": "仅检测人脸，无属性分析",
+          "evidence": [
+            "a9ac8fe27d8396d480b3adf5"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "medium",
+        "approach": "1. 直接使用行人属性大模型中的 hair_style 字段，但需验证具体类别是否包含短发/长发/光头\n2. 若类别不匹配，需重新训练模型，基于现有行人检测模型接入 hair_style 属性分支",
+        "data_requirements": "需准备行人头发清晰可见的训练样本，标注短发、长发、光头、其他",
+        "compute_requirements": "Ascend310/710 或 T4/P4，推理延迟参考 60*120 大小阈值下的速度",
+        "engineering_work": "1. 确认 hair_style 属性是否支持自定义分类\n2. 若无，需训练新模型或调用 API 进行多分类识别",
+        "estimated_timeline": "1-4 周（取决于模型是否支持自定义类别及数据准备速度）",
+        "estimated_cost": "若使用现有模型：低；若需训练：中等（取决于数据量和算力）",
+        "dependencies": [
+          "行人属性大模型 2.21.1 的 API 或模型权重",
+          "发型分类标注数据（至少 5000 张，覆盖不同光照/遮挡）"
+        ],
+        "risks": [
+          "发型类别定义可能与现有模型不一致（如：短发 vs 长发边界模糊）",
+          "遮挡场景下（帽子、长发遮挡）识别率可能下降",
+          "模型可能不支持自定义类别，需重新训练"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "ACC 0.84, mPrec 0.802 (基于现有 hair_style 属性)",
+        "target": "需根据新类别重新标注数据后测试",
+        "uncertainty": "若类别不一致，性能可能下降 5-15%"
+      },
+      "recommendation": "建议先查询行人属性大模型 2.21.1 文档中 `hair_style` 的具体类别定义。若包含用户所需类别，可直接使用；否则，建议基于该模型结构微调，或采用多模型组合（检测 + 属性识别）方案。"
+    }
+  }
+}

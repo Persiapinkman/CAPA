@@ -1,0 +1,69 @@
+{
+  "session_id": "1406d218-0df2-4bd4-94c5-18f77dca6f8a",
+  "run_stamp": "20260522_143420_417e65c0",
+  "stage": "migration_retrieval_plan_response",
+  "step_index": 1,
+  "created_at": "2026-05-22T14:34:23+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "output_schema": {
+      "abstract_requirement": "object, attribute, task_type, scene, constraints[]",
+      "retrieve_fields": "每项 field + queries[]（2-4 条）"
+    },
+    "used_fallback": false,
+    "output_raw": "{\n  \"abstract_requirement\": {\n    \"object\": \"行人特征识别\",\n    \"attribute\": \"头发类型判断\",\n    \"task_type\": \"视觉模型推荐\",\n    \"scene\": \"监控视频分析\"\n  , \n  \"constraints\": [\n    \"禁止口语\",\n    \"纯中文\",\n    \"短 query\",\n    \"同义词扩展\",\n    \"禁止编造结论\"\n  ]\n}\n, \n  \"retrieve_fields\": [\n    {\n      \"field\": \"existing_models\",\n      \"queries\": [\n        \"行人头发类型检测模型\",\n        \"发型识别分类算法\",\n        \"面部特征分析模型\",\n        \"人像头部属性识别\"\n      ]\n    },\n    {\n      \"field\": \"similar_capabilities\",\n      \"queries\": [\n        \"人体部位属性检测\",\n        \"外观特征分类\",\n        \"视频监控人体细分\",\n        \"人脸头部形态识别\"\n      ]\n    },\n    {\n      \"field\": \"performance_baseline\",\n      \"queries\": [\n        \"头发检测准确率\",\n        \"单人面部特征 f1 值\",\n        \"行人样式识别精度\",\n        \"多类别发型模型 metrics\"\n      ]\n    },\n    {\n      \"field\": \"data_requirements\",\n      \"queries\": [\n        \"头部特征数据集\",\n        \"行人发型标注数据\",\n        \"监控视频样本训练\",\n        \"头部属性精细标注方案\"\n      ]\n    }\n  ]\n}",
+    "structured_output": {
+      "abstract_requirement": {
+        "object": "行人特征识别",
+        "attribute": "头发类型判断",
+        "task_type": "视觉模型推荐",
+        "scene": "监控视频分析",
+        "constraints": [
+          "禁止口语",
+          "纯中文",
+          "短 query",
+          "同义词扩展",
+          "禁止编造结论"
+        ]
+      },
+      "retrieve_fields": [
+        {
+          "field": "existing_models",
+          "queries": [
+            "行人头发类型检测模型",
+            "发型识别分类算法",
+            "面部特征分析模型",
+            "人像头部属性识别"
+          ]
+        },
+        {
+          "field": "similar_capabilities",
+          "queries": [
+            "人体部位属性检测",
+            "外观特征分类",
+            "视频监控人体细分",
+            "人脸头部形态识别"
+          ]
+        },
+        {
+          "field": "performance_baseline",
+          "queries": [
+            "头发检测准确率",
+            "单人面部特征 f1 值",
+            "行人样式识别精度",
+            "多类别发型模型 metrics"
+          ]
+        },
+        {
+          "field": "data_requirements",
+          "queries": [
+            "头部特征数据集",
+            "行人发型标注数据",
+            "监控视频样本训练",
+            "头部属性精细标注方案"
+          ]
+        }
+      ]
+    }
+  }
+}

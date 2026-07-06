@@ -1,0 +1,66 @@
+{
+  "session_id": "17331810-2ef0-4515-88f4-206803022aac",
+  "run_stamp": "20260521_175145_942f9768",
+  "stage": "migration_retrieval_plan_response",
+  "step_index": 1,
+  "created_at": "2026-05-21T17:51:49+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "output_schema": {
+      "abstract_requirement": "object, attribute, task_type, scene, constraints[]",
+      "retrieve_fields": "每项 field + queries[]（2-4 条）"
+    },
+    "used_fallback": false,
+    "output_raw": "{\n  \"abstract_requirement\": {\n    \"object\": \"头盔\",\n    \"attribute\": \"颜色识别（黑/白/灰/红/蓝/黄/绿/紫/迷彩）\",\n    \"task_type\": \"细粒度分类\"\n  ,\n  \"scene\": \"城市/安防，人体结构化属性检测\"\n  ,\n  \"constraints\": [\n    \"不能直接复用城市人体属性模型\",\n    \"颜色类别包含迷彩等干扰类\"\n  ]\n  },\n  \"retrieve_fields\": [\n    {\n      \"field\": \"existing_models\",\n      \"queries\": [\n        \"头盔颜色分类 安防模型\",\n        \"人员头部装备 颜色识别\",\n        \"安全帽状态检测 颜色目标检测\",\n        \"迷彩图案分类 细粒度颜色\"\n      ]\n    },\n    {\n      \"field\": \"similar_capabilities\",\n      \"queries\": [\n        \"行人头部属性 多颜色检测\",\n        \"车辆部件颜色提取 泛化能力\",\n        \"工业缺陷检测 颜色分割迁移\",\n        \"人体附属物识别 第一人称\"\n      ]\n    },\n    {\n      \"field\": \"performance_baseline\",\n      \"queries\": [\n        \"头盔颜色准确率 mAP benchmark\",\n        \"行人属性识别 颜色分类精度\",\n        \"多色目标检测 F1分数\",\n        \"复杂光照 颜色识别稳定性\"\n      ]\n    },\n    {\n      \"field\": \"data_requirements\",\n      \"queries\": [\n        \"头盔RGB颜色样本集 训练数据量\",\n        \"人员头部装备 标注格式标准\",\n        \"不安全场景 多尺度图像标注\",\n        \"人体属性数据 迁移学习需求\"\n      ]\n    }\n  ]\n}",
+    "structured_output": {
+      "abstract_requirement": {
+        "object": "头盔",
+        "attribute": "颜色识别（黑/白/灰/红/蓝/黄/绿/紫/迷彩）",
+        "task_type": "细粒度分类",
+        "scene": "城市/安防，人体结构化属性检测",
+        "constraints": [
+          "不能直接复用城市人体属性模型",
+          "颜色类别包含迷彩等干扰类"
+        ]
+      },
+      "retrieve_fields": [
+        {
+          "field": "existing_models",
+          "queries": [
+            "头盔颜色分类 安防模型",
+            "人员头部装备 颜色识别",
+            "安全帽状态检测 颜色目标检测",
+            "迷彩图案分类 细粒度颜色"
+          ]
+        },
+        {
+          "field": "similar_capabilities",
+          "queries": [
+            "行人头部属性 多颜色检测",
+            "车辆部件颜色提取 泛化能力",
+            "工业缺陷检测 颜色分割迁移",
+            "人体附属物识别 第一人称"
+          ]
+        },
+        {
+          "field": "performance_baseline",
+          "queries": [
+            "头盔颜色准确率 mAP benchmark",
+            "行人属性识别 颜色分类精度",
+            "多色目标检测 F1分数",
+            "复杂光照 颜色识别稳定性"
+          ]
+        },
+        {
+          "field": "data_requirements",
+          "queries": [
+            "头盔RGB颜色样本集 训练数据量",
+            "人员头部装备 标注格式标准",
+            "不安全场景 多尺度图像标注",
+            "人体属性数据 迁移学习需求"
+          ]
+        }
+      ]
+    }
+  }
+}

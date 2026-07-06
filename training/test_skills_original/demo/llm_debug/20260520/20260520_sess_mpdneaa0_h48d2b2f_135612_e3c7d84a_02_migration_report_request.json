@@ -1,0 +1,386 @@
+{
+  "session_id": "sess_mpdneaa0_h48d2b2f",
+  "run_stamp": "20260520_135612_e3c7d84a",
+  "stage": "migration_report_request",
+  "step_index": 2,
+  "created_at": "2026-05-20T13:57:11+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260520_135612_e3c7d84a",
+    "input_schema": {
+      "user_query": "用户原始问题",
+      "retrieval_plan": "上一步检索规划（abstract_requirement + retrieve_fields）",
+      "field_results": "playbook 分字段检索结果：field, queries, coverage, evidence[]"
+    },
+    "evidence_item_fields": [
+      "evidence_id",
+      "title",
+      "snippet",
+      "model_name",
+      "algorithm_name",
+      "algorithm_type",
+      "application_scene",
+      "section_type",
+      "score"
+    ],
+    "structured_input": {
+      "user_query": "口罩颜色要识别黑、白、灰、红、蓝、黄、绿、紫、迷彩，用什么模型？",
+      "retrieval_plan": {
+        "abstract_requirement": {
+          "object": "口罩颜色识别",
+          "attribute": "黑/白/灰/红/蓝/黄/绿/紫/迷彩",
+          "task_type": "多类别分类/异常检测",
+          "scene": "医疗防护/质量控制",
+          "constraints": [
+            "口罩必须作为唯一目标物体",
+            "需精准区分九种颜色类别",
+            "需考虑口罩材质反光/磨损等光照干扰",
+            "需处理多色混合或反光干扰场景"
+          ]
+        },
+        "retrieve_fields": [
+          {
+            "field": "existing_models",
+            "queries": [
+              "口罩 multiclass color classification model industrial AI",
+              "medical mask color classification CNN tensorflow pytorch",
+              "low-resource image color classification model mask detection"
+            ]
+          },
+          {
+            "field": "similar_capabilities",
+            "queries": [
+              "industrial vision part inspection color extraction GAN",
+              "text recognition OCR color segmentation algorithm",
+              "object detection confidence threshold tuning multiclass"
+            ]
+          },
+          {
+            "field": "performance_baseline",
+            "queries": [
+              "medical mask classification accuracy benchmark mAP IoU",
+              "industrial object detection AUC precision recall mask",
+              "low-shot color classification performance evaluation"
+            ]
+          },
+          {
+            "field": "data_requirements",
+            "queries": [
+              "mask multiclass color dataset labeling guidelines",
+              "industrial defect imaging data collection illumination",
+              "color classification data augmentation balancing techniques"
+            ]
+          }
+        ]
+      },
+      "field_results": [
+        {
+          "field": "existing_models",
+          "queries": [
+            "口罩 multiclass color classification model industrial AI",
+            "medical mask color classification CNN tensorflow pytorch",
+            "low-resource image color classification model mask detection"
+          ],
+          "coverage": "strong",
+          "evidence": [
+            {
+              "evidence_id": "61ade30548ab54447ef31525",
+              "title": "PDFs/Classify_3.4.0.pdf p16",
+              "snippet": "e_typ                                                           \n                    e_ot                                                            \n                    her                                                             \n                            • 口罩                                                    \n                              相关...",
+              "section_type": "general",
+              "score": 0.789779
+            },
+            {
+              "evidence_id": "bab21bf76719bfe7491f7027",
+              "title": "KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model",
+              "snippet": "target_name: 红马甲/安全带\nalgorithm_type: 属性\nalgorithm_name: 中车工厂-属性模型1\napplication_scene: 中车工厂项目\nowner: 朱帅\nmodel_name: KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\nsupported_device: cpu\nrecommended_config: cpu-ppl2-fp32\nlast_updated: 2023-11-15\nlast_updated_month: 2023-11",
+              "model_name": "KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model",
+              "algorithm_name": "中车工厂-属性模型1",
+              "algorithm_type": "属性",
+              "application_scene": "中车工厂项目",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "085a4a19f4c436618ff7b838",
+              "title": "PAR_waistcoat_safetybelt",
+              "snippet": "model_name: PAR_waistcoat_safetybelt\nname: PAR_waistcoat_safetybelt\ntype: classifier\nplatform: cpu-ppl2-fp32\nstatus: SUCCESS\ndid: 95824\nrid: 34577\nversion: 0.2.0\nversion_train_date: 20231108\nsource_file: data/PAR_waistcoat_safetybelt-cpu-ppl2-fp32_34577_95824.json",
+              "model_name": "PAR_waistcoat_safetybelt",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "71d9995a5ba5a391cc26ae8d",
+              "title": "PDFs/安防方向--车辆属性大模型更新.pdf p14",
+              "snippet": "车辆颜色分类属性ACC/mP：",
+              "section_type": "general",
+              "score": 0.437855
+            },
+            {
+              "evidence_id": "c4d83a8a93c87ebdc30e46f1",
+              "title": "KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-P4_b8_0.2.0.model",
+              "snippet": "target_name: 红马甲/安全带\nalgorithm_type: 属性\nalgorithm_name: 中车工厂-属性模型1\napplication_scene: 中车工厂项目\nowner: 朱帅\nmodel_name: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-P4_b8_0.2.0.model\nsupported_device: P4\nrecommended_config: cuda11.0-trt7.1-int8-P4\nlast_updated: 2023-11-15\nlast_updated_month: 2023-11",
+              "model_name": "KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-P4_b8_0.2.0.model",
+              "algorithm_name": "中车工厂-属性模型1",
+              "algorithm_type": "属性",
+              "application_scene": "中车工厂项目",
+              "section_type": "model_artifact",
+              "score": 0.991211
+            },
+            {
+              "evidence_id": "b664f87d3d42cb3abb15e73d",
+              "title": "PAR_waistcoat_safetybelt",
+              "snippet": "model_name: PAR_waistcoat_safetybelt\nname: PAR_waistcoat_safetybelt\ntype: classifier\nplatform: cpu-nart-fp32\nstatus: SUCCESS\ndid: 93156\nrid: 33307\nversion: 0.1.0\nversion_train_date: 20230912\nsource_file: data/PAR_waistcoat_safetybelt-cpu-nart-fp32_33307_93156.json",
+              "model_name": "PAR_waistcoat_safetybelt",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "3c127a88c915dba69a4bd43c",
+              "title": "PDFs/Classify_3.4.0.pdf p9",
+              "snippet": "respirat                                                                      \n      or_color                                                                      \n           98.68 98.68 98.68 98.68 98.68 98.68 98.68 98.88 98.76 98.76 98.66 98.66 98.66\n      /口罩拉                                                                          \n      到下巴...",
+              "section_type": "general",
+              "score": 0.417224
+            },
+            {
+              "evidence_id": "2a289a7e844b6b9d89079853",
+              "title": "KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model",
+              "snippet": "target_name: 红马甲/安全带\nalgorithm_type: 属性\nalgorithm_name: 中车工厂-属性模型1\napplication_scene: 中车工厂项目\nowner: 朱帅\nmodel_name: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model\nsupported_device: T4\nrecommended_config: cuda11.0-trt7.1-int8-T4\nlast_updated: 2023-11-15\nlast_updated_month: 2023-11",
+              "model_name": "KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model",
+              "algorithm_name": "中车工厂-属性模型1",
+              "algorithm_type": "属性",
+              "application_scene": "中车工厂项目",
+              "section_type": "model_artifact",
+              "score": 0.991211
+            }
+          ]
+        },
+        {
+          "field": "similar_capabilities",
+          "queries": [
+            "industrial vision part inspection color extraction GAN",
+            "text recognition OCR color segmentation algorithm",
+            "object detection confidence threshold tuning multiclass"
+          ],
+          "coverage": "strong",
+          "evidence": [
+            {
+              "evidence_id": "71d9995a5ba5a391cc26ae8d",
+              "title": "PDFs/安防方向--车辆属性大模型更新.pdf p14",
+              "snippet": "车辆颜色分类属性ACC/mP：",
+              "section_type": "general",
+              "score": 0.665994
+            },
+            {
+              "evidence_id": "b37f60bf62e6051f3fe455a3",
+              "title": "KM_classifier_Carplate_TypeColor_nart_acl-ascend310-int8_b8_3.0.0.model",
+              "snippet": "target_name: 车牌\nalgorithm_type: 属性\nalgorithm_name: 车牌颜色类型属性\napplication_scene: V3.0.0，标品\nowner: 冯江燕\nmodel_name: KM_classifier_Carplate_TypeColor_nart_acl-ascend310-int8_b8_3.0.0.model\nsupported_device: ascend310\nrecommended_config: acl-ascend310-int8\nlast_updated: 2023-05-30\nlast_updated_month: 2023-05",
+              "model_name": "KM_classifier_Carplate_TypeColor_nart_acl-ascend310-int8_b8_3.0.0.model",
+              "algorithm_name": "车牌颜色类型属性",
+              "algorithm_type": "属性",
+              "application_scene": "V3.0.0，标品",
+              "section_type": "model_artifact",
+              "score": 0.484199
+            },
+            {
+              "evidence_id": "4554c73d0e8ce47e83a89401",
+              "title": "ClothColor",
+              "snippet": "model_name: ClothColor\nname: ClothColor\ntype: classifier\nplatform: cuda11.0-trt7.1-fp16-T4\nstatus: SUCCESS\ndid: 126728\nrid: 47901\nversion: 1.0.0\nversion_train_date: 20250506\nsource_file: data/ClothColor-cuda11.0-trt7.1-fp16-T4_47901_126728.json",
+              "model_name": "ClothColor",
+              "section_type": "model_artifact",
+              "score": 0.40401
+            },
+            {
+              "evidence_id": "d63d9e23a2da41bb60b97723",
+              "title": "PDFs/安防方向--车辆属性大模型更新.pdf p14",
+              "snippet": "◦ 颜色：vehicle_color_precision                                                \n                                                                                    \n        ◦ 粗分类：vehicle_type_precision                                                \n                                                                                    \n       平台                       数据集                  Acc/mP...",
+              "section_type": "accuracy_metric",
+              "score": 0.670616
+            },
+            {
+              "evidence_id": "ce7a770d1382489fb63496cf",
+              "title": "KM_classifier_Carplate_TypeColor_nart_acl-ascend710-int8_b8_3.0.0.model",
+              "snippet": "target_name: 车牌\nalgorithm_type: 属性\nalgorithm_name: 车牌颜色类型属性\napplication_scene: V3.0.0，标品\nowner: 冯江燕\nmodel_name: KM_classifier_Carplate_TypeColor_nart_acl-ascend710-int8_b8_3.0.0.model\nsupported_device: ascend710\nrecommended_config: acl-ascend710-int8\nlast_updated: 2023-05-30\nlast_updated_month: 2023-05",
+              "model_name": "KM_classifier_Carplate_TypeColor_nart_acl-ascend710-int8_b8_3.0.0.model",
+              "algorithm_name": "车牌颜色类型属性",
+              "algorithm_type": "属性",
+              "application_scene": "V3.0.0，标品",
+              "section_type": "model_artifact",
+              "score": 0.476294
+            },
+            {
+              "evidence_id": "600e7277af1c1dfe3665a06b",
+              "title": "BannerSlogan_960x960",
+              "snippet": "model_name: BannerSlogan_960x960\nname: BannerSlogan_960x960\nlabel_list: banner\nlabels: banner\ntype: essos\nplatform: acl-ascend310-fp16\nstatus: SUCCESS\ndid: 128595\nrid: 48718\nversion: 3.0.5\nversion_train_date: 20250702\nsource_file: data/BannerSlogan_960x960-acl-ascend310-fp16_48718_128595.json",
+              "model_name": "BannerSlogan_960x960",
+              "section_type": "model_artifact",
+              "score": 0.39654
+            },
+            {
+              "evidence_id": "a997d23f68620a066453fa5d",
+              "title": "PDFs/安防方向--车辆属性大模型更新.pdf p14",
+              "snippet": "6       vehicle_class = [\"st_car\", \"st_van\", \"st_pickup_truck\", \"st_big_truck\", \"s\n         t_small_truck\", \"st_suv\",                                                  \n       7                     \"st_big_coach\", \"st_vehicle_class_agnostic\", \"st_vehicle_\n                                                                                    \n         class_other\"]...",
+              "section_type": "label_schema",
+              "score": 0.66315
+            },
+            {
+              "evidence_id": "7571ba32218935d0e761dbff",
+              "title": "KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model",
+              "snippet": "target_name: 车牌\nalgorithm_type: 属性\nalgorithm_name: 车牌颜色类型属性\napplication_scene: V3.0.0，标品\nowner: 冯江燕\nmodel_name: KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model\nsupported_device: cpu\nrecommended_config: cpu-ppl2-fp32\nlast_updated: 2023-05-30\nlast_updated_month: 2023-05",
+              "model_name": "KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model",
+              "algorithm_name": "车牌颜色类型属性",
+              "algorithm_type": "属性",
+              "application_scene": "V3.0.0，标品",
+              "section_type": "model_artifact",
+              "score": 0.472733
+            }
+          ]
+        },
+        {
+          "field": "performance_baseline",
+          "queries": [
+            "medical mask classification accuracy benchmark mAP IoU",
+            "industrial object detection AUC precision recall mask",
+            "low-shot color classification performance evaluation"
+          ],
+          "coverage": "strong",
+          "evidence": [
+            {
+              "evidence_id": "543e7e71ada36b0ca436d51e",
+              "title": "PDFs/Shikra-Embedding-V3.1.0.pdf p3",
+              "snippet": "通用维度                    \n      模型名称   分辨   特征                                                                \n                         urbaninsight- urbaninsight- urbaninsight-retrieval- urbaninsight-retrieval-\n              率   维度     retrieval-rjf retrieval-hl semantic        common          \n                           mAP         mAP           mAP             mAP            \n       SIE-2.1-...",
+              "section_type": "accuracy_metric",
+              "score": 0.511125
+            },
+            {
+              "evidence_id": "4b87914a80e683e2c21ca3ba",
+              "title": "PDFs/Shikra-Embedding-V3.1.0.pdf p3 table 1",
+              "snippet": "PDF表格: PDFs/Shikra-Embedding-V3.1.0.pdf 第3页 表1\n\n| 构造与发布urbaninsight-retrieval评测集，涵盖urbaninsight-retrieval-hl(业务真实HL检索)、 urbaninsight-retrieval-rjf(人车非检索)、urbaninsight-retrieval-semantic(多样性语义检索)、urbaninsight- retrieval-common(常见物体检索)，能较全面的评价多模态模型的检索效果。 1. urbaninsight-retrieval-rjf 该数据集由研发团队自主构建，主要基于监控场景中的真实图像。包含448个紧贴业务需求的检索 query，共计5831张图，涵盖多属性(包括长文本)及国内特定元素的检索任务。所有query均配备完整标 注，采用mAP指标评估模型精度。该数...",
+              "section_type": "accuracy_eval",
+              "score": 0.497369
+            },
+            {
+              "evidence_id": "e03c292ba1a197e77b75aa7e",
+              "title": "PDFs/特殊文字检测模型发布记录.pdf p6",
+              "snippet": "五.  精度测试                                                                       \n                                                                                    \n     •  注：metric_level为32，即小于32x32的目标不纳入统计，iou=0.5。                                 \n                                                                                    \n     •  测试数据说明：...",
+              "section_type": "accuracy_eval",
+              "score": 0.876092
+            },
+            {
+              "evidence_id": "dab6d148fab0e13e2f2864f5",
+              "title": "PDFs/Shikra-Embedding-V3.1.0.pdf p3",
+              "snippet": "query均配备完整标                       \n                                                                                    \n        注，采用mAP指标评估模型精度。该数据集全面反映模型在人、车及其他非目标场景中的检索能力。                               \n      2. urbaninsight-retrieval-hl                                                  \n                                                                                    \n        结合产线(前场)实际需求打造，数据...",
+              "section_type": "accuracy_eval",
+              "score": 0.489217
+            },
+            {
+              "evidence_id": "bfee70623563dafe1b0c72f0",
+              "title": "PDFs/v0.1.1.pdf p3",
+              "snippet": "• iou_thresh: 0.3                                                             \n                                                                                    \n      • metric_level=0                                                              \n                                                                                    \n       测试集（最新...",
+              "section_type": "release_note",
+              "score": 0.835075
+            },
+            {
+              "evidence_id": "f34984e76fa121cac8146d23",
+              "title": "PDFs/v0.1.1.pdf p3",
+              "snippet": "四、精度结果                                                                         \n                                                                                    \n     检测结果                                                                           \n                                                                                    \n     setting:...",
+              "section_type": "accuracy_metric",
+              "score": 0.836948
+            },
+            {
+              "evidence_id": "7025c259880c2134850b0c0a",
+              "title": "PDFs/v0.1.1.pdf p3",
+              "snippet": "• metric_level=0                                                              \n                                                                                    \n      模型版本           测试集（最新HL）      mAP           recall@fppi=0.1 recall@prec=0.9   \n                                                                                    \n      v011           大组装2           0.9893        0.9894         0...",
+              "section_type": "release_note",
+              "score": 0.833515
+            },
+            {
+              "evidence_id": "d9e5cb8ab71abc73c5db6b65",
+              "title": "PDFs/特殊文字检测模型发布记录.pdf p6 table 1",
+              "snippet": "PDF表格: PDFs/特殊文字检测模型发布记录.pdf 第6页 表1\n\n| 五. 精度测试 • 注：metric_level为32，即小于32x32的目标不纳入统计，iou=0.5。 • 测试数据说明： • 不同平台测试精度 平台 mAP recall@fppi0.01 recall@fppi0.1 cuda11.0-trt7.1-fp16-T4 0.6489 0.0157 0.2691 cuda11.0-trt7.1-fp32-T4 0.6466 0.0157 0.2691 acl-ascend310-fp16 0.6126 0.0135 0.2623 acl-ascend710-fp16 0.6123 0.0202 0.2825 | 五. 精度测试 |  |  |  |  |  |  |  |  |  |  |  |  |  |\n| --- | --- | --- | --- | -...",
+              "section_type": "accuracy_eval",
+              "score": 0.862659
+            }
+          ]
+        },
+        {
+          "field": "data_requirements",
+          "queries": [
+            "mask multiclass color dataset labeling guidelines",
+            "industrial defect imaging data collection illumination",
+            "color classification data augmentation balancing techniques"
+          ],
+          "coverage": "strong",
+          "evidence": [
+            {
+              "evidence_id": "c57b2097434e5945a04a0bd9",
+              "title": "PDFs/安防方向-人脸误检分类模型发版记录.pdf p1 table 1",
+              "snippet": "PDF表格: PDFs/安防方向-人脸误检分类模型发版记录.pdf 第1页 表1\n\n| 安防方向-人脸误检分类模型发版记录 KM_classifier_Face_None_Security_3.0.2 release note: • release date: 2025.02.17 • owner: fengjiangyan@sensetime.com • highlights ◦ 输出字段与原KM_classifier_FaceNoFace_cls_sz_1.0.2, KM_classifier_Face_None_Security_3.0.1 模型保持一致 ◦ 数据: 清洗原数据集, 并增加58w训练数据, 包含监控场景的大角度/被遮挡人脸、后脑、全遮挡数据 ◦ 精度: 大幅提升监控场景大角度/被遮挡人脸正样本、全遮挡负样本的召回, 其中common测试集人脸 召回+26%、误报召回+...",
+              "section_type": "accuracy_eval",
+              "score": 0.528737
+            },
+            {
+              "evidence_id": "861a5561ed449bd1647fa5ca",
+              "title": "PDFs/安防方向-人脸质量3.1.0模型更新.pdf p2 table 1",
+              "snippet": "PDF表格: PDFs/安防方向-人脸质量3.1.0模型更新.pdf 第2页 表1\n\n|  |  | 1 { 2 \"st_face_gray\": { 3 \"calculator\": \"bypass\", 4 \"feature_start\": 0, 5 \"feature_end\": 1, 6 \"labels\": [ 7 \"st_color\", 8 \"st_gray\" 9 ], 10 \"proposal_threshold\": [None, 0.86] 11 }, 12 \"st_face_blur\": { 13 \"calculator\": \"bypass\", 14 \"feature_start\": 2, 15 \"feature_end\": 3, 16 \"labels\": [ 17 \"st_clear\", 18 \"st_blur\" 19 ], 20 \"proposal_threshold\": [N...",
+              "section_type": "label_schema",
+              "score": 0.520265
+            },
+            {
+              "evidence_id": "36afdc020460f058647aae88",
+              "title": "PDFs/安防方向-人脸质量3.1.0模型更新.pdf p2",
+              "snippet": "20        \"proposal_threshold\": [None, 0.995]                                 \n      21    },                                                                      \n                                                                                    \n      22    \"st_face_otherocc\": {                                                   \n      23        \"calculator\": \"bypass\",...",
+              "section_type": "label_schema",
+              "score": 0.510605
+            },
+            {
+              "evidence_id": "14459b9255e20e9cd01ee5fa",
+              "title": "PDFs/安防方向-人脸误检分类模型发版记录.pdf p1",
+              "snippet": "1 {'attribute': {'imagenet': {'0': 0.5389107465744019, '1': 0.46108928322792053}},\n          'id': 0, 'label': 37017, 'image_id': 0}",
+              "section_type": "label_schema",
+              "score": 0.510565
+            },
+            {
+              "evidence_id": "a2886176e6bccf7631c28ffe",
+              "title": "PDFs/安防方向-人脸质量3.1.0模型更新.pdf p2",
+              "snippet": "33        \"calculator\": \"bypass\",                                             \n                                                                                    \n      34        \"feature_start\": 6,                                                 \n      35        \"feature_end\": 8,...",
+              "section_type": "label_schema",
+              "score": 0.508756
+            },
+            {
+              "evidence_id": "ecbbb2ea27f6c1429d3f4dba",
+              "title": "PDFs/安防方向-人脸质量3.1.0模型更新.pdf p2",
+              "snippet": "27           \"st_otherocc_none\",                                              \n      28           \"st_otherocc\"                                                    \n                                                                                    \n      29        ],                                                                  \n      30        \"proposal_threshold\": [None, 0.82]...",
+              "section_type": "label_schema",
+              "score": 0.505266
+            },
+            {
+              "evidence_id": "39ddddd71245453a8eb5ec1a",
+              "title": "PDFs/安防方向-人脸质量3.1.0模型更新.pdf p2",
+              "snippet": "8           \"st_gray\"                                                        \n       9        ],                                                                  \n      10        \"proposal_threshold\": [None, 0.86]                                  \n                                                                                    \n      11    },...",
+              "section_type": "label_schema",
+              "score": 0.503918
+            },
+            {
+              "evidence_id": "e9fdde44540a819e4df7799b",
+              "title": "PDFs/安防方向--车辆属性大模型更新.pdf p7",
+              "snippet": "▪  颜色 ”无法判断“  标签字段调整为\"color_type_agnostic\"                                \n                                                                                    \n                                                                                    \n                                                                                    \n       1 输出字段：...",
+              "section_type": "label_schema",
+              "score": 0.515352
+            }
+          ]
+        }
+      ]
+    },
+    "llm_messages": [
+      {
+        "role": "system",
+        "content": "你是视觉模型迁移顾问。请基于检索证据生成结构化迁移评估报告。必须区分证据支持和合理推断；证据不足时明确写证据不足，不要编造精度、周期或成本。若可估计成本/周期，只能给区间和依赖前提。只输出 JSON。"
+      },
+      {
+        "role": "user",
+        "content": "{\n  \"user_query\": \"口罩颜色要识别黑、白、灰、红、蓝、黄、绿、紫、迷彩，用什么模型？\",\n  \"retrieval_plan\": {\n    \"abstract_requirement\": {\n      \"object\": \"口罩颜色识别\",\n      \"attribute\": \"黑/白/灰/红/蓝/黄/绿/紫/迷彩\",\n      \"task_type\": \"多类别分类/异常检测\",\n      \"scene\": \"医疗防护/质量控制\",\n      \"constraints\": [\n        \"口罩必须作为唯一目标物体\",\n        \"需精准区分九种颜色类别\",\n        \"需考虑口罩材质反光/磨损等光照干扰\",\n        \"需处理多色混合或反光干扰场景\"\n      ]\n    },\n    \"retrieve_fields\": [\n      {\n        \"field\": \"existing_models\",\n        \"queries\": [\n          \"口罩 multiclass color classification model industrial AI\",\n          \"medical mask color classification CNN tensorflow pytorch\",\n          \"low-resource image color classification model mask detection\"\n        ]\n      },\n      {\n        \"field\": \"similar_capabilities\",\n        \"queries\": [\n          \"industrial vision part inspection color extraction GAN\",\n          \"text recognition OCR color segmentation algorithm\",\n          \"object detection confidence threshold tuning multiclass\"\n        ]\n      },\n      {\n        \"field\": \"performance_baseline\",\n        \"queries\": [\n          \"medical mask classification accuracy benchmark mAP IoU\",\n          \"industrial object detection AUC precision recall mask\",\n          \"low-shot color classification performance evaluation\"\n        ]\n      },\n      {\n        \"field\": \"data_requirements\",\n        \"queries\": [\n          \"mask multiclass color dataset labeling guidelines\",\n          \"industrial defect imaging data collection illumination\",\n          \"color classification data augmentation balancing techniques\"\n        ]\n      }\n    ]\n  },\n  \"field_results\": [\n    {\n      \"field\": \"existing_models\",\n      \"queries\": [\n        \"口罩 multiclass color classification model industrial AI\",\n        \"medical mask color classification CNN tensorflow pytorch\",\n        \"low-resource image color classification model mask detection\"\n      ],\n      \"coverage\": \"strong\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"61ade30548ab54447ef31525\",\n          \"title\": \"PDFs/Classify_3.4.0.pdf p16\",\n          \"snippet\": \"e_typ                                                           \\n                    e_ot                                                            \\n                    her                                                             \\n                            • 口罩                                                    \\n                              相关...\",\n          \"section_type\": \"general\",\n          \"score\": 0.789779\n        },\n        {\n          \"evidence_id\": \"bab21bf76719bfe7491f7027\",\n          \"title\": \"KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\",\n          \"snippet\": \"target_name: 红马甲/安全带\\nalgorithm_type: 属性\\nalgorithm_name: 中车工厂-属性模型1\\napplication_scene: 中车工厂项目\\nowner: 朱帅\\nmodel_name: KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\\nsupported_device: cpu\\nrecommended_config: cpu-ppl2-fp32\\nlast_updated: 2023-11-15\\nlast_updated_month: 2023-11\",\n          \"model_name\": \"KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\",\n          \"algorithm_name\": \"中车工厂-属性模型1\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"中车工厂项目\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"085a4a19f4c436618ff7b838\",\n          \"title\": \"PAR_waistcoat_safetybelt\",\n          \"snippet\": \"model_name: PAR_waistcoat_safetybelt\\nname: PAR_waistcoat_safetybelt\\ntype: classifier\\nplatform: cpu-ppl2-fp32\\nstatus: SUCCESS\\ndid: 95824\\nrid: 34577\\nversion: 0.2.0\\nversion_train_date: 20231108\\nsource_file: data/PAR_waistcoat_safetybelt-cpu-ppl2-fp32_34577_95824.json\",\n          \"model_name\": \"PAR_waistcoat_safetybelt\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"71d9995a5ba5a391cc26ae8d\",\n          \"title\": \"PDFs/安防方向--车辆属性大模型更新.pdf p14\",\n          \"snippet\": \"车辆颜色分类属性ACC/mP：\",\n          \"section_type\": \"general\",\n          \"score\": 0.437855\n        },\n        {\n          \"evidence_id\": \"c4d83a8a93c87ebdc30e46f1\",\n          \"title\": \"KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-P4_b8_0.2.0.model\",\n          \"snippet\": \"target_name: 红马甲/安全带\\nalgorithm_type: 属性\\nalgorithm_name: 中车工厂-属性模型1\\napplication_scene: 中车工厂项目\\nowner: 朱帅\\nmodel_name: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-P4_b8_0.2.0.model\\nsupported_device: P4\\nrecommended_config: cuda11.0-trt7.1-int8-P4\\nlast_updated: 2023-11-15\\nlast_updated_month: 2023-11\",\n          \"model_name\": \"KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-P4_b8_0.2.0.model\",\n          \"algorithm_name\": \"中车工厂-属性模型1\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"中车工厂项目\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.991211\n        },\n        {\n          \"evidence_id\": \"b664f87d3d42cb3abb15e73d\",\n          \"title\": \"PAR_waistcoat_safetybelt\",\n          \"snippet\": \"model_name: PAR_waistcoat_safetybelt\\nname: PAR_waistcoat_safetybelt\\ntype: classifier\\nplatform: cpu-nart-fp32\\nstatus: SUCCESS\\ndid: 93156\\nrid: 33307\\nversion: 0.1.0\\nversion_train_date: 20230912\\nsource_file: data/PAR_waistcoat_safetybelt-cpu-nart-fp32_33307_93156.json\",\n          \"model_name\": \"PAR_waistcoat_safetybelt\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"3c127a88c915dba69a4bd43c\",\n          \"title\": \"PDFs/Classify_3.4.0.pdf p9\",\n          \"snippet\": \"respirat                                                                      \\n      or_color                                                                      \\n           98.68 98.68 98.68 98.68 98.68 98.68 98.68 98.88 98.76 98.76 98.66 98.66 98.66\\n      /口罩拉                                                                          \\n      到下巴...\",\n          \"section_type\": \"general\",\n          \"score\": 0.417224\n        },\n        {\n          \"evidence_id\": \"2a289a7e844b6b9d89079853\",\n          \"title\": \"KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model\",\n          \"snippet\": \"target_name: 红马甲/安全带\\nalgorithm_type: 属性\\nalgorithm_name: 中车工厂-属性模型1\\napplication_scene: 中车工厂项目\\nowner: 朱帅\\nmodel_name: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model\\nsupported_device: T4\\nrecommended_config: cuda11.0-trt7.1-int8-T4\\nlast_updated: 2023-11-15\\nlast_updated_month: 2023-11\",\n          \"model_name\": \"KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model\",\n          \"algorithm_name\": \"中车工厂-属性模型1\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"中车工厂项目\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.991211\n        }\n      ]\n    },\n    {\n      \"field\": \"similar_capabilities\",\n      \"queries\": [\n        \"industrial vision part inspection color extraction GAN\",\n        \"text recognition OCR color segmentation algorithm\",\n        \"object detection confidence threshold tuning multiclass\"\n      ],\n      \"coverage\": \"strong\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"71d9995a5ba5a391cc26ae8d\",\n          \"title\": \"PDFs/安防方向--车辆属性大模型更新.pdf p14\",\n          \"snippet\": \"车辆颜色分类属性ACC/mP：\",\n          \"section_type\": \"general\",\n          \"score\": 0.665994\n        },\n        {\n          \"evidence_id\": \"b37f60bf62e6051f3fe455a3\",\n          \"title\": \"KM_classifier_Carplate_TypeColor_nart_acl-ascend310-int8_b8_3.0.0.model\",\n          \"snippet\": \"target_name: 车牌\\nalgorithm_type: 属性\\nalgorithm_name: 车牌颜色类型属性\\napplication_scene: V3.0.0，标品\\nowner: 冯江燕\\nmodel_name: KM_classifier_Carplate_TypeColor_nart_acl-ascend310-int8_b8_3.0.0.model\\nsupported_device: ascend310\\nrecommended_config: acl-ascend310-int8\\nlast_updated: 2023-05-30\\nlast_updated_month: 2023-05\",\n          \"model_name\": \"KM_classifier_Carplate_TypeColor_nart_acl-ascend310-int8_b8_3.0.0.model\",\n          \"algorithm_name\": \"车牌颜色类型属性\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"V3.0.0，标品\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.484199\n        },\n        {\n          \"evidence_id\": \"4554c73d0e8ce47e83a89401\",\n          \"title\": \"ClothColor\",\n          \"snippet\": \"model_name: ClothColor\\nname: ClothColor\\ntype: classifier\\nplatform: cuda11.0-trt7.1-fp16-T4\\nstatus: SUCCESS\\ndid: 126728\\nrid: 47901\\nversion: 1.0.0\\nversion_train_date: 20250506\\nsource_file: data/ClothColor-cuda11.0-trt7.1-fp16-T4_47901_126728.json\",\n          \"model_name\": \"ClothColor\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.40401\n        },\n        {\n          \"evidence_id\": \"d63d9e23a2da41bb60b97723\",\n          \"title\": \"PDFs/安防方向--车辆属性大模型更新.pdf p14\",\n          \"snippet\": \"◦ 颜色：vehicle_color_precision                                                \\n                                                                                    \\n        ◦ 粗分类：vehicle_type_precision                                                \\n                                                                                    \\n       平台                       数据集                  Acc/mP...\",\n          \"section_type\": \"accuracy_metric\",\n          \"score\": 0.670616\n        },\n        {\n          \"evidence_id\": \"ce7a770d1382489fb63496cf\",\n          \"title\": \"KM_classifier_Carplate_TypeColor_nart_acl-ascend710-int8_b8_3.0.0.model\",\n          \"snippet\": \"target_name: 车牌\\nalgorithm_type: 属性\\nalgorithm_name: 车牌颜色类型属性\\napplication_scene: V3.0.0，标品\\nowner: 冯江燕\\nmodel_name: KM_classifier_Carplate_TypeColor_nart_acl-ascend710-int8_b8_3.0.0.model\\nsupported_device: ascend710\\nrecommended_config: acl-ascend710-int8\\nlast_updated: 2023-05-30\\nlast_updated_month: 2023-05\",\n          \"model_name\": \"KM_classifier_Carplate_TypeColor_nart_acl-ascend710-int8_b8_3.0.0.model\",\n          \"algorithm_name\": \"车牌颜色类型属性\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"V3.0.0，标品\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.476294\n        },\n        {\n          \"evidence_id\": \"600e7277af1c1dfe3665a06b\",\n          \"title\": \"BannerSlogan_960x960\",\n          \"snippet\": \"model_name: BannerSlogan_960x960\\nname: BannerSlogan_960x960\\nlabel_list: banner\\nlabels: banner\\ntype: essos\\nplatform: acl-ascend310-fp16\\nstatus: SUCCESS\\ndid: 128595\\nrid: 48718\\nversion: 3.0.5\\nversion_train_date: 20250702\\nsource_file: data/BannerSlogan_960x960-acl-ascend310-fp16_48718_128595.json\",\n          \"model_name\": \"BannerSlogan_960x960\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.39654\n        },\n        {\n          \"evidence_id\": \"a997d23f68620a066453fa5d\",\n          \"title\": \"PDFs/安防方向--车辆属性大模型更新.pdf p14\",\n          \"snippet\": \"6       vehicle_class = [\\\"st_car\\\", \\\"st_van\\\", \\\"st_pickup_truck\\\", \\\"st_big_truck\\\", \\\"s\\n         t_small_truck\\\", \\\"st_suv\\\",                                                  \\n       7                     \\\"st_big_coach\\\", \\\"st_vehicle_class_agnostic\\\", \\\"st_vehicle_\\n                                                                                    \\n         class_other\\\"]...\",\n          \"section_type\": \"label_schema\",\n          \"score\": 0.66315\n        },\n        {\n          \"evidence_id\": \"7571ba32218935d0e761dbff\",\n          \"title\": \"KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model\",\n          \"snippet\": \"target_name: 车牌\\nalgorithm_type: 属性\\nalgorithm_name: 车牌颜色类型属性\\napplication_scene: V3.0.0，标品\\nowner: 冯江燕\\nmodel_name: KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model\\nsupported_device: cpu\\nrecommended_config: cpu-ppl2-fp32\\nlast_updated: 2023-05-30\\nlast_updated_month: 2023-05\",\n          \"model_name\": \"KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model\",\n          \"algorithm_name\": \"车牌颜色类型属性\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"V3.0.0，标品\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.472733\n        }\n      ]\n    },\n    {\n      \"field\": \"performance_baseline\",\n      \"queries\": [\n        \"medical mask classification accuracy benchmark mAP IoU\",\n        \"industrial object detection AUC precision recall mask\",\n        \"low-shot color classification performance evaluation\"\n      ],\n      \"coverage\": \"strong\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"543e7e71ada36b0ca436d51e\",\n          \"title\": \"PDFs/Shikra-Embedding-V3.1.0.pdf p3\",\n          \"snippet\": \"通用维度                    \\n      模型名称   分辨   特征                                                                \\n                         urbaninsight- urbaninsight- urbaninsight-retrieval- urbaninsight-retrieval-\\n              率   维度     retrieval-rjf retrieval-hl semantic        common          \\n                           mAP         mAP           mAP             mAP            \\n       SIE-2.1-...\",\n          \"section_type\": \"accuracy_metric\",\n          \"score\": 0.511125\n        },\n        {\n          \"evidence_id\": \"4b87914a80e683e2c21ca3ba\",\n          \"title\": \"PDFs/Shikra-Embedding-V3.1.0.pdf p3 table 1\",\n          \"snippet\": \"PDF表格: PDFs/Shikra-Embedding-V3.1.0.pdf 第3页 表1\\n\\n| 构造与发布urbaninsight-retrieval评测集，涵盖urbaninsight-retrieval-hl(业务真实HL检索)、 urbaninsight-retrieval-rjf(人车非检索)、urbaninsight-retrieval-semantic(多样性语义检索)、urbaninsight- retrieval-common(常见物体检索)，能较全面的评价多模态模型的检索效果。 1. urbaninsight-retrieval-rjf 该数据集由研发团队自主构建，主要基于监控场景中的真实图像。包含448个紧贴业务需求的检索 query，共计5831张图，涵盖多属性(包括长文本)及国内特定元素的检索任务。所有query均配备完整标 注，采用mAP指标评估模型精度。该数...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.497369\n        },\n        {\n          \"evidence_id\": \"e03c292ba1a197e77b75aa7e\",\n          \"title\": \"PDFs/特殊文字检测模型发布记录.pdf p6\",\n          \"snippet\": \"五.  精度测试                                                                       \\n                                                                                    \\n     •  注：metric_level为32，即小于32x32的目标不纳入统计，iou=0.5。                                 \\n                                                                                    \\n     •  测试数据说明：...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.876092\n        },\n        {\n          \"evidence_id\": \"dab6d148fab0e13e2f2864f5\",\n          \"title\": \"PDFs/Shikra-Embedding-V3.1.0.pdf p3\",\n          \"snippet\": \"query均配备完整标                       \\n                                                                                    \\n        注，采用mAP指标评估模型精度。该数据集全面反映模型在人、车及其他非目标场景中的检索能力。                               \\n      2. urbaninsight-retrieval-hl                                                  \\n                                                                                    \\n        结合产线(前场)实际需求打造，数据...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.489217\n        },\n        {\n          \"evidence_id\": \"bfee70623563dafe1b0c72f0\",\n          \"title\": \"PDFs/v0.1.1.pdf p3\",\n          \"snippet\": \"• iou_thresh: 0.3                                                             \\n                                                                                    \\n      • metric_level=0                                                              \\n                                                                                    \\n       测试集（最新...\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.835075\n        },\n        {\n          \"evidence_id\": \"f34984e76fa121cac8146d23\",\n          \"title\": \"PDFs/v0.1.1.pdf p3\",\n          \"snippet\": \"四、精度结果                                                                         \\n                                                                                    \\n     检测结果                                                                           \\n                                                                                    \\n     setting:...\",\n          \"section_type\": \"accuracy_metric\",\n          \"score\": 0.836948\n        },\n        {\n          \"evidence_id\": \"7025c259880c2134850b0c0a\",\n          \"title\": \"PDFs/v0.1.1.pdf p3\",\n          \"snippet\": \"• metric_level=0                                                              \\n                                                                                    \\n      模型版本           测试集（最新HL）      mAP           recall@fppi=0.1 recall@prec=0.9   \\n                                                                                    \\n      v011           大组装2           0.9893        0.9894         0...\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.833515\n        },\n        {\n          \"evidence_id\": \"d9e5cb8ab71abc73c5db6b65\",\n          \"title\": \"PDFs/特殊文字检测模型发布记录.pdf p6 table 1\",\n          \"snippet\": \"PDF表格: PDFs/特殊文字检测模型发布记录.pdf 第6页 表1\\n\\n| 五. 精度测试 • 注：metric_level为32，即小于32x32的目标不纳入统计，iou=0.5。 • 测试数据说明： • 不同平台测试精度 平台 mAP recall@fppi0.01 recall@fppi0.1 cuda11.0-trt7.1-fp16-T4 0.6489 0.0157 0.2691 cuda11.0-trt7.1-fp32-T4 0.6466 0.0157 0.2691 acl-ascend310-fp16 0.6126 0.0135 0.2623 acl-ascend710-fp16 0.6123 0.0202 0.2825 | 五. 精度测试 |  |  |  |  |  |  |  |  |  |  |  |  |  |\\n| --- | --- | --- | --- | -...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.862659\n        }\n      ]\n    },\n    {\n      \"field\": \"data_requirements\",\n      \"queries\": [\n        \"mask multiclass color dataset labeling guidelines\",\n        \"industrial defect imaging data collection illumination\",\n        \"color classification data augmentation balancing techniques\"\n      ],\n      \"coverage\": \"strong\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"c57b2097434e5945a04a0bd9\",\n          \"title\": \"PDFs/安防方向-人脸误检分类模型发版记录.pdf p1 table 1\",\n          \"snippet\": \"PDF表格: PDFs/安防方向-人脸误检分类模型发版记录.pdf 第1页 表1\\n\\n| 安防方向-人脸误检分类模型发版记录 KM_classifier_Face_None_Security_3.0.2 release note: • release date: 2025.02.17 • owner: fengjiangyan@sensetime.com • highlights ◦ 输出字段与原KM_classifier_FaceNoFace_cls_sz_1.0.2, KM_classifier_Face_None_Security_3.0.1 模型保持一致 ◦ 数据: 清洗原数据集, 并增加58w训练数据, 包含监控场景的大角度/被遮挡人脸、后脑、全遮挡数据 ◦ 精度: 大幅提升监控场景大角度/被遮挡人脸正样本、全遮挡负样本的召回, 其中common测试集人脸 召回+26%、误报召回+...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.528737\n        },\n        {\n          \"evidence_id\": \"861a5561ed449bd1647fa5ca\",\n          \"title\": \"PDFs/安防方向-人脸质量3.1.0模型更新.pdf p2 table 1\",\n          \"snippet\": \"PDF表格: PDFs/安防方向-人脸质量3.1.0模型更新.pdf 第2页 表1\\n\\n|  |  | 1 { 2 \\\"st_face_gray\\\": { 3 \\\"calculator\\\": \\\"bypass\\\", 4 \\\"feature_start\\\": 0, 5 \\\"feature_end\\\": 1, 6 \\\"labels\\\": [ 7 \\\"st_color\\\", 8 \\\"st_gray\\\" 9 ], 10 \\\"proposal_threshold\\\": [None, 0.86] 11 }, 12 \\\"st_face_blur\\\": { 13 \\\"calculator\\\": \\\"bypass\\\", 14 \\\"feature_start\\\": 2, 15 \\\"feature_end\\\": 3, 16 \\\"labels\\\": [ 17 \\\"st_clear\\\", 18 \\\"st_blur\\\" 19 ], 20 \\\"proposal_threshold\\\": [N...\",\n          \"section_type\": \"label_schema\",\n          \"score\": 0.520265\n        },\n        {\n          \"evidence_id\": \"36afdc020460f058647aae88\",\n          \"title\": \"PDFs/安防方向-人脸质量3.1.0模型更新.pdf p2\",\n          \"snippet\": \"20        \\\"proposal_threshold\\\": [None, 0.995]                                 \\n      21    },                                                                      \\n                                                                                    \\n      22    \\\"st_face_otherocc\\\": {                                                   \\n      23        \\\"calculator\\\": \\\"bypass\\\",...\",\n          \"section_type\": \"label_schema\",\n          \"score\": 0.510605\n        },\n        {\n          \"evidence_id\": \"14459b9255e20e9cd01ee5fa\",\n          \"title\": \"PDFs/安防方向-人脸误检分类模型发版记录.pdf p1\",\n          \"snippet\": \"1 {'attribute': {'imagenet': {'0': 0.5389107465744019, '1': 0.46108928322792053}},\\n          'id': 0, 'label': 37017, 'image_id': 0}\",\n          \"section_type\": \"label_schema\",\n          \"score\": 0.510565\n        },\n        {\n          \"evidence_id\": \"a2886176e6bccf7631c28ffe\",\n          \"title\": \"PDFs/安防方向-人脸质量3.1.0模型更新.pdf p2\",\n          \"snippet\": \"33        \\\"calculator\\\": \\\"bypass\\\",                                             \\n                                                                                    \\n      34        \\\"feature_start\\\": 6,                                                 \\n      35        \\\"feature_end\\\": 8,...\",\n          \"section_type\": \"label_schema\",\n          \"score\": 0.508756\n        },\n        {\n          \"evidence_id\": \"ecbbb2ea27f6c1429d3f4dba\",\n          \"title\": \"PDFs/安防方向-人脸质量3.1.0模型更新.pdf p2\",\n          \"snippet\": \"27           \\\"st_otherocc_none\\\",                                              \\n      28           \\\"st_otherocc\\\"                                                    \\n                                                                                    \\n      29        ],                                                                  \\n      30        \\\"proposal_threshold\\\": [None, 0.82]...\",\n          \"section_type\": \"label_schema\",\n          \"score\": 0.505266\n        },\n        {\n          \"evidence_id\": \"39ddddd71245453a8eb5ec1a\",\n          \"title\": \"PDFs/安防方向-人脸质量3.1.0模型更新.pdf p2\",\n          \"snippet\": \"8           \\\"st_gray\\\"                                                        \\n       9        ],                                                                  \\n      10        \\\"proposal_threshold\\\": [None, 0.86]                                  \\n                                                                                    \\n      11    },...\",\n          \"section_type\": \"label_schema\",\n          \"score\": 0.503918\n        },\n        {\n          \"evidence_id\": \"e9fdde44540a819e4df7799b\",\n          \"title\": \"PDFs/安防方向--车辆属性大模型更新.pdf p7\",\n          \"snippet\": \"▪  颜色 ”无法判断“  标签字段调整为\\\"color_type_agnostic\\\"                                \\n                                                                                    \\n                                                                                    \\n                                                                                    \\n       1 输出字段：...\",\n          \"section_type\": \"label_schema\",\n          \"score\": 0.515352\n        }\n      ]\n    }\n  ]\n}"
+      }
+    ]
+  }
+}

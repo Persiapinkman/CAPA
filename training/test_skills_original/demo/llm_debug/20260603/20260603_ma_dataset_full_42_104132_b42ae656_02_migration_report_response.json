@@ -1,0 +1,113 @@
+{
+  "session_id": "ma_dataset_full_42",
+  "run_stamp": "20260603_104132_b42ae656",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-06-03T10:42:51+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"客户需要识别非机动车颜色（黑、白、灰、红、蓝、黄、棕、绿、紫、粉），需评估现有模型支持情况。\",\n  \"direct_match\": {\n    \"exists\": false,\n    \"summary\": \"检索证据中未找到明确标注为'非机动车颜色'且包含用户所列全部 10 种颜色标签的专用模型。部分模型包含'车辆颜色'属性，但针对'非机动车'的专用颜色标签体系不完整或精度保障条件苛刻。\"\n  ,\n    \"evidence\": []\n  },\n  \"similar_assets\": [\n    {\n      \"model_or_solution\": \"KM_classifier_Nonmotor_FullAttr_Security (安防非机动车属性)\",\n      \"label_schema\": \"标签定义：非机动车属性模型。包含非机动车类型（电动车、自行车、三轮车等），颜色属性证据不足，部分版本可能支持车辆颜色但需核实非机动车分支。\",\n      \"training_data\": \"训练集来源：历史全量数据。标注规范：依赖于安防场景数据，样本量未知。\",\n      \"reported_metrics\": \"精度证据不足。仅知整体模型在纯非机动车检测上 mAP 约 85%-99%，但颜色类属性精度文档明确说明“夜间场景、强逆光导致目标亮度很低的场景，精度尚无法保证，尤其是颜色类属性”。\",\n      \"covered_capability\": \"非机动车类型、目标检测、部分场景下颜色属性。\",\n      \"gap\": \"用户指定 10 种颜色（黑、白、灰、红、蓝、黄、棕、绿、紫、粉）的明确标签体系及精度保障不足，特别是非理想光照下的颜色识别。\",\n      \"evidence\": [\n        \"bfc95ea2ae7a886408522aaf\",\n        \"baadf484d301fc24da09b3e8\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"安防方向--车辆属性大模型 (Vehicle Color Attribute)\",\n      \"label_schema\": \"标签定义：车辆颜色 (vehicle_color)。包含['灰', '白', '红', '黑', '蓝', '绿', '棕', '黄', '紫', '粉', '青', '橙', '无法判断']。\",\n      \"training_data\": \"数据集：Adela 测试集。平台：CPU/PCIe, CUDA-T4, CUDA-P4 等。\",\n      \"reported_metrics\": \"颜色属性精度 (vehicle_color_precision)：CPU 平台 Acc 0.887, mP 0.874; T4-INT8 Acc 0.883, mP 0.869。\",\n      \"covered_capability\": \"车辆颜色分类，支持 13 种颜色（含青、橙、无法判断），与用户需求高度重合。\",\n      \"gap\": \"该模型主要针对机动车（轿车、卡车、SUV 等），文档未明确说明是否覆盖非机动车（电动车、自行车）或覆盖程度。需进一步确认是否支持非机动车场景。\",\n      \"evidence\": [\n        \"1de1624938b0181389f409b7\",\n        \"d63d9e23a2da41bb60b97723\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"KM_senu_NonMotorVehicleFeature (非机动车特征)\",\n      \"label_schema\": \"目标对象：非机动车。属性：特征向量，非具体颜色标签。\",\n      \"training_data\": \"来源：模型汇总源数据。样本量：未知。\",\n      \"reported_metrics\": \"未提供颜色精度指标。\",\n      \"covered_capability\": \"非机动车目标检测及特征提取。\",\n      \"gap\": \"不支持直接的颜色标签分类，无法直接满足用户需求。\",\n      \"evidence\": [\n        \"fc461c71a5cdc78058e061b1\",\n        \"8d43edd344a2519cac06f597\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"Vehicle_FullAttr (全属性车辆分类)\",\n      \"label_schema\": \"标签定义：车辆全属性分类。标签包含 st_ambulance, st_carrier, st_common_vehicle, st_dump 等车型，未明确列出颜色细分标签。\",\n      \"training_data\": \"数据集：sc_G5_602。\",\n      \"reported_metrics\": \"车型精度：st_common_vehicle Recall 0.8196, Prec 1.0。颜色属性证据不足。\",\n      \"covered_capability\": \"多车型分类。\",\n      \"gap\": \"未见明确的颜色分类标签体系。\",\n      \"evidence\": [\n        \"c02ee013d0de655d04285ca6\",\n        \"9bac13700090019f90eccecb\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"KM_classifier_Carplate_TypeColor (车牌颜色类型属性)\",\n      \"label_schema\": \"标签定义：车牌颜色类型属性。\",\n      \"training_data\": \"来源：模型汇总源数据。\",\n      \"reported_metrics\": \"未提供颜色精度。\",\n      \"covered_capability\": \"车牌颜色识别。\",\n      \"gap\": \"场景为车牌，非车身颜色；对象为车牌，非非机动车。\",\n      \"evidence\": [\n        \"b37f60bf62e6051f3fe455a3\",\n        \"ce7a770d1382489fb63496cf\"\n      ]\n    }\n  ],\n  \"migration_plan\": {\n    \"feasibility\": \"high\",\n    \"approach\": \"建议复用'安防方向--车辆属性大模型'中的颜色分类能力，但需验证其对非机动车（电动车、自行车）的覆盖情况。若现有非机动车属性模型颜色精度不足（文档明确指出颜色类属性精度在低光照下无法保证），可考虑以车辆颜色模型为基础进行微调或迁移。\",\n    \"data_requirements\": \"收集非机动车颜色标注数据（覆盖用户要求的 10 种颜色），建议样本量至少 5000+，需包含不同光照、角度、遮挡场景。\",\n    \"compute_requirements\": \"推荐使用 T4/Ascend310 平台进行推理，训练建议使用 A2/A100 等高性能 GPU。\",\n    \"engineering_work\": \"1. 确认非机动车模型是否包含颜色分支；2. 若否，基于车辆颜色模型迁移；3. 补充非机动车颜色数据微调；4. 评估边缘场景（低光照、小目标）精度。\",\n    \"estimated_timeline\": \"1-2 个月（数据准备 2 周 + 模型训练/微调 2 周 + 测试验证 2 周）\",\n    \"estimated_cost\": \"证据不足，需根据实际数据量和算力成本评估。\"\n  ,\n    \"dependencies\": [\n      \"非机动车数据集的收集与标注\",\n      \"车辆颜色模型对非机动车场景的兼容性验证\"\n    ]\n  ,\n    \"risks\": [\n      \"非机动车颜色在低光照下精度难以保障（参考文档 KM_classifier_NonMotor_Complete_Attribute）\",\n      \"小目标（90x90 以下）颜色识别精度下降\",\n      \"多颜色混合（如车身 + 装饰）导致分类困难\"\n    ]\n  }\n  ,\n  \"expected_performance\": {\n    \"baseline\": \"参考车辆颜色大模型在 Adela 测试集上的精度，预期非机动车颜色识别 Acc 在 85%-90% 之间（理想光照条件下）。低光照或遮挡场景精度预计下降 10%-20%。\",\n    \"target\": \"用户要求的 10 种颜色分类，目标 Acc > 90%。\",\n    \"uncertainty\": \"不确定性主要来自非标准光照、小目标及复杂背景，需依赖实测数据。\"\n  },\n  \"recommendation\": \"不推荐直接使用现有'非机动车属性全模型'，因其文档明确指出颜色类属性精度无法保证。建议基于'安防方向--车辆属性大模型'（含灰、白、红、黑、蓝、绿、棕、黄、紫、粉等 13 色）进行迁移，并针对非机动车场景补充数据微调。需特别注意光照条件和目标尺寸的精度降级风险。\"\n}",
+    "structured_output": {
+      "requirement_summary": "客户需要识别非机动车颜色（黑、白、灰、红、蓝、黄、棕、绿、紫、粉），需评估现有模型支持情况。",
+      "direct_match": {
+        "exists": false,
+        "summary": "检索证据中未找到明确标注为'非机动车颜色'且包含用户所列全部 10 种颜色标签的专用模型。部分模型包含'车辆颜色'属性，但针对'非机动车'的专用颜色标签体系不完整或精度保障条件苛刻。",
+        "evidence": []
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "KM_classifier_Nonmotor_FullAttr_Security (安防非机动车属性)",
+          "label_schema": "标签定义：非机动车属性模型。包含非机动车类型（电动车、自行车、三轮车等），颜色属性证据不足，部分版本可能支持车辆颜色但需核实非机动车分支。",
+          "training_data": "训练集来源：历史全量数据。标注规范：依赖于安防场景数据，样本量未知。",
+          "reported_metrics": "精度证据不足。仅知整体模型在纯非机动车检测上 mAP 约 85%-99%，但颜色类属性精度文档明确说明“夜间场景、强逆光导致目标亮度很低的场景，精度尚无法保证，尤其是颜色类属性”。",
+          "covered_capability": "非机动车类型、目标检测、部分场景下颜色属性。",
+          "gap": "用户指定 10 种颜色（黑、白、灰、红、蓝、黄、棕、绿、紫、粉）的明确标签体系及精度保障不足，特别是非理想光照下的颜色识别。",
+          "evidence": [
+            "bfc95ea2ae7a886408522aaf",
+            "baadf484d301fc24da09b3e8"
+          ]
+        },
+        {
+          "model_or_solution": "安防方向--车辆属性大模型 (Vehicle Color Attribute)",
+          "label_schema": "标签定义：车辆颜色 (vehicle_color)。包含['灰', '白', '红', '黑', '蓝', '绿', '棕', '黄', '紫', '粉', '青', '橙', '无法判断']。",
+          "training_data": "数据集：Adela 测试集。平台：CPU/PCIe, CUDA-T4, CUDA-P4 等。",
+          "reported_metrics": "颜色属性精度 (vehicle_color_precision)：CPU 平台 Acc 0.887, mP 0.874; T4-INT8 Acc 0.883, mP 0.869。",
+          "covered_capability": "车辆颜色分类，支持 13 种颜色（含青、橙、无法判断），与用户需求高度重合。",
+          "gap": "该模型主要针对机动车（轿车、卡车、SUV 等），文档未明确说明是否覆盖非机动车（电动车、自行车）或覆盖程度。需进一步确认是否支持非机动车场景。",
+          "evidence": [
+            "1de1624938b0181389f409b7",
+            "d63d9e23a2da41bb60b97723"
+          ]
+        },
+        {
+          "model_or_solution": "KM_senu_NonMotorVehicleFeature (非机动车特征)",
+          "label_schema": "目标对象：非机动车。属性：特征向量，非具体颜色标签。",
+          "training_data": "来源：模型汇总源数据。样本量：未知。",
+          "reported_metrics": "未提供颜色精度指标。",
+          "covered_capability": "非机动车目标检测及特征提取。",
+          "gap": "不支持直接的颜色标签分类，无法直接满足用户需求。",
+          "evidence": [
+            "fc461c71a5cdc78058e061b1",
+            "8d43edd344a2519cac06f597"
+          ]
+        },
+        {
+          "model_or_solution": "Vehicle_FullAttr (全属性车辆分类)",
+          "label_schema": "标签定义：车辆全属性分类。标签包含 st_ambulance, st_carrier, st_common_vehicle, st_dump 等车型，未明确列出颜色细分标签。",
+          "training_data": "数据集：sc_G5_602。",
+          "reported_metrics": "车型精度：st_common_vehicle Recall 0.8196, Prec 1.0。颜色属性证据不足。",
+          "covered_capability": "多车型分类。",
+          "gap": "未见明确的颜色分类标签体系。",
+          "evidence": [
+            "c02ee013d0de655d04285ca6",
+            "9bac13700090019f90eccecb"
+          ]
+        },
+        {
+          "model_or_solution": "KM_classifier_Carplate_TypeColor (车牌颜色类型属性)",
+          "label_schema": "标签定义：车牌颜色类型属性。",
+          "training_data": "来源：模型汇总源数据。",
+          "reported_metrics": "未提供颜色精度。",
+          "covered_capability": "车牌颜色识别。",
+          "gap": "场景为车牌，非车身颜色；对象为车牌，非非机动车。",
+          "evidence": [
+            "b37f60bf62e6051f3fe455a3",
+            "ce7a770d1382489fb63496cf"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "high",
+        "approach": "建议复用'安防方向--车辆属性大模型'中的颜色分类能力，但需验证其对非机动车（电动车、自行车）的覆盖情况。若现有非机动车属性模型颜色精度不足（文档明确指出颜色类属性精度在低光照下无法保证），可考虑以车辆颜色模型为基础进行微调或迁移。",
+        "data_requirements": "收集非机动车颜色标注数据（覆盖用户要求的 10 种颜色），建议样本量至少 5000+，需包含不同光照、角度、遮挡场景。",
+        "compute_requirements": "推荐使用 T4/Ascend310 平台进行推理，训练建议使用 A2/A100 等高性能 GPU。",
+        "engineering_work": "1. 确认非机动车模型是否包含颜色分支；2. 若否，基于车辆颜色模型迁移；3. 补充非机动车颜色数据微调；4. 评估边缘场景（低光照、小目标）精度。",
+        "estimated_timeline": "1-2 个月（数据准备 2 周 + 模型训练/微调 2 周 + 测试验证 2 周）",
+        "estimated_cost": "证据不足，需根据实际数据量和算力成本评估。",
+        "dependencies": [
+          "非机动车数据集的收集与标注",
+          "车辆颜色模型对非机动车场景的兼容性验证"
+        ],
+        "risks": [
+          "非机动车颜色在低光照下精度难以保障（参考文档 KM_classifier_NonMotor_Complete_Attribute）",
+          "小目标（90x90 以下）颜色识别精度下降",
+          "多颜色混合（如车身 + 装饰）导致分类困难"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "参考车辆颜色大模型在 Adela 测试集上的精度，预期非机动车颜色识别 Acc 在 85%-90% 之间（理想光照条件下）。低光照或遮挡场景精度预计下降 10%-20%。",
+        "target": "用户要求的 10 种颜色分类，目标 Acc > 90%。",
+        "uncertainty": "不确定性主要来自非标准光照、小目标及复杂背景，需依赖实测数据。"
+      },
+      "recommendation": "不推荐直接使用现有'非机动车属性全模型'，因其文档明确指出颜色类属性精度无法保证。建议基于'安防方向--车辆属性大模型'（含灰、白、红、黑、蓝、绿、棕、黄、紫、粉等 13 色）进行迁移，并针对非机动车场景补充数据微调。需特别注意光照条件和目标尺寸的精度降级风险。"
+    }
+  }
+}

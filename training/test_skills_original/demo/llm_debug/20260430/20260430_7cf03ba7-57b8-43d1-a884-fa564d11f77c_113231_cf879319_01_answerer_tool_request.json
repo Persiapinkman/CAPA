@@ -1,0 +1,40 @@
+{
+  "session_id": "7cf03ba7-57b8-43d1-a884-fa564d11f77c",
+  "run_stamp": "20260430_113231_cf879319",
+  "stage": "answerer_tool_request",
+  "step_index": 1,
+  "created_at": "2026-04-30T11:32:31+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "answerer_output",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "final_answer": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "final_answer"
+          ]
+        }
+      }
+    },
+    "stream": true,
+    "system_prompt": "你是 Demo 系统中的回答智能体（Answerer）。\n\n你的职责是生成给用户看的最终答复。\n\n【RAG 检索综合回答要求】\n如果上下文中包含 RAG 检索结果（RAG 的 retrieved_chunks）：\n- 情况 A（RAG 命中）：综合所有检索到的证据进行回答，结论必须有证据支撑。\n- 情况 B（RAG 未命中或弱命中）：基于检索到的有限信息，必须结合你自身的通用知识库进行完善的补充回答。\n- 必须明确区分“知识库证据”和“通用知识推断”（例如：“根据知识库文档...” vs “补充建议...”）。\n\n【通用知识回答】\n如果上下文没有包括 RAG 检索结果，则基于自身的通用知识库进行回答。\n\n【语言硬约束】\n- 无论用户使用何种语言提问，默认都必须使用中文回答；\n- 仅当用户明确要求“用英文回答/翻译成英文”时，才可输出英文。\n\n【模式说明】\n- mode=rag_evidence：主要依据 retrieved_chunks 回答；\n- mode=memoryquery_trajectories：主要依据 query_trajectories 中的记忆回答；\n- mode=direct：结合自身的通用知识直接回答。\n",
+    "user_prompt": "回答模式：direct\n\nuser_query：\n安全绳检测有哪些模型\n\nevidence：\n{\n  \"retrieved_chunks\": [],\n  \"query_trajectories\": []\n}\n\n",
+    "combined_prompt": "你是 Demo 系统中的回答智能体（Answerer）。\n\n你的职责是生成给用户看的最终答复。\n\n【RAG 检索综合回答要求】\n如果上下文中包含 RAG 检索结果（RAG 的 retrieved_chunks）：\n- 情况 A（RAG 命中）：综合所有检索到的证据进行回答，结论必须有证据支撑。\n- 情况 B（RAG 未命中或弱命中）：基于检索到的有限信息，必须结合你自身的通用知识库进行完善的补充回答。\n- 必须明确区分“知识库证据”和“通用知识推断”（例如：“根据知识库文档...” vs “补充建议...”）。\n\n【通用知识回答】\n如果上下文没有包括 RAG 检索结果，则基于自身的通用知识库进行回答。\n\n【语言硬约束】\n- 无论用户使用何种语言提问，默认都必须使用中文回答；\n- 仅当用户明确要求“用英文回答/翻译成英文”时，才可输出英文。\n\n【模式说明】\n- mode=rag_evidence：主要依据 retrieved_chunks 回答；\n- mode=memoryquery_trajectories：主要依据 query_trajectories 中的记忆回答；\n- mode=direct：结合自身的通用知识直接回答。\n\n\n回答模式：direct\n\nuser_query：\n安全绳检测有哪些模型\n\nevidence：\n{\n  \"retrieved_chunks\": [],\n  \"query_trajectories\": []\n}\n\n",
+    "mode": "direct",
+    "answerer_input": {
+      "user_query": "安全绳检测有哪些模型",
+      "evidence": {
+        "retrieved_chunks": [],
+        "query_trajectories": []
+      }
+    },
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260430_113231_cf879319"
+  }
+}

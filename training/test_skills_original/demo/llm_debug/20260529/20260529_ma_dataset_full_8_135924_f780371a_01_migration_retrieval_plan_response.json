@@ -1,0 +1,67 @@
+{
+  "session_id": "ma_dataset_full_8",
+  "run_stamp": "20260529_135924_f780371a",
+  "stage": "migration_retrieval_plan_response",
+  "step_index": 1,
+  "created_at": "2026-05-29T13:59:27+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "output_schema": {
+      "abstract_requirement": "object, attribute, task_type, scene, constraints[]",
+      "retrieve_fields": "每项 field + queries[]（2-4 条）"
+    },
+    "used_fallback": false,
+    "output_raw": "{\n  \"abstract_requirement\": {\n    \"object\": \"人脸\",\n    \"attribute\": \"口罩位置\",\n    \"task_type\": \"动作检测/属性检测\"\n  ,\n  \"scene\": \"安防/筛查/后疫情\",\n  \"constraints\": [\n    \"口罩佩戴状态\",\n    \"口罩归位预测\",\n    \"口罩位点检测\",\n    \"口罩归属检测\"\n  ]\n}\n\n,\n\"retrieve_fields\": [\n  {\n    \"field\": \"existing_models\",\n    \"queries\": [\n      \"人脸口罩佩戴状态识别模型\",\n      \"口罩检测归位模型\",\n      \"佩戴口罩人脸检测算法\"\n    ]\n  },\n  {\n    \"field\": \"similar_capabilities\",\n    \"queries\": [\n      \"人脸面部配件状态识别\",\n      \"疫情期间行为特征检测\",\n      \"人体穿戴物位检测\",\n      \"面部遮挡区域识别\"\n    ]\n  },\n  {\n    \"field\": \"performance_baseline\",\n    \"queries\": [\n      \"口罩检测准确率基准\",\n      \"面部局部检测精度指标\",\n      \"异常佩戴识别 F1 分数\",\n      \"多场景口罩检测 IoU\"\n    ]\n  },\n  {\n    \"field\": \"data_requirements\",\n    \"queries\": [\n      \"口罩佩戴状态数据集\",\n      \"面部遮挡标注方案\",\n      \"疫情期间人脸采样\",\n      \"多多人场景口罩标注\"\n    ]\n  }\n]\n}",
+    "structured_output": {
+      "abstract_requirement": {
+        "object": "人脸",
+        "attribute": "口罩位置",
+        "task_type": "动作检测/属性检测",
+        "scene": "安防/筛查/后疫情",
+        "constraints": [
+          "口罩佩戴状态",
+          "口罩归位预测",
+          "口罩位点检测",
+          "口罩归属检测"
+        ]
+      },
+      "retrieve_fields": [
+        {
+          "field": "existing_models",
+          "queries": [
+            "人脸口罩佩戴状态识别模型",
+            "口罩检测归位模型",
+            "佩戴口罩人脸检测算法"
+          ]
+        },
+        {
+          "field": "similar_capabilities",
+          "queries": [
+            "人脸面部配件状态识别",
+            "疫情期间行为特征检测",
+            "人体穿戴物位检测",
+            "面部遮挡区域识别"
+          ]
+        },
+        {
+          "field": "performance_baseline",
+          "queries": [
+            "口罩检测准确率基准",
+            "面部局部检测精度指标",
+            "异常佩戴识别 F1 分数",
+            "多场景口罩检测 IoU"
+          ]
+        },
+        {
+          "field": "data_requirements",
+          "queries": [
+            "口罩佩戴状态数据集",
+            "面部遮挡标注方案",
+            "疫情期间人脸采样",
+            "多多人场景口罩标注"
+          ]
+        }
+      ]
+    }
+  }
+}

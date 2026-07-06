@@ -1,0 +1,90 @@
+{
+  "session_id": "ma_dataset_full_25",
+  "run_stamp": "20260529_144537_f9e7263d",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-05-29T14:47:14+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"用户需要一个能识别车辆轮毂/轮胎颜色（黑、白、灰、红、蓝、黄、棕、绿、紫、粉、其他）的模型推荐。核心需求是颜色分类，目标对象是车辆局部（轮毂/轮胎）。\",\n  \"direct_match\": {\n    \"exists\": false,\n    \"summary\": \"检索到的现有模型主要针对车辆整体颜色（vehicle_color）或车牌颜色（carplate_color），未发现专门针对“轮毂/轮胎颜色”的独立模型或方案。\"\n  ,\"evidence\": [\"现有模型主要为`KM_classifier_Vehicle_FullAttr`等，关注车辆整体属性。\"]\n  },\n  \"similar_assets\": [\n    {\n      \"model_or_solution\": \"KM_classifier_Vehicle_FullAttr (安防方向-车辆属性大模型)\",\n      \"label_schema\": \"车辆颜色属性标签定义。类别包含：['灰', '白', '红', '黑', '蓝', '绿', '棕', '黄', '紫', '粉', '青', '橙', '无法判断']，部分版本包含英码如 ['gray', 'white', 'red', 'black', 'blue', 'green', 'brown', 'yellow', 'purple', 'pink', 'cyan', 'orange', 'vehicle_color_agnostic']。\",\n      \"training_data\": \"文档中未直接披露训练集具体规模或来源，但提及使用多个模型进行数据挖掘和GT伪标签生成，并加入模糊/噪声/颜色空间等扩增以增强模型鲁棒性（参考车牌检测相关数据构建逻辑）。\",\n      \"reported_metrics\": \"在Adela测试集上，车辆颜色整体精度（vehicle_color_precision）在不同平台表现：cpu-ppl2-fp32 Acc 0.892, cuda11.0-trt7.1-int8-T4 Acc 0.891, acl-ascend710-int8 Acc 0.887。黑/蓝/红等单色精度在0.8-0.9区间，灰色/白色较高（0.93-0.96）。\",\n      \"covered_capability\": \"已包含需求中的黑、白、灰、红、蓝、黄、棕、绿、紫、粉标签。\",\n      \"gap\": \"该模型针对的是**整车**或**车辆主体**颜色，并非专门针对轮毂/轮胎颜色。轮毂颜色可能受光照、脏污影响较大，且轮毂颜色通常与车身颜色不一致（如黑轮毂配白车身），直接套用车身颜色模型可能失效。需重新标注轮毂区域数据。\",\n      \"evidence\": [\"PDFs/安防方向--车辆属性大模型更新.pdf p14\", \"PDFs/安防方向--车辆属性大模型更新.pdf p10\"]\n    },\n    {\n      \"model_or_solution\": \"KM_classifier_Carplate_TypeColor (车牌颜色类型属性模型)\",\n      \"label_schema\": \"车牌颜色属性标签定义。类别包含：black, blue, yellow, green, white, st_yellow_green等（部分版本支持蓝底、黄底等，具体取决于配置）。\",\n      \"training_data\": \"文档未披露具体训练数据规模。\",\n      \"reported_metrics\": \"在车牌颜色属性测试集上，黑/蓝/黄/绿/白等主流颜色 precision/recall 较高（>0.9）。例如黑/蓝/白 precision>0.99, recall>0.97。\",\n      \"covered_capability\": \"包含黑、白、蓝、黄、绿。\",\n      \"gap\": \"目标对象为**车牌**颜色，并非轮毂/轮胎。且车牌颜色分类通常涉及底色与字符颜色区分，与轮毂实体颜色分类任务形态差异较大。标签体系较简单，可能缺乏需求中的红、棕、紫、粉、灰等颜色。\",\n      \"evidence\": [\"PDFs/安防方向--车牌属性.pdf p6\", \"tables/model_release_records.jsonl (KM_classifier_Carplate_TypeColor...)\"]\n    },\n    {\n      \"model_or_solution\": \"安防方向--非机动车属性大模型\",\n      \"label_schema\": \"车辆颜色属性标签定义：['灰', '白', '红', '黑', '蓝', '绿', '棕', '黄', '紫', '粉', '无法判断']。\",\n      \"training_data\": \"文档未披露具体训练数据规模。\",\n      \"reported_metrics\": \"车辆颜色 recall 76.6% (90% recall threshold 下)。\",\n      \"covered_capability\": \"包含需求中的黑、白、灰、红、蓝、黄、棕、绿、紫、粉标签。\",\n      \"gap\": \"目标对象为**非机动车**（自行车、三轮车等）。虽然颜色标签体系与需求高度匹配，但应用场景（非机动车 vs 汽车）及训练数据的领域差异（非机动车轮胎轮毂特征不明显）可能导致迁移困难。\",\n      \"evidence\": [\"PDFs/安防方向--非机动车属性大模型更新.pdf p4\"]\n    }\n  ],\n  \"migration_plan\": {\n    \"feasibility\": \"medium\",\n    \"approach\": \"Transfer Learning with Re-training。鉴于无直接匹配的轮毂颜色模型，建议复用现有的车辆颜色分类模型（Vehicle_FullAttr）作为 Backbone，利用其已有的颜色特征提取能力。需重点调整标签定义（聚焦轮毂颜色）并构建专门的轮毂/轮胎颜色标注数据集。\",\n    \"data_requirements\": \"需收集包含清晰轮毂/轮胎区域的图像数据，标注轮毂/轮胎颜色。考虑到需求中颜色种类较多（11类+其他），需确保各类别样本分布均衡。参考车牌检测数据的构建方式，可能需要进行数据挖掘和增强（模糊/噪声/光照）。\",\n    \"compute_requirements\": \"建议参考现有车辆属性模型的配置（如 ascend710 fp16 或 T4 cuda fp16）。\",\n    \"engineering_work\": \"1. 定义轮毂/轮胎ROI（可能需要配合检测模型或人工筛选）。2. 标注轮毂颜色数据。3. 模型微调（Fine-tuning）或重训练。4. 验证轮毂区域光照敏感性问题。\"\n  ,\n    \"estimated_timeline\": \"证据不足。若复用现成模型权重，预计 2-4 周（数据收集与标注+微调+验证）。\",\n    \"estimated_cost\": \"证据不足。参考现有模型发布周期与算力配置估算。\"\n  ,\n    \"dependencies\": [\"轮毂/轮胎区域的检测/分割模型（如用于自动裁剪）\", \"充足的颜色标签样本\"]\n  ,\n    \"risks\": [\"轮毂反光/脏污/阴影导致颜色误判\", \"车身颜色与轮毂颜色不一致的样本可能干扰训练（若数据混入）\", \"现有车辆颜色模型对轮毂特征提取可能不足（需验证）\"]\n  }\n  ,\n  \"expected_performance\": {\n    \"baseline\": \"参考车辆颜色模型整体精度，预计在光照充足、轮毂清晰的场景下，主力颜色（黑、白、银灰）可达 85%-90% 以上。\",\n    \"target\": \"主力颜色 Recall > 90%, 稀有颜色（紫、粉、黄等） Recall > 80% (需足够训练数据)。\",\n    \"uncertainty\": \"轮毂面积小、分辨率低、反光严重可能导致精度大幅下降。\"\n  }\n  ,\n  \"recommendation\": \"推荐采用‘车辆属性大模型（Vehicle_FullAttr）’作为迁移基准，重点在于构建专门的轮毂颜色训练数据。建议分阶段实施：1. 数据探索与标注；2. 小规模验证；3. 全量微调。\"\n  }",
+    "structured_output": {
+      "requirement_summary": "用户需要一个能识别车辆轮毂/轮胎颜色（黑、白、灰、红、蓝、黄、棕、绿、紫、粉、其他）的模型推荐。核心需求是颜色分类，目标对象是车辆局部（轮毂/轮胎）。",
+      "direct_match": {
+        "exists": false,
+        "summary": "检索到的现有模型主要针对车辆整体颜色（vehicle_color）或车牌颜色（carplate_color），未发现专门针对“轮毂/轮胎颜色”的独立模型或方案。",
+        "evidence": [
+          "现有模型主要为`KM_classifier_Vehicle_FullAttr`等，关注车辆整体属性。"
+        ]
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "KM_classifier_Vehicle_FullAttr (安防方向-车辆属性大模型)",
+          "label_schema": "车辆颜色属性标签定义。类别包含：['灰', '白', '红', '黑', '蓝', '绿', '棕', '黄', '紫', '粉', '青', '橙', '无法判断']，部分版本包含英码如 ['gray', 'white', 'red', 'black', 'blue', 'green', 'brown', 'yellow', 'purple', 'pink', 'cyan', 'orange', 'vehicle_color_agnostic']。",
+          "training_data": "文档中未直接披露训练集具体规模或来源，但提及使用多个模型进行数据挖掘和GT伪标签生成，并加入模糊/噪声/颜色空间等扩增以增强模型鲁棒性（参考车牌检测相关数据构建逻辑）。",
+          "reported_metrics": "在Adela测试集上，车辆颜色整体精度（vehicle_color_precision）在不同平台表现：cpu-ppl2-fp32 Acc 0.892, cuda11.0-trt7.1-int8-T4 Acc 0.891, acl-ascend710-int8 Acc 0.887。黑/蓝/红等单色精度在0.8-0.9区间，灰色/白色较高（0.93-0.96）。",
+          "covered_capability": "已包含需求中的黑、白、灰、红、蓝、黄、棕、绿、紫、粉标签。",
+          "gap": "该模型针对的是**整车**或**车辆主体**颜色，并非专门针对轮毂/轮胎颜色。轮毂颜色可能受光照、脏污影响较大，且轮毂颜色通常与车身颜色不一致（如黑轮毂配白车身），直接套用车身颜色模型可能失效。需重新标注轮毂区域数据。",
+          "evidence": [
+            "PDFs/安防方向--车辆属性大模型更新.pdf p14",
+            "PDFs/安防方向--车辆属性大模型更新.pdf p10"
+          ]
+        },
+        {
+          "model_or_solution": "KM_classifier_Carplate_TypeColor (车牌颜色类型属性模型)",
+          "label_schema": "车牌颜色属性标签定义。类别包含：black, blue, yellow, green, white, st_yellow_green等（部分版本支持蓝底、黄底等，具体取决于配置）。",
+          "training_data": "文档未披露具体训练数据规模。",
+          "reported_metrics": "在车牌颜色属性测试集上，黑/蓝/黄/绿/白等主流颜色 precision/recall 较高（>0.9）。例如黑/蓝/白 precision>0.99, recall>0.97。",
+          "covered_capability": "包含黑、白、蓝、黄、绿。",
+          "gap": "目标对象为**车牌**颜色，并非轮毂/轮胎。且车牌颜色分类通常涉及底色与字符颜色区分，与轮毂实体颜色分类任务形态差异较大。标签体系较简单，可能缺乏需求中的红、棕、紫、粉、灰等颜色。",
+          "evidence": [
+            "PDFs/安防方向--车牌属性.pdf p6",
+            "tables/model_release_records.jsonl (KM_classifier_Carplate_TypeColor...)"
+          ]
+        },
+        {
+          "model_or_solution": "安防方向--非机动车属性大模型",
+          "label_schema": "车辆颜色属性标签定义：['灰', '白', '红', '黑', '蓝', '绿', '棕', '黄', '紫', '粉', '无法判断']。",
+          "training_data": "文档未披露具体训练数据规模。",
+          "reported_metrics": "车辆颜色 recall 76.6% (90% recall threshold 下)。",
+          "covered_capability": "包含需求中的黑、白、灰、红、蓝、黄、棕、绿、紫、粉标签。",
+          "gap": "目标对象为**非机动车**（自行车、三轮车等）。虽然颜色标签体系与需求高度匹配，但应用场景（非机动车 vs 汽车）及训练数据的领域差异（非机动车轮胎轮毂特征不明显）可能导致迁移困难。",
+          "evidence": [
+            "PDFs/安防方向--非机动车属性大模型更新.pdf p4"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "medium",
+        "approach": "Transfer Learning with Re-training。鉴于无直接匹配的轮毂颜色模型，建议复用现有的车辆颜色分类模型（Vehicle_FullAttr）作为 Backbone，利用其已有的颜色特征提取能力。需重点调整标签定义（聚焦轮毂颜色）并构建专门的轮毂/轮胎颜色标注数据集。",
+        "data_requirements": "需收集包含清晰轮毂/轮胎区域的图像数据，标注轮毂/轮胎颜色。考虑到需求中颜色种类较多（11类+其他），需确保各类别样本分布均衡。参考车牌检测数据的构建方式，可能需要进行数据挖掘和增强（模糊/噪声/光照）。",
+        "compute_requirements": "建议参考现有车辆属性模型的配置（如 ascend710 fp16 或 T4 cuda fp16）。",
+        "engineering_work": "1. 定义轮毂/轮胎ROI（可能需要配合检测模型或人工筛选）。2. 标注轮毂颜色数据。3. 模型微调（Fine-tuning）或重训练。4. 验证轮毂区域光照敏感性问题。",
+        "estimated_timeline": "证据不足。若复用现成模型权重，预计 2-4 周（数据收集与标注+微调+验证）。",
+        "estimated_cost": "证据不足。参考现有模型发布周期与算力配置估算。",
+        "dependencies": [
+          "轮毂/轮胎区域的检测/分割模型（如用于自动裁剪）",
+          "充足的颜色标签样本"
+        ],
+        "risks": [
+          "轮毂反光/脏污/阴影导致颜色误判",
+          "车身颜色与轮毂颜色不一致的样本可能干扰训练（若数据混入）",
+          "现有车辆颜色模型对轮毂特征提取可能不足（需验证）"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "参考车辆颜色模型整体精度，预计在光照充足、轮毂清晰的场景下，主力颜色（黑、白、银灰）可达 85%-90% 以上。",
+        "target": "主力颜色 Recall > 90%, 稀有颜色（紫、粉、黄等） Recall > 80% (需足够训练数据)。",
+        "uncertainty": "轮毂面积小、分辨率低、反光严重可能导致精度大幅下降。"
+      },
+      "recommendation": "推荐采用‘车辆属性大模型（Vehicle_FullAttr）’作为迁移基准，重点在于构建专门的轮毂颜色训练数据。建议分阶段实施：1. 数据探索与标注；2. 小规模验证；3. 全量微调。"
+    }
+  }
+}

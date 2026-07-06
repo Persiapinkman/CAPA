@@ -1,0 +1,362 @@
+{
+  "session_id": "sess_mpdn84r2_yvbfrdt2",
+  "run_stamp": "20260520_135410_b4829abc",
+  "stage": "migration_report_request",
+  "step_index": 2,
+  "created_at": "2026-05-20T13:54:45+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260520_135410_b4829abc",
+    "input_schema": {
+      "user_query": "用户原始问题",
+      "retrieval_plan": "上一步检索规划（abstract_requirement + retrieve_fields）",
+      "field_results": "playbook 分字段检索结果：field, queries, coverage, evidence[]"
+    },
+    "evidence_item_fields": [
+      "evidence_id",
+      "title",
+      "snippet",
+      "model_name",
+      "algorithm_name",
+      "algorithm_type",
+      "application_scene",
+      "section_type",
+      "score"
+    ],
+    "structured_input": {
+      "user_query": "客户要求区分帽子款式，包括渔夫帽、无檐帽、鸭舌帽、安全帽、open-face helmet、full-face helmet、连衣帽，用什么模型",
+      "retrieval_plan": {
+        "abstract_requirement": {
+          "object": "帽子款式分类",
+          "attribute": "渔夫帽 无檐帽 鸭舌帽 安全帽 open-face helmet full-face helmet 连衣帽",
+          "task_type": "物体分类",
+          "scene": "工业视觉/服装工业",
+          "constraints": [
+            "已有模型不可用",
+            "需找类似功能的迁移模型或方法"
+          ]
+        },
+        "retrieve_fields": [
+          {
+            "field": "existing_models",
+            "queries": [
+              "帽子 款式 分类 模型 渔夫帽 鸭舌帽 安全帽 helmet",
+              "headwear classification model 棒球帽 背心帽 安全帽 classify"
+            ]
+          },
+          {
+            "field": "similar_capabilities",
+            "queries": [
+              "服装外观识别 物品属性分类 多类别分类模型",
+              "headwear visual recognition attribute classification"
+            ]
+          },
+          {
+            "field": "performance_baseline",
+            "queries": [
+              "视觉分类任务 精度指标 模型评估 准确率",
+              "image classification accuracy benchmark gss.csv"
+            ]
+          },
+          {
+            "field": "data_requirements",
+            "queries": [
+              "帽子 类别 训练数据 图像标注",
+              "巾帽检测识别数据集 可视化标注 网络"
+            ]
+          }
+        ]
+      },
+      "field_results": [
+        {
+          "field": "existing_models",
+          "queries": [
+            "帽子 款式 分类 模型 渔夫帽 鸭舌帽 安全帽 helmet",
+            "headwear classification model 棒球帽 背心帽 安全帽 classify"
+          ],
+          "coverage": "strong",
+          "evidence": [
+            {
+              "evidence_id": "10db7130aad189358f9dae31",
+              "title": "PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p1",
+              "snippet": "穿安全带           穿马甲",
+              "section_type": "general",
+              "score": 0.99124
+            },
+            {
+              "evidence_id": "bab21bf76719bfe7491f7027",
+              "title": "KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model",
+              "snippet": "target_name: 红马甲/安全带\nalgorithm_type: 属性\nalgorithm_name: 中车工厂-属性模型1\napplication_scene: 中车工厂项目\nowner: 朱帅\nmodel_name: KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\nsupported_device: cpu\nrecommended_config: cpu-ppl2-fp32\nlast_updated: 2023-11-15\nlast_updated_month: 2023-11",
+              "model_name": "KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model",
+              "algorithm_name": "中车工厂-属性模型1",
+              "algorithm_type": "属性",
+              "application_scene": "中车工厂项目",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "206c530d3f4e80aeadcc8c99",
+              "title": "PAR_waistcoat_safetybelt",
+              "snippet": "did: 93156\nrid: 33307\nmodel_name: PAR_waistcoat_safetybelt\nplatform: cpu-nart-fp32",
+              "model_name": "PAR_waistcoat_safetybelt",
+              "section_type": "model_artifact",
+              "score": 0.956326
+            },
+            {
+              "evidence_id": "3b2fd8ef619d1cec181e7484",
+              "title": "PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p1",
+              "snippet": "检测类别：2个行人属性，共6个类别标签",
+              "section_type": "label_schema",
+              "score": 0.991041
+            },
+            {
+              "evidence_id": "080b46058b3955b81c4e6546",
+              "title": "KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model",
+              "snippet": "target_name: 红马甲/安全带\nalgorithm_type: 属性\nalgorithm_name: 中车工厂-属性模型1\napplication_scene: 中车工厂项目\nowner: 朱帅\nmodel_name: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model\nsupported_device: T4\nrecommended_config: cuda11.0-trt7.1-fp16-T4\nlast_updated: 2023-11-15\nlast_updated_month: 2023-11",
+              "model_name": "KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model",
+              "algorithm_name": "中车工厂-属性模型1",
+              "algorithm_type": "属性",
+              "application_scene": "中车工厂项目",
+              "section_type": "model_artifact",
+              "score": 0.991211
+            },
+            {
+              "evidence_id": "1d2c64caca66b4cfaddefdee",
+              "title": "PAR_waistcoat_safetybelt",
+              "snippet": "did: 95822\nrid: 34577\nmodel_name: PAR_waistcoat_safetybelt\nplatform: cuda11.0-trt7.1-int8-P4",
+              "model_name": "PAR_waistcoat_safetybelt",
+              "section_type": "model_artifact",
+              "score": 0.952914
+            },
+            {
+              "evidence_id": "c0e550dc8560837ea9e8d258",
+              "title": "PDFs/safety_rope v0.2.1.pdf p1 table 2",
+              "snippet": "PDF表格: PDFs/safety_rope v0.2.1.pdf 第1页 表2\n\n| ▪ \"safety_rope\": |  |\n| --- | --- |\n|  | • \"safety_rope_connected\" （安全绳已连接） |\n|  | • \"safety_rope_unconnected\" （安全绳未连接） |\n|  | • \"safety_rope_without\" （无安全绳） |\n|  | • \"safety_rope_agnostic\" （无法判断） |",
+              "section_type": "label_schema",
+              "score": 0.352699
+            },
+            {
+              "evidence_id": "2a289a7e844b6b9d89079853",
+              "title": "KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model",
+              "snippet": "target_name: 红马甲/安全带\nalgorithm_type: 属性\nalgorithm_name: 中车工厂-属性模型1\napplication_scene: 中车工厂项目\nowner: 朱帅\nmodel_name: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model\nsupported_device: T4\nrecommended_config: cuda11.0-trt7.1-int8-T4\nlast_updated: 2023-11-15\nlast_updated_month: 2023-11",
+              "model_name": "KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model",
+              "algorithm_name": "中车工厂-属性模型1",
+              "algorithm_type": "属性",
+              "application_scene": "中车工厂项目",
+              "section_type": "model_artifact",
+              "score": 0.991211
+            }
+          ]
+        },
+        {
+          "field": "similar_capabilities",
+          "queries": [
+            "服装外观识别 物品属性分类 多类别分类模型",
+            "headwear visual recognition attribute classification"
+          ],
+          "coverage": "strong",
+          "evidence": [
+            {
+              "evidence_id": "f860d99ac91fa73c4f8940d4",
+              "title": "PDFs/服饰属性模型.pdf p1",
+              "snippet": ".9999734163284302, \"st_juron\n         g_police\": 1.7758437024895102e-05, \"st_jurong_others\": 0.0}}, 'id': 0, 'label': 2\n         21488, 'image_id': 0}",
+              "section_type": "label_schema",
+              "score": 0.66438
+            },
+            {
+              "evidence_id": "7b6580ab9e2f07ae444c3864",
+              "title": "PDFs/安防方向--非机动车属性大模型更新.pdf p4",
+              "snippet": "\"feature_end\": 9,                                                              \n     \"labels\": [",
+              "section_type": "model_artifact",
+              "score": 0.915689
+            },
+            {
+              "evidence_id": "77aa28f82a19a78e04c51d0e",
+              "title": "PDFs/服饰属性模型.pdf p1",
+              "snippet": "1 {\"attribute\": {\"st_uniform\": {\"st_jurong_prisoner\": 0.9999734163284302, \"st_juron\n         g_police\": 1.7758437024895102e-05, \"st_jurong_others\": 0.0}}, 'id': 0, 'label': 2",
+              "section_type": "label_schema",
+              "score": 0.663369
+            },
+            {
+              "evidence_id": "d00d767df5dcfcfdb68b96f2",
+              "title": "PDFs/安防方向--非机动车属性大模型更新.pdf p4 table 1",
+              "snippet": "PDF表格: PDFs/安防方向--非机动车属性大模型更新.pdf 第4页 表1\n\n|  |  |  |  | 90% recall | thres | input size |  |  |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- |\n|  |  | 车辆颜色 | vehicle_ color | 71.6% / 76.6% | 0.95 | 90*90 |  |  |\n|  |  | 三轮车细 分类 | st_tricycl e_type | 98.6% / 92.1% | 0.9 | 120*120 |  |  |\n|  | 非机动车粗分类，每个标签推荐不同的阈值如下： |  |  |  |  |  |  |  |\n|  |  | st_vehicl e_class | thres | 90% recall | inp...",
+              "section_type": "accuracy_metric",
+              "score": 0.912541
+            },
+            {
+              "evidence_id": "a19e4ba880d44c3a8f8e8a4c",
+              "title": "PDFs/安防方向--非机动车属性大模型更新.pdf p4",
+              "snippet": "{                                                                              \n     \"vehicle_color\": {                                                             \n     \"calculator\": \"bypass\",                                                        \n                                                                                    \n     \"feature_start\": 0,...",
+              "section_type": "model_artifact",
+              "score": 0.911914
+            },
+            {
+              "evidence_id": "dc6d9d800fb19e368cdba836",
+              "title": "PDFs/服饰属性模型.pdf p1",
+              "snippet": "Kestrel模型部署                                                                    \n                                                                                    \n     1、模型输入输出...",
+              "section_type": "algorithm_boundary",
+              "score": 0.639497
+            },
+            {
+              "evidence_id": "137691d3edd6c1b135b49405",
+              "title": "PDFs/安防方向-人脸误检分类模型发版记录.pdf p7",
+              "snippet": "1 {'attribute': {'imagenet': {'0': 0.5389107465744019, '1': 0.46108928322792053}},\n          'id': 0, 'label': 37017, 'image_id': 0}",
+              "section_type": "label_schema",
+              "score": 0.622141
+            },
+            {
+              "evidence_id": "80320e59c6d48ecbd7bdd9ff",
+              "title": "PDFs/服饰属性模型.pdf p1 table 1",
+              "snippet": "PDF表格: PDFs/服饰属性模型.pdf 第1页 表1\n\n| 服饰属性模型 HL数据处理 • 第一批次 ◦ 小图总量：312251 ◦ 路径：s3://struct-data2/SDJY/ ◦ 模型训练使用全量，按 8:2 比例切分训练集、测试集。各类别具体数量如下表 ◦ 数据同步 ▪ 251223：已同步采样小图1w张，含训练集8000张（三类各6000/1500/500），测试集2000张 （三类各1000/800/200） ▪ 251224：已同步采样小图10w张，含训练集8w、测试集2w；附带数据采样脚本，采样并直接转 成spiral的数据格式； 0-prisoner 1-police 2-others train 230312 16499 2989 test 57578 4125 748 总计 287890 20624 3737 • 第二批次（HL视频抽帧采样） ◦ 小图总量...",
+              "section_type": "algorithm_boundary",
+              "score": 0.620989
+            }
+          ]
+        },
+        {
+          "field": "performance_baseline",
+          "queries": [
+            "视觉分类任务 精度指标 模型评估 准确率",
+            "image classification accuracy benchmark gss.csv"
+          ],
+          "coverage": "strong",
+          "evidence": [
+            {
+              "evidence_id": "c7711b84757a14915a38a72a",
+              "title": "PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2 table 1",
+              "snippet": "PDF表格: PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf 第2页 表1\n\n表格结构化行:\n模型族: 三、模型列表\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model\nOID: beeb6944bdca2dafd0213251951cc47f829efad2981d7f847010b13f486181c5\n平台: cuda11.0-trt7.1-fp16-T4\n\n模型族: 三、模型列表\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model\nOID: fcd2d67fbbaab4fc2064f08ccaf5e6...",
+              "section_type": "accuracy_eval",
+              "score": 0.807289
+            },
+            {
+              "evidence_id": "c3df8f567b44bcd3cf139136",
+              "title": "PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2",
+              "snippet": "58                  \n                 without_safetybelt 0.9269   0.9702   0.9481                        \n     评测平台：cuda11.0-trt7.1-fp16-T4                                                   \n                                                                                    \n                                                                                    \n     模型性能",
+              "section_type": "accuracy_eval",
+              "score": 0.802051
+            },
+            {
+              "evidence_id": "1d4107dd8be5f74f932bdc50",
+              "title": "PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2",
+              "snippet": "ge/project/3/releaseManage?       \n     rid=34577&id=3&model_type=classifier&tabName=deployment                        \n     四、精度性能                                                                         \n                                                                                    \n     模型精度...",
+              "section_type": "accuracy_eval",
+              "score": 0.800952
+            },
+            {
+              "evidence_id": "09de649f24bff04033b48267",
+              "title": "PDFs/安防方向-人脸模糊3.2.1模型更新.pdf p1 table 1",
+              "snippet": "PDF表格: PDFs/安防方向-人脸模糊3.2.1模型更新.pdf 第1页 表1\n\n| 安防方向-人脸模糊3.2.1模型更新 KM_classifier_Face_Blur_Security_3.2.1 release note 1 release date: 2025.7.23 2 owner: gonglijun@sensetime.com 3 highlights: 4 清晰度分数由极端的U型分布变为更合理的0-1之间均匀分布 5 二分类精度提升约20%，清晰度排序准确率提升约4% 6 支持多batch部署 7 模型输出变化： 8 3.1.0/3.1.1输出：{'attribute': {'st_face_blur': {'st_clear': xxx, 'st_blur': xx x}}} 9 3.2.1 输出：{'attribute': {'st_face_blur': {'s...",
+              "section_type": "release_note",
+              "score": 0.626532
+            },
+            {
+              "evidence_id": "b5c1032332b3503421a8294e",
+              "title": "PDFs/safety_rope v0.2.1.pdf p1 table 1",
+              "snippet": "PDF表格: PDFs/safety_rope v0.2.1.pdf 第1页 表1\n\n| safety_rope v0.2.1 Release Note: • 发布时间: 2024.01.29 • Owner: zhushuai@sensetime.com • Highlight: ◦ 追加了长客场景回流误报的工人图片，以提升该场景下的精度，目前对应数据点位 top1 acc从原先 0.55提升到0.97。 ◦ 在通用测试集上无掉点，各项精度指标有略微提升0.1%-0.5% 标签解释: ▪ \"safety_rope\": • \"safety_rope_connected\" （安全绳已连接） • \"safety_rope_unconnected\" （安全绳未连接） • \"safety_rope_without\" （无安全绳） • \"safety_rope_agnostic\" （无法判断） |...",
+              "section_type": "release_note",
+              "score": 0.472662
+            },
+            {
+              "evidence_id": "26118afe849d7cf49ebf137b",
+              "title": "PDFs/safety_rope v0.2.1.pdf p1",
+              "snippet": "• Highlight:                                                                  \n                                                                                    \n        ◦ 追加了长客场景回流误报的工人图片，以提升该场景下的精度，目前对应数据点位                      top1 acc从原先     \n          0.55提升到0.97。...",
+              "section_type": "release_note",
+              "score": 0.466175
+            },
+            {
+              "evidence_id": "c57b2097434e5945a04a0bd9",
+              "title": "PDFs/安防方向-人脸误检分类模型发版记录.pdf p1 table 1",
+              "snippet": "PDF表格: PDFs/安防方向-人脸误检分类模型发版记录.pdf 第1页 表1\n\n| 安防方向-人脸误检分类模型发版记录 KM_classifier_Face_None_Security_3.0.2 release note: • release date: 2025.02.17 • owner: fengjiangyan@sensetime.com • highlights ◦ 输出字段与原KM_classifier_FaceNoFace_cls_sz_1.0.2, KM_classifier_Face_None_Security_3.0.1 模型保持一致 ◦ 数据: 清洗原数据集, 并增加58w训练数据, 包含监控场景的大角度/被遮挡人脸、后脑、全遮挡数据 ◦ 精度: 大幅提升监控场景大角度/被遮挡人脸正样本、全遮挡负样本的召回, 其中common测试集人脸 召回+26%、误报召回+...",
+              "section_type": "accuracy_eval",
+              "score": 0.618587
+            },
+            {
+              "evidence_id": "02dce4ee46076b26105a3364",
+              "title": "PDFs/车辆细分类（四级标签）.pdf p18",
+              "snippet": "95.27     96.07     96.94      97.13     96.16          \n       阈值后       n                                                                  \n                 recall     65.70     66.25     66.84      66.98     66.31...",
+              "section_type": "accuracy_metric",
+              "score": 0.410511
+            }
+          ]
+        },
+        {
+          "field": "data_requirements",
+          "queries": [
+            "帽子 类别 训练数据 图像标注",
+            "巾帽检测识别数据集 可视化标注 网络"
+          ],
+          "coverage": "strong",
+          "evidence": [
+            {
+              "evidence_id": "14459b9255e20e9cd01ee5fa",
+              "title": "PDFs/安防方向-人脸误检分类模型发版记录.pdf p1",
+              "snippet": "1 {'attribute': {'imagenet': {'0': 0.5389107465744019, '1': 0.46108928322792053}},\n          'id': 0, 'label': 37017, 'image_id': 0}",
+              "section_type": "label_schema",
+              "score": 0.901069
+            },
+            {
+              "evidence_id": "fa98e6d066641dc937255e73",
+              "title": "PDFs/横幅标语检测3.0.5-发版.pdf p1 table 1",
+              "snippet": "PDF表格: PDFs/横幅标语检测3.0.5-发版.pdf 第1页 表1\n\n| 横幅标语检测3.0.5-发版 算法功能和边界 • 算法功能：输出图中横幅或标语的坐标 • 前提条件：图中横幅或标语边界清晰、包含文字，目前不支持衣服上的、投影等非常规形式的横幅或标 语 • 目标要求：对于1080x1920分辨率图片输入，ROI区域宽&高不小于60像素 • 潜在风险：对于夜间场景、不规则形状目标、模糊小目标，检测准确率无法保证 KM_essos_BannerSlogan_960x960_3.0.5 release note • 发布时间：20250626 • owner：fengjiangyan@sensetime.com, rendafa@sensetime.com • Highlights： ◦ 配置：增大模型输入尺寸至960x960 ◦ 数据：生成手举竖横幅数据，去除车身横幅数据 ◦ 精...",
+              "section_type": "algorithm_boundary",
+              "score": 0.965383
+            },
+            {
+              "evidence_id": "250a1decfea9ca85b0f2944f",
+              "title": "PDFs/横幅标语检测3.0.5-发版.pdf p1",
+              "snippet": "• 检测图中的横幅/标语                                                                  \n      • 模型仅输出banner一类：{\"id\": 806880, \"label\": \"banner\"}                             \n                                                                                    \n                                                                                    \n     二、算法边界...",
+              "section_type": "algorithm_boundary",
+              "score": 0.944319
+            },
+            {
+              "evidence_id": "13910ff7920cde39bfb87cdc",
+              "title": "PDFs/人体二分类发版记录.pdf p1",
+              "snippet": "1 {'attribute': {'st_ped_none': {'st_none': 0.5389107465744019, 'st_ped': 0.4610892\n         8322792053}}, 'id': 0, 'label': 221488, 'image_id': 0}",
+              "section_type": "label_schema",
+              "score": 0.571595
+            },
+            {
+              "evidence_id": "c57b2097434e5945a04a0bd9",
+              "title": "PDFs/安防方向-人脸误检分类模型发版记录.pdf p1 table 1",
+              "snippet": "PDF表格: PDFs/安防方向-人脸误检分类模型发版记录.pdf 第1页 表1\n\n| 安防方向-人脸误检分类模型发版记录 KM_classifier_Face_None_Security_3.0.2 release note: • release date: 2025.02.17 • owner: fengjiangyan@sensetime.com • highlights ◦ 输出字段与原KM_classifier_FaceNoFace_cls_sz_1.0.2, KM_classifier_Face_None_Security_3.0.1 模型保持一致 ◦ 数据: 清洗原数据集, 并增加58w训练数据, 包含监控场景的大角度/被遮挡人脸、后脑、全遮挡数据 ◦ 精度: 大幅提升监控场景大角度/被遮挡人脸正样本、全遮挡负样本的召回, 其中common测试集人脸 召回+26%、误报召回+...",
+              "section_type": "accuracy_eval",
+              "score": 0.91684
+            },
+            {
+              "evidence_id": "0ea79d23060c393c49f8c0e0",
+              "title": "PDFs/安防方向-人脸误检分类模型发版记录.pdf p1",
+              "snippet": "KM_classifier_Face_None_Security_3.0.1 模型保持一致                             \n        ◦ 数据: 清洗原数据集,    并增加58w训练数据,    包含监控场景的大角度/被遮挡人脸、后脑、全遮挡数据                   \n                                                                                    \n        ◦ 精度: 大幅提升监控场景大角度/被遮挡人脸正样本、全遮挡负样本的召回,                 其中common测试集人脸         \n          召回+26%、误报召回+43%...",
+              "section_type": "accuracy_eval",
+              "score": 0.911827
+            },
+            {
+              "evidence_id": "89e3fcc34cc23cf9031163e3",
+              "title": "PDFs/人体二分类发版记录.pdf p1 table 1",
+              "snippet": "PDF表格: PDFs/人体二分类发版记录.pdf 第1页 表1\n\n| 人体二分类发版记录 KM_classifier_Ped_None_Security_3.1.1 release note: • release date: 2025.07.31 • owner: fengjiangyan@sensetime.com • highlights ◦ 数据: 清洗原数据集, 并增加75w训练数据, 包含监控场景的遮挡/截断/躺卧人体，补充猫狗、植物等 常见误报 ◦ 精度: 大幅提升监控场景遮挡截断躺卧人体正样本、猫狗负样本的召回, 其中遮挡人体召回+8.2%， 躺卧人体召回+8.8%，猫狗过滤+12.2% ◦ 精度: 大幅提升监控场景遮挡截断躺卧人体正样本、猫狗负样本的召回, 其中遮挡人体召回+8.5%， 躺卧人体召回+10.2%，猫狗过滤+12.9% ◦ 阈值：模型无内置阈值, 阈值设定可...",
+              "section_type": "accuracy_eval",
+              "score": 0.878491
+            },
+            {
+              "evidence_id": "f40d2faec9334b3c60b5bda8",
+              "title": "PDFs/安防方向-人脸误检分类模型发版记录.pdf p1",
+              "snippet": "• 类别定义说明",
+              "section_type": "general",
+              "score": 0.906341
+            }
+          ]
+        }
+      ]
+    },
+    "llm_messages": [
+      {
+        "role": "system",
+        "content": "你是视觉模型迁移顾问。请基于检索证据生成结构化迁移评估报告。必须区分证据支持和合理推断；证据不足时明确写证据不足，不要编造精度、周期或成本。若可估计成本/周期，只能给区间和依赖前提。只输出 JSON。"
+      },
+      {
+        "role": "user",
+        "content": "{\n  \"user_query\": \"客户要求区分帽子款式，包括渔夫帽、无檐帽、鸭舌帽、安全帽、open-face helmet、full-face helmet、连衣帽，用什么模型\",\n  \"retrieval_plan\": {\n    \"abstract_requirement\": {\n      \"object\": \"帽子款式分类\",\n      \"attribute\": \"渔夫帽 无檐帽 鸭舌帽 安全帽 open-face helmet full-face helmet 连衣帽\",\n      \"task_type\": \"物体分类\",\n      \"scene\": \"工业视觉/服装工业\",\n      \"constraints\": [\n        \"已有模型不可用\",\n        \"需找类似功能的迁移模型或方法\"\n      ]\n    },\n    \"retrieve_fields\": [\n      {\n        \"field\": \"existing_models\",\n        \"queries\": [\n          \"帽子 款式 分类 模型 渔夫帽 鸭舌帽 安全帽 helmet\",\n          \"headwear classification model 棒球帽 背心帽 安全帽 classify\"\n        ]\n      },\n      {\n        \"field\": \"similar_capabilities\",\n        \"queries\": [\n          \"服装外观识别 物品属性分类 多类别分类模型\",\n          \"headwear visual recognition attribute classification\"\n        ]\n      },\n      {\n        \"field\": \"performance_baseline\",\n        \"queries\": [\n          \"视觉分类任务 精度指标 模型评估 准确率\",\n          \"image classification accuracy benchmark gss.csv\"\n        ]\n      },\n      {\n        \"field\": \"data_requirements\",\n        \"queries\": [\n          \"帽子 类别 训练数据 图像标注\",\n          \"巾帽检测识别数据集 可视化标注 网络\"\n        ]\n      }\n    ]\n  },\n  \"field_results\": [\n    {\n      \"field\": \"existing_models\",\n      \"queries\": [\n        \"帽子 款式 分类 模型 渔夫帽 鸭舌帽 安全帽 helmet\",\n        \"headwear classification model 棒球帽 背心帽 安全帽 classify\"\n      ],\n      \"coverage\": \"strong\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"10db7130aad189358f9dae31\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p1\",\n          \"snippet\": \"穿安全带           穿马甲\",\n          \"section_type\": \"general\",\n          \"score\": 0.99124\n        },\n        {\n          \"evidence_id\": \"bab21bf76719bfe7491f7027\",\n          \"title\": \"KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\",\n          \"snippet\": \"target_name: 红马甲/安全带\\nalgorithm_type: 属性\\nalgorithm_name: 中车工厂-属性模型1\\napplication_scene: 中车工厂项目\\nowner: 朱帅\\nmodel_name: KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\\nsupported_device: cpu\\nrecommended_config: cpu-ppl2-fp32\\nlast_updated: 2023-11-15\\nlast_updated_month: 2023-11\",\n          \"model_name\": \"KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\",\n          \"algorithm_name\": \"中车工厂-属性模型1\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"中车工厂项目\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"206c530d3f4e80aeadcc8c99\",\n          \"title\": \"PAR_waistcoat_safetybelt\",\n          \"snippet\": \"did: 93156\\nrid: 33307\\nmodel_name: PAR_waistcoat_safetybelt\\nplatform: cpu-nart-fp32\",\n          \"model_name\": \"PAR_waistcoat_safetybelt\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.956326\n        },\n        {\n          \"evidence_id\": \"3b2fd8ef619d1cec181e7484\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p1\",\n          \"snippet\": \"检测类别：2个行人属性，共6个类别标签\",\n          \"section_type\": \"label_schema\",\n          \"score\": 0.991041\n        },\n        {\n          \"evidence_id\": \"080b46058b3955b81c4e6546\",\n          \"title\": \"KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model\",\n          \"snippet\": \"target_name: 红马甲/安全带\\nalgorithm_type: 属性\\nalgorithm_name: 中车工厂-属性模型1\\napplication_scene: 中车工厂项目\\nowner: 朱帅\\nmodel_name: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model\\nsupported_device: T4\\nrecommended_config: cuda11.0-trt7.1-fp16-T4\\nlast_updated: 2023-11-15\\nlast_updated_month: 2023-11\",\n          \"model_name\": \"KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model\",\n          \"algorithm_name\": \"中车工厂-属性模型1\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"中车工厂项目\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.991211\n        },\n        {\n          \"evidence_id\": \"1d2c64caca66b4cfaddefdee\",\n          \"title\": \"PAR_waistcoat_safetybelt\",\n          \"snippet\": \"did: 95822\\nrid: 34577\\nmodel_name: PAR_waistcoat_safetybelt\\nplatform: cuda11.0-trt7.1-int8-P4\",\n          \"model_name\": \"PAR_waistcoat_safetybelt\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.952914\n        },\n        {\n          \"evidence_id\": \"c0e550dc8560837ea9e8d258\",\n          \"title\": \"PDFs/safety_rope v0.2.1.pdf p1 table 2\",\n          \"snippet\": \"PDF表格: PDFs/safety_rope v0.2.1.pdf 第1页 表2\\n\\n| ▪ \\\"safety_rope\\\": |  |\\n| --- | --- |\\n|  | • \\\"safety_rope_connected\\\" （安全绳已连接） |\\n|  | • \\\"safety_rope_unconnected\\\" （安全绳未连接） |\\n|  | • \\\"safety_rope_without\\\" （无安全绳） |\\n|  | • \\\"safety_rope_agnostic\\\" （无法判断） |\",\n          \"section_type\": \"label_schema\",\n          \"score\": 0.352699\n        },\n        {\n          \"evidence_id\": \"2a289a7e844b6b9d89079853\",\n          \"title\": \"KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model\",\n          \"snippet\": \"target_name: 红马甲/安全带\\nalgorithm_type: 属性\\nalgorithm_name: 中车工厂-属性模型1\\napplication_scene: 中车工厂项目\\nowner: 朱帅\\nmodel_name: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model\\nsupported_device: T4\\nrecommended_config: cuda11.0-trt7.1-int8-T4\\nlast_updated: 2023-11-15\\nlast_updated_month: 2023-11\",\n          \"model_name\": \"KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model\",\n          \"algorithm_name\": \"中车工厂-属性模型1\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"中车工厂项目\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.991211\n        }\n      ]\n    },\n    {\n      \"field\": \"similar_capabilities\",\n      \"queries\": [\n        \"服装外观识别 物品属性分类 多类别分类模型\",\n        \"headwear visual recognition attribute classification\"\n      ],\n      \"coverage\": \"strong\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"f860d99ac91fa73c4f8940d4\",\n          \"title\": \"PDFs/服饰属性模型.pdf p1\",\n          \"snippet\": \".9999734163284302, \\\"st_juron\\n         g_police\\\": 1.7758437024895102e-05, \\\"st_jurong_others\\\": 0.0}}, 'id': 0, 'label': 2\\n         21488, 'image_id': 0}\",\n          \"section_type\": \"label_schema\",\n          \"score\": 0.66438\n        },\n        {\n          \"evidence_id\": \"7b6580ab9e2f07ae444c3864\",\n          \"title\": \"PDFs/安防方向--非机动车属性大模型更新.pdf p4\",\n          \"snippet\": \"\\\"feature_end\\\": 9,                                                              \\n     \\\"labels\\\": [\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.915689\n        },\n        {\n          \"evidence_id\": \"77aa28f82a19a78e04c51d0e\",\n          \"title\": \"PDFs/服饰属性模型.pdf p1\",\n          \"snippet\": \"1 {\\\"attribute\\\": {\\\"st_uniform\\\": {\\\"st_jurong_prisoner\\\": 0.9999734163284302, \\\"st_juron\\n         g_police\\\": 1.7758437024895102e-05, \\\"st_jurong_others\\\": 0.0}}, 'id': 0, 'label': 2\",\n          \"section_type\": \"label_schema\",\n          \"score\": 0.663369\n        },\n        {\n          \"evidence_id\": \"d00d767df5dcfcfdb68b96f2\",\n          \"title\": \"PDFs/安防方向--非机动车属性大模型更新.pdf p4 table 1\",\n          \"snippet\": \"PDF表格: PDFs/安防方向--非机动车属性大模型更新.pdf 第4页 表1\\n\\n|  |  |  |  | 90% recall | thres | input size |  |  |\\n| --- | --- | --- | --- | --- | --- | --- | --- | --- |\\n|  |  | 车辆颜色 | vehicle_ color | 71.6% / 76.6% | 0.95 | 90*90 |  |  |\\n|  |  | 三轮车细 分类 | st_tricycl e_type | 98.6% / 92.1% | 0.9 | 120*120 |  |  |\\n|  | 非机动车粗分类，每个标签推荐不同的阈值如下： |  |  |  |  |  |  |  |\\n|  |  | st_vehicl e_class | thres | 90% recall | inp...\",\n          \"section_type\": \"accuracy_metric\",\n          \"score\": 0.912541\n        },\n        {\n          \"evidence_id\": \"a19e4ba880d44c3a8f8e8a4c\",\n          \"title\": \"PDFs/安防方向--非机动车属性大模型更新.pdf p4\",\n          \"snippet\": \"{                                                                              \\n     \\\"vehicle_color\\\": {                                                             \\n     \\\"calculator\\\": \\\"bypass\\\",                                                        \\n                                                                                    \\n     \\\"feature_start\\\": 0,...\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.911914\n        },\n        {\n          \"evidence_id\": \"dc6d9d800fb19e368cdba836\",\n          \"title\": \"PDFs/服饰属性模型.pdf p1\",\n          \"snippet\": \"Kestrel模型部署                                                                    \\n                                                                                    \\n     1、模型输入输出...\",\n          \"section_type\": \"algorithm_boundary\",\n          \"score\": 0.639497\n        },\n        {\n          \"evidence_id\": \"137691d3edd6c1b135b49405\",\n          \"title\": \"PDFs/安防方向-人脸误检分类模型发版记录.pdf p7\",\n          \"snippet\": \"1 {'attribute': {'imagenet': {'0': 0.5389107465744019, '1': 0.46108928322792053}},\\n          'id': 0, 'label': 37017, 'image_id': 0}\",\n          \"section_type\": \"label_schema\",\n          \"score\": 0.622141\n        },\n        {\n          \"evidence_id\": \"80320e59c6d48ecbd7bdd9ff\",\n          \"title\": \"PDFs/服饰属性模型.pdf p1 table 1\",\n          \"snippet\": \"PDF表格: PDFs/服饰属性模型.pdf 第1页 表1\\n\\n| 服饰属性模型 HL数据处理 • 第一批次 ◦ 小图总量：312251 ◦ 路径：s3://struct-data2/SDJY/ ◦ 模型训练使用全量，按 8:2 比例切分训练集、测试集。各类别具体数量如下表 ◦ 数据同步 ▪ 251223：已同步采样小图1w张，含训练集8000张（三类各6000/1500/500），测试集2000张 （三类各1000/800/200） ▪ 251224：已同步采样小图10w张，含训练集8w、测试集2w；附带数据采样脚本，采样并直接转 成spiral的数据格式； 0-prisoner 1-police 2-others train 230312 16499 2989 test 57578 4125 748 总计 287890 20624 3737 • 第二批次（HL视频抽帧采样） ◦ 小图总量...\",\n          \"section_type\": \"algorithm_boundary\",\n          \"score\": 0.620989\n        }\n      ]\n    },\n    {\n      \"field\": \"performance_baseline\",\n      \"queries\": [\n        \"视觉分类任务 精度指标 模型评估 准确率\",\n        \"image classification accuracy benchmark gss.csv\"\n      ],\n      \"coverage\": \"strong\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"c7711b84757a14915a38a72a\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2 table 1\",\n          \"snippet\": \"PDF表格: PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf 第2页 表1\\n\\n表格结构化行:\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model\\nOID: beeb6944bdca2dafd0213251951cc47f829efad2981d7f847010b13f486181c5\\n平台: cuda11.0-trt7.1-fp16-T4\\n\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model\\nOID: fcd2d67fbbaab4fc2064f08ccaf5e6...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.807289\n        },\n        {\n          \"evidence_id\": \"c3df8f567b44bcd3cf139136\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2\",\n          \"snippet\": \"58                  \\n                 without_safetybelt 0.9269   0.9702   0.9481                        \\n     评测平台：cuda11.0-trt7.1-fp16-T4                                                   \\n                                                                                    \\n                                                                                    \\n     模型性能\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.802051\n        },\n        {\n          \"evidence_id\": \"1d4107dd8be5f74f932bdc50\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2\",\n          \"snippet\": \"ge/project/3/releaseManage?       \\n     rid=34577&id=3&model_type=classifier&tabName=deployment                        \\n     四、精度性能                                                                         \\n                                                                                    \\n     模型精度...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.800952\n        },\n        {\n          \"evidence_id\": \"09de649f24bff04033b48267\",\n          \"title\": \"PDFs/安防方向-人脸模糊3.2.1模型更新.pdf p1 table 1\",\n          \"snippet\": \"PDF表格: PDFs/安防方向-人脸模糊3.2.1模型更新.pdf 第1页 表1\\n\\n| 安防方向-人脸模糊3.2.1模型更新 KM_classifier_Face_Blur_Security_3.2.1 release note 1 release date: 2025.7.23 2 owner: gonglijun@sensetime.com 3 highlights: 4 清晰度分数由极端的U型分布变为更合理的0-1之间均匀分布 5 二分类精度提升约20%，清晰度排序准确率提升约4% 6 支持多batch部署 7 模型输出变化： 8 3.1.0/3.1.1输出：{'attribute': {'st_face_blur': {'st_clear': xxx, 'st_blur': xx x}}} 9 3.2.1 输出：{'attribute': {'st_face_blur': {'s...\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.626532\n        },\n        {\n          \"evidence_id\": \"b5c1032332b3503421a8294e\",\n          \"title\": \"PDFs/safety_rope v0.2.1.pdf p1 table 1\",\n          \"snippet\": \"PDF表格: PDFs/safety_rope v0.2.1.pdf 第1页 表1\\n\\n| safety_rope v0.2.1 Release Note: • 发布时间: 2024.01.29 • Owner: zhushuai@sensetime.com • Highlight: ◦ 追加了长客场景回流误报的工人图片，以提升该场景下的精度，目前对应数据点位 top1 acc从原先 0.55提升到0.97。 ◦ 在通用测试集上无掉点，各项精度指标有略微提升0.1%-0.5% 标签解释: ▪ \\\"safety_rope\\\": • \\\"safety_rope_connected\\\" （安全绳已连接） • \\\"safety_rope_unconnected\\\" （安全绳未连接） • \\\"safety_rope_without\\\" （无安全绳） • \\\"safety_rope_agnostic\\\" （无法判断） |...\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.472662\n        },\n        {\n          \"evidence_id\": \"26118afe849d7cf49ebf137b\",\n          \"title\": \"PDFs/safety_rope v0.2.1.pdf p1\",\n          \"snippet\": \"• Highlight:                                                                  \\n                                                                                    \\n        ◦ 追加了长客场景回流误报的工人图片，以提升该场景下的精度，目前对应数据点位                      top1 acc从原先     \\n          0.55提升到0.97。...\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.466175\n        },\n        {\n          \"evidence_id\": \"c57b2097434e5945a04a0bd9\",\n          \"title\": \"PDFs/安防方向-人脸误检分类模型发版记录.pdf p1 table 1\",\n          \"snippet\": \"PDF表格: PDFs/安防方向-人脸误检分类模型发版记录.pdf 第1页 表1\\n\\n| 安防方向-人脸误检分类模型发版记录 KM_classifier_Face_None_Security_3.0.2 release note: • release date: 2025.02.17 • owner: fengjiangyan@sensetime.com • highlights ◦ 输出字段与原KM_classifier_FaceNoFace_cls_sz_1.0.2, KM_classifier_Face_None_Security_3.0.1 模型保持一致 ◦ 数据: 清洗原数据集, 并增加58w训练数据, 包含监控场景的大角度/被遮挡人脸、后脑、全遮挡数据 ◦ 精度: 大幅提升监控场景大角度/被遮挡人脸正样本、全遮挡负样本的召回, 其中common测试集人脸 召回+26%、误报召回+...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.618587\n        },\n        {\n          \"evidence_id\": \"02dce4ee46076b26105a3364\",\n          \"title\": \"PDFs/车辆细分类（四级标签）.pdf p18\",\n          \"snippet\": \"95.27     96.07     96.94      97.13     96.16          \\n       阈值后       n                                                                  \\n                 recall     65.70     66.25     66.84      66.98     66.31...\",\n          \"section_type\": \"accuracy_metric\",\n          \"score\": 0.410511\n        }\n      ]\n    },\n    {\n      \"field\": \"data_requirements\",\n      \"queries\": [\n        \"帽子 类别 训练数据 图像标注\",\n        \"巾帽检测识别数据集 可视化标注 网络\"\n      ],\n      \"coverage\": \"strong\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"14459b9255e20e9cd01ee5fa\",\n          \"title\": \"PDFs/安防方向-人脸误检分类模型发版记录.pdf p1\",\n          \"snippet\": \"1 {'attribute': {'imagenet': {'0': 0.5389107465744019, '1': 0.46108928322792053}},\\n          'id': 0, 'label': 37017, 'image_id': 0}\",\n          \"section_type\": \"label_schema\",\n          \"score\": 0.901069\n        },\n        {\n          \"evidence_id\": \"fa98e6d066641dc937255e73\",\n          \"title\": \"PDFs/横幅标语检测3.0.5-发版.pdf p1 table 1\",\n          \"snippet\": \"PDF表格: PDFs/横幅标语检测3.0.5-发版.pdf 第1页 表1\\n\\n| 横幅标语检测3.0.5-发版 算法功能和边界 • 算法功能：输出图中横幅或标语的坐标 • 前提条件：图中横幅或标语边界清晰、包含文字，目前不支持衣服上的、投影等非常规形式的横幅或标 语 • 目标要求：对于1080x1920分辨率图片输入，ROI区域宽&高不小于60像素 • 潜在风险：对于夜间场景、不规则形状目标、模糊小目标，检测准确率无法保证 KM_essos_BannerSlogan_960x960_3.0.5 release note • 发布时间：20250626 • owner：fengjiangyan@sensetime.com, rendafa@sensetime.com • Highlights： ◦ 配置：增大模型输入尺寸至960x960 ◦ 数据：生成手举竖横幅数据，去除车身横幅数据 ◦ 精...\",\n          \"section_type\": \"algorithm_boundary\",\n          \"score\": 0.965383\n        },\n        {\n          \"evidence_id\": \"250a1decfea9ca85b0f2944f\",\n          \"title\": \"PDFs/横幅标语检测3.0.5-发版.pdf p1\",\n          \"snippet\": \"• 检测图中的横幅/标语                                                                  \\n      • 模型仅输出banner一类：{\\\"id\\\": 806880, \\\"label\\\": \\\"banner\\\"}                             \\n                                                                                    \\n                                                                                    \\n     二、算法边界...\",\n          \"section_type\": \"algorithm_boundary\",\n          \"score\": 0.944319\n        },\n        {\n          \"evidence_id\": \"13910ff7920cde39bfb87cdc\",\n          \"title\": \"PDFs/人体二分类发版记录.pdf p1\",\n          \"snippet\": \"1 {'attribute': {'st_ped_none': {'st_none': 0.5389107465744019, 'st_ped': 0.4610892\\n         8322792053}}, 'id': 0, 'label': 221488, 'image_id': 0}\",\n          \"section_type\": \"label_schema\",\n          \"score\": 0.571595\n        },\n        {\n          \"evidence_id\": \"c57b2097434e5945a04a0bd9\",\n          \"title\": \"PDFs/安防方向-人脸误检分类模型发版记录.pdf p1 table 1\",\n          \"snippet\": \"PDF表格: PDFs/安防方向-人脸误检分类模型发版记录.pdf 第1页 表1\\n\\n| 安防方向-人脸误检分类模型发版记录 KM_classifier_Face_None_Security_3.0.2 release note: • release date: 2025.02.17 • owner: fengjiangyan@sensetime.com • highlights ◦ 输出字段与原KM_classifier_FaceNoFace_cls_sz_1.0.2, KM_classifier_Face_None_Security_3.0.1 模型保持一致 ◦ 数据: 清洗原数据集, 并增加58w训练数据, 包含监控场景的大角度/被遮挡人脸、后脑、全遮挡数据 ◦ 精度: 大幅提升监控场景大角度/被遮挡人脸正样本、全遮挡负样本的召回, 其中common测试集人脸 召回+26%、误报召回+...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.91684\n        },\n        {\n          \"evidence_id\": \"0ea79d23060c393c49f8c0e0\",\n          \"title\": \"PDFs/安防方向-人脸误检分类模型发版记录.pdf p1\",\n          \"snippet\": \"KM_classifier_Face_None_Security_3.0.1 模型保持一致                             \\n        ◦ 数据: 清洗原数据集,    并增加58w训练数据,    包含监控场景的大角度/被遮挡人脸、后脑、全遮挡数据                   \\n                                                                                    \\n        ◦ 精度: 大幅提升监控场景大角度/被遮挡人脸正样本、全遮挡负样本的召回,                 其中common测试集人脸         \\n          召回+26%、误报召回+43%...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.911827\n        },\n        {\n          \"evidence_id\": \"89e3fcc34cc23cf9031163e3\",\n          \"title\": \"PDFs/人体二分类发版记录.pdf p1 table 1\",\n          \"snippet\": \"PDF表格: PDFs/人体二分类发版记录.pdf 第1页 表1\\n\\n| 人体二分类发版记录 KM_classifier_Ped_None_Security_3.1.1 release note: • release date: 2025.07.31 • owner: fengjiangyan@sensetime.com • highlights ◦ 数据: 清洗原数据集, 并增加75w训练数据, 包含监控场景的遮挡/截断/躺卧人体，补充猫狗、植物等 常见误报 ◦ 精度: 大幅提升监控场景遮挡截断躺卧人体正样本、猫狗负样本的召回, 其中遮挡人体召回+8.2%， 躺卧人体召回+8.8%，猫狗过滤+12.2% ◦ 精度: 大幅提升监控场景遮挡截断躺卧人体正样本、猫狗负样本的召回, 其中遮挡人体召回+8.5%， 躺卧人体召回+10.2%，猫狗过滤+12.9% ◦ 阈值：模型无内置阈值, 阈值设定可...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.878491\n        },\n        {\n          \"evidence_id\": \"f40d2faec9334b3c60b5bda8\",\n          \"title\": \"PDFs/安防方向-人脸误检分类模型发版记录.pdf p1\",\n          \"snippet\": \"• 类别定义说明\",\n          \"section_type\": \"general\",\n          \"score\": 0.906341\n        }\n      ]\n    }\n  ]\n}"
+      }
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "migration_advisor",
+  "_action_input": {
+    "user_query": "先用这张图验证厨师帽能不能被现有模型看到；若不稳定，再给后厨帽子佩戴检测的轻量验证路径。",
+    "use_image": true,
+    "use_visual_probe": true,
+    "finish_after_tool": false
+  },
+  "_thought": "用户请求用提供的图片验证‘厨师帽是否能被现有模型看到’，并进一步给出‘后厨帽子佩戴检测的轻量验证路径’。这是一个典型的‘能力边界验证 + 可行性路径规划’问题，需求落在迁移顾问/模型能力探针领域：先做视觉探针（图片中的帽子可检测性），再给出能力边界/数据/工程路径。根据工具库，migration_advisor 最适合这类‘能否做/如何迁移/能力边界/数据/探针路径’的需求；且图片用于验证，因此 use_image=true。finish_after_tool 应设为 false，因为探针仅给中间信息，后续要根据结果再规划验证路径。无需使用 clarify 或 re_question，意图明确，图中有目标（帽子/头饰），可以执行轻量视觉探针。decision_type 选 tool，action 为 migration_advisor，参数包含 user_query、use_image=true、use_visual_probe=true、finish_after_tool=false。无需 action_input 中的 end_reason，因此 end_reason 留空。不纠结是否用 pipeline_eval，因为用户未要求生成样本或评测报告，而是先做可行性验证与路径规划。"
+}

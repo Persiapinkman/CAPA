@@ -1,0 +1,68 @@
+{
+  "session_id": "f030b2f0-5680-404e-bd4c-b5c66ebf2ac7",
+  "run_stamp": "20260427_151611_f996a118",
+  "stage": "answerer_memory_end_request",
+  "step_index": 1,
+  "created_at": "2026-04-27T15:17:28+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "answerer_output",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "final_answer": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "final_answer"
+          ]
+        }
+      }
+    },
+    "stream": true,
+    "system_prompt": "你是 Demo 系统中的回答智能体（Answerer）。\n\n你的职责是基于已给出的上下文，生成给用户看的最终答复。\n\n【RAG 检索综合回答要求】\n如果上下文中包含 RAG 检索结果（如 rag_answer 的 observation）：\n- 情况 A（RAG 命中）：综合所有检索到的证据进行回答，结论必须有证据支撑。\n- 情况 B（RAG 未命中或弱命中）：基于检索到的有限信息，结合你自身的通用知识库进行补充回答。\n- 必须明确区分“知识库证据”和“通用知识推断”（例如：“根据知识库文档...” vs “补充建议...”）。\n\n【通用知识回答】\n如果上下文没有包括 RAG 检索结果，则基于自身的通用知识库进行回答。\n\n【语言硬约束】\n- 无论用户使用何种语言提问，默认都必须使用中文回答；\n- 仅当用户明确要求“用英文回答/翻译成英文”时，才可输出英文。\n\n【输入内容】\n1) user_query：当前用户问题；\n2) evidence：可包含 retrieved_chunks 与 query_trajectories。\n\n【模式说明】\n- mode=rag_answer / rag_answer_fallback：主要依据 retrieved_chunks 回答；\n- mode=memoryquery_trajectories：主要依据 query_trajectories 中的历史轨迹与 observation 回答；\n- mode=direct：无强证据时的直接回答。\n\n【输出硬约束】\n1) 直接输出给用户的最终答案纯文本；\n2) 严禁输出 markdown 代码块、JSON 包装、解释前后缀或思考过程；\n3) 严禁输出类似“Thinking Process”“分析如下”“<think>”等内容。\n",
+    "user_prompt": "回答模式：memoryquery_trajectories\n\nuser_query：\n统计目标为人脸的算法都有哪些\n\nevidence：\n{\n  \"retrieved_chunks\": [],\n  \"query_trajectories\": [\n    {\n      \"query_id\": \"qry_4086871b40720f04\",\n      \"query\": \"请问RD现有跟人脸相关的模型有多少个\",\n      \"result_summary\": \"通过RAG检索成功获取RD现有与人脸相关的模型信息，共找到12个模型。最终答案已生成，包含各模型名称、算法类型、支持设备及所有者等详细信息。\",\n      \"steps\": [\n        {\n          \"step_id\": \"step_1\",\n          \"action\": \"rag_answer\",\n          \"observation\": {\n            \"summary\": \"依据提供的跨来源检索证据，RD现有与“人脸”相关的模型共有**12个**。\\n\\n以下是各模型的具体信息汇总：\\n\\n1.  **KM_essos_SmallFace_544x960_nart_cuda11.4-trt8.2.0-fp16-A2_b64_3.0.0.model**\\n    *   算法：人脸检测3系列1\\n    *   支持设备：A2\\n    *   所有者：任大发\\n\\n2.  **KM_essos_LargeFace_224x224_nart_cuda11.0-trt7.1-int8-T4_b64_8.0.1.model**\\n    *   算法：人脸检测8系列\\n    *   支持设备：T4\\n    *   所有者：任大发, 冯江燕\\n\\n3.  **KM_essos_SmallFace_544x960_nart_cuda11.0-trt7.1-int8-T4_b48_3.0.0.model**\\n    *   算法：人脸检测3系列1\\n    *   支持设备：T4\\n    *   所有者：任大发\\n\\n4.  **KM_essos_LargeFace_224x224_nart_cuda11.4-trt8.2.0-fp16-A2_b64_8.0.1.model**\\n    *   算法：人脸检测8系列\\n    *   支持设备：A2\\n    *   所有者：任大发, 冯江燕\\n\\n5…\"\n          }\n        },\n        {\n          \"step_id\": \"step_2\",\n          \"action\": \"final_answer\",\n          \"observation\": {\n            \"summary\": \"依据提供的跨来源检索证据，RD现有与“人脸”相关的模型共有**12个**。\\n\\n以下是各模型的具体信息汇总：\\n\\n1.  **KM_essos_SmallFace_544x960_nart_cuda11.4-trt8.2.0-fp16-A2_b64_3.0.0.model**\\n    *   算法：人脸检测3系列1\\n    *   支持设备：A2\\n    *   所有者：任大发\\n\\n2.  **KM_essos_LargeFace_224x224_nart_cuda11.0-trt7.1-int8-T4_b64_8.0.1.model**\\n    *   算法：人脸检测8系列\\n    *   支持设备：T4\\n    *   所有者：任大发, 冯江燕\\n\\n3.  **KM_essos_SmallFace_544x960_nart_cuda11.0-trt7.1-int8-T4_b48_3.0.0.model**\\n    *   算法：人脸检测3系列1\\n    *   支持设备：T4\\n    *   所有者：任大发\\n\\n4.  **KM_essos_LargeFace_224x224_nart_cuda11.4-trt8.2.0-fp16-A2_b64_8.0.1.model**\\n    *   算法：人脸检测8系列\\n    *   支持设备：A2\\n    *   所有者：任大发, 冯江燕\\n\\n5.  **KM_essos_LargeFace_224x224_nart_cuda11.0-trt7.1-int8-P4_b32_8.0.1.model**\\n    *   算法：人脸检测8系列\\n    *   支持设备：P4\\n    *   所有者：任大发, 冯江燕\\n\\n6.  **KM_essos_SmallFace_544x960_nart_cuda11.0-trt7.1-fp32-P4_b24_3.0.0.model**\\n    *   算法：人脸检测3系列1\\n    *   支持设备：P4\\n    *   所有者：任大发\\n\\n7.  **KM_classifier_Face_BigAngle_SD_nart_cuda11.0-trt7.1-int8-T4_b8_0.0.1.model**\\n    *   算法：安防方向-人脸大角度二分类\\n    *   支持设备：T4\\n    *   所有者：冯江燕\\n\\n8.  **KM_feature_face-pro512d_nart_cuda11.0-trt7.1-fp16-T4_b8_2.56.0.model**\\n    *   算法：人脸特征-PK\\n    *   支持设备：T4\\n    *   所有者：马东宇\\n\\n9.  **KM_pageant_Pageant_88id_nart_cuda11.0-trt7.1-int8-T4_b16_1.0.8.model**\\n    *   算法：pageant\\n    *   支持设备：T4\\n    *   所有者：马东宇\\n\\n10. **KM_essos_SmallFace_gray_448x800_nart_cuda11.0-trt7.1-int8-T4_b48_3.0.1.model**\\n    *   算法：人脸检测3系列2\\n    *   支持设备：T4\\n    *   所有者：任大发\\n\\n11. **KM_essos_SmallFace_gray_448x800_nart_cuda11.4-trt8.2.0-fp16-A2_b64_3.0.1.model**\\n    *   算法：人脸检测3系列2\\n    *   支持设备：A2\\n    *   所有者：任大发\\n\\n12. **KM_bifrost_face-deepcode-64d_nart_cuda11.0-trt7.1-fp16-T4_b128_2.54.0.model**\\n    *   算法：deepcode-方舟标品\\n    *   支持设备：T4\\n    *   所有者：马东宇\"\n          }\n        }\n      ]\n    },\n    {\n      \"query_id\": \"qry_2702a0e634b99269\",\n      \"query\": \"统计目标为人脸的算法都有哪些\",\n      \"result_summary\": \"\",\n      \"steps\": []\n    }\n  ]\n}\n\n请直接输出最终回答正文，不要输出 JSON。默认必须使用中文回答；仅当用户明确要求英文时才可英文输出。",
+    "combined_prompt": "你是 Demo 系统中的回答智能体（Answerer）。\n\n你的职责是基于已给出的上下文，生成给用户看的最终答复。\n\n【RAG 检索综合回答要求】\n如果上下文中包含 RAG 检索结果（如 rag_answer 的 observation）：\n- 情况 A（RAG 命中）：综合所有检索到的证据进行回答，结论必须有证据支撑。\n- 情况 B（RAG 未命中或弱命中）：基于检索到的有限信息，结合你自身的通用知识库进行补充回答。\n- 必须明确区分“知识库证据”和“通用知识推断”（例如：“根据知识库文档...” vs “补充建议...”）。\n\n【通用知识回答】\n如果上下文没有包括 RAG 检索结果，则基于自身的通用知识库进行回答。\n\n【语言硬约束】\n- 无论用户使用何种语言提问，默认都必须使用中文回答；\n- 仅当用户明确要求“用英文回答/翻译成英文”时，才可输出英文。\n\n【输入内容】\n1) user_query：当前用户问题；\n2) evidence：可包含 retrieved_chunks 与 query_trajectories。\n\n【模式说明】\n- mode=rag_answer / rag_answer_fallback：主要依据 retrieved_chunks 回答；\n- mode=memoryquery_trajectories：主要依据 query_trajectories 中的历史轨迹与 observation 回答；\n- mode=direct：无强证据时的直接回答。\n\n【输出硬约束】\n1) 直接输出给用户的最终答案纯文本；\n2) 严禁输出 markdown 代码块、JSON 包装、解释前后缀或思考过程；\n3) 严禁输出类似“Thinking Process”“分析如下”“<think>”等内容。\n\n\n回答模式：memoryquery_trajectories\n\nuser_query：\n统计目标为人脸的算法都有哪些\n\nevidence：\n{\n  \"retrieved_chunks\": [],\n  \"query_trajectories\": [\n    {\n      \"query_id\": \"qry_4086871b40720f04\",\n      \"query\": \"请问RD现有跟人脸相关的模型有多少个\",\n      \"result_summary\": \"通过RAG检索成功获取RD现有与人脸相关的模型信息，共找到12个模型。最终答案已生成，包含各模型名称、算法类型、支持设备及所有者等详细信息。\",\n      \"steps\": [\n        {\n          \"step_id\": \"step_1\",\n          \"action\": \"rag_answer\",\n          \"observation\": {\n            \"summary\": \"依据提供的跨来源检索证据，RD现有与“人脸”相关的模型共有**12个**。\\n\\n以下是各模型的具体信息汇总：\\n\\n1.  **KM_essos_SmallFace_544x960_nart_cuda11.4-trt8.2.0-fp16-A2_b64_3.0.0.model**\\n    *   算法：人脸检测3系列1\\n    *   支持设备：A2\\n    *   所有者：任大发\\n\\n2.  **KM_essos_LargeFace_224x224_nart_cuda11.0-trt7.1-int8-T4_b64_8.0.1.model**\\n    *   算法：人脸检测8系列\\n    *   支持设备：T4\\n    *   所有者：任大发, 冯江燕\\n\\n3.  **KM_essos_SmallFace_544x960_nart_cuda11.0-trt7.1-int8-T4_b48_3.0.0.model**\\n    *   算法：人脸检测3系列1\\n    *   支持设备：T4\\n    *   所有者：任大发\\n\\n4.  **KM_essos_LargeFace_224x224_nart_cuda11.4-trt8.2.0-fp16-A2_b64_8.0.1.model**\\n    *   算法：人脸检测8系列\\n    *   支持设备：A2\\n    *   所有者：任大发, 冯江燕\\n\\n5…\"\n          }\n        },\n        {\n          \"step_id\": \"step_2\",\n          \"action\": \"final_answer\",\n          \"observation\": {\n            \"summary\": \"依据提供的跨来源检索证据，RD现有与“人脸”相关的模型共有**12个**。\\n\\n以下是各模型的具体信息汇总：\\n\\n1.  **KM_essos_SmallFace_544x960_nart_cuda11.4-trt8.2.0-fp16-A2_b64_3.0.0.model**\\n    *   算法：人脸检测3系列1\\n    *   支持设备：A2\\n    *   所有者：任大发\\n\\n2.  **KM_essos_LargeFace_224x224_nart_cuda11.0-trt7.1-int8-T4_b64_8.0.1.model**\\n    *   算法：人脸检测8系列\\n    *   支持设备：T4\\n    *   所有者：任大发, 冯江燕\\n\\n3.  **KM_essos_SmallFace_544x960_nart_cuda11.0-trt7.1-int8-T4_b48_3.0.0.model**\\n    *   算法：人脸检测3系列1\\n    *   支持设备：T4\\n    *   所有者：任大发\\n\\n4.  **KM_essos_LargeFace_224x224_nart_cuda11.4-trt8.2.0-fp16-A2_b64_8.0.1.model**\\n    *   算法：人脸检测8系列\\n    *   支持设备：A2\\n    *   所有者：任大发, 冯江燕\\n\\n5.  **KM_essos_LargeFace_224x224_nart_cuda11.0-trt7.1-int8-P4_b32_8.0.1.model**\\n    *   算法：人脸检测8系列\\n    *   支持设备：P4\\n    *   所有者：任大发, 冯江燕\\n\\n6.  **KM_essos_SmallFace_544x960_nart_cuda11.0-trt7.1-fp32-P4_b24_3.0.0.model**\\n    *   算法：人脸检测3系列1\\n    *   支持设备：P4\\n    *   所有者：任大发\\n\\n7.  **KM_classifier_Face_BigAngle_SD_nart_cuda11.0-trt7.1-int8-T4_b8_0.0.1.model**\\n    *   算法：安防方向-人脸大角度二分类\\n    *   支持设备：T4\\n    *   所有者：冯江燕\\n\\n8.  **KM_feature_face-pro512d_nart_cuda11.0-trt7.1-fp16-T4_b8_2.56.0.model**\\n    *   算法：人脸特征-PK\\n    *   支持设备：T4\\n    *   所有者：马东宇\\n\\n9.  **KM_pageant_Pageant_88id_nart_cuda11.0-trt7.1-int8-T4_b16_1.0.8.model**\\n    *   算法：pageant\\n    *   支持设备：T4\\n    *   所有者：马东宇\\n\\n10. **KM_essos_SmallFace_gray_448x800_nart_cuda11.0-trt7.1-int8-T4_b48_3.0.1.model**\\n    *   算法：人脸检测3系列2\\n    *   支持设备：T4\\n    *   所有者：任大发\\n\\n11. **KM_essos_SmallFace_gray_448x800_nart_cuda11.4-trt8.2.0-fp16-A2_b64_3.0.1.model**\\n    *   算法：人脸检测3系列2\\n    *   支持设备：A2\\n    *   所有者：任大发\\n\\n12. **KM_bifrost_face-deepcode-64d_nart_cuda11.0-trt7.1-fp16-T4_b128_2.54.0.model**\\n    *   算法：deepcode-方舟标品\\n    *   支持设备：T4\\n    *   所有者：马东宇\"\n          }\n        }\n      ]\n    },\n    {\n      \"query_id\": \"qry_2702a0e634b99269\",\n      \"query\": \"统计目标为人脸的算法都有哪些\",\n      \"result_summary\": \"\",\n      \"steps\": []\n    }\n  ]\n}\n\n请直接输出最终回答正文，不要输出 JSON。默认必须使用中文回答；仅当用户明确要求英文时才可英文输出。",
+    "mode": "memoryquery_trajectories",
+    "answerer_input": {
+      "user_query": "统计目标为人脸的算法都有哪些",
+      "evidence": {
+        "retrieved_chunks": [],
+        "query_trajectories": [
+          {
+            "query_id": "qry_4086871b40720f04",
+            "query": "请问RD现有跟人脸相关的模型有多少个",
+            "result_summary": "通过RAG检索成功获取RD现有与人脸相关的模型信息，共找到12个模型。最终答案已生成，包含各模型名称、算法类型、支持设备及所有者等详细信息。",
+            "steps": [
+              {
+                "step_id": "step_1",
+                "action": "rag_answer",
+                "observation": {
+                  "summary": "依据提供的跨来源检索证据，RD现有与“人脸”相关的模型共有**12个**。\n\n以下是各模型的具体信息汇总：\n\n1.  **KM_essos_SmallFace_544x960_nart_cuda11.4-trt8.2.0-fp16-A2_b64_3.0.0.model**\n    *   算法：人脸检测3系列1\n    *   支持设备：A2\n    *   所有者：任大发\n\n2.  **KM_essos_LargeFace_224x224_nart_cuda11.0-trt7.1-int8-T4_b64_8.0.1.model**\n    *   算法：人脸检测8系列\n    *   支持设备：T4\n    *   所有者：任大发, 冯江燕\n\n3.  **KM_essos_SmallFace_544x960_nart_cuda11.0-trt7.1-int8-T4_b48_3.0.0.model**\n    *   算法：人脸检测3系列1\n    *   支持设备：T4\n    *   所有者：任大发\n\n4.  **KM_essos_LargeFace_224x224_nart_cuda11.4-trt8.2.0-fp16-A2_b64_8.0.1.model**\n    *   算法：人脸检测8系列\n    *   支持设备：A2\n    *   所有者：任大发, 冯江燕\n\n5…"
+                }
+              },
+              {
+                "step_id": "step_2",
+                "action": "final_answer",
+                "observation": {
+                  "summary": "依据提供的跨来源检索证据，RD现有与“人脸”相关的模型共有**12个**。\n\n以下是各模型的具体信息汇总：\n\n1.  **KM_essos_SmallFace_544x960_nart_cuda11.4-trt8.2.0-fp16-A2_b64_3.0.0.model**\n    *   算法：人脸检测3系列1\n    *   支持设备：A2\n    *   所有者：任大发\n\n2.  **KM_essos_LargeFace_224x224_nart_cuda11.0-trt7.1-int8-T4_b64_8.0.1.model**\n    *   算法：人脸检测8系列\n    *   支持设备：T4\n    *   所有者：任大发, 冯江燕\n\n3.  **KM_essos_SmallFace_544x960_nart_cuda11.0-trt7.1-int8-T4_b48_3.0.0.model**\n    *   算法：人脸检测3系列1\n    *   支持设备：T4\n    *   所有者：任大发\n\n4.  **KM_essos_LargeFace_224x224_nart_cuda11.4-trt8.2.0-fp16-A2_b64_8.0.1.model**\n    *   算法：人脸检测8系列\n    *   支持设备：A2\n    *   所有者：任大发, 冯江燕\n\n5.  **KM_essos_LargeFace_224x224_nart_cuda11.0-trt7.1-int8-P4_b32_8.0.1.model**\n    *   算法：人脸检测8系列\n    *   支持设备：P4\n    *   所有者：任大发, 冯江燕\n\n6.  **KM_essos_SmallFace_544x960_nart_cuda11.0-trt7.1-fp32-P4_b24_3.0.0.model**\n    *   算法：人脸检测3系列1\n    *   支持设备：P4\n    *   所有者：任大发\n\n7.  **KM_classifier_Face_BigAngle_SD_nart_cuda11.0-trt7.1-int8-T4_b8_0.0.1.model**\n    *   算法：安防方向-人脸大角度二分类\n    *   支持设备：T4\n    *   所有者：冯江燕\n\n8.  **KM_feature_face-pro512d_nart_cuda11.0-trt7.1-fp16-T4_b8_2.56.0.model**\n    *   算法：人脸特征-PK\n    *   支持设备：T4\n    *   所有者：马东宇\n\n9.  **KM_pageant_Pageant_88id_nart_cuda11.0-trt7.1-int8-T4_b16_1.0.8.model**\n    *   算法：pageant\n    *   支持设备：T4\n    *   所有者：马东宇\n\n10. **KM_essos_SmallFace_gray_448x800_nart_cuda11.0-trt7.1-int8-T4_b48_3.0.1.model**\n    *   算法：人脸检测3系列2\n    *   支持设备：T4\n    *   所有者：任大发\n\n11. **KM_essos_SmallFace_gray_448x800_nart_cuda11.4-trt8.2.0-fp16-A2_b64_3.0.1.model**\n    *   算法：人脸检测3系列2\n    *   支持设备：A2\n    *   所有者：任大发\n\n12. **KM_bifrost_face-deepcode-64d_nart_cuda11.0-trt7.1-fp16-T4_b128_2.54.0.model**\n    *   算法：deepcode-方舟标品\n    *   支持设备：T4\n    *   所有者：马东宇"
+                }
+              }
+            ]
+          },
+          {
+            "query_id": "qry_2702a0e634b99269",
+            "query": "统计目标为人脸的算法都有哪些",
+            "result_summary": "",
+            "steps": []
+          }
+        ]
+      }
+    },
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260427_151611_f996a118"
+  }
+}

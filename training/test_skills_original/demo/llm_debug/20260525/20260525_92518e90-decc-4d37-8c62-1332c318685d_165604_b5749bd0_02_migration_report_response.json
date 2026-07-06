@@ -1,0 +1,125 @@
+{
+  "session_id": "92518e90-decc-4d37-8c62-1332c318685d",
+  "run_stamp": "20260525_165604_b5749bd0",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-05-25T16:57:13+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"香港项目要求识别头盔颜色（黑、白、灰、红、蓝、黄、绿、紫、迷彩）。需评估现有城市结构化人体属性模型是否能直接支持该需求。\",\n  \"direct_match\": {\n    \"exists\": false\n  ,\n  \"summary\": \"现有模型\"\n  , \"evidence\": []\n  }\n  , \"similar_assets\": [\n    {\n      \"model_or_solution\": \"KM_classifier_Ped_33of33_nart_acl-ascend310-fp16_b16_2.21.0.model\",\n      \"label_schema\": \"pedestrian attribute\",\n      \"training_data\": \"Evidence不足。文档提及使用结构化数据并涉及8:2训练/测试集切分，但具体头盔颜色类别未明示。\",\n      \"reported_metrics\": \"Evidence不足。未报告头盔颜色具体指标，但整体模型描述表明支持行人属性分类。\"\n    , \"covered_capability\": \"斯卡检测花生属性，包含 '</em>'。\"\n    , \"gap\": \"未包含头盔颜色标签（黑、白、灰、红、蓝、黄、绿、紫、迷彩）。\"\n    , \"evidence\": [\n      \"evidence_id: 5eb1abee773e1d93c2e72f13\",\n      \"target_name: 人体\",\n      \"algorithm_name: 人体属性模型\"\n    ]\n    }\n    , {\n      \"model_or_solution\": \"KM_classifier_Ped_33of33_nart_acl-ascend710-fp16_b16_2.21.0.model\",\n      \"label_schema\": \"pedestrian attribute\",\n      \"training_data\": \"证据不足。\",\n      \"reported_metrics\": \"证据不足。\",\n      \"covered_capability\": \"Erica检测属性。\",\n      \"gap\": \"未包含头盔颜色。\",\n      \"evidence\": [\n      \"evidence_id: 50456af57ca2a020a208c4ce\"\n      ]\n    }\n    , {\n      \"model_or_solution\": \"KM_classifier_Ped_33of33_MTR_nart_cuda11.4-trt8.4.1-fp16-T4_b8_2.20.8.model\",\n      \"label_schema\": \" pedestrian attribute\",\n      \"training_data\": \"证据不足。\",\n      \"reported_metrics\": \"证据不足。\",\n      \"covered_capability\": \"行人属性检测。\",\n      \"gap\": \"未包含头盔颜色（黑、白、灰、红、蓝、黄、绿、紫、迷彩）。\",\n      \"evidence\": [\n      \"evidence_id: 4ad2e35299e61dd6f05ea621\",\n      \"algorithm_name: 香港地铁-属性模型\",\n      \"application_scene: 香港地铁老人[年龄、白发、玩手机，背包]\"\n    ]\n    }\n    , {\n    \"model_or_solution\": \"KM_Classifier_Ped_33of33_2.21.0\",\n    \"label_schema\": \" pedestrian attribute\",\n    \"training_data\": \"证据不足。\",\n    \"reported_metrics\": \"证据不足。\",\n    \"covered_capability\": \"行人属性检测。\",\n    \"gap\": \"未明确支持头盔颜色（黑、白、灰、红、蓝、黄、绿、紫、迷彩）。文档指出颜色类属性在夜间或逆光场景精度无法保证。\",\n    \"evidence\": [\n    \"evidence_id: e07ae4af55757d5513904730\",\n    \"est_safety: :normal.htm\"\n    ]\n}\n    , {\n      \"model_or_solution\": \"KM_Classifier_Ped_33of33_2.21.1\",\n      \"label_schema\": \" pedestrian attribute\",\n      \"training_data\": \"证据不足。\",\n      \"reported_metrics\": \"证据不足。\",\n      \"covered_capability\": \"行人属性检测。\",\n      \"gap\": \"未明确支持头盔颜色（黑、白、灰、红、蓝、黄、绿、紫、迷彩）。文档指出颜色类属性在夜间或逆光场景精度无法保证。\",\n      \"evidence\": [\n      \"evidence_id: 250152b471cecf8cab0d58d1\",\n      \"algorithms_boundary: 33 attributes\"\n    ]\n    }\n    , {\n    \"model_or_solution\": \"Vehicle_FullAttr_Security_3.1.0\",\n    \"label_schema\": \" vehicle color\",\n    \"training_data\": \"Document-based。\",\n    \"reported_metrics\": \"Recall/Precision的. 通用测试集：黄色（87%/99），绿色（57%/86），紫色（18%/71）。面向公安测试集：黄色（96%/94）。准确率较高。\",\n    \"covered_capability\": \"车辆颜色分类。\",\n    \"gap\": \"未支持头盔颜色（黑、白、灰、红、蓝、黄、绿、紫、迷彩）。\",\n    \"evidence\": [\n    \"evidence_id: d7bea6d3bd8695ee3a479898\",\n    \"黄色 87%/99\"\n    ]\n  }\n  ]\n  , \"migration_plan\": {\n    \"feasibility\": \"low\",\n    \"approach\": \"one-shot\"  ,\n    \"data_requirements\": \"需采集头盔颜色特定标签（黑、白、灰、红、蓝、黄、绿、紫、迷彩）的高质量图像样本。\",\n    \"compute_requirements\": \"需适配Ascend 310/710或NVIDIA T4/P4等硬件。\",\n    \"engineering_work\": \"需集成头盔颜色属性模型到结构化人体模型中，或直接调用独立颜色分类模型。\",\n    \"estimated_timeline\": \"3-6个月\"\n  , \"estimated_cost\": \"低\"\n  , \"dependencies\": [\n    \"Model retraining requires access to helmet color data\",\n    \"Model retraining\"\n  ]\n  , \"risks\": [\n    \"Helmet color attribute precision may be variables across different lighting conditions\",\n    \"Existing model may not cover helmet attributes\"\n  ]\n}\n\n  , \"expected_performance\": {\n    \"baseline\": \"Unknown\"\n  , \"target\": \"未知/不适用\"\n  , \"uncertainty\": \"High - existing models do not explicitly cover helmet color classification\"\n  }\n , \"recommendation\": \"建议采用独立头盔属性模型或进行全面重训，而非直接使用现有城市结构化人体模型。其中国户颜色属性：黑、白、灰、红、蓝、黄、绿、紫、迷彩，需要针对性训练。\"\n}",
+    "structured_output": {
+      "requirement_summary": "香港项目要求识别头盔颜色（黑、白、灰、红、蓝、黄、绿、紫、迷彩）。需评估现有城市结构化人体属性模型是否能直接支持该需求。",
+      "direct_match": {
+        "exists": false,
+        "summary": "现有模型",
+        "evidence": []
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "KM_classifier_Ped_33of33_nart_acl-ascend310-fp16_b16_2.21.0.model",
+          "label_schema": "pedestrian attribute",
+          "training_data": "Evidence不足。文档提及使用结构化数据并涉及8:2训练/测试集切分，但具体头盔颜色类别未明示。",
+          "reported_metrics": "Evidence不足。未报告头盔颜色具体指标，但整体模型描述表明支持行人属性分类。",
+          "covered_capability": "斯卡检测花生属性，包含 '</em>'。",
+          "gap": "未包含头盔颜色标签（黑、白、灰、红、蓝、黄、绿、紫、迷彩）。",
+          "evidence": [
+            "evidence_id: 5eb1abee773e1d93c2e72f13",
+            "target_name: 人体",
+            "algorithm_name: 人体属性模型"
+          ]
+        },
+        {
+          "model_or_solution": "KM_classifier_Ped_33of33_nart_acl-ascend710-fp16_b16_2.21.0.model",
+          "label_schema": "pedestrian attribute",
+          "training_data": "证据不足。",
+          "reported_metrics": "证据不足。",
+          "covered_capability": "Erica检测属性。",
+          "gap": "未包含头盔颜色。",
+          "evidence": [
+            "evidence_id: 50456af57ca2a020a208c4ce"
+          ]
+        },
+        {
+          "model_or_solution": "KM_classifier_Ped_33of33_MTR_nart_cuda11.4-trt8.4.1-fp16-T4_b8_2.20.8.model",
+          "label_schema": " pedestrian attribute",
+          "training_data": "证据不足。",
+          "reported_metrics": "证据不足。",
+          "covered_capability": "行人属性检测。",
+          "gap": "未包含头盔颜色（黑、白、灰、红、蓝、黄、绿、紫、迷彩）。",
+          "evidence": [
+            "evidence_id: 4ad2e35299e61dd6f05ea621",
+            "algorithm_name: 香港地铁-属性模型",
+            "application_scene: 香港地铁老人[年龄、白发、玩手机，背包]"
+          ]
+        },
+        {
+          "model_or_solution": "KM_Classifier_Ped_33of33_2.21.0",
+          "label_schema": " pedestrian attribute",
+          "training_data": "证据不足。",
+          "reported_metrics": "证据不足。",
+          "covered_capability": "行人属性检测。",
+          "gap": "未明确支持头盔颜色（黑、白、灰、红、蓝、黄、绿、紫、迷彩）。文档指出颜色类属性在夜间或逆光场景精度无法保证。",
+          "evidence": [
+            "evidence_id: e07ae4af55757d5513904730",
+            "est_safety: :normal.htm"
+          ]
+        },
+        {
+          "model_or_solution": "KM_Classifier_Ped_33of33_2.21.1",
+          "label_schema": " pedestrian attribute",
+          "training_data": "证据不足。",
+          "reported_metrics": "证据不足。",
+          "covered_capability": "行人属性检测。",
+          "gap": "未明确支持头盔颜色（黑、白、灰、红、蓝、黄、绿、紫、迷彩）。文档指出颜色类属性在夜间或逆光场景精度无法保证。",
+          "evidence": [
+            "evidence_id: 250152b471cecf8cab0d58d1",
+            "algorithms_boundary: 33 attributes"
+          ]
+        },
+        {
+          "model_or_solution": "Vehicle_FullAttr_Security_3.1.0",
+          "label_schema": " vehicle color",
+          "training_data": "Document-based。",
+          "reported_metrics": "Recall/Precision的. 通用测试集：黄色（87%/99），绿色（57%/86），紫色（18%/71）。面向公安测试集：黄色（96%/94）。准确率较高。",
+          "covered_capability": "车辆颜色分类。",
+          "gap": "未支持头盔颜色（黑、白、灰、红、蓝、黄、绿、紫、迷彩）。",
+          "evidence": [
+            "evidence_id: d7bea6d3bd8695ee3a479898",
+            "黄色 87%/99"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "low",
+        "approach": "one-shot",
+        "data_requirements": "需采集头盔颜色特定标签（黑、白、灰、红、蓝、黄、绿、紫、迷彩）的高质量图像样本。",
+        "compute_requirements": "需适配Ascend 310/710或NVIDIA T4/P4等硬件。",
+        "engineering_work": "需集成头盔颜色属性模型到结构化人体模型中，或直接调用独立颜色分类模型。",
+        "estimated_timeline": "3-6个月",
+        "estimated_cost": "低",
+        "dependencies": [
+          "Model retraining requires access to helmet color data",
+          "Model retraining"
+        ],
+        "risks": [
+          "Helmet color attribute precision may be variables across different lighting conditions",
+          "Existing model may not cover helmet attributes"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "Unknown",
+        "target": "未知/不适用",
+        "uncertainty": "High - existing models do not explicitly cover helmet color classification"
+      },
+      "recommendation": "建议采用独立头盔属性模型或进行全面重训，而非直接使用现有城市结构化人体模型。其中国户颜色属性：黑、白、灰、红、蓝、黄、绿、紫、迷彩，需要针对性训练。"
+    }
+  }
+}

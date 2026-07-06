@@ -1,0 +1,87 @@
+{
+  "session_id": "ma_dataset_full_45",
+  "run_stamp": "20260603_104600_2c6a7a03",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-06-03T10:47:18+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"客户要求识别“电动车挡风布：有、无、无法判断”。\",\n  \"direct_match\": {\n    \"exists\": false,\n    \"summary\": \"检索数据中未发现直接支持“电动车挡风布（有、无、无法判断）”分类的模型。\"\n  ,\"evidence\": [\n    \"证据不足\"\n  ]\n},\n  \"similar_assets\": [\n    {\n      \"model_or_solution\": \"KM_classifier_Vehicle_FullAttr_3.0.3\",\n      \"label_schema\": \"属性分类标签体系，包含车辆属性（颜色、粗分类、特种车细分等）。示例标签体系结构：`st_属性名=['有','无','无法判断']`（参照车辆属性大模型更新文档），具体属性包含天窗、行李架、车身文字、贴纸等（参考 PDFs/安防方向--车辆属性大模型更新.pdf p25），挡风布属性未明确列出但架构一致。\",\n      \"training_data\": \"证据不足。推测基于车辆图像数据集进行属性分类训练，类似车辆属性大模型（参考文档中提及“车辆属性大模型更新”）。\",\n      \"reported_metrics\": \"证据不足。文档中提及特种车辆（如警卫车、救护车、消防车）精度优化（precision/recall=95.8%/99.2%等），但未提供挡风布属性的具体精度数值。\",\n      \"covered_capability\": \"车辆属性识别（二分类/多标签/有无法判断），场景为车辆小图，输入要求推荐车辆小图尺寸≥90*90。\",\n      \"gap\": \"未明确包含“挡风布”标签，需确认是否在“特种车辆细分”或“车身属性”分支中，可能需微调或扩展标签。\",\n      \"evidence\": [\n        \"证据不足\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"EBikeSafety\",\n      \"label_schema\": \"二分类属性标签，标签体系参考`st_属性名=['有','无','无法判断']`（参照车辆属性大模型更新文档）。模型类型为classifier，用于电动车安全相关属性。\",\n      \"training_data\": \"证据不足。基于电动车安全场景训练，推测包含电动车图像数据。\",\n      \"reported_metrics\": \"证据不足。文档中未提供具体精度指标，仅标注为classifier类型。\",\n      \"covered_capability\": \"电动车属性识别（二分类），输入尺寸为256x128。\",\n      \"gap\": \"未明确说明是否包含“挡风布”标签，但标签体系与需求（有、无、无法判断）结构高度相似。\",\n      \"evidence\": [\n        \"证据不足\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"PDFs/非机动车属性全模型\",\n      \"label_schema\": \"粗分类标签：摩托车、电动车、自行车、三轮车、婴儿车、轮椅。细分标签：有无（参考“有无阈”指标）。例如：摩托车有无=73.0/56.7，电动车有无=93.6/93.3。\",\n      \"training_data\": \"证据不足。基于非机动车场景训练，数据包含多车型，精度数据分车型统计。\",\n      \"reported_metrics\": \"整体精度：电动车类别下，有无属性指标：Precision/Recall分别为93.6/93.3（有），77.6/50.8（无），83.9/91.2（纯非机动车）。\",\n      \"covered_capability\": \"非机动车粗分类及属性有无判断（二分类）。\",\n      \"gap\": \"仅区分车辆类型及“有无”属性，未细分为“有、无、无法判断”三分类，且未针对“挡风布”属性。\",\n      \"evidence\": [\n        \"证据不足\"\n      ]\n    }\n  ],\n  \"migration_plan\": {\n    \"feasibility\": \"high\",\n    \"approach\": \"基于EBikeSafety或KM_classifier_Vehicle_FullAttr_3.0.3模型，通过标签体系扩展实现‘有、无、无法判断’三分类。\",\n    \"data_requirements\": \"需准备包含电动车挡风布（有、无、无法判断）的标注数据集，建议样本量参考车牌检测模型（32w训练集）。\",\n    \"compute_requirements\": \"参考EBikeSafety部署平台（cuda11.0-trt7.1-fp16-T4），输入尺寸256x128。\",\n    \"engineering_work\": \"标签体系调整、模型微调（Fine-tuning）、精度验证。\"\n  ,\"estimated_timeline\": \"2-4 周（含数据准备、模型微调、测试）。\",\n    \"estimated_cost\": \"中等（需重新标注数据、模型微调）。\"\n  ,\"dependencies\": [\n    \"数据标注能力（三分类）\",\n    \"模型微调基础设施\"\n  ]\n  ,\n  \"risks\": [\n    \"无法判断”标签需明确定义（如遮挡、模糊）。\",\n    \"电动车挡风布属性特征可能与车身颜色/反光条混淆。\"\n  ]\n}\n  ,\n  \"expected_performance\": {\n    \"baseline\": \"参考电动车属性分类精度（93.6% Precision, 93.3% Recall），三分类可能略有下降。\",\n    \"target\": \"Precision/Recall > 90%（有/无），无法判断召回率 > 80%。\"\n  ,\"uncertainty\": \"中等（依赖新数据质量和标签定义清晰度）。\"\n  }\n  ,\n  \"recommendation\": \"建议优先使用EBikeSafety或KM_classifier_Vehicle_FullAttr_3.0.3模型架构进行标签扩展微调。若数据量充足且特征明显，三分类可行性高。\"\n  }",
+    "structured_output": {
+      "requirement_summary": "客户要求识别“电动车挡风布：有、无、无法判断”。",
+      "direct_match": {
+        "exists": false,
+        "summary": "检索数据中未发现直接支持“电动车挡风布（有、无、无法判断）”分类的模型。",
+        "evidence": [
+          "证据不足"
+        ]
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "KM_classifier_Vehicle_FullAttr_3.0.3",
+          "label_schema": "属性分类标签体系，包含车辆属性（颜色、粗分类、特种车细分等）。示例标签体系结构：`st_属性名=['有','无','无法判断']`（参照车辆属性大模型更新文档），具体属性包含天窗、行李架、车身文字、贴纸等（参考 PDFs/安防方向--车辆属性大模型更新.pdf p25），挡风布属性未明确列出但架构一致。",
+          "training_data": "证据不足。推测基于车辆图像数据集进行属性分类训练，类似车辆属性大模型（参考文档中提及“车辆属性大模型更新”）。",
+          "reported_metrics": "证据不足。文档中提及特种车辆（如警卫车、救护车、消防车）精度优化（precision/recall=95.8%/99.2%等），但未提供挡风布属性的具体精度数值。",
+          "covered_capability": "车辆属性识别（二分类/多标签/有无法判断），场景为车辆小图，输入要求推荐车辆小图尺寸≥90*90。",
+          "gap": "未明确包含“挡风布”标签，需确认是否在“特种车辆细分”或“车身属性”分支中，可能需微调或扩展标签。",
+          "evidence": [
+            "证据不足"
+          ]
+        },
+        {
+          "model_or_solution": "EBikeSafety",
+          "label_schema": "二分类属性标签，标签体系参考`st_属性名=['有','无','无法判断']`（参照车辆属性大模型更新文档）。模型类型为classifier，用于电动车安全相关属性。",
+          "training_data": "证据不足。基于电动车安全场景训练，推测包含电动车图像数据。",
+          "reported_metrics": "证据不足。文档中未提供具体精度指标，仅标注为classifier类型。",
+          "covered_capability": "电动车属性识别（二分类），输入尺寸为256x128。",
+          "gap": "未明确说明是否包含“挡风布”标签，但标签体系与需求（有、无、无法判断）结构高度相似。",
+          "evidence": [
+            "证据不足"
+          ]
+        },
+        {
+          "model_or_solution": "PDFs/非机动车属性全模型",
+          "label_schema": "粗分类标签：摩托车、电动车、自行车、三轮车、婴儿车、轮椅。细分标签：有无（参考“有无阈”指标）。例如：摩托车有无=73.0/56.7，电动车有无=93.6/93.3。",
+          "training_data": "证据不足。基于非机动车场景训练，数据包含多车型，精度数据分车型统计。",
+          "reported_metrics": "整体精度：电动车类别下，有无属性指标：Precision/Recall分别为93.6/93.3（有），77.6/50.8（无），83.9/91.2（纯非机动车）。",
+          "covered_capability": "非机动车粗分类及属性有无判断（二分类）。",
+          "gap": "仅区分车辆类型及“有无”属性，未细分为“有、无、无法判断”三分类，且未针对“挡风布”属性。",
+          "evidence": [
+            "证据不足"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "high",
+        "approach": "基于EBikeSafety或KM_classifier_Vehicle_FullAttr_3.0.3模型，通过标签体系扩展实现‘有、无、无法判断’三分类。",
+        "data_requirements": "需准备包含电动车挡风布（有、无、无法判断）的标注数据集，建议样本量参考车牌检测模型（32w训练集）。",
+        "compute_requirements": "参考EBikeSafety部署平台（cuda11.0-trt7.1-fp16-T4），输入尺寸256x128。",
+        "engineering_work": "标签体系调整、模型微调（Fine-tuning）、精度验证。",
+        "estimated_timeline": "2-4 周（含数据准备、模型微调、测试）。",
+        "estimated_cost": "中等（需重新标注数据、模型微调）。",
+        "dependencies": [
+          "数据标注能力（三分类）",
+          "模型微调基础设施"
+        ],
+        "risks": [
+          "无法判断”标签需明确定义（如遮挡、模糊）。",
+          "电动车挡风布属性特征可能与车身颜色/反光条混淆。"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "参考电动车属性分类精度（93.6% Precision, 93.3% Recall），三分类可能略有下降。",
+        "target": "Precision/Recall > 90%（有/无），无法判断召回率 > 80%。",
+        "uncertainty": "中等（依赖新数据质量和标签定义清晰度）。"
+      },
+      "recommendation": "建议优先使用EBikeSafety或KM_classifier_Vehicle_FullAttr_3.0.3模型架构进行标签扩展微调。若数据量充足且特征明显，三分类可行性高。"
+    }
+  }
+}

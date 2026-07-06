@@ -1,0 +1,72 @@
+{
+  "session_id": "b2006b60-a0da-407f-a669-cafbe09d3dd7",
+  "run_stamp": "20260522_162005_1ddc5985",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-05-22T16:22:02+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"香港项目要求识别头盔颜色（黑、白、灰、红、蓝、黄、绿、紫、迷彩），评估现有城市结构化人体属性模型是否支持\",\n  \"direct_match\": {\n    \"exists\": false,\n    \"summary\": \"现有证据未包含支持头盔颜色识别的模型，主要涉及安全带、医保、车牌颜色等属性\"\n  ,\n  \"evidence\": []\n }\n  ,\n  \"similar_assets\": [\n    {\n      \"model_or_solution\": \"KM_classifier_Carplate_TypeColor_nart_acl-ascend310-int8_b8_3.0.0.model\",\n      \"label_schema\": \"车牌颜色类型属性\",\n      \"training_data\": \"证据不足\",\n      \"reported_metrics\": \"证据不足\"\n  ,\n    \"covered_capability\": \"已证实支持车牌颜色识别算法\"\n  ,\n      \"gap\": \"目标领域从车牌颜色迁移至头盔，缺乏对应训练证据\"\n  ,\n    \"evidence\": []\n    },\n    {\n      \"model_or_solution\": \"KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model\",\n      \"label_schema\": \"腰带/安全带\",\n      \"training_data\": \"未提供\",\n      \"reported_metrics\": \"没有\"\n  ,\n      \"covered_capability\": \"已提供腰带/安全带结构化检测\"\n  ,\n    \"gap\": \"头盔与腰带是不同目标，场景差异明显\"\n  ,\n      \"evidence\": []\n    }\n  ],\n  \"migration_plan\": {\n    \"feasibility\": \"low\",\n    \"approach\": \"基于已有安全帽/头盔类属性分类模型能力评估\",\n    \"data_requirements\": \"需要针对头盔颜色扩展训练样本\",\n    \"compute_requirements\": \"依赖证据不足\",\n    \"engineering_work\": \"需要重新训练或微调，无法直接使用现有模型\"\n  ,\n      \"estimated_timeline\": \"5-8 周（基于模型迁移工作量估算）\"\n  ,\n    \"estimated_cost\": \"10,000 - 50,000 元（依赖训练样本量与基础设施）\"\n  ,\n    \"dependencies\": [ \"香港项目数据中心支持\", \"头盔样本数据可获取性\", \"模型评估体系完备性\" ]\n  ,\n      \"risks\": [ \"现有模型无头盔直接经验\", \"颜色标签可能不完整\", \"迁移精度不确定性\" ]\n  }\n ,\n  \"expected_performance\": {\n    \"baseline\": \"模型需达到 95% 精度要求，参考护栏检测等已验证场景\",\n    \"target\": \"精确率和召回率需分别 > 0.9\",\n    \"uncertainty\": \"需要重新验证,\"\n    }\n  ,\n\n    \"recommendation\": \"建议不直接使用'头盔属性检测'现有模型，建议迁移车辆检测类属性或重新设计头盔专用模型，需补充头盔颜色分类训练样本与标注流程\"\n  }",
+    "structured_output": {
+      "requirement_summary": "香港项目要求识别头盔颜色（黑、白、灰、红、蓝、黄、绿、紫、迷彩），评估现有城市结构化人体属性模型是否支持",
+      "direct_match": {
+        "exists": false,
+        "summary": "现有证据未包含支持头盔颜色识别的模型，主要涉及安全带、医保、车牌颜色等属性",
+        "evidence": []
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "KM_classifier_Carplate_TypeColor_nart_acl-ascend310-int8_b8_3.0.0.model",
+          "label_schema": "车牌颜色类型属性",
+          "training_data": "证据不足",
+          "reported_metrics": "证据不足",
+          "covered_capability": "已证实支持车牌颜色识别算法",
+          "gap": "目标领域从车牌颜色迁移至头盔，缺乏对应训练证据",
+          "evidence": []
+        },
+        {
+          "model_or_solution": "KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model",
+          "label_schema": "腰带/安全带",
+          "training_data": "未提供",
+          "reported_metrics": "没有",
+          "covered_capability": "已提供腰带/安全带结构化检测",
+          "gap": "头盔与腰带是不同目标，场景差异明显",
+          "evidence": []
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "low",
+        "approach": "基于已有安全帽/头盔类属性分类模型能力评估",
+        "data_requirements": "需要针对头盔颜色扩展训练样本",
+        "compute_requirements": "依赖证据不足",
+        "engineering_work": "需要重新训练或微调，无法直接使用现有模型",
+        "estimated_timeline": "5-8 周（基于模型迁移工作量估算）",
+        "estimated_cost": "10,000 - 50,000 元（依赖训练样本量与基础设施）",
+        "dependencies": [
+          "香港项目数据中心支持",
+          "头盔样本数据可获取性",
+          "模型评估体系完备性"
+        ],
+        "risks": [
+          "现有模型无头盔直接经验",
+          "颜色标签可能不完整",
+          "迁移精度不确定性"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "模型需达到 95% 精度要求，参考护栏检测等已验证场景",
+        "target": "精确率和召回率需分别 > 0.9",
+        "uncertainty": "需要重新验证,"
+      },
+      "recommendation": "建议不直接使用'头盔属性检测'现有模型，建议迁移车辆检测类属性或重新设计头盔专用模型，需补充头盔颜色分类训练样本与标注流程"
+    }
+  }
+}

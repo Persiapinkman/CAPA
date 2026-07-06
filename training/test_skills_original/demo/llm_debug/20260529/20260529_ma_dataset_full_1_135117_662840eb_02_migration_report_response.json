@@ -1,0 +1,62 @@
+{
+  "session_id": "ma_dataset_full_1",
+  "run_stamp": "20260529_135117_662840eb",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-05-29T13:52:10+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"用户需要识别‘头盔是否有花纹’的模型\",\n  \"direct_match\": {\n    \"exists\": false,\n    \"summary\": \"没有直接匹配识别头盔花纹的模型\",\n    \"evidence\": []\n  },\n  \"similar_assets\": [\n    {\n      \"model_or_solution\": \"Classify_3.4.0 (头盔属性分类模型)\",\n      \"label_schema\": \"头盔属性分类（例如：是否有花纹、是否戴安全帽等）\",\n      \"training_data\": \"头盔类图片数据\",\n      \"reported_metrics\": \"ma_安全帽 = 84.07%\",\n      \"covered_capability\": \"头盔属性识别\"\n    ,\n    \"gap\": \"无明确花纹类别\",\n    \"evidence\": [\"f586a56a911c80497fa3679c\"]\n    }\n  ]\n  ,\n  \"migration_plan\": {\n    \"feasibility\": \"low\",\n    \"approach\": \"微调或重训\",\n    \"data_requirements\": \"头盔花纹图片\",\n    \"compute_requirements\": \"GPU\",\n    \"engineering_work\": \"中等\"\n  ,\n  \"estimated_timeline\": \"2-4周\",\n  \"estimated_cost\": \"无\",\n  \"dependencies\": [\"头盔花纹标注数据\"],\n  \"risks\": [\"数据不足\", \"花纹定义模糊\"]\n  }\n  ,\n  \"expected_performance\": {\n    \"baseline\": \"需重新测试\",\n    \"target\": \"mAP >= 80%\",\n    \"uncertainty\": \"高\"\n  }\n  ,\n  \"recommendation\": \"基于Classify_3.4.0微调或训练新模型，需明确花纹类别并标注数据\"\n}",
+    "structured_output": {
+      "requirement_summary": "用户需要识别‘头盔是否有花纹’的模型",
+      "direct_match": {
+        "exists": false,
+        "summary": "没有直接匹配识别头盔花纹的模型",
+        "evidence": []
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "Classify_3.4.0 (头盔属性分类模型)",
+          "label_schema": "头盔属性分类（例如：是否有花纹、是否戴安全帽等）",
+          "training_data": "头盔类图片数据",
+          "reported_metrics": "ma_安全帽 = 84.07%",
+          "covered_capability": "头盔属性识别",
+          "gap": "无明确花纹类别",
+          "evidence": [
+            "f586a56a911c80497fa3679c"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "low",
+        "approach": "微调或重训",
+        "data_requirements": "头盔花纹图片",
+        "compute_requirements": "GPU",
+        "engineering_work": "中等",
+        "estimated_timeline": "2-4周",
+        "estimated_cost": "无",
+        "dependencies": [
+          "头盔花纹标注数据"
+        ],
+        "risks": [
+          "数据不足",
+          "花纹定义模糊"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "需重新测试",
+        "target": "mAP >= 80%",
+        "uncertainty": "高"
+      },
+      "recommendation": "基于Classify_3.4.0微调或训练新模型，需明确花纹类别并标注数据"
+    }
+  }
+}

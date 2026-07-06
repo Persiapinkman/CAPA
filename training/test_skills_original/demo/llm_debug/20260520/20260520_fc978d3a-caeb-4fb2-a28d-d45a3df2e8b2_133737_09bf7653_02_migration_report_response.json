@@ -1,0 +1,64 @@
+{
+  "session_id": "fc978d3a-caeb-4fb2-a28d-d45a3df2e8b2",
+  "run_stamp": "20260520_133737_09bf7653",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-05-20T13:39:12+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{   \"requirement_summary\": \"客户需要识别7种特定帽子款式：渔夫帽、无檐帽、鸭舌帽、安全帽、open-face helmet、full-face helmet、连衣帽，属于细粒度多类分类任务。\",   \"direct_match\": {    \"exists\": false,    \"summary\": \"未发现完全匹配的帽子样式分类模型\",    \"evidence\": []},   \"similar_assets\": [     {      \"model_or_solution\": \"KM_classifier_Clothes_SD_nart_acl-ascend710-fp16_b8_0.0.2.model\",      \"covered_capability\": \"人体-服饰分类（包含帽子相关类别）\",      \"gap\": \"未明确包含安全帽及头盔类，标签体系未直接对应客户所需7类\"     ,   \"evidence\": [       \"evidence_id_23318a7afa50126f79400960\",       \"title: KM_classifier_Clothes_SD_nart_acl-ascend710-fp16_b8_0.0.2.model\",       \"snippet: 山东监狱人体服饰分类\"     ]    }  ],   \"migration_plan\": {    \"feasibility\": \"high\",    \"approach\": \"数据定制+微调\",    \"data_requirements\": \"600-2000张/类别 (based on similar fashion classifier patterns)\",    \"compute_requirements\": \"Ascend NPU 310/710 or GPU T4/A10\",    \"engineering_work\": \"标签体系对齐 + 数据隐私过滤 + 模型微调\",    \"estimated_timeline\": \"2-4 周 (开发迭代周期偏差)\"    ,\"estimated_cost\": \"需客户内部采购模型服务或自建，区间 3000-15000 元/模型 (depend on project budget and compute type)\"    ,\"dependencies\": [\"客户协议，现有训练数据>\",    \"标注团队>\",    \"算力环境准备好>\"   ]  ,\"risks\": [     \"场景光照/佩戴角度差异可能影响精度，\",      \"7类别较细粒度，部分类别重叠度高<br/>\",      \"标签体系差异不兼容给出的风险组合\"     ]  },   \"expected_performance\": {    \"baseline\": \"F1-score 0.85-0.92 range (benchmark fine-classification)\",    \"target\": \"需达到客户阈值 0.85+ (analogous to other attributes)\",    \"uncertainty\": \"high due to lack of headwear-specific metrics\"}   ,   \"recommendation\": \"ADAPT KM_classifier_Clothes_SD 为优先选择，成本=数据自费 + 模型微调， timeline=快速迭代，但需额外标注工作\"   }",
+    "structured_output": {
+      "requirement_summary": "客户需要识别7种特定帽子款式：渔夫帽、无檐帽、鸭舌帽、安全帽、open-face helmet、full-face helmet、连衣帽，属于细粒度多类分类任务。",
+      "direct_match": {
+        "exists": false,
+        "summary": "未发现完全匹配的帽子样式分类模型",
+        "evidence": []
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "KM_classifier_Clothes_SD_nart_acl-ascend710-fp16_b8_0.0.2.model",
+          "covered_capability": "人体-服饰分类（包含帽子相关类别）",
+          "gap": "未明确包含安全帽及头盔类，标签体系未直接对应客户所需7类",
+          "evidence": [
+            "evidence_id_23318a7afa50126f79400960",
+            "title: KM_classifier_Clothes_SD_nart_acl-ascend710-fp16_b8_0.0.2.model",
+            "snippet: 山东监狱人体服饰分类"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "high",
+        "approach": "数据定制+微调",
+        "data_requirements": "600-2000张/类别 (based on similar fashion classifier patterns)",
+        "compute_requirements": "Ascend NPU 310/710 or GPU T4/A10",
+        "engineering_work": "标签体系对齐 + 数据隐私过滤 + 模型微调",
+        "estimated_timeline": "2-4 周 (开发迭代周期偏差)",
+        "estimated_cost": "需客户内部采购模型服务或自建，区间 3000-15000 元/模型 (depend on project budget and compute type)",
+        "dependencies": [
+          "客户协议，现有训练数据>",
+          "标注团队>",
+          "算力环境准备好>"
+        ],
+        "risks": [
+          "场景光照/佩戴角度差异可能影响精度，",
+          "7类别较细粒度，部分类别重叠度高<br/>",
+          "标签体系差异不兼容给出的风险组合"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "F1-score 0.85-0.92 range (benchmark fine-classification)",
+        "target": "需达到客户阈值 0.85+ (analogous to other attributes)",
+        "uncertainty": "high due to lack of headwear-specific metrics"
+      },
+      "recommendation": "ADAPT KM_classifier_Clothes_SD 为优先选择，成本=数据自费 + 模型微调， timeline=快速迭代，但需额外标注工作"
+    }
+  }
+}

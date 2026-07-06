@@ -1,0 +1,63 @@
+{
+  "session_id": "35eacf06-ae36-4e52-91db-89efbc583384",
+  "run_stamp": "20260519_171949_0e80ed49",
+  "stage": "migration_retrieval_plan_response",
+  "step_index": 1,
+  "created_at": "2026-05-19T17:19:52+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "output_schema": {
+      "abstract_requirement": "object, attribute, task_type, scene, constraints[]",
+      "retrieve_fields": "每项 field + queries[]（2-4 条）"
+    },
+    "used_fallback": false,
+    "output_raw": "{\n  \"abstract_requirement\": {\n    \"object\": \"头盔\",\n    \"attribute\": \"颜色\",\n    \"task_type\": \"目标属性识别\"\n  ,\n  \"scene\": \"城市结构化\",\n  \"constraints\": [\n    \"香港项目\",\n    \"结构化输出\",\n    \"颜色分类\"\n  ]\n}\n\n    ,\"retrieve_fields\": [\n    {\n      \"field\": \"existing_models\",\n      \"queries\": [\n        \"头盔颜色识别模型 城市结构化\",\n        \"pedestrian attribute model helmet color\",\n        \"安全帽颜色分类异常检测模型\"\n      ]\n    },\n    {\n      \"field\": \"similar_capabilities\",\n      \"queries\": [\n        \"安全帽属性识别能力迁移\",\n        \"头盔分类 异常检测 业务场景迁移\",\n        \"行人属性模型 特定部件提取\"\n      ]\n    },\n    {\n      \"field\": \"performance_baseline\",\n      \"queries\": [\n        \"头盔颜色识别准确率 red blue green purple\",\n        \"安全帽颜色分类 多色类别 benchmark\",\n        \"头盔风格识别混淆率 颜色\"\n      ]\n    },\n    {\n      \"field\": \"data_requirements\",\n      \"queries\": [\n        \"头盔颜色样本数据 黑 白 灰 红 蓝 黄 绿 紫 迷彩\",\n        \"安全帽颜色标注数据 多类别\",\n        \"头盔归因数据 混合背景 遮挡\"\n      ]\n    }\n  ]\n}",
+    "structured_output": {
+      "abstract_requirement": {
+        "object": "头盔",
+        "attribute": "颜色",
+        "task_type": "目标属性识别",
+        "scene": "城市结构化",
+        "constraints": [
+          "香港项目",
+          "结构化输出",
+          "颜色分类"
+        ]
+      },
+      "retrieve_fields": [
+        {
+          "field": "existing_models",
+          "queries": [
+            "头盔颜色识别模型 城市结构化",
+            "pedestrian attribute model helmet color",
+            "安全帽颜色分类异常检测模型"
+          ]
+        },
+        {
+          "field": "similar_capabilities",
+          "queries": [
+            "安全帽属性识别能力迁移",
+            "头盔分类 异常检测 业务场景迁移",
+            "行人属性模型 特定部件提取"
+          ]
+        },
+        {
+          "field": "performance_baseline",
+          "queries": [
+            "头盔颜色识别准确率 red blue green purple",
+            "安全帽颜色分类 多色类别 benchmark",
+            "头盔风格识别混淆率 颜色"
+          ]
+        },
+        {
+          "field": "data_requirements",
+          "queries": [
+            "头盔颜色样本数据 黑 白 灰 红 蓝 黄 绿 紫 迷彩",
+            "安全帽颜色标注数据 多类别",
+            "头盔归因数据 混合背景 遮挡"
+          ]
+        }
+      ]
+    }
+  }
+}

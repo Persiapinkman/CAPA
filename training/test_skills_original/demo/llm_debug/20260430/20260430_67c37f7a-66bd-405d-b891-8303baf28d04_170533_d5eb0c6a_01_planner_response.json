@@ -1,0 +1,11 @@
+{
+  "session_id": "67c37f7a-66bd-405d-b891-8303baf28d04",
+  "run_stamp": "20260430_170533_d5eb0c6a",
+  "stage": "planner_response",
+  "step_index": 1,
+  "created_at": "2026-04-30T17:05:34+08:00",
+  "payload": {
+    "raw_response": "{\"thought\": \"用户明确要求使用Qwen检测\"  ,\"decision_type\": \"tool\", \"action\": \"qwen_detection\", \"action_input\": {\"label\": \"钓鱼的人\", \"finish_after_tool\": false}}",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260430_170533_d5eb0c6a"
+  }
+}

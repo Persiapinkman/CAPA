@@ -1,0 +1,129 @@
+{
+  "session_id": "5e68d079-9775-434c-b794-faf2bc76ef9c",
+  "run_stamp": "20260520_115842_99485c3a",
+  "stage": "migration_report_request",
+  "step_index": 2,
+  "created_at": "2026-05-20T11:59:50+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260520_115842_99485c3a",
+    "input_schema": {
+      "user_query": "用户原始问题",
+      "retrieval_plan": "上一步检索规划（abstract_requirement + retrieve_fields）",
+      "field_results": "rag 分字段检索概览：field, queries, coverage, evidence_count, full_document_count",
+      "evidence_facts": "已校验的结构化事实；报告只能引用这些事实中的 evidence_ids/doc_ids",
+      "llm_user_markdown": "实际发给报告 LLM 的 Markdown 正文，只包含检索规划和已校验事实"
+    },
+    "evidence_item_fields": [
+      "facts"
+    ],
+    "structured_input": {
+      "user_query": "香港项目要求识别“头盔颜色：黑、白、灰、红、蓝、黄、绿、紫、迷彩”，现有城市结构化人体属性模型是否能直接支持？",
+      "retrieval_plan": {
+        "abstract_requirement": {
+          "object": "头盔、安全帽",
+          "attribute": "颜色识别",
+          "task_type": "属性分类",
+          "scene": "城市安防、结构化人体监控",
+          "constraints": [
+            "多色类黑/白/灰/红/蓝/黄/绿/紫/迷彩",
+            "基于城市结构化人体属性模型",
+            "迁移/适配框架"
+          ]
+        },
+        "retrieve_fields": [
+          {
+            "field": "existing_models",
+            "queries": [
+              "define hat helmet rider body attribute model color classification existing",
+              "define KM_classifier model Peds body attribute based model exist",
+              "define安防非机动车 人体属性模型 头盔 颜色 分类 可用"
+            ]
+          },
+          {
+            "field": "similar_capabilities",
+            "queries": [
+              "access structured pose head accessory attribute support",
+              "define color categorization attribute task transferable to headgear",
+              "define human detection attribute scene transfer to head area detection"
+            ]
+          },
+          {
+            "field": "performance_baseline",
+            "queries": [
+              "define 5.0 Recognition / classification accuracy per class benchmark 头盔颜色",
+              "define color attribute resolution accuracy for region head structure",
+              "define安全帽/头盔颜色识别 性能指标 多色/近黑多色 精度"
+            ]
+          },
+          {
+            "field": "data_requirements",
+            "queries": [
+              "define helmet color classification training data collection requirements",
+              "define multi class color headgear annotation standard 所需真实遮挡示例",
+              "define hat color finetune dataset depth missing routing color data"
+            ]
+          }
+        ]
+      },
+      "field_results": [
+        {
+          "field": "existing_models",
+          "queries": [
+            "define hat helmet rider body attribute model color classification existing",
+            "define KM_classifier model Peds body attribute based model exist",
+            "define安防非机动车 人体属性模型 头盔 颜色 分类 可用"
+          ],
+          "coverage": "strong",
+          "evidence_count": 20,
+          "full_document_count": 12
+        },
+        {
+          "field": "similar_capabilities",
+          "queries": [
+            "access structured pose head accessory attribute support",
+            "define color categorization attribute task transferable to headgear",
+            "define human detection attribute scene transfer to head area detection"
+          ],
+          "coverage": "strong",
+          "evidence_count": 20,
+          "full_document_count": 12
+        },
+        {
+          "field": "performance_baseline",
+          "queries": [
+            "define 5.0 Recognition / classification accuracy per class benchmark 头盔颜色",
+            "define color attribute resolution accuracy for region head structure",
+            "define安全帽/头盔颜色识别 性能指标 多色/近黑多色 精度"
+          ],
+          "coverage": "strong",
+          "evidence_count": 20,
+          "full_document_count": 10
+        },
+        {
+          "field": "data_requirements",
+          "queries": [
+            "define helmet color classification training data collection requirements",
+            "define multi class color headgear annotation standard 所需真实遮挡示例",
+            "define hat color finetune dataset depth missing routing color data"
+          ],
+          "coverage": "strong",
+          "evidence_count": 20,
+          "full_document_count": 8
+        }
+      ],
+      "evidence_facts": [],
+      "llm_user_markdown": "## 用户需求\n香港项目要求识别头盔颜色：黑、白、灰、红、蓝、黄、绿、紫、迷彩，现有城市结构化人体属性模型是否能直接支持？\n\n## 检索规划\n### 需求抽象\n- 对象：头盔、安全帽\n- 属性：颜色识别\n- 任务类型：属性分类\n- 场景：城市安防、结构化人体监控\n- 约束：多色类黑/白/灰/红/蓝/黄/绿/紫/迷彩；基于城市结构化人体属性模型；迁移/适配框架\n\n### 可直接复用的已有模型 检索词\n- define hat helmet rider body attribute model color classification existing\n- define KM_classifier model Peds body attribute based model exist\n- define安防非机动车 人体属性模型 头盔 颜色 分类 可用\n\n### 可迁移的相似能力 检索词\n- access structured pose head accessory attribute support\n- define color categorization attribute task transferable to headgear\n- define human detection attribute scene transfer to head area detection\n\n### 性能与精度基线 检索词\n- define 5.0 Recognition / classification accuracy per class benchmark 头盔颜色\n- define color attribute resolution accuracy for region head structure\n- define安全帽/头盔颜色识别 性能指标 多色/近黑多色 精度\n\n### 数据、标注与迭代依赖 检索词\n- define helmet color classification training data collection requirements\n- define multi class color headgear annotation standard 所需真实遮挡示例\n- define hat color finetune dataset depth missing routing color data\n\n## 分字段检索概览\n\n### 可直接复用的已有模型\n- 检索覆盖：strong\n- 检索词：\n  - define hat helmet rider body attribute model color classification existing\n  - define KM_classifier model Peds body attribute based model exist\n  - define安防非机动车 人体属性模型 头盔 颜色 分类 可用\n- 命中证据数：20\n- 命中完整文档数：12\n\n### 可迁移的相似能力\n- 检索覆盖：strong\n- 检索词：\n  - access structured pose head accessory attribute support\n  - define color categorization attribute task transferable to headgear\n  - define human detection attribute scene transfer to head area detection\n- 命中证据数：20\n- 命中完整文档数：12\n\n### 性能与精度基线\n- 检索覆盖：strong\n- 检索词：\n  - define 5.0 Recognition / classification accuracy per class benchmark 头盔颜色\n  - define color attribute resolution accuracy for region head structure\n  - define安全帽/头盔颜色识别 性能指标 多色/近黑多色 精度\n- 命中证据数：20\n- 命中完整文档数：10\n\n### 数据、标注与迭代依赖\n- 检索覆盖：strong\n- 检索词：\n  - define helmet color classification training data collection requirements\n  - define multi class color headgear annotation standard 所需真实遮挡示例\n  - define hat color finetune dataset depth missing routing color data\n- 命中证据数：20\n- 命中完整文档数：8\n\n## 已校验结构化事实\n报告只能基于以下事实作答。若以下事实不足以支持某个结论，必须写“证据不足”。"
+    },
+    "llm_messages": [
+      {
+        "role": "system",
+        "content": "你是视觉模型迁移顾问。请只基于输入中的“已校验结构化事实”生成结构化迁移评估报告。硬约束：1) 所有模型、精度、性能、类别数、数据量、部署、周期、成本结论都必须能从事实列表中找到依据；2) 没有事实支撑时必须写“证据不足”，禁止使用常识或经验补数字；3) 可以做风险推断，但必须说明它来自哪些相似事实，例如低精度/类别数更少/场景不同；4) direct_match.evidence、similar_assets.evidence 等 evidence 字段只允许填写事实中的 evidence_ids 或 doc_ids；5) 只输出 JSON。"
+      },
+      {
+        "role": "user",
+        "content": "## 用户需求\n香港项目要求识别头盔颜色：黑、白、灰、红、蓝、黄、绿、紫、迷彩，现有城市结构化人体属性模型是否能直接支持？\n\n## 检索规划\n### 需求抽象\n- 对象：头盔、安全帽\n- 属性：颜色识别\n- 任务类型：属性分类\n- 场景：城市安防、结构化人体监控\n- 约束：多色类黑/白/灰/红/蓝/黄/绿/紫/迷彩；基于城市结构化人体属性模型；迁移/适配框架\n\n### 可直接复用的已有模型 检索词\n- define hat helmet rider body attribute model color classification existing\n- define KM_classifier model Peds body attribute based model exist\n- define安防非机动车 人体属性模型 头盔 颜色 分类 可用\n\n### 可迁移的相似能力 检索词\n- access structured pose head accessory attribute support\n- define color categorization attribute task transferable to headgear\n- define human detection attribute scene transfer to head area detection\n\n### 性能与精度基线 检索词\n- define 5.0 Recognition / classification accuracy per class benchmark 头盔颜色\n- define color attribute resolution accuracy for region head structure\n- define安全帽/头盔颜色识别 性能指标 多色/近黑多色 精度\n\n### 数据、标注与迭代依赖 检索词\n- define helmet color classification training data collection requirements\n- define multi class color headgear annotation standard 所需真实遮挡示例\n- define hat color finetune dataset depth missing routing color data\n\n## 分字段检索概览\n\n### 可直接复用的已有模型\n- 检索覆盖：strong\n- 检索词：\n  - define hat helmet rider body attribute model color classification existing\n  - define KM_classifier model Peds body attribute based model exist\n  - define安防非机动车 人体属性模型 头盔 颜色 分类 可用\n- 命中证据数：20\n- 命中完整文档数：12\n\n### 可迁移的相似能力\n- 检索覆盖：strong\n- 检索词：\n  - access structured pose head accessory attribute support\n  - define color categorization attribute task transferable to headgear\n  - define human detection attribute scene transfer to head area detection\n- 命中证据数：20\n- 命中完整文档数：12\n\n### 性能与精度基线\n- 检索覆盖：strong\n- 检索词：\n  - define 5.0 Recognition / classification accuracy per class benchmark 头盔颜色\n  - define color attribute resolution accuracy for region head structure\n  - define安全帽/头盔颜色识别 性能指标 多色/近黑多色 精度\n- 命中证据数：20\n- 命中完整文档数：10\n\n### 数据、标注与迭代依赖\n- 检索覆盖：strong\n- 检索词：\n  - define helmet color classification training data collection requirements\n  - define multi class color headgear annotation standard 所需真实遮挡示例\n  - define hat color finetune dataset depth missing routing color data\n- 命中证据数：20\n- 命中完整文档数：8\n\n## 已校验结构化事实\n报告只能基于以下事实作答。若以下事实不足以支持某个结论，必须写“证据不足”。"
+      }
+    ]
+  }
+}

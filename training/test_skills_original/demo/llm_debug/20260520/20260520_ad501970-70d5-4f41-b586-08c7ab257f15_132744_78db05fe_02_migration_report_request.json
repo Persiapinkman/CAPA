@@ -1,0 +1,386 @@
+{
+  "session_id": "ad501970-70d5-4f41-b586-08c7ab257f15",
+  "run_stamp": "20260520_132744_78db05fe",
+  "stage": "migration_report_request",
+  "step_index": 2,
+  "created_at": "2026-05-20T13:28:24+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260520_132744_78db05fe",
+    "input_schema": {
+      "user_query": "用户原始问题",
+      "retrieval_plan": "上一步检索规划（abstract_requirement + retrieve_fields）",
+      "field_results": "playbook 分字段检索结果：field, queries, coverage, evidence[]"
+    },
+    "evidence_item_fields": [
+      "evidence_id",
+      "title",
+      "snippet",
+      "model_name",
+      "algorithm_name",
+      "algorithm_type",
+      "application_scene",
+      "section_type",
+      "score"
+    ],
+    "structured_input": {
+      "user_query": "识别“肤色：黑色、白色、黄色”的模型",
+      "retrieval_plan": {
+        "abstract_requirement": {
+          "object": "肤色 识别",
+          "attribute": "黑色 白色 黄色",
+          "task_type": "模型 搜索",
+          "scene": "工业视觉",
+          "constraints": [
+            "不生成幻觉结论",
+            "不做结论性回答"
+          ]
+        },
+        "retrieve_fields": [
+          {
+            "field": "existing_models",
+            "queries": [
+              "肤色 检测 模型 工业视觉",
+              "多肤色 识别 分类器 性能比较"
+            ]
+          },
+          {
+            "field": "similar_capabilities",
+            "queries": [
+              "肤色分割 像素级 对齐",
+              "皮肤 异常检测 缺陷识别"
+            ]
+          },
+          {
+            "field": "performance_baseline",
+            "queries": [
+              "肤色 分类 mIoU 精度 数据集",
+              "肤色 识别 精度 评估"
+            ]
+          },
+          {
+            "field": "data_requirements",
+            "queries": [
+              "肤色 分类 数据 标注 样本大小",
+              "肤色 识别 训练数据 采集"
+            ]
+          }
+        ]
+      },
+      "field_results": [
+        {
+          "field": "existing_models",
+          "queries": [
+            "肤色 检测 模型 工业视觉",
+            "多肤色 识别 分类器 性能比较"
+          ],
+          "coverage": "strong",
+          "evidence": [
+            {
+              "evidence_id": "417686bcfbaae66d5736d972",
+              "title": "PDFs/CommonFace_Gray_0.1.0.pdf p3",
+              "snippet": "•  模型                                                                        \n                                                                                    \n          可检                                                                        \n          出的                                                                        \n          最大...",
+              "section_type": "general",
+              "score": 0.817082
+            },
+            {
+              "evidence_id": "dd622ab3d2c615477dc4f8b1",
+              "title": "KM_essos_BannerSlogan_960x960_nart_acl-ascend710-fp16_b8_3.0.5.model",
+              "snippet": "target_name: 横幅\nalgorithm_type: 检测\nalgorithm_name: 横幅检测模型\napplication_scene: 视频巡逻项目\nowner: 任大发\nmodel_name: KM_essos_BannerSlogan_960x960_nart_acl-ascend710-fp16_b8_3.0.5.model\nsupported_device: ascend710\nrecommended_config: acl-ascend710-fp16\nlast_updated: 2025-06-26\nlast_updated_month: 2025-06",
+              "model_name": "KM_essos_BannerSlogan_960x960_nart_acl-ascend710-fp16_b8_3.0.5.model",
+              "algorithm_name": "横幅检测模型",
+              "algorithm_type": "检测",
+              "application_scene": "视频巡逻项目",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "a7c6f1602ea555d5c635417c",
+              "title": "LargeFace_288x288",
+              "snippet": "did: 128413\nrid: 48648\nmodel_name: LargeFace_288x288\nplatform: acl-ascend310-int8",
+              "model_name": "LargeFace_288x288",
+              "section_type": "model_artifact",
+              "score": 0.954623
+            },
+            {
+              "evidence_id": "1f4e04a660d63cb28556b897",
+              "title": "PDFs/CommonFace_Gray_0.1.0.pdf p3",
+              "snippet": "512                                                                       \n       •  模型                                                                        \n          按照                                                                        \n          如下...",
+              "section_type": "general",
+              "score": 0.817082
+            },
+            {
+              "evidence_id": "83807db14b0bbfd44474b7c2",
+              "title": "KM_essos_BannerSlogan_960x960_nart_acl-ascend310-fp16_b8_3.0.5.model",
+              "snippet": "target_name: 横幅\nalgorithm_type: 检测\nalgorithm_name: 横幅检测模型\napplication_scene: 视频巡逻项目\nowner: 任大发\nmodel_name: KM_essos_BannerSlogan_960x960_nart_acl-ascend310-fp16_b8_3.0.5.model\nsupported_device: ascend310\nrecommended_config: acl-ascend310-fp16\nlast_updated: 2025-06-26\nlast_updated_month: 2025-06",
+              "model_name": "KM_essos_BannerSlogan_960x960_nart_acl-ascend310-fp16_b8_3.0.5.model",
+              "algorithm_name": "横幅检测模型",
+              "algorithm_type": "检测",
+              "application_scene": "视频巡逻项目",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "81540bc2e16b5508e7b0bf43",
+              "title": "LargeFace_256x256",
+              "snippet": "did: 128437\nrid: 48669\nmodel_name: LargeFace_256x256\nplatform: acl-ascend310-int8",
+              "model_name": "LargeFace_256x256",
+              "section_type": "model_artifact",
+              "score": 0.954623
+            },
+            {
+              "evidence_id": "9ba68f488bf3185775478dd4",
+              "title": "PDFs/安防方向-人脸模糊3.2.1模型更新.pdf p6 table 1",
+              "snippet": "PDF表格: PDFs/安防方向-人脸模糊3.2.1模型更新.pdf 第6页 表1\n\n|  |  |  |  | blur 3.1.1 |  | blur 3.2.0 |  |  |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- |\n|  |  | 模型 |  |  |  |  |  |  |\n|  | ROC曲线 |  |  |  |  |  |  |  |\n|  | 分数分布对比 |  |  |  |  |  |  |  |\n|  |  |  |  | blur 3.1.1 | blur 3.2.0 |  |  |  |\n|  |  | 模型 |  |  |  |  |  |  |\n|  | 分数分布 |  |  |  |  |  |  |  |\n|  | 不同阈值在正负样本上的过滤率 |  |  |  |  |  |  |...",
+              "section_type": "general",
+              "score": 0.801728
+            },
+            {
+              "evidence_id": "7d46e31c0867251721fe60c5",
+              "title": "KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model",
+              "snippet": "target_name: 二维码\nalgorithm_type: 检测\nalgorithm_name: 二维码检测模型\napplication_scene: 网安场景，正方形二维码\nowner: 龚丽君\nmodel_name: KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model\nsupported_device: ascend310\nrecommended_config: ascend310-fp16\nlast_updated: 2023-04-07\nlast_updated_month: 2023-04",
+              "model_name": "KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model",
+              "algorithm_name": "二维码检测模型",
+              "algorithm_type": "检测",
+              "application_scene": "网安场景，正方形二维码",
+              "section_type": "model_artifact",
+              "score": 1.0
+            }
+          ]
+        },
+        {
+          "field": "similar_capabilities",
+          "queries": [
+            "肤色分割 像素级 对齐",
+            "皮肤 异常检测 缺陷识别"
+          ],
+          "coverage": "strong",
+          "evidence": [
+            {
+              "evidence_id": "30f6364bd258d2694f252cd0",
+              "title": "PDFs/CommonFace_Gray_0.1.0.pdf p5",
+              "snippet": "下                                                                       \n                                                                                    \n            的                                                                       \n            像                                                                       \n            素...",
+              "section_type": "general",
+              "score": 0.631044
+            },
+            {
+              "evidence_id": "1599d713acc736d8b89d6978",
+              "title": "安防方向-人脸二分类",
+              "snippet": "目标名称: 人脸\n算法类型: 属性\n算法名称: 安防方向-人脸二分类\nones发版链接: https://ones.ainewera.com/wiki/#/team/JNwe8qUX/space/GebSt74Y/page/RxxiLWb8\n应用场景: 人脸误检分类；V3.0.2\n负责人(人员): 冯江燕\n模型名称: KM_classifier_Face_None_Security_nart_cpu-ppl2-fp32_b8_3.0.2.model\nOID: ca25a1c96c3b3a1bcefed7ea6cbbb85e3b6dc1e957a45619ef0c5b3752d87f22\n支持设备: cpu\n推荐配置: cpu-ppl2-fp32\n最近更新时间: 2025/2/17\n最近更新时间-提取年月: 2025年02月\n计数: 0",
+              "model_name": "KM_classifier_Face_None_Security_nart_cpu-ppl2-fp32_b8_3.0.2.model",
+              "algorithm_name": "安防方向-人脸二分类",
+              "algorithm_type": "属性",
+              "application_scene": "人脸误检分类；V3.0.2",
+              "section_type": "model_artifact",
+              "score": 0.247046
+            },
+            {
+              "evidence_id": "e70e4d2c66d9aa49bfd41778",
+              "title": "LargeFace_224x224",
+              "snippet": "model_name: LargeFace_224x224\nname: LargeFace_224x224\nlabel_list: 1\nlabels: 1\ntype: essos\nplatform: acl-ascend710-fp16\nstatus: SUCCESS\ndid: 125301\nrid: 47266\nversion: 3.0.0\nversion_train_date: 20250304\nsource_file: data/LargeFace_224x224-acl-ascend710-fp16_47266_125301.json",
+              "model_name": "LargeFace_224x224",
+              "section_type": "release_note",
+              "score": 0.147635
+            },
+            {
+              "evidence_id": "d706ad9809664c416d209620",
+              "title": "PDFs/安防方向--车辆属性大模型更新.pdf p10",
+              "snippet": "halnn0.4-stpu-int8（对齐）   vehicle_backup_resize 0.963/0.968",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "fced1321aec1c2c3d9c533c3",
+              "title": "人脸检测4系列-适配",
+              "snippet": "目标名称: 人脸\n算法类型: 检测\n算法名称: 人脸检测4系列-适配\nones发版链接: https://ones.ainewera.com/wiki/#/team/JNwe8qUX/space/GebSt74Y/page/XBV2ydxa\n应用场景: 方舟标品hunter组件，ascend710使用736x1280分辨率，smallface\n负责人(人员): 任大发\n模型名称: KM_hunter_SmallFace_Gray_736x1280_nart_acl-ascend310-int8_b16_4.15.3.model\nOID: 27317486b290adacf1945dfdda67d550b404aad238b0cfe4c12ba5ec2b92305c\n支持设备: ascend710\n推荐配置: acl-ascend710-int8\n最近更新时间: 2025/6/30\n最近更新...",
+              "model_name": "KM_hunter_SmallFace_Gray_736x1280_nart_acl-ascend310-int8_b16_4.15.3.model",
+              "algorithm_name": "人脸检测4系列-适配",
+              "algorithm_type": "检测",
+              "application_scene": "方舟标品hunter组件，ascend710使用736x1280分辨率，smallface",
+              "section_type": "model_artifact",
+              "score": 0.545259
+            },
+            {
+              "evidence_id": "77a1d95d44fad36c46f46508",
+              "title": "SmallFace_yolov10n_544x960",
+              "snippet": "model_name: SmallFace_yolov10n_544x960\nname: SmallFace_yolov10n_544x960\nlabel_list: 1\nlabels: 1\ntype: essos\nplatform: acl-ascend710-int8\nstatus: SUCCESS\ndid: 124678\nrid: 46996\nversion: 0.0.1\nversion_train_date: 20250304\nsource_file: data/SmallFace_yolov10n_544x960-acl-ascend710-int8_46996_124678.json",
+              "model_name": "SmallFace_yolov10n_544x960",
+              "section_type": "release_note",
+              "score": 0.145737
+            },
+            {
+              "evidence_id": "e72f7dbc36c0c0bb1dd64354",
+              "title": "PDFs/CommonFace_Gray_0.1.0.pdf p4",
+              "snippet": "脸                                                                       \n            >                                                                       \n            1                                                                       \n            6                                                                       \n            像...",
+              "section_type": "model_artifact",
+              "score": 0.608668
+            },
+            {
+              "evidence_id": "b9dfd70bbed0d8f27c43be81",
+              "title": "row 68",
+              "snippet": "pdf_file: 车辆细分类（四级标签）.pdf\nurl:  https://ones.ainewera.com/wiki/#/team/JNwe8qUX/space/GebSt74Y/page/AYmGCptp",
+              "section_type": "general",
+              "score": 1.0
+            }
+          ]
+        },
+        {
+          "field": "performance_baseline",
+          "queries": [
+            "肤色 分类 mIoU 精度 数据集",
+            "肤色 识别 精度 评估"
+          ],
+          "coverage": "strong",
+          "evidence": [
+            {
+              "evidence_id": "1d4107dd8be5f74f932bdc50",
+              "title": "PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2",
+              "snippet": "ge/project/3/releaseManage?       \n     rid=34577&id=3&model_type=classifier&tabName=deployment                        \n     四、精度性能                                                                         \n                                                                                    \n     模型精度...",
+              "section_type": "accuracy_eval",
+              "score": 0.82845
+            },
+            {
+              "evidence_id": "c7711b84757a14915a38a72a",
+              "title": "PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2 table 1",
+              "snippet": "PDF表格: PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf 第2页 表1\n\n表格结构化行:\n模型族: 三、模型列表\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model\nOID: beeb6944bdca2dafd0213251951cc47f829efad2981d7f847010b13f486181c5\n平台: cuda11.0-trt7.1-fp16-T4\n\n模型族: 三、模型列表\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model\nOID: fcd2d67fbbaab4fc2064f08ccaf5e6...",
+              "section_type": "accuracy_eval",
+              "score": 0.826457
+            },
+            {
+              "evidence_id": "09de649f24bff04033b48267",
+              "title": "PDFs/安防方向-人脸模糊3.2.1模型更新.pdf p1 table 1",
+              "snippet": "PDF表格: PDFs/安防方向-人脸模糊3.2.1模型更新.pdf 第1页 表1\n\n| 安防方向-人脸模糊3.2.1模型更新 KM_classifier_Face_Blur_Security_3.2.1 release note 1 release date: 2025.7.23 2 owner: gonglijun@sensetime.com 3 highlights: 4 清晰度分数由极端的U型分布变为更合理的0-1之间均匀分布 5 二分类精度提升约20%，清晰度排序准确率提升约4% 6 支持多batch部署 7 模型输出变化： 8 3.1.0/3.1.1输出：{'attribute': {'st_face_blur': {'st_clear': xxx, 'st_blur': xx x}}} 9 3.2.1 输出：{'attribute': {'st_face_blur': {'s...",
+              "section_type": "release_note",
+              "score": 0.597534
+            },
+            {
+              "evidence_id": "c3df8f567b44bcd3cf139136",
+              "title": "PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2",
+              "snippet": "58                  \n                 without_safetybelt 0.9269   0.9702   0.9481                        \n     评测平台：cuda11.0-trt7.1-fp16-T4                                                   \n                                                                                    \n                                                                                    \n     模型性能",
+              "section_type": "accuracy_eval",
+              "score": 0.822303
+            },
+            {
+              "evidence_id": "16cd20acc1fdc0c0dbbf9f77",
+              "title": "PDFs/安防方向--车牌属性.pdf p6",
+              "snippet": "白牌、                               \n          黄牌的分类精度                                                                   \n                                                                                    \n        ◦ 测试集颜色：黑牌precision69.67%->99.68%(+30.9%)，蓝牌precision84.78%->97.20%         \n          (+12.42%)，白牌precision60.28%->99.31%(+39.03%)，黄牌precsion55.39%-96.67%...",
+              "section_type": "accuracy_metric",
+              "score": 0.596023
+            },
+            {
+              "evidence_id": "ae2d10698faed2d83bef2ebd",
+              "title": "PDFs/安防方向-人脸误检分类模型发版记录.pdf p6",
+              "snippet": "common测试集                       监控难例测试集                   \n                                  1-              0-              1-                \n                  0-                                                                \n       误报阈值             0-recall precisio 1-recall precisio 0-recall precisio 1-recall\n                precision...",
+              "section_type": "accuracy_metric",
+              "score": 0.586307
+            },
+            {
+              "evidence_id": "e8a60fc7574659a8f8ee1686",
+              "title": "PDFs/横幅标语检测3.0.5-发版.pdf p1",
+              "snippet": "• owner：fengjiangyan@sensetime.com, rendafa@sensetime.com                     \n                                                                                    \n      • Highlights：                                                                 \n        ◦ 配置：增大模型输入尺寸至960x960...",
+              "section_type": "release_note",
+              "score": 0.520947
+            },
+            {
+              "evidence_id": "5e2f5ea6226af4b01ada8f75",
+              "title": "PDFs/安防方向--车牌文字识别-small.pdf p6",
+              "snippet": "release note：                                                                  \n                                                                                    \n      • 发布时间：20230113                                                               \n                                                                                    \n      • owner：fengjiangyan@sensetime.com...",
+              "section_type": "release_note",
+              "score": 0.51446
+            }
+          ]
+        },
+        {
+          "field": "data_requirements",
+          "queries": [
+            "肤色 分类 数据 标注 样本大小",
+            "肤色 识别 训练数据 采集"
+          ],
+          "coverage": "strong",
+          "evidence": [
+            {
+              "evidence_id": "71d9995a5ba5a391cc26ae8d",
+              "title": "PDFs/安防方向--车辆属性大模型更新.pdf p14",
+              "snippet": "车辆颜色分类属性ACC/mP：",
+              "section_type": "general",
+              "score": 0.633433
+            },
+            {
+              "evidence_id": "bd2c34c723743f6611c446a6",
+              "title": "车牌颜色类型属性",
+              "snippet": "目标名称: 车牌\n算法类型: 属性\n算法名称: 车牌颜色类型属性\nones发版链接: https://ones.ainewera.com/wiki/#/team/JNwe8qUX/space/GebSt74Y/page/FjTEy9No\n应用场景: V3.0.0，标品\n负责人(人员): 冯江燕\n模型名称: KM_classifier_Carplate_TypeColor_nart_cuda11.0-trt7.1-int8-T4_b8_3.0.0.model\nOID: 3f0f2e47033ba59078ee90d3baae597c44fc9ac3bd1118f137acbc952816f124\n支持设备: T4\n推荐配置: cuda11.0-trt7.1-int8-T4\n最近更新时间: 2023/5/30\n最近更新时间-提取年月: 2023年05月\n计数: 1",
+              "model_name": "KM_classifier_Carplate_TypeColor_nart_cuda11.0-trt7.1-int8-T4_b8_3.0.0.model",
+              "algorithm_name": "车牌颜色类型属性",
+              "algorithm_type": "属性",
+              "application_scene": "V3.0.0，标品",
+              "section_type": "model_artifact",
+              "score": 0.587251
+            },
+            {
+              "evidence_id": "a7c6f1602ea555d5c635417c",
+              "title": "LargeFace_288x288",
+              "snippet": "did: 128413\nrid: 48648\nmodel_name: LargeFace_288x288\nplatform: acl-ascend310-int8",
+              "model_name": "LargeFace_288x288",
+              "section_type": "model_artifact",
+              "score": 0.969083
+            },
+            {
+              "evidence_id": "b33f91b62115352de7ab534d",
+              "title": "PDFs/安防方向-人脸误检分类模型发版记录.pdf p6",
+              "snippet": "KM_classifier_Face_None_Security_3.0.1                                         \n                                                                                    \n                                                                                    \n     release note:...",
+              "section_type": "owner_metadata",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "0b073b37fdae0fe510723ae6",
+              "title": "KM_headpose_nart_acl-ascend710-fp16_b64_1.0.1.model",
+              "snippet": "target_name: 人脸\nalgorithm_type: 属性\nalgorithm_name: 人脸姿态\napplication_scene: 方舟标品\nowner: 马东宇\nmodel_name: KM_headpose_nart_acl-ascend710-fp16_b64_1.0.1.model\nsupported_device: ascend710\nrecommended_config: acl-ascend710-fp16\nlast_updated: 2023-04-13\nlast_updated_month: 2023-04",
+              "model_name": "KM_headpose_nart_acl-ascend710-fp16_b64_1.0.1.model",
+              "algorithm_name": "人脸姿态",
+              "algorithm_type": "属性",
+              "application_scene": "方舟标品",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "2224c139adfad3dcbfcff792",
+              "title": "LargeFace_320x320",
+              "snippet": "did: 131378\nrid: 47339\nmodel_name: LargeFace_320x320\nplatform: acl-ascend710-int8",
+              "model_name": "LargeFace_320x320",
+              "section_type": "model_artifact",
+              "score": 0.969083
+            },
+            {
+              "evidence_id": "1de1624938b0181389f409b7",
+              "title": "PDFs/安防方向--车辆属性大模型更新.pdf p14 table 1",
+              "snippet": "PDF表格: PDFs/安防方向--车辆属性大模型更新.pdf 第14页 表1\n\n|  |  | 2 颜色: vehicle_color = ['灰', '白', '红', '黑', '蓝', '绿', '棕', '黄', '紫', '粉', '青', '橙', '无法判断'] 3 vehicle_color = [\"gray\", \"white\", \"red\", \"black\", \"blue\", \"green\", \"brown\", 4 \"yellow\", \"purple\", \"pink\", \"cyan\", \"orange\", \"vehicle_colo r_agnostic\"] 5 粗分类: vehicle_class = ['轿车', '面包车/MPV', '皮卡', '大卡车', '小卡车', 'SUV', '大客 车', '无法判断', '其他'] 6 vehicle_class =...",
+              "section_type": "accuracy_eval",
+              "score": 0.629372
+            },
+            {
+              "evidence_id": "2e656e26272e6145e914f87e",
+              "title": "车牌颜色类型属性",
+              "snippet": "目标名称: 车牌\n算法类型: 属性\n算法名称: 车牌颜色类型属性\nones发版链接: https://ones.ainewera.com/wiki/#/team/JNwe8qUX/space/GebSt74Y/page/FjTEy9No\n应用场景: V3.0.0，标品\n负责人(人员): 冯江燕\n模型名称: KM_classifier_Carplate_TypeColor_nart_cuda11.4-trt8.4.1-int8-A2_b8_3.0.0.model\nOID: a963c5e5ff181d61ac944b609b192c36ec8f0e46f88efc92279454639a397cbe\n支持设备: A2\n推荐配置: cuda11.4-trt8.4.1-int8-A2\n最近更新时间: 2023/5/30\n最近更新时间-提取年月: 2023年05月\n计数: 0",
+              "model_name": "KM_classifier_Carplate_TypeColor_nart_cuda11.4-trt8.4.1-int8-A2_b8_3.0.0.model",
+              "algorithm_name": "车牌颜色类型属性",
+              "algorithm_type": "属性",
+              "application_scene": "V3.0.0，标品",
+              "section_type": "model_artifact",
+              "score": 0.585915
+            }
+          ]
+        }
+      ]
+    },
+    "llm_messages": [
+      {
+        "role": "system",
+        "content": "你是视觉模型迁移顾问。请基于检索证据生成结构化迁移评估报告。必须区分证据支持和合理推断；证据不足时明确写证据不足，不要编造精度、周期或成本。若可估计成本/周期，只能给区间和依赖前提。只输出 JSON。"
+      },
+      {
+        "role": "user",
+        "content": "{\n  \"user_query\": \"识别“肤色：黑色、白色、黄色”的模型\",\n  \"retrieval_plan\": {\n    \"abstract_requirement\": {\n      \"object\": \"肤色 识别\",\n      \"attribute\": \"黑色 白色 黄色\",\n      \"task_type\": \"模型 搜索\",\n      \"scene\": \"工业视觉\",\n      \"constraints\": [\n        \"不生成幻觉结论\",\n        \"不做结论性回答\"\n      ]\n    },\n    \"retrieve_fields\": [\n      {\n        \"field\": \"existing_models\",\n        \"queries\": [\n          \"肤色 检测 模型 工业视觉\",\n          \"多肤色 识别 分类器 性能比较\"\n        ]\n      },\n      {\n        \"field\": \"similar_capabilities\",\n        \"queries\": [\n          \"肤色分割 像素级 对齐\",\n          \"皮肤 异常检测 缺陷识别\"\n        ]\n      },\n      {\n        \"field\": \"performance_baseline\",\n        \"queries\": [\n          \"肤色 分类 mIoU 精度 数据集\",\n          \"肤色 识别 精度 评估\"\n        ]\n      },\n      {\n        \"field\": \"data_requirements\",\n        \"queries\": [\n          \"肤色 分类 数据 标注 样本大小\",\n          \"肤色 识别 训练数据 采集\"\n        ]\n      }\n    ]\n  },\n  \"field_results\": [\n    {\n      \"field\": \"existing_models\",\n      \"queries\": [\n        \"肤色 检测 模型 工业视觉\",\n        \"多肤色 识别 分类器 性能比较\"\n      ],\n      \"coverage\": \"strong\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"417686bcfbaae66d5736d972\",\n          \"title\": \"PDFs/CommonFace_Gray_0.1.0.pdf p3\",\n          \"snippet\": \"•  模型                                                                        \\n                                                                                    \\n          可检                                                                        \\n          出的                                                                        \\n          最大...\",\n          \"section_type\": \"general\",\n          \"score\": 0.817082\n        },\n        {\n          \"evidence_id\": \"dd622ab3d2c615477dc4f8b1\",\n          \"title\": \"KM_essos_BannerSlogan_960x960_nart_acl-ascend710-fp16_b8_3.0.5.model\",\n          \"snippet\": \"target_name: 横幅\\nalgorithm_type: 检测\\nalgorithm_name: 横幅检测模型\\napplication_scene: 视频巡逻项目\\nowner: 任大发\\nmodel_name: KM_essos_BannerSlogan_960x960_nart_acl-ascend710-fp16_b8_3.0.5.model\\nsupported_device: ascend710\\nrecommended_config: acl-ascend710-fp16\\nlast_updated: 2025-06-26\\nlast_updated_month: 2025-06\",\n          \"model_name\": \"KM_essos_BannerSlogan_960x960_nart_acl-ascend710-fp16_b8_3.0.5.model\",\n          \"algorithm_name\": \"横幅检测模型\",\n          \"algorithm_type\": \"检测\",\n          \"application_scene\": \"视频巡逻项目\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"a7c6f1602ea555d5c635417c\",\n          \"title\": \"LargeFace_288x288\",\n          \"snippet\": \"did: 128413\\nrid: 48648\\nmodel_name: LargeFace_288x288\\nplatform: acl-ascend310-int8\",\n          \"model_name\": \"LargeFace_288x288\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.954623\n        },\n        {\n          \"evidence_id\": \"1f4e04a660d63cb28556b897\",\n          \"title\": \"PDFs/CommonFace_Gray_0.1.0.pdf p3\",\n          \"snippet\": \"512                                                                       \\n       •  模型                                                                        \\n          按照                                                                        \\n          如下...\",\n          \"section_type\": \"general\",\n          \"score\": 0.817082\n        },\n        {\n          \"evidence_id\": \"83807db14b0bbfd44474b7c2\",\n          \"title\": \"KM_essos_BannerSlogan_960x960_nart_acl-ascend310-fp16_b8_3.0.5.model\",\n          \"snippet\": \"target_name: 横幅\\nalgorithm_type: 检测\\nalgorithm_name: 横幅检测模型\\napplication_scene: 视频巡逻项目\\nowner: 任大发\\nmodel_name: KM_essos_BannerSlogan_960x960_nart_acl-ascend310-fp16_b8_3.0.5.model\\nsupported_device: ascend310\\nrecommended_config: acl-ascend310-fp16\\nlast_updated: 2025-06-26\\nlast_updated_month: 2025-06\",\n          \"model_name\": \"KM_essos_BannerSlogan_960x960_nart_acl-ascend310-fp16_b8_3.0.5.model\",\n          \"algorithm_name\": \"横幅检测模型\",\n          \"algorithm_type\": \"检测\",\n          \"application_scene\": \"视频巡逻项目\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"81540bc2e16b5508e7b0bf43\",\n          \"title\": \"LargeFace_256x256\",\n          \"snippet\": \"did: 128437\\nrid: 48669\\nmodel_name: LargeFace_256x256\\nplatform: acl-ascend310-int8\",\n          \"model_name\": \"LargeFace_256x256\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.954623\n        },\n        {\n          \"evidence_id\": \"9ba68f488bf3185775478dd4\",\n          \"title\": \"PDFs/安防方向-人脸模糊3.2.1模型更新.pdf p6 table 1\",\n          \"snippet\": \"PDF表格: PDFs/安防方向-人脸模糊3.2.1模型更新.pdf 第6页 表1\\n\\n|  |  |  |  | blur 3.1.1 |  | blur 3.2.0 |  |  |\\n| --- | --- | --- | --- | --- | --- | --- | --- | --- |\\n|  |  | 模型 |  |  |  |  |  |  |\\n|  | ROC曲线 |  |  |  |  |  |  |  |\\n|  | 分数分布对比 |  |  |  |  |  |  |  |\\n|  |  |  |  | blur 3.1.1 | blur 3.2.0 |  |  |  |\\n|  |  | 模型 |  |  |  |  |  |  |\\n|  | 分数分布 |  |  |  |  |  |  |  |\\n|  | 不同阈值在正负样本上的过滤率 |  |  |  |  |  |  |...\",\n          \"section_type\": \"general\",\n          \"score\": 0.801728\n        },\n        {\n          \"evidence_id\": \"7d46e31c0867251721fe60c5\",\n          \"title\": \"KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model\",\n          \"snippet\": \"target_name: 二维码\\nalgorithm_type: 检测\\nalgorithm_name: 二维码检测模型\\napplication_scene: 网安场景，正方形二维码\\nowner: 龚丽君\\nmodel_name: KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model\\nsupported_device: ascend310\\nrecommended_config: ascend310-fp16\\nlast_updated: 2023-04-07\\nlast_updated_month: 2023-04\",\n          \"model_name\": \"KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model\",\n          \"algorithm_name\": \"二维码检测模型\",\n          \"algorithm_type\": \"检测\",\n          \"application_scene\": \"网安场景，正方形二维码\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        }\n      ]\n    },\n    {\n      \"field\": \"similar_capabilities\",\n      \"queries\": [\n        \"肤色分割 像素级 对齐\",\n        \"皮肤 异常检测 缺陷识别\"\n      ],\n      \"coverage\": \"strong\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"30f6364bd258d2694f252cd0\",\n          \"title\": \"PDFs/CommonFace_Gray_0.1.0.pdf p5\",\n          \"snippet\": \"下                                                                       \\n                                                                                    \\n            的                                                                       \\n            像                                                                       \\n            素...\",\n          \"section_type\": \"general\",\n          \"score\": 0.631044\n        },\n        {\n          \"evidence_id\": \"1599d713acc736d8b89d6978\",\n          \"title\": \"安防方向-人脸二分类\",\n          \"snippet\": \"目标名称: 人脸\\n算法类型: 属性\\n算法名称: 安防方向-人脸二分类\\nones发版链接: https://ones.ainewera.com/wiki/#/team/JNwe8qUX/space/GebSt74Y/page/RxxiLWb8\\n应用场景: 人脸误检分类；V3.0.2\\n负责人(人员): 冯江燕\\n模型名称: KM_classifier_Face_None_Security_nart_cpu-ppl2-fp32_b8_3.0.2.model\\nOID: ca25a1c96c3b3a1bcefed7ea6cbbb85e3b6dc1e957a45619ef0c5b3752d87f22\\n支持设备: cpu\\n推荐配置: cpu-ppl2-fp32\\n最近更新时间: 2025/2/17\\n最近更新时间-提取年月: 2025年02月\\n计数: 0\",\n          \"model_name\": \"KM_classifier_Face_None_Security_nart_cpu-ppl2-fp32_b8_3.0.2.model\",\n          \"algorithm_name\": \"安防方向-人脸二分类\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"人脸误检分类；V3.0.2\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.247046\n        },\n        {\n          \"evidence_id\": \"e70e4d2c66d9aa49bfd41778\",\n          \"title\": \"LargeFace_224x224\",\n          \"snippet\": \"model_name: LargeFace_224x224\\nname: LargeFace_224x224\\nlabel_list: 1\\nlabels: 1\\ntype: essos\\nplatform: acl-ascend710-fp16\\nstatus: SUCCESS\\ndid: 125301\\nrid: 47266\\nversion: 3.0.0\\nversion_train_date: 20250304\\nsource_file: data/LargeFace_224x224-acl-ascend710-fp16_47266_125301.json\",\n          \"model_name\": \"LargeFace_224x224\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.147635\n        },\n        {\n          \"evidence_id\": \"d706ad9809664c416d209620\",\n          \"title\": \"PDFs/安防方向--车辆属性大模型更新.pdf p10\",\n          \"snippet\": \"halnn0.4-stpu-int8（对齐）   vehicle_backup_resize 0.963/0.968\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"fced1321aec1c2c3d9c533c3\",\n          \"title\": \"人脸检测4系列-适配\",\n          \"snippet\": \"目标名称: 人脸\\n算法类型: 检测\\n算法名称: 人脸检测4系列-适配\\nones发版链接: https://ones.ainewera.com/wiki/#/team/JNwe8qUX/space/GebSt74Y/page/XBV2ydxa\\n应用场景: 方舟标品hunter组件，ascend710使用736x1280分辨率，smallface\\n负责人(人员): 任大发\\n模型名称: KM_hunter_SmallFace_Gray_736x1280_nart_acl-ascend310-int8_b16_4.15.3.model\\nOID: 27317486b290adacf1945dfdda67d550b404aad238b0cfe4c12ba5ec2b92305c\\n支持设备: ascend710\\n推荐配置: acl-ascend710-int8\\n最近更新时间: 2025/6/30\\n最近更新...\",\n          \"model_name\": \"KM_hunter_SmallFace_Gray_736x1280_nart_acl-ascend310-int8_b16_4.15.3.model\",\n          \"algorithm_name\": \"人脸检测4系列-适配\",\n          \"algorithm_type\": \"检测\",\n          \"application_scene\": \"方舟标品hunter组件，ascend710使用736x1280分辨率，smallface\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.545259\n        },\n        {\n          \"evidence_id\": \"77a1d95d44fad36c46f46508\",\n          \"title\": \"SmallFace_yolov10n_544x960\",\n          \"snippet\": \"model_name: SmallFace_yolov10n_544x960\\nname: SmallFace_yolov10n_544x960\\nlabel_list: 1\\nlabels: 1\\ntype: essos\\nplatform: acl-ascend710-int8\\nstatus: SUCCESS\\ndid: 124678\\nrid: 46996\\nversion: 0.0.1\\nversion_train_date: 20250304\\nsource_file: data/SmallFace_yolov10n_544x960-acl-ascend710-int8_46996_124678.json\",\n          \"model_name\": \"SmallFace_yolov10n_544x960\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.145737\n        },\n        {\n          \"evidence_id\": \"e72f7dbc36c0c0bb1dd64354\",\n          \"title\": \"PDFs/CommonFace_Gray_0.1.0.pdf p4\",\n          \"snippet\": \"脸                                                                       \\n            >                                                                       \\n            1                                                                       \\n            6                                                                       \\n            像...\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.608668\n        },\n        {\n          \"evidence_id\": \"b9dfd70bbed0d8f27c43be81\",\n          \"title\": \"row 68\",\n          \"snippet\": \"pdf_file: 车辆细分类（四级标签）.pdf\\nurl:  https://ones.ainewera.com/wiki/#/team/JNwe8qUX/space/GebSt74Y/page/AYmGCptp\",\n          \"section_type\": \"general\",\n          \"score\": 1.0\n        }\n      ]\n    },\n    {\n      \"field\": \"performance_baseline\",\n      \"queries\": [\n        \"肤色 分类 mIoU 精度 数据集\",\n        \"肤色 识别 精度 评估\"\n      ],\n      \"coverage\": \"strong\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"1d4107dd8be5f74f932bdc50\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2\",\n          \"snippet\": \"ge/project/3/releaseManage?       \\n     rid=34577&id=3&model_type=classifier&tabName=deployment                        \\n     四、精度性能                                                                         \\n                                                                                    \\n     模型精度...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.82845\n        },\n        {\n          \"evidence_id\": \"c7711b84757a14915a38a72a\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2 table 1\",\n          \"snippet\": \"PDF表格: PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf 第2页 表1\\n\\n表格结构化行:\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model\\nOID: beeb6944bdca2dafd0213251951cc47f829efad2981d7f847010b13f486181c5\\n平台: cuda11.0-trt7.1-fp16-T4\\n\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model\\nOID: fcd2d67fbbaab4fc2064f08ccaf5e6...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.826457\n        },\n        {\n          \"evidence_id\": \"09de649f24bff04033b48267\",\n          \"title\": \"PDFs/安防方向-人脸模糊3.2.1模型更新.pdf p1 table 1\",\n          \"snippet\": \"PDF表格: PDFs/安防方向-人脸模糊3.2.1模型更新.pdf 第1页 表1\\n\\n| 安防方向-人脸模糊3.2.1模型更新 KM_classifier_Face_Blur_Security_3.2.1 release note 1 release date: 2025.7.23 2 owner: gonglijun@sensetime.com 3 highlights: 4 清晰度分数由极端的U型分布变为更合理的0-1之间均匀分布 5 二分类精度提升约20%，清晰度排序准确率提升约4% 6 支持多batch部署 7 模型输出变化： 8 3.1.0/3.1.1输出：{'attribute': {'st_face_blur': {'st_clear': xxx, 'st_blur': xx x}}} 9 3.2.1 输出：{'attribute': {'st_face_blur': {'s...\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.597534\n        },\n        {\n          \"evidence_id\": \"c3df8f567b44bcd3cf139136\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2\",\n          \"snippet\": \"58                  \\n                 without_safetybelt 0.9269   0.9702   0.9481                        \\n     评测平台：cuda11.0-trt7.1-fp16-T4                                                   \\n                                                                                    \\n                                                                                    \\n     模型性能\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.822303\n        },\n        {\n          \"evidence_id\": \"16cd20acc1fdc0c0dbbf9f77\",\n          \"title\": \"PDFs/安防方向--车牌属性.pdf p6\",\n          \"snippet\": \"白牌、                               \\n          黄牌的分类精度                                                                   \\n                                                                                    \\n        ◦ 测试集颜色：黑牌precision69.67%->99.68%(+30.9%)，蓝牌precision84.78%->97.20%         \\n          (+12.42%)，白牌precision60.28%->99.31%(+39.03%)，黄牌precsion55.39%-96.67%...\",\n          \"section_type\": \"accuracy_metric\",\n          \"score\": 0.596023\n        },\n        {\n          \"evidence_id\": \"ae2d10698faed2d83bef2ebd\",\n          \"title\": \"PDFs/安防方向-人脸误检分类模型发版记录.pdf p6\",\n          \"snippet\": \"common测试集                       监控难例测试集                   \\n                                  1-              0-              1-                \\n                  0-                                                                \\n       误报阈值             0-recall precisio 1-recall precisio 0-recall precisio 1-recall\\n                precision...\",\n          \"section_type\": \"accuracy_metric\",\n          \"score\": 0.586307\n        },\n        {\n          \"evidence_id\": \"e8a60fc7574659a8f8ee1686\",\n          \"title\": \"PDFs/横幅标语检测3.0.5-发版.pdf p1\",\n          \"snippet\": \"• owner：fengjiangyan@sensetime.com, rendafa@sensetime.com                     \\n                                                                                    \\n      • Highlights：                                                                 \\n        ◦ 配置：增大模型输入尺寸至960x960...\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.520947\n        },\n        {\n          \"evidence_id\": \"5e2f5ea6226af4b01ada8f75\",\n          \"title\": \"PDFs/安防方向--车牌文字识别-small.pdf p6\",\n          \"snippet\": \"release note：                                                                  \\n                                                                                    \\n      • 发布时间：20230113                                                               \\n                                                                                    \\n      • owner：fengjiangyan@sensetime.com...\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.51446\n        }\n      ]\n    },\n    {\n      \"field\": \"data_requirements\",\n      \"queries\": [\n        \"肤色 分类 数据 标注 样本大小\",\n        \"肤色 识别 训练数据 采集\"\n      ],\n      \"coverage\": \"strong\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"71d9995a5ba5a391cc26ae8d\",\n          \"title\": \"PDFs/安防方向--车辆属性大模型更新.pdf p14\",\n          \"snippet\": \"车辆颜色分类属性ACC/mP：\",\n          \"section_type\": \"general\",\n          \"score\": 0.633433\n        },\n        {\n          \"evidence_id\": \"bd2c34c723743f6611c446a6\",\n          \"title\": \"车牌颜色类型属性\",\n          \"snippet\": \"目标名称: 车牌\\n算法类型: 属性\\n算法名称: 车牌颜色类型属性\\nones发版链接: https://ones.ainewera.com/wiki/#/team/JNwe8qUX/space/GebSt74Y/page/FjTEy9No\\n应用场景: V3.0.0，标品\\n负责人(人员): 冯江燕\\n模型名称: KM_classifier_Carplate_TypeColor_nart_cuda11.0-trt7.1-int8-T4_b8_3.0.0.model\\nOID: 3f0f2e47033ba59078ee90d3baae597c44fc9ac3bd1118f137acbc952816f124\\n支持设备: T4\\n推荐配置: cuda11.0-trt7.1-int8-T4\\n最近更新时间: 2023/5/30\\n最近更新时间-提取年月: 2023年05月\\n计数: 1\",\n          \"model_name\": \"KM_classifier_Carplate_TypeColor_nart_cuda11.0-trt7.1-int8-T4_b8_3.0.0.model\",\n          \"algorithm_name\": \"车牌颜色类型属性\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"V3.0.0，标品\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.587251\n        },\n        {\n          \"evidence_id\": \"a7c6f1602ea555d5c635417c\",\n          \"title\": \"LargeFace_288x288\",\n          \"snippet\": \"did: 128413\\nrid: 48648\\nmodel_name: LargeFace_288x288\\nplatform: acl-ascend310-int8\",\n          \"model_name\": \"LargeFace_288x288\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.969083\n        },\n        {\n          \"evidence_id\": \"b33f91b62115352de7ab534d\",\n          \"title\": \"PDFs/安防方向-人脸误检分类模型发版记录.pdf p6\",\n          \"snippet\": \"KM_classifier_Face_None_Security_3.0.1                                         \\n                                                                                    \\n                                                                                    \\n     release note:...\",\n          \"section_type\": \"owner_metadata\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"0b073b37fdae0fe510723ae6\",\n          \"title\": \"KM_headpose_nart_acl-ascend710-fp16_b64_1.0.1.model\",\n          \"snippet\": \"target_name: 人脸\\nalgorithm_type: 属性\\nalgorithm_name: 人脸姿态\\napplication_scene: 方舟标品\\nowner: 马东宇\\nmodel_name: KM_headpose_nart_acl-ascend710-fp16_b64_1.0.1.model\\nsupported_device: ascend710\\nrecommended_config: acl-ascend710-fp16\\nlast_updated: 2023-04-13\\nlast_updated_month: 2023-04\",\n          \"model_name\": \"KM_headpose_nart_acl-ascend710-fp16_b64_1.0.1.model\",\n          \"algorithm_name\": \"人脸姿态\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"方舟标品\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"2224c139adfad3dcbfcff792\",\n          \"title\": \"LargeFace_320x320\",\n          \"snippet\": \"did: 131378\\nrid: 47339\\nmodel_name: LargeFace_320x320\\nplatform: acl-ascend710-int8\",\n          \"model_name\": \"LargeFace_320x320\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.969083\n        },\n        {\n          \"evidence_id\": \"1de1624938b0181389f409b7\",\n          \"title\": \"PDFs/安防方向--车辆属性大模型更新.pdf p14 table 1\",\n          \"snippet\": \"PDF表格: PDFs/安防方向--车辆属性大模型更新.pdf 第14页 表1\\n\\n|  |  | 2 颜色: vehicle_color = ['灰', '白', '红', '黑', '蓝', '绿', '棕', '黄', '紫', '粉', '青', '橙', '无法判断'] 3 vehicle_color = [\\\"gray\\\", \\\"white\\\", \\\"red\\\", \\\"black\\\", \\\"blue\\\", \\\"green\\\", \\\"brown\\\", 4 \\\"yellow\\\", \\\"purple\\\", \\\"pink\\\", \\\"cyan\\\", \\\"orange\\\", \\\"vehicle_colo r_agnostic\\\"] 5 粗分类: vehicle_class = ['轿车', '面包车/MPV', '皮卡', '大卡车', '小卡车', 'SUV', '大客 车', '无法判断', '其他'] 6 vehicle_class =...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.629372\n        },\n        {\n          \"evidence_id\": \"2e656e26272e6145e914f87e\",\n          \"title\": \"车牌颜色类型属性\",\n          \"snippet\": \"目标名称: 车牌\\n算法类型: 属性\\n算法名称: 车牌颜色类型属性\\nones发版链接: https://ones.ainewera.com/wiki/#/team/JNwe8qUX/space/GebSt74Y/page/FjTEy9No\\n应用场景: V3.0.0，标品\\n负责人(人员): 冯江燕\\n模型名称: KM_classifier_Carplate_TypeColor_nart_cuda11.4-trt8.4.1-int8-A2_b8_3.0.0.model\\nOID: a963c5e5ff181d61ac944b609b192c36ec8f0e46f88efc92279454639a397cbe\\n支持设备: A2\\n推荐配置: cuda11.4-trt8.4.1-int8-A2\\n最近更新时间: 2023/5/30\\n最近更新时间-提取年月: 2023年05月\\n计数: 0\",\n          \"model_name\": \"KM_classifier_Carplate_TypeColor_nart_cuda11.4-trt8.4.1-int8-A2_b8_3.0.0.model\",\n          \"algorithm_name\": \"车牌颜色类型属性\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"V3.0.0，标品\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.585915\n        }\n      ]\n    }\n  ]\n}"
+      }
+    ]
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "session_id": "e8e37abe-80ac-469f-b35e-1728acc8ad8c",
+  "run_stamp": "20260521_145921_9eb51c6e",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-05-21T15:00:30+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"识别头盔颜色（黑、白、灰、红、蓝、黄、绿、紫、迷彩）的香港项目，现有城市结构化人体属性模型是否可直接支持。\",\n  \"direct_match\": {\n    \"exists\": false,\n    \"summary\": \"现有模型仅预置人脸属性与车牌属性模型，且未直接支持头盔颜色类别。头盔属于头部装备，不在常见人脸属性模型的任务定义中。\"\n  ,\n  \"evidence\": [\n    \"人脸属性模型（KM_attribute_face_nart_...）仅支持人脸相关标准属性，未列头盔颜色。\"\n  ]\n},\n\"similar_assets\": [\n  {\n    \"model_or_solution\": \"KM_classifier_Carplate_TypeColor_nart_...\",\n    \"covered_capability\": \"特定目标（车牌）颜色分类模型存在，且支持多色分类。\",\n    \"gap\": \"头盔与车牌（车辆部件）不同，头盔为头部装备。任务目标需从车牌迁移至头盔。\"\n  ,\n  \"evidence\": [\n    \"KM_classifier_Carplate_TypeColor_nart_cuda11.0-trt7.1-int8-T4_b8_6.0.0.model支持车牌颜色分类。\",\n    \"KM_classifier_Carplate_TypeColor_nart_... 模型说明仅保证颜色属性精度，类别分类能力需验证。\"\n  ]\n},\n  {\n    \"model_or_solution\": \"head_det\",\n    \"covered_capability\": \"人群检测中包含 head_det 模型用于头部检测。\",\n    \"gap\": \"仅检测头部位置，不包含头盔颜色识别。\"\n  ,\n  \"evidence\": [\n    \"head_det 模型用于检测头部区域，但未包含颜色属性。\"\n  ]\n},\n  {\n    \"model_or_solution\": \"wearing\",\n    \"covered_capability\": \"人体着装/穿戴检测，可能覆盖头盔。\",\n    \"gap\": \"需验证是否包含头盔颜色属性。\"\n  ,\n  \"evidence\": [\n    \"wearing 模型未明确支持头盔颜色。\"\n  ]\n},\n  {\n    \"model_or_solution\": \"口罩颜色分类（红黄口罩）\",\n    \"covered_capability\": \"存在口罩颜色分类（红黄），多类别颜色属性迁移经验。\",\n    \"gap\": \"头盔颜色类别（9 色 + 迷彩）与口罩类别不匹配，且头盔为佩戴物，衣物/装备与口罩检测属性不同。\"\n  ,\n  \"evidence\": [\n    \"口罩颜色分类优化案例显示多类别颜色集中且类别不平衡，红色/黄色口罩识别提升红色偏差。\"\n  ]\n},\n  {\n    \"model_or_solution\": \"悬浮/异常检测\",\n    \"covered_capability\": \"Shikra-Video-Embedding 视频人体行为检测模型，支持多场景分类。\",\n    \"gap\": \"该模型主要用于检测人物状态、交互行为，不支持头部装备颜色属性。\"\n  ,\n  \"evidence\": [\n    \"Shikra-Video-Embedding 支持行为类判断，如跳舞、运动等，未包含颜色属性检测。\"\n  ]\n},\n  {\n    \"model_or_solution\": \"车牌文字检测\",\n    \"covered_capability\": \"车牌文字检测 ROI 区域精确保含量高，对同区域目标颜色分割有类似能力。\",\n    \"gap\": \"车牌识别要求输入 ROI 长宽比及高度，头盔检测需适配头部形态与姿态。\"\n  ,\n  \"evidence\": [\n    \"车牌文字检测要求 ROI 长宽比 > 2:1 以保证精度。\"\n  ]\n}],\n\"migration_plan\": {\n  \"feasibility\": \"low\",\n  \"approach\": \"需迁移增量：先使用头部分割（head_det 或人脸检测）ROI，再迁移车牌颜色模型聚焦头盔颜色属性。多色类别数量多（9 色 + 迷彩）需重新训练或迁移预热。\"\n  ,\n  \"data_requirements\": \"头盔颜色分类模型需专用头盔数据集，且支持多类别，包括迷彩与深绿/深蓝等采样。现有口罩/车牌样本来剂量小且场景不同（口罩/车辆），迁移需清洗与通信。\"\n  ,\n  \"compute_requirements\": \"head_det 模型在 Ascend/Cuda 环境应具备，颜色分类模型支持 int8/float，同现硬件驱动，但需适配头盔尺寸。\"\n  ,\n  \"engineering_work\": \"需新标注头盔颜色，参与迁移，再微调或重新适配。车牌/口罩模型行为作为参考，但不直接替代。\"\n  ,\n  \"estimated_timeline\": \"2-4 周，依赖数据获取与标注（在港项目时间同步），测试验证（5-7 天）\",\n  \"estimated_cost\": \"区间 ¥10,000-50,000，取决于头部分割/颜色分类模型定制与标注工作量。\"\n  ,\n  \"dependencies\": [\n    \"确认 head_det 或人脸检测模型可过滤头盔区域。\",\n    \"头盔多色类别分布是否覆盖 9 色 + 迷彩。\",\n    \"是否可复用地域标注习惯（如迷彩/深浅色）。\",\n    \"硬件环境是否承载 classIfication 模型（Ascend/Cuda）。\",\n    \"边缘设备推理性能。\"\n  ]\n  ,\n  \"risks\": [\n    \"迁移模型适配头盔维度（变形、遮挡）困难。\",\n    \"头盔种类繁多与高混合背景影响精度。\",\n    \"灯光/阴影/动作干扰\"\n  ]\n},\n\"expected_performance\": {\n  \"baseline\": \"需实测 9 色 + 迷彩在明确光照条件下的准确性。\",\n  \"target\": \"无可靠实验参考。\",\n  \"uncertainty\": \"高\"\n},\n\"recommendation\": \"不建议直接支持，需增量迁移或重新训练。建议：1) 适配头盔检测，2) 先迁移车牌/口罩多色分类模型作为概念参考，3) 小样本测试验证。\"\n}",
+    "structured_output": {
+      "requirement_summary": "识别头盔颜色（黑、白、灰、红、蓝、黄、绿、紫、迷彩）的香港项目，现有城市结构化人体属性模型是否可直接支持。",
+      "direct_match": {
+        "exists": false,
+        "summary": "现有模型仅预置人脸属性与车牌属性模型，且未直接支持头盔颜色类别。头盔属于头部装备，不在常见人脸属性模型的任务定义中。",
+        "evidence": [
+          "人脸属性模型（KM_attribute_face_nart_...）仅支持人脸相关标准属性，未列头盔颜色。"
+        ]
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "KM_classifier_Carplate_TypeColor_nart_...",
+          "covered_capability": "特定目标（车牌）颜色分类模型存在，且支持多色分类。",
+          "gap": "头盔与车牌（车辆部件）不同，头盔为头部装备。任务目标需从车牌迁移至头盔。",
+          "evidence": [
+            "KM_classifier_Carplate_TypeColor_nart_cuda11.0-trt7.1-int8-T4_b8_6.0.0.model支持车牌颜色分类。",
+            "KM_classifier_Carplate_TypeColor_nart_... 模型说明仅保证颜色属性精度，类别分类能力需验证。"
+          ]
+        },
+        {
+          "model_or_solution": "head_det",
+          "covered_capability": "人群检测中包含 head_det 模型用于头部检测。",
+          "gap": "仅检测头部位置，不包含头盔颜色识别。",
+          "evidence": [
+            "head_det 模型用于检测头部区域，但未包含颜色属性。"
+          ]
+        },
+        {
+          "model_or_solution": "wearing",
+          "covered_capability": "人体着装/穿戴检测，可能覆盖头盔。",
+          "gap": "需验证是否包含头盔颜色属性。",
+          "evidence": [
+            "wearing 模型未明确支持头盔颜色。"
+          ]
+        },
+        {
+          "model_or_solution": "口罩颜色分类（红黄口罩）",
+          "covered_capability": "存在口罩颜色分类（红黄），多类别颜色属性迁移经验。",
+          "gap": "头盔颜色类别（9 色 + 迷彩）与口罩类别不匹配，且头盔为佩戴物，衣物/装备与口罩检测属性不同。",
+          "evidence": [
+            "口罩颜色分类优化案例显示多类别颜色集中且类别不平衡，红色/黄色口罩识别提升红色偏差。"
+          ]
+        },
+        {
+          "model_or_solution": "悬浮/异常检测",
+          "covered_capability": "Shikra-Video-Embedding 视频人体行为检测模型，支持多场景分类。",
+          "gap": "该模型主要用于检测人物状态、交互行为，不支持头部装备颜色属性。",
+          "evidence": [
+            "Shikra-Video-Embedding 支持行为类判断，如跳舞、运动等，未包含颜色属性检测。"
+          ]
+        },
+        {
+          "model_or_solution": "车牌文字检测",
+          "covered_capability": "车牌文字检测 ROI 区域精确保含量高，对同区域目标颜色分割有类似能力。",
+          "gap": "车牌识别要求输入 ROI 长宽比及高度，头盔检测需适配头部形态与姿态。",
+          "evidence": [
+            "车牌文字检测要求 ROI 长宽比 > 2:1 以保证精度。"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "low",
+        "approach": "需迁移增量：先使用头部分割（head_det 或人脸检测）ROI，再迁移车牌颜色模型聚焦头盔颜色属性。多色类别数量多（9 色 + 迷彩）需重新训练或迁移预热。",
+        "data_requirements": "头盔颜色分类模型需专用头盔数据集，且支持多类别，包括迷彩与深绿/深蓝等采样。现有口罩/车牌样本来剂量小且场景不同（口罩/车辆），迁移需清洗与通信。",
+        "compute_requirements": "head_det 模型在 Ascend/Cuda 环境应具备，颜色分类模型支持 int8/float，同现硬件驱动，但需适配头盔尺寸。",
+        "engineering_work": "需新标注头盔颜色，参与迁移，再微调或重新适配。车牌/口罩模型行为作为参考，但不直接替代。",
+        "estimated_timeline": "2-4 周，依赖数据获取与标注（在港项目时间同步），测试验证（5-7 天）",
+        "estimated_cost": "区间 ¥10,000-50,000，取决于头部分割/颜色分类模型定制与标注工作量。",
+        "dependencies": [
+          "确认 head_det 或人脸检测模型可过滤头盔区域。",
+          "头盔多色类别分布是否覆盖 9 色 + 迷彩。",
+          "是否可复用地域标注习惯（如迷彩/深浅色）。",
+          "硬件环境是否承载 classIfication 模型（Ascend/Cuda）。",
+          "边缘设备推理性能。"
+        ],
+        "risks": [
+          "迁移模型适配头盔维度（变形、遮挡）困难。",
+          "头盔种类繁多与高混合背景影响精度。",
+          "灯光/阴影/动作干扰"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "需实测 9 色 + 迷彩在明确光照条件下的准确性。",
+        "target": "无可靠实验参考。",
+        "uncertainty": "高"
+      },
+      "recommendation": "不建议直接支持，需增量迁移或重新训练。建议：1) 适配头盔检测，2) 先迁移车牌/口罩多色分类模型作为概念参考，3) 小样本测试验证。"
+    }
+  }
+}

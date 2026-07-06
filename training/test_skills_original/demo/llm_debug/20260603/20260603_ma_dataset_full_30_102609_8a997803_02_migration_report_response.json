@@ -1,0 +1,78 @@
+{
+  "session_id": "ma_dataset_full_30",
+  "run_stamp": "20260603_102609_8a997803",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-06-03T10:27:13+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"客户识别行人是否戴眼镜及款式：无眼镜、太阳镜、透明色\",\n  \"direct_match\": {\n    \"exists\": false,\n    \"summary\": \"无完全匹配的直接模型，现有模型未明确包含行人眼镜款式属性\"\n  ,\"evidence\": [\n    \"检索模型均为二维码、横幅、车牌、旗帜、非机动车、车辆等属性或检测模型，无直接包含'行人眼镜'标签的模型\",\n    \"行人属性相关模型（KM_Classifier_Ped_33of33_2.21.0/2.21.1）标签体系中未包含眼镜属性\"\n  ]\n  },\n  \"similar_assets\": [\n    {\n      \"model_or_solution\": \"行人属性大模型 2.21.0/2.21.1 (KM_Classifier_Ped_33of33)\",\n      \"label_schema\": \"行人 33 个属性，共 174 个类别标签。包含 gender_code, hair_color, st_glove_v2, st_respirator_v2, st_coat_pattern 等，但未明确包含 glass_style\",\n      \"training_data\": \"正常亮度、白天监控场景；目标清晰；无遮挡、截断等\",\n      \"reported_metrics\": \"glass_style 属性在人脸质量模型中存在，精度为 0.967 (Precisio), 0.947 (Recall)\",\n      \"covered_capability\": \"行人属性识别，但眼镜属性仅在人脸模型中出现\",\n      \"gap\": \"行人属性大模型未包含眼镜属性\",\n      \"evidence\": [\n        \"PDFs/行人属性大模型 2.21.0.pdf p1 table 1: 检测类别：行人 33 个属性，共 174 个类别标签\",\n        \"PDFs/行人属性大模型 2.21.0.pdf p4 table 1: glass_style 精度 0.967/0.947 (属于人脸模型部分)\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"人脸质量模型 (PDFs/安防方向 - 人脸质量 3.1.0 模型更新.pdf)\",\n      \"label_schema\": \"眼镜（glass_style）：0-不戴眼镜（glasses_style_none）、1-透明眼镜（transparent_glasses）、2-有色眼镜（sunglasses）\",\n      \"training_data\": \"人脸质量模型训练数据，未详述具体样本量\",\n      \"reported_metrics\": \"文档中仅列出标签定义，未给出具体精度数值\",\n      \"covered_capability\": \"人脸级眼镜款式识别，支持无眼镜、透明眼镜、有色眼镜三种\",\n      \"gap\": \"模型面向人脸，非行人级，可能需结合行人检测模型\",\n      \"evidence\": [\n        \"PDFs/安防方向 - 人脸质量 3.1.0 模型更新.pdf p6: 眼镜（glass_style）：0-不戴眼镜（glasses_style_none）、1-透明眼镜（transparent_glasses）、2-有色眼镜（sunglasses）\"\n      ]\n    }\n  ]\n  ,\n  \"migration_plan\": {\n    \"feasibility\": \"medium\",\n    \"approach\": \"使用人脸质量模型检测眼镜属性，结合行人检测模型（KM_Classifier_Ped_33of33）实现行人眼镜识别\",\n    \"data_requirements\": \"需收集行人级眼镜图片数据，标签定义：无眼镜、透明眼镜、有色眼镜\",\n    \"compute_requirements\": \"Ascend310/710或T4/P4等主流推理平台\",\n    \"engineering_work\": \"需整合行人检测与眼镜识别模块，注意人脸级模型在行人级应用中的精度损失\",\n    \"estimated_timeline\": \"2-4 周\",\n    \"estimated_cost\": \"中等（需定制开发 + 数据标注）\",\n    \"dependencies\": [\n      \"行人检测模型精度（目标大小>60*120像素）\",\n      \"人脸眼镜模型在行人场景的泛化能力\"\n    ]\n  ,\n  \"risks\": [\n    \"人脸级模型在行人检测框内的小人脸场景下可能失效\",\n    \"行人遮挡、姿态对眼镜属性识别影响大\"\n  ]\n  }\n  ,\n  \"expected_performance\": {\n    \"baseline\": \"参考人脸模型 glass_style 精度 0.967/0.947，行人级可能下降至 0.85-0.90\",\n    \"target\": \"0.85+ (Precison), 0.85+ (Recall)\",\n    \"uncertainty\": \"高（取决于行人场景多样性）\"\n  }\n  ,\n  \"recommendation\": \"建议优先采用人脸质量模型 + 行人检测级联方案，验证行人级眼镜识别效果后再考虑训练行人专用眼镜模型\"\n}",
+    "structured_output": {
+      "requirement_summary": "客户识别行人是否戴眼镜及款式：无眼镜、太阳镜、透明色",
+      "direct_match": {
+        "exists": false,
+        "summary": "无完全匹配的直接模型，现有模型未明确包含行人眼镜款式属性",
+        "evidence": [
+          "检索模型均为二维码、横幅、车牌、旗帜、非机动车、车辆等属性或检测模型，无直接包含'行人眼镜'标签的模型",
+          "行人属性相关模型（KM_Classifier_Ped_33of33_2.21.0/2.21.1）标签体系中未包含眼镜属性"
+        ]
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "行人属性大模型 2.21.0/2.21.1 (KM_Classifier_Ped_33of33)",
+          "label_schema": "行人 33 个属性，共 174 个类别标签。包含 gender_code, hair_color, st_glove_v2, st_respirator_v2, st_coat_pattern 等，但未明确包含 glass_style",
+          "training_data": "正常亮度、白天监控场景；目标清晰；无遮挡、截断等",
+          "reported_metrics": "glass_style 属性在人脸质量模型中存在，精度为 0.967 (Precisio), 0.947 (Recall)",
+          "covered_capability": "行人属性识别，但眼镜属性仅在人脸模型中出现",
+          "gap": "行人属性大模型未包含眼镜属性",
+          "evidence": [
+            "PDFs/行人属性大模型 2.21.0.pdf p1 table 1: 检测类别：行人 33 个属性，共 174 个类别标签",
+            "PDFs/行人属性大模型 2.21.0.pdf p4 table 1: glass_style 精度 0.967/0.947 (属于人脸模型部分)"
+          ]
+        },
+        {
+          "model_or_solution": "人脸质量模型 (PDFs/安防方向 - 人脸质量 3.1.0 模型更新.pdf)",
+          "label_schema": "眼镜（glass_style）：0-不戴眼镜（glasses_style_none）、1-透明眼镜（transparent_glasses）、2-有色眼镜（sunglasses）",
+          "training_data": "人脸质量模型训练数据，未详述具体样本量",
+          "reported_metrics": "文档中仅列出标签定义，未给出具体精度数值",
+          "covered_capability": "人脸级眼镜款式识别，支持无眼镜、透明眼镜、有色眼镜三种",
+          "gap": "模型面向人脸，非行人级，可能需结合行人检测模型",
+          "evidence": [
+            "PDFs/安防方向 - 人脸质量 3.1.0 模型更新.pdf p6: 眼镜（glass_style）：0-不戴眼镜（glasses_style_none）、1-透明眼镜（transparent_glasses）、2-有色眼镜（sunglasses）"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "medium",
+        "approach": "使用人脸质量模型检测眼镜属性，结合行人检测模型（KM_Classifier_Ped_33of33）实现行人眼镜识别",
+        "data_requirements": "需收集行人级眼镜图片数据，标签定义：无眼镜、透明眼镜、有色眼镜",
+        "compute_requirements": "Ascend310/710或T4/P4等主流推理平台",
+        "engineering_work": "需整合行人检测与眼镜识别模块，注意人脸级模型在行人级应用中的精度损失",
+        "estimated_timeline": "2-4 周",
+        "estimated_cost": "中等（需定制开发 + 数据标注）",
+        "dependencies": [
+          "行人检测模型精度（目标大小>60*120像素）",
+          "人脸眼镜模型在行人场景的泛化能力"
+        ],
+        "risks": [
+          "人脸级模型在行人检测框内的小人脸场景下可能失效",
+          "行人遮挡、姿态对眼镜属性识别影响大"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "参考人脸模型 glass_style 精度 0.967/0.947，行人级可能下降至 0.85-0.90",
+        "target": "0.85+ (Precison), 0.85+ (Recall)",
+        "uncertainty": "高（取决于行人场景多样性）"
+      },
+      "recommendation": "建议优先采用人脸质量模型 + 行人检测级联方案，验证行人级眼镜识别效果后再考虑训练行人专用眼镜模型"
+    }
+  }
+}

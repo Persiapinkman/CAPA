@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "钓鱼的人",
+    "finish_after_tool": false
+  },
+  "_thought": "用户问题是'这张图里有没有钓鱼的人？先用已有模型试一下。如果不确定，再给客户一个钓鱼人员检测的低成本验证方案。'这是一个典型的'清晰任务 + 降级方案'场景。用户明确提出'先用已有模型试一下'（即执行目标检测，quality check），然后'如果不确定，再给客户一个钓鱼人员检测的低成本验证方案'（即给出迁移/能力边界报告）。根据规划规则，第一步应优先调用直接的检测工具尝试执行，初步执行检测以验证答案。因此，第一步用 qwen_detection 先跑一遍检测结果，若结果不明确后再触发 feeder_id、solution_id 等，允许迁移顾问介入。首先使用 qwen_detection 检测图里是否有钓鱼的人。参数为 label='钓鱼的人'，finish_after_tool=false（因为需要看检测结果再决定走迁移顾问流程）。并设置用 image 进行探针。所以第一步决策为 tool，调用 qwen_detection，finish_after_tool 设为 false。"
+}

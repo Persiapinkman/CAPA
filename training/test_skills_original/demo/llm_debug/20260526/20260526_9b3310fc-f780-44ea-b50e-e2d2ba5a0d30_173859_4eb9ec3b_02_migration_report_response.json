@@ -1,0 +1,103 @@
+{
+  "session_id": "9b3310fc-f780-44ea-b50e-e2d2ba5a0d30",
+  "run_stamp": "20260526_173859_4eb9ec3b",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-05-26T17:40:09+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"识别'头盔是否有花纹'，核心是头盔的属性分类或检测任务，标签为是否花纹（二分类或多分类）。\",\n  \"direct_match\": {\n    \"exists\": false,\n    \"summary\": \"检索到的模型中没有直接匹配'头盔花纹'识别的模型。存在头盔相关模型但聚焦于'安全帽'类型或佩戴状态，而非花纹细节。\"\n  ,\n  \"evidence\": [\n    \"文档中提及 st_helmet_style（头盔）分支，但仅优化了'安全帽'类型，未明确提及花纹。\"\n  ]\n  },\n  \"similar_assets\": [\n    {\n      \"model_or_solution\": \"Classify_3.4.0 (st_helmet_style 分支)\",\n      \"label_schema\": \"类别：头盔样式/类型（如'安全帽'）；取值范围：安全帽（二分类或多分类中的一类）；文档明确提及优化'安全帽'类型图片的召回率。\",\n      \"training_data\": \"来源：HL（High Light，可能指特定场景/数据集）；标注规范：文档未明确说明训练样本量，提及测试集存在且各类别不平衡（红黄口罩案例类推）；证据不足，未提及头盔花纹相关数据。\",\n      \"reported_metrics\": \"ma_安全帽 = 84.07%(+12.01%)，mAP；acc_红黄口罩 = 92.59%(+3.7%)，准确率。测试集未明确说明，但文档提及'推荐阈值表'和'精度评测'表格。\",\n      \"covered_capability\": \"头盔属性识别（安全帽），非花纹。\",\n      \"gap\": \"缺乏头盔花纹类别定义，未提及花纹检测任务。\",\n      \"evidence\": [\n        \"f586a56a911c80497fa3679c\",\n        \"864d157ed16434b83193f000\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"KM_classifier_Ped_ClothBanner (人体状衣二分类)\",\n      \"label_schema\": \"类别：二分类（有醒目大字 vs 无）；取值范围：0/1；应用场景：人体衣物属性。\",\n      \"training_data\": \"来源：HL视频抽帧或特定场景图片；标注规范：二分类，有/无醒目大字；证据不足，未提及头盔相关。\",\n      \"reported_metrics\": \"文档未提供具体指标，仅描述应用场景。\",\n      \"covered_capability\": \"衣物/人体属性识别，二分类任务。\",\n      \"gap\": \"目标对象为人体衣物，非头盔；任务为是否醒目大字，非花纹。\",\n      \"evidence\": [\n        \"574e8a69ac4e1edd855a3cbe\",\n        \"e1ce9c64a50a803497e733aa\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"PDFs/服饰属性模型 (Clothes_SD)\",\n      \"label_schema\": \"类别：服饰属性（如st_jurong_prisoner, st_jurong_police, st_jurong_others）；取值范围：多类别（3类）。\",\n      \"training_data\": \"来源：HL全量数据；样本量：训练集8000张（三类各6000/1500/500），测试集2000张（三类各1000/800/200）；标注规范：三类分类。\",\n      \"reported_metrics\": \"precision=0.9879, recall=0.9462, f1_score=0.9666（V0.0.1）；precision=0.9772, recall=0.9779, f1_score=0.9776（V0.0.2）。\",\n      \"covered_capability\": \"服饰属性分类，多类别任务。\",\n      \"gap\": \"目标对象为服饰，非头盔；任务为属性分类，非花纹。\",\n      \"evidence\": [\n        \"56d8993e619b052c1ed42614\",\n        \"1a436115fa23d43f1bbe061a\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"KM_textrecognition_CarPlate (车牌文字识别)\",\n      \"label_schema\": \"类别：车牌文字（数字/字母/汉字）；任务：文本识别。\",\n      \"training_data\": \"来源：大陆及港澳车牌图片；标注规范：文字转录；证据不足，未提及头盔相关。\",\n      \"reported_metrics\": \"文档未提供具体精度数值，仅描述应用场景。\",\n      \"covered_capability\": \"文本/图案识别，细粒度识别任务。\",\n      \"gap\": \"目标对象为车牌，非头盔；任务为文字识别，非花纹分类。\",\n      \"evidence\": [\n        \"9affabb19036f5d9f85a65bf\"\n      ]\n    }\n  ],\n  \"migration_plan\": {\n    \"feasibility\": \"medium\",\n    \"approach\": \"基于头盔属性分类模型（如Classify_3.4.0 的 st_helmet_style 分支）进行微调，添加'花纹'相关标签；或复用人体衣物花纹/图案识别模型（如Clothes_SD）进行跨域迁移。\",\n    \"data_requirements\": \"需收集头盔图片，标注'有花纹'/'无花纹'（或具体花纹类型），建议至少 2000+ 样本（参考服饰属性模型训练集规模 1 万张，可适度减少但需保证类别平衡）。\",\n    \"compute_requirements\": \"参考 Ascend 310/710 平台部署，训练资源依赖样本量，预估 2-4 张 Ascend 910 卡进行微调。\",\n    \"engineering_work\": \"标签体系调整（新增花纹类别）、模型结构微调（保留主干，调整分类头）、评估指标调整（增加细粒度花纹识别指标）。\"\n  ,\n  \"estimated_timeline\": \"2-4 周（数据准备+模型微调+验证），依赖数据标注速度。\",\n  \"estimated_cost\": \"证据不足，无法提供精确成本，仅预估训练资源（约 1-2 万元/月，基于 Ascend 910 卡时）。\"\n  ,\n  \"dependencies\": [\n    \"头盔花纹标注数据质量\",\n    \"Ascend 或 NVIDIA 硬件资源可用性\",\n    \"现有头盔属性模型代码及权重可用性\"\n  ]\n  ,\n  \"risks\": [\n    \"头盔花纹纹理细微，模型可能需更大输入尺寸（如 512x512 或更高）\",\n    \"测试集样本量可能不足，导致评估结果不可靠\",\n    \"跨域迁移（服饰->头盔）可能带来 domain shift，需针对性调优\"\n  ]\n  }\n  ,\n  \"expected_performance\": {\n    \"baseline\": \"参考'安全帽'类型 mAP 84.07%，花纹识别可能略低（细粒度分类难度较大），预估 mAP 75%-85%。\",\n    \"target\": \"mAP > 80%，recall > 85%（参考现有安全帽指标）\",\n    \"uncertainty\": \"中等，依赖测试集质量和数据多样性。\"\n  }\n  ,\n  \"recommendation\": \"优先选择 Classify_3.4.0 (st_helmet_style 分支) 进行迁移，因其直接涉及头盔属性识别，任务形态最接近；其次考虑服饰属性模型作为辅助参考（用于花纹特征提取）。需注意头盔花纹的细粒度特性，建议增加测试集覆盖不同光照、角度和背景。\"\n}",
+    "structured_output": {
+      "requirement_summary": "识别'头盔是否有花纹'，核心是头盔的属性分类或检测任务，标签为是否花纹（二分类或多分类）。",
+      "direct_match": {
+        "exists": false,
+        "summary": "检索到的模型中没有直接匹配'头盔花纹'识别的模型。存在头盔相关模型但聚焦于'安全帽'类型或佩戴状态，而非花纹细节。",
+        "evidence": [
+          "文档中提及 st_helmet_style（头盔）分支，但仅优化了'安全帽'类型，未明确提及花纹。"
+        ]
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "Classify_3.4.0 (st_helmet_style 分支)",
+          "label_schema": "类别：头盔样式/类型（如'安全帽'）；取值范围：安全帽（二分类或多分类中的一类）；文档明确提及优化'安全帽'类型图片的召回率。",
+          "training_data": "来源：HL（High Light，可能指特定场景/数据集）；标注规范：文档未明确说明训练样本量，提及测试集存在且各类别不平衡（红黄口罩案例类推）；证据不足，未提及头盔花纹相关数据。",
+          "reported_metrics": "ma_安全帽 = 84.07%(+12.01%)，mAP；acc_红黄口罩 = 92.59%(+3.7%)，准确率。测试集未明确说明，但文档提及'推荐阈值表'和'精度评测'表格。",
+          "covered_capability": "头盔属性识别（安全帽），非花纹。",
+          "gap": "缺乏头盔花纹类别定义，未提及花纹检测任务。",
+          "evidence": [
+            "f586a56a911c80497fa3679c",
+            "864d157ed16434b83193f000"
+          ]
+        },
+        {
+          "model_or_solution": "KM_classifier_Ped_ClothBanner (人体状衣二分类)",
+          "label_schema": "类别：二分类（有醒目大字 vs 无）；取值范围：0/1；应用场景：人体衣物属性。",
+          "training_data": "来源：HL视频抽帧或特定场景图片；标注规范：二分类，有/无醒目大字；证据不足，未提及头盔相关。",
+          "reported_metrics": "文档未提供具体指标，仅描述应用场景。",
+          "covered_capability": "衣物/人体属性识别，二分类任务。",
+          "gap": "目标对象为人体衣物，非头盔；任务为是否醒目大字，非花纹。",
+          "evidence": [
+            "574e8a69ac4e1edd855a3cbe",
+            "e1ce9c64a50a803497e733aa"
+          ]
+        },
+        {
+          "model_or_solution": "PDFs/服饰属性模型 (Clothes_SD)",
+          "label_schema": "类别：服饰属性（如st_jurong_prisoner, st_jurong_police, st_jurong_others）；取值范围：多类别（3类）。",
+          "training_data": "来源：HL全量数据；样本量：训练集8000张（三类各6000/1500/500），测试集2000张（三类各1000/800/200）；标注规范：三类分类。",
+          "reported_metrics": "precision=0.9879, recall=0.9462, f1_score=0.9666（V0.0.1）；precision=0.9772, recall=0.9779, f1_score=0.9776（V0.0.2）。",
+          "covered_capability": "服饰属性分类，多类别任务。",
+          "gap": "目标对象为服饰，非头盔；任务为属性分类，非花纹。",
+          "evidence": [
+            "56d8993e619b052c1ed42614",
+            "1a436115fa23d43f1bbe061a"
+          ]
+        },
+        {
+          "model_or_solution": "KM_textrecognition_CarPlate (车牌文字识别)",
+          "label_schema": "类别：车牌文字（数字/字母/汉字）；任务：文本识别。",
+          "training_data": "来源：大陆及港澳车牌图片；标注规范：文字转录；证据不足，未提及头盔相关。",
+          "reported_metrics": "文档未提供具体精度数值，仅描述应用场景。",
+          "covered_capability": "文本/图案识别，细粒度识别任务。",
+          "gap": "目标对象为车牌，非头盔；任务为文字识别，非花纹分类。",
+          "evidence": [
+            "9affabb19036f5d9f85a65bf"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "medium",
+        "approach": "基于头盔属性分类模型（如Classify_3.4.0 的 st_helmet_style 分支）进行微调，添加'花纹'相关标签；或复用人体衣物花纹/图案识别模型（如Clothes_SD）进行跨域迁移。",
+        "data_requirements": "需收集头盔图片，标注'有花纹'/'无花纹'（或具体花纹类型），建议至少 2000+ 样本（参考服饰属性模型训练集规模 1 万张，可适度减少但需保证类别平衡）。",
+        "compute_requirements": "参考 Ascend 310/710 平台部署，训练资源依赖样本量，预估 2-4 张 Ascend 910 卡进行微调。",
+        "engineering_work": "标签体系调整（新增花纹类别）、模型结构微调（保留主干，调整分类头）、评估指标调整（增加细粒度花纹识别指标）。",
+        "estimated_timeline": "2-4 周（数据准备+模型微调+验证），依赖数据标注速度。",
+        "estimated_cost": "证据不足，无法提供精确成本，仅预估训练资源（约 1-2 万元/月，基于 Ascend 910 卡时）。",
+        "dependencies": [
+          "头盔花纹标注数据质量",
+          "Ascend 或 NVIDIA 硬件资源可用性",
+          "现有头盔属性模型代码及权重可用性"
+        ],
+        "risks": [
+          "头盔花纹纹理细微，模型可能需更大输入尺寸（如 512x512 或更高）",
+          "测试集样本量可能不足，导致评估结果不可靠",
+          "跨域迁移（服饰->头盔）可能带来 domain shift，需针对性调优"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "参考'安全帽'类型 mAP 84.07%，花纹识别可能略低（细粒度分类难度较大），预估 mAP 75%-85%。",
+        "target": "mAP > 80%，recall > 85%（参考现有安全帽指标）",
+        "uncertainty": "中等，依赖测试集质量和数据多样性。"
+      },
+      "recommendation": "优先选择 Classify_3.4.0 (st_helmet_style 分支) 进行迁移，因其直接涉及头盔属性识别，任务形态最接近；其次考虑服饰属性模型作为辅助参考（用于花纹特征提取）。需注意头盔花纹的细粒度特性，建议增加测试集覆盖不同光照、角度和背景。"
+    }
+  }
+}

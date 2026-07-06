@@ -1,0 +1,11 @@
+{
+  "session_id": "548dba2b-b379-4b28-9d40-d1c33c6ebade",
+  "run_stamp": "20260520_121526_e7b3ffda",
+  "stage": "planner_response",
+  "step_index": 1,
+  "created_at": "2026-05-20T12:15:28+08:00",
+  "payload": {
+    "raw_response": "{\"thought\":\"用户询问监控画面中行人发型分类检测用什么模型。这是一个关于具体检测方案/业务知识的查询，需要检索企业内部知识库中关于行人检测、发型分类模型、监控场景部署方案等文档。根据决策原则，知识检索（rag_answer）是首选工具。\",\"decision_type\":\"tool\",\"action\":\"rag_answer\",\"action_input\":{\"query\":\"监控画面中要判断行人“短发、长发、光头、其他”，用什么检测模型\",\"finish_after_tool\":true},\"final_answer\":\"\"}",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260520_121526_e7b3ffda"
+  }
+}

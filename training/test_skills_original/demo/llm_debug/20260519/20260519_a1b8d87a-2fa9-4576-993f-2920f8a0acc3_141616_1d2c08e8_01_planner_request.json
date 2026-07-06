@@ -1,0 +1,133 @@
+{
+  "session_id": "a1b8d87a-2fa9-4576-993f-2920f8a0acc3",
+  "run_stamp": "20260519_141616_1d2c08e8",
+  "stage": "planner_request",
+  "step_index": 1,
+  "created_at": "2026-05-19T14:16:17+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "agent_step_decision",
+        "strict": true,
+        "schema": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "thought": {
+                  "type": "string",
+                  "description": "当前回合的分析与计划，中文，简洁但要说明为什么选择该动作。"
+                },
+                "decision_type": {
+                  "type": "string",
+                  "const": "tool",
+                  "description": "本轮决策类型：tool(执行动作)。"
+                },
+                "action": {
+                  "type": "string",
+                  "enum": [
+                    "rag_answer",
+                    "re_question",
+                    "answerer",
+                    "flux-image-generation",
+                    "qwen_detection",
+                    "rexomni_detection",
+                    "pipeline_eval",
+                    "adela_cli_eval"
+                  ],
+                  "description": "本轮要执行的工具动作。"
+                },
+                "action_input": {
+                  "type": "object",
+                  "description": "对应工具入参；tool 模式下必须提供。"
+                },
+                "final_answer": {
+                  "type": "string",
+                  "description": "tool 模式下通常为空字符串，可省略。"
+                }
+              },
+              "required": [
+                "thought",
+                "decision_type",
+                "action",
+                "action_input"
+              ]
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "thought": {
+                  "type": "string",
+                  "description": "当前回合的分析与计划，中文，简洁但要说明为什么结束。"
+                },
+                "decision_type": {
+                  "type": "string",
+                  "const": "end",
+                  "description": "本轮决策类型：end(结束该轮次的任务)。"
+                },
+                "end_reason": {
+                  "type": "string",
+                  "enum": [
+                    "recheck_done",
+                    "memory_hit"
+                  ],
+                  "description": "结束原因：recheck_done / memory_hit。"
+                },
+                "final_answer": {
+                  "type": "string",
+                  "description": "当 end 且无需再调用 Answerer 时，可直接填写最终答复；否则通常为空字符串。"
+                }
+              },
+              "required": [
+                "thought",
+                "decision_type",
+                "end_reason",
+                "final_answer"
+              ]
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "thought": {
+                  "type": "string",
+                  "description": "当前回合的分析与计划，中文，简洁说明为何需要向用户澄清。"
+                },
+                "decision_type": {
+                  "type": "string",
+                  "const": "clarify",
+                  "description": "本轮决策类型：clarify(向用户追问澄清)。"
+                },
+                "clarification_question": {
+                  "type": "string",
+                  "description": "直接发给用户的澄清问题，中文，单轮可回答。"
+                }
+              },
+              "required": [
+                "thought",
+                "decision_type",
+                "clarification_question"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "image_paths": [],
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 Demo 系统中的规划智能体（Planner）。\n\n【角色与核心目标】\n你是一个专注于“下一步决策”的 Agent 规划中枢。\n你必须基于当前上下文环境，严格遵循 ReAct 模式（Thought -> Action -> Action Input），并在满足条件时及时结束任务。\n\n【决策与路由原则】\n1. 知识检索 (rag_answer)：当问题涉及企业规范、业务文档、标准指标等具体事实，首选本工具。\n2. 通用问答 (answerer)：仅用于通用常识和闲聊，或无需检索即可直接解答的场景。\n3. 目标检测和评测工具（qwendetect/rexomnidetect/evalpipeline）：必须确保前置条件（如存在明确的目标描述及 image_path）：detect工具用于执行目标检测；eval工具用于端到端的图片数据生成扩增、目标检测和评估\n4. 生图工具（flux image generation）：用于生成图片。\n5. 补充追问：若当前记忆（Memory）仅为摘要，缺少回答所需的具体细节，必须继续调用工具，切勿草率结束。\n6. 指代改写优先：若当前 query 出现“这个/该/其/上述/it/this”等指代，且 query_trajectories 中有可参考的历史问题，优先选择 re_question 做实体补全，再进入 rag_answer。\n7. 示例：历史 query = “安全绳检测用什么模型？”，当前 query = “这个模型的精度如何？”；应先调用 re_question，将 query 改写为“安全绳检测模型的精度如何”。\n8. 语义歧义优先澄清：若用户意图存在多种高概率解释，且不同解释会导致完全不同的工具路径，必须输出 decision_type=\"clarify\" 向用户反问，而不是擅自猜测。\n9. 例如“黑夜检测黑猫”可能表示：\n   - 对上传图片做目标检测；\n   - 生成“黑夜里的黑猫”图片；\n   - 查询黑猫夜间检测方案；\n   这种情况下必须先澄清。\n10. 若你已确定要使用某个工具，但用户提供的参数不完整，不要输出 decision_type=\"clarify\"，而是直接输出 decision_type=\"tool\"，在 action_input 中填入已知参数，缺失的留空字符串。系统会自动检测缺失项并向用户追问。clarify 仅用于\"用户意图不明确、无法判断该用哪个工具\"的场景。\n\n【状态流转规则 (finish_after_tool)】\n当 decision_type = \"tool\" 时，你必须在 action_input 中设置 finish_after_tool（布尔值）：\n- 设置为 true：若该工具的输出结果已直接解答了用户的终极问题，不需要你再做后续加工。\n- 设置为 false：若该工具仅获取中间信息（如生成了图片还需要评测），你还需要根据它的返回结果来规划下一步。\n\n【全局硬约束】\n1. 绝对忠实：禁止捏造任何事实、工具结果或不存在的上下文。\n2. 纯净思考：thought 字段必须使用纯中文，简明扼要说明本次决策原因。\n3. 严格结束：当 decision_type=\"end\" 时，必须只使用以下两种 end_reason：\n   - recheck_done：表示仅用于收口复核，不需要给用户任何新增输出。\n   - memory_hit：表示之前调用过工具，Memory 中有结果，后续由系统调用 Answerer 生成答复。\n4. 当 decision_type=\"end\" 时：\n   - 不要输出 action；\n   - 不要输出 action_input；\n   - 必须输出 end_reason；\n   - final_answer 若交给系统后续生成，填空字符串 \"\"。\n5. 当 decision_type=\"tool\" 时：\n   - 必须输出 action；\n   - 必须输出 action_input；\n   - 不要输出 end_reason；\n   - final_answer 可省略，或填空字符串 \"\"。\n6. 当 decision_type=\"clarify\" 时：\n   - 不要输出 action；\n   - 不要输出 action_input；\n   - 不要输出 end_reason；\n   - 必须输出 clarification_question；\n   - clarification_question 要让用户一轮就能补齐关键歧义。\n\n【工具库】\n[\n  {\n    \"name\": \"rag_answer\",\n    \"description\": \"适合用**知识库 / RAG 检索**回答的问题：如公司内部私有业务知识、项目文档、模型版本、标签含义、safety_rope 等业务与配置类问答；不适用于已在问题中写明 Adela 类部署平台标识（如 cuda*-trt*-*）并追问该模型在该平台上的精度、性能或 benchmark 数值的场景，此类应使用 adela_cli_eval。\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"query\": {\n          \"type\": \"string\",\n          \"description\": \"完全使用“用户原始输入”\"\n        },\n        \"finish_after_tool\": {\n          \"type\": \"boolean\",\n          \"description\": \"该工具执行完成后是否可以直接结束本轮请求。若工具结果只是中间状态、后续还要继续规划其它工具，则填 false；若该工具结果就是用户要的最终结果，则填 true。\"\n        }\n      },\n      \"required\": [\n        \"query\"\n      ]\n    }\n  },\n  {\n    \"name\": \"re_question\",\n    \"description\": \"在 RAG 未命中时，针对当前问题进行小步改写后继续检索。当问题含有指代（如“这个模型/它/上述方案”）或表述过短导致检索不稳定时，先调用 re_question 做实体补全与最小改写，再交给 rag_answer。示例：历史问题“安全绳检测用什么模型？”，当前问题“这个模型的精度如何？” -> 改写为“安全绳检测模型的精度如何”。\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"query\": {\n          \"type\": \"string\",\n          \"description\": \"待改写的原始查询（通常为用户问题或上一轮查询）。\"\n        },\n        \"rewrite_reason\": {\n          \"type\": \"string\",\n          \"description\": \"改写原因（如 rag_miss / coref_resolve / narrow_scope）。\"\n        },\n        \"retrieval_round\": {\n          \"type\": \"integer\",\n          \"minimum\": 1,\n          \"maximum\": 3,\n          \"description\": \"当前检索轮次（1~3）。\"\n        },\n        \"context_hint\": {\n          \"type\": \"string\",\n          \"description\": \"可选上下文提示，用于指代消解（例如上一问中的实体）。\"\n        },\n        \"finish_after_tool\": {\n          \"type\": \"boolean\",\n          \"description\": \"该工具执行完成后是否可以直接结束本轮请求。若工具结果只是中间状态、后续还要继续规划其它工具，则填 false；若该工具结果就是用户要的最终结果，则填 true。\"\n        }\n      },\n      \"required\": [\n        \"query\",\n        \"rewrite_reason\",\n        \"retrieval_round\"\n      ]\n    }\n  },\n  {\n    \"name\": \"answerer\",\n    \"description\": \"无需查阅公司内部文档的问题，比如：苹果是当季水果吗\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"mode\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"direct\",\n            \"rag_evidence\",\n            \"memoryquery_trajectories\"\n          ],\n          \"description\": \"direct=通用知识直接回答；rag_evidence=主要依据 evidence.retrieved_chunks（可含 RAG 未命中时的弱证据）；memoryquery_trajectories=主要依据 evidence.query_trajectories。\"\n        },\n        \"finish_after_tool\": {\n          \"type\": \"boolean\",\n          \"description\": \"该工具执行完成后是否可以直接结束本轮请求。若工具结果只是中间状态、后续还要继续规划其它工具，则填 false；若该工具结果就是用户要的最终结果，则填 true。\"\n        }\n      },\n      \"required\": []\n    }\n  },\n  {\n    \"name\": \"flux-image-generation\",\n    \"description\": \"图像生成工具。可纯文本生成，也可结合参考图进行变化生成。\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"task_text\": {\n          \"type\": \"string\"\n        },\n        \"source_image_required\": {\n          \"type\": \"boolean\"\n        },\n        \"num_images\": {\n          \"type\": \"integer\",\n          \"minimum\": 1,\n          \"maximum\": 5\n        },\n        \"finish_after_tool\": {\n          \"type\": \"boolean\",\n          \"description\": \"该工具执行完成后是否可以直接结束本轮请求。若工具结果只是中间状态、后续还要继续规划其它工具，则填 false；若该工具结果就是用户要的最终结果，则填 true。\"\n        }\n      },\n      \"required\": [\n        \"task_text\",\n        \"source_image_required\",\n        \"num_images\"\n      ]\n    }\n  },\n  {\n    \"name\": \"qwen_detection\",\n    \"description\": \"适用于检测目标的任务 Qwen。\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"label\": {\n          \"type\": \"string\"\n        },\n        \"finish_after_tool\": {\n          \"type\": \"boolean\",\n          \"description\": \"该工具执行完成后是否可以直接结束本轮请求。若工具结果只是中间状态、后续还要继续规划其它工具，则填 false；若该工具结果就是用户要的最终结果，则填 true。\"\n        }\n      },\n      \"required\": [\n        \"label\"\n      ]\n    }\n  },\n  {\n    \"name\": \"rexomni_detection\",\n    \"description\": \"适用于检测目标的任务 Rex-Omni\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"label\": {\n          \"type\": \"string\"\n        },\n        \"finish_after_tool\": {\n          \"type\": \"boolean\",\n          \"description\": \"该工具执行完成后是否可以直接结束本轮请求。若工具结果只是中间状态、后续还要继续规划其它工具，则填 false；若该工具结果就是用户要的最终结果，则填 true。\"\n        }\n      },\n      \"required\": [\n        \"label\"\n      ]\n    }\n  },\n  {\n    \"name\": \"pipeline_eval\",\n    \"description\": \"完整目标检测评测流水线：图片生成 - 分别使用 Qwen 和 Rex-Omni 进行标注 - 评估模型检测效果\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"task_text\": {\n          \"type\": \"string\"\n        },\n        \"finish_after_tool\": {\n          \"type\": \"boolean\",\n          \"description\": \"该工具执行完成后是否可以直接结束本轮请求。若工具结果只是中间状态、后续还要继续规划其它工具，则填 false；若该工具结果就是用户要的最终结果，则填 true。\"\n        }\n      },\n      \"required\": [\n        \"task_text\"\n      ]\n    }\n  },\n  {\n    \"name\": \"adela_cli_eval\",\n    \"description\": \"用于在 Adela 上对指定模型与部署平台执行部署与 benchmark 评测。典型场景：已知或可从知识库解析的模型名/rawmodel_id，搭配具体平台串（如 cuda11.0-trt7.1-fp32-T4），询问该模型在该平台上的精度（eval_type=0）或性能（eval_type=1）。仅填 model_name 时，系统会在工具内先经 RAG 解析出 rawmodel_id，再调用 Adela CLI，不要改用 rag_answer 单独回答此类问题。\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"model_name\": {\n          \"type\": \"string\",\n          \"description\": \"Adela 上的模型名称。若未提供 rawmodel_id，可先提供该字段让系统通过 RAG 解析模型 ID。禁止自己编造\"\n        },\n        \"rawmodel_id\": {\n          \"type\": \"integer\",\n          \"description\": \"Adela 原模型 ID。\"\n        },\n        \"platform\": {\n          \"type\": \"string\",\n          \"description\": \"目标部署平台，例如 cuda11.0-trt7.1-int8-T4。在用户未提供该类信息的时候，禁止编造\"\n        },\n        \"eval_type\": {\n          \"type\": \"integer\",\n          \"enum\": [\n            0,\n            1\n          ],\n          \"description\": \"0=精度评测，1=性能评测。在用户未提供该类信息的时候，禁止编造\"\n        },\n        \"finish_after_tool\": {\n          \"type\": \"boolean\",\n          \"description\": \"该工具执行完成后是否可以直接结束本轮请求。若工具结果只是中间状态、后续还要继续规划其它工具，则填 false；若该工具结果就是用户要的最终结果，则填 true。\"\n        }\n      },\n      \"required\": [\n        \"platform\",\n        \"eval_type\"\n      ]\n    }\n  }\n]\n\n"
+      },
+      {
+        "role": "user",
+        "content": "请基于下面的结构化上下文决定下一步，只输出符合 schema 的 JSON。\n\n{\n  \"query\": \"检测电子元器异常，用什么模型？\",\n  \"query_trajectories\": [\n    {\n      \"session_id\": \"a1b8d87a-2fa9-4576-993f-2920f8a0acc3\",\n      \"thread_id\": \"thread_b6d8c93a4ef56190\",\n      \"query_id\": \"qry_f70f911a4ba82760\",\n      \"query\": \"检测电子元器异常，用什么模型？\",\n      \"result_summary\": \"\",\n      \"steps\": []\n    }\n  ]\n}"
+      }
+    ],
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260519_141616_1d2c08e8"
+  }
+}

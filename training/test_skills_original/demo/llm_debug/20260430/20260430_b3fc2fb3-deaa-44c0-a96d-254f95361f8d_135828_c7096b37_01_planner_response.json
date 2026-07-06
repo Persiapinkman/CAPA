@@ -1,0 +1,11 @@
+{
+  "session_id": "b3fc2fb3-deaa-44c0-a96d-254f95361f8d",
+  "run_stamp": "20260430_135828_c7096b37",
+  "stage": "planner_response",
+  "step_index": 1,
+  "created_at": "2026-04-30T13:58:29+08:00",
+  "payload": {
+    "raw_response": "{\n  \"thought\": \"用户已经补充说明检测内容为'烟花'。当前 query 已明确目标，无需进一步澄清。根据工具库，需要调用目标检测工具。由于是检测'烟花'这一特定目标，且没有说明需要生成图片，应选择目标检测工具。在 qwen_detection 和 rexomni_detection 中，选择 qwen_detection 作为检测目标的任务工具。finish_after_tool 设为 true，因为检测结果是最终输出。\",\n  \"decision_type\": \"tool\",\n  \"action\": \"qwen_detection\",\n  \"action_input\": {\n    \"label\": \"烟花\",\n    \"finish_after_tool\": true\n  },\n  \"final_answer\": \"\"\n}",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260430_135828_c7096b37"
+  }
+}

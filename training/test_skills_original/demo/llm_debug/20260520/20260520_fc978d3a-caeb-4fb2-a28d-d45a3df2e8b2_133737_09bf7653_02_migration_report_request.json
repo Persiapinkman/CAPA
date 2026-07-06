@@ -1,0 +1,404 @@
+{
+  "session_id": "fc978d3a-caeb-4fb2-a28d-d45a3df2e8b2",
+  "run_stamp": "20260520_133737_09bf7653",
+  "stage": "migration_report_request",
+  "step_index": 2,
+  "created_at": "2026-05-20T13:39:07+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260520_133737_09bf7653",
+    "input_schema": {
+      "user_query": "用户原始问题",
+      "retrieval_plan": "上一步检索规划（abstract_requirement + retrieve_fields）",
+      "field_results": "playbook 分字段检索结果：field, queries, coverage, evidence[]"
+    },
+    "evidence_item_fields": [
+      "evidence_id",
+      "title",
+      "snippet",
+      "model_name",
+      "algorithm_name",
+      "algorithm_type",
+      "application_scene",
+      "section_type",
+      "score"
+    ],
+    "structured_input": {
+      "user_query": "客户要求区分帽子款式，包括渔夫帽、无檐帽、鸭舌帽、安全帽、open-face helmet、full-face helmet、连衣帽，用什么模型？",
+      "retrieval_plan": {
+        "abstract_requirement": {
+          "object": "帽子款式识别",
+          "attribute": "fisherman_hat, no_brim, baseball, hard_hat, open_face_helmet, full_face_helmet, hooded_hat",
+          "task_type": "multi_class_classification",
+          "scene": "humanwear_visual_inspection",
+          "constraints": [
+            "distinct_styles",
+            "category_label"
+          ]
+        },
+        "retrieve_fields": [
+          {
+            "field": "existing_models",
+            "queries": [
+              "classify baseball hard_hat helmet finger_test model",
+              "fisherman_hat_multi_label_visual_model classification",
+              "clothing_hat_style_classification model reuse",
+              "safety_headwear_visual_classifier existing model"
+            ]
+          },
+          {
+            "field": "similar_capabilities",
+            "queries": [
+              "person_headwear_style_detection transfer model",
+              "appetite_band_detection model similar based",
+              "wearable_attribute_classifier capability",
+              "human_object_detection can be adapted"
+            ]
+          },
+          {
+            "field": "performance_baseline",
+            "queries": [
+              "hat_style_accuracy_wall_detect_baseline",
+              "headwear_classifier mAP IoU evaluation",
+              "visual_category_classification model performance",
+              "fewshot_visual_model benchmark"
+            ]
+          },
+          {
+            "field": "data_requirements",
+            "queries": [
+              "headwear_dataset labeling standard annotation_needs",
+              "hat_style_data_collection and visualize samples needed",
+              "multiheadwear_classifier training data ratio",
+              "sample_visual_inspection data requirement"
+            ]
+          }
+        ]
+      },
+      "field_results": [
+        {
+          "field": "existing_models",
+          "queries": [
+            "classify baseball hard_hat helmet finger_test model",
+            "fisherman_hat_multi_label_visual_model classification",
+            "clothing_hat_style_classification model reuse",
+            "safety_headwear_visual_classifier existing model"
+          ],
+          "coverage": "strong",
+          "evidence": [
+            {
+              "evidence_id": "262acb557aca54acb5870581",
+              "title": "KM_classifier_video_classify_nart_acl-ascend310-fp16_b16_1.1.0.model",
+              "snippet": "target_name: 视频内容\nalgorithm_type: 属性\nalgorithm_name: 影视剧、新闻、游戏、卡通分类模型\napplication_scene: V1.1.0\nowner: 龚丽君\nmodel_name: KM_classifier_video_classify_nart_acl-ascend310-fp16_b16_1.1.0.model\nsupported_device: ascend310\nrecommended_config: ascend310-fp16\nlast_updated: 2023-05-30\nlast_updated_month: 2023-05",
+              "model_name": "KM_classifier_video_classify_nart_acl-ascend310-fp16_b16_1.1.0.model",
+              "algorithm_name": "影视剧、新闻、游戏、卡通分类模型",
+              "algorithm_type": "属性",
+              "application_scene": "V1.1.0",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "5d76e67ace9d1745732d9057",
+              "title": "PAR_merged_model",
+              "snippet": "model_name: PAR_merged_model\nname: PAR_merged_model\ntype: classifier\nplatform: cuda10.0-nart-fp32\nstatus: SUCCESS\ndid: 102249\nrid: 36933\nversion: 1.0.0\nversion_train_date: 20240301\nsource_file: data/PAR_merged_model-cuda10.0-nart-fp32_36933_102249.json",
+              "model_name": "PAR_merged_model",
+              "section_type": "release_note",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "4b772095050ca04651c380d5",
+              "title": "KM_classifier_video_classify_nart_acl-ascend710-fp16_b16_1.1.0.model",
+              "snippet": "target_name: 视频内容\nalgorithm_type: 属性\nalgorithm_name: 影视剧、新闻、游戏、卡通分类模型\napplication_scene: V1.1.0\nowner: 龚丽君\nmodel_name: KM_classifier_video_classify_nart_acl-ascend710-fp16_b16_1.1.0.model\nsupported_device: ascend710\nrecommended_config: ascend710-fp16\nlast_updated: 2023-05-30\nlast_updated_month: 2023-05",
+              "model_name": "KM_classifier_video_classify_nart_acl-ascend710-fp16_b16_1.1.0.model",
+              "algorithm_name": "影视剧、新闻、游戏、卡通分类模型",
+              "algorithm_type": "属性",
+              "application_scene": "V1.1.0",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "be542d9e836f2f5a8c82fda0",
+              "title": "PAR_merged_model",
+              "snippet": "model_name: PAR_merged_model\nname: PAR_merged_model\ntype: classifier\nplatform: cuda11.0-trt7.1-int8-P4\nstatus: SUCCESS\ndid: 102246\nrid: 36932\nversion: 1.0.0\nversion_train_date: 20240301\nsource_file: data/PAR_merged_model-cuda11.0-trt7.1-int8-P4_36932_102246.json",
+              "model_name": "PAR_merged_model",
+              "section_type": "release_note",
+              "score": 0.767515
+            },
+            {
+              "evidence_id": "71d3e0aab14227291c88cf56",
+              "title": "KM_classifier_video_classify_nart_cuda11.0-trt7.1-fp16-T4_b16_1.1.0.model",
+              "snippet": "target_name: 视频内容\nalgorithm_type: 属性\nalgorithm_name: 影视剧、新闻、游戏、卡通分类模型\napplication_scene: V1.1.0\nowner: 龚丽君\nmodel_name: KM_classifier_video_classify_nart_cuda11.0-trt7.1-fp16-T4_b16_1.1.0.model\nsupported_device: T4\nrecommended_config: cuda11.0-trt7.1-fp16-T4\nlast_updated: 2023-05-30\nlast_updated_month: 2023-05",
+              "model_name": "KM_classifier_video_classify_nart_cuda11.0-trt7.1-fp16-T4_b16_1.1.0.model",
+              "algorithm_name": "影视剧、新闻、游戏、卡通分类模型",
+              "algorithm_type": "属性",
+              "application_scene": "V1.1.0",
+              "section_type": "model_artifact",
+              "score": 0.989795
+            },
+            {
+              "evidence_id": "cb65cdef3571f8e586a95e1c",
+              "title": "PAR_merged_model",
+              "snippet": "model_name: PAR_merged_model\nname: PAR_merged_model\ntype: classifier\nplatform: cuda11.0-trt7.1-int8-T4\nstatus: SUCCESS\ndid: 102248\nrid: 36933\nversion: 1.0.0\nversion_train_date: 20240301\nsource_file: data/PAR_merged_model-cuda11.0-trt7.1-int8-T4_36933_102248.json",
+              "model_name": "PAR_merged_model",
+              "section_type": "release_note",
+              "score": 0.765006
+            },
+            {
+              "evidence_id": "42de4c5076863449d821f5d5",
+              "title": "KM_classifier_Ped_33of33_nart_acl-ascend310-fp16_b16_2.21.1.model",
+              "snippet": "target_name: 黄手套\nalgorithm_type: 属性\nalgorithm_name: 中车工厂-属性模型2\napplication_scene: 中车工厂项目\nowner: 朱帅\nmodel_name: KM_classifier_Ped_33of33_nart_acl-ascend310-fp16_b16_2.21.1.model\nsupported_device: ascend310\nrecommended_config: acl-ascend310-fp16\nlast_updated: 2023-09-12\nlast_updated_month: 2023-09",
+              "model_name": "KM_classifier_Ped_33of33_nart_acl-ascend310-fp16_b16_2.21.1.model",
+              "algorithm_name": "中车工厂-属性模型2",
+              "algorithm_type": "属性",
+              "application_scene": "中车工厂项目",
+              "section_type": "model_artifact",
+              "score": 0.146405
+            },
+            {
+              "evidence_id": "f53d026649b58ea0fecf243a",
+              "title": "PAR_merged_model",
+              "snippet": "model_name: PAR_merged_model\nname: PAR_merged_model\ntype: classifier\nplatform: cpu-ppl2-fp32\nstatus: SUCCESS\ndid: 102019\nrid: 36860\nversion: 1.0.0\nversion_train_date: 20240228\nsource_file: data/PAR_merged_model-cpu-ppl2-fp32_36860_102019.json",
+              "model_name": "PAR_merged_model",
+              "section_type": "model_artifact",
+              "score": 0.212958
+            }
+          ]
+        },
+        {
+          "field": "similar_capabilities",
+          "queries": [
+            "person_headwear_style_detection transfer model",
+            "appetite_band_detection model similar based",
+            "wearable_attribute_classifier capability",
+            "human_object_detection can be adapted"
+          ],
+          "coverage": "strong",
+          "evidence": [
+            {
+              "evidence_id": "23318a7afa50126f79400960",
+              "title": "KM_classifier_Clothes_SD_nart_acl-ascend710-fp16_b8_0.0.2.model",
+              "snippet": "target_name: 人体\nalgorithm_type: 属性\nalgorithm_name: SDJY 服饰分类\napplication_scene: 山东监狱人体服饰分类\nowner: 冯江燕\nmodel_name: KM_classifier_Clothes_SD_nart_acl-ascend710-fp16_b8_0.0.2.model\nsupported_device: ascend710\nrecommended_config: ascend710-fp16\nlast_updated: 2026-01-05\nlast_updated_month: 2026-01",
+              "model_name": "KM_classifier_Clothes_SD_nart_acl-ascend710-fp16_b8_0.0.2.model",
+              "algorithm_name": "SDJY 服饰分类",
+              "algorithm_type": "属性",
+              "application_scene": "山东监狱人体服饰分类",
+              "section_type": "model_artifact",
+              "score": 0.995772
+            },
+            {
+              "evidence_id": "cb65cdef3571f8e586a95e1c",
+              "title": "PAR_merged_model",
+              "snippet": "model_name: PAR_merged_model\nname: PAR_merged_model\ntype: classifier\nplatform: cuda11.0-trt7.1-int8-T4\nstatus: SUCCESS\ndid: 102248\nrid: 36933\nversion: 1.0.0\nversion_train_date: 20240301\nsource_file: data/PAR_merged_model-cuda11.0-trt7.1-int8-T4_36933_102248.json",
+              "model_name": "PAR_merged_model",
+              "section_type": "release_note",
+              "score": 0.956973
+            },
+            {
+              "evidence_id": "bab21bf76719bfe7491f7027",
+              "title": "KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model",
+              "snippet": "target_name: 红马甲/安全带\nalgorithm_type: 属性\nalgorithm_name: 中车工厂-属性模型1\napplication_scene: 中车工厂项目\nowner: 朱帅\nmodel_name: KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\nsupported_device: cpu\nrecommended_config: cpu-ppl2-fp32\nlast_updated: 2023-11-15\nlast_updated_month: 2023-11",
+              "model_name": "KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model",
+              "algorithm_name": "中车工厂-属性模型1",
+              "algorithm_type": "属性",
+              "application_scene": "中车工厂项目",
+              "section_type": "model_artifact",
+              "score": 0.990536
+            },
+            {
+              "evidence_id": "f53d026649b58ea0fecf243a",
+              "title": "PAR_merged_model",
+              "snippet": "model_name: PAR_merged_model\nname: PAR_merged_model\ntype: classifier\nplatform: cpu-ppl2-fp32\nstatus: SUCCESS\ndid: 102019\nrid: 36860\nversion: 1.0.0\nversion_train_date: 20240228\nsource_file: data/PAR_merged_model-cpu-ppl2-fp32_36860_102019.json",
+              "model_name": "PAR_merged_model",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "0b073b37fdae0fe510723ae6",
+              "title": "KM_headpose_nart_acl-ascend710-fp16_b64_1.0.1.model",
+              "snippet": "target_name: 人脸\nalgorithm_type: 属性\nalgorithm_name: 人脸姿态\napplication_scene: 方舟标品\nowner: 马东宇\nmodel_name: KM_headpose_nart_acl-ascend710-fp16_b64_1.0.1.model\nsupported_device: ascend710\nrecommended_config: acl-ascend710-fp16\nlast_updated: 2023-04-13\nlast_updated_month: 2023-04",
+              "model_name": "KM_headpose_nart_acl-ascend710-fp16_b64_1.0.1.model",
+              "algorithm_name": "人脸姿态",
+              "algorithm_type": "属性",
+              "application_scene": "方舟标品",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "e603f74f5ab719dfa1019089",
+              "title": "fight_model",
+              "snippet": "model_name: fight_model\nname: fight_model\ntype: falcon\nplatform: cuda11.0-trt7.1-fp16-T4\nstatus: SUCCESS\ndid: 116885\nrid: 29947\nversion: 1.0.0\nversion_train_date: 20230621\nsource_file: data/fight_model-cuda11.0-trt7.1-fp16-T4_29947_116885.json",
+              "model_name": "fight_model",
+              "section_type": "model_artifact",
+              "score": 0.997628
+            },
+            {
+              "evidence_id": "832fe21808d48167419334ea",
+              "title": "KM_aligner_deepface_nart_acl-ascend710-fp16_b64_2.17.2.model",
+              "snippet": "target_name: 人脸\nalgorithm_type: 关键点\nalgorithm_name: 人脸关键点\napplication_scene: 方舟标品\nowner: 马东宇\nmodel_name: KM_aligner_deepface_nart_acl-ascend710-fp16_b64_2.17.2.model\nsupported_device: ascend710\nrecommended_config: acl-ascend710-fp16\nlast_updated: 2021-05-13\nlast_updated_month: 2021-05",
+              "model_name": "KM_aligner_deepface_nart_acl-ascend710-fp16_b64_2.17.2.model",
+              "algorithm_name": "人脸关键点",
+              "algorithm_type": "关键点",
+              "application_scene": "方舟标品",
+              "section_type": "model_artifact",
+              "score": 0.997881
+            },
+            {
+              "evidence_id": "f01f4352f202edbafab47244",
+              "title": "PAR_merged_model",
+              "snippet": "model_name: PAR_merged_model\nname: PAR_merged_model\ntype: classifier\nplatform: cuda11.0-trt7.1-fp16-T4\nstatus: SUCCESS\ndid: 131495\nrid: 50900\nversion: 1.0.0\nversion_train_date: 20260108\nsource_file: data/PAR_merged_model-cuda11.0-trt7.1-fp16-T4_50900_131495.json",
+              "model_name": "PAR_merged_model",
+              "section_type": "model_artifact",
+              "score": 0.993984
+            }
+          ]
+        },
+        {
+          "field": "performance_baseline",
+          "queries": [
+            "hat_style_accuracy_wall_detect_baseline",
+            "headwear_classifier mAP IoU evaluation",
+            "visual_category_classification model performance",
+            "fewshot_visual_model benchmark"
+          ],
+          "coverage": "strong",
+          "evidence": [
+            {
+              "evidence_id": "0a3975a4f3046b5d6846f27f",
+              "title": "PDFs/异常行为-打架模型-base（城市街道安防场景）.pdf p3",
+              "snippet": "• owner：rendafa@sensetime.com，shenqi@sensetime.com，fengjiangyan@sensetime.com \n      • Hightlight：                                                                 \n                                                                                    \n        ◦ 清洗现场标注数据，并加入更多线上准确预警数据、误报数据，准确率提升明显。以现场单日线上                               \n          告警数据作为测试集(0105)，高准确率阈值下，召回减少10%，但误报下降71%，...",
+              "section_type": "release_note",
+              "score": 0.593778
+            },
+            {
+              "evidence_id": "56247c5715a74da4898330cd",
+              "title": "PDFs/异常行为-打架模型-base（城市街道安防场景）.pdf p5",
+              "snippet": "KM_falcon_KM_falcon_fight_UMT_base_nart_acl- 0169503e9c621a7e6907b4497d8253da2cb12f062cbbd4c46f4c6 acl31\n                                                                1          是        \n      ascend310-fp16_b8_2.0.3.model 4f6bdfd0a85                       0             \n     三 性能测试                                                                         \n      • 速度测试数据集：sta_climb_performance...",
+              "section_type": "accuracy_eval",
+              "score": 0.574514
+            },
+            {
+              "evidence_id": "01c9401bbb8063cd7c40c94d",
+              "title": "PDFs/异常行为-打架模型-base（城市街道安防场景）.pdf p3",
+              "snippet": "准确率  准确率                                        \n                            base large阈       告警  成人  小孩  no_fight no_fight（轻微 no_fight（单\n      模型版本                          (不含小 (含小孩                                       \n                            阈值  值             总数  打架  打架  （多人）  接触）     人）          \n                                    孩打架) 打架)...",
+              "section_type": "release_note",
+              "score": 0.573854
+            },
+            {
+              "evidence_id": "839c7e9bcc089f6e3d63870c",
+              "title": "PDFs/异常行为-打架模型-base（城市街道安防场景）.pdf p4",
+              "snippet": "准确率        准确率       \n                                        量        警量   率    警量        警量             \n      falcon_fight_UMT_base_v2.0.1+falcon_fight_UMT_la                              \n                             0.8 0.9   502  81.8% 1020 86.9% 386 88.7% 649 79.6%    \n      rge_v2.0.1                                                                    \n                             0.8 0.8...",
+              "section_type": "accuracy_metric",
+              "score": 0.565572
+            },
+            {
+              "evidence_id": "dbe6c8faa60924b64747edfa",
+              "title": "PDFs/异常行为-打架模型-base（城市街道安防场景）.pdf p2",
+              "snippet": "acl310       1      8*224*224 266.902 256.979 837 MB 0 B      \n      _v2.0.4                                                                       \n      falcon_fight_UMT_base                                                         \n                      acl710       1      8*224*224 196.065 195.790 844 MB 0 B      \n      _v2.0.4...",
+              "section_type": "accuracy_eval",
+              "score": 0.563798
+            },
+            {
+              "evidence_id": "ee6c548459c7e96247b47c59",
+              "title": "PDFs/异常行为-打架模型-base（城市街道安防场景）.pdf p3",
+              "snippet": "• 推荐阈值：高召回阈值：0.7，高准确率阈值：0.8                                                   \n                                                                                    \n     一 功能介绍...",
+              "section_type": "accuracy_metric",
+              "score": 0.563414
+            },
+            {
+              "evidence_id": "1315926dab8732229a16507f",
+              "title": "PDFs/异常行为-打架模型-large（城市街道安防场景）.pdf p2",
+              "snippet": "• 100路测试结果                                                                    \n                                                                                    \n                                                                                    \n                                    准确率  准确率                                        \n                            base large阈       告警  成人  小孩  no_fight...",
+              "section_type": "accuracy_eval",
+              "score": 0.562737
+            },
+            {
+              "evidence_id": "f4fc57402f6eaebf00b3acb9",
+              "title": "PDFs/异常行为-打架模型-base（城市街道安防场景）.pdf p10",
+              "snippet": "acl310       8      8*224*224 264.56 263.93 829MB 0B          \n      _v2.0.1                                                                       \n      falcon_fight_UMT_base                                                         \n                      acl710       8      8*224*224 196.40 196.09 1.01GB 0B         \n      _v2.0.1...",
+              "section_type": "accuracy_eval",
+              "score": 0.561747
+            }
+          ]
+        },
+        {
+          "field": "data_requirements",
+          "queries": [
+            "headwear_dataset labeling standard annotation_needs",
+            "hat_style_data_collection and visualize samples needed",
+            "multiheadwear_classifier training data ratio",
+            "sample_visual_inspection data requirement"
+          ],
+          "coverage": "strong",
+          "evidence": [
+            {
+              "evidence_id": "fe4863b392231a077a254b55",
+              "title": "PDFs/服饰属性模型.pdf p3 table 1",
+              "snippet": "PDF表格: PDFs/服饰属性模型.pdf 第3页 表1\n\n| 模型版本 平台 阈值 precision recall f1_score Clothes_SD torch 0.2 0.9879 0.9462 0.9666 V0.0.1 Clothes_SD torch 0.2 0.9772 0.9779 0.9776 V0.0.2 spiral Standard基模型替换 • 训练目的：获取一个全量数据训练的预训练模型，结构和spiral上分类任务的【Standard / 标准版】模 型一致，便于后续开发替换 • 训练代码：https://gitlab.bj.sensetime.com/sensespring-link/element/united- perception/-/tree/monolith/scripts_monolith/cls?ref_type=heads ◦ 代码修改...",
+              "section_type": "accuracy_eval",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "1d53c8d70e478f462a72d35b",
+              "title": "PDFs/服饰属性模型.pdf p3",
+              "snippet": "g：              dict_cfg.yaml     \n                                                                                    \n      • 模型更新                                                                        \n                                                                                    \n      版本                                             police类F1-                     \n           使用数据   标签顺序...",
+              "section_type": "label_schema",
+              "score": 0.998437
+            },
+            {
+              "evidence_id": "5ff9aa433792455f49e555b3",
+              "title": "PDFs/服饰属性模型.pdf p3",
+              "snippet": "p                    \n                  \"st_jurong_others\"]                                               \n                  [\"st_jurong_others\",                                              \n                                                               sdjy_cloth_standard_v1224.s\n      v1224 HL全量  \"st_jurong_police\", [224, 224]     0.9751...",
+              "section_type": "accuracy_eval",
+              "score": 0.99758
+            },
+            {
+              "evidence_id": "37cf6f91621fdd7d523e50a7",
+              "title": "PDFs/安防方向--非机动车属性大模型更新.pdf p5",
+              "snippet": "\"append_dep\": 13,                                                              \n     \"labels\": [                                                                    \n                                                                                    \n     \"st_hopper\",                                                                   \n     \"st_canopy\",...",
+              "section_type": "label_schema",
+              "score": 0.559361
+            },
+            {
+              "evidence_id": "fa98e6d066641dc937255e73",
+              "title": "PDFs/横幅标语检测3.0.5-发版.pdf p1 table 1",
+              "snippet": "PDF表格: PDFs/横幅标语检测3.0.5-发版.pdf 第1页 表1\n\n| 横幅标语检测3.0.5-发版 算法功能和边界 • 算法功能：输出图中横幅或标语的坐标 • 前提条件：图中横幅或标语边界清晰、包含文字，目前不支持衣服上的、投影等非常规形式的横幅或标 语 • 目标要求：对于1080x1920分辨率图片输入，ROI区域宽&高不小于60像素 • 潜在风险：对于夜间场景、不规则形状目标、模糊小目标，检测准确率无法保证 KM_essos_BannerSlogan_960x960_3.0.5 release note • 发布时间：20250626 • owner：fengjiangyan@sensetime.com, rendafa@sensetime.com • Highlights： ◦ 配置：增大模型输入尺寸至960x960 ◦ 数据：生成手举竖横幅数据，去除车身横幅数据 ◦ 精...",
+              "section_type": "algorithm_boundary",
+              "score": 0.538767
+            },
+            {
+              "evidence_id": "b6b8bcba80fd4065641eaac5",
+              "title": "PDFs/车身横幅二分类-发版.pdf p2 table 1",
+              "snippet": "PDF表格: PDFs/车身横幅二分类-发版.pdf 第2页 表1\n\n|  | Label |  | st_car_normal： 正常车辆 | st_car_banner: 含条幅车辆 |  |  |\n| --- | --- | --- | --- | --- | --- | --- |\n|  | 样例图 |  |  |  |  |  |\n|  | 二 模型边界 |  |  |  |  |  |\n|  | • 支持场景：监控摄像机下室内外 |  |  |  |  |  |\n|  | • 输入要求： |  |  |  |  |  |\n|  | ◦ 输入尺寸不小于60 x 60 ◦ 图片光线清晰度正常无损坏 |  |  |  |  |  |\n|  |  | ◦ 输入尺寸不小于60 x 60 |  |  |  |  |\n|  |  | ◦ 图片光线清晰度正常无损坏 |  |  |  |  |",
+              "section_type": "algorithm_boundary",
+              "score": 0.5358
+            },
+            {
+              "evidence_id": "88e6ae226750b4fc4a049d53",
+              "title": "PDFs/安防方向--非机动车属性大模型更新.pdf p5",
+              "snippet": "\"proposal_label_thresholds\": [0.6, 0.5, 0.8, 0.8, 0.5, 0.8, 0.5]               \n                                                                                    \n     },                                                                             \n     \"st_tricycle_type\": {...",
+              "section_type": "label_schema",
+              "score": 0.534402
+            },
+            {
+              "evidence_id": "cba3cf9869e678127941ddeb",
+              "title": "PDFs/横幅标语检测3.0.5-发版.pdf p8 table 1",
+              "snippet": "PDF表格: PDFs/横幅标语检测3.0.5-发版.pdf 第8页 表1\n\n|  | KM_essos_BannerSlogan_960x960 3.0.3 |  |  |\n| --- | --- | --- | --- |\n|  | release note |  |  |\n|  | • 发布时间：20250619 |  |  |\n|  | • owner：fengjiangyan@sensetime.com |  |  |\n|  | • Highlights： |  |  |\n|  | ◦ 配置：增大模型输入尺寸至960x960 ◦ 精度：和3.0.3_764x764模型相比，召回测试集Recall提升21%，SZ回流测试集Recall提升8%， HK回流测试集告警框个数增加30%。与BannerSlogan_764x764_r50_4.0.0模型默认阈值相比， SZ回流测试集Rec...",
+              "section_type": "algorithm_boundary",
+              "score": 0.532712
+            }
+          ]
+        }
+      ]
+    },
+    "llm_messages": [
+      {
+        "role": "system",
+        "content": "你是视觉模型迁移顾问。请基于检索证据生成结构化迁移评估报告。必须区分证据支持和合理推断；证据不足时明确写证据不足，不要编造精度、周期或成本。若可估计成本/周期，只能给区间和依赖前提。只输出 JSON。"
+      },
+      {
+        "role": "user",
+        "content": "{\n  \"user_query\": \"客户要求区分帽子款式，包括渔夫帽、无檐帽、鸭舌帽、安全帽、open-face helmet、full-face helmet、连衣帽，用什么模型？\",\n  \"retrieval_plan\": {\n    \"abstract_requirement\": {\n      \"object\": \"帽子款式识别\",\n      \"attribute\": \"fisherman_hat, no_brim, baseball, hard_hat, open_face_helmet, full_face_helmet, hooded_hat\",\n      \"task_type\": \"multi_class_classification\",\n      \"scene\": \"humanwear_visual_inspection\",\n      \"constraints\": [\n        \"distinct_styles\",\n        \"category_label\"\n      ]\n    },\n    \"retrieve_fields\": [\n      {\n        \"field\": \"existing_models\",\n        \"queries\": [\n          \"classify baseball hard_hat helmet finger_test model\",\n          \"fisherman_hat_multi_label_visual_model classification\",\n          \"clothing_hat_style_classification model reuse\",\n          \"safety_headwear_visual_classifier existing model\"\n        ]\n      },\n      {\n        \"field\": \"similar_capabilities\",\n        \"queries\": [\n          \"person_headwear_style_detection transfer model\",\n          \"appetite_band_detection model similar based\",\n          \"wearable_attribute_classifier capability\",\n          \"human_object_detection can be adapted\"\n        ]\n      },\n      {\n        \"field\": \"performance_baseline\",\n        \"queries\": [\n          \"hat_style_accuracy_wall_detect_baseline\",\n          \"headwear_classifier mAP IoU evaluation\",\n          \"visual_category_classification model performance\",\n          \"fewshot_visual_model benchmark\"\n        ]\n      },\n      {\n        \"field\": \"data_requirements\",\n        \"queries\": [\n          \"headwear_dataset labeling standard annotation_needs\",\n          \"hat_style_data_collection and visualize samples needed\",\n          \"multiheadwear_classifier training data ratio\",\n          \"sample_visual_inspection data requirement\"\n        ]\n      }\n    ]\n  },\n  \"field_results\": [\n    {\n      \"field\": \"existing_models\",\n      \"queries\": [\n        \"classify baseball hard_hat helmet finger_test model\",\n        \"fisherman_hat_multi_label_visual_model classification\",\n        \"clothing_hat_style_classification model reuse\",\n        \"safety_headwear_visual_classifier existing model\"\n      ],\n      \"coverage\": \"strong\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"262acb557aca54acb5870581\",\n          \"title\": \"KM_classifier_video_classify_nart_acl-ascend310-fp16_b16_1.1.0.model\",\n          \"snippet\": \"target_name: 视频内容\\nalgorithm_type: 属性\\nalgorithm_name: 影视剧、新闻、游戏、卡通分类模型\\napplication_scene: V1.1.0\\nowner: 龚丽君\\nmodel_name: KM_classifier_video_classify_nart_acl-ascend310-fp16_b16_1.1.0.model\\nsupported_device: ascend310\\nrecommended_config: ascend310-fp16\\nlast_updated: 2023-05-30\\nlast_updated_month: 2023-05\",\n          \"model_name\": \"KM_classifier_video_classify_nart_acl-ascend310-fp16_b16_1.1.0.model\",\n          \"algorithm_name\": \"影视剧、新闻、游戏、卡通分类模型\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"V1.1.0\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"5d76e67ace9d1745732d9057\",\n          \"title\": \"PAR_merged_model\",\n          \"snippet\": \"model_name: PAR_merged_model\\nname: PAR_merged_model\\ntype: classifier\\nplatform: cuda10.0-nart-fp32\\nstatus: SUCCESS\\ndid: 102249\\nrid: 36933\\nversion: 1.0.0\\nversion_train_date: 20240301\\nsource_file: data/PAR_merged_model-cuda10.0-nart-fp32_36933_102249.json\",\n          \"model_name\": \"PAR_merged_model\",\n          \"section_type\": \"release_note\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"4b772095050ca04651c380d5\",\n          \"title\": \"KM_classifier_video_classify_nart_acl-ascend710-fp16_b16_1.1.0.model\",\n          \"snippet\": \"target_name: 视频内容\\nalgorithm_type: 属性\\nalgorithm_name: 影视剧、新闻、游戏、卡通分类模型\\napplication_scene: V1.1.0\\nowner: 龚丽君\\nmodel_name: KM_classifier_video_classify_nart_acl-ascend710-fp16_b16_1.1.0.model\\nsupported_device: ascend710\\nrecommended_config: ascend710-fp16\\nlast_updated: 2023-05-30\\nlast_updated_month: 2023-05\",\n          \"model_name\": \"KM_classifier_video_classify_nart_acl-ascend710-fp16_b16_1.1.0.model\",\n          \"algorithm_name\": \"影视剧、新闻、游戏、卡通分类模型\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"V1.1.0\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"be542d9e836f2f5a8c82fda0\",\n          \"title\": \"PAR_merged_model\",\n          \"snippet\": \"model_name: PAR_merged_model\\nname: PAR_merged_model\\ntype: classifier\\nplatform: cuda11.0-trt7.1-int8-P4\\nstatus: SUCCESS\\ndid: 102246\\nrid: 36932\\nversion: 1.0.0\\nversion_train_date: 20240301\\nsource_file: data/PAR_merged_model-cuda11.0-trt7.1-int8-P4_36932_102246.json\",\n          \"model_name\": \"PAR_merged_model\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.767515\n        },\n        {\n          \"evidence_id\": \"71d3e0aab14227291c88cf56\",\n          \"title\": \"KM_classifier_video_classify_nart_cuda11.0-trt7.1-fp16-T4_b16_1.1.0.model\",\n          \"snippet\": \"target_name: 视频内容\\nalgorithm_type: 属性\\nalgorithm_name: 影视剧、新闻、游戏、卡通分类模型\\napplication_scene: V1.1.0\\nowner: 龚丽君\\nmodel_name: KM_classifier_video_classify_nart_cuda11.0-trt7.1-fp16-T4_b16_1.1.0.model\\nsupported_device: T4\\nrecommended_config: cuda11.0-trt7.1-fp16-T4\\nlast_updated: 2023-05-30\\nlast_updated_month: 2023-05\",\n          \"model_name\": \"KM_classifier_video_classify_nart_cuda11.0-trt7.1-fp16-T4_b16_1.1.0.model\",\n          \"algorithm_name\": \"影视剧、新闻、游戏、卡通分类模型\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"V1.1.0\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.989795\n        },\n        {\n          \"evidence_id\": \"cb65cdef3571f8e586a95e1c\",\n          \"title\": \"PAR_merged_model\",\n          \"snippet\": \"model_name: PAR_merged_model\\nname: PAR_merged_model\\ntype: classifier\\nplatform: cuda11.0-trt7.1-int8-T4\\nstatus: SUCCESS\\ndid: 102248\\nrid: 36933\\nversion: 1.0.0\\nversion_train_date: 20240301\\nsource_file: data/PAR_merged_model-cuda11.0-trt7.1-int8-T4_36933_102248.json\",\n          \"model_name\": \"PAR_merged_model\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.765006\n        },\n        {\n          \"evidence_id\": \"42de4c5076863449d821f5d5\",\n          \"title\": \"KM_classifier_Ped_33of33_nart_acl-ascend310-fp16_b16_2.21.1.model\",\n          \"snippet\": \"target_name: 黄手套\\nalgorithm_type: 属性\\nalgorithm_name: 中车工厂-属性模型2\\napplication_scene: 中车工厂项目\\nowner: 朱帅\\nmodel_name: KM_classifier_Ped_33of33_nart_acl-ascend310-fp16_b16_2.21.1.model\\nsupported_device: ascend310\\nrecommended_config: acl-ascend310-fp16\\nlast_updated: 2023-09-12\\nlast_updated_month: 2023-09\",\n          \"model_name\": \"KM_classifier_Ped_33of33_nart_acl-ascend310-fp16_b16_2.21.1.model\",\n          \"algorithm_name\": \"中车工厂-属性模型2\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"中车工厂项目\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.146405\n        },\n        {\n          \"evidence_id\": \"f53d026649b58ea0fecf243a\",\n          \"title\": \"PAR_merged_model\",\n          \"snippet\": \"model_name: PAR_merged_model\\nname: PAR_merged_model\\ntype: classifier\\nplatform: cpu-ppl2-fp32\\nstatus: SUCCESS\\ndid: 102019\\nrid: 36860\\nversion: 1.0.0\\nversion_train_date: 20240228\\nsource_file: data/PAR_merged_model-cpu-ppl2-fp32_36860_102019.json\",\n          \"model_name\": \"PAR_merged_model\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.212958\n        }\n      ]\n    },\n    {\n      \"field\": \"similar_capabilities\",\n      \"queries\": [\n        \"person_headwear_style_detection transfer model\",\n        \"appetite_band_detection model similar based\",\n        \"wearable_attribute_classifier capability\",\n        \"human_object_detection can be adapted\"\n      ],\n      \"coverage\": \"strong\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"23318a7afa50126f79400960\",\n          \"title\": \"KM_classifier_Clothes_SD_nart_acl-ascend710-fp16_b8_0.0.2.model\",\n          \"snippet\": \"target_name: 人体\\nalgorithm_type: 属性\\nalgorithm_name: SDJY 服饰分类\\napplication_scene: 山东监狱人体服饰分类\\nowner: 冯江燕\\nmodel_name: KM_classifier_Clothes_SD_nart_acl-ascend710-fp16_b8_0.0.2.model\\nsupported_device: ascend710\\nrecommended_config: ascend710-fp16\\nlast_updated: 2026-01-05\\nlast_updated_month: 2026-01\",\n          \"model_name\": \"KM_classifier_Clothes_SD_nart_acl-ascend710-fp16_b8_0.0.2.model\",\n          \"algorithm_name\": \"SDJY 服饰分类\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"山东监狱人体服饰分类\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.995772\n        },\n        {\n          \"evidence_id\": \"cb65cdef3571f8e586a95e1c\",\n          \"title\": \"PAR_merged_model\",\n          \"snippet\": \"model_name: PAR_merged_model\\nname: PAR_merged_model\\ntype: classifier\\nplatform: cuda11.0-trt7.1-int8-T4\\nstatus: SUCCESS\\ndid: 102248\\nrid: 36933\\nversion: 1.0.0\\nversion_train_date: 20240301\\nsource_file: data/PAR_merged_model-cuda11.0-trt7.1-int8-T4_36933_102248.json\",\n          \"model_name\": \"PAR_merged_model\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.956973\n        },\n        {\n          \"evidence_id\": \"bab21bf76719bfe7491f7027\",\n          \"title\": \"KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\",\n          \"snippet\": \"target_name: 红马甲/安全带\\nalgorithm_type: 属性\\nalgorithm_name: 中车工厂-属性模型1\\napplication_scene: 中车工厂项目\\nowner: 朱帅\\nmodel_name: KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\\nsupported_device: cpu\\nrecommended_config: cpu-ppl2-fp32\\nlast_updated: 2023-11-15\\nlast_updated_month: 2023-11\",\n          \"model_name\": \"KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\",\n          \"algorithm_name\": \"中车工厂-属性模型1\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"中车工厂项目\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.990536\n        },\n        {\n          \"evidence_id\": \"f53d026649b58ea0fecf243a\",\n          \"title\": \"PAR_merged_model\",\n          \"snippet\": \"model_name: PAR_merged_model\\nname: PAR_merged_model\\ntype: classifier\\nplatform: cpu-ppl2-fp32\\nstatus: SUCCESS\\ndid: 102019\\nrid: 36860\\nversion: 1.0.0\\nversion_train_date: 20240228\\nsource_file: data/PAR_merged_model-cpu-ppl2-fp32_36860_102019.json\",\n          \"model_name\": \"PAR_merged_model\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"0b073b37fdae0fe510723ae6\",\n          \"title\": \"KM_headpose_nart_acl-ascend710-fp16_b64_1.0.1.model\",\n          \"snippet\": \"target_name: 人脸\\nalgorithm_type: 属性\\nalgorithm_name: 人脸姿态\\napplication_scene: 方舟标品\\nowner: 马东宇\\nmodel_name: KM_headpose_nart_acl-ascend710-fp16_b64_1.0.1.model\\nsupported_device: ascend710\\nrecommended_config: acl-ascend710-fp16\\nlast_updated: 2023-04-13\\nlast_updated_month: 2023-04\",\n          \"model_name\": \"KM_headpose_nart_acl-ascend710-fp16_b64_1.0.1.model\",\n          \"algorithm_name\": \"人脸姿态\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"方舟标品\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"e603f74f5ab719dfa1019089\",\n          \"title\": \"fight_model\",\n          \"snippet\": \"model_name: fight_model\\nname: fight_model\\ntype: falcon\\nplatform: cuda11.0-trt7.1-fp16-T4\\nstatus: SUCCESS\\ndid: 116885\\nrid: 29947\\nversion: 1.0.0\\nversion_train_date: 20230621\\nsource_file: data/fight_model-cuda11.0-trt7.1-fp16-T4_29947_116885.json\",\n          \"model_name\": \"fight_model\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.997628\n        },\n        {\n          \"evidence_id\": \"832fe21808d48167419334ea\",\n          \"title\": \"KM_aligner_deepface_nart_acl-ascend710-fp16_b64_2.17.2.model\",\n          \"snippet\": \"target_name: 人脸\\nalgorithm_type: 关键点\\nalgorithm_name: 人脸关键点\\napplication_scene: 方舟标品\\nowner: 马东宇\\nmodel_name: KM_aligner_deepface_nart_acl-ascend710-fp16_b64_2.17.2.model\\nsupported_device: ascend710\\nrecommended_config: acl-ascend710-fp16\\nlast_updated: 2021-05-13\\nlast_updated_month: 2021-05\",\n          \"model_name\": \"KM_aligner_deepface_nart_acl-ascend710-fp16_b64_2.17.2.model\",\n          \"algorithm_name\": \"人脸关键点\",\n          \"algorithm_type\": \"关键点\",\n          \"application_scene\": \"方舟标品\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.997881\n        },\n        {\n          \"evidence_id\": \"f01f4352f202edbafab47244\",\n          \"title\": \"PAR_merged_model\",\n          \"snippet\": \"model_name: PAR_merged_model\\nname: PAR_merged_model\\ntype: classifier\\nplatform: cuda11.0-trt7.1-fp16-T4\\nstatus: SUCCESS\\ndid: 131495\\nrid: 50900\\nversion: 1.0.0\\nversion_train_date: 20260108\\nsource_file: data/PAR_merged_model-cuda11.0-trt7.1-fp16-T4_50900_131495.json\",\n          \"model_name\": \"PAR_merged_model\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.993984\n        }\n      ]\n    },\n    {\n      \"field\": \"performance_baseline\",\n      \"queries\": [\n        \"hat_style_accuracy_wall_detect_baseline\",\n        \"headwear_classifier mAP IoU evaluation\",\n        \"visual_category_classification model performance\",\n        \"fewshot_visual_model benchmark\"\n      ],\n      \"coverage\": \"strong\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"0a3975a4f3046b5d6846f27f\",\n          \"title\": \"PDFs/异常行为-打架模型-base（城市街道安防场景）.pdf p3\",\n          \"snippet\": \"• owner：rendafa@sensetime.com，shenqi@sensetime.com，fengjiangyan@sensetime.com \\n      • Hightlight：                                                                 \\n                                                                                    \\n        ◦ 清洗现场标注数据，并加入更多线上准确预警数据、误报数据，准确率提升明显。以现场单日线上                               \\n          告警数据作为测试集(0105)，高准确率阈值下，召回减少10%，但误报下降71%，...\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.593778\n        },\n        {\n          \"evidence_id\": \"56247c5715a74da4898330cd\",\n          \"title\": \"PDFs/异常行为-打架模型-base（城市街道安防场景）.pdf p5\",\n          \"snippet\": \"KM_falcon_KM_falcon_fight_UMT_base_nart_acl- 0169503e9c621a7e6907b4497d8253da2cb12f062cbbd4c46f4c6 acl31\\n                                                                1          是        \\n      ascend310-fp16_b8_2.0.3.model 4f6bdfd0a85                       0             \\n     三 性能测试                                                                         \\n      • 速度测试数据集：sta_climb_performance...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.574514\n        },\n        {\n          \"evidence_id\": \"01c9401bbb8063cd7c40c94d\",\n          \"title\": \"PDFs/异常行为-打架模型-base（城市街道安防场景）.pdf p3\",\n          \"snippet\": \"准确率  准确率                                        \\n                            base large阈       告警  成人  小孩  no_fight no_fight（轻微 no_fight（单\\n      模型版本                          (不含小 (含小孩                                       \\n                            阈值  值             总数  打架  打架  （多人）  接触）     人）          \\n                                    孩打架) 打架)...\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.573854\n        },\n        {\n          \"evidence_id\": \"839c7e9bcc089f6e3d63870c\",\n          \"title\": \"PDFs/异常行为-打架模型-base（城市街道安防场景）.pdf p4\",\n          \"snippet\": \"准确率        准确率       \\n                                        量        警量   率    警量        警量             \\n      falcon_fight_UMT_base_v2.0.1+falcon_fight_UMT_la                              \\n                             0.8 0.9   502  81.8% 1020 86.9% 386 88.7% 649 79.6%    \\n      rge_v2.0.1                                                                    \\n                             0.8 0.8...\",\n          \"section_type\": \"accuracy_metric\",\n          \"score\": 0.565572\n        },\n        {\n          \"evidence_id\": \"dbe6c8faa60924b64747edfa\",\n          \"title\": \"PDFs/异常行为-打架模型-base（城市街道安防场景）.pdf p2\",\n          \"snippet\": \"acl310       1      8*224*224 266.902 256.979 837 MB 0 B      \\n      _v2.0.4                                                                       \\n      falcon_fight_UMT_base                                                         \\n                      acl710       1      8*224*224 196.065 195.790 844 MB 0 B      \\n      _v2.0.4...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.563798\n        },\n        {\n          \"evidence_id\": \"ee6c548459c7e96247b47c59\",\n          \"title\": \"PDFs/异常行为-打架模型-base（城市街道安防场景）.pdf p3\",\n          \"snippet\": \"• 推荐阈值：高召回阈值：0.7，高准确率阈值：0.8                                                   \\n                                                                                    \\n     一 功能介绍...\",\n          \"section_type\": \"accuracy_metric\",\n          \"score\": 0.563414\n        },\n        {\n          \"evidence_id\": \"1315926dab8732229a16507f\",\n          \"title\": \"PDFs/异常行为-打架模型-large（城市街道安防场景）.pdf p2\",\n          \"snippet\": \"• 100路测试结果                                                                    \\n                                                                                    \\n                                                                                    \\n                                    准确率  准确率                                        \\n                            base large阈       告警  成人  小孩  no_fight...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.562737\n        },\n        {\n          \"evidence_id\": \"f4fc57402f6eaebf00b3acb9\",\n          \"title\": \"PDFs/异常行为-打架模型-base（城市街道安防场景）.pdf p10\",\n          \"snippet\": \"acl310       8      8*224*224 264.56 263.93 829MB 0B          \\n      _v2.0.1                                                                       \\n      falcon_fight_UMT_base                                                         \\n                      acl710       8      8*224*224 196.40 196.09 1.01GB 0B         \\n      _v2.0.1...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.561747\n        }\n      ]\n    },\n    {\n      \"field\": \"data_requirements\",\n      \"queries\": [\n        \"headwear_dataset labeling standard annotation_needs\",\n        \"hat_style_data_collection and visualize samples needed\",\n        \"multiheadwear_classifier training data ratio\",\n        \"sample_visual_inspection data requirement\"\n      ],\n      \"coverage\": \"strong\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"fe4863b392231a077a254b55\",\n          \"title\": \"PDFs/服饰属性模型.pdf p3 table 1\",\n          \"snippet\": \"PDF表格: PDFs/服饰属性模型.pdf 第3页 表1\\n\\n| 模型版本 平台 阈值 precision recall f1_score Clothes_SD torch 0.2 0.9879 0.9462 0.9666 V0.0.1 Clothes_SD torch 0.2 0.9772 0.9779 0.9776 V0.0.2 spiral Standard基模型替换 • 训练目的：获取一个全量数据训练的预训练模型，结构和spiral上分类任务的【Standard / 标准版】模 型一致，便于后续开发替换 • 训练代码：https://gitlab.bj.sensetime.com/sensespring-link/element/united- perception/-/tree/monolith/scripts_monolith/cls?ref_type=heads ◦ 代码修改...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"1d53c8d70e478f462a72d35b\",\n          \"title\": \"PDFs/服饰属性模型.pdf p3\",\n          \"snippet\": \"g：              dict_cfg.yaml     \\n                                                                                    \\n      • 模型更新                                                                        \\n                                                                                    \\n      版本                                             police类F1-                     \\n           使用数据   标签顺序...\",\n          \"section_type\": \"label_schema\",\n          \"score\": 0.998437\n        },\n        {\n          \"evidence_id\": \"5ff9aa433792455f49e555b3\",\n          \"title\": \"PDFs/服饰属性模型.pdf p3\",\n          \"snippet\": \"p                    \\n                  \\\"st_jurong_others\\\"]                                               \\n                  [\\\"st_jurong_others\\\",                                              \\n                                                               sdjy_cloth_standard_v1224.s\\n      v1224 HL全量  \\\"st_jurong_police\\\", [224, 224]     0.9751...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.99758\n        },\n        {\n          \"evidence_id\": \"37cf6f91621fdd7d523e50a7\",\n          \"title\": \"PDFs/安防方向--非机动车属性大模型更新.pdf p5\",\n          \"snippet\": \"\\\"append_dep\\\": 13,                                                              \\n     \\\"labels\\\": [                                                                    \\n                                                                                    \\n     \\\"st_hopper\\\",                                                                   \\n     \\\"st_canopy\\\",...\",\n          \"section_type\": \"label_schema\",\n          \"score\": 0.559361\n        },\n        {\n          \"evidence_id\": \"fa98e6d066641dc937255e73\",\n          \"title\": \"PDFs/横幅标语检测3.0.5-发版.pdf p1 table 1\",\n          \"snippet\": \"PDF表格: PDFs/横幅标语检测3.0.5-发版.pdf 第1页 表1\\n\\n| 横幅标语检测3.0.5-发版 算法功能和边界 • 算法功能：输出图中横幅或标语的坐标 • 前提条件：图中横幅或标语边界清晰、包含文字，目前不支持衣服上的、投影等非常规形式的横幅或标 语 • 目标要求：对于1080x1920分辨率图片输入，ROI区域宽&高不小于60像素 • 潜在风险：对于夜间场景、不规则形状目标、模糊小目标，检测准确率无法保证 KM_essos_BannerSlogan_960x960_3.0.5 release note • 发布时间：20250626 • owner：fengjiangyan@sensetime.com, rendafa@sensetime.com • Highlights： ◦ 配置：增大模型输入尺寸至960x960 ◦ 数据：生成手举竖横幅数据，去除车身横幅数据 ◦ 精...\",\n          \"section_type\": \"algorithm_boundary\",\n          \"score\": 0.538767\n        },\n        {\n          \"evidence_id\": \"b6b8bcba80fd4065641eaac5\",\n          \"title\": \"PDFs/车身横幅二分类-发版.pdf p2 table 1\",\n          \"snippet\": \"PDF表格: PDFs/车身横幅二分类-发版.pdf 第2页 表1\\n\\n|  | Label |  | st_car_normal： 正常车辆 | st_car_banner: 含条幅车辆 |  |  |\\n| --- | --- | --- | --- | --- | --- | --- |\\n|  | 样例图 |  |  |  |  |  |\\n|  | 二 模型边界 |  |  |  |  |  |\\n|  | • 支持场景：监控摄像机下室内外 |  |  |  |  |  |\\n|  | • 输入要求： |  |  |  |  |  |\\n|  | ◦ 输入尺寸不小于60 x 60 ◦ 图片光线清晰度正常无损坏 |  |  |  |  |  |\\n|  |  | ◦ 输入尺寸不小于60 x 60 |  |  |  |  |\\n|  |  | ◦ 图片光线清晰度正常无损坏 |  |  |  |  |\",\n          \"section_type\": \"algorithm_boundary\",\n          \"score\": 0.5358\n        },\n        {\n          \"evidence_id\": \"88e6ae226750b4fc4a049d53\",\n          \"title\": \"PDFs/安防方向--非机动车属性大模型更新.pdf p5\",\n          \"snippet\": \"\\\"proposal_label_thresholds\\\": [0.6, 0.5, 0.8, 0.8, 0.5, 0.8, 0.5]               \\n                                                                                    \\n     },                                                                             \\n     \\\"st_tricycle_type\\\": {...\",\n          \"section_type\": \"label_schema\",\n          \"score\": 0.534402\n        },\n        {\n          \"evidence_id\": \"cba3cf9869e678127941ddeb\",\n          \"title\": \"PDFs/横幅标语检测3.0.5-发版.pdf p8 table 1\",\n          \"snippet\": \"PDF表格: PDFs/横幅标语检测3.0.5-发版.pdf 第8页 表1\\n\\n|  | KM_essos_BannerSlogan_960x960 3.0.3 |  |  |\\n| --- | --- | --- | --- |\\n|  | release note |  |  |\\n|  | • 发布时间：20250619 |  |  |\\n|  | • owner：fengjiangyan@sensetime.com |  |  |\\n|  | • Highlights： |  |  |\\n|  | ◦ 配置：增大模型输入尺寸至960x960 ◦ 精度：和3.0.3_764x764模型相比，召回测试集Recall提升21%，SZ回流测试集Recall提升8%， HK回流测试集告警框个数增加30%。与BannerSlogan_764x764_r50_4.0.0模型默认阈值相比， SZ回流测试集Rec...\",\n          \"section_type\": \"algorithm_boundary\",\n          \"score\": 0.532712\n        }\n      ]\n    }\n  ]\n}"
+      }
+    ]
+  }
+}

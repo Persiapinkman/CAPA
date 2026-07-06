@@ -1,0 +1,88 @@
+{
+  "session_id": "ma_dataset_full_38",
+  "run_stamp": "20260603_103638_fb8ded33",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-06-03T10:37:51+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"客户需要识别 6 种工作服款式：商务制服、工人服、厨师服、医护服、警服、消防服。\",\n  \"direct_match\": {\n    \"exists\": false,\n    \"summary\": \"没有检索到完全匹配 6 种工作服款式（商务制服、工人服、厨师服、医护服、警服、消防服）的直接匹配模型。但检索到服饰属性分类模型，其中包含警服识别能力，部分工服识别能力，可作为迁移参考。\"\n  ,\n  \"evidence\": []\n  },\n  \"similar_assets\": [\n    {\n      \"model_or_solution\": \"KM_classifier_Clothes_SD_nart_cuda11.0-trt7.1-fp16-T4_b8_0.0.2.model (服饰属性模型)\",\n      \"label_schema\": \"包含'0-prisoner'（囚服）、'1-police'（警服）、'2-others'（其他）三类标签。其中警服有明确定义，工服、厨师服等无直接定义标签，但可归入'others'或需扩展训练。\",\n      \"training_data\": \"训练集包含全量小图，第一批次小图总量 312251，按 8:2 切分。已同步采样 10w 张。证据不足：具体工服类、厨师服类样本量、标注规范未披露。\",\n      \"reported_metrics\": \"V0.0.2 版本推荐阈值 0.2，警服召回精度未直接给出数值，但文档提到 st_jurong_police > 0.2 即为警服。证据不足：其他工服类别的精度数值。\",\n      \"covered_capability\": \"服饰属性分类，支持警服识别，支持工服（部分）识别，支持其他工作服分类。\",\n      \"gap\": \"缺少商务制服、工人服、厨师服、医护服、消防服的独立标签定义和精度评估。\",\n      \"evidence\": [\n        \"77aa28f82a19a78e04c51d0e\",\n        \"178adc4e00616ffe401a41a3\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"新中车工服-zc_uniform_v4 (工服识别模型)\",\n      \"label_schema\": \"包含 grey_T_shirt、grey_shirt、light_bule_shirt（警卫服）、dark_guard_clothing、white_protective_clothing（防护服）、blue_electrostatic_suit 等多种工服类别。未明确包含'商务制服'、'厨师服'、'医护服'、'消防服'。\",\n      \"training_data\": \"证据不足：样本量、标注规范未披露。\",\n      \"reported_metrics\": \"各类别 precision/recall 在 0.94~1.0 之间（如 grey_T_shirt prec 0.9931, rec 0.9829）。\",\n      \"covered_capability\": \"工服款式细分类，支持警卫服、防护服、静电服等。\",\n      \"gap\": \"缺少商务制服、厨师服、医护服、消防服标签，且场景可能局限于特定行业（中车）。\",\n      \"evidence\": [\n        \"4fa3a7f0f72507a3313a0a88\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"KM_classifier_Ped_ClothBanner_nart_cuda11.0-trt7.1-fp16-T4_b1_0.0.1.model (人体状衣二分类)\",\n      \"label_schema\": \"二分类模型（有无醒目大字），非多分类工服识别。\",\n      \"training_data\": \"证据不足。\",\n      \"reported_metrics\": \"证据不足。\",\n      \"covered_capability\": \"工服上有文字的二分类，非款式识别。\",\n      \"gap\": \"无法识别 6 种工服款式。\",\n      \"evidence\": [\n        \"415cfacb726c399a33e408c3\"\n      ]\n    }\n  ],\n  \"migration_plan\": {\n    \"feasibility\": \"high\",\n    \"approach\": \"基于'KM_classifier_Clothes_SD_nart_cuda11.0-trt7.1-fp16-T4_b8_0.0.2.model'进行增量训练（Fine-tune），补充商务制服、工人服、厨师服、医护服、消防服等标签数据，扩展标签体系。\",\n    \"data_requirements\": \"建议补充 6 类工服的样本，每类建议 500-1000 张（参考服饰属性模型采样规范）。需确保样本包含不同光照、姿态、遮挡场景。\",\n    \"compute_requirements\": \"推荐 T4 或 Ascend710 平台，输入尺寸建议 224x224 或 256x256，batch_size 根据显存调整（参考模型推荐配置 b8 或 b16）。\",\n    \"engineering_work\": \"1. 扩展标签体系；2. 数据清洗与重标注；3. 模型微调与阈值调优；4. 评估集构建。\",\n    \"estimated_timeline\": \"4-6 周（假设数据准备充分，含 1-2 轮迭代）。\",\n    \"estimated_cost\": \"数据标注 1-2 万元；算力成本 0.5-1 万元（按 T4/Ascend710 实例估算）。\",\n    \"dependencies\": [\n      \"需要客户提供工服样本或授权访问历史工服数据。\",\n      \"需要确认部署平台（如 T4/Ascend710）。\",\n      \"需要评估 6 类工服的混淆场景（如医护服 vs 厨师服）。\"\n    ]\n  ,\n  \"risks\": [\n    \"部分工服（如消防服）与工人服可能视觉相似，需特别注意标签定义。\",\n    \"警服已有模型，可复用，但需确认是否满足客户精度要求。\",\n    \"数据偏差：若历史数据集中在某类工服（如警卫服），可能导致模型对其他类别欠拟合。\"\n  ]\n  }\n  ,\n  \"expected_performance\": {\n    \"baseline\": \"参考'KM_classifier_Clothes_SD'模型，警服识别精度约 0.9+（阈值依赖），其他工服类别精度需重新评估。\",\n    \"target\": \"6 类工服 mAP/ACC 目标 0.85~0.95（参考中车工服模型精度范围）。\",\n    \"uncertainty\": \"高精度需依赖高质量标注数据，否则可能降至 0.75 左右。\"\n  }\n  ,\n  \"recommendation\": \"建议采用增量迁移方案，复用'KM_classifier_Clothes_SD'模型，补充 6 类工服数据进行微调。优先验证警服（已有模型）的复用性，再扩展其他 5 类。\"\n  }",
+    "structured_output": {
+      "requirement_summary": "客户需要识别 6 种工作服款式：商务制服、工人服、厨师服、医护服、警服、消防服。",
+      "direct_match": {
+        "exists": false,
+        "summary": "没有检索到完全匹配 6 种工作服款式（商务制服、工人服、厨师服、医护服、警服、消防服）的直接匹配模型。但检索到服饰属性分类模型，其中包含警服识别能力，部分工服识别能力，可作为迁移参考。",
+        "evidence": []
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "KM_classifier_Clothes_SD_nart_cuda11.0-trt7.1-fp16-T4_b8_0.0.2.model (服饰属性模型)",
+          "label_schema": "包含'0-prisoner'（囚服）、'1-police'（警服）、'2-others'（其他）三类标签。其中警服有明确定义，工服、厨师服等无直接定义标签，但可归入'others'或需扩展训练。",
+          "training_data": "训练集包含全量小图，第一批次小图总量 312251，按 8:2 切分。已同步采样 10w 张。证据不足：具体工服类、厨师服类样本量、标注规范未披露。",
+          "reported_metrics": "V0.0.2 版本推荐阈值 0.2，警服召回精度未直接给出数值，但文档提到 st_jurong_police > 0.2 即为警服。证据不足：其他工服类别的精度数值。",
+          "covered_capability": "服饰属性分类，支持警服识别，支持工服（部分）识别，支持其他工作服分类。",
+          "gap": "缺少商务制服、工人服、厨师服、医护服、消防服的独立标签定义和精度评估。",
+          "evidence": [
+            "77aa28f82a19a78e04c51d0e",
+            "178adc4e00616ffe401a41a3"
+          ]
+        },
+        {
+          "model_or_solution": "新中车工服-zc_uniform_v4 (工服识别模型)",
+          "label_schema": "包含 grey_T_shirt、grey_shirt、light_bule_shirt（警卫服）、dark_guard_clothing、white_protective_clothing（防护服）、blue_electrostatic_suit 等多种工服类别。未明确包含'商务制服'、'厨师服'、'医护服'、'消防服'。",
+          "training_data": "证据不足：样本量、标注规范未披露。",
+          "reported_metrics": "各类别 precision/recall 在 0.94~1.0 之间（如 grey_T_shirt prec 0.9931, rec 0.9829）。",
+          "covered_capability": "工服款式细分类，支持警卫服、防护服、静电服等。",
+          "gap": "缺少商务制服、厨师服、医护服、消防服标签，且场景可能局限于特定行业（中车）。",
+          "evidence": [
+            "4fa3a7f0f72507a3313a0a88"
+          ]
+        },
+        {
+          "model_or_solution": "KM_classifier_Ped_ClothBanner_nart_cuda11.0-trt7.1-fp16-T4_b1_0.0.1.model (人体状衣二分类)",
+          "label_schema": "二分类模型（有无醒目大字），非多分类工服识别。",
+          "training_data": "证据不足。",
+          "reported_metrics": "证据不足。",
+          "covered_capability": "工服上有文字的二分类，非款式识别。",
+          "gap": "无法识别 6 种工服款式。",
+          "evidence": [
+            "415cfacb726c399a33e408c3"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "high",
+        "approach": "基于'KM_classifier_Clothes_SD_nart_cuda11.0-trt7.1-fp16-T4_b8_0.0.2.model'进行增量训练（Fine-tune），补充商务制服、工人服、厨师服、医护服、消防服等标签数据，扩展标签体系。",
+        "data_requirements": "建议补充 6 类工服的样本，每类建议 500-1000 张（参考服饰属性模型采样规范）。需确保样本包含不同光照、姿态、遮挡场景。",
+        "compute_requirements": "推荐 T4 或 Ascend710 平台，输入尺寸建议 224x224 或 256x256，batch_size 根据显存调整（参考模型推荐配置 b8 或 b16）。",
+        "engineering_work": "1. 扩展标签体系；2. 数据清洗与重标注；3. 模型微调与阈值调优；4. 评估集构建。",
+        "estimated_timeline": "4-6 周（假设数据准备充分，含 1-2 轮迭代）。",
+        "estimated_cost": "数据标注 1-2 万元；算力成本 0.5-1 万元（按 T4/Ascend710 实例估算）。",
+        "dependencies": [
+          "需要客户提供工服样本或授权访问历史工服数据。",
+          "需要确认部署平台（如 T4/Ascend710）。",
+          "需要评估 6 类工服的混淆场景（如医护服 vs 厨师服）。"
+        ],
+        "risks": [
+          "部分工服（如消防服）与工人服可能视觉相似，需特别注意标签定义。",
+          "警服已有模型，可复用，但需确认是否满足客户精度要求。",
+          "数据偏差：若历史数据集中在某类工服（如警卫服），可能导致模型对其他类别欠拟合。"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "参考'KM_classifier_Clothes_SD'模型，警服识别精度约 0.9+（阈值依赖），其他工服类别精度需重新评估。",
+        "target": "6 类工服 mAP/ACC 目标 0.85~0.95（参考中车工服模型精度范围）。",
+        "uncertainty": "高精度需依赖高质量标注数据，否则可能降至 0.75 左右。"
+      },
+      "recommendation": "建议采用增量迁移方案，复用'KM_classifier_Clothes_SD'模型，补充 6 类工服数据进行微调。优先验证警服（已有模型）的复用性，再扩展其他 5 类。"
+    }
+  }
+}

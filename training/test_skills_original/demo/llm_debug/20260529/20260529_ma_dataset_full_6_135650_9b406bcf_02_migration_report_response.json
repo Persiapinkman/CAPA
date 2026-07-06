@@ -1,0 +1,103 @@
+{
+  "session_id": "ma_dataset_full_6",
+  "run_stamp": "20260529_135650_9b406bcf",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-05-29T13:58:19+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"客户要求区分帽子款式：渔夫帽、无檐帽、鸭舌帽、安全帽、头盔、连衣帽，人体属性模型是否支持？\",\n  \"direct_match\": {\n    \"exists\": false,\n    \"summary\": \"检索到的证据中未找到直接支持区分渔夫帽、无檐帽、鸭舌帽、安全帽、头盔、连衣帽这 6 类帽子款式的现成模型。\"\n  ,\n  \"evidence\": []\n  },\n  \"similar_assets\": [\n    {\n      \"model_or_solution\": \"行人属性大模型（2.21.0/2.21.1 版本）\",\n      \"label_schema\": \"包含 cap_style（帽子样式）和 cap_color（帽子颜色）属性。cap_style 类别包含 hat_style_type_none, st_ushanka 等具体帽型，但未覆盖渔夫帽、鸭舌帽等细分款式；类别定义需查阅 PDF 文档，仅部分可见。\",\n      \"training_data\": \"证据不足。文档提及训练集来源可能为大规模公开数据集，但未见具体样本量或标注规范描述。\",\n      \"reported_metrics\": \"cap_style 平均精度 97.83%，推荐阈值 0.900，过滤比例 1.66%；st_ushanka 精度 97.02%；st_helmet_style（头盔样式）平均精度 98.89%，推荐阈值 0.900。\",\n      \"covered_capability\": \"支持帽子类别检测（cap_style），支持头盔样式检测（st_helmet_style）。对于渔夫帽、鸭舌帽等细分款式，需确认是否属于 cap_style 的扩展类别或需要定制训练。\",\n      \"gap\": \"未明确列出渔夫帽、无檐帽、鸭舌帽等具体款式的类别定义；可能需要基于现有 cap_style 模型进行微调或增加自定义类别训练。\",\n      \"evidence\": [\n        \"evidence_id: 52874b6b3dae5a190f86fd51\",\n        \"evidence_id: ed7ec126f5251b2b62e1a512\",\n        \"evidence_id: c4f1d7f084a7f84ea5ed02c1\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"非机动车属性大模型（安防方向）\",\n      \"label_schema\": \"支持车辆颜色、三轮车细分类等属性。未涉及人体头部或帽子类别。\",\n      \"training_data\": \"证据不足。文档提及输入分辨率（90*90, 120*120）及推荐阈值，但未详述训练集规模或数据来源。\",\n      \"reported_metrics\": \"三轮车细分类（st_tricycle）召回 98.6%；车辆颜色（color）ACC 0.95, recall 76.6%。\",\n      \"covered_capability\": \"不支持帽子款式识别。\",\n      \"gap\": \"目标对象不匹配（非机动车 vs 人体）。\",\n      \"evidence\": [\n        \"evidence_id: 3b429f956353161148093e4e\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"服饰分类模型（Clothes_SD）\",\n      \"label_schema\": \"支持服装类别分类，如警察、囚犯、其他等（st_jurong_police, st_jurong_prisoner, st_jurong_others）。未包含帽子款式。\",\n      \"training_data\": \"使用数据为 HL 全量数据，标签顺序固定，输入尺寸 [128, 64] 或 [224, 224]。\",\n      \"reported_metrics\": \"F1 score 约 0.9746-0.9776，Precision/Recall 在 0.97-0.98 之间。\",\n      \"covered_capability\": \"支持人体服饰整体分类，可能无法区分头部帽子细节。\",\n      \"gap\": \"目标属性为帽子款式，非服饰整体；需扩展模型能力或重新训练。\",\n      \"evidence\": [\n        \"evidence_id: 5ff9aa433792455f49e555b3\",\n        \"evidence_id: fe4863b392231a077a254b55\",\n        \"evidence_id: 1a436115fa23d43f1bbe061a\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"KM_classifier_Clothes_SD_nart_ 系列模型\",\n      \"label_schema\": \"山东监狱人体服饰分类，支持 st_jurong_police 等特定标签。无帽子类别。\",\n      \"training_data\": \"证据不足。基于监狱场景数据定制。\",\n      \"reported_metrics\": \"证据不足。\",\n      \"covered_capability\": \"支持人体服饰分类，未提及帽子。\",\n      \"gap\": \"类别不匹配。\",\n      \"evidence\": [\n        \"evidence_id: f837cb54b2639e7dc7aaff27\",\n        \"evidence_id: 23318a7afa50126f79400960\"\n      ]\n    }\n  ],\n  \"migration_plan\": {\n    \"feasibility\": \"medium\",\n    \"approach\": \"建议基于行人属性大模型（cap_style 类别）进行微调，增加自定义帽子款式类别（渔夫帽、鸭舌帽等）。若现有 cap_style 精度不足，可考虑引入新的训练数据集重新训练分类头。\",\n    \"data_requirements\": \"需要收集包含渔夫帽、无檐帽、鸭舌帽、安全帽、头盔、连衣帽等 6 类帽子款式的标注图像数据。建议每个类别不少于 1000 张，覆盖不同场景、光照、遮挡条件。标注规范需统一帽子款式的定义（如渔夫帽的帽檐形状、连衣帽的兜帽形态等）。\",\n    \"compute_requirements\": \"基于 Ascend 310/710 或 T4 等硬件，训练时间预估 5-10 小时（取决于数据量和模型结构）。\",\n    \"engineering_work\": \"模型结构微调、数据清洗与标注、训练脚本调整、精度验证与部署测试。\",\n    \"estimated_timeline\": \"4-6 周（含数据准备、训练、验证、部署）。\",\n    \"estimated_cost\": \"人力成本为主，数据标注成本约 1-2 万（视规模而定），计算资源成本约 2-5 千（云资源）。\",\n    \"dependencies\": [\n      \"现有行人属性大模型版本 2.21.x 或更高\",\n      \"帽子款式标注数据集\",\n      \"训练与部署环境（Ascend/CUDA）\"\n    ]\n  ,\n  \"risks\": [\n    \"帽子款式边界模糊（如鸭舌帽与渔夫帽的区分标准）\",\n    \"极端场景下（遮挡、低光照）精度下降\",\n    \"现有模型特征提取能力对细粒度帽子分类的适配性\"\n  ]\n  },\n  \"expected_performance\": {\n    \"baseline\": \"基于 cap_style 现有精度（97.83%），增加自定义类别后，预期 F1 分数在 0.90-0.95 区间，但需验证。\",\n    \"target\": \"6 类帽子款式识别 mAP > 0.90，召回率 > 0.92。\"\n  ,\n  \"uncertainty\": \"高精度依赖于数据质量与标注一致性；细粒度分类在复杂场景下可能波动。\"\n  }\n  ,\n  \"recommendation\": \"直接支持帽子款式区分（渔夫帽、鸭舌帽等）的模型不存在。建议采用行人属性大模型作为基础，通过增加自定义类别训练实现。需投入数据准备与微调工作。\"\n}",
+    "structured_output": {
+      "requirement_summary": "客户要求区分帽子款式：渔夫帽、无檐帽、鸭舌帽、安全帽、头盔、连衣帽，人体属性模型是否支持？",
+      "direct_match": {
+        "exists": false,
+        "summary": "检索到的证据中未找到直接支持区分渔夫帽、无檐帽、鸭舌帽、安全帽、头盔、连衣帽这 6 类帽子款式的现成模型。",
+        "evidence": []
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "行人属性大模型（2.21.0/2.21.1 版本）",
+          "label_schema": "包含 cap_style（帽子样式）和 cap_color（帽子颜色）属性。cap_style 类别包含 hat_style_type_none, st_ushanka 等具体帽型，但未覆盖渔夫帽、鸭舌帽等细分款式；类别定义需查阅 PDF 文档，仅部分可见。",
+          "training_data": "证据不足。文档提及训练集来源可能为大规模公开数据集，但未见具体样本量或标注规范描述。",
+          "reported_metrics": "cap_style 平均精度 97.83%，推荐阈值 0.900，过滤比例 1.66%；st_ushanka 精度 97.02%；st_helmet_style（头盔样式）平均精度 98.89%，推荐阈值 0.900。",
+          "covered_capability": "支持帽子类别检测（cap_style），支持头盔样式检测（st_helmet_style）。对于渔夫帽、鸭舌帽等细分款式，需确认是否属于 cap_style 的扩展类别或需要定制训练。",
+          "gap": "未明确列出渔夫帽、无檐帽、鸭舌帽等具体款式的类别定义；可能需要基于现有 cap_style 模型进行微调或增加自定义类别训练。",
+          "evidence": [
+            "evidence_id: 52874b6b3dae5a190f86fd51",
+            "evidence_id: ed7ec126f5251b2b62e1a512",
+            "evidence_id: c4f1d7f084a7f84ea5ed02c1"
+          ]
+        },
+        {
+          "model_or_solution": "非机动车属性大模型（安防方向）",
+          "label_schema": "支持车辆颜色、三轮车细分类等属性。未涉及人体头部或帽子类别。",
+          "training_data": "证据不足。文档提及输入分辨率（90*90, 120*120）及推荐阈值，但未详述训练集规模或数据来源。",
+          "reported_metrics": "三轮车细分类（st_tricycle）召回 98.6%；车辆颜色（color）ACC 0.95, recall 76.6%。",
+          "covered_capability": "不支持帽子款式识别。",
+          "gap": "目标对象不匹配（非机动车 vs 人体）。",
+          "evidence": [
+            "evidence_id: 3b429f956353161148093e4e"
+          ]
+        },
+        {
+          "model_or_solution": "服饰分类模型（Clothes_SD）",
+          "label_schema": "支持服装类别分类，如警察、囚犯、其他等（st_jurong_police, st_jurong_prisoner, st_jurong_others）。未包含帽子款式。",
+          "training_data": "使用数据为 HL 全量数据，标签顺序固定，输入尺寸 [128, 64] 或 [224, 224]。",
+          "reported_metrics": "F1 score 约 0.9746-0.9776，Precision/Recall 在 0.97-0.98 之间。",
+          "covered_capability": "支持人体服饰整体分类，可能无法区分头部帽子细节。",
+          "gap": "目标属性为帽子款式，非服饰整体；需扩展模型能力或重新训练。",
+          "evidence": [
+            "evidence_id: 5ff9aa433792455f49e555b3",
+            "evidence_id: fe4863b392231a077a254b55",
+            "evidence_id: 1a436115fa23d43f1bbe061a"
+          ]
+        },
+        {
+          "model_or_solution": "KM_classifier_Clothes_SD_nart_ 系列模型",
+          "label_schema": "山东监狱人体服饰分类，支持 st_jurong_police 等特定标签。无帽子类别。",
+          "training_data": "证据不足。基于监狱场景数据定制。",
+          "reported_metrics": "证据不足。",
+          "covered_capability": "支持人体服饰分类，未提及帽子。",
+          "gap": "类别不匹配。",
+          "evidence": [
+            "evidence_id: f837cb54b2639e7dc7aaff27",
+            "evidence_id: 23318a7afa50126f79400960"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "medium",
+        "approach": "建议基于行人属性大模型（cap_style 类别）进行微调，增加自定义帽子款式类别（渔夫帽、鸭舌帽等）。若现有 cap_style 精度不足，可考虑引入新的训练数据集重新训练分类头。",
+        "data_requirements": "需要收集包含渔夫帽、无檐帽、鸭舌帽、安全帽、头盔、连衣帽等 6 类帽子款式的标注图像数据。建议每个类别不少于 1000 张，覆盖不同场景、光照、遮挡条件。标注规范需统一帽子款式的定义（如渔夫帽的帽檐形状、连衣帽的兜帽形态等）。",
+        "compute_requirements": "基于 Ascend 310/710 或 T4 等硬件，训练时间预估 5-10 小时（取决于数据量和模型结构）。",
+        "engineering_work": "模型结构微调、数据清洗与标注、训练脚本调整、精度验证与部署测试。",
+        "estimated_timeline": "4-6 周（含数据准备、训练、验证、部署）。",
+        "estimated_cost": "人力成本为主，数据标注成本约 1-2 万（视规模而定），计算资源成本约 2-5 千（云资源）。",
+        "dependencies": [
+          "现有行人属性大模型版本 2.21.x 或更高",
+          "帽子款式标注数据集",
+          "训练与部署环境（Ascend/CUDA）"
+        ],
+        "risks": [
+          "帽子款式边界模糊（如鸭舌帽与渔夫帽的区分标准）",
+          "极端场景下（遮挡、低光照）精度下降",
+          "现有模型特征提取能力对细粒度帽子分类的适配性"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "基于 cap_style 现有精度（97.83%），增加自定义类别后，预期 F1 分数在 0.90-0.95 区间，但需验证。",
+        "target": "6 类帽子款式识别 mAP > 0.90，召回率 > 0.92。",
+        "uncertainty": "高精度依赖于数据质量与标注一致性；细粒度分类在复杂场景下可能波动。"
+      },
+      "recommendation": "直接支持帽子款式区分（渔夫帽、鸭舌帽等）的模型不存在。建议采用行人属性大模型作为基础，通过增加自定义类别训练实现。需投入数据准备与微调工作。"
+    }
+  }
+}

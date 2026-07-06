@@ -1,0 +1,384 @@
+{
+  "schema_version": "1.0",
+  "description": "迁移顾问评测集：由 migration_advisor.csv 结构化，用于 POST /test/migration-advisor 批量回归。",
+  "source_csv": "dataset/migration_advisor.csv",
+  "generated_at": "2026-06-01",
+  "default_setup": {
+    "force_migration_advisor": true,
+    "session_id_prefix": "mig_eval",
+    "image": null
+  },
+  "trace_review_rubric_ref": "dataset/agent_trace_eval.json#trace_review_rubric",
+  "expect": {
+    "artifacts": ["migration_advisor_report.json", "migration_advisor_report.md"],
+    "must_not_tools": ["pipeline_eval"],
+    "report_sections_any": [
+      "需求摘要",
+      "是否存在直接同款",
+      "相似模型",
+      "迁移方案",
+      "建议"
+    ]
+  },
+  "ground_truth_defaults": {
+    "must_disclose_if": [
+      {
+        "condition": "no_direct_support",
+        "phrases_any": ["不能直接", "无直接", "不支持", "需定制", "证据不足", "否"]
+      }
+    ],
+    "must_not_claim": ["无需任何改动即可直接支持"]
+  },
+  "cases": [
+    {
+      "case_id": "MIG-001",
+      "source_index": 1,
+      "title": "头盔颜色九类枚举",
+      "query": "香港项目要求识别「头盔颜色：黑、白、灰、红、蓝、黄、绿、紫、迷彩」，现有人脸属性模型是否能直接支持？",
+      "tags": ["颜色", "头盔", "人脸属性", "迁移"]
+    },
+    {
+      "case_id": "MIG-002",
+      "source_index": 2,
+      "title": "头盔花纹",
+      "query": "客户要识别「头盔是否有花纹」，推荐什么模型？",
+      "tags": ["头盔", "推荐模型"]
+    },
+    {
+      "case_id": "MIG-003",
+      "source_index": 3,
+      "title": "行人发型",
+      "query": "监控画面中要判断行人「短发、长发、光头、其他」，用什么模型？",
+      "tags": ["人体属性", "发型"]
+    },
+    {
+      "case_id": "MIG-004",
+      "source_index": 4,
+      "title": "纹身有无",
+      "query": "香港人体属性中要求识别「纹身有无」，普通人体属性模型是否直接支持？",
+      "tags": ["纹身", "人体属性"]
+    },
+    {
+      "case_id": "MIG-005",
+      "source_index": 5,
+      "title": "纹身位置",
+      "query": "客户要求识别「纹身位置：面部、颈部、手部、腿部、背部、无法判断」，推荐什么方案？",
+      "tags": ["纹身", "位置枚举"]
+    },
+    {
+      "case_id": "MIG-006",
+      "source_index": 6,
+      "title": "口罩颜色",
+      "query": "口罩颜色要识别黑、白、灰、红、蓝、黄、绿、紫、迷彩，用什么模型？",
+      "tags": ["口罩", "颜色"]
+    },
+    {
+      "case_id": "MIG-007",
+      "source_index": 7,
+      "title": "帽子款式",
+      "query": "客户要求区分帽子款式：渔夫帽、无檐帽、鸭舌帽、安全帽、头盔、连衣帽，人体属性模型是否支持？",
+      "tags": ["帽子", "人体属性"]
+    },
+    {
+      "case_id": "MIG-008",
+      "source_index": 8,
+      "title": "骑行人头盔开脸/全脸",
+      "query": "骑行人帽子款式要区分 open-face helmet 和 full-face helmet，推荐什么模型？",
+      "tags": ["头盔", "骑行人"]
+    },
+    {
+      "case_id": "MIG-009",
+      "source_index": 9,
+      "title": "口罩佩戴位置",
+      "query": "人脸属性中「口罩位置：正常佩戴、露出鼻孔、露出嘴巴、未戴口罩」是否已支持？",
+      "tags": ["口罩", "人脸属性"]
+    },
+    {
+      "case_id": "MIG-010",
+      "source_index": 10,
+      "title": "鞋子款式",
+      "query": "客户要求识别「鞋子款式：运动鞋、皮鞋、凉鞋/拖鞋、靴子、其他/无法判断」，现有人体属性模型是否能直接支持？",
+      "tags": ["鞋子", "人体属性"]
+    },
+    {
+      "case_id": "MIG-011",
+      "source_index": 11,
+      "title": "体型",
+      "query": "客户要求识别「体型：正常、胖、瘦」，用什么方案？",
+      "tags": ["体型", "人体属性"]
+    },
+    {
+      "case_id": "MIG-012",
+      "source_index": 12,
+      "title": "上衣颜色含迷彩",
+      "query": "上衣颜色要求包含「迷彩」，是否建议保留这个枚举？",
+      "tags": ["颜色", "迷彩", "上衣"]
+    },
+    {
+      "case_id": "MIG-013",
+      "source_index": 13,
+      "title": "下装颜色含迷彩",
+      "query": "下装颜色要求包含「迷彩」，能否直接照原枚举做？",
+      "tags": ["颜色", "迷彩", "下装"]
+    },
+    {
+      "case_id": "MIG-014",
+      "source_index": 14,
+      "title": "上衣图案",
+      "query": "人体属性要识别「上衣图案：纯色、条纹、图案、拼接、格子」，是否已支持？",
+      "tags": ["图案", "上衣"]
+    },
+    {
+      "case_id": "MIG-015",
+      "source_index": 15,
+      "title": "下装图案",
+      "query": "人体属性要识别「下装图案：纯色、条纹、图案、拼接、格子」，是否已支持？",
+      "tags": ["图案", "下装"]
+    },
+    {
+      "case_id": "MIG-016",
+      "source_index": 16,
+      "title": "头巾颜色",
+      "query": "客户要求识别「头巾颜色：黑、白、灰、红、蓝、黄、绿、紫」，推荐什么模型？",
+      "tags": ["头巾", "颜色"]
+    },
+    {
+      "case_id": "MIG-017",
+      "source_index": 17,
+      "title": "颈巾颜色",
+      "query": "客户要求识别「颈巾颜色：黑、白、灰、红、蓝、黄、绿、紫」，推荐什么模型？",
+      "tags": ["颈巾", "颜色"]
+    },
+    {
+      "case_id": "MIG-018",
+      "source_index": 18,
+      "title": "武器附属物",
+      "query": "附属物中要识别「武器：刀、棍、铁锤、疑似手枪物体」，普通附属物模型是否直接支持？",
+      "tags": ["武器", "附属物", "安全"]
+    },
+    {
+      "case_id": "MIG-019",
+      "source_index": 19,
+      "title": "人体角度",
+      "query": "行人「人体角度：正面、侧面、背面」是否已支持？",
+      "tags": ["人体角度", "人体属性"]
+    },
+    {
+      "case_id": "MIG-020",
+      "source_index": 20,
+      "title": "上衣长度",
+      "query": "行人「上衣长度：长袖、短袖、无法判断、背心」是否都已支持？",
+      "tags": ["上衣长度", "人体属性"]
+    },
+    {
+      "case_id": "MIG-021",
+      "source_index": 21,
+      "title": "骑行人上衣长度",
+      "query": "骑行人「上衣长度：长袖、短袖、赤膊、无法判断、背心」是否直接支持？",
+      "tags": ["骑行人", "上衣长度"]
+    },
+    {
+      "case_id": "MIG-022",
+      "source_index": 22,
+      "title": "骑行人载具类型",
+      "query": "客户要求判断「骑行人：单车、滑板车、wheelchair」，推荐什么模型？",
+      "tags": ["骑行人", "载具"]
+    },
+    {
+      "case_id": "MIG-023",
+      "source_index": 23,
+      "title": "香港车辆类型",
+      "query": "香港车辆类型要识别 Red PLB、Green PLB、Tow truck、container truck，现有机动车属性是否完全支持？",
+      "tags": ["车辆类型", "香港"]
+    },
+    {
+      "case_id": "MIG-024",
+      "source_index": 24,
+      "title": "香港车辆颜色 VALID_Color",
+      "query": "香港车辆颜色要按 VALID_Color 页签识别，是否只支持常规十种颜色？",
+      "tags": ["车辆颜色", "香港"]
+    },
+    {
+      "case_id": "MIG-025",
+      "source_index": 25,
+      "title": "车款识别",
+      "query": "客户要求识别「车款：Tesla Model Y、Tesla Model 3、Toyota Alphard、BYD Sealion 7、Toyota Hiace」，推荐什么方案？",
+      "tags": ["车款", "车辆属性"]
+    },
+    {
+      "case_id": "MIG-026",
+      "source_index": 26,
+      "title": "轮毂颜色",
+      "query": "车辆轮毂/呔铃颜色要识别黑、白、灰、红、蓝、黄、棕、绿、紫、粉、其他，推荐什么模型？",
+      "tags": ["轮毂", "颜色"]
+    },
+    {
+      "case_id": "MIG-027",
+      "source_index": 27,
+      "title": "车身图案",
+      "query": "客户要求识别「车身图案：有图案、无图案」，是否已有结构化车辆属性直接支持？",
+      "tags": ["车身图案", "车辆属性"]
+    },
+    {
+      "case_id": "MIG-028",
+      "source_index": 28,
+      "title": "颜色开集识别",
+      "query": "客户提出「颜色开集识别」，允许用户从色板选择颜色或从视频截图取样，推荐什么方案？",
+      "tags": ["开集", "颜色"]
+    },
+    {
+      "case_id": "MIG-029",
+      "source_index": 29,
+      "title": "动作/行为识别",
+      "query": "客户要求「动作识别/人体行为识别」，例如移动方向、跑步，推荐什么方案？",
+      "tags": ["行为识别", "动作"]
+    },
+    {
+      "case_id": "MIG-030",
+      "source_index": 30,
+      "title": "公交路线号等特殊 OCR",
+      "query": "客户要求识别公交路线号、集装箱号、container length、probationary sign、learner sign，是否能用普通车辆属性模型直接完成？",
+      "tags": ["OCR", "车辆属性", "特殊目标"]
+    },
+    {
+      "case_id": "MIG-031",
+      "source_index": 31,
+      "title": "眼镜款式",
+      "query": "客户要求识别「行人是否戴眼镜，以及眼镜款式：无眼镜、太阳镜、透明色」，人体属性模型是否支持？",
+      "tags": ["眼镜", "人体属性"]
+    },
+    {
+      "case_id": "MIG-032",
+      "source_index": 32,
+      "title": "反光衣",
+      "query": "客户要求判断「行人是否穿反光衣」，推荐什么模型？",
+      "tags": ["反光衣", "人体属性"]
+    },
+    {
+      "case_id": "MIG-033",
+      "source_index": 33,
+      "title": "手机使用状态",
+      "query": "客户要识别「行人是否携带手机，以及玩手机、打电话、拍照状态」，用什么模型？",
+      "tags": ["手机", "行为", "人体属性"]
+    },
+    {
+      "case_id": "MIG-034",
+      "source_index": 34,
+      "title": "胸前抱物",
+      "query": "客户要求判断「行人胸前是否抱物」，现有人体属性是否支持？",
+      "tags": ["抱物", "人体属性"]
+    },
+    {
+      "case_id": "MIG-035",
+      "source_index": 35,
+      "title": "手套佩戴",
+      "query": "客户要求识别「行人是否佩戴手套」，推荐什么模型？",
+      "tags": ["手套", "人体属性"]
+    },
+    {
+      "case_id": "MIG-036",
+      "source_index": 36,
+      "title": "包款式",
+      "query": "客户要求识别「包款式：无背包、单肩包、手提包、双肩包、腰包、手拉箱、斜孭袋」，是否已支持？",
+      "tags": ["包", "人体属性"]
+    },
+    {
+      "case_id": "MIG-037",
+      "source_index": 37,
+      "title": "包颜色",
+      "query": "客户要求识别「包颜色：黑、白、灰、红、蓝、黄、绿、紫」，人体属性模型是否支持？",
+      "tags": ["包", "颜色"]
+    },
+    {
+      "case_id": "MIG-038",
+      "source_index": 38,
+      "title": "行人姿态",
+      "query": "客户要求判断「行人姿态：站立、蹲坐、躺卧、无法判断」，是否需要大模型？",
+      "tags": ["姿态", "人体属性"]
+    },
+    {
+      "case_id": "MIG-039",
+      "source_index": 39,
+      "title": "工作服款式",
+      "query": "客户要求识别「工作服款式：商务制服、工人服、厨师服、医护服、警服、消防服」等，是否支持？",
+      "tags": ["工作服", "人体属性"]
+    },
+    {
+      "case_id": "MIG-040",
+      "source_index": 40,
+      "title": "抽烟识别",
+      "query": "客户要求判断「行人是否抽烟」，人体属性是否支持？",
+      "tags": ["抽烟", "人体属性"]
+    },
+    {
+      "case_id": "MIG-041",
+      "source_index": 41,
+      "title": "非机动车类型",
+      "query": "非机动车要识别「摩托车、电动车、自行车、三轮车、婴儿车、轮椅、其他非电动车」，是否支持？",
+      "tags": ["非机动车", "车辆属性"]
+    },
+    {
+      "case_id": "MIG-042",
+      "source_index": 42,
+      "title": "三轮车类型",
+      "query": "客户要求识别「三轮车类型：斗式、蓬式、箱式」，推荐什么模型？",
+      "tags": ["三轮车", "非机动车"]
+    },
+    {
+      "case_id": "MIG-043",
+      "source_index": 43,
+      "title": "非机动车颜色",
+      "query": "客户要求识别「非机动车颜色：黑、白、灰、红、蓝、黄、棕、绿、紫、粉」，是否已支持？",
+      "tags": ["非机动车", "颜色"]
+    },
+    {
+      "case_id": "MIG-044",
+      "source_index": 44,
+      "title": "电动车前载物",
+      "query": "客户要求判断「电动车前载物：有、无、无法判断」，是否支持？",
+      "tags": ["电动车", "载物"]
+    },
+    {
+      "case_id": "MIG-045",
+      "source_index": 45,
+      "title": "电动车后载物",
+      "query": "客户要求判断「电动车后载物：密封性载物箱、其他携带物品、无法判断」，是否支持？",
+      "tags": ["电动车", "载物"]
+    },
+    {
+      "case_id": "MIG-046",
+      "source_index": 46,
+      "title": "电动车挡风布",
+      "query": "客户要求识别「电动车挡风布：有、无、无法判断」，是否支持？",
+      "tags": ["电动车", "附属物"]
+    },
+    {
+      "case_id": "MIG-047",
+      "source_index": 47,
+      "title": "电动车朝向",
+      "query": "客户要求识别「电动车车辆朝向：车头正前、正后、偏左、偏右、无法判断」，是否支持？",
+      "tags": ["电动车", "朝向"]
+    },
+    {
+      "case_id": "MIG-048",
+      "source_index": 48,
+      "title": "电动车靠背",
+      "query": "客户要求判断「电动车是否有靠背」，是否支持？",
+      "tags": ["电动车", "附属物"]
+    },
+    {
+      "case_id": "MIG-049",
+      "source_index": 49,
+      "title": "天窗识别",
+      "query": "机动车要判断「天窗：有天窗、无天窗、无法判断」，是否已支持？",
+      "tags": ["天窗", "车辆属性"]
+    },
+    {
+      "case_id": "MIG-050",
+      "source_index": 50,
+      "title": "行李架识别",
+      "query": "客户要求识别「车辆是否有行李架」，现有机动车属性是否支持？",
+      "tags": ["行李架", "车辆属性"]
+    }
+  ]
+}

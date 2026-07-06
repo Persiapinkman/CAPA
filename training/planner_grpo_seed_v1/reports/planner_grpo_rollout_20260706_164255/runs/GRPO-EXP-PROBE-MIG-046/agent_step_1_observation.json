@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "烟雾",
+    "finish_after_tool": false
+  },
+  "_thought": "用户指令明确要求：1) 先对图片执行烟雾检测（检查烟雾的存在与情况）；2) 若检测不具备把握，再进行‘烟雾异常检测迁移评估’。因此当前应优先执行目标检测，确认是否存在烟雾。query_trajectories 中已有当前查询，指代清晰。由于用户已说明图像存在，直接调用 qwen_detection 或 rexomni_detection 均可，这里选择 qwen_detection 执行烟雾检测。根据 decision_type 规则，若工具结果可直接结束则 finish_after_tool=true；但用户提到‘如果没有把握再转迁移评估’，说明当前检测是中间步骤，故 finish_after_tool=false。同时优先匹配常规搜索/知识库模式。当前 query 为‘这是当前查询’，直接调用 qwen_detection。"
+}

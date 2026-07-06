@@ -1,0 +1,11 @@
+{
+  "session_id": "cacc6160-e8d6-4bcb-8345-b2250c337f32",
+  "run_stamp": "20260518_175407_7336bfa6",
+  "stage": "migration_abstraction_response",
+  "step_index": 1,
+  "created_at": "2026-05-18T17:54:10+08:00",
+  "payload": {
+    "raw_response": "{\n  \"raw_requirement\": \"检测电子元器异常，用什么模型？\",\n  \"task_family\": [\n    \"制造业缺陷检测\",\n    \"电子元件质量检测\",\n    \"表面缺陷分类\",\n    \"目标异常检测\",\n    \"工业质量评估\"\n  ],\n  \"visual_targets\": [\n    \"电子元件\",\n    \"电路板\",\n    \"元器件\",\n    \"表面\"\n  ],\n  \"capability_types\": [\n    \"异常检测\",\n    \"分类\",\n    \"检测\",\n    \"属性识别\"\n  ],\n  \"constraints\": [\n    \"数据稀缺性：缺乏预训练异常数据集\",\n    \"环境因素：光线、角度、组装差异\",\n    \"部署场景：工业生产线实时性要求\",\n    \"误检管控：需严格控制漏检和误检率\",\n    \"尺寸挑战：元件尺寸微小，像素尺度小\"\n  ],\n  \"retrieval_queries\": [\n    \"工业电子元件缺陷检测异常识别模型推荐\",\n    \"PCB电路板元器件表面瑕疵分类检测方案\",\n    \"机器视觉小目标缺陷检测方案选型\",\n    \"无监督异常检测在电子制造中应用案例\",\n    \"工业相机下元器件检测模型性能对比\",\n    \"小样本缺陷检测精度与部署成本平衡策略\",\n    \"电子元件外观质量检测模型部署极限与优化\"\n  ],\n  \"must_answer_sections\": [\n    \"coverage\",\n    \"gaps\",\n    \"iteration\",\n    \"performance\",\n    \"cost\",\n    \"dependencies\",\n    \"counter_cases\",\n    \"deploy_risks\",\n    \"uncertainties\",\n    \"next_steps\"\n  ]\n}",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260518_175407_7336bfa6"
+  }
+}

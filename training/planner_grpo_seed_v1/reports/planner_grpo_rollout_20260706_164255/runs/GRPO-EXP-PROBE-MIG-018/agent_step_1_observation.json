@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "migration_advisor",
+  "_action_input": {
+    "user_query": "请先对图里的垃圾车做快速探针，探针结果不确定的话，再给一个垃圾车识别的可行性方案。",
+    "use_image": true,
+    "use_visual_probe": true,
+    "finish_after_tool": true
+  },
+  "_thought": "用户的问题是进行垃圾车快速探针，如果结果不确定再给可行性方案。用户明确给出了图片，图片中确实有垃圾车。需求本质是“评估现有能力是否能检测这张图里的垃圾车 -> 如果做不了，给迁移方案”，因此应路由到 migration_advisor，而不是直接用 qwen_detection/rxomnidetection/pipeline_eval。migration_advisor 室内会先按图做视觉探针，再给出可行性报告与方案，符合“探针+可行性方案”的需求。image_path/可用，use_image=true，use_visual_probe=true，finish_after_tool=true，因为报告发布后即可替代表达所需。不是简单的目标检测任务，而是多元能力融合的需求。"
+}

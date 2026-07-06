@@ -1,0 +1,154 @@
+{
+  "session_id": "ma_dataset_full_35",
+  "run_stamp": "20260603_103258_84b6a486",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-06-03T10:34:20+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\"requirement_summary\": \"用户需要识别“包款式”（无背包、单肩包、手提包、双肩包、腰包、手拉箱、斜孭袋），询问是否已支持。\", \"direct_match\": {\"exists\": false, \"summary\": \"检索结果中未发现直接支持用户指定7类“包款式”识别的模型。现有模型主要聚焦于车辆属性、行人属性、台标检测、行李检测/特征等，未包含用户所需的包款式细分类标签体系。\", \"evidence\": []}, \"similar_assets\": [{\"model_or_solution\": \"KM_senu_hk_suitcase_feature_256_nart_cuda12.1-trt8.6.0-fp16-L4_b1_1.2.0.model\", \"label_schema\": \"目标名称：行李；算法名称：香港机场监控-行李特征模型；算法类型：特征。标签体系未明确列出具体包款细分，主要关注行李特征。\", \"training_data\": \"数据源：模型发版记录汇总.xlsx、ones语料汇总.xlsx。训练数据来源未明确文档，需参考项目文档。\", \"reported_metrics\": \"无明确精度数据，仅记录更新时间和版本（1.2.0）。\", \"covered_capability\": \"行李特征提取/检测\", \"gap\": \"缺少用户指定的具体包款分类标签（单肩、手提、双肩等）。\", \"evidence\": [\"526880d8168c387d935868f3\"]}, {\"model_or_solution\": \"KM_essos_HKC_Det_Suitcase_VPS_recover_nart_cuda12.1-trt8.6.0-fp16-L4_b16_2.2.19.model\", \"label_schema\": \"目标名称：行李；检测类别：行李箱（不包括拉杆）；标签：suitcase。\", \"training_data\": \"数据源：模型发版记录汇总.xlsx、ones语料汇总.xlsx、PDFs/v2.2.19（龙门架）.pdf。训练数据来源为机场监控数据。\", \"reported_metrics\": \"mAP75（龙门架）：v2.2.19版本为0.9836。\", \"covered_capability\": \"行李箱检测（机场龙门架场景）\", \"gap\": \"仅识别行李箱，未覆盖单肩包、手提包等细分类别。\", \"evidence\": [\"5de3de6796ddc390f461dce3\", \"d8541687fdc82e559952036e\"]}, {\"model_or_solution\": \"KM_classifier_Vehicle_FullAttr_3.0.2\", \"label_schema\": \"车辆粗分类（st_car, st_van等）、颜色、细分类（st_dump_style等）。\", \"training_data\": \"数据源：PDFs/安防方向--车辆属性大模型更新.pdf。\", \"reported_metrics\": \"车辆粗分类ACC：0.887/0.874（cpu-ppl2-fp32）；颜色ACC：0.887/0.874。\", \"covered_capability\": \"车辆属性分类\", \"gap\": \"对象为车辆，非包款式。\", \"evidence\": [\"28d11e731adb475351a4549f\"]}, {\"model_or_solution\": \"KM_classifier_Ped_ClothBanner_nart_cuda11.0-trt7.1-fp16-T4_b1_0.0.1.model\", \"label_schema\": \"人体状衣二分类；标签：有/无醒目大字。\", \"training_data\": \"数据源：模型发版记录汇总.xlsx。\", \"reported_metrics\": \"未明确提供。\", \"covered_capability\": \"人体衣着属性二分类\", \"gap\": \"对象为人，非包款式。\", \"evidence\": [\"415cfacb726c399a33e408c3\"]}, {\"model_or_solution\": \"PDFs/台标检测模型发布记录.pdf p14\", \"label_schema\": \"台标检测，22类+1background。\", \"training_data\": \"基于yolox-small训练，精度相比原始发版对齐。\", \"reported_metrics\": \"fppi@0.1-recall：95.13（level=32）。\", \"covered_capability\": \"多类别检测（台标）\", \"gap\": \"对象为台标，非包款式。\", \"evidence\": [\"0b8bf719e67c47e07be4eabc\"]}, {\"model_or_solution\": \"PDFs/非机车属性全模型.pdf p2\", \"label_schema\": \"摩托车、电动车、自行车、三轮车、婴儿车、轮椅等粗分类。\", \"training_data\": \"数据源：PDFs/非机车属性全模型.pdf。\", \"reported_metrics\": \"电动车粗分类precision/recall：93.6/93.3（无阈值）；97.2/85.8（有阈值）。\", \"covered_capability\": \"非机车属性粗分类\", \"gap\": \"对象为非机动车，非包款式。\", \"evidence\": [\"cffe7beb5a41ae2acc42088e\"]}, {\"model_or_solution\": \"Trashcan\", \"label_schema\": \"垃圾桶状态（st_trashcan_status）。\", \"training_data\": \"数据源：adela/adela_release_records.jsonl。\", \"reported_metrics\": \"acc：0.9769（huiliu1026数据集）；0.9217（all1206数据集）。\", \"covered_capability\": \"垃圾桶状态分类\", \"gap\": \"对象为垃圾桶，非包款式。\", \"evidence\": [\"48b3570aa1b8747b66da1a42\"]}, {\"model_or_solution\": \"st_dump_load\", \"label_schema\": \"渣土车空载状态（st_dump_load）：密闭、空载未密闭、满载未密闭等。\", \"training_data\": \"数据源：adela/adela_release_records.jsonl。\", \"reported_metrics\": \"acc：0.1072（dumpfull_204数据集）；0.1072（mPrec）；0.3333（mA）。\", \"covered_capability\": \"车辆状态细分类\", \"gap\": \"对象为渣土车，非包款式。\", \"evidence\": [\"a9b60db37304ae2e6a9b5e52\"]}, {\"model_or_solution\": \"PDFs/车辆细分类（四级标签）.pdf p1\", \"label_schema\": \"车辆细分类：厂商-品牌-车系-年款，4级标签。\", \"training_data\": \"数据源：PDFs/车辆细分类（四级标签）.pdf。\", \"reported_metrics\": \"未明确提供。\", \"covered_capability\": \"车辆细分类\", \"gap\": \"对象为车辆，非包款式。\", \"evidence\": [\"91943c9ab741e12865f7f617\"]}], \"migration_plan\": {\"feasibility\": \"medium\", \"approach\": \"建议基于现有行李检测/特征模型（如KM_senu_hk_suitcase_feature_256...）进行标签体系迁移或微调，引入用户指定的7类包款标签。可参考车辆属性模型（KM_classifier_Vehicle_FullAttr_3.0.2）的标签体系设计经验，重新标注训练数据。\", \"data_requirements\": \"需收集包含用户指定7类包款（无背包、单肩包、手提包、双肩包、腰包、手拉箱、斜孭袋）的图像数据，标注规范需明确定义每类标签的边界和特征。\", \"compute_requirements\": \"证据不足\", \"engineering_work\": \"标签体系映射、模型微调/重训、推理接口适配。\", \"estimated_timeline\": \"3-6个月（取决于数据准备和微调难度）。\", \"estimated_cost\": \"证据不足\", \"dependencies\": [\"标注数据质量\", \"算力资源\", \"模型选型\"]\n  ,\n  \"risks\": [\"场景适配（如机场vs城市街道）\", \"数据不平衡风险\", \"标签定义模糊风险\"]\n}\n\n  \t\t  ,\n  \"expected_performance\": {\"baseline\": \"参考机场行李检测模型（mAP75 ~0.98），包款识别精度可能因场景差异而下降。\", \"target\": \"mAP > 0.90（需结合测试集验证）\", \"uncertainty\": \"高（缺乏具体测试集和场景定义）\"},\n  \"recommendation\": \"暂无直接支持模型，需定制开发或微调现有行李/物体识别模型。建议先进行标签体系梳理和少量样本验证可行性。\"\n}",
+    "structured_output": {
+      "requirement_summary": "用户需要识别“包款式”（无背包、单肩包、手提包、双肩包、腰包、手拉箱、斜孭袋），询问是否已支持。",
+      "direct_match": {
+        "exists": false,
+        "summary": "检索结果中未发现直接支持用户指定7类“包款式”识别的模型。现有模型主要聚焦于车辆属性、行人属性、台标检测、行李检测/特征等，未包含用户所需的包款式细分类标签体系。",
+        "evidence": []
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "KM_senu_hk_suitcase_feature_256_nart_cuda12.1-trt8.6.0-fp16-L4_b1_1.2.0.model",
+          "label_schema": "目标名称：行李；算法名称：香港机场监控-行李特征模型；算法类型：特征。标签体系未明确列出具体包款细分，主要关注行李特征。",
+          "training_data": "数据源：模型发版记录汇总.xlsx、ones语料汇总.xlsx。训练数据来源未明确文档，需参考项目文档。",
+          "reported_metrics": "无明确精度数据，仅记录更新时间和版本（1.2.0）。",
+          "covered_capability": "行李特征提取/检测",
+          "gap": "缺少用户指定的具体包款分类标签（单肩、手提、双肩等）。",
+          "evidence": [
+            "526880d8168c387d935868f3"
+          ]
+        },
+        {
+          "model_or_solution": "KM_essos_HKC_Det_Suitcase_VPS_recover_nart_cuda12.1-trt8.6.0-fp16-L4_b16_2.2.19.model",
+          "label_schema": "目标名称：行李；检测类别：行李箱（不包括拉杆）；标签：suitcase。",
+          "training_data": "数据源：模型发版记录汇总.xlsx、ones语料汇总.xlsx、PDFs/v2.2.19（龙门架）.pdf。训练数据来源为机场监控数据。",
+          "reported_metrics": "mAP75（龙门架）：v2.2.19版本为0.9836。",
+          "covered_capability": "行李箱检测（机场龙门架场景）",
+          "gap": "仅识别行李箱，未覆盖单肩包、手提包等细分类别。",
+          "evidence": [
+            "5de3de6796ddc390f461dce3",
+            "d8541687fdc82e559952036e"
+          ]
+        },
+        {
+          "model_or_solution": "KM_classifier_Vehicle_FullAttr_3.0.2",
+          "label_schema": "车辆粗分类（st_car, st_van等）、颜色、细分类（st_dump_style等）。",
+          "training_data": "数据源：PDFs/安防方向--车辆属性大模型更新.pdf。",
+          "reported_metrics": "车辆粗分类ACC：0.887/0.874（cpu-ppl2-fp32）；颜色ACC：0.887/0.874。",
+          "covered_capability": "车辆属性分类",
+          "gap": "对象为车辆，非包款式。",
+          "evidence": [
+            "28d11e731adb475351a4549f"
+          ]
+        },
+        {
+          "model_or_solution": "KM_classifier_Ped_ClothBanner_nart_cuda11.0-trt7.1-fp16-T4_b1_0.0.1.model",
+          "label_schema": "人体状衣二分类；标签：有/无醒目大字。",
+          "training_data": "数据源：模型发版记录汇总.xlsx。",
+          "reported_metrics": "未明确提供。",
+          "covered_capability": "人体衣着属性二分类",
+          "gap": "对象为人，非包款式。",
+          "evidence": [
+            "415cfacb726c399a33e408c3"
+          ]
+        },
+        {
+          "model_or_solution": "PDFs/台标检测模型发布记录.pdf p14",
+          "label_schema": "台标检测，22类+1background。",
+          "training_data": "基于yolox-small训练，精度相比原始发版对齐。",
+          "reported_metrics": "fppi@0.1-recall：95.13（level=32）。",
+          "covered_capability": "多类别检测（台标）",
+          "gap": "对象为台标，非包款式。",
+          "evidence": [
+            "0b8bf719e67c47e07be4eabc"
+          ]
+        },
+        {
+          "model_or_solution": "PDFs/非机车属性全模型.pdf p2",
+          "label_schema": "摩托车、电动车、自行车、三轮车、婴儿车、轮椅等粗分类。",
+          "training_data": "数据源：PDFs/非机车属性全模型.pdf。",
+          "reported_metrics": "电动车粗分类precision/recall：93.6/93.3（无阈值）；97.2/85.8（有阈值）。",
+          "covered_capability": "非机车属性粗分类",
+          "gap": "对象为非机动车，非包款式。",
+          "evidence": [
+            "cffe7beb5a41ae2acc42088e"
+          ]
+        },
+        {
+          "model_or_solution": "Trashcan",
+          "label_schema": "垃圾桶状态（st_trashcan_status）。",
+          "training_data": "数据源：adela/adela_release_records.jsonl。",
+          "reported_metrics": "acc：0.9769（huiliu1026数据集）；0.9217（all1206数据集）。",
+          "covered_capability": "垃圾桶状态分类",
+          "gap": "对象为垃圾桶，非包款式。",
+          "evidence": [
+            "48b3570aa1b8747b66da1a42"
+          ]
+        },
+        {
+          "model_or_solution": "st_dump_load",
+          "label_schema": "渣土车空载状态（st_dump_load）：密闭、空载未密闭、满载未密闭等。",
+          "training_data": "数据源：adela/adela_release_records.jsonl。",
+          "reported_metrics": "acc：0.1072（dumpfull_204数据集）；0.1072（mPrec）；0.3333（mA）。",
+          "covered_capability": "车辆状态细分类",
+          "gap": "对象为渣土车，非包款式。",
+          "evidence": [
+            "a9b60db37304ae2e6a9b5e52"
+          ]
+        },
+        {
+          "model_or_solution": "PDFs/车辆细分类（四级标签）.pdf p1",
+          "label_schema": "车辆细分类：厂商-品牌-车系-年款，4级标签。",
+          "training_data": "数据源：PDFs/车辆细分类（四级标签）.pdf。",
+          "reported_metrics": "未明确提供。",
+          "covered_capability": "车辆细分类",
+          "gap": "对象为车辆，非包款式。",
+          "evidence": [
+            "91943c9ab741e12865f7f617"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "medium",
+        "approach": "建议基于现有行李检测/特征模型（如KM_senu_hk_suitcase_feature_256...）进行标签体系迁移或微调，引入用户指定的7类包款标签。可参考车辆属性模型（KM_classifier_Vehicle_FullAttr_3.0.2）的标签体系设计经验，重新标注训练数据。",
+        "data_requirements": "需收集包含用户指定7类包款（无背包、单肩包、手提包、双肩包、腰包、手拉箱、斜孭袋）的图像数据，标注规范需明确定义每类标签的边界和特征。",
+        "compute_requirements": "证据不足",
+        "engineering_work": "标签体系映射、模型微调/重训、推理接口适配。",
+        "estimated_timeline": "3-6个月（取决于数据准备和微调难度）。",
+        "estimated_cost": "证据不足",
+        "dependencies": [
+          "标注数据质量",
+          "算力资源",
+          "模型选型"
+        ],
+        "risks": [
+          "场景适配（如机场vs城市街道）",
+          "数据不平衡风险",
+          "标签定义模糊风险"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "参考机场行李检测模型（mAP75 ~0.98），包款识别精度可能因场景差异而下降。",
+        "target": "mAP > 0.90（需结合测试集验证）",
+        "uncertainty": "高（缺乏具体测试集和场景定义）"
+      },
+      "recommendation": "暂无直接支持模型，需定制开发或微调现有行李/物体识别模型。建议先进行标签体系梳理和少量样本验证可行性。"
+    }
+  }
+}

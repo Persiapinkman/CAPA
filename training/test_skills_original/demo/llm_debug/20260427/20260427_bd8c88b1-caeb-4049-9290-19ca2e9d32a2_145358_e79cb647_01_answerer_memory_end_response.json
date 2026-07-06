@@ -1,0 +1,11 @@
+{
+  "session_id": "bd8c88b1-caeb-4049-9290-19ca2e9d32a2",
+  "run_stamp": "20260427_145358_e79cb647",
+  "stage": "answerer_memory_end_response",
+  "step_index": 1,
+  "created_at": "2026-04-27T14:55:14+08:00",
+  "payload": {
+    "raw_response": "{\n  \"final_answer\": \"根据企业知识库检索结果，模型 `km_classifier_safety_rope_nart_cpu-ppl2-fp32_b16_0.2.1.model` 的推荐配置信息如下：**CPU-PPL2-FP32**。\\n\\n该模型属于“中车工厂 - 属性模型”，旨在针对安全绳检测任务进行部署。该模型支持多种硬件平台和精度配置，具体信息如下：\\n\\n*   **CPU 版本**：\\n    *   **推荐配置**：`cpu-ppl2-fp32`\\n    *   设备：CPU\\n\\n*   **T4 (T4_A100-A/G) GPU 版本**：\\n    *   FP32 版：`cuda11.0-trt7.1-fp32-T4`\\n    *   INT8 版：`cuda11.0-trt7.1-int8-T4`\\n    *   FP16 版：`cuda11.0-trt7.1-fp16-T4`\\n\\n*   **P4 (P4) GPU 版本**：\\n    *   INT8 版：`cuda11.0-trt7.1-int8-P4`\\n    *   FP16 版：`cuda11.0-trt7.1-fp16-P4`\\n\\n**关键信息补充**：\\n*   模型所有者：朱帅\\n*   算法类型：属性分类\\n*   存储格式：NART（适用于实时推理）\\n*   量化策略：部分版本支持 b16 量化。\\n\\n如果您需要部署到其他平台（如其他 GPU）或需要更低延迟的配置，可参考上述列表中选择对应的版本。\"\n}",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260427_145358_e79cb647"
+  }
+}

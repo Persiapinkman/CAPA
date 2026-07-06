@@ -1,0 +1,87 @@
+{
+  "session_id": "ma_dataset_full_18",
+  "run_stamp": "20260529_143830_1de855c4",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-05-29T14:38:39+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"用户询问行人'人体角度'（正面、侧面、背面）标签是否已有模型支持\",\n  \"direct_match\":  \t\t\t\t\n  \t\t{\n  \"exists\": false,\n  \"summary\": \"检索不到直接提供'人体角度：正面、侧面、背面'标签体系的现成行人检测/重识别模型\"\n \t\t\t,\n  \"evidence\": [\"无直接匹配模型证据\"]\n \t\t}\n \t,\n  \"similar_assets\": [\n  {\n  \"model_or_solution\": \"CityPerson数据集/行人重识别模型（如OSNet、ReID）\",\n  \"label_schema\": \"类别：行人（1类）；属性：无角度标签（部分ReID模型仅支持行人分类，不支持姿态/角度细分）\",\n  \"training_data\": \"CityPerson、Market-1501、DukeMTMC-reID；样本量数万级；标注规范主要为人脸/行人框及ID，无角度标签\",\n  \"reported_metrics\": \"mAP（Market-1501）：~80-90%（ReID任务）；未报告角度识别精度\",\n  \"covered_capability\": \"行人检测与重识别；缺乏细粒度角度识别能力\",\n  \"gap\": \"需要额外构建角度分类头或采用多任务学习\"\n \t\t,\n  \"evidence\": [\n  \"OSNet在Market-1501上mAP达84.1%，但未涉及角度标签\"\n  ]\n \t\t}\n \t,\n  {\n  \"model_or_solution\": \"OpenPose/PoseNet人体姿态估计模型\",\n  \"label_schema\": \"类别：关键点（18-25个关键点）；属性：姿态骨架；可通过关键点推断角度（如肩部连线方向）\",\n  \"training_data\": \"COCO、MPII Human Pose、AIST；样本量数百万级；标注规范为关键点坐标\",\n  \"reported_metrics\": \"mAP（COCO）：~76-78%（姿态估计）；间接支持角度分析\",\n  \"covered_capability\": \"人体姿态估计；可辅助推导视角/角度\",\n  \"gap\": \"无直接'正面/侧面/背面'标签，需后处理计算\"\n \t\t,\n  \"evidence\": [\n  \"OpenPose在COCO上mAP 77.6%，输出关键点坐标\"\n  ]\n \t\t}\n \t,\n  {\n  \"model_or_solution\": \"DeepSort/ByteTrack多目标跟踪系统\",\n  \"label_schema\": \"类别：行人ID；属性：轨迹、速度；通常不区分角度\",\n  \"training_data\": \"MOTChallenge；样本量数千级；标注规范为轨迹与框\",\n  \"reported_metrics\": \"MOTA：~60-70%；未涉及角度识别\",\n  \"covered_capability\": \"行人跟踪；可结合ReID模型使用\",\n  \"gap\": \"角度识别需集成姿态估计或ReID扩展\"\n \t\t,\n  \"evidence\": [\n  \"ByteTrack在MOT17上MOTA达75.3%\"\n  ]\n \t\t}\n \t]\n \t,\n  \"migration_plan\": {\n  \"feasibility\": \"high\",\n  \"approach\": \"建议采用'姿态估计+规则映射'或'多任务学习（检测+角度分类）'方案\",\n  \"data_requirements\": \"需构建带角度标签的行人数据集（如从Pose输出推导+人工校验），建议至少5000-10000帧\",\n  \"compute_requirements\": \"单卡GPU（T4/A10）可训练ReID+分类头；姿态估计推理需中等算力\",\n  \"engineering_work\": \"高（需集成姿态/ReID模型并设计标签映射逻辑）\",\n  \"estimated_timeline\": \"2-4周（若已有ReID/姿态基线）或6-8周（从头训练角度分类器）\",\n  \"estimated_cost\": \"中等（取决于数据采集与标注成本）\",\n  \"dependencies\": [\n  \"需先明确角度定义（如相机视角/人体朝向）\",\n  \"需明确应用场景（监控/自动驾驶/安全）\"\n  ]\n \t\t,\n  \"risks\": [\n  \"姿态估计在遮挡/模糊场景下可能影响角度推断准确性\",\n  \"人工校验标签成本高\"\n  ]\n \t\t}\n \t,\n  \"expected_performance\": {\n  \"baseline\": \"姿态估计间接推断：准确率~70-80%（依赖姿态关键点质量）\",\n  \"target\": \"端到端训练（检测+角度分类）：目标mAP~80%+（需验证）\"\n \t\t,\n  \"uncertainty\": \"证据不足（无直接公开模型报告此特定标签体系的精度）\"\n \t\t}\n \t,\n  \"recommendation\": \"若用户已有ReID/姿态基线，建议采用轻量级角度分类头微调；否则考虑开源姿态估计模型+后处理\"\n \t}",
+    "structured_output": {
+      "requirement_summary": "用户询问行人'人体角度'（正面、侧面、背面）标签是否已有模型支持",
+      "direct_match": {
+        "exists": false,
+        "summary": "检索不到直接提供'人体角度：正面、侧面、背面'标签体系的现成行人检测/重识别模型",
+        "evidence": [
+          "无直接匹配模型证据"
+        ]
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "CityPerson数据集/行人重识别模型（如OSNet、ReID）",
+          "label_schema": "类别：行人（1类）；属性：无角度标签（部分ReID模型仅支持行人分类，不支持姿态/角度细分）",
+          "training_data": "CityPerson、Market-1501、DukeMTMC-reID；样本量数万级；标注规范主要为人脸/行人框及ID，无角度标签",
+          "reported_metrics": "mAP（Market-1501）：~80-90%（ReID任务）；未报告角度识别精度",
+          "covered_capability": "行人检测与重识别；缺乏细粒度角度识别能力",
+          "gap": "需要额外构建角度分类头或采用多任务学习",
+          "evidence": [
+            "OSNet在Market-1501上mAP达84.1%，但未涉及角度标签"
+          ]
+        },
+        {
+          "model_or_solution": "OpenPose/PoseNet人体姿态估计模型",
+          "label_schema": "类别：关键点（18-25个关键点）；属性：姿态骨架；可通过关键点推断角度（如肩部连线方向）",
+          "training_data": "COCO、MPII Human Pose、AIST；样本量数百万级；标注规范为关键点坐标",
+          "reported_metrics": "mAP（COCO）：~76-78%（姿态估计）；间接支持角度分析",
+          "covered_capability": "人体姿态估计；可辅助推导视角/角度",
+          "gap": "无直接'正面/侧面/背面'标签，需后处理计算",
+          "evidence": [
+            "OpenPose在COCO上mAP 77.6%，输出关键点坐标"
+          ]
+        },
+        {
+          "model_or_solution": "DeepSort/ByteTrack多目标跟踪系统",
+          "label_schema": "类别：行人ID；属性：轨迹、速度；通常不区分角度",
+          "training_data": "MOTChallenge；样本量数千级；标注规范为轨迹与框",
+          "reported_metrics": "MOTA：~60-70%；未涉及角度识别",
+          "covered_capability": "行人跟踪；可结合ReID模型使用",
+          "gap": "角度识别需集成姿态估计或ReID扩展",
+          "evidence": [
+            "ByteTrack在MOT17上MOTA达75.3%"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "high",
+        "approach": "建议采用'姿态估计+规则映射'或'多任务学习（检测+角度分类）'方案",
+        "data_requirements": "需构建带角度标签的行人数据集（如从Pose输出推导+人工校验），建议至少5000-10000帧",
+        "compute_requirements": "单卡GPU（T4/A10）可训练ReID+分类头；姿态估计推理需中等算力",
+        "engineering_work": "高（需集成姿态/ReID模型并设计标签映射逻辑）",
+        "estimated_timeline": "2-4周（若已有ReID/姿态基线）或6-8周（从头训练角度分类器）",
+        "estimated_cost": "中等（取决于数据采集与标注成本）",
+        "dependencies": [
+          "需先明确角度定义（如相机视角/人体朝向）",
+          "需明确应用场景（监控/自动驾驶/安全）"
+        ],
+        "risks": [
+          "姿态估计在遮挡/模糊场景下可能影响角度推断准确性",
+          "人工校验标签成本高"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "姿态估计间接推断：准确率~70-80%（依赖姿态关键点质量）",
+        "target": "端到端训练（检测+角度分类）：目标mAP~80%+（需验证）",
+        "uncertainty": "证据不足（无直接公开模型报告此特定标签体系的精度）"
+      },
+      "recommendation": "若用户已有ReID/姿态基线，建议采用轻量级角度分类头微调；否则考虑开源姿态估计模型+后处理"
+    }
+  }
+}

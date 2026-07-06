@@ -1,0 +1,103 @@
+{
+  "session_id": "11ae220e-224d-49f7-bec9-e2311397855e",
+  "run_stamp": "20260518_182929_feec36eb",
+  "stage": "migration_report_retry_request",
+  "step_index": 3,
+  "created_at": "2026-05-18T18:32:56+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "migration_report",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "coverage": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "iteration": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "performance": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "cost": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "dependencies": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "counter_cases": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "deploy_risks": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "uncertainties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "next_steps": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "final_answer": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "coverage",
+            "gaps",
+            "iteration",
+            "performance",
+            "cost",
+            "dependencies",
+            "counter_cases",
+            "deploy_risks",
+            "uncertainties",
+            "next_steps",
+            "final_answer"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "system_prompt": "你是迁移顾问报告生成器。\n任务：基于需求抽象和知识库多路检索证据，回答“现有模型/经验能覆盖哪些、不能覆盖哪些、如何迁移迭代”。\n输出必须是结构化 JSON，并包含 final_answer 作为面向用户的中文报告。\n硬约束：\n1) coverage 只能写知识库证据明确支持的已有能力或相似经验；没有证据要写“待核实”；\n2) gaps 写不能直接覆盖的能力缺口，不要把相似能力说成已支持；\n3) iteration 可提出数据、训练、微调、蒸馏、规则后处理、POC 等迁移路径，但要标明需验证；\n4) performance 只能引用证据里的 benchmark/指标；无指标必须写“需 POC/需评测”，禁止编造数字；\n5) cost 只能给定性或区间级别描述，如低/中/高、人力角色、周期量级，禁止伪造精确数字；\n6) dependencies 必须包含数据、标注规范、算力/平台、合规或业务验收依赖中相关项；\n7) counter_cases/deploy_risks/uncertainties 要从证据边界和需求约束反推，无法确认则标“待核实”；\n8) next_steps 要给出 POC 范围和需要用户/客户/售前补充的信息；\n9) final_answer 必须按 coverage/gaps/iteration/performance/cost/dependencies/counter_cases/deploy_risks/uncertainties/next_steps 分段，中文，简洁，不要输出 markdown 代码块。\n禁止编造模型名称、客户名称、部署记录、性能指标、成本数字或不存在的证据。",
+    "user_prompt": "{\n  \"raw_requirement\": \"检测电子元器异常，用什么模型？\",\n  \"abstraction\": {\n    \"raw_requirement\": \"检测电子元器异常\",\n    \"task_family\": [\n      \"缺陷检测\",\n      \"异常检测\",\n      \"工业视觉质量监控\",\n      \"轮廓缺陷识别\"\n    ],\n    \"visual_targets\": [\n      \"电子元件\",\n      \"半导体芯片\",\n      \"PCB\",\n      \"电路板\"\n    ],\n    \"capability_types\": [\n      \"缺陷检测\",\n      \"分类\",\n      \"分割\"\n    ],\n    \"constraints\": [\n      \"需要标注异常样本视觉目标\",\n      \"需明确通信量领域、电子类型等\",\n      \"不同电子元件结构差异大\",\n      \"数据量不足\",\n      \"移除误检和漏检要求\"\n    ],\n    \"retrieval_queries\": [\n      \"电子元件外观缺陷检测模型推荐\",\n      \"工业电子元件表面处理异常检测\",\n      \"半导体芯片缺陷检测视觉模型\",\n      \"PCB板线路异常检测任务迁移\",\n      \"电子元件多层板缺陷识别\"\n    ],\n    \"must_answer_sections\": [\n      \"coverage\",\n      \"gaps\",\n      \"iteration\",\n      \"performance\",\n      \"cost\",\n      \"dependencies\",\n      \"counter_cases\",\n      \"deploy_risks\",\n      \"uncertainties\",\n      \"next_steps\"\n    ]\n  },\n  \"retrieval\": {\n    \"queries\": [\n      \"电子元件外观缺陷检测模型推荐\",\n      \"工业电子元件表面处理异常检测\",\n      \"半导体芯片缺陷检测视觉模型\",\n      \"PCB板线路异常检测任务迁移\",\n      \"电子元件多层板缺陷识别\"\n    ],\n    \"rounds\": [\n      {\n        \"round\": 1,\n        \"query\": \"电子元件外观缺陷检测模型推荐\",\n        \"success\": true,\n        \"retrieved_count\": 12\n      },\n      {\n        \"round\": 2,\n        \"query\": \"工业电子元件表面处理异常检测\",\n        \"success\": true,\n        \"retrieved_count\": 24\n      },\n      {\n        \"round\": 3,\n        \"query\": \"半导体芯片缺陷检测视觉模型\",\n        \"success\": true,\n        \"retrieved_count\": 24\n      },\n      {\n        \"round\": 4,\n        \"query\": \"PCB板线路异常检测任务迁移\",\n        \"success\": true,\n        \"retrieved_count\": 24\n      },\n      {\n        \"round\": 5,\n        \"query\": \"电子元件多层板缺陷识别\",\n        \"success\": true,\n        \"retrieved_count\": 24\n      }\n    ],\n    \"merged_retrieved_count\": 78,\n    \"references\": [\n      {\n        \"doc_name\": \"adela/adela_release_records.jsonl\",\n        \"url\": \"/media/nvme1n1p1/linshihao/projects/gbrain-rag/data_source/adela/adela_release_records.jsonl\"\n      },\n      {\n        \"doc_name\": \"PDFs/安防方向-人脸误检分类模型发版记录.pdf\",\n        \"url\": \"/media/nvme1n1p1/linshihao/projects/gbrain-rag/data_source/PDFs/安防方向-人脸误检分类模型发版记录.pdf\"\n      },\n      {\n        \"doc_name\": \"tables/model_release_records.jsonl\",\n        \"url\": \"/media/nvme1n1p1/linshihao/projects/gbrain-rag/data_source/tables/model_release_records.jsonl\"\n      },\n      {\n        \"doc_name\": \"PDFs/feature_v2.56.00_pro_max.pdf\",\n        \"url\": \"/media/nvme1n1p1/linshihao/projects/gbrain-rag/data_source/PDFs/feature_v2.56.00_pro_max.pdf\"\n      },\n      {\n        \"doc_name\": \"PDFs/台标检测模型发布记录.pdf\",\n        \"url\": \"/media/nvme1n1p1/linshihao/projects/gbrain-rag/data_source/PDFs/台标检测模型发布记录.pdf\"\n      },\n      {\n        \"doc_name\": \"PDFs/安防方向--非机动车属性大模型更新.pdf\",\n        \"url\": \"/media/nvme1n1p1/linshihao/projects/gbrain-rag/data_source/PDFs/安防方向--非机动车属性大模型更新.pdf\"\n      },\n      {\n        \"doc_name\": \"PDFs/横幅标语检测3.0.5-发版.pdf\",\n        \"url\": \"/media/nvme1n1p1/linshihao/projects/gbrain-rag/data_source/PDFs/横幅标语检测3.0.5-发版.pdf\"\n      },\n      {\n        \"doc_name\": \"PDFs/实名举报场景身份证检测模型发版记录.pdf\",\n        \"url\": \"/media/nvme1n1p1/linshihao/projects/gbrain-rag/data_source/PDFs/实名举报场景身份证检测模型发版记录.pdf\"\n      }\n    ],\n    \"retrieved_chunks\": [\n      {\n        \"evidence_id\": \"22a1d1b99a258c80ef04d874\",\n        \"source_type\": \"adela\",\n        \"score\": 0.020393,\n        \"source_score\": 0.92601,\n        \"title\": \"FireSmogRetinatenetEssos0.7.3_rp\",\n        \"snippet\": \"model_name: FireSmogRetinatenetEssos0.7.3_rp\\nname: FireSmogRetinatenetEssos0.7.3_rp\\ntype: essos\\nplatform: cuda11.0-trt7.1-fp16-T4\\nstatus: SUCCESS\\ndid: 86163\\nrid: 30238\\nversion: 0.7.3\\nversion_train_date: 20230630\\nsource_file: data/FireSmogRetinatenetEssos0.7.3_rp-cuda11.0-trt7.1-fp16-T4_30238_86163.json\",\n        \"doc_name\": \"adela/adela_release_records.jsonl\",\n        \"target_name\": \"\",\n        \"algorithm_type\": \"\",\n        \"algorithm_name\": \"\",\n        \"model_name\": \"FireSmogRetinatenetEssos0.7.3_rp\",\n        \"application_scene\": \"\",\n        \"supported_device\": \"\",\n        \"recommended_config\": \"\",\n        \"last_updated\": \"\"\n      },\n      {\n        \"evidence_id\": \"160b752b9c00fdd6d6ab9e5c\",\n        \"source_type\": \"adela\",\n        \"score\": 0.018274,\n        \"source_score\": 0.908581,\n        \"title\": \"struct_e5\",\n        \"snippet\": \"model_name: struct_e5\\nname: struct_e5\\nlabel_list: pedestrian|cycer|car|cyc\\nlabels: pedestrian cycer car cyc\\ntype: essos\\nplatform: nvt-nt98530-int16\\nstatus: SUCCESS\\ndid: 106008\\nrid: 38424\\nversion: 3.0.0\\nversion_train_date: 20240509\\nsource_file: data/struct_e5-nvt-nt98530-int16_38424_106008.json\",\n        \"doc_name\": \"adela/adela_release_records.jsonl\",\n        \"target_name\": \"\",\n        \"algorithm_type\": \"\",\n        \"algorithm_name\": \"\",\n        \"model_name\": \"struct_e5\",\n        \"application_scene\": \"\",\n        \"supported_device\": \"\",\n        \"recommended_config\": \"\",\n        \"last_updated\": \"\"\n      },\n      {\n        \"evidence_id\": \"5488192405915f7c5999f38d\",\n        \"source_type\": \"adela\",\n        \"score\": 0.01794,\n        \"source_score\": 0.908581,\n        \"title\": \"struct_e5\",\n        \"snippet\": \"model_name: struct_e5\\nname: struct_e5\\nlabel_list: pedestrian|cycer|car|cyc\\nlabels: pedestrian cycer car cyc\\ntype: essos\\nplatform: nvt-nt9869x-int16\\nstatus: SUCCESS\\ndid: 106001\\nrid: 38424\\nversion: 3.0.0\\nversion_train_date: 20240509\\nsource_file: data/struct_e5-nvt-nt9869x-int16_38424_106001.json\",\n        \"doc_name\": \"adela/adela_release_records.jsonl\",\n        \"target_name\": \"\",\n        \"algorithm_type\": \"\",\n        \"algorithm_name\": \"\",\n        \"model_name\": \"struct_e5\",\n        \"application_scene\": \"\",\n        \"supported_device\": \"\",\n        \"recommended_config\": \"\",\n        \"last_updated\": \"\"\n      },\n      {\n        \"evidence_id\": \"b664f87d3d42cb3abb15e73d\",\n        \"source_type\": \"adela\",\n        \"score\": 0.016667,\n        \"source_score\": 0.911031,\n        \"title\": \"PAR_waistcoat_safetybelt\",\n        \"snippet\": \"model_name: PAR_waistcoat_safetybelt\\nname: PAR_waistcoat_safetybelt\\ntype: classifier\\nplatform: cpu-nart-fp32\\nstatus: SUCCESS\\ndid: 93156\\nrid: 33307\\nversion: 0.1.0\\nversion_train_date: 20230912\\nsource_file: data/PAR_waistcoat_safetybelt-cpu-nart-fp32_33307_93156.json\",\n        \"doc_name\": \"adela/adela_release_records.jsonl\",\n        \"target_name\": \"\",\n        \"algorithm_type\": \"\",\n        \"algorithm_name\": \"\",\n        \"model_name\": \"PAR_waistcoat_safetybelt\",\n        \"application_scene\": \"\",\n        \"supported_device\": \"\",\n        \"recommended_config\": \"\",\n        \"last_updated\": \"\"\n      }\n    ]\n  }\n}",
+    "combined_prompt": "你是迁移顾问报告生成器。\n任务：基于需求抽象和知识库多路检索证据，回答“现有模型/经验能覆盖哪些、不能覆盖哪些、如何迁移迭代”。\n输出必须是结构化 JSON，并包含 final_answer 作为面向用户的中文报告。\n硬约束：\n1) coverage 只能写知识库证据明确支持的已有能力或相似经验；没有证据要写“待核实”；\n2) gaps 写不能直接覆盖的能力缺口，不要把相似能力说成已支持；\n3) iteration 可提出数据、训练、微调、蒸馏、规则后处理、POC 等迁移路径，但要标明需验证；\n4) performance 只能引用证据里的 benchmark/指标；无指标必须写“需 POC/需评测”，禁止编造数字；\n5) cost 只能给定性或区间级别描述，如低/中/高、人力角色、周期量级，禁止伪造精确数字；\n6) dependencies 必须包含数据、标注规范、算力/平台、合规或业务验收依赖中相关项；\n7) counter_cases/deploy_risks/uncertainties 要从证据边界和需求约束反推，无法确认则标“待核实”；\n8) next_steps 要给出 POC 范围和需要用户/客户/售前补充的信息；\n9) final_answer 必须按 coverage/gaps/iteration/performance/cost/dependencies/counter_cases/deploy_risks/uncertainties/next_steps 分段，中文，简洁，不要输出 markdown 代码块。\n禁止编造模型名称、客户名称、部署记录、性能指标、成本数字或不存在的证据。\n\n{\n  \"raw_requirement\": \"检测电子元器异常，用什么模型？\",\n  \"abstraction\": {\n    \"raw_requirement\": \"检测电子元器异常\",\n    \"task_family\": [\n      \"缺陷检测\",\n      \"异常检测\",\n      \"工业视觉质量监控\",\n      \"轮廓缺陷识别\"\n    ],\n    \"visual_targets\": [\n      \"电子元件\",\n      \"半导体芯片\",\n      \"PCB\",\n      \"电路板\"\n    ],\n    \"capability_types\": [\n      \"缺陷检测\",\n      \"分类\",\n      \"分割\"\n    ],\n    \"constraints\": [\n      \"需要标注异常样本视觉目标\",\n      \"需明确通信量领域、电子类型等\",\n      \"不同电子元件结构差异大\",\n      \"数据量不足\",\n      \"移除误检和漏检要求\"\n    ],\n    \"retrieval_queries\": [\n      \"电子元件外观缺陷检测模型推荐\",\n      \"工业电子元件表面处理异常检测\",\n      \"半导体芯片缺陷检测视觉模型\",\n      \"PCB板线路异常检测任务迁移\",\n      \"电子元件多层板缺陷识别\"\n    ],\n    \"must_answer_sections\": [\n      \"coverage\",\n      \"gaps\",\n      \"iteration\",\n      \"performance\",\n      \"cost\",\n      \"dependencies\",\n      \"counter_cases\",\n      \"deploy_risks\",\n      \"uncertainties\",\n      \"next_steps\"\n    ]\n  },\n  \"retrieval\": {\n    \"queries\": [\n      \"电子元件外观缺陷检测模型推荐\",\n      \"工业电子元件表面处理异常检测\",\n      \"半导体芯片缺陷检测视觉模型\",\n      \"PCB板线路异常检测任务迁移\",\n      \"电子元件多层板缺陷识别\"\n    ],\n    \"rounds\": [\n      {\n        \"round\": 1,\n        \"query\": \"电子元件外观缺陷检测模型推荐\",\n        \"success\": true,\n        \"retrieved_count\": 12\n      },\n      {\n        \"round\": 2,\n        \"query\": \"工业电子元件表面处理异常检测\",\n        \"success\": true,\n        \"retrieved_count\": 24\n      },\n      {\n        \"round\": 3,\n        \"query\": \"半导体芯片缺陷检测视觉模型\",\n        \"success\": true,\n        \"retrieved_count\": 24\n      },\n      {\n        \"round\": 4,\n        \"query\": \"PCB板线路异常检测任务迁移\",\n        \"success\": true,\n        \"retrieved_count\": 24\n      },\n      {\n        \"round\": 5,\n        \"query\": \"电子元件多层板缺陷识别\",\n        \"success\": true,\n        \"retrieved_count\": 24\n      }\n    ],\n    \"merged_retrieved_count\": 78,\n    \"references\": [\n      {\n        \"doc_name\": \"adela/adela_release_records.jsonl\",\n        \"url\": \"/media/nvme1n1p1/linshihao/projects/gbrain-rag/data_source/adela/adela_release_records.jsonl\"\n      },\n      {\n        \"doc_name\": \"PDFs/安防方向-人脸误检分类模型发版记录.pdf\",\n        \"url\": \"/media/nvme1n1p1/linshihao/projects/gbrain-rag/data_source/PDFs/安防方向-人脸误检分类模型发版记录.pdf\"\n      },\n      {\n        \"doc_name\": \"tables/model_release_records.jsonl\",\n        \"url\": \"/media/nvme1n1p1/linshihao/projects/gbrain-rag/data_source/tables/model_release_records.jsonl\"\n      },\n      {\n        \"doc_name\": \"PDFs/feature_v2.56.00_pro_max.pdf\",\n        \"url\": \"/media/nvme1n1p1/linshihao/projects/gbrain-rag/data_source/PDFs/feature_v2.56.00_pro_max.pdf\"\n      },\n      {\n        \"doc_name\": \"PDFs/台标检测模型发布记录.pdf\",\n        \"url\": \"/media/nvme1n1p1/linshihao/projects/gbrain-rag/data_source/PDFs/台标检测模型发布记录.pdf\"\n      },\n      {\n        \"doc_name\": \"PDFs/安防方向--非机动车属性大模型更新.pdf\",\n        \"url\": \"/media/nvme1n1p1/linshihao/projects/gbrain-rag/data_source/PDFs/安防方向--非机动车属性大模型更新.pdf\"\n      },\n      {\n        \"doc_name\": \"PDFs/横幅标语检测3.0.5-发版.pdf\",\n        \"url\": \"/media/nvme1n1p1/linshihao/projects/gbrain-rag/data_source/PDFs/横幅标语检测3.0.5-发版.pdf\"\n      },\n      {\n        \"doc_name\": \"PDFs/实名举报场景身份证检测模型发版记录.pdf\",\n        \"url\": \"/media/nvme1n1p1/linshihao/projects/gbrain-rag/data_source/PDFs/实名举报场景身份证检测模型发版记录.pdf\"\n      }\n    ],\n    \"retrieved_chunks\": [\n      {\n        \"evidence_id\": \"22a1d1b99a258c80ef04d874\",\n        \"source_type\": \"adela\",\n        \"score\": 0.020393,\n        \"source_score\": 0.92601,\n        \"title\": \"FireSmogRetinatenetEssos0.7.3_rp\",\n        \"snippet\": \"model_name: FireSmogRetinatenetEssos0.7.3_rp\\nname: FireSmogRetinatenetEssos0.7.3_rp\\ntype: essos\\nplatform: cuda11.0-trt7.1-fp16-T4\\nstatus: SUCCESS\\ndid: 86163\\nrid: 30238\\nversion: 0.7.3\\nversion_train_date: 20230630\\nsource_file: data/FireSmogRetinatenetEssos0.7.3_rp-cuda11.0-trt7.1-fp16-T4_30238_86163.json\",\n        \"doc_name\": \"adela/adela_release_records.jsonl\",\n        \"target_name\": \"\",\n        \"algorithm_type\": \"\",\n        \"algorithm_name\": \"\",\n        \"model_name\": \"FireSmogRetinatenetEssos0.7.3_rp\",\n        \"application_scene\": \"\",\n        \"supported_device\": \"\",\n        \"recommended_config\": \"\",\n        \"last_updated\": \"\"\n      },\n      {\n        \"evidence_id\": \"160b752b9c00fdd6d6ab9e5c\",\n        \"source_type\": \"adela\",\n        \"score\": 0.018274,\n        \"source_score\": 0.908581,\n        \"title\": \"struct_e5\",\n        \"snippet\": \"model_name: struct_e5\\nname: struct_e5\\nlabel_list: pedestrian|cycer|car|cyc\\nlabels: pedestrian cycer car cyc\\ntype: essos\\nplatform: nvt-nt98530-int16\\nstatus: SUCCESS\\ndid: 106008\\nrid: 38424\\nversion: 3.0.0\\nversion_train_date: 20240509\\nsource_file: data/struct_e5-nvt-nt98530-int16_38424_106008.json\",\n        \"doc_name\": \"adela/adela_release_records.jsonl\",\n        \"target_name\": \"\",\n        \"algorithm_type\": \"\",\n        \"algorithm_name\": \"\",\n        \"model_name\": \"struct_e5\",\n        \"application_scene\": \"\",\n        \"supported_device\": \"\",\n        \"recommended_config\": \"\",\n        \"last_updated\": \"\"\n      },\n      {\n        \"evidence_id\": \"5488192405915f7c5999f38d\",\n        \"source_type\": \"adela\",\n        \"score\": 0.01794,\n        \"source_score\": 0.908581,\n        \"title\": \"struct_e5\",\n        \"snippet\": \"model_name: struct_e5\\nname: struct_e5\\nlabel_list: pedestrian|cycer|car|cyc\\nlabels: pedestrian cycer car cyc\\ntype: essos\\nplatform: nvt-nt9869x-int16\\nstatus: SUCCESS\\ndid: 106001\\nrid: 38424\\nversion: 3.0.0\\nversion_train_date: 20240509\\nsource_file: data/struct_e5-nvt-nt9869x-int16_38424_106001.json\",\n        \"doc_name\": \"adela/adela_release_records.jsonl\",\n        \"target_name\": \"\",\n        \"algorithm_type\": \"\",\n        \"algorithm_name\": \"\",\n        \"model_name\": \"struct_e5\",\n        \"application_scene\": \"\",\n        \"supported_device\": \"\",\n        \"recommended_config\": \"\",\n        \"last_updated\": \"\"\n      },\n      {\n        \"evidence_id\": \"b664f87d3d42cb3abb15e73d\",\n        \"source_type\": \"adela\",\n        \"score\": 0.016667,\n        \"source_score\": 0.911031,\n        \"title\": \"PAR_waistcoat_safetybelt\",\n        \"snippet\": \"model_name: PAR_waistcoat_safetybelt\\nname: PAR_waistcoat_safetybelt\\ntype: classifier\\nplatform: cpu-nart-fp32\\nstatus: SUCCESS\\ndid: 93156\\nrid: 33307\\nversion: 0.1.0\\nversion_train_date: 20230912\\nsource_file: data/PAR_waistcoat_safetybelt-cpu-nart-fp32_33307_93156.json\",\n        \"doc_name\": \"adela/adela_release_records.jsonl\",\n        \"target_name\": \"\",\n        \"algorithm_type\": \"\",\n        \"algorithm_name\": \"\",\n        \"model_name\": \"PAR_waistcoat_safetybelt\",\n        \"application_scene\": \"\",\n        \"supported_device\": \"\",\n        \"recommended_config\": \"\",\n        \"last_updated\": \"\"\n      }\n    ]\n  }\n}",
+    "chunk_limit": 4,
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260518_182929_feec36eb"
+  }
+}

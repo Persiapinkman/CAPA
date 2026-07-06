@@ -1,0 +1,222 @@
+{
+  "session_id": "47bc0103-aa00-435e-b1bf-c0f511307039",
+  "run_stamp": "20260525_153703_34cf9825",
+  "stage": "migration_retrieval_plan_request",
+  "step_index": 1,
+  "created_at": "2026-05-25T15:37:04+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260525_153703_34cf9825",
+    "input_schema": {
+      "user_query": "用户原始问题",
+      "failed_rag_trace": "最近最多 3 轮 RAG 失败轨迹（round/query/knowledge_base_fully_answered/evidence[]）",
+      "required_fields": "固定 4 个检索维度 field + label"
+    },
+    "evidence_item_fields": [
+      "evidence_id",
+      "title",
+      "snippet",
+      "model_name",
+      "algorithm_name",
+      "algorithm_type",
+      "application_scene",
+      "section_type",
+      "score"
+    ],
+    "structured_input": {
+      "user_query": "香港项目要求识别“头盔颜色：黑、白、灰、红、蓝、黄、绿、紫、迷彩”，现有城市结构化人体属性模型是否能直接支持？",
+      "failed_rag_trace": [
+        {
+          "round": 1,
+          "query": "香港项目要求识别“头盔颜色：黑、白、灰、红、蓝、黄、绿、紫、迷彩”，现有城市结构化人体属性模型是否能直接支持？",
+          "knowledge_base_fully_answered": 0.82,
+          "evidence": [
+            {
+              "evidence_id": "40c29e8b4229de135e3c09fe",
+              "title": "PDFs/安防方向--车辆属性大模型更新.pdf p3",
+              "snippet": "一、功能介绍\n• 输入：结构化车辆小图\n• 输出：颜色、粗分类推断结果\n• 要求：推荐车辆小图尺寸≥90*90，输入低于此尺寸模型精度不能保证\n• 输出参考：\n◦ 模型输出：category_param.json",
+              "section_type": "algorithm_boundary",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "a74f05e4611996ea01ce77bb",
+              "title": "struct",
+              "snippet": "model_name: struct\nname: struct\nlabel_list: pedestrian|cycer|car|cyc\nlabels: pedestrian cycer car cyc\ntype: essos\nplatform: acl-ascend710-fp16\nstatus: SUCCESS\ndid: 131988\nrid: 48870\nversion: 3.0.2\nversion_train_date: 20250716\nsource_file: data/struct-acl-ascend710-fp16_48870_131988.json",
+              "model_name": "struct",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "160b752b9c00fdd6d6ab9e5c",
+              "title": "struct_e5",
+              "snippet": "model_name: struct_e5\nname: struct_e5\nlabel_list: pedestrian|cycer|car|cyc\nlabels: pedestrian cycer car cyc\ntype: essos\nplatform: nvt-nt98530-int16\nstatus: SUCCESS\ndid: 106008\nrid: 38424\nversion: 3.0.0\nversion_train_date: 20240509\nsource_file: data/struct_e5-nvt-nt98530-int16_38424_106008.json",
+              "model_name": "struct_e5",
+              "section_type": "model_artifact",
+              "score": 0.999977
+            },
+            {
+              "evidence_id": "d5d30a3ba1c59bf3fdabca17",
+              "title": "full_struct",
+              "snippet": "model_name: full_struct\nname: full_struct\nlabel_list: face|pedestrian|cycer|vehicle|cyc\nlabels: face pedestrian cycer vehicle cyc\ntype: essos\nplatform: rknn-rk3588-int8-linux\nstatus: SUCCESS\ndid: 117380\nrid: 31058\nversion: 3.5.5\nversion_train_date: 20230727\nsource_file: data/full_struct-rknn-rk3588-int8-linux_31058_117380.json",
+              "model_name": "full_struct",
+              "section_type": "model_artifact",
+              "score": 0.997108
+            },
+            {
+              "evidence_id": "cd8148d65b579a4e6e31561f",
+              "title": "full_struct",
+              "snippet": "model_name: full_struct\nname: full_struct\nlabel_list: face|pedestrian|cycer|vehicle|cyc\nlabels: face pedestrian cycer vehicle cyc\ntype: essos\nplatform: cpu-nart-fp32\nstatus: SUCCESS\ndid: 131332\nrid: 28313\nversion: 3.5.3\nversion_train_date: 20230506\nsource_file: data/full_struct-cpu-nart-fp32_28313_131332.json",
+              "model_name": "full_struct",
+              "section_type": "model_artifact",
+              "score": 0.996627
+            },
+            {
+              "evidence_id": "255a2533ef42737a71da6e04",
+              "title": "full_struct",
+              "snippet": "model_name: full_struct\nname: full_struct\nlabel_list: face|pedestrian|cycer|vehicle|cyc\nlabels: face pedestrian cycer vehicle cyc\ntype: essos\nplatform: ssc338q-sgstar-int8\nstatus: SUCCESS\ndid: 87299\nrid: 28671\nversion: 3.5.4\nversion_train_date: 20230516\nsource_file: data/full_struct-ssc338q-sgstar-int8_28671_87299.json",
+              "model_name": "full_struct",
+              "section_type": "model_artifact",
+              "score": 0.996627
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "query": "头盔颜色 识别 城市结构化模型",
+          "knowledge_base_fully_answered": 0.15,
+          "evidence": [
+            {
+              "evidence_id": "f586a56a911c80497fa3679c",
+              "title": "PDFs/Classify_3.4.0.pdf p1",
+              "snippet": "Classify_3.4.0\nHighlight\n• 优化st_helmet_style（头盔）分支下“安全帽”类型图片的召回率（识别成未戴口罩），ma_安全帽 =\n84.07%(+12.01%)",
+              "section_type": "release_note",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "a74f05e4611996ea01ce77bb",
+              "title": "struct",
+              "snippet": "model_name: struct\nname: struct\nlabel_list: pedestrian|cycer|car|cyc\nlabels: pedestrian cycer car cyc\ntype: essos\nplatform: acl-ascend710-fp16\nstatus: SUCCESS\ndid: 131988\nrid: 48870\nversion: 3.0.2\nversion_train_date: 20250716\nsource_file: data/struct-acl-ascend710-fp16_48870_131988.json",
+              "model_name": "struct",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "52969462ecb973e9cf529281",
+              "title": "struct_e5",
+              "snippet": "model_name: struct_e5\nname: struct_e5\nlabel_list: pedestrian|cycer|car|cyc\nlabels: pedestrian cycer car cyc\ntype: essos\nplatform: ssc338q-sgstar-int8\nstatus: SUCCESS\ndid: 109419\nrid: 38424\nversion: 3.0.0\nversion_train_date: 20240509\nsource_file: data/struct_e5-ssc338q-sgstar-int8_38424_109419.json",
+              "model_name": "struct_e5",
+              "section_type": "model_artifact",
+              "score": 0.998672
+            },
+            {
+              "evidence_id": "c782d0105174752db9d5cb3b",
+              "title": "full_struct",
+              "snippet": "model_name: full_struct\nname: full_struct\nlabel_list: face|pedestrian|cycer|vehicle|cyc\nlabels: face pedestrian cycer vehicle cyc\ntype: essos\nplatform: cvflow-cv25-int8\nstatus: SUCCESS\ndid: 100665\nrid: 31058\nversion: 3.5.5\nversion_train_date: 20230727\nsource_file: data/full_struct-cvflow-cv25-int8_31058_100665.json",
+              "model_name": "full_struct",
+              "section_type": "model_artifact",
+              "score": 0.99819
+            },
+            {
+              "evidence_id": "e878aa1b695b8617ddec1463",
+              "title": "full_struct",
+              "snippet": "model_name: full_struct\nname: full_struct\nlabel_list: face|pedestrian|cycer|vehicle|cyc\nlabels: face pedestrian cycer vehicle cyc\ntype: essos\nplatform: cvflow-cv25-int16\nstatus: SUCCESS\ndid: 111868\nrid: 31058\nversion: 3.5.5\nversion_train_date: 20230727\nsource_file: data/full_struct-cvflow-cv25-int16_31058_111868.json",
+              "model_name": "full_struct",
+              "section_type": "model_artifact",
+              "score": 0.99807
+            },
+            {
+              "evidence_id": "345299e2f4ed9937a4726f9d",
+              "title": "full_struct",
+              "snippet": "model_name: full_struct\nname: full_struct\nlabel_list: face|pedestrian|cycer|vehicle|cyc\nlabels: face pedestrian cycer vehicle cyc\ntype: essos\nplatform: cvflow-cv22-int8\nstatus: SUCCESS\ndid: 98939\nrid: 31058\nversion: 3.5.5\nversion_train_date: 20230727\nsource_file: data/full_struct-cvflow-cv22-int8_31058_98939.json",
+              "model_name": "full_struct",
+              "section_type": "model_artifact",
+              "score": 0.99807
+            }
+          ]
+        },
+        {
+          "round": 3,
+          "query": "头盔颜色 识别 结构化 城市模型",
+          "knowledge_base_fully_answered": 0.82,
+          "evidence": [
+            {
+              "evidence_id": "a74f05e4611996ea01ce77bb",
+              "title": "struct",
+              "snippet": "model_name: struct\nname: struct\nlabel_list: pedestrian|cycer|car|cyc\nlabels: pedestrian cycer car cyc\ntype: essos\nplatform: acl-ascend710-fp16\nstatus: SUCCESS\ndid: 131988\nrid: 48870\nversion: 3.0.2\nversion_train_date: 20250716\nsource_file: data/struct-acl-ascend710-fp16_48870_131988.json",
+              "model_name": "struct",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "3b516e739c46f412291d37bb",
+              "title": "PDFs/安防方向-人脸误检分类模型发版记录.pdf p6",
+              "snippet": "• highlights\n◦ 基于原KM_classifier_FaceNoFace_cls_sz_1.0.2 模型，修正后脑勺，头盔，全遮挡为人脸误检负\n样本\n◦ 新增车内人脸为正样本\n◦ 基于clip蒸馏小模型为预训练模型，平均acc在hardcase上提升38.6%->72.5%\n◦ 输出字段与原KM_classifier_FaceNoFace_cls_sz_1.0.2 模型保持一致",
+              "section_type": "release_note",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "5850200e8d6cdb50680b2deb",
+              "title": "full_struct",
+              "snippet": "model_name: full_struct\nname: full_struct\nlabel_list: face|pedestrian|cycer|vehicle|cyc\nlabels: face pedestrian cycer vehicle cyc\ntype: essos\nplatform: nvt-nt9852x-int16\nstatus: SUCCESS\ndid: 112752\nrid: 31058\nversion: 3.5.5\nversion_train_date: 20230727\nsource_file: data/full_struct-nvt-nt9852x-int16_31058_112752.json",
+              "model_name": "full_struct",
+              "section_type": "model_artifact",
+              "score": 0.998555
+            },
+            {
+              "evidence_id": "c782d0105174752db9d5cb3b",
+              "title": "full_struct",
+              "snippet": "model_name: full_struct\nname: full_struct\nlabel_list: face|pedestrian|cycer|vehicle|cyc\nlabels: face pedestrian cycer vehicle cyc\ntype: essos\nplatform: cvflow-cv25-int8\nstatus: SUCCESS\ndid: 100665\nrid: 31058\nversion: 3.5.5\nversion_train_date: 20230727\nsource_file: data/full_struct-cvflow-cv25-int8_31058_100665.json",
+              "model_name": "full_struct",
+              "section_type": "model_artifact",
+              "score": 0.99819
+            },
+            {
+              "evidence_id": "345299e2f4ed9937a4726f9d",
+              "title": "full_struct",
+              "snippet": "model_name: full_struct\nname: full_struct\nlabel_list: face|pedestrian|cycer|vehicle|cyc\nlabels: face pedestrian cycer vehicle cyc\ntype: essos\nplatform: cvflow-cv22-int8\nstatus: SUCCESS\ndid: 98939\nrid: 31058\nversion: 3.5.5\nversion_train_date: 20230727\nsource_file: data/full_struct-cvflow-cv22-int8_31058_98939.json",
+              "model_name": "full_struct",
+              "section_type": "model_artifact",
+              "score": 0.99807
+            },
+            {
+              "evidence_id": "e878aa1b695b8617ddec1463",
+              "title": "full_struct",
+              "snippet": "model_name: full_struct\nname: full_struct\nlabel_list: face|pedestrian|cycer|vehicle|cyc\nlabels: face pedestrian cycer vehicle cyc\ntype: essos\nplatform: cvflow-cv25-int16\nstatus: SUCCESS\ndid: 111868\nrid: 31058\nversion: 3.5.5\nversion_train_date: 20230727\nsource_file: data/full_struct-cvflow-cv25-int16_31058_111868.json",
+              "model_name": "full_struct",
+              "section_type": "model_artifact",
+              "score": 0.99807
+            }
+          ]
+        }
+      ],
+      "required_fields": [
+        {
+          "field": "existing_models",
+          "label": "可直接复用的已有模型"
+        },
+        {
+          "field": "similar_capabilities",
+          "label": "可迁移的相似能力"
+        },
+        {
+          "field": "performance_baseline",
+          "label": "性能与精度基线"
+        },
+        {
+          "field": "data_requirements",
+          "label": "数据、标注与迭代依赖"
+        }
+      ]
+    },
+    "llm_messages": [
+      {
+        "role": "system",
+        "content": "你是视觉模型迁移顾问的检索规划器。用户的问题没有被知识库直接回答。请先抽取目标对象、部件/场景、属性/缺陷、任务类型等核心实体，再补充行业常用同义词。例如电子元器件缺陷检测可扩展为工业视觉、表面缺陷、异常检测。为每个固定字段生成 2-4 条短检索 query，每条 query 只放一组核心实体/同义词和一个检索意图。existing_models 偏已有模型/算法，similar_capabilities 偏可迁移能力，performance_baseline 偏精度/性能/benchmark，data_requirements 偏数据/标注/训练。删除“推荐/有没有/帮我/是否/什么模型”等口语噪声，不要把多组同义词堆成一条长句。禁止编造模型结论，只做检索规划。注意检索词除了缩略词，要求纯中文。只输出 JSON。"
+      },
+      {
+        "role": "user",
+        "content": "{\n  \"user_query\": \"香港项目要求识别“头盔颜色：黑、白、灰、红、蓝、黄、绿、紫、迷彩”，现有城市结构化人体属性模型是否能直接支持？\",\n  \"failed_rag_trace\": [\n    {\n      \"round\": 1,\n      \"query\": \"香港项目要求识别“头盔颜色：黑、白、灰、红、蓝、黄、绿、紫、迷彩”，现有城市结构化人体属性模型是否能直接支持？\",\n      \"knowledge_base_fully_answered\": 0.82,\n      \"evidence\": [\n        {\n          \"evidence_id\": \"40c29e8b4229de135e3c09fe\",\n          \"title\": \"PDFs/安防方向--车辆属性大模型更新.pdf p3\",\n          \"snippet\": \"一、功能介绍\\n• 输入：结构化车辆小图\\n• 输出：颜色、粗分类推断结果\\n• 要求：推荐车辆小图尺寸≥90*90，输入低于此尺寸模型精度不能保证\\n• 输出参考：\\n◦ 模型输出：category_param.json\",\n          \"section_type\": \"algorithm_boundary\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"a74f05e4611996ea01ce77bb\",\n          \"title\": \"struct\",\n          \"snippet\": \"model_name: struct\\nname: struct\\nlabel_list: pedestrian|cycer|car|cyc\\nlabels: pedestrian cycer car cyc\\ntype: essos\\nplatform: acl-ascend710-fp16\\nstatus: SUCCESS\\ndid: 131988\\nrid: 48870\\nversion: 3.0.2\\nversion_train_date: 20250716\\nsource_file: data/struct-acl-ascend710-fp16_48870_131988.json\",\n          \"model_name\": \"struct\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"160b752b9c00fdd6d6ab9e5c\",\n          \"title\": \"struct_e5\",\n          \"snippet\": \"model_name: struct_e5\\nname: struct_e5\\nlabel_list: pedestrian|cycer|car|cyc\\nlabels: pedestrian cycer car cyc\\ntype: essos\\nplatform: nvt-nt98530-int16\\nstatus: SUCCESS\\ndid: 106008\\nrid: 38424\\nversion: 3.0.0\\nversion_train_date: 20240509\\nsource_file: data/struct_e5-nvt-nt98530-int16_38424_106008.json\",\n          \"model_name\": \"struct_e5\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.999977\n        },\n        {\n          \"evidence_id\": \"d5d30a3ba1c59bf3fdabca17\",\n          \"title\": \"full_struct\",\n          \"snippet\": \"model_name: full_struct\\nname: full_struct\\nlabel_list: face|pedestrian|cycer|vehicle|cyc\\nlabels: face pedestrian cycer vehicle cyc\\ntype: essos\\nplatform: rknn-rk3588-int8-linux\\nstatus: SUCCESS\\ndid: 117380\\nrid: 31058\\nversion: 3.5.5\\nversion_train_date: 20230727\\nsource_file: data/full_struct-rknn-rk3588-int8-linux_31058_117380.json\",\n          \"model_name\": \"full_struct\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.997108\n        },\n        {\n          \"evidence_id\": \"cd8148d65b579a4e6e31561f\",\n          \"title\": \"full_struct\",\n          \"snippet\": \"model_name: full_struct\\nname: full_struct\\nlabel_list: face|pedestrian|cycer|vehicle|cyc\\nlabels: face pedestrian cycer vehicle cyc\\ntype: essos\\nplatform: cpu-nart-fp32\\nstatus: SUCCESS\\ndid: 131332\\nrid: 28313\\nversion: 3.5.3\\nversion_train_date: 20230506\\nsource_file: data/full_struct-cpu-nart-fp32_28313_131332.json\",\n          \"model_name\": \"full_struct\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.996627\n        },\n        {\n          \"evidence_id\": \"255a2533ef42737a71da6e04\",\n          \"title\": \"full_struct\",\n          \"snippet\": \"model_name: full_struct\\nname: full_struct\\nlabel_list: face|pedestrian|cycer|vehicle|cyc\\nlabels: face pedestrian cycer vehicle cyc\\ntype: essos\\nplatform: ssc338q-sgstar-int8\\nstatus: SUCCESS\\ndid: 87299\\nrid: 28671\\nversion: 3.5.4\\nversion_train_date: 20230516\\nsource_file: data/full_struct-ssc338q-sgstar-int8_28671_87299.json\",\n          \"model_name\": \"full_struct\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.996627\n        }\n      ]\n    },\n    {\n      \"round\": 2,\n      \"query\": \"头盔颜色 识别 城市结构化模型\",\n      \"knowledge_base_fully_answered\": 0.15,\n      \"evidence\": [\n        {\n          \"evidence_id\": \"f586a56a911c80497fa3679c\",\n          \"title\": \"PDFs/Classify_3.4.0.pdf p1\",\n          \"snippet\": \"Classify_3.4.0\\nHighlight\\n• 优化st_helmet_style（头盔）分支下“安全帽”类型图片的召回率（识别成未戴口罩），ma_安全帽 =\\n84.07%(+12.01%)\",\n          \"section_type\": \"release_note\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"a74f05e4611996ea01ce77bb\",\n          \"title\": \"struct\",\n          \"snippet\": \"model_name: struct\\nname: struct\\nlabel_list: pedestrian|cycer|car|cyc\\nlabels: pedestrian cycer car cyc\\ntype: essos\\nplatform: acl-ascend710-fp16\\nstatus: SUCCESS\\ndid: 131988\\nrid: 48870\\nversion: 3.0.2\\nversion_train_date: 20250716\\nsource_file: data/struct-acl-ascend710-fp16_48870_131988.json\",\n          \"model_name\": \"struct\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"52969462ecb973e9cf529281\",\n          \"title\": \"struct_e5\",\n          \"snippet\": \"model_name: struct_e5\\nname: struct_e5\\nlabel_list: pedestrian|cycer|car|cyc\\nlabels: pedestrian cycer car cyc\\ntype: essos\\nplatform: ssc338q-sgstar-int8\\nstatus: SUCCESS\\ndid: 109419\\nrid: 38424\\nversion: 3.0.0\\nversion_train_date: 20240509\\nsource_file: data/struct_e5-ssc338q-sgstar-int8_38424_109419.json\",\n          \"model_name\": \"struct_e5\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.998672\n        },\n        {\n          \"evidence_id\": \"c782d0105174752db9d5cb3b\",\n          \"title\": \"full_struct\",\n          \"snippet\": \"model_name: full_struct\\nname: full_struct\\nlabel_list: face|pedestrian|cycer|vehicle|cyc\\nlabels: face pedestrian cycer vehicle cyc\\ntype: essos\\nplatform: cvflow-cv25-int8\\nstatus: SUCCESS\\ndid: 100665\\nrid: 31058\\nversion: 3.5.5\\nversion_train_date: 20230727\\nsource_file: data/full_struct-cvflow-cv25-int8_31058_100665.json\",\n          \"model_name\": \"full_struct\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.99819\n        },\n        {\n          \"evidence_id\": \"e878aa1b695b8617ddec1463\",\n          \"title\": \"full_struct\",\n          \"snippet\": \"model_name: full_struct\\nname: full_struct\\nlabel_list: face|pedestrian|cycer|vehicle|cyc\\nlabels: face pedestrian cycer vehicle cyc\\ntype: essos\\nplatform: cvflow-cv25-int16\\nstatus: SUCCESS\\ndid: 111868\\nrid: 31058\\nversion: 3.5.5\\nversion_train_date: 20230727\\nsource_file: data/full_struct-cvflow-cv25-int16_31058_111868.json\",\n          \"model_name\": \"full_struct\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.99807\n        },\n        {\n          \"evidence_id\": \"345299e2f4ed9937a4726f9d\",\n          \"title\": \"full_struct\",\n          \"snippet\": \"model_name: full_struct\\nname: full_struct\\nlabel_list: face|pedestrian|cycer|vehicle|cyc\\nlabels: face pedestrian cycer vehicle cyc\\ntype: essos\\nplatform: cvflow-cv22-int8\\nstatus: SUCCESS\\ndid: 98939\\nrid: 31058\\nversion: 3.5.5\\nversion_train_date: 20230727\\nsource_file: data/full_struct-cvflow-cv22-int8_31058_98939.json\",\n          \"model_name\": \"full_struct\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.99807\n        }\n      ]\n    },\n    {\n      \"round\": 3,\n      \"query\": \"头盔颜色 识别 结构化 城市模型\",\n      \"knowledge_base_fully_answered\": 0.82,\n      \"evidence\": [\n        {\n          \"evidence_id\": \"a74f05e4611996ea01ce77bb\",\n          \"title\": \"struct\",\n          \"snippet\": \"model_name: struct\\nname: struct\\nlabel_list: pedestrian|cycer|car|cyc\\nlabels: pedestrian cycer car cyc\\ntype: essos\\nplatform: acl-ascend710-fp16\\nstatus: SUCCESS\\ndid: 131988\\nrid: 48870\\nversion: 3.0.2\\nversion_train_date: 20250716\\nsource_file: data/struct-acl-ascend710-fp16_48870_131988.json\",\n          \"model_name\": \"struct\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"3b516e739c46f412291d37bb\",\n          \"title\": \"PDFs/安防方向-人脸误检分类模型发版记录.pdf p6\",\n          \"snippet\": \"• highlights\\n◦ 基于原KM_classifier_FaceNoFace_cls_sz_1.0.2 模型，修正后脑勺，头盔，全遮挡为人脸误检负\\n样本\\n◦ 新增车内人脸为正样本\\n◦ 基于clip蒸馏小模型为预训练模型，平均acc在hardcase上提升38.6%->72.5%\\n◦ 输出字段与原KM_classifier_FaceNoFace_cls_sz_1.0.2 模型保持一致\",\n          \"section_type\": \"release_note\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"5850200e8d6cdb50680b2deb\",\n          \"title\": \"full_struct\",\n          \"snippet\": \"model_name: full_struct\\nname: full_struct\\nlabel_list: face|pedestrian|cycer|vehicle|cyc\\nlabels: face pedestrian cycer vehicle cyc\\ntype: essos\\nplatform: nvt-nt9852x-int16\\nstatus: SUCCESS\\ndid: 112752\\nrid: 31058\\nversion: 3.5.5\\nversion_train_date: 20230727\\nsource_file: data/full_struct-nvt-nt9852x-int16_31058_112752.json\",\n          \"model_name\": \"full_struct\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.998555\n        },\n        {\n          \"evidence_id\": \"c782d0105174752db9d5cb3b\",\n          \"title\": \"full_struct\",\n          \"snippet\": \"model_name: full_struct\\nname: full_struct\\nlabel_list: face|pedestrian|cycer|vehicle|cyc\\nlabels: face pedestrian cycer vehicle cyc\\ntype: essos\\nplatform: cvflow-cv25-int8\\nstatus: SUCCESS\\ndid: 100665\\nrid: 31058\\nversion: 3.5.5\\nversion_train_date: 20230727\\nsource_file: data/full_struct-cvflow-cv25-int8_31058_100665.json\",\n          \"model_name\": \"full_struct\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.99819\n        },\n        {\n          \"evidence_id\": \"345299e2f4ed9937a4726f9d\",\n          \"title\": \"full_struct\",\n          \"snippet\": \"model_name: full_struct\\nname: full_struct\\nlabel_list: face|pedestrian|cycer|vehicle|cyc\\nlabels: face pedestrian cycer vehicle cyc\\ntype: essos\\nplatform: cvflow-cv22-int8\\nstatus: SUCCESS\\ndid: 98939\\nrid: 31058\\nversion: 3.5.5\\nversion_train_date: 20230727\\nsource_file: data/full_struct-cvflow-cv22-int8_31058_98939.json\",\n          \"model_name\": \"full_struct\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.99807\n        },\n        {\n          \"evidence_id\": \"e878aa1b695b8617ddec1463\",\n          \"title\": \"full_struct\",\n          \"snippet\": \"model_name: full_struct\\nname: full_struct\\nlabel_list: face|pedestrian|cycer|vehicle|cyc\\nlabels: face pedestrian cycer vehicle cyc\\ntype: essos\\nplatform: cvflow-cv25-int16\\nstatus: SUCCESS\\ndid: 111868\\nrid: 31058\\nversion: 3.5.5\\nversion_train_date: 20230727\\nsource_file: data/full_struct-cvflow-cv25-int16_31058_111868.json\",\n          \"model_name\": \"full_struct\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.99807\n        }\n      ]\n    }\n  ],\n  \"required_fields\": [\n    {\n      \"field\": \"existing_models\",\n      \"label\": \"可直接复用的已有模型\"\n    },\n    {\n      \"field\": \"similar_capabilities\",\n      \"label\": \"可迁移的相似能力\"\n    },\n    {\n      \"field\": \"performance_baseline\",\n      \"label\": \"性能与精度基线\"\n    },\n    {\n      \"field\": \"data_requirements\",\n      \"label\": \"数据、标注与迭代依赖\"\n    }\n  ]\n}"
+      }
+    ]
+  }
+}

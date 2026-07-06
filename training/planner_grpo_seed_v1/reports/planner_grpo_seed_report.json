@@ -1,0 +1,589 @@
+{
+  "summary": {
+    "cases": 20,
+    "prediction_mode": "expected_decisions_smoke",
+    "mean_score": 1.0,
+    "by_category": {
+      "adela_eval": {
+        "count": 2,
+        "mean_score": 1.0
+      },
+      "full_detection_eval": {
+        "count": 3,
+        "mean_score": 1.0
+      },
+      "general_answer": {
+        "count": 2,
+        "mean_score": 1.0
+      },
+      "historical_asset_qa": {
+        "count": 3,
+        "mean_score": 1.0
+      },
+      "intent_ambiguity": {
+        "count": 1,
+        "mean_score": 1.0
+      },
+      "migration_feasibility": {
+        "count": 3,
+        "mean_score": 1.0
+      },
+      "migration_feasibility_with_image": {
+        "count": 1,
+        "mean_score": 1.0
+      },
+      "probe_then_migration": {
+        "count": 1,
+        "mean_score": 1.0
+      },
+      "single_image_probe": {
+        "count": 4,
+        "mean_score": 1.0
+      }
+    },
+    "used_action_counts": {
+      "qwen_detection": 5,
+      "pipeline_eval": 3,
+      "migration_advisor": 5,
+      "rag_answer": 3,
+      "answerer": 2,
+      "adela_cli_eval": 2,
+      "clarify": 1
+    }
+  },
+  "results": [
+    {
+      "case_id": "GRPO-VIS-PROBE-001",
+      "category": "single_image_probe",
+      "score": 1.0,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-VIS-PROBE-002",
+      "category": "single_image_probe",
+      "score": 1.0,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-VIS-PROBE-003",
+      "category": "single_image_probe",
+      "score": 1.0,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-VIS-PROBE-004",
+      "category": "single_image_probe",
+      "score": 1.0,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-PIPELINE-001",
+      "category": "full_detection_eval",
+      "score": 1.0,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "used_actions": [
+        "pipeline_eval"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-PIPELINE-002",
+      "category": "full_detection_eval",
+      "score": 1.0,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "used_actions": [
+        "pipeline_eval"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-PIPELINE-003",
+      "category": "full_detection_eval",
+      "score": 1.0,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "used_actions": [
+        "pipeline_eval"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-MIG-001",
+      "category": "migration_feasibility",
+      "score": 1.0,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "used_actions": [
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-MIG-002",
+      "category": "migration_feasibility",
+      "score": 1.0,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "used_actions": [
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-MIG-003",
+      "category": "migration_feasibility",
+      "score": 1.0,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "used_actions": [
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-MIG-004",
+      "category": "migration_feasibility_with_image",
+      "score": 1.0,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "used_actions": [
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-RAG-001",
+      "category": "historical_asset_qa",
+      "score": 1.0,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "used_actions": [
+        "rag_answer"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-RAG-002",
+      "category": "historical_asset_qa",
+      "score": 1.0,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "used_actions": [
+        "rag_answer"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-RAG-003",
+      "category": "historical_asset_qa",
+      "score": 1.0,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "used_actions": [
+        "rag_answer"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-ANS-001",
+      "category": "general_answer",
+      "score": 1.0,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "used_actions": [
+        "answerer"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-ANS-002",
+      "category": "general_answer",
+      "score": 1.0,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "used_actions": [
+        "answerer"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-ADELA-001",
+      "category": "adela_eval",
+      "score": 1.0,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "used_actions": [
+        "adela_cli_eval"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-ADELA-002",
+      "category": "adela_eval",
+      "score": 1.0,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "used_actions": [
+        "adela_cli_eval"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-CLARIFY-001",
+      "category": "intent_ambiguity",
+      "score": 1.0,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "used_actions": [
+        "clarify"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-OBS-001",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "raw_score": 1.9,
+      "max_score": 1.9,
+      "forbidden_hit": [],
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    }
+  ]
+}

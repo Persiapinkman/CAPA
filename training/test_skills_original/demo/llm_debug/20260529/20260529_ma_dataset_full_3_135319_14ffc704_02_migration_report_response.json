@@ -1,0 +1,115 @@
+{
+  "session_id": "ma_dataset_full_3",
+  "run_stamp": "20260529_135319_14ffc704",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-05-29T13:54:42+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"用户需要识别香港人体属性中的‘纹身有无’属性，询问普通人体属性模型是否直接支持。\",\n  \"direct_match\": {\n    \"exists\": false,\n    \"summary\": \"检索到的证据中未发现任何模型明确支持‘纹身有无’属性识别。现有模型主要集中在人脸检测、人体检测、人体 ReID、人体服饰分类、人体状衣二分类等非纹身属性。\"\n  ,\n  \"evidence\": [\n    \"所有检索模型的目标名称（target_name）均为‘人脸’或‘人体’，未出现‘纹身’相关关键词。\",\n    \"人体属性模型（KM_classifier_Ped_33of33）主要涵盖服饰分类，无纹身属性。\",\n    \"人体状衣二分类模型仅区分‘正常人体’与‘穿着状衣’。\"\n  ]\n  }\n,\n  \"similar_assets\": [\n    {\n      \"model_or_solution\": \"KM_classifier_Ped_33of33\",\n      \"label_schema\": \"无纹身属性，主要为人体服饰分类（如裤子、鞋、包、上衣等）及性别、年龄等通用属性。具体标签体系未在当前证据中完整列出，但已知不包含‘纹身’。\",\n      \"training_data\": \"证据不足。已知为‘人体属性模型’，版本 V2.21.0，用于 ReID 场景。\",\n      \"reported_metrics\": \"证据不足。文档中未提供该模型在人体属性（服饰）识别任务上的具体精度数值（如 mAP, ACC）。\",\n      \"covered_capability\": \"普通人体属性识别（服饰、性别等），但不包含纹身、伤疤等细节属性。\"\n    ,\n    \"gap\": \"与用户需求在‘纹身有无’标签体系上不匹配。\"\n    ,\n    \"evidence\": [\n      \"KM_classifier_Ped_33of33 模型文档中标题及描述为‘人体属性模型’，目标为人体。\",\n      \"证据中未见‘纹身’相关标签定义。\"\n    ]\n    }\n  ,\n    {\n      \"model_or_solution\": \"KM_classifier_Ped_ClothBanner_nart\",\n      \"label_schema\": \"二分类标签：'st_ped_normal'（正常人体）vs 'st_ped_clothbanner'（人体穿着状衣）。\",\n      \"training_data\": \"证据不足。文档描述为‘召回衣物上有肉眼可辨醒目大字的人体的二分类模型’。\",\n      \"reported_metrics\": \"证据不足。无具体精度数值。\",\n      \"covered_capability\": \"针对人体衣物上的‘状衣’（醒目文字）进行识别，属于属性识别的一种，但标签体系为二分类，且关注点是文字而非纹身。\",\n      \"gap\": \"模型关注点为衣物上的文字标识，与用户需要的‘纹身有无’属于不同的视觉特征。标签体系不匹配。\"\n    ,\n    \"evidence\": [\n      \"模型文档描述为‘人体状衣二分类’。\",\n      \"标签定义为‘正常人体’和‘人体穿着状衣’。\"\n    ]\n    }\n  ,\n    {\n      \"model_or_solution\": \"PDFs/非机车属性全模型\",\n      \"label_schema\": \"非机动车属性识别，包含摩托车、电动车、自行车、三轮车、婴儿车、轮椅等。部分场景有‘有无阈值’区分，但非纹身。\",\n      \"training_data\": \"证据不足。测试集信息未明确。\",\n      \"reported_metrics\": \"证据不足。仅给出精度/召回率数值，但未说明对应具体场景下的‘纹身’属性。\",\n      \"covered_capability\": \"非机动车细分类，与人体属性不直接相关，但属于细粒度属性识别方案。\",\n      \"gap\": \"目标对象为车辆，非人体。\"\n    ,\n    \"evidence\": [\n      \"PDF 表格显示车辆类型分类精度。\"\n    ]\n    }\n  ,\n    {\n      \"model_or_solution\": \"KM_senu_reid_156\",\n      \"label_schema\": \"ReID 特征，输出人体特征向量，非分类标签。\",\n      \"training_data\": \"证据不足。\",\n      \"reported_metrics\": \"证据不足。无具体属性识别精度。\",\n      \"covered_capability\": \"人体特征提取，可用于 ReID 场景，但不直接输出‘纹身有无’的标签。\",\n      \"gap\": \"输出为特征向量，非属性标签。\"\n    ,\n    \"evidence\": [\n      \"模型目标名称为‘人体’，算法类型为‘特征’。\"\n    ]\n    }\n  ,\n    {\n      \"model_or_solution\": \"Human Attribute Detection Models (General)\",\n      \"label_schema\": \"普通人体属性模型通常包含：性别、年龄、衣着颜色、衣着类型、姿态等。\",\n      \"training_data\": \"证据不足。\",\n      \"reported_metrics\": \"证据不足。\",\n      \"covered_capability\": \"标准属性识别，一般不包含纹身、疤痕等细粒度皮肤属性。\",\n      \"gap\": \"标签体系不支持。\"\n    ,\n    \"evidence\": [\n      \"检索模型中无纹身相关属性。\"\n    ]\n    }\n  ]\n  ,\n  \"migration_plan\": {\n    \"feasibility\": \"low\",\n    \"approach\": \"普通人体属性模型通常不支持‘纹身有无’属性。建议方案：1. 评估是否可基于 ReID 模型（如 KM_senu_reid_156）提取特征，再微调训练一个分类头（Head）来识别纹身；2. 收集‘有无纹身’的标注数据，重新训练或微调一个人体属性模型。\",\n    \"data_requirements\": \"需要收集香港地区人体照片，标注‘纹身有无’二分类标签。数量建议至少数千张，覆盖不同光照、角度。\",\n    \"compute_requirements\": \"证据不足。基于 ReID 模型微调通常需要 GPU 资源（如 T4/A10/A800）。\",\n    \"engineering_work\": \"需重新训练模型或调整现有模型结构。\"\n  ,\n  \"estimated_timeline\": \"证据不足。取决于数据准备和模型迭代周期，通常数月。\"\n  ,\n  \"estimated_cost\": \"证据不足。取决于算力资源和人力投入。\"\n  ,\n  \"dependencies\": [\"数据标注质量\", \"算力资源\", \"现有 ReID 模型基座能力\"]\n  ,\n  \"risks\": [\"纹身遮挡、光照影响大，模型精度可能低\", \"隐私合规风险（纹身属于人体特征）\", \"数据稀缺\"]\n  }\n  ,\n  \"expected_performance\": {\n    \"baseline\": \"证据不足。目前无直接模型支持，无法提供 baseline。\",\n    \"target\": \"建议目标 mAP/ACC > 85%（需结合测试集定义）。\"\n  ,\n  \"uncertainty\": \"高。纹身属性受遮挡、光照、位置影响极大，精度难以预估。\"\n  }\n  ,\n  \"recommendation\": \"现有普通人体属性模型不支持‘纹身有无’识别。建议采用 ReID 模型微调方案或从头训练属性模型。需重点关注数据标注和隐私合规问题。\"\n  }",
+    "structured_output": {
+      "requirement_summary": "用户需要识别香港人体属性中的‘纹身有无’属性，询问普通人体属性模型是否直接支持。",
+      "direct_match": {
+        "exists": false,
+        "summary": "检索到的证据中未发现任何模型明确支持‘纹身有无’属性识别。现有模型主要集中在人脸检测、人体检测、人体 ReID、人体服饰分类、人体状衣二分类等非纹身属性。",
+        "evidence": [
+          "所有检索模型的目标名称（target_name）均为‘人脸’或‘人体’，未出现‘纹身’相关关键词。",
+          "人体属性模型（KM_classifier_Ped_33of33）主要涵盖服饰分类，无纹身属性。",
+          "人体状衣二分类模型仅区分‘正常人体’与‘穿着状衣’。"
+        ]
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "KM_classifier_Ped_33of33",
+          "label_schema": "无纹身属性，主要为人体服饰分类（如裤子、鞋、包、上衣等）及性别、年龄等通用属性。具体标签体系未在当前证据中完整列出，但已知不包含‘纹身’。",
+          "training_data": "证据不足。已知为‘人体属性模型’，版本 V2.21.0，用于 ReID 场景。",
+          "reported_metrics": "证据不足。文档中未提供该模型在人体属性（服饰）识别任务上的具体精度数值（如 mAP, ACC）。",
+          "covered_capability": "普通人体属性识别（服饰、性别等），但不包含纹身、伤疤等细节属性。",
+          "gap": "与用户需求在‘纹身有无’标签体系上不匹配。",
+          "evidence": [
+            "KM_classifier_Ped_33of33 模型文档中标题及描述为‘人体属性模型’，目标为人体。",
+            "证据中未见‘纹身’相关标签定义。"
+          ]
+        },
+        {
+          "model_or_solution": "KM_classifier_Ped_ClothBanner_nart",
+          "label_schema": "二分类标签：'st_ped_normal'（正常人体）vs 'st_ped_clothbanner'（人体穿着状衣）。",
+          "training_data": "证据不足。文档描述为‘召回衣物上有肉眼可辨醒目大字的人体的二分类模型’。",
+          "reported_metrics": "证据不足。无具体精度数值。",
+          "covered_capability": "针对人体衣物上的‘状衣’（醒目文字）进行识别，属于属性识别的一种，但标签体系为二分类，且关注点是文字而非纹身。",
+          "gap": "模型关注点为衣物上的文字标识，与用户需要的‘纹身有无’属于不同的视觉特征。标签体系不匹配。",
+          "evidence": [
+            "模型文档描述为‘人体状衣二分类’。",
+            "标签定义为‘正常人体’和‘人体穿着状衣’。"
+          ]
+        },
+        {
+          "model_or_solution": "PDFs/非机车属性全模型",
+          "label_schema": "非机动车属性识别，包含摩托车、电动车、自行车、三轮车、婴儿车、轮椅等。部分场景有‘有无阈值’区分，但非纹身。",
+          "training_data": "证据不足。测试集信息未明确。",
+          "reported_metrics": "证据不足。仅给出精度/召回率数值，但未说明对应具体场景下的‘纹身’属性。",
+          "covered_capability": "非机动车细分类，与人体属性不直接相关，但属于细粒度属性识别方案。",
+          "gap": "目标对象为车辆，非人体。",
+          "evidence": [
+            "PDF 表格显示车辆类型分类精度。"
+          ]
+        },
+        {
+          "model_or_solution": "KM_senu_reid_156",
+          "label_schema": "ReID 特征，输出人体特征向量，非分类标签。",
+          "training_data": "证据不足。",
+          "reported_metrics": "证据不足。无具体属性识别精度。",
+          "covered_capability": "人体特征提取，可用于 ReID 场景，但不直接输出‘纹身有无’的标签。",
+          "gap": "输出为特征向量，非属性标签。",
+          "evidence": [
+            "模型目标名称为‘人体’，算法类型为‘特征’。"
+          ]
+        },
+        {
+          "model_or_solution": "Human Attribute Detection Models (General)",
+          "label_schema": "普通人体属性模型通常包含：性别、年龄、衣着颜色、衣着类型、姿态等。",
+          "training_data": "证据不足。",
+          "reported_metrics": "证据不足。",
+          "covered_capability": "标准属性识别，一般不包含纹身、疤痕等细粒度皮肤属性。",
+          "gap": "标签体系不支持。",
+          "evidence": [
+            "检索模型中无纹身相关属性。"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "low",
+        "approach": "普通人体属性模型通常不支持‘纹身有无’属性。建议方案：1. 评估是否可基于 ReID 模型（如 KM_senu_reid_156）提取特征，再微调训练一个分类头（Head）来识别纹身；2. 收集‘有无纹身’的标注数据，重新训练或微调一个人体属性模型。",
+        "data_requirements": "需要收集香港地区人体照片，标注‘纹身有无’二分类标签。数量建议至少数千张，覆盖不同光照、角度。",
+        "compute_requirements": "证据不足。基于 ReID 模型微调通常需要 GPU 资源（如 T4/A10/A800）。",
+        "engineering_work": "需重新训练模型或调整现有模型结构。",
+        "estimated_timeline": "证据不足。取决于数据准备和模型迭代周期，通常数月。",
+        "estimated_cost": "证据不足。取决于算力资源和人力投入。",
+        "dependencies": [
+          "数据标注质量",
+          "算力资源",
+          "现有 ReID 模型基座能力"
+        ],
+        "risks": [
+          "纹身遮挡、光照影响大，模型精度可能低",
+          "隐私合规风险（纹身属于人体特征）",
+          "数据稀缺"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "证据不足。目前无直接模型支持，无法提供 baseline。",
+        "target": "建议目标 mAP/ACC > 85%（需结合测试集定义）。",
+        "uncertainty": "高。纹身属性受遮挡、光照、位置影响极大，精度难以预估。"
+      },
+      "recommendation": "现有普通人体属性模型不支持‘纹身有无’识别。建议采用 ReID 模型微调方案或从头训练属性模型。需重点关注数据标注和隐私合规问题。"
+    }
+  }
+}

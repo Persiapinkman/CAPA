@@ -1,0 +1,106 @@
+{
+  "session_id": "ma_dataset_full_29",
+  "run_stamp": "20260529_145213_5a78aeec",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-05-29T14:53:26+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"客户要求识别五个特定属性：1. 公交路线号，2. 集装箱号，3. container length（集装箱长度），4. probationary sign（实习/临时标志），5. learner sign（学员标志）。核心问题是：是否能用普通车辆属性模型直接完成？需要评估现有模型能力、数据需求、精度基准。\",\n  \"direct_match\":  {\"exists\": false, \"summary\": \"当前检索到的现有模型库中，没有直接支持识别这五个特定属性（公交路线号、集装箱号、集装箱长度、实习标志、学员标志）的模型。现有的车辆属性模型主要集中在车牌、车辆类型（如大客车、货车）、颜色等常见属性。针对‘公交路线号’，部分车辆分类模型包含‘公交车’大类，但未见具体路线号识别能力。针对‘集装箱号’和'container length'，这是集装箱/特种车特定属性，非普通车辆属性模型覆盖范围。针对‘probationary/learner sign'，这类驾驶员/车辆状态标志通常属于驾驶员属性或特定行业规则，未在通用车辆属性模型中出现。\",\n  \"evidence\": [\n    \"检索到的车辆属性模型（如 KM_classifier_Vehicle_FullAttr 系列、KM_classifier_Carplate_TypeColor 等）主要输出车辆颜色、粗分类（如 SUV、轿车、大客车）、车牌颜色/类型等。\",\n    \"KM_obb_carplate 等模型专注于车牌文字识别，但针对的是车辆牌照（如粤 A·12345），而非公交路线号。\",\n    \"KM_classifier_Carplate_TypeColor 识别的是车牌颜色（蓝、黄、白等）和车牌类型（大型/小型），不包含集装箱号。\",\n    \"RoadConstruction 模型识别的是 road_construction_sign（道路施工标志）、traffic_cone（交通锥）、guild_sign（路标），并非 probationary/learner sign。\",\n    \"证据不足表明无法直接支持客户需求，但提供了迁移参考信息。\"\n  ]\n}\n  \t,\n  \"similar_assets\": [\n    {\n      \"model_or_solution\": \"车辆属性大模型 (KM_classifier_Vehicle_FullAttr)\",\n      \"label_schema\": \"车辆粗分类（st_car, st_suv, st_van, st_small_truck, st_big_truck 等）, 颜色（黑色、蓝色、白色、橙色、青色等）, 车身文字、贴纸、天窗、行李架等。不包含公交路线号、集装箱号、probationary/learner sign。\",\n      \"training_data\": \"结构化车辆小图，输入尺寸≥90*90。数据来源于车辆检测与属性标注。具体样本量未知。\",\n      \"reported_metrics\": \"颜色属性全属性 Acc 89.1%（从 81.6% 提升）。粗分类全属性 Acc 90.0%（从 81.5% 提升）。\"\n    ,\n      \"covered_capability\": \"部分支持：'车身文字识别'（st_vehicle_characters=['有文字','无文字','无法判断']），但仅为有无判断，不支持具体路线号文本内容提取。不支持集装箱号识别。\"\n    ,\n      \"gap\": \"缺乏对公交路线号、集装箱号、集装箱长度、probationary/learner sign 的细粒度识别能力。\"\n    ,\n      \"evidence\": [\n        \"KM_classifier_Vehicle_FullAttr 3.0.0 release note 提及 '车身文字识别'，但仅为二分类（有/无），无具体文本内容提取。\",\n        \"KM_classifier_Vehicle_FullAttr 3.0.0 release note 提及 '车身文字识别：st_vehicle_characters'，未包含公交路线号。\",\n        \"无证据支持支持集装箱号识别。\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"车牌文字识别模型 (KM_textrecognition_CarPlate)\",\n      \"label_schema\": \"车牌文字识别，包括车牌号（如 '粤 A·12345'）。\",\n      \"training_data\": \"车牌图像，单/双行车牌。训练数据量级未明确（其他车牌模型类似任务约 39w+ 训练数据）。\",\n      \"reported_metrics\": \"端到端测试准确率达 0.9763（T4 平台），部分场景（如深圳测试集）准确率 0.9966。\",\n      \"covered_capability\": \"支持车牌文字提取（标准车牌）。不直接支持公交路线号（通常为电子屏或车身喷涂，非标准车牌格式）。\",\n      \"gap\": \"公交路线号通常显示在公交车前部/侧面的电子屏或车身喷涂，与标准车牌格式不同。需额外训练数据适配。\",\n      \"evidence\": [\n        \"KM_textrecognition_CarPlate 模型针对标准车牌识别。\",\n        \"证据不足支持支持公交路线号直接识别。\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"道路施工标志检测 (RoadConstruction)\",\n      \"label_schema\": \"construction_sign（施工标志）, traffic_cone（交通锥）, guild_sign（路标）。\",\n      \"training_data\": \"道路场景图像。\",\n      \"reported_metrics\": \"未公开具体 mAP 值。\",\n      \"covered_capability\": \"支持交通标志检测（施工、锥桶、路标），可能部分支持 probationary/learner sign（如实习/学员标志属于交通/驾驶员标志），但需确认具体类别。\",\n      \"gap\": \"无证据表明支持 probationary/learner sign。现有标签为 road construction 相关。\",\n      \"evidence\": [\n        \"RoadConstruction 模型标签 list: construction_sign, traffic_cone, guild_sign。\",\n        \"无证据支持 probationary/learner sign 识别。\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"车牌特征模型 (KM_Senu_Carplate)\",\n      \"label_schema\": \"车牌特征向量（256 维/64 维）。用于 ReID。\",\n      \"training_data\": \"百万底库（清洗后）, sjc 模糊车牌，sjc 特殊车牌，sjc 清晰车牌。\",\n      \"reported_metrics\": \"百万底库 mAP/CMC1 99.3%/99.4%（256 维）。\",\n      \"covered_capability\": \"不支持直接文本/属性识别，仅提供特征向量。\",\n      \"gap\": \"无法满足公交路线号、集装箱号等文本/属性提取需求。\",\n      \"evidence\": [\n        \"KM_Senu_Carplate 模型输出为特征向量，用于车牌 ReID。\"\n      ]\n    }\n  ],\n  \"migration_plan\": {\n    \"feasibility\": \"low\",\n    \"approach\": \"定制开发\",\n    \"data_requirements\": \"公交路线号需从公交车图像中采集标注数据（建议≥1 万张，含不同角度、天气、光照）。集装箱号需从集装箱车/集装箱正面采集（建议≥1 万张）。container length 需通过视觉或结合 OCR 推算。probationary sign 和 learner sign 需从驾驶员/车身/车窗处采集（建议≥5000 张）。\",\n    \"compute_requirements\": \"建议 T4/A2 平台，batch size 8-16。精度依赖数据质量和标注规范。\",\n    \"engineering_work\": \"需单独训练文本检测（CTPN/EAST）+ OCR（CRNN）或端到端文本识别模型（如 DBNet + CRNN）。针对集装箱号需适配字体、遮挡。probationary/learner sign 需重新设计标签体系。\",\n    \"estimated_timeline\": \"数据标注：2-4 周；模型训练与调优：4-6 周；测试与部署：2 周。总计约 8-12 周。\",\n    \"estimated_cost\": \"人力成本约 30-50 万 RMB（取决于数据规模与标注外包情况）。算力成本约 2-5 万 RMB。\",\n    \"dependencies\": [\"数据收集与标注规范\", \"OCR 模型选型\", \"业务逻辑集成（如路线号与车辆 ID 关联）\"],\n    \"risks\": [\"公交路线号字体多变、遮挡严重。集装箱号反光/磨损。probationary/learner sign 识别易受驾驶员位置/角度影响。\"]\n  },\n  \"expected_performance\": {\n    \"baseline\": \"若数据质量良好，OCR 模型在标准场景下可达 95%+准确率，但公交路线号/集装箱号因场景复杂，预期 85-92%。\",\n    \"target\": \"公交路线号 90%+；集装箱号 85%+；container length 80%+；probationary sign 90%+；learner sign 90%+。\",\n    \"uncertainty\": \"高度依赖实际场景数据分布与标注质量。\"\n  },\n  \"recommendation\": \"不建议直接使用现有模型。建议定制开发 OCR 文本检测 + 识别模型，针对公交路线号/集装箱号专项优化。probationary/learner sign 可考虑作为交通标志检测任务，需确认是否属于道路施工标志。需先行数据评估与标注测试。\"\n}",
+    "structured_output": {
+      "requirement_summary": "客户要求识别五个特定属性：1. 公交路线号，2. 集装箱号，3. container length（集装箱长度），4. probationary sign（实习/临时标志），5. learner sign（学员标志）。核心问题是：是否能用普通车辆属性模型直接完成？需要评估现有模型能力、数据需求、精度基准。",
+      "direct_match": {
+        "exists": false,
+        "summary": "当前检索到的现有模型库中，没有直接支持识别这五个特定属性（公交路线号、集装箱号、集装箱长度、实习标志、学员标志）的模型。现有的车辆属性模型主要集中在车牌、车辆类型（如大客车、货车）、颜色等常见属性。针对‘公交路线号’，部分车辆分类模型包含‘公交车’大类，但未见具体路线号识别能力。针对‘集装箱号’和'container length'，这是集装箱/特种车特定属性，非普通车辆属性模型覆盖范围。针对‘probationary/learner sign'，这类驾驶员/车辆状态标志通常属于驾驶员属性或特定行业规则，未在通用车辆属性模型中出现。",
+        "evidence": [
+          "检索到的车辆属性模型（如 KM_classifier_Vehicle_FullAttr 系列、KM_classifier_Carplate_TypeColor 等）主要输出车辆颜色、粗分类（如 SUV、轿车、大客车）、车牌颜色/类型等。",
+          "KM_obb_carplate 等模型专注于车牌文字识别，但针对的是车辆牌照（如粤 A·12345），而非公交路线号。",
+          "KM_classifier_Carplate_TypeColor 识别的是车牌颜色（蓝、黄、白等）和车牌类型（大型/小型），不包含集装箱号。",
+          "RoadConstruction 模型识别的是 road_construction_sign（道路施工标志）、traffic_cone（交通锥）、guild_sign（路标），并非 probationary/learner sign。",
+          "证据不足表明无法直接支持客户需求，但提供了迁移参考信息。"
+        ]
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "车辆属性大模型 (KM_classifier_Vehicle_FullAttr)",
+          "label_schema": "车辆粗分类（st_car, st_suv, st_van, st_small_truck, st_big_truck 等）, 颜色（黑色、蓝色、白色、橙色、青色等）, 车身文字、贴纸、天窗、行李架等。不包含公交路线号、集装箱号、probationary/learner sign。",
+          "training_data": "结构化车辆小图，输入尺寸≥90*90。数据来源于车辆检测与属性标注。具体样本量未知。",
+          "reported_metrics": "颜色属性全属性 Acc 89.1%（从 81.6% 提升）。粗分类全属性 Acc 90.0%（从 81.5% 提升）。",
+          "covered_capability": "部分支持：'车身文字识别'（st_vehicle_characters=['有文字','无文字','无法判断']），但仅为有无判断，不支持具体路线号文本内容提取。不支持集装箱号识别。",
+          "gap": "缺乏对公交路线号、集装箱号、集装箱长度、probationary/learner sign 的细粒度识别能力。",
+          "evidence": [
+            "KM_classifier_Vehicle_FullAttr 3.0.0 release note 提及 '车身文字识别'，但仅为二分类（有/无），无具体文本内容提取。",
+            "KM_classifier_Vehicle_FullAttr 3.0.0 release note 提及 '车身文字识别：st_vehicle_characters'，未包含公交路线号。",
+            "无证据支持支持集装箱号识别。"
+          ]
+        },
+        {
+          "model_or_solution": "车牌文字识别模型 (KM_textrecognition_CarPlate)",
+          "label_schema": "车牌文字识别，包括车牌号（如 '粤 A·12345'）。",
+          "training_data": "车牌图像，单/双行车牌。训练数据量级未明确（其他车牌模型类似任务约 39w+ 训练数据）。",
+          "reported_metrics": "端到端测试准确率达 0.9763（T4 平台），部分场景（如深圳测试集）准确率 0.9966。",
+          "covered_capability": "支持车牌文字提取（标准车牌）。不直接支持公交路线号（通常为电子屏或车身喷涂，非标准车牌格式）。",
+          "gap": "公交路线号通常显示在公交车前部/侧面的电子屏或车身喷涂，与标准车牌格式不同。需额外训练数据适配。",
+          "evidence": [
+            "KM_textrecognition_CarPlate 模型针对标准车牌识别。",
+            "证据不足支持支持公交路线号直接识别。"
+          ]
+        },
+        {
+          "model_or_solution": "道路施工标志检测 (RoadConstruction)",
+          "label_schema": "construction_sign（施工标志）, traffic_cone（交通锥）, guild_sign（路标）。",
+          "training_data": "道路场景图像。",
+          "reported_metrics": "未公开具体 mAP 值。",
+          "covered_capability": "支持交通标志检测（施工、锥桶、路标），可能部分支持 probationary/learner sign（如实习/学员标志属于交通/驾驶员标志），但需确认具体类别。",
+          "gap": "无证据表明支持 probationary/learner sign。现有标签为 road construction 相关。",
+          "evidence": [
+            "RoadConstruction 模型标签 list: construction_sign, traffic_cone, guild_sign。",
+            "无证据支持 probationary/learner sign 识别。"
+          ]
+        },
+        {
+          "model_or_solution": "车牌特征模型 (KM_Senu_Carplate)",
+          "label_schema": "车牌特征向量（256 维/64 维）。用于 ReID。",
+          "training_data": "百万底库（清洗后）, sjc 模糊车牌，sjc 特殊车牌，sjc 清晰车牌。",
+          "reported_metrics": "百万底库 mAP/CMC1 99.3%/99.4%（256 维）。",
+          "covered_capability": "不支持直接文本/属性识别，仅提供特征向量。",
+          "gap": "无法满足公交路线号、集装箱号等文本/属性提取需求。",
+          "evidence": [
+            "KM_Senu_Carplate 模型输出为特征向量，用于车牌 ReID。"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "low",
+        "approach": "定制开发",
+        "data_requirements": "公交路线号需从公交车图像中采集标注数据（建议≥1 万张，含不同角度、天气、光照）。集装箱号需从集装箱车/集装箱正面采集（建议≥1 万张）。container length 需通过视觉或结合 OCR 推算。probationary sign 和 learner sign 需从驾驶员/车身/车窗处采集（建议≥5000 张）。",
+        "compute_requirements": "建议 T4/A2 平台，batch size 8-16。精度依赖数据质量和标注规范。",
+        "engineering_work": "需单独训练文本检测（CTPN/EAST）+ OCR（CRNN）或端到端文本识别模型（如 DBNet + CRNN）。针对集装箱号需适配字体、遮挡。probationary/learner sign 需重新设计标签体系。",
+        "estimated_timeline": "数据标注：2-4 周；模型训练与调优：4-6 周；测试与部署：2 周。总计约 8-12 周。",
+        "estimated_cost": "人力成本约 30-50 万 RMB（取决于数据规模与标注外包情况）。算力成本约 2-5 万 RMB。",
+        "dependencies": [
+          "数据收集与标注规范",
+          "OCR 模型选型",
+          "业务逻辑集成（如路线号与车辆 ID 关联）"
+        ],
+        "risks": [
+          "公交路线号字体多变、遮挡严重。集装箱号反光/磨损。probationary/learner sign 识别易受驾驶员位置/角度影响。"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "若数据质量良好，OCR 模型在标准场景下可达 95%+准确率，但公交路线号/集装箱号因场景复杂，预期 85-92%。",
+        "target": "公交路线号 90%+；集装箱号 85%+；container length 80%+；probationary sign 90%+；learner sign 90%+。",
+        "uncertainty": "高度依赖实际场景数据分布与标注质量。"
+      },
+      "recommendation": "不建议直接使用现有模型。建议定制开发 OCR 文本检测 + 识别模型，针对公交路线号/集装箱号专项优化。probationary/learner sign 可考虑作为交通标志检测任务，需确认是否属于道路施工标志。需先行数据评估与标注测试。"
+    }
+  }
+}

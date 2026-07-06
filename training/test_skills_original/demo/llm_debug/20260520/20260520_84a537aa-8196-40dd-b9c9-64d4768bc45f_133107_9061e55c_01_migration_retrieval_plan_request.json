@@ -1,0 +1,220 @@
+{
+  "session_id": "84a537aa-8196-40dd-b9c9-64d4768bc45f",
+  "run_stamp": "20260520_133107_9061e55c",
+  "stage": "migration_retrieval_plan_request",
+  "step_index": 1,
+  "created_at": "2026-05-20T13:31:07+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260520_133107_9061e55c",
+    "input_schema": {
+      "user_query": "用户原始问题",
+      "failed_rag_trace": "最近最多 3 轮 RAG 失败轨迹（round/query/knowledge_base_fully_answered/evidence[]）",
+      "required_fields": "固定 4 个检索维度 field + label"
+    },
+    "evidence_item_fields": [
+      "evidence_id",
+      "title",
+      "snippet",
+      "model_name",
+      "algorithm_name",
+      "algorithm_type",
+      "application_scene",
+      "section_type",
+      "score"
+    ],
+    "structured_input": {
+      "user_query": "香港人体属性中要求识别“纹身有无”和“纹身位置：面部、颈部、手部、腿部、背部、无法判断”，普通城市监控场景是否可行？",
+      "failed_rag_trace": [
+        {
+          "round": 1,
+          "query": "香港人体属性中要求识别“纹身有无”和“纹身位置：面部、颈部、手部、腿部、背部、无法判断”，普通城市监控场景是否可行？",
+          "knowledge_base_fully_answered": false,
+          "evidence": [
+            {
+              "evidence_id": "5e42412ae3303a418a6c07c1",
+              "title": "PDFs/非机车属性全模型.pdf p3",
+              "snippet": "骑手类型                    骑手载人               骑手状态                   \n             有无                                                                     \n      骑手属性                                                                          \n             阈值                                                                     \n                  普通    美团    饿了么   其他    1人     2人    多人    骑车       推车...",
+              "section_type": "accuracy_metric",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "e3147847015c051257e71c5e",
+              "title": "SmallFace_Gray_736x1280",
+              "snippet": "model_name: SmallFace_Gray_736x1280\nname: SmallFace_Gray_736x1280\ntype: hunter\nplatform: acl-ascend310-int8\nstatus: SUCCESS\ndid: 128356\nrid: 48621\nversion: 4.15.3\nversion_train_date: 20250224\nsource_file: data/SmallFace_Gray_736x1280-acl-ascend310-int8_48621_128356.json",
+              "model_name": "SmallFace_Gray_736x1280",
+              "section_type": "release_note",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "3e187867d0dc03b7fc02c241",
+              "title": "SmallFace_Gray_800x1333",
+              "snippet": "model_name: SmallFace_Gray_800x1333\nname: SmallFace_Gray_800x1333\ntype: hunter\nplatform: acl-ascend310-fp16\nstatus: SUCCESS\ndid: 123917\nrid: 46717\nversion: 4.15.3\nversion_train_date: 20250224\nsource_file: data/SmallFace_Gray_800x1333-acl-ascend310-fp16_46717_123917.json",
+              "model_name": "SmallFace_Gray_800x1333",
+              "section_type": "release_note",
+              "score": 0.934072
+            },
+            {
+              "evidence_id": "ee44956ffa2fa6ec7f4b00a3",
+              "title": "SmallFace_gray_448x800",
+              "snippet": "model_name: SmallFace_gray_448x800\nname: SmallFace_gray_448x800\nlabel_list: 1\nlabels: 1\ntype: essos\nplatform: acl-ascend310-int8\nstatus: SUCCESS\ndid: 127274\nrid: 47733\nversion: 3.0.1\nversion_train_date: 20250304\nsource_file: data/SmallFace_gray_448x800-acl-ascend310-int8_47733_127274.json",
+              "model_name": "SmallFace_gray_448x800",
+              "section_type": "release_note",
+              "score": 0.921082
+            },
+            {
+              "evidence_id": "fa95bcbc620099830640c34d",
+              "title": "PDFs/非机车属性全模型.pdf p3",
+              "snippet": "非机动车类型：st_nonmotor_type  = ['纯非机动车', '不完整的骑手', '完整的骑手']",
+              "section_type": "general",
+              "score": 0.914437
+            },
+            {
+              "evidence_id": "fd4505628e562c8cda30c4a9",
+              "title": "PDFs/非机车属性全模型.pdf p3",
+              "snippet": "519a                                                                         \n       atlas     16         -         25.7                                          \n                                                                                    \n       stpu      8          -         348.3",
+              "section_type": "general",
+              "score": 0.913301
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "query": "纹身识别 人体属性 城市监控",
+          "knowledge_base_fully_answered": false,
+          "evidence": [
+            {
+              "evidence_id": "fb8b9d13e22a82193a3c3627",
+              "title": "KM_falcon_fight_UMT_base",
+              "snippet": "model_name: KM_falcon_fight_UMT_base\nname: KM_falcon_fight_UMT_base\ntype: falcon\nplatform: acl-ascend710-fp16\nstatus: SUCCESS\ndid: 129715\nrid: 49258\nversion: 2.0.5\nversion_train_date: 20250114\nsource_file: data/KM_falcon_fight_UMT_base-acl-ascend710-fp16_49258_129715.json",
+              "model_name": "KM_falcon_fight_UMT_base",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "d49ba648c8d323205d0ad634",
+              "title": "KM_falcon_fight_UMT_base",
+              "snippet": "model_name: KM_falcon_fight_UMT_base\nname: KM_falcon_fight_UMT_base\ntype: falcon\nplatform: cuda11.0-trt7.1-fp16-T4\nstatus: SUCCESS\ndid: 132443\nrid: 46122\nversion: 2.0.5\nversion_train_date: 20250114\nsource_file: data/KM_falcon_fight_UMT_base-cuda11.0-trt7.1-fp16-T4_46122_132443.json",
+              "model_name": "KM_falcon_fight_UMT_base",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "836140894cbb0bb4846f4f26",
+              "title": "KM_falcon_fight_stm50",
+              "snippet": "model_name: KM_falcon_fight_stm50\nname: KM_falcon_fight_stm50\ntype: falcon\nplatform: cuda11.0-trt7.1-fp32-T4\nstatus: SUCCESS\ndid: 100799\nrid: 35317\nversion: 1.5.1\nversion_train_date: 20231219\nsource_file: data/KM_falcon_fight_stm50-cuda11.0-trt7.1-fp32-T4_35317_100799.json",
+              "model_name": "KM_falcon_fight_stm50",
+              "section_type": "model_artifact",
+              "score": 0.997828
+            },
+            {
+              "evidence_id": "52bf133531cace3b620c3bb2",
+              "title": "package_tossing",
+              "snippet": "model_name: package_tossing\nname: package_tossing\ntype: falcon\nplatform: cuda11.0-trt7.1-fp16-T4\nstatus: SUCCESS\ndid: 131462\nrid: 48754\nversion: 0.3.1\nversion_train_date: 20250704\nsource_file: data/package_tossing-cuda11.0-trt7.1-fp16-T4_48754_131462.json",
+              "model_name": "package_tossing",
+              "section_type": "model_artifact",
+              "score": 0.997828
+            },
+            {
+              "evidence_id": "dd40d2e13bd3efdd9e4084f0",
+              "title": "pod_fight_test",
+              "snippet": "model_name: pod_fight_test\nname: pod_fight_test\ntype: falcon\nplatform: sophgo-bm1684-fp32-sdkV221201\nstatus: SUCCESS\ndid: 103246\nrid: 37308\nversion: 1.4.1\nversion_train_date: 20231129\nsource_file: data/pod_fight_test-sophgo-bm1684-fp32-sdkV221201_37308_103246.json",
+              "model_name": "pod_fight_test",
+              "section_type": "model_artifact",
+              "score": 0.997828
+            },
+            {
+              "evidence_id": "cbc9bd8507049827841ce0bd",
+              "title": "PDFs/安防场景-城市结构化检测模型3.0.1.pdf p6 table 1",
+              "snippet": "PDF表格: PDFs/安防场景-城市结构化检测模型3.0.1.pdf 第6页 表1\n\n| nanjing struct_anno_cleaned huiliu_wo_hk chuangxinyun 人体 骑手 机动车 非机 人体 骑手 机动车 非机 人体 骑手 机动车 非机 人体 非机 recall recall recall recall recall recall recall recall recall recall recall recall recall recall fppi fppi fppi fppi fppi fppi fppi fppi fppi fppi fppi fppi fppi fppi 0.552 0.704 0.458 0.532 0.623 0.298 0.491 0.026 0.108 0.541 0.067 0.675 0.306 0.039 默认发...",
+              "section_type": "accuracy_metric",
+              "score": 0.959619
+            }
+          ]
+        },
+        {
+          "round": 3,
+          "query": "纹身 人体属性 城市监控",
+          "knowledge_base_fully_answered": false,
+          "evidence": [
+            {
+              "evidence_id": "fb8b9d13e22a82193a3c3627",
+              "title": "KM_falcon_fight_UMT_base",
+              "snippet": "model_name: KM_falcon_fight_UMT_base\nname: KM_falcon_fight_UMT_base\ntype: falcon\nplatform: acl-ascend710-fp16\nstatus: SUCCESS\ndid: 129715\nrid: 49258\nversion: 2.0.5\nversion_train_date: 20250114\nsource_file: data/KM_falcon_fight_UMT_base-acl-ascend710-fp16_49258_129715.json",
+              "model_name": "KM_falcon_fight_UMT_base",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "d49ba648c8d323205d0ad634",
+              "title": "KM_falcon_fight_UMT_base",
+              "snippet": "model_name: KM_falcon_fight_UMT_base\nname: KM_falcon_fight_UMT_base\ntype: falcon\nplatform: cuda11.0-trt7.1-fp16-T4\nstatus: SUCCESS\ndid: 132443\nrid: 46122\nversion: 2.0.5\nversion_train_date: 20250114\nsource_file: data/KM_falcon_fight_UMT_base-cuda11.0-trt7.1-fp16-T4_46122_132443.json",
+              "model_name": "KM_falcon_fight_UMT_base",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "b2af630f3c90f25d86d77fea",
+              "title": "PDFs/非机动车特征发版.pdf p13",
+              "snippet": "非机动车                                                                         \n       V1.0.0 +  92.6%                                                              \n       人体...",
+              "section_type": "general",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "836140894cbb0bb4846f4f26",
+              "title": "KM_falcon_fight_stm50",
+              "snippet": "model_name: KM_falcon_fight_stm50\nname: KM_falcon_fight_stm50\ntype: falcon\nplatform: cuda11.0-trt7.1-fp32-T4\nstatus: SUCCESS\ndid: 100799\nrid: 35317\nversion: 1.5.1\nversion_train_date: 20231219\nsource_file: data/KM_falcon_fight_stm50-cuda11.0-trt7.1-fp32-T4_35317_100799.json",
+              "model_name": "KM_falcon_fight_stm50",
+              "section_type": "model_artifact",
+              "score": 0.997828
+            },
+            {
+              "evidence_id": "52bf133531cace3b620c3bb2",
+              "title": "package_tossing",
+              "snippet": "model_name: package_tossing\nname: package_tossing\ntype: falcon\nplatform: cuda11.0-trt7.1-fp16-T4\nstatus: SUCCESS\ndid: 131462\nrid: 48754\nversion: 0.3.1\nversion_train_date: 20250704\nsource_file: data/package_tossing-cuda11.0-trt7.1-fp16-T4_48754_131462.json",
+              "model_name": "package_tossing",
+              "section_type": "model_artifact",
+              "score": 0.997828
+            },
+            {
+              "evidence_id": "dd40d2e13bd3efdd9e4084f0",
+              "title": "pod_fight_test",
+              "snippet": "model_name: pod_fight_test\nname: pod_fight_test\ntype: falcon\nplatform: sophgo-bm1684-fp32-sdkV221201\nstatus: SUCCESS\ndid: 103246\nrid: 37308\nversion: 1.4.1\nversion_train_date: 20231129\nsource_file: data/pod_fight_test-sophgo-bm1684-fp32-sdkV221201_37308_103246.json",
+              "model_name": "pod_fight_test",
+              "section_type": "model_artifact",
+              "score": 0.997828
+            }
+          ]
+        }
+      ],
+      "required_fields": [
+        {
+          "field": "existing_models",
+          "label": "可直接复用的已有模型"
+        },
+        {
+          "field": "similar_capabilities",
+          "label": "可迁移的相似能力"
+        },
+        {
+          "field": "performance_baseline",
+          "label": "性能与精度基线"
+        },
+        {
+          "field": "data_requirements",
+          "label": "数据、标注与迭代依赖"
+        }
+      ]
+    },
+    "llm_messages": [
+      {
+        "role": "system",
+        "content": "你是视觉模型迁移顾问的检索规划器。用户的问题没有被知识库直接回答。请先抽取目标对象、部件/场景、属性/缺陷、任务类型等核心实体，再补充行业常用同义词。例如电子元器件缺陷检测可扩展为 PCB、PCBA、SMT、AOI、工业视觉、表面缺陷、异常检测。为每个固定字段生成 2-4 条短检索 query，每条 query 只放一组核心实体/同义词和一个检索意图。existing_models 偏已有模型/算法，similar_capabilities 偏可迁移能力，performance_baseline 偏精度/性能/benchmark，data_requirements 偏数据/标注/训练。删除“推荐/有没有/帮我/是否/什么模型”等口语噪声，不要把多组同义词堆成一条长句。禁止编造模型结论，只做检索规划。只输出 JSON。"
+      },
+      {
+        "role": "user",
+        "content": "{\n  \"user_query\": \"香港人体属性中要求识别“纹身有无”和“纹身位置：面部、颈部、手部、腿部、背部、无法判断”，普通城市监控场景是否可行？\",\n  \"failed_rag_trace\": [\n    {\n      \"round\": 1,\n      \"query\": \"香港人体属性中要求识别“纹身有无”和“纹身位置：面部、颈部、手部、腿部、背部、无法判断”，普通城市监控场景是否可行？\",\n      \"knowledge_base_fully_answered\": false,\n      \"evidence\": [\n        {\n          \"evidence_id\": \"5e42412ae3303a418a6c07c1\",\n          \"title\": \"PDFs/非机车属性全模型.pdf p3\",\n          \"snippet\": \"骑手类型                    骑手载人               骑手状态                   \\n             有无                                                                     \\n      骑手属性                                                                          \\n             阈值                                                                     \\n                  普通    美团    饿了么   其他    1人     2人    多人    骑车       推车...\",\n          \"section_type\": \"accuracy_metric\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"e3147847015c051257e71c5e\",\n          \"title\": \"SmallFace_Gray_736x1280\",\n          \"snippet\": \"model_name: SmallFace_Gray_736x1280\\nname: SmallFace_Gray_736x1280\\ntype: hunter\\nplatform: acl-ascend310-int8\\nstatus: SUCCESS\\ndid: 128356\\nrid: 48621\\nversion: 4.15.3\\nversion_train_date: 20250224\\nsource_file: data/SmallFace_Gray_736x1280-acl-ascend310-int8_48621_128356.json\",\n          \"model_name\": \"SmallFace_Gray_736x1280\",\n          \"section_type\": \"release_note\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"3e187867d0dc03b7fc02c241\",\n          \"title\": \"SmallFace_Gray_800x1333\",\n          \"snippet\": \"model_name: SmallFace_Gray_800x1333\\nname: SmallFace_Gray_800x1333\\ntype: hunter\\nplatform: acl-ascend310-fp16\\nstatus: SUCCESS\\ndid: 123917\\nrid: 46717\\nversion: 4.15.3\\nversion_train_date: 20250224\\nsource_file: data/SmallFace_Gray_800x1333-acl-ascend310-fp16_46717_123917.json\",\n          \"model_name\": \"SmallFace_Gray_800x1333\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.934072\n        },\n        {\n          \"evidence_id\": \"ee44956ffa2fa6ec7f4b00a3\",\n          \"title\": \"SmallFace_gray_448x800\",\n          \"snippet\": \"model_name: SmallFace_gray_448x800\\nname: SmallFace_gray_448x800\\nlabel_list: 1\\nlabels: 1\\ntype: essos\\nplatform: acl-ascend310-int8\\nstatus: SUCCESS\\ndid: 127274\\nrid: 47733\\nversion: 3.0.1\\nversion_train_date: 20250304\\nsource_file: data/SmallFace_gray_448x800-acl-ascend310-int8_47733_127274.json\",\n          \"model_name\": \"SmallFace_gray_448x800\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.921082\n        },\n        {\n          \"evidence_id\": \"fa95bcbc620099830640c34d\",\n          \"title\": \"PDFs/非机车属性全模型.pdf p3\",\n          \"snippet\": \"非机动车类型：st_nonmotor_type  = ['纯非机动车', '不完整的骑手', '完整的骑手']\",\n          \"section_type\": \"general\",\n          \"score\": 0.914437\n        },\n        {\n          \"evidence_id\": \"fd4505628e562c8cda30c4a9\",\n          \"title\": \"PDFs/非机车属性全模型.pdf p3\",\n          \"snippet\": \"519a                                                                         \\n       atlas     16         -         25.7                                          \\n                                                                                    \\n       stpu      8          -         348.3\",\n          \"section_type\": \"general\",\n          \"score\": 0.913301\n        }\n      ]\n    },\n    {\n      \"round\": 2,\n      \"query\": \"纹身识别 人体属性 城市监控\",\n      \"knowledge_base_fully_answered\": false,\n      \"evidence\": [\n        {\n          \"evidence_id\": \"fb8b9d13e22a82193a3c3627\",\n          \"title\": \"KM_falcon_fight_UMT_base\",\n          \"snippet\": \"model_name: KM_falcon_fight_UMT_base\\nname: KM_falcon_fight_UMT_base\\ntype: falcon\\nplatform: acl-ascend710-fp16\\nstatus: SUCCESS\\ndid: 129715\\nrid: 49258\\nversion: 2.0.5\\nversion_train_date: 20250114\\nsource_file: data/KM_falcon_fight_UMT_base-acl-ascend710-fp16_49258_129715.json\",\n          \"model_name\": \"KM_falcon_fight_UMT_base\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"d49ba648c8d323205d0ad634\",\n          \"title\": \"KM_falcon_fight_UMT_base\",\n          \"snippet\": \"model_name: KM_falcon_fight_UMT_base\\nname: KM_falcon_fight_UMT_base\\ntype: falcon\\nplatform: cuda11.0-trt7.1-fp16-T4\\nstatus: SUCCESS\\ndid: 132443\\nrid: 46122\\nversion: 2.0.5\\nversion_train_date: 20250114\\nsource_file: data/KM_falcon_fight_UMT_base-cuda11.0-trt7.1-fp16-T4_46122_132443.json\",\n          \"model_name\": \"KM_falcon_fight_UMT_base\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"836140894cbb0bb4846f4f26\",\n          \"title\": \"KM_falcon_fight_stm50\",\n          \"snippet\": \"model_name: KM_falcon_fight_stm50\\nname: KM_falcon_fight_stm50\\ntype: falcon\\nplatform: cuda11.0-trt7.1-fp32-T4\\nstatus: SUCCESS\\ndid: 100799\\nrid: 35317\\nversion: 1.5.1\\nversion_train_date: 20231219\\nsource_file: data/KM_falcon_fight_stm50-cuda11.0-trt7.1-fp32-T4_35317_100799.json\",\n          \"model_name\": \"KM_falcon_fight_stm50\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.997828\n        },\n        {\n          \"evidence_id\": \"52bf133531cace3b620c3bb2\",\n          \"title\": \"package_tossing\",\n          \"snippet\": \"model_name: package_tossing\\nname: package_tossing\\ntype: falcon\\nplatform: cuda11.0-trt7.1-fp16-T4\\nstatus: SUCCESS\\ndid: 131462\\nrid: 48754\\nversion: 0.3.1\\nversion_train_date: 20250704\\nsource_file: data/package_tossing-cuda11.0-trt7.1-fp16-T4_48754_131462.json\",\n          \"model_name\": \"package_tossing\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.997828\n        },\n        {\n          \"evidence_id\": \"dd40d2e13bd3efdd9e4084f0\",\n          \"title\": \"pod_fight_test\",\n          \"snippet\": \"model_name: pod_fight_test\\nname: pod_fight_test\\ntype: falcon\\nplatform: sophgo-bm1684-fp32-sdkV221201\\nstatus: SUCCESS\\ndid: 103246\\nrid: 37308\\nversion: 1.4.1\\nversion_train_date: 20231129\\nsource_file: data/pod_fight_test-sophgo-bm1684-fp32-sdkV221201_37308_103246.json\",\n          \"model_name\": \"pod_fight_test\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.997828\n        },\n        {\n          \"evidence_id\": \"cbc9bd8507049827841ce0bd\",\n          \"title\": \"PDFs/安防场景-城市结构化检测模型3.0.1.pdf p6 table 1\",\n          \"snippet\": \"PDF表格: PDFs/安防场景-城市结构化检测模型3.0.1.pdf 第6页 表1\\n\\n| nanjing struct_anno_cleaned huiliu_wo_hk chuangxinyun 人体 骑手 机动车 非机 人体 骑手 机动车 非机 人体 骑手 机动车 非机 人体 非机 recall recall recall recall recall recall recall recall recall recall recall recall recall recall fppi fppi fppi fppi fppi fppi fppi fppi fppi fppi fppi fppi fppi fppi 0.552 0.704 0.458 0.532 0.623 0.298 0.491 0.026 0.108 0.541 0.067 0.675 0.306 0.039 默认发...\",\n          \"section_type\": \"accuracy_metric\",\n          \"score\": 0.959619\n        }\n      ]\n    },\n    {\n      \"round\": 3,\n      \"query\": \"纹身 人体属性 城市监控\",\n      \"knowledge_base_fully_answered\": false,\n      \"evidence\": [\n        {\n          \"evidence_id\": \"fb8b9d13e22a82193a3c3627\",\n          \"title\": \"KM_falcon_fight_UMT_base\",\n          \"snippet\": \"model_name: KM_falcon_fight_UMT_base\\nname: KM_falcon_fight_UMT_base\\ntype: falcon\\nplatform: acl-ascend710-fp16\\nstatus: SUCCESS\\ndid: 129715\\nrid: 49258\\nversion: 2.0.5\\nversion_train_date: 20250114\\nsource_file: data/KM_falcon_fight_UMT_base-acl-ascend710-fp16_49258_129715.json\",\n          \"model_name\": \"KM_falcon_fight_UMT_base\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"d49ba648c8d323205d0ad634\",\n          \"title\": \"KM_falcon_fight_UMT_base\",\n          \"snippet\": \"model_name: KM_falcon_fight_UMT_base\\nname: KM_falcon_fight_UMT_base\\ntype: falcon\\nplatform: cuda11.0-trt7.1-fp16-T4\\nstatus: SUCCESS\\ndid: 132443\\nrid: 46122\\nversion: 2.0.5\\nversion_train_date: 20250114\\nsource_file: data/KM_falcon_fight_UMT_base-cuda11.0-trt7.1-fp16-T4_46122_132443.json\",\n          \"model_name\": \"KM_falcon_fight_UMT_base\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"b2af630f3c90f25d86d77fea\",\n          \"title\": \"PDFs/非机动车特征发版.pdf p13\",\n          \"snippet\": \"非机动车                                                                         \\n       V1.0.0 +  92.6%                                                              \\n       人体...\",\n          \"section_type\": \"general\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"836140894cbb0bb4846f4f26\",\n          \"title\": \"KM_falcon_fight_stm50\",\n          \"snippet\": \"model_name: KM_falcon_fight_stm50\\nname: KM_falcon_fight_stm50\\ntype: falcon\\nplatform: cuda11.0-trt7.1-fp32-T4\\nstatus: SUCCESS\\ndid: 100799\\nrid: 35317\\nversion: 1.5.1\\nversion_train_date: 20231219\\nsource_file: data/KM_falcon_fight_stm50-cuda11.0-trt7.1-fp32-T4_35317_100799.json\",\n          \"model_name\": \"KM_falcon_fight_stm50\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.997828\n        },\n        {\n          \"evidence_id\": \"52bf133531cace3b620c3bb2\",\n          \"title\": \"package_tossing\",\n          \"snippet\": \"model_name: package_tossing\\nname: package_tossing\\ntype: falcon\\nplatform: cuda11.0-trt7.1-fp16-T4\\nstatus: SUCCESS\\ndid: 131462\\nrid: 48754\\nversion: 0.3.1\\nversion_train_date: 20250704\\nsource_file: data/package_tossing-cuda11.0-trt7.1-fp16-T4_48754_131462.json\",\n          \"model_name\": \"package_tossing\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.997828\n        },\n        {\n          \"evidence_id\": \"dd40d2e13bd3efdd9e4084f0\",\n          \"title\": \"pod_fight_test\",\n          \"snippet\": \"model_name: pod_fight_test\\nname: pod_fight_test\\ntype: falcon\\nplatform: sophgo-bm1684-fp32-sdkV221201\\nstatus: SUCCESS\\ndid: 103246\\nrid: 37308\\nversion: 1.4.1\\nversion_train_date: 20231129\\nsource_file: data/pod_fight_test-sophgo-bm1684-fp32-sdkV221201_37308_103246.json\",\n          \"model_name\": \"pod_fight_test\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.997828\n        }\n      ]\n    }\n  ],\n  \"required_fields\": [\n    {\n      \"field\": \"existing_models\",\n      \"label\": \"可直接复用的已有模型\"\n    },\n    {\n      \"field\": \"similar_capabilities\",\n      \"label\": \"可迁移的相似能力\"\n    },\n    {\n      \"field\": \"performance_baseline\",\n      \"label\": \"性能与精度基线\"\n    },\n    {\n      \"field\": \"data_requirements\",\n      \"label\": \"数据、标注与迭代依赖\"\n    }\n  ]\n}"
+      }
+    ]
+  }
+}

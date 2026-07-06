@@ -1,0 +1,99 @@
+{
+  "session_id": "12158e0c-4dbb-43e5-93d8-50ca479b6a17",
+  "run_stamp": "20260525_142158_6b9f6695",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-05-25T14:23:58+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"识别头盔颜色：黑、白、灰、红、蓝、黄、绿、紫、迷彩，评估现有城市结构化人体属性模型是否支持。\",\n  \"direct_match\": {\n    \"exists\": false,\n    \"summary\": \"无直接匹配，现有模型为车辆相关或头盔风格/状态，无明确头盔颜色分类模型。\"\n  ,\n  \"evidence\": [\n    \"车型颜色识别仅针对车牌，学习标签为 ['灰', '白', '红', '黑', '蓝', '绿', '棕', '黄', '紫', '粉']\",\n    \"头盔分支仅优化安全帽检测率与口罩准确率，未见头盔颜色分类输出架构\"\n  ]\n},\n\"similar_assets\": [\n  {\n    \"model_or_solution\": \"KM_classifier_Ped_33of33_nart_acl-ascend310-fp16_b16_2.21.0.model\",\n    \"label_schema\": \"human_attribute_classification\",\n    \"training_data\": \"证据不足\",\n    \"reported_metrics\": \"证据不足\",\n    \"covered_capability\": \"人体属性分类，包含头盔状态检测但未提及颜色\",\n    \"gap\": \"缺少头盔颜色（黑/白/灰/红/蓝/黄/绿/紫/迷彩）训练场景\"\n  ,\n  \"evidence\": [\n    \"KM_classifier_Ped_33of33 仅提及头盔存在性/风格，未提及颜色分类\"\n  ]\n},\n  {\n    \"model_or_solution\": \"KM_classifier_ClothBanner_nart_acl-ascend710-fp16_b8_0.0.1.model\",\n    \"label_schema\": \"human_object_classification\",\n    \"training_data\": \"证据不足\",\n    \"reported_metrics\": \"证据不足\",\n    \"covered_capability\": \"二分类（衣物上有醒目大字标识），不适用于头盔颜色\",\n    \"gap\": \"能力完全不匹配，仅针对衣物上醒目图案分类，未涉及头盔颜色检测\"\n  ,\n  \"evidence\": [\n    \"该模型仅用于识别衣物上有醒目大字，与头盔颜色识别无关\"\n  ]\n},\n  {\n    \"model_or_solution\": \"KM_classifier_Carplate_TypeColor_nart_cuda11.0-trt7.1-int8-T4_b8_3.0.0.model\",\n    \"label_schema\": \"car_attribute_classification\",\n    \"training_data\": \"证据不足\",\n    \"reported_metrics\": \"证据不足\",\n    \"covered_capability\": \"针对车牌颜色分类，标签体系包含 [灰，白，红，黑，蓝，绿，棕，黄，紫，粉]\",\n    \"gap\": \"载体对象不同（车辆 vs 头盔），训练任务不同（车牌特征 vs 头盔外观）\"\n  ,\n  \"evidence\": [\n    \"车牌颜色标签为 ['灰', '白', '红', '黑', '蓝', '绿', '棕', '黄', '紫', '粉']，与头盔颜色需求存在重叠但不适用\"\n  ]\n},\n  {\n    \"model_or_solution\": \"KM_classifier_CarPlate_vit_nart_cuda11.0-trt7.1-fp16-T4_b1_6.0.0.model\",\n    \"label_schema\": \"textrecognition\",\n    \"training_data\": \"证据不足\",\n    \"reported_metrics\": \"证据不足\",\n    \"covered_capability\": \"车牌文字识别，针对单双行车牌，与头盔颜色无关\",\n    \"gap\": \"功能完全无关，属于文本识别而非物体属性分类，不支持颜色提取\"\n  ,\n  \"evidence\": [\n    \"该模型用于车牌文字识别，不支持人体属性分析\"\n  ]\n}\n],\n\"migration_plan\": {\n  \"feasibility\": \"medium\",\n  \"approach\": \"rewrite_color_scheme\",\n  \"data_requirements\": \"证据不足（需获取头盔颜色图数据集）\",\n  \"compute_requirements\": \"证据不足（依赖人生态体检测网络规模）\",\n  \"engineering_work\": \"调整输出标签与网络输出层，适配9类颜色\"\n,\n  \"estimated_timeline\": \"2-4 周\",\n  \"estimated_cost\": \"3-5 人天（无设备差异、不考虑训练周期）\",\n  \"dependencies\": [\n    \"确认头盔颜色标注规范及数据标注数量\",\n    \"目标电子设备端口与模型推理模块配置支持\"\n  ]\n,\n  \"risks\": [\n    \"头盔颜色检测难度可能高于车牌颜色（光照、材质差异大）\",\n    \"无颜色样本会导致召回率下降\"\n  ]\n},\n\"expected_performance\": {\n  \"baseline\": \"毫米级精度（如车牌）\",\n  \"target\": \"难以直接确定\",\n  \"uncertainty\": \"证据不足 - 现有头盔相关模型仅关注存在性/技能/安全规范，未涉及颜色\"\n}\n,\n\"recommendation\": \"建议采用‘车辆颜色分类系列qwack’方案（已有标品）进行迁移，作为人体头盔颜色任务的基础架构，需在头部识别网络中增加颜色检测层，并通过真实场景（城市交通监控数据）进行微调。因现有文献未提供头盔颜色训练数据，性能评估需先完成小样本验证与标签体系对齐。\"\n}",
+    "structured_output": {
+      "requirement_summary": "识别头盔颜色：黑、白、灰、红、蓝、黄、绿、紫、迷彩，评估现有城市结构化人体属性模型是否支持。",
+      "direct_match": {
+        "exists": false,
+        "summary": "无直接匹配，现有模型为车辆相关或头盔风格/状态，无明确头盔颜色分类模型。",
+        "evidence": [
+          "车型颜色识别仅针对车牌，学习标签为 ['灰', '白', '红', '黑', '蓝', '绿', '棕', '黄', '紫', '粉']",
+          "头盔分支仅优化安全帽检测率与口罩准确率，未见头盔颜色分类输出架构"
+        ]
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "KM_classifier_Ped_33of33_nart_acl-ascend310-fp16_b16_2.21.0.model",
+          "label_schema": "human_attribute_classification",
+          "training_data": "证据不足",
+          "reported_metrics": "证据不足",
+          "covered_capability": "人体属性分类，包含头盔状态检测但未提及颜色",
+          "gap": "缺少头盔颜色（黑/白/灰/红/蓝/黄/绿/紫/迷彩）训练场景",
+          "evidence": [
+            "KM_classifier_Ped_33of33 仅提及头盔存在性/风格，未提及颜色分类"
+          ]
+        },
+        {
+          "model_or_solution": "KM_classifier_ClothBanner_nart_acl-ascend710-fp16_b8_0.0.1.model",
+          "label_schema": "human_object_classification",
+          "training_data": "证据不足",
+          "reported_metrics": "证据不足",
+          "covered_capability": "二分类（衣物上有醒目大字标识），不适用于头盔颜色",
+          "gap": "能力完全不匹配，仅针对衣物上醒目图案分类，未涉及头盔颜色检测",
+          "evidence": [
+            "该模型仅用于识别衣物上有醒目大字，与头盔颜色识别无关"
+          ]
+        },
+        {
+          "model_or_solution": "KM_classifier_Carplate_TypeColor_nart_cuda11.0-trt7.1-int8-T4_b8_3.0.0.model",
+          "label_schema": "car_attribute_classification",
+          "training_data": "证据不足",
+          "reported_metrics": "证据不足",
+          "covered_capability": "针对车牌颜色分类，标签体系包含 [灰，白，红，黑，蓝，绿，棕，黄，紫，粉]",
+          "gap": "载体对象不同（车辆 vs 头盔），训练任务不同（车牌特征 vs 头盔外观）",
+          "evidence": [
+            "车牌颜色标签为 ['灰', '白', '红', '黑', '蓝', '绿', '棕', '黄', '紫', '粉']，与头盔颜色需求存在重叠但不适用"
+          ]
+        },
+        {
+          "model_or_solution": "KM_classifier_CarPlate_vit_nart_cuda11.0-trt7.1-fp16-T4_b1_6.0.0.model",
+          "label_schema": "textrecognition",
+          "training_data": "证据不足",
+          "reported_metrics": "证据不足",
+          "covered_capability": "车牌文字识别，针对单双行车牌，与头盔颜色无关",
+          "gap": "功能完全无关，属于文本识别而非物体属性分类，不支持颜色提取",
+          "evidence": [
+            "该模型用于车牌文字识别，不支持人体属性分析"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "medium",
+        "approach": "rewrite_color_scheme",
+        "data_requirements": "证据不足（需获取头盔颜色图数据集）",
+        "compute_requirements": "证据不足（依赖人生态体检测网络规模）",
+        "engineering_work": "调整输出标签与网络输出层，适配9类颜色",
+        "estimated_timeline": "2-4 周",
+        "estimated_cost": "3-5 人天（无设备差异、不考虑训练周期）",
+        "dependencies": [
+          "确认头盔颜色标注规范及数据标注数量",
+          "目标电子设备端口与模型推理模块配置支持"
+        ],
+        "risks": [
+          "头盔颜色检测难度可能高于车牌颜色（光照、材质差异大）",
+          "无颜色样本会导致召回率下降"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "毫米级精度（如车牌）",
+        "target": "难以直接确定",
+        "uncertainty": "证据不足 - 现有头盔相关模型仅关注存在性/技能/安全规范，未涉及颜色"
+      },
+      "recommendation": "建议采用‘车辆颜色分类系列qwack’方案（已有标品）进行迁移，作为人体头盔颜色任务的基础架构，需在头部识别网络中增加颜色检测层，并通过真实场景（城市交通监控数据）进行微调。因现有文献未提供头盔颜色训练数据，性能评估需先完成小样本验证与标签体系对齐。"
+    }
+  }
+}

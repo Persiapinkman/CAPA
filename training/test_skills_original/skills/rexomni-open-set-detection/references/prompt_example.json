@@ -1,0 +1,11 @@
+{
+    "prompts": {
+        "banner_slogan": [
+            "banner",
+            "slogan"
+        ]
+    },
+    "index2cls": {
+        "1": "banner_slogan"
+    }
+}

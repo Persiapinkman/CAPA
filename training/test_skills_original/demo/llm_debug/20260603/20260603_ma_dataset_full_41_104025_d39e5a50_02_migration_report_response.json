@@ -1,0 +1,104 @@
+{
+  "session_id": "ma_dataset_full_41",
+  "run_stamp": "20260603_104025_d39e5a50",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-06-03T10:41:31+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"客户要求识别“三轮车类型：斗式、蓬式、箱式”，推荐什么模型？\",\n  \"direct_match\": {\n    \"exists\": false,\n    \"summary\": \"检索结果中未发现直接提供‘斗式、蓬式、箱式’三轮车类型识别的现成模型。现有模型中，PDFs/非机车属性全模型.pdf p4 和 PDFs/安防方向--非机动车属性大模型更新.pdf p4 包含‘三轮车细分类：st_tricycle_type = [‘斗式', '蓬式', '厢式’]'的标签定义，但属于非机动车属性大模型的一部分，并非独立模型。其他模型（如 vehicle_type, nonmotor, Vehicle_FullAttr）虽然涉及车辆或非机动车分类，但未明确包含此三级细分类标签。\"\n  ,\n  \"evidence\": []\n  },\n  \"similar_assets\": [\n    {\n      \"model_or_solution\": \"PDFs/非机车属性全模型.pdf / 非机动车属性大模型\",\n      \"label_schema\": \"包含‘三轮车细分类：st_tricycle_type = [‘斗式', '蓬式', '厢式’]'，取值范围：斗式、蓬式、厢式、无效\",\n      \"training_data\": \"文档提及使用全量数据训练，具体样本量、数据来源及标注规范未在证据中详细说明，仅提及‘HL 全量’（参考服饰属性模型训练数据描述），推测为全量非机动车属性标注数据\",\n      \"reported_metrics\": \"三轮车细分类 st_tricycle_type 准确率 92.1%，召回率 98.6%（PDFs/安防方向--非机动车属性大模型更新.pdf p4），输入尺寸 120*120，阈值 0.9。整体粗分类中三轮车精度 83.1/79.8（Precision/Recall）（PDFs/非机车属性全模型.pdf p2）\",\n      \"covered_capability\": \"标签体系、任务形态（细分类）与需求高度匹配，但精度指标为模型整体指标，非独立三轮车模型精度\",\n      \"gap\": \"该模型为‘非机动车属性大模型’多任务模型的一部分，需确认是否支持单独部署三轮车类型识别功能\",\n      \"evidence\": [\n        \"778ccb22d5acbeafb5afb636\",\n        \"be8dd5f39cb06711a21523e7\",\n        \"892addb4452361781498dbe6\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"Vehicle_FullAttr\",\n      \"label_schema\": \"标签体系包含车辆多属性识别，但证据中未明确列出‘斗式、蓬式、箱式’具体标签，仅显示 st_dump_load 等属性。需进一步确认模型内部标签定义\",\n      \"training_data\": \"证据中未明确训练数据来源及样本量，仅显示模型版本及部署信息\",\n      \"reported_metrics\": \"Vehicle_FullAttr 在 vehicle_color_precsion 数据集上 Acc 86.7%, mPrec 81.2%; 在 dumpfull_4_classify 数据集上 st_dump_load Acc 91.2%, mPrec 90.8%。但未明确三轮车类型识别精度\",\n      \"covered_capability\": \"部署平台覆盖广（T4, Ascend310/710），具备车辆属性分类能力，可能包含三轮车细分类标签\",\n      \"gap\": \"标签定义未明确，精度指标非三轮车类型专属，无法确认是否包含需求标签\",\n      \"evidence\": [\n        \"94be1a60e56bf93a6c41ecc0\",\n        \"9bac13700090019f90eccecb\",\n        \"77e76fbdb1d3d9f8f601d2e9\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"vehicle_type / nonmotor / st_vehicle_class\",\n      \"label_schema\": \"vehicle_type 和 nonmotor 模型为车辆/非机动车粗分类，标签体系可能包含三轮车，但未明确细分类（斗式/蓬式/箱式）。st_vehicle_class 为粗分类标签\",\n      \"training_data\": \"证据中未提供具体训练数据来源及样本量，仅显示模型训练日期及版本\",\n      \"reported_metrics\": \"未提供具体精度指标，仅显示部署状态 SUCCESS\",\n      \"covered_capability\": \"任务形态（分类）匹配，部署平台覆盖 NPU/CUDA，但缺乏细分类标签支持\",\n      \"gap\": \"缺乏细分类标签定义，无法直接用于斗式/蓬式/箱式识别\",\n      \"evidence\": [\n        \"47cb8ada0cf40e1b77952200\",\n        \"5b12f8bc8c67a469845b3c60\",\n        \"877d282badd69d3bf2e20a86\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"PDFs/车辆细分类（四级标签）.pdf\",\n      \"label_schema\": \"文档提及车辆细分类四级标签，但未直接显示‘三轮车斗式/蓬式/箱式’标签，可能包含厂商/品牌/车系等细分类\",\n      \"training_data\": \"使用‘车辆细分类-4 级标签’数据集，样本量未明确\",\n      \"reported_metrics\": \"模型 VehicleSubtypeStyles2305 在 4 级标签上 Acc 82.46%，3 级标签 Acc 89.04%。但无法确认是否包含三轮车类型细分类\",\n      \"covered_capability\": \"车辆细分类任务形态匹配，可能涵盖三轮车细分类\",\n      \"gap\": \"标签定义与需求不直接匹配，需进一步验证标签体系\",\n      \"evidence\": [\n        \"935c2b166513732712575ff4\"\n      ]\n    }\n  ],\n  \"migration_plan\": {\n    \"feasibility\": \"high\",\n    \"approach\": \"复用非机动车属性大模型中的三轮车细分类模块，或基于 Vehicle_FullAttr 模型进行标签扩展/微调\",\n    \"data_requirements\": \"需要标注‘斗式、蓬式、箱式’三轮车样本，建议参考非机动车属性大模型训练数据格式，构建至少 5k-10k 样本的训练集\",\n    \"compute_requirements\": \"推荐部署平台：Ascend 310/710 或 CUDA T4，输入分辨率建议 120*120 或 224*224\",\n    \"engineering_work\": \"需确认模型是否支持单独输出三轮车细分类标签，若不支持需进行模型解耦或微调\",\n    \"estimated_timeline\": \"2-4 周（取决于数据标注及模型微调难度）\"\n  ,\n  \"estimated_cost\": \"证据不足（未提供标注、训练及部署成本信息）\"\n  ,\n  \"dependencies\": [\n    \"需确认非机动车属性大模型是否支持单独推理三轮车细分类标签\",\n    \"需验证三轮车类型标签体系是否与现有模型标签兼容\",\n    \"需明确输入图像质量要求（分辨率、亮度等）\"\n  ]\n  ,\n  \"risks\": [\n    \"模型可能未包含‘厢式’标签（部分文档显示‘斗式、蓬式、厢式’，部分显示‘斗式、蓬式’），需确认标签一致性\",\n    \"三轮车细分类精度可能受输入图像质量影响较大，需进行场景适配测试\",\n    \"若需微调，需确保训练数据分布与真实场景一致，避免模型偏差\"\n  ]\n  }\n  ,\n  \"expected_performance\": {\n    \"baseline\": \"三轮车细分类 st_tricycle_type 准确率 92.1%，召回率 98.6%（PDFs/安防方向--非机动车属性大模型更新.pdf p4）\",\n    \"target\": \"建议目标：准确率 > 90%，召回率 > 95%\",\n    \"uncertainty\": \"实际精度取决于部署场景、输入图像质量及数据分布，需进行实地验证\"\n  }\n  ,\n  \"recommendation\": \"1. 优先尝试复用非机动车属性大模型（PDFs/非机车属性全模型.pdf / PDFs/安防方向--非机动车属性大模型更新.pdf），该模型已明确包含‘斗式、蓬式、厢式’标签，且精度指标明确。2. 若需独立部署，可考虑基于 Vehicle_FullAttr 或 vehicle_type 模型进行微调，引入三轮车细分类标签。3. 需补充标注三轮车类型样本，并验证模型在目标场景下的精度。\"\n  }",
+    "structured_output": {
+      "requirement_summary": "客户要求识别“三轮车类型：斗式、蓬式、箱式”，推荐什么模型？",
+      "direct_match": {
+        "exists": false,
+        "summary": "检索结果中未发现直接提供‘斗式、蓬式、箱式’三轮车类型识别的现成模型。现有模型中，PDFs/非机车属性全模型.pdf p4 和 PDFs/安防方向--非机动车属性大模型更新.pdf p4 包含‘三轮车细分类：st_tricycle_type = [‘斗式', '蓬式', '厢式’]'的标签定义，但属于非机动车属性大模型的一部分，并非独立模型。其他模型（如 vehicle_type, nonmotor, Vehicle_FullAttr）虽然涉及车辆或非机动车分类，但未明确包含此三级细分类标签。",
+        "evidence": []
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "PDFs/非机车属性全模型.pdf / 非机动车属性大模型",
+          "label_schema": "包含‘三轮车细分类：st_tricycle_type = [‘斗式', '蓬式', '厢式’]'，取值范围：斗式、蓬式、厢式、无效",
+          "training_data": "文档提及使用全量数据训练，具体样本量、数据来源及标注规范未在证据中详细说明，仅提及‘HL 全量’（参考服饰属性模型训练数据描述），推测为全量非机动车属性标注数据",
+          "reported_metrics": "三轮车细分类 st_tricycle_type 准确率 92.1%，召回率 98.6%（PDFs/安防方向--非机动车属性大模型更新.pdf p4），输入尺寸 120*120，阈值 0.9。整体粗分类中三轮车精度 83.1/79.8（Precision/Recall）（PDFs/非机车属性全模型.pdf p2）",
+          "covered_capability": "标签体系、任务形态（细分类）与需求高度匹配，但精度指标为模型整体指标，非独立三轮车模型精度",
+          "gap": "该模型为‘非机动车属性大模型’多任务模型的一部分，需确认是否支持单独部署三轮车类型识别功能",
+          "evidence": [
+            "778ccb22d5acbeafb5afb636",
+            "be8dd5f39cb06711a21523e7",
+            "892addb4452361781498dbe6"
+          ]
+        },
+        {
+          "model_or_solution": "Vehicle_FullAttr",
+          "label_schema": "标签体系包含车辆多属性识别，但证据中未明确列出‘斗式、蓬式、箱式’具体标签，仅显示 st_dump_load 等属性。需进一步确认模型内部标签定义",
+          "training_data": "证据中未明确训练数据来源及样本量，仅显示模型版本及部署信息",
+          "reported_metrics": "Vehicle_FullAttr 在 vehicle_color_precsion 数据集上 Acc 86.7%, mPrec 81.2%; 在 dumpfull_4_classify 数据集上 st_dump_load Acc 91.2%, mPrec 90.8%。但未明确三轮车类型识别精度",
+          "covered_capability": "部署平台覆盖广（T4, Ascend310/710），具备车辆属性分类能力，可能包含三轮车细分类标签",
+          "gap": "标签定义未明确，精度指标非三轮车类型专属，无法确认是否包含需求标签",
+          "evidence": [
+            "94be1a60e56bf93a6c41ecc0",
+            "9bac13700090019f90eccecb",
+            "77e76fbdb1d3d9f8f601d2e9"
+          ]
+        },
+        {
+          "model_or_solution": "vehicle_type / nonmotor / st_vehicle_class",
+          "label_schema": "vehicle_type 和 nonmotor 模型为车辆/非机动车粗分类，标签体系可能包含三轮车，但未明确细分类（斗式/蓬式/箱式）。st_vehicle_class 为粗分类标签",
+          "training_data": "证据中未提供具体训练数据来源及样本量，仅显示模型训练日期及版本",
+          "reported_metrics": "未提供具体精度指标，仅显示部署状态 SUCCESS",
+          "covered_capability": "任务形态（分类）匹配，部署平台覆盖 NPU/CUDA，但缺乏细分类标签支持",
+          "gap": "缺乏细分类标签定义，无法直接用于斗式/蓬式/箱式识别",
+          "evidence": [
+            "47cb8ada0cf40e1b77952200",
+            "5b12f8bc8c67a469845b3c60",
+            "877d282badd69d3bf2e20a86"
+          ]
+        },
+        {
+          "model_or_solution": "PDFs/车辆细分类（四级标签）.pdf",
+          "label_schema": "文档提及车辆细分类四级标签，但未直接显示‘三轮车斗式/蓬式/箱式’标签，可能包含厂商/品牌/车系等细分类",
+          "training_data": "使用‘车辆细分类-4 级标签’数据集，样本量未明确",
+          "reported_metrics": "模型 VehicleSubtypeStyles2305 在 4 级标签上 Acc 82.46%，3 级标签 Acc 89.04%。但无法确认是否包含三轮车类型细分类",
+          "covered_capability": "车辆细分类任务形态匹配，可能涵盖三轮车细分类",
+          "gap": "标签定义与需求不直接匹配，需进一步验证标签体系",
+          "evidence": [
+            "935c2b166513732712575ff4"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "high",
+        "approach": "复用非机动车属性大模型中的三轮车细分类模块，或基于 Vehicle_FullAttr 模型进行标签扩展/微调",
+        "data_requirements": "需要标注‘斗式、蓬式、箱式’三轮车样本，建议参考非机动车属性大模型训练数据格式，构建至少 5k-10k 样本的训练集",
+        "compute_requirements": "推荐部署平台：Ascend 310/710 或 CUDA T4，输入分辨率建议 120*120 或 224*224",
+        "engineering_work": "需确认模型是否支持单独输出三轮车细分类标签，若不支持需进行模型解耦或微调",
+        "estimated_timeline": "2-4 周（取决于数据标注及模型微调难度）",
+        "estimated_cost": "证据不足（未提供标注、训练及部署成本信息）",
+        "dependencies": [
+          "需确认非机动车属性大模型是否支持单独推理三轮车细分类标签",
+          "需验证三轮车类型标签体系是否与现有模型标签兼容",
+          "需明确输入图像质量要求（分辨率、亮度等）"
+        ],
+        "risks": [
+          "模型可能未包含‘厢式’标签（部分文档显示‘斗式、蓬式、厢式’，部分显示‘斗式、蓬式’），需确认标签一致性",
+          "三轮车细分类精度可能受输入图像质量影响较大，需进行场景适配测试",
+          "若需微调，需确保训练数据分布与真实场景一致，避免模型偏差"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "三轮车细分类 st_tricycle_type 准确率 92.1%，召回率 98.6%（PDFs/安防方向--非机动车属性大模型更新.pdf p4）",
+        "target": "建议目标：准确率 > 90%，召回率 > 95%",
+        "uncertainty": "实际精度取决于部署场景、输入图像质量及数据分布，需进行实地验证"
+      },
+      "recommendation": "1. 优先尝试复用非机动车属性大模型（PDFs/非机车属性全模型.pdf / PDFs/安防方向--非机动车属性大模型更新.pdf），该模型已明确包含‘斗式、蓬式、厢式’标签，且精度指标明确。2. 若需独立部署，可考虑基于 Vehicle_FullAttr 或 vehicle_type 模型进行微调，引入三轮车细分类标签。3. 需补充标注三轮车类型样本，并验证模型在目标场景下的精度。"
+    }
+  }
+}

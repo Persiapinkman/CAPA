@@ -1,0 +1,112 @@
+{
+  "session_id": "ma_dataset_full_34",
+  "run_stamp": "20260603_103107_f4ee65d7",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-06-03T10:32:58+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"用户需要识别行人是否佩戴手套的模型，推荐方案。\",\n  \"direct_match\": {\n    \"exists\": true,\n    \"summary\": \"存在直接匹配模型，行人属性大模型（KM_Classifier_Ped_33of33_2.21.1）包含手套属性识别。\"\n  ,\n    \"evidence\": [\n      \"KM_Classifier_Ped_33of33_2.21.1 明确支持手套属性，包含 glove_without（不戴手套）、glove（戴手套，如黄手套）、glove_agnostic（不可见/遮挡）等标签。\"\n    ]\n  },\n  \"similar_assets\": [\n    {\n      \"model_or_solution\": \"KM_Classifier_Ped_33of33_2.21.1 (行人属性大模型)\",\n      \"label_schema\": \"行人属性大模型支持 33 个属性，共 174 个标签。手套属性包含：glove_without（不戴手套）、glove（戴手套，含黄手套）、glove_agnostic（不可见、模糊、遮挡等）。\",\n      \"training_data\": \"训练数据包含中车项目-大连黄手套场景数据，以及 st_glove_v2 通用测试数据集。具体样本量未明确提及，但文档提到针对特定场景（大连黄手套场景）进行了数据增强训练。\",\n      \"reported_metrics\": \"针对中车项目-大连黄手套场景，模型精度（prec/recall）从 0.53/0.55 提升至 0.81/0.82；在 st_glove_v2 通用测试数据集上保持精度不变。整体行人属性模型边界参考中未列出通用 mAP，但针对手套属性有明确提升数据。\",\n      \"covered_capability\": \"目标：行人。属性：手套（戴/不戴/未知）。任务形态：属性分类/检测。支持设备：Ascend 310/710, CUDA T4/3080/A2, RKNN RV3399pro/RV1126, HALNN STPU 等。\",\n      \"gap\": \"文档未提及手套属性在所有场景下的通用 mAP 数值，仅提及特定场景下的 Recall/Precision 提升。对于非黄手套颜色，文档未提供明确精度。\"\n    ,\n      \"evidence\": [\n        \"evidence_id: 1d9d6a2e42f5991f80b7aba5\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"KM_classifier_Ped_33of33 (多平台版本)\",\n      \"label_schema\": \"与 KM_Classifier_Ped_33of33_2.21.1 一致，包含黄手套属性标签。\",\n      \"training_data\": \"基于中车工厂项目数据训练，针对特定场景优化。\",\n      \"reported_metrics\": \"证据中未直接列出通用性能指标，仅列出发布版本信息（Ascend 710, T4, P4, 3080, A2, STPU 等）。\",\n      \"covered_capability\": \"支持多种硬件平台部署，包括 Ascend 310/710, CUDA T4/P4/3080/A2, RKNN, HALNN 等。目标为行人，属性为黄手套。\",\n      \"gap\": \"缺少具体的精度指标（如 mAP, Recall）在公开文档证据中，主要依赖 2.21.1 版本的 PDF 文档数据。\",\n      \"evidence\": [\n        \"evidence_id: 8d0c5c15ae16073279bebb44\",\n        \"evidence_id: 42a794971b41d4728dfaf207\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"KM_essos_BannerSlogan (横幅检测) / 其他检测模型\",\n      \"label_schema\": \"横幅、二维码、车牌、旗帜、特殊文字等。与手套识别无关。\",\n      \"training_data\": \"未知，主要为特定场景检测。\",\n      \"reported_metrics\": \"未知，主要作为同类型检测模型参考。\",\n      \"covered_capability\": \"同属检测类模型，支持 Ascend 710/310 等部署，但标签体系完全不匹配。\",\n      \"gap\": \"标签体系不匹配，无法直接用于手套识别，仅作为部署平台和任务形态的参考。\",\n      \"evidence\": [\n        \"evidence_id: dd622ab3d2c615477dc4f8b1\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"Shikra-Video-Embedding\",\n      \"label_schema\": \"基于自然语言描述的语义嵌入，支持多模态检索。\",\n      \"training_data\": \"预训练模型，未提及具体手套训练数据。\",\n      \"reported_metrics\": \"Recall 0.8969, Accuracy 0.8116（针对特定描述性任务）。\",\n      \"covered_capability\": \"视频理解、语义检索，可识别复杂行为或物体属性描述，但非结构化手套属性分类。\",\n      \"gap\": \"模型形态为视频嵌入，非传统检测/分类模型，无法直接输出手套二分类/多分类结果，仅可作为语义检索参考。\",\n      \"evidence\": [\n        \"evidence_id: e3b76c2f918f5090e92f6fa1\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"人脸手掌检测\",\n      \"label_schema\": \"人脸、手心、手背。\",\n      \"training_data\": \"AIoT 门锁人脸手掌检测场景。\",\n      \"reported_metrics\": \"未知。\",\n      \"covered_capability\": \"针对手部区域的检测，可定位手掌/手背，但非手套属性识别。\",\n      \"gap\": \"目标对象为手部而非手套，任务为手部检测而非手套佩戴状态判断。可作为手套检测的预处理或定位参考。\",\n      \"evidence\": [\n        \"evidence_id: 222dbe44074ec17c9a6064a5\"\n      ]\n    }\n  ],\n  \"migration_plan\": {\n    \"feasibility\": \"high\",\n    \"approach\": \"复用行人属性大模型（KM_Classifier_Ped_33of33_2.21.1）中的手套属性识别模块。该模型已针对中车工厂黄手套场景进行专项优化，精度显著提升。\",\n    \"data_requirements\": \"若场景为非黄手套或非中车场景，需补充相应手套样本（如黑色、白色手套等），并结合通用数据集进行微调。建议收集至少 1000+ 张带手套图片（不同颜色、遮挡情况），以及 2000+ 张不戴手套图片。\",\n    \"compute_requirements\": \"支持 Ascend 710/310, CUDA T4/3080/A2 等主流算力平台。根据部署环境选择对应版本（如 Ascend 710 使用 acl-ascend710-fp16）。\",\n    \"engineering_work\": \"1. 选择 2.21.1 版本模型作为基线；2. 若需支持多色手套，需进行增量训练或重新标注训练；3. 部署时注意目标大小（>60*120 像素）及清晰度要求。\",\n    \"estimated_timeline\": \"2-4 周（含数据准备、微调、验证）。\",\n    \"estimated_cost\": \"硬件成本依平台而定（Ascend/CUDA），数据标注成本按样本量估算，模型训练成本较低（基于现有模型微调）。\",\n    \"dependencies\": [\"依赖行人检测模型先检出目标人\", \"摄像头高度 2~6 米，夹角 30° 以上\", \"白天清晰场景，夜间/逆光/雨雪场景精度无保证\"]\n  ,\n    \"risks\": [\"非黄手套颜色识别效果可能下降\", \"夜间/遮挡严重场景精度不可控\", \"小目标（<60*120 像素）可能漏检\"]\n  }\n  ,\n  \"expected_performance\": {\n    \"baseline\": \"中车黄手套场景：Prec 0.81, Recall 0.82\",\n    \"target\": \"通用场景手套识别，Recall > 0.75 (预计需增量训练)\"\n  ,\n    \"uncertainty\": \"通用场景精度依赖新数据量及分布，文档中无通用 mAP 指标。\"\n  }\n  ,\n  \"recommendation\": \"直接推荐 KM_Classifier_Ped_33of33_2.21.1 模型，其已包含手套属性识别能力，且有特定场景优化经验。若需支持多颜色手套或特定场景，需基于该模型进行微调。\"\n}",
+    "structured_output": {
+      "requirement_summary": "用户需要识别行人是否佩戴手套的模型，推荐方案。",
+      "direct_match": {
+        "exists": true,
+        "summary": "存在直接匹配模型，行人属性大模型（KM_Classifier_Ped_33of33_2.21.1）包含手套属性识别。",
+        "evidence": [
+          "KM_Classifier_Ped_33of33_2.21.1 明确支持手套属性，包含 glove_without（不戴手套）、glove（戴手套，如黄手套）、glove_agnostic（不可见/遮挡）等标签。"
+        ]
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "KM_Classifier_Ped_33of33_2.21.1 (行人属性大模型)",
+          "label_schema": "行人属性大模型支持 33 个属性，共 174 个标签。手套属性包含：glove_without（不戴手套）、glove（戴手套，含黄手套）、glove_agnostic（不可见、模糊、遮挡等）。",
+          "training_data": "训练数据包含中车项目-大连黄手套场景数据，以及 st_glove_v2 通用测试数据集。具体样本量未明确提及，但文档提到针对特定场景（大连黄手套场景）进行了数据增强训练。",
+          "reported_metrics": "针对中车项目-大连黄手套场景，模型精度（prec/recall）从 0.53/0.55 提升至 0.81/0.82；在 st_glove_v2 通用测试数据集上保持精度不变。整体行人属性模型边界参考中未列出通用 mAP，但针对手套属性有明确提升数据。",
+          "covered_capability": "目标：行人。属性：手套（戴/不戴/未知）。任务形态：属性分类/检测。支持设备：Ascend 310/710, CUDA T4/3080/A2, RKNN RV3399pro/RV1126, HALNN STPU 等。",
+          "gap": "文档未提及手套属性在所有场景下的通用 mAP 数值，仅提及特定场景下的 Recall/Precision 提升。对于非黄手套颜色，文档未提供明确精度。",
+          "evidence": [
+            "evidence_id: 1d9d6a2e42f5991f80b7aba5"
+          ]
+        },
+        {
+          "model_or_solution": "KM_classifier_Ped_33of33 (多平台版本)",
+          "label_schema": "与 KM_Classifier_Ped_33of33_2.21.1 一致，包含黄手套属性标签。",
+          "training_data": "基于中车工厂项目数据训练，针对特定场景优化。",
+          "reported_metrics": "证据中未直接列出通用性能指标，仅列出发布版本信息（Ascend 710, T4, P4, 3080, A2, STPU 等）。",
+          "covered_capability": "支持多种硬件平台部署，包括 Ascend 310/710, CUDA T4/P4/3080/A2, RKNN, HALNN 等。目标为行人，属性为黄手套。",
+          "gap": "缺少具体的精度指标（如 mAP, Recall）在公开文档证据中，主要依赖 2.21.1 版本的 PDF 文档数据。",
+          "evidence": [
+            "evidence_id: 8d0c5c15ae16073279bebb44",
+            "evidence_id: 42a794971b41d4728dfaf207"
+          ]
+        },
+        {
+          "model_or_solution": "KM_essos_BannerSlogan (横幅检测) / 其他检测模型",
+          "label_schema": "横幅、二维码、车牌、旗帜、特殊文字等。与手套识别无关。",
+          "training_data": "未知，主要为特定场景检测。",
+          "reported_metrics": "未知，主要作为同类型检测模型参考。",
+          "covered_capability": "同属检测类模型，支持 Ascend 710/310 等部署，但标签体系完全不匹配。",
+          "gap": "标签体系不匹配，无法直接用于手套识别，仅作为部署平台和任务形态的参考。",
+          "evidence": [
+            "evidence_id: dd622ab3d2c615477dc4f8b1"
+          ]
+        },
+        {
+          "model_or_solution": "Shikra-Video-Embedding",
+          "label_schema": "基于自然语言描述的语义嵌入，支持多模态检索。",
+          "training_data": "预训练模型，未提及具体手套训练数据。",
+          "reported_metrics": "Recall 0.8969, Accuracy 0.8116（针对特定描述性任务）。",
+          "covered_capability": "视频理解、语义检索，可识别复杂行为或物体属性描述，但非结构化手套属性分类。",
+          "gap": "模型形态为视频嵌入，非传统检测/分类模型，无法直接输出手套二分类/多分类结果，仅可作为语义检索参考。",
+          "evidence": [
+            "evidence_id: e3b76c2f918f5090e92f6fa1"
+          ]
+        },
+        {
+          "model_or_solution": "人脸手掌检测",
+          "label_schema": "人脸、手心、手背。",
+          "training_data": "AIoT 门锁人脸手掌检测场景。",
+          "reported_metrics": "未知。",
+          "covered_capability": "针对手部区域的检测，可定位手掌/手背，但非手套属性识别。",
+          "gap": "目标对象为手部而非手套，任务为手部检测而非手套佩戴状态判断。可作为手套检测的预处理或定位参考。",
+          "evidence": [
+            "evidence_id: 222dbe44074ec17c9a6064a5"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "high",
+        "approach": "复用行人属性大模型（KM_Classifier_Ped_33of33_2.21.1）中的手套属性识别模块。该模型已针对中车工厂黄手套场景进行专项优化，精度显著提升。",
+        "data_requirements": "若场景为非黄手套或非中车场景，需补充相应手套样本（如黑色、白色手套等），并结合通用数据集进行微调。建议收集至少 1000+ 张带手套图片（不同颜色、遮挡情况），以及 2000+ 张不戴手套图片。",
+        "compute_requirements": "支持 Ascend 710/310, CUDA T4/3080/A2 等主流算力平台。根据部署环境选择对应版本（如 Ascend 710 使用 acl-ascend710-fp16）。",
+        "engineering_work": "1. 选择 2.21.1 版本模型作为基线；2. 若需支持多色手套，需进行增量训练或重新标注训练；3. 部署时注意目标大小（>60*120 像素）及清晰度要求。",
+        "estimated_timeline": "2-4 周（含数据准备、微调、验证）。",
+        "estimated_cost": "硬件成本依平台而定（Ascend/CUDA），数据标注成本按样本量估算，模型训练成本较低（基于现有模型微调）。",
+        "dependencies": [
+          "依赖行人检测模型先检出目标人",
+          "摄像头高度 2~6 米，夹角 30° 以上",
+          "白天清晰场景，夜间/逆光/雨雪场景精度无保证"
+        ],
+        "risks": [
+          "非黄手套颜色识别效果可能下降",
+          "夜间/遮挡严重场景精度不可控",
+          "小目标（<60*120 像素）可能漏检"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "中车黄手套场景：Prec 0.81, Recall 0.82",
+        "target": "通用场景手套识别，Recall > 0.75 (预计需增量训练)",
+        "uncertainty": "通用场景精度依赖新数据量及分布，文档中无通用 mAP 指标。"
+      },
+      "recommendation": "直接推荐 KM_Classifier_Ped_33of33_2.21.1 模型，其已包含手套属性识别能力，且有特定场景优化经验。若需支持多颜色手套或特定场景，需基于该模型进行微调。"
+    }
+  }
+}

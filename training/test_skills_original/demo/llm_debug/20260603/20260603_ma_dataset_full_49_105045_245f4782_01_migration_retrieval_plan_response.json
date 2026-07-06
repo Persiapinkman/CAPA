@@ -1,0 +1,65 @@
+{
+  "session_id": "ma_dataset_full_49",
+  "run_stamp": "20260603_105045_245f4782",
+  "stage": "migration_retrieval_plan_response",
+  "step_index": 1,
+  "created_at": "2026-06-03T10:50:48+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "output_schema": {
+      "abstract_requirement": "object, attribute, task_type, scene, constraints[]",
+      "retrieve_fields": "每项 field + queries[]（2-4 条）"
+    },
+    "used_fallback": false,
+    "output_raw": "{\n  \"abstract_requirement\": {\n    \"object\": \"车辆\",\n    \"attribute\": \"行李架\",\n    \"task_type\": \"目标检测/属性识别\"\n  ,\n  \"scene\": \"机动车检测/汽车电路/车身图像/车形分类\"\n  ,\n  \"constraints\": [\n    \"纯中文无扩义\",\n    \"结构化单字段短 query\",\n    \"2-4 条/字段\",\n    \"无网络检索接口\",\n    \"无代码生成\"\n  ]\n},\n\"retrieve_fields\": [\n  {\n    \"field\": \"existing_models\",\n    \"queries\": [\n      \"目标检测行人车辆行李架\",\n      \"机动车特征识别\",\n      \"汽车目标检测模型\"\n    ]\n  },\n  {\n    \"field\": \"similar_capabilities\",\n    \"queries\": [\n      \"车身部件识别迁移\",\n      \"物体属性分类适配\",\n      \"车形检测微调\"\n    ]\n  },\n  {\n    \"field\": \"performance_baseline\",\n    \"queries\": [\n      \"车辆检测精度指标\",\n      \"属性识别 mAP 标准\",\n      \"车行检测性能基准\"\n    ]\n  },\n  {\n    \"field\": \"data_requirements\",\n    \"queries\": [\n      \"车辆检测数据集\",\n      \"属性标注示例\",\n      \"车行样本数量需求\"\n    ]\n  }\n]\n}",
+    "structured_output": {
+      "abstract_requirement": {
+        "object": "车辆",
+        "attribute": "行李架",
+        "task_type": "目标检测/属性识别",
+        "scene": "机动车检测/汽车电路/车身图像/车形分类",
+        "constraints": [
+          "纯中文无扩义",
+          "结构化单字段短 query",
+          "2-4 条/字段",
+          "无网络检索接口",
+          "无代码生成"
+        ]
+      },
+      "retrieve_fields": [
+        {
+          "field": "existing_models",
+          "queries": [
+            "目标检测行人车辆行李架",
+            "机动车特征识别",
+            "汽车目标检测模型"
+          ]
+        },
+        {
+          "field": "similar_capabilities",
+          "queries": [
+            "车身部件识别迁移",
+            "物体属性分类适配",
+            "车形检测微调"
+          ]
+        },
+        {
+          "field": "performance_baseline",
+          "queries": [
+            "车辆检测精度指标",
+            "属性识别 mAP 标准",
+            "车行检测性能基准"
+          ]
+        },
+        {
+          "field": "data_requirements",
+          "queries": [
+            "车辆检测数据集",
+            "属性标注示例",
+            "车行样本数量需求"
+          ]
+        }
+      ]
+    }
+  }
+}

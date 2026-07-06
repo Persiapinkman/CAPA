@@ -1,0 +1,243 @@
+{
+  "session_id": "1406d218-0df2-4bd4-94c5-18f77dca6f8a",
+  "run_stamp": "20260522_143420_417e65c0",
+  "stage": "migration_retrieval_plan_request",
+  "step_index": 1,
+  "created_at": "2026-05-22T14:34:20+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260522_143420_417e65c0",
+    "input_schema": {
+      "user_query": "用户原始问题",
+      "failed_rag_trace": "最近最多 3 轮 RAG 失败轨迹（round/query/knowledge_base_fully_answered/evidence[]）",
+      "required_fields": "固定 4 个检索维度 field + label"
+    },
+    "evidence_item_fields": [
+      "evidence_id",
+      "title",
+      "snippet",
+      "model_name",
+      "algorithm_name",
+      "algorithm_type",
+      "application_scene",
+      "section_type",
+      "score"
+    ],
+    "structured_input": {
+      "user_query": "监控画面中要判断行人“短发、长发、光头、其他”，用什么检测模型",
+      "failed_rag_trace": [
+        {
+          "round": 1,
+          "query": "监控画面中要判断行人“短发、长发、光头、其他”，用什么检测模型",
+          "knowledge_base_fully_answered": 0.0,
+          "evidence": [
+            {
+              "evidence_id": "dd622ab3d2c615477dc4f8b1",
+              "title": "KM_essos_BannerSlogan_960x960_nart_acl-ascend710-fp16_b8_3.0.5.model",
+              "snippet": "target_name: 横幅\nalgorithm_type: 检测\nalgorithm_name: 横幅检测模型\napplication_scene: 视频巡逻项目\nowner: 任大发\nmodel_name: KM_essos_BannerSlogan_960x960_nart_acl-ascend710-fp16_b8_3.0.5.model\nsupported_device: ascend710\nrecommended_config: acl-ascend710-fp16\nlast_updated: 2025-06-26\nlast_updated_month: 2025-06",
+              "model_name": "KM_essos_BannerSlogan_960x960_nart_acl-ascend710-fp16_b8_3.0.5.model",
+              "algorithm_name": "横幅检测模型",
+              "algorithm_type": "检测",
+              "application_scene": "视频巡逻项目",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "3e535ba4d981b834efe94c63",
+              "title": "PDFs/影视剧、新闻、游戏、卡通分类模型发版记录.pdf p1 table 1",
+              "snippet": "PDF表格: PDFs/影视剧、新闻、游戏、卡通分类模型发版记录.pdf 第1页 表1\n| 影视剧、新闻、游戏、卡通分类模型发版记录 视频分类v1.1.0 release note • 发布时间： 2023.05.30 • owner：chencheng1@sensetime.com • 交付物：模型 • 版本：v1.1.0 • highlights ◦ 增加\"卡通\"类型分类 ◦ 平均准确度提升2.86%，其中f1值 影视剧-0.35% / 新闻+1.53% / 游戏+4.32% / 其他+3.57% 一 功能介绍 • 判断输入的图片属于[影视剧 / 新闻 / 游戏 / 卡通 / 其他]中的哪一个类别 • 各类别图片预览 | | | |\n| --- | --- | --- | --- |\n| | 影视剧、新闻、游戏、卡通分类模型发版记录 | | |\n| | 视频分类v1.1.0 | | |\n| | release note | | |\n| | • 发布时间： 2023.05.30 | | |\n| | • owner：chencheng1@sensetime.com | | |\n| | • 交付物：模型 | | |\n| | • 版本：v1.1.0 | | |\n| | • highlights | | |\n| | ◦ 增加\"卡通\"类型分类 ◦ 平均准确度提升2.86%，其中f1值 影视剧-0.35% / 新闻+1.53% / 游戏+4.32% / 其他+3.57% | | |\n| | | ◦ 增加\"卡通\"类型分类 | |\n| | | ◦ 平均准确度提升2.86%，其中f1值 影视剧-0.35% / 新闻+1.53% / 游戏+4.32% / 其他+3.57% | |\n| | 一 功能介绍 | | |\n| | • 判断输入的图片属于[影视剧 / 新闻 / 游戏 / 卡通 / 其他...",
+              "section_type": "release_note",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "f53d026649b58ea0fecf243a",
+              "title": "PAR_merged_model",
+              "snippet": "model_name: PAR_merged_model\nname: PAR_merged_model\ntype: classifier\nplatform: cpu-ppl2-fp32\nstatus: SUCCESS\ndid: 102019\nrid: 36860\nversion: 1.0.0\nversion_train_date: 20240228\nsource_file: data/PAR_merged_model-cpu-ppl2-fp32_36860_102019.json",
+              "model_name": "PAR_merged_model",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "83807db14b0bbfd44474b7c2",
+              "title": "KM_essos_BannerSlogan_960x960_nart_acl-ascend310-fp16_b8_3.0.5.model",
+              "snippet": "target_name: 横幅\nalgorithm_type: 检测\nalgorithm_name: 横幅检测模型\napplication_scene: 视频巡逻项目\nowner: 任大发\nmodel_name: KM_essos_BannerSlogan_960x960_nart_acl-ascend310-fp16_b8_3.0.5.model\nsupported_device: ascend310\nrecommended_config: acl-ascend310-fp16\nlast_updated: 2025-06-26\nlast_updated_month: 2025-06",
+              "model_name": "KM_essos_BannerSlogan_960x960_nart_acl-ascend310-fp16_b8_3.0.5.model",
+              "algorithm_name": "横幅检测模型",
+              "algorithm_type": "检测",
+              "application_scene": "视频巡逻项目",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "f49eaa60bd0ce737bae724f7",
+              "title": "KM_textdetection_HoriTextDetection_Plate_nart_acl-ascend710-int8_b16_3.2.0.model",
+              "snippet": "target_name: 车牌\nalgorithm_type: 检测\nalgorithm_name: 香港车牌文字检测\napplication_scene: 香港车牌文字检测\nowner: 肖坤\nmodel_name: KM_textdetection_HoriTextDetection_Plate_nart_acl-ascend710-int8_b16_3.2.0.model\nsupported_device: ascend710\nrecommended_config: acl-ascend710-int8\nlast_updated: 2025-07-08\nlast_updated_month: 2025-07",
+              "model_name": "KM_textdetection_HoriTextDetection_Plate_nart_acl-ascend710-int8_b16_3.2.0.model",
+              "algorithm_name": "香港车牌文字检测",
+              "algorithm_type": "检测",
+              "application_scene": "香港车牌文字检测",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "7d46e31c0867251721fe60c5",
+              "title": "KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model",
+              "snippet": "target_name: 二维码\nalgorithm_type: 检测\nalgorithm_name: 二维码检测模型\napplication_scene: 网安场景，正方形二维码\nowner: 龚丽君\nmodel_name: KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model\nsupported_device: ascend310\nrecommended_config: ascend310-fp16\nlast_updated: 2023-04-07\nlast_updated_month: 2023-04",
+              "model_name": "KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model",
+              "algorithm_name": "二维码检测模型",
+              "algorithm_type": "检测",
+              "application_scene": "网安场景，正方形二维码",
+              "section_type": "model_artifact",
+              "score": 1.0
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "query": "行人头发类型 检测模型",
+          "knowledge_base_fully_answered": 0.0,
+          "evidence": [
+            {
+              "evidence_id": "2f1206908af4aa0e8ce6255d",
+              "title": "PDFs/横幅标语检测3.0.5-发版.pdf p6",
+              "snippet": "1、pytorch模型测试精度\n• 召回测试集（全集中包含正负样本，其余子集仅包含正样本）\n类型 全集 横/竖 红色/白色/其他颜色 人举/车身/悬挂\n数量 19705 5447/1224 2529/3102/1040 3979/103/2589\n• FPPI测试集：wc_neg\n◦ 图片数：28156张",
+              "section_type": "accuracy_metric",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "f53d026649b58ea0fecf243a",
+              "title": "PAR_merged_model",
+              "snippet": "model_name: PAR_merged_model\nname: PAR_merged_model\ntype: classifier\nplatform: cpu-ppl2-fp32\nstatus: SUCCESS\ndid: 102019\nrid: 36860\nversion: 1.0.0\nversion_train_date: 20240228\nsource_file: data/PAR_merged_model-cpu-ppl2-fp32_36860_102019.json",
+              "model_name": "PAR_merged_model",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "dd622ab3d2c615477dc4f8b1",
+              "title": "KM_essos_BannerSlogan_960x960_nart_acl-ascend710-fp16_b8_3.0.5.model",
+              "snippet": "target_name: 横幅\nalgorithm_type: 检测\nalgorithm_name: 横幅检测模型\napplication_scene: 视频巡逻项目\nowner: 任大发\nmodel_name: KM_essos_BannerSlogan_960x960_nart_acl-ascend710-fp16_b8_3.0.5.model\nsupported_device: ascend710\nrecommended_config: acl-ascend710-fp16\nlast_updated: 2025-06-26\nlast_updated_month: 2025-06",
+              "model_name": "KM_essos_BannerSlogan_960x960_nart_acl-ascend710-fp16_b8_3.0.5.model",
+              "algorithm_name": "横幅检测模型",
+              "algorithm_type": "检测",
+              "application_scene": "视频巡逻项目",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "83807db14b0bbfd44474b7c2",
+              "title": "KM_essos_BannerSlogan_960x960_nart_acl-ascend310-fp16_b8_3.0.5.model",
+              "snippet": "target_name: 横幅\nalgorithm_type: 检测\nalgorithm_name: 横幅检测模型\napplication_scene: 视频巡逻项目\nowner: 任大发\nmodel_name: KM_essos_BannerSlogan_960x960_nart_acl-ascend310-fp16_b8_3.0.5.model\nsupported_device: ascend310\nrecommended_config: acl-ascend310-fp16\nlast_updated: 2025-06-26\nlast_updated_month: 2025-06",
+              "model_name": "KM_essos_BannerSlogan_960x960_nart_acl-ascend310-fp16_b8_3.0.5.model",
+              "algorithm_name": "横幅检测模型",
+              "algorithm_type": "检测",
+              "application_scene": "视频巡逻项目",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "7d46e31c0867251721fe60c5",
+              "title": "KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model",
+              "snippet": "target_name: 二维码\nalgorithm_type: 检测\nalgorithm_name: 二维码检测模型\napplication_scene: 网安场景，正方形二维码\nowner: 龚丽君\nmodel_name: KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model\nsupported_device: ascend310\nrecommended_config: ascend310-fp16\nlast_updated: 2023-04-07\nlast_updated_month: 2023-04",
+              "model_name": "KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model",
+              "algorithm_name": "二维码检测模型",
+              "algorithm_type": "检测",
+              "application_scene": "网安场景，正方形二维码",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "4e854c10e9ef5cf71f5d69c7",
+              "title": "KM_essos_qrcode_Det_nart_acl-ascend710-fp16_b8_1.0.0.model",
+              "snippet": "target_name: 二维码\nalgorithm_type: 检测\nalgorithm_name: 二维码检测模型\napplication_scene: 网安场景，正方形二维码\nowner: 龚丽君\nmodel_name: KM_essos_qrcode_Det_nart_acl-ascend710-fp16_b8_1.0.0.model\nsupported_device: ascend710\nrecommended_config: ascend710-fp16\nlast_updated: 2023-04-07\nlast_updated_month: 2023-04",
+              "model_name": "KM_essos_qrcode_Det_nart_acl-ascend710-fp16_b8_1.0.0.model",
+              "algorithm_name": "二维码检测模型",
+              "algorithm_type": "检测",
+              "application_scene": "网安场景，正方形二维码",
+              "section_type": "model_artifact",
+              "score": 1.0
+            }
+          ]
+        },
+        {
+          "round": 3,
+          "query": "行人头发类型 检测模型精度",
+          "knowledge_base_fully_answered": 0.0,
+          "evidence": [
+            {
+              "evidence_id": "28ae8bda39974c0fcb0c97e5",
+              "title": "PAR_waistcoat_safetybelt",
+              "snippet": "model_name: PAR_waistcoat_safetybelt\nname: PAR_waistcoat_safetybelt\ntype: classifier\nplatform: cuda11.0-trt7.1-fp16-T4\nstatus: SUCCESS\ndid: 95802\nrid: 34577\nversion: 0.2.0\nversion_train_date: 20231108\nsource_file: data/PAR_waistcoat_safetybelt-cuda11.0-trt7.1-fp16-T4_34577_95802.json",
+              "model_name": "PAR_waistcoat_safetybelt",
+              "section_type": "release_note",
+              "score": 0.981135
+            },
+            {
+              "evidence_id": "7897ccb97861f1035d11b34b",
+              "title": "PAR_waistcoat_safetybelt",
+              "snippet": "model_name: PAR_waistcoat_safetybelt\nname: PAR_waistcoat_safetybelt\ntype: classifier\nplatform: cuda11.0-trt7.1-int8-T4\nstatus: SUCCESS\ndid: 95821\nrid: 34577\nversion: 0.2.0\nversion_train_date: 20231108\nsource_file: data/PAR_waistcoat_safetybelt-cuda11.0-trt7.1-int8-T4_34577_95821.json",
+              "model_name": "PAR_waistcoat_safetybelt",
+              "section_type": "release_note",
+              "score": 0.981135
+            },
+            {
+              "evidence_id": "c7711b84757a14915a38a72a",
+              "title": "PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2 table 1",
+              "snippet": "PDF表格: PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf 第2页 表1\n表格结构化行:\n模型族: 三、模型列表\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model\nOID: beeb6944bdca2dafd0213251951cc47f829efad2981d7f847010b13f486181c5\n平台: cuda11.0-trt7.1-fp16-T4\n模型族: 三、模型列表\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model\nOID: fcd2d67fbbaab4fc2064f08ccaf5e61abf7b9655388c7f39a349c43184c6b102\n平台: cuda11.0-trt7.1-int8-T4\n模型族: 三、模型列表\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-P4_b8_0.2.0.model\nOID: c059a471994cbb3365e4a0e6e6e8c8469f578190e75f31b348867599041e5880\n平台: cuda11.0-trt7.1-int8-P4\n模型族: 三、模型列表\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\nOID: 0cef652610b4f5fef96dd575ba52e283ce7e1908565d...",
+              "section_type": "accuracy_eval",
+              "score": 0.807289
+            },
+            {
+              "evidence_id": "c3df8f567b44bcd3cf139136",
+              "title": "PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2",
+              "snippet": "58\nwithout_safetybelt 0.9269 0.9702 0.9481\n评测平台：cuda11.0-trt7.1-fp16-T4\n模型性能",
+              "section_type": "accuracy_eval",
+              "score": 0.802051
+            },
+            {
+              "evidence_id": "1d4107dd8be5f74f932bdc50",
+              "title": "PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2",
+              "snippet": "ge/project/3/releaseManage?\nrid=34577&id=3&model_type=classifier&tabName=deployment\n四、精度性能\n模型精度\n属性 类别 precision recall f1-score Acc|mPrec|mA\nwaistcoat_agnostic 0.7439 0.6246 0.6790\nwaistcoat\n0.9680|0.8918|0.86",
+              "section_type": "accuracy_eval",
+              "score": 0.800952
+            },
+            {
+              "evidence_id": "02b45c90d49384befdd62de9",
+              "title": "PDFs/行人属性大模型2.21.0.pdf p1",
+              "snippet": "a. pose睡岗模型 训练更新：\ni. st_lie: prec/recall 0.99/0.78->0.99/0.99\nii. st_sleep_on_the_table: prec/recall 0.98/0.60->0.98/0.82\nb. smoke抽烟模型 训练更新：\ni. st_smoking: prec/recall 0.41/0.77->0.76/0.75",
+              "section_type": "accuracy_metric",
+              "score": 0.675418
+            }
+          ]
+        }
+      ],
+      "required_fields": [
+        {
+          "field": "existing_models",
+          "label": "可直接复用的已有模型"
+        },
+        {
+          "field": "similar_capabilities",
+          "label": "可迁移的相似能力"
+        },
+        {
+          "field": "performance_baseline",
+          "label": "性能与精度基线"
+        },
+        {
+          "field": "data_requirements",
+          "label": "数据、标注与迭代依赖"
+        }
+      ]
+    },
+    "llm_messages": [
+      {
+        "role": "system",
+        "content": "你是视觉模型迁移顾问的检索规划器。用户的问题没有被知识库直接回答。请先抽取目标对象、部件/场景、属性/缺陷、任务类型等核心实体，再补充行业常用同义词。例如电子元器件缺陷检测可扩展为工业视觉、表面缺陷、异常检测。为每个固定字段生成 2-4 条短检索 query，每条 query 只放一组核心实体/同义词和一个检索意图。existing_models 偏已有模型/算法，similar_capabilities 偏可迁移能力，performance_baseline 偏精度/性能/benchmark，data_requirements 偏数据/标注/训练。删除“推荐/有没有/帮我/是否/什么模型”等口语噪声，不要把多组同义词堆成一条长句。禁止编造模型结论，只做检索规划。注意检索词除了缩略词，要求纯中文。只输出 JSON。"
+      },
+      {
+        "role": "user",
+        "content": "{\n  \"user_query\": \"监控画面中要判断行人“短发、长发、光头、其他”，用什么检测模型\",\n  \"failed_rag_trace\": [\n    {\n      \"round\": 1,\n      \"query\": \"监控画面中要判断行人“短发、长发、光头、其他”，用什么检测模型\",\n      \"knowledge_base_fully_answered\": 0.0,\n      \"evidence\": [\n        {\n          \"evidence_id\": \"dd622ab3d2c615477dc4f8b1\",\n          \"title\": \"KM_essos_BannerSlogan_960x960_nart_acl-ascend710-fp16_b8_3.0.5.model\",\n          \"snippet\": \"target_name: 横幅\\nalgorithm_type: 检测\\nalgorithm_name: 横幅检测模型\\napplication_scene: 视频巡逻项目\\nowner: 任大发\\nmodel_name: KM_essos_BannerSlogan_960x960_nart_acl-ascend710-fp16_b8_3.0.5.model\\nsupported_device: ascend710\\nrecommended_config: acl-ascend710-fp16\\nlast_updated: 2025-06-26\\nlast_updated_month: 2025-06\",\n          \"model_name\": \"KM_essos_BannerSlogan_960x960_nart_acl-ascend710-fp16_b8_3.0.5.model\",\n          \"algorithm_name\": \"横幅检测模型\",\n          \"algorithm_type\": \"检测\",\n          \"application_scene\": \"视频巡逻项目\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"3e535ba4d981b834efe94c63\",\n          \"title\": \"PDFs/影视剧、新闻、游戏、卡通分类模型发版记录.pdf p1 table 1\",\n          \"snippet\": \"PDF表格: PDFs/影视剧、新闻、游戏、卡通分类模型发版记录.pdf 第1页 表1\\n| 影视剧、新闻、游戏、卡通分类模型发版记录 视频分类v1.1.0 release note • 发布时间： 2023.05.30 • owner：chencheng1@sensetime.com • 交付物：模型 • 版本：v1.1.0 • highlights ◦ 增加\\\"卡通\\\"类型分类 ◦ 平均准确度提升2.86%，其中f1值 影视剧-0.35% / 新闻+1.53% / 游戏+4.32% / 其他+3.57% 一 功能介绍 • 判断输入的图片属于[影视剧 / 新闻 / 游戏 / 卡通 / 其他]中的哪一个类别 • 各类别图片预览 | | | |\\n| --- | --- | --- | --- |\\n| | 影视剧、新闻、游戏、卡通分类模型发版记录 | | |\\n| | 视频分类v1.1.0 | | |\\n| | release note | | |\\n| | • 发布时间： 2023.05.30 | | |\\n| | • owner：chencheng1@sensetime.com | | |\\n| | • 交付物：模型 | | |\\n| | • 版本：v1.1.0 | | |\\n| | • highlights | | |\\n| | ◦ 增加\\\"卡通\\\"类型分类 ◦ 平均准确度提升2.86%，其中f1值 影视剧-0.35% / 新闻+1.53% / 游戏+4.32% / 其他+3.57% | | |\\n| | | ◦ 增加\\\"卡通\\\"类型分类 | |\\n| | | ◦ 平均准确度提升2.86%，其中f1值 影视剧-0.35% / 新闻+1.53% / 游戏+4.32% / 其他+3.57% | |\\n| | 一 功能介绍 | | |\\n| | • 判断输入的图片属于[影视剧 / 新闻 / 游戏 / 卡通 / 其他...\",\n          \"section_type\": \"release_note\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"f53d026649b58ea0fecf243a\",\n          \"title\": \"PAR_merged_model\",\n          \"snippet\": \"model_name: PAR_merged_model\\nname: PAR_merged_model\\ntype: classifier\\nplatform: cpu-ppl2-fp32\\nstatus: SUCCESS\\ndid: 102019\\nrid: 36860\\nversion: 1.0.0\\nversion_train_date: 20240228\\nsource_file: data/PAR_merged_model-cpu-ppl2-fp32_36860_102019.json\",\n          \"model_name\": \"PAR_merged_model\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"83807db14b0bbfd44474b7c2\",\n          \"title\": \"KM_essos_BannerSlogan_960x960_nart_acl-ascend310-fp16_b8_3.0.5.model\",\n          \"snippet\": \"target_name: 横幅\\nalgorithm_type: 检测\\nalgorithm_name: 横幅检测模型\\napplication_scene: 视频巡逻项目\\nowner: 任大发\\nmodel_name: KM_essos_BannerSlogan_960x960_nart_acl-ascend310-fp16_b8_3.0.5.model\\nsupported_device: ascend310\\nrecommended_config: acl-ascend310-fp16\\nlast_updated: 2025-06-26\\nlast_updated_month: 2025-06\",\n          \"model_name\": \"KM_essos_BannerSlogan_960x960_nart_acl-ascend310-fp16_b8_3.0.5.model\",\n          \"algorithm_name\": \"横幅检测模型\",\n          \"algorithm_type\": \"检测\",\n          \"application_scene\": \"视频巡逻项目\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"f49eaa60bd0ce737bae724f7\",\n          \"title\": \"KM_textdetection_HoriTextDetection_Plate_nart_acl-ascend710-int8_b16_3.2.0.model\",\n          \"snippet\": \"target_name: 车牌\\nalgorithm_type: 检测\\nalgorithm_name: 香港车牌文字检测\\napplication_scene: 香港车牌文字检测\\nowner: 肖坤\\nmodel_name: KM_textdetection_HoriTextDetection_Plate_nart_acl-ascend710-int8_b16_3.2.0.model\\nsupported_device: ascend710\\nrecommended_config: acl-ascend710-int8\\nlast_updated: 2025-07-08\\nlast_updated_month: 2025-07\",\n          \"model_name\": \"KM_textdetection_HoriTextDetection_Plate_nart_acl-ascend710-int8_b16_3.2.0.model\",\n          \"algorithm_name\": \"香港车牌文字检测\",\n          \"algorithm_type\": \"检测\",\n          \"application_scene\": \"香港车牌文字检测\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"7d46e31c0867251721fe60c5\",\n          \"title\": \"KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model\",\n          \"snippet\": \"target_name: 二维码\\nalgorithm_type: 检测\\nalgorithm_name: 二维码检测模型\\napplication_scene: 网安场景，正方形二维码\\nowner: 龚丽君\\nmodel_name: KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model\\nsupported_device: ascend310\\nrecommended_config: ascend310-fp16\\nlast_updated: 2023-04-07\\nlast_updated_month: 2023-04\",\n          \"model_name\": \"KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model\",\n          \"algorithm_name\": \"二维码检测模型\",\n          \"algorithm_type\": \"检测\",\n          \"application_scene\": \"网安场景，正方形二维码\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        }\n      ]\n    },\n    {\n      \"round\": 2,\n      \"query\": \"行人头发类型 检测模型\",\n      \"knowledge_base_fully_answered\": 0.0,\n      \"evidence\": [\n        {\n          \"evidence_id\": \"2f1206908af4aa0e8ce6255d\",\n          \"title\": \"PDFs/横幅标语检测3.0.5-发版.pdf p6\",\n          \"snippet\": \"1、pytorch模型测试精度\\n• 召回测试集（全集中包含正负样本，其余子集仅包含正样本）\\n类型 全集 横/竖 红色/白色/其他颜色 人举/车身/悬挂\\n数量 19705 5447/1224 2529/3102/1040 3979/103/2589\\n• FPPI测试集：wc_neg\\n◦ 图片数：28156张\",\n          \"section_type\": \"accuracy_metric\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"f53d026649b58ea0fecf243a\",\n          \"title\": \"PAR_merged_model\",\n          \"snippet\": \"model_name: PAR_merged_model\\nname: PAR_merged_model\\ntype: classifier\\nplatform: cpu-ppl2-fp32\\nstatus: SUCCESS\\ndid: 102019\\nrid: 36860\\nversion: 1.0.0\\nversion_train_date: 20240228\\nsource_file: data/PAR_merged_model-cpu-ppl2-fp32_36860_102019.json\",\n          \"model_name\": \"PAR_merged_model\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"dd622ab3d2c615477dc4f8b1\",\n          \"title\": \"KM_essos_BannerSlogan_960x960_nart_acl-ascend710-fp16_b8_3.0.5.model\",\n          \"snippet\": \"target_name: 横幅\\nalgorithm_type: 检测\\nalgorithm_name: 横幅检测模型\\napplication_scene: 视频巡逻项目\\nowner: 任大发\\nmodel_name: KM_essos_BannerSlogan_960x960_nart_acl-ascend710-fp16_b8_3.0.5.model\\nsupported_device: ascend710\\nrecommended_config: acl-ascend710-fp16\\nlast_updated: 2025-06-26\\nlast_updated_month: 2025-06\",\n          \"model_name\": \"KM_essos_BannerSlogan_960x960_nart_acl-ascend710-fp16_b8_3.0.5.model\",\n          \"algorithm_name\": \"横幅检测模型\",\n          \"algorithm_type\": \"检测\",\n          \"application_scene\": \"视频巡逻项目\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"83807db14b0bbfd44474b7c2\",\n          \"title\": \"KM_essos_BannerSlogan_960x960_nart_acl-ascend310-fp16_b8_3.0.5.model\",\n          \"snippet\": \"target_name: 横幅\\nalgorithm_type: 检测\\nalgorithm_name: 横幅检测模型\\napplication_scene: 视频巡逻项目\\nowner: 任大发\\nmodel_name: KM_essos_BannerSlogan_960x960_nart_acl-ascend310-fp16_b8_3.0.5.model\\nsupported_device: ascend310\\nrecommended_config: acl-ascend310-fp16\\nlast_updated: 2025-06-26\\nlast_updated_month: 2025-06\",\n          \"model_name\": \"KM_essos_BannerSlogan_960x960_nart_acl-ascend310-fp16_b8_3.0.5.model\",\n          \"algorithm_name\": \"横幅检测模型\",\n          \"algorithm_type\": \"检测\",\n          \"application_scene\": \"视频巡逻项目\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"7d46e31c0867251721fe60c5\",\n          \"title\": \"KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model\",\n          \"snippet\": \"target_name: 二维码\\nalgorithm_type: 检测\\nalgorithm_name: 二维码检测模型\\napplication_scene: 网安场景，正方形二维码\\nowner: 龚丽君\\nmodel_name: KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model\\nsupported_device: ascend310\\nrecommended_config: ascend310-fp16\\nlast_updated: 2023-04-07\\nlast_updated_month: 2023-04\",\n          \"model_name\": \"KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model\",\n          \"algorithm_name\": \"二维码检测模型\",\n          \"algorithm_type\": \"检测\",\n          \"application_scene\": \"网安场景，正方形二维码\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"4e854c10e9ef5cf71f5d69c7\",\n          \"title\": \"KM_essos_qrcode_Det_nart_acl-ascend710-fp16_b8_1.0.0.model\",\n          \"snippet\": \"target_name: 二维码\\nalgorithm_type: 检测\\nalgorithm_name: 二维码检测模型\\napplication_scene: 网安场景，正方形二维码\\nowner: 龚丽君\\nmodel_name: KM_essos_qrcode_Det_nart_acl-ascend710-fp16_b8_1.0.0.model\\nsupported_device: ascend710\\nrecommended_config: ascend710-fp16\\nlast_updated: 2023-04-07\\nlast_updated_month: 2023-04\",\n          \"model_name\": \"KM_essos_qrcode_Det_nart_acl-ascend710-fp16_b8_1.0.0.model\",\n          \"algorithm_name\": \"二维码检测模型\",\n          \"algorithm_type\": \"检测\",\n          \"application_scene\": \"网安场景，正方形二维码\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        }\n      ]\n    },\n    {\n      \"round\": 3,\n      \"query\": \"行人头发类型 检测模型精度\",\n      \"knowledge_base_fully_answered\": 0.0,\n      \"evidence\": [\n        {\n          \"evidence_id\": \"28ae8bda39974c0fcb0c97e5\",\n          \"title\": \"PAR_waistcoat_safetybelt\",\n          \"snippet\": \"model_name: PAR_waistcoat_safetybelt\\nname: PAR_waistcoat_safetybelt\\ntype: classifier\\nplatform: cuda11.0-trt7.1-fp16-T4\\nstatus: SUCCESS\\ndid: 95802\\nrid: 34577\\nversion: 0.2.0\\nversion_train_date: 20231108\\nsource_file: data/PAR_waistcoat_safetybelt-cuda11.0-trt7.1-fp16-T4_34577_95802.json\",\n          \"model_name\": \"PAR_waistcoat_safetybelt\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.981135\n        },\n        {\n          \"evidence_id\": \"7897ccb97861f1035d11b34b\",\n          \"title\": \"PAR_waistcoat_safetybelt\",\n          \"snippet\": \"model_name: PAR_waistcoat_safetybelt\\nname: PAR_waistcoat_safetybelt\\ntype: classifier\\nplatform: cuda11.0-trt7.1-int8-T4\\nstatus: SUCCESS\\ndid: 95821\\nrid: 34577\\nversion: 0.2.0\\nversion_train_date: 20231108\\nsource_file: data/PAR_waistcoat_safetybelt-cuda11.0-trt7.1-int8-T4_34577_95821.json\",\n          \"model_name\": \"PAR_waistcoat_safetybelt\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.981135\n        },\n        {\n          \"evidence_id\": \"c7711b84757a14915a38a72a\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2 table 1\",\n          \"snippet\": \"PDF表格: PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf 第2页 表1\\n表格结构化行:\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model\\nOID: beeb6944bdca2dafd0213251951cc47f829efad2981d7f847010b13f486181c5\\n平台: cuda11.0-trt7.1-fp16-T4\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model\\nOID: fcd2d67fbbaab4fc2064f08ccaf5e61abf7b9655388c7f39a349c43184c6b102\\n平台: cuda11.0-trt7.1-int8-T4\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-P4_b8_0.2.0.model\\nOID: c059a471994cbb3365e4a0e6e6e8c8469f578190e75f31b348867599041e5880\\n平台: cuda11.0-trt7.1-int8-P4\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\\nOID: 0cef652610b4f5fef96dd575ba52e283ce7e1908565d...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.807289\n        },\n        {\n          \"evidence_id\": \"c3df8f567b44bcd3cf139136\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2\",\n          \"snippet\": \"58\\nwithout_safetybelt 0.9269 0.9702 0.9481\\n评测平台：cuda11.0-trt7.1-fp16-T4\\n模型性能\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.802051\n        },\n        {\n          \"evidence_id\": \"1d4107dd8be5f74f932bdc50\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2\",\n          \"snippet\": \"ge/project/3/releaseManage?\\nrid=34577&id=3&model_type=classifier&tabName=deployment\\n四、精度性能\\n模型精度\\n属性 类别 precision recall f1-score Acc|mPrec|mA\\nwaistcoat_agnostic 0.7439 0.6246 0.6790\\nwaistcoat\\n0.9680|0.8918|0.86\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.800952\n        },\n        {\n          \"evidence_id\": \"02b45c90d49384befdd62de9\",\n          \"title\": \"PDFs/行人属性大模型2.21.0.pdf p1\",\n          \"snippet\": \"a. pose睡岗模型 训练更新：\\ni. st_lie: prec/recall 0.99/0.78->0.99/0.99\\nii. st_sleep_on_the_table: prec/recall 0.98/0.60->0.98/0.82\\nb. smoke抽烟模型 训练更新：\\ni. st_smoking: prec/recall 0.41/0.77->0.76/0.75\",\n          \"section_type\": \"accuracy_metric\",\n          \"score\": 0.675418\n        }\n      ]\n    }\n  ],\n  \"required_fields\": [\n    {\n      \"field\": \"existing_models\",\n      \"label\": \"可直接复用的已有模型\"\n    },\n    {\n      \"field\": \"similar_capabilities\",\n      \"label\": \"可迁移的相似能力\"\n    },\n    {\n      \"field\": \"performance_baseline\",\n      \"label\": \"性能与精度基线\"\n    },\n    {\n      \"field\": \"data_requirements\",\n      \"label\": \"数据、标注与迭代依赖\"\n    }\n  ]\n}"
+      }
+    ]
+  }
+}

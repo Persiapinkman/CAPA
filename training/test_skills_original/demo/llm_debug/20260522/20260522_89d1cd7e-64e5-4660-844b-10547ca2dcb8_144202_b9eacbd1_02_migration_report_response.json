@@ -1,0 +1,64 @@
+{
+  "session_id": "89d1cd7e-64e5-4660-844b-10547ca2dcb8",
+  "run_stamp": "20260522_144202_b9eacbd1",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-05-22T14:42:55+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"用户需要识别“肤色：黑色、白色、黄色”的模型。我需要根据field_results中的文档片段，构建相似资产列表。只能引用field_results中的证据，如果找不到相关信息必须标记为「证据不足」。只能按label_schema、training_data、reported_metrics三项分类填写。不要编造精度、周期或成本。\",\n  \"direct_match\": {\n    \"exists\": false,\n    \"summary\": \"提供的field_results中没有任何明确针对‘肤色分类’训练或部署的模型记录。虽然存在'KM_classifier_Clothes_SD...'等属性分类模型，但其label_schema为'服饰分类'，与肤色无关。现有的'videowear'、'Face_None'等标签也与肤色无关。因此无法基于现有证据构建返回结果。\",\n    \"evidence\": []\n  },\n  \"similar_assets\": [\n    {\n      \"model_or_solution\": \"KM_classifier_Clothes_SD\",\n      \"label_schema\": \"服饰分类\",\n      \"training_data\": \"无证据\",\n      \"reported_metrics\": \"无证据\",\n      \"covered_capability\": \"属性分类（基于scene）\"\n    ,\n    \"gap\": \"有待补充的label_schema：\"\n    ,\n    \"evidence\": [\n        \"a1dfd312a8a9107afdc1d242\",\n        \"c7711b84757a14915a38a72a\"\n      ]\n    }\n  ]\n  ,\n  \"migration_plan\": {\n    \"feasibility\": \"low\",\n    \"approach\": \"基于现有属性分类逻辑构建新模型\",\n    \"data_requirements\": \"需要新采集内含黑色、白色、黄色皮肤颜色类别的图像数据集\",\n    \"compute_requirements\": \"无明确证据\",\n    \"engineering_work\": \"需要针对肤色特征进行数据增强和模型微调\"\n  ,\n  \"estimated_timeline\": \"【证据不足】\",\n  \"estimated_cost\": \"【证据不足】\"\n  ,\n  \"dependencies\": [\n    \"need_access_to_training_dataset\"\n    ,\n    \"need_validation_metrics_against_black_yellow_white_skin_palette\"\n  ]\n  ,\n  \"risks\": [\n    \"semantic_drift_in_training_data\"\n    ,\n    \"underrepresented_sizes_intraining_data\"\n  ]\n  }\n  ,\n  \"expected_performance\": {\n    \"baseline\": \"无证据\"\n  ,\n    \"target\": \"待定\"\n  ,\n    \"uncertainty\": \"high\"\n  }\n  \n  ,\n  \"recommendation\": \"采集/获取足够的含肤色图像数据，采用半监督或主动学习策略加速训练。参考现有属性分类模型vf16-v0.2.0架构，在respecting差异指标约束下构建预训练模型。\"\n}",
+    "structured_output": {
+      "requirement_summary": "用户需要识别“肤色：黑色、白色、黄色”的模型。我需要根据field_results中的文档片段，构建相似资产列表。只能引用field_results中的证据，如果找不到相关信息必须标记为「证据不足」。只能按label_schema、training_data、reported_metrics三项分类填写。不要编造精度、周期或成本。",
+      "direct_match": {
+        "exists": false,
+        "summary": "提供的field_results中没有任何明确针对‘肤色分类’训练或部署的模型记录。虽然存在'KM_classifier_Clothes_SD...'等属性分类模型，但其label_schema为'服饰分类'，与肤色无关。现有的'videowear'、'Face_None'等标签也与肤色无关。因此无法基于现有证据构建返回结果。",
+        "evidence": []
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "KM_classifier_Clothes_SD",
+          "label_schema": "服饰分类",
+          "training_data": "无证据",
+          "reported_metrics": "无证据",
+          "covered_capability": "属性分类（基于scene）",
+          "gap": "有待补充的label_schema：",
+          "evidence": [
+            "a1dfd312a8a9107afdc1d242",
+            "c7711b84757a14915a38a72a"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "low",
+        "approach": "基于现有属性分类逻辑构建新模型",
+        "data_requirements": "需要新采集内含黑色、白色、黄色皮肤颜色类别的图像数据集",
+        "compute_requirements": "无明确证据",
+        "engineering_work": "需要针对肤色特征进行数据增强和模型微调",
+        "estimated_timeline": "【证据不足】",
+        "estimated_cost": "【证据不足】",
+        "dependencies": [
+          "need_access_to_training_dataset",
+          "need_validation_metrics_against_black_yellow_white_skin_palette"
+        ],
+        "risks": [
+          "semantic_drift_in_training_data",
+          "underrepresented_sizes_intraining_data"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "无证据",
+        "target": "待定",
+        "uncertainty": "high"
+      },
+      "recommendation": "采集/获取足够的含肤色图像数据，采用半监督或主动学习策略加速训练。参考现有属性分类模型vf16-v0.2.0架构，在respecting差异指标约束下构建预训练模型。"
+    }
+  }
+}

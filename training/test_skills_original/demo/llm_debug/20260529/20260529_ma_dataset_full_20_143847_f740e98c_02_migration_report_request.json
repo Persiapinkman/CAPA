@@ -1,0 +1,412 @@
+{
+  "session_id": "ma_dataset_full_20",
+  "run_stamp": "20260529_143847_f740e98c",
+  "stage": "migration_report_request",
+  "step_index": 2,
+  "created_at": "2026-05-29T14:38:50+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260529_143847_f740e98c",
+    "input_schema": {
+      "user_query": "用户原始问题",
+      "field_results": "分字段检索结果：field, assets[]。assets 按模型/方案聚合，包含模型身份字段、labels、benchmark_info 摘要，以及 evidence[]（evidence_id/section_type/index_text）。"
+    },
+    "evidence_item_fields": [
+      "asset_name",
+      "model_name",
+      "target_name",
+      "algorithm_name",
+      "algorithm_type",
+      "application_scene",
+      "labels",
+      "benchmark_info",
+      "evidence[].evidence_id",
+      "evidence[].section_type",
+      "evidence[].index_text"
+    ],
+    "structured_input": {
+      "user_query": "骑行人“上衣长度：长袖、短袖、赤膊、无法判断、背心”是否直接支持？",
+      "field_results": [
+        {
+          "field": "existing_models",
+          "assets": []
+        },
+        {
+          "field": "similar_capabilities",
+          "assets": []
+        },
+        {
+          "field": "performance_baseline",
+          "assets": []
+        },
+        {
+          "field": "data_requirements",
+          "assets": []
+        }
+      ]
+    },
+    "llm_messages": [
+      {
+        "role": "system",
+        "content": "你是视觉模型迁移顾问。请基于检索证据生成结构化迁移评估报告（中文）。\n本报告的首要目标是总结可用于迁移参考的相似模型信息，而不是强求找到与需求完全一致的直接模型。\n只要检索到的模型/方案在对象、属性、任务形态、标签体系、评测方式、部署平台中任一方面与需求相近，就应作为 similar_assets 的有效候选，优先提炼其可复用信息。\n必须区分证据支持和合理推断；证据不足时明确写「证据不足」，不要编造精度、周期或成本。\n若可估计成本/周期，只能给区间和依赖前提。\ndirect_match 仅用于回答“是否存在直接匹配模型”。即使不存在直接匹配，也不影响 similar_assets 充分展开。\nsimilar_assets 中每个相似模型/方案必须逐项填写：\n- label_schema：该模型的类别/标签定义（含类别名、取值范围）；\n- training_data：训练集来源、标注规范、样本量或数据要求；\n- reported_metrics：文档中的 mAP、ACC、recall、benchmark 等数值及对应测试集/平台；\nfield_results 按 assets 聚合；先判断 asset 与用户需求的相似性，再从同一 asset 的结构化字段、benchmark_info 与 evidence.index_text 中提取标签、训练数据和精度。无对应文本则写「证据不足」。\n若某个 asset 已有标签、精度、平台或场景中的部分信息，必须先如实填写已知部分，只对缺失字段写「证据不足」，不要因为“不是直接模型”就把整项写成「证据不足」。\nevidence 数组可引用 evidence_id 或证据原文短句。只输出 JSON。"
+      },
+      {
+        "role": "user",
+        "content": "{\n  \"user_query\": \"骑行人“上衣长度：长袖、短袖、赤膊、无法判断、背心”是否直接支持？\",\n  \"field_results\": [\n    {\n      \"field\": \"existing_models\",\n      \"assets\": []\n    },\n    {\n      \"field\": \"similar_capabilities\",\n      \"assets\": []\n    },\n    {\n      \"field\": \"performance_baseline\",\n      \"assets\": []\n    },\n    {\n      \"field\": \"data_requirements\",\n      \"assets\": []\n    }\n  ]\n}"
+      }
+    ],
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "migration_advisor_report",
+        "strict": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "requirement_summary": {
+              "type": "string"
+            },
+            "direct_match": {
+              "type": "object",
+              "properties": {
+                "exists": {
+                  "type": "boolean"
+                },
+                "summary": {
+                  "type": "string"
+                },
+                "evidence": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "exists",
+                "summary",
+                "evidence"
+              ],
+              "additionalProperties": false
+            },
+            "similar_assets": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "model_or_solution": {
+                    "type": "string"
+                  },
+                  "label_schema": {
+                    "type": "string",
+                    "description": "类别/标签定义；证据无则写「证据不足」。"
+                  },
+                  "training_data": {
+                    "type": "string",
+                    "description": "训练集、标注规范、样本量；证据无则写「证据不足」。"
+                  },
+                  "reported_metrics": {
+                    "type": "string",
+                    "description": "mAP/ACC/召回等精度指标及测试集/平台；证据无则写「证据不足」。"
+                  },
+                  "covered_capability": {
+                    "type": "string"
+                  },
+                  "gap": {
+                    "type": "string"
+                  },
+                  "evidence": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "model_or_solution",
+                  "label_schema",
+                  "training_data",
+                  "reported_metrics",
+                  "covered_capability",
+                  "gap",
+                  "evidence"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "migration_plan": {
+              "type": "object",
+              "properties": {
+                "feasibility": {
+                  "type": "string",
+                  "enum": [
+                    "high",
+                    "medium",
+                    "low"
+                  ]
+                },
+                "approach": {
+                  "type": "string"
+                },
+                "data_requirements": {
+                  "type": "string"
+                },
+                "compute_requirements": {
+                  "type": "string"
+                },
+                "engineering_work": {
+                  "type": "string"
+                },
+                "estimated_timeline": {
+                  "type": "string"
+                },
+                "estimated_cost": {
+                  "type": "string"
+                },
+                "dependencies": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "risks": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "feasibility",
+                "approach",
+                "data_requirements",
+                "compute_requirements",
+                "engineering_work",
+                "estimated_timeline",
+                "estimated_cost",
+                "dependencies",
+                "risks"
+              ],
+              "additionalProperties": false
+            },
+            "expected_performance": {
+              "type": "object",
+              "properties": {
+                "baseline": {
+                  "type": "string"
+                },
+                "target": {
+                  "type": "string"
+                },
+                "uncertainty": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "baseline",
+                "target",
+                "uncertainty"
+              ],
+              "additionalProperties": false
+            },
+            "recommendation": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "requirement_summary",
+            "direct_match",
+            "similar_assets",
+            "migration_plan",
+            "expected_performance",
+            "recommendation"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "assistant_input_name": "migration_advisor_report",
+    "assistant_input": {
+      "messages": [
+        {
+          "role": "system",
+          "content": "你是视觉模型迁移顾问。请基于检索证据生成结构化迁移评估报告（中文）。\n本报告的首要目标是总结可用于迁移参考的相似模型信息，而不是强求找到与需求完全一致的直接模型。\n只要检索到的模型/方案在对象、属性、任务形态、标签体系、评测方式、部署平台中任一方面与需求相近，就应作为 similar_assets 的有效候选，优先提炼其可复用信息。\n必须区分证据支持和合理推断；证据不足时明确写「证据不足」，不要编造精度、周期或成本。\n若可估计成本/周期，只能给区间和依赖前提。\ndirect_match 仅用于回答“是否存在直接匹配模型”。即使不存在直接匹配，也不影响 similar_assets 充分展开。\nsimilar_assets 中每个相似模型/方案必须逐项填写：\n- label_schema：该模型的类别/标签定义（含类别名、取值范围）；\n- training_data：训练集来源、标注规范、样本量或数据要求；\n- reported_metrics：文档中的 mAP、ACC、recall、benchmark 等数值及对应测试集/平台；\nfield_results 按 assets 聚合；先判断 asset 与用户需求的相似性，再从同一 asset 的结构化字段、benchmark_info 与 evidence.index_text 中提取标签、训练数据和精度。无对应文本则写「证据不足」。\n若某个 asset 已有标签、精度、平台或场景中的部分信息，必须先如实填写已知部分，只对缺失字段写「证据不足」，不要因为“不是直接模型”就把整项写成「证据不足」。\nevidence 数组可引用 evidence_id 或证据原文短句。只输出 JSON。"
+        },
+        {
+          "role": "user",
+          "content": "{\n  \"user_query\": \"骑行人“上衣长度：长袖、短袖、赤膊、无法判断、背心”是否直接支持？\",\n  \"field_results\": [\n    {\n      \"field\": \"existing_models\",\n      \"assets\": []\n    },\n    {\n      \"field\": \"similar_capabilities\",\n      \"assets\": []\n    },\n    {\n      \"field\": \"performance_baseline\",\n      \"assets\": []\n    },\n    {\n      \"field\": \"data_requirements\",\n      \"assets\": []\n    }\n  ]\n}"
+        }
+      ],
+      "response_format": {
+        "type": "json_schema",
+        "json_schema": {
+          "name": "migration_advisor_report",
+          "strict": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "requirement_summary": {
+                "type": "string"
+              },
+              "direct_match": {
+                "type": "object",
+                "properties": {
+                  "exists": {
+                    "type": "boolean"
+                  },
+                  "summary": {
+                    "type": "string"
+                  },
+                  "evidence": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "exists",
+                  "summary",
+                  "evidence"
+                ],
+                "additionalProperties": false
+              },
+              "similar_assets": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "model_or_solution": {
+                      "type": "string"
+                    },
+                    "label_schema": {
+                      "type": "string",
+                      "description": "类别/标签定义；证据无则写「证据不足」。"
+                    },
+                    "training_data": {
+                      "type": "string",
+                      "description": "训练集、标注规范、样本量；证据无则写「证据不足」。"
+                    },
+                    "reported_metrics": {
+                      "type": "string",
+                      "description": "mAP/ACC/召回等精度指标及测试集/平台；证据无则写「证据不足」。"
+                    },
+                    "covered_capability": {
+                      "type": "string"
+                    },
+                    "gap": {
+                      "type": "string"
+                    },
+                    "evidence": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "model_or_solution",
+                    "label_schema",
+                    "training_data",
+                    "reported_metrics",
+                    "covered_capability",
+                    "gap",
+                    "evidence"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "migration_plan": {
+                "type": "object",
+                "properties": {
+                  "feasibility": {
+                    "type": "string",
+                    "enum": [
+                      "high",
+                      "medium",
+                      "low"
+                    ]
+                  },
+                  "approach": {
+                    "type": "string"
+                  },
+                  "data_requirements": {
+                    "type": "string"
+                  },
+                  "compute_requirements": {
+                    "type": "string"
+                  },
+                  "engineering_work": {
+                    "type": "string"
+                  },
+                  "estimated_timeline": {
+                    "type": "string"
+                  },
+                  "estimated_cost": {
+                    "type": "string"
+                  },
+                  "dependencies": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "risks": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "feasibility",
+                  "approach",
+                  "data_requirements",
+                  "compute_requirements",
+                  "engineering_work",
+                  "estimated_timeline",
+                  "estimated_cost",
+                  "dependencies",
+                  "risks"
+                ],
+                "additionalProperties": false
+              },
+              "expected_performance": {
+                "type": "object",
+                "properties": {
+                  "baseline": {
+                    "type": "string"
+                  },
+                  "target": {
+                    "type": "string"
+                  },
+                  "uncertainty": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "baseline",
+                  "target",
+                  "uncertainty"
+                ],
+                "additionalProperties": false
+              },
+              "recommendation": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "requirement_summary",
+              "direct_match",
+              "similar_assets",
+              "migration_plan",
+              "expected_performance",
+              "recommendation"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "total_planner_steps": 617,
+  "parse_failed": 54,
+  "sessions": 418,
+  "total_pairs": 98,
+  "pairs_by_type": {
+    "contrastive": 50,
+    "repair": 48
+  },
+  "pairs_by_rule": {
+    "R5_degenerate_decision": 26,
+    "B1_platform_eval_correct": 25,
+    "B3_generic_direct_correct": 17,
+    "R3_clarify_loop": 17,
+    "B2_coref_rewrite_correct": 8,
+    "R2_coref_no_rewrite": 3,
+    "R1_platform_misroute": 2
+  },
+  "labels": {
+    "skipped_no_response": 27,
+    "good": 491,
+    "bad": 48,
+    "good_anchor": 50,
+    "neutral": 1
+  },
+  "action_distribution": {
+    "rag_answer": 317,
+    "answerer": 59,
+    "unparsed": 54,
+    "clarify": 51,
+    "adela_cli_eval": 48,
+    "qwen_detection": 24,
+    "flux-image-generation": 19,
+    "re_question": 18,
+    "end": 9,
+    "pipeline_eval": 8,
+    "final_answer": 5,
+    "rexomni_detection": 3,
+    "adela_cli_benchmark": 1,
+    "transfer_advisory": 1
+  },
+  "session_findings_total": 13,
+  "session_findings_by_issue": {
+    "clarify_loop": 12,
+    "empty_action": 3
+  },
+  "session_findings_by_root_cause": {
+    "planner": 12,
+    "rag_judger": 1
+  }
+}

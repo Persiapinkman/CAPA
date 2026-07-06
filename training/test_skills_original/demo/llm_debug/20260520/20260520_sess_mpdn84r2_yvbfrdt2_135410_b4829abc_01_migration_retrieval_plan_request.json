@@ -1,0 +1,235 @@
+{
+  "session_id": "sess_mpdn84r2_yvbfrdt2",
+  "run_stamp": "20260520_135410_b4829abc",
+  "stage": "migration_retrieval_plan_request",
+  "step_index": 1,
+  "created_at": "2026-05-20T13:54:10+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260520_135410_b4829abc",
+    "input_schema": {
+      "user_query": "用户原始问题",
+      "failed_rag_trace": "最近最多 3 轮 RAG 失败轨迹（round/query/knowledge_base_fully_answered/evidence[]）",
+      "required_fields": "固定 4 个检索维度 field + label"
+    },
+    "evidence_item_fields": [
+      "evidence_id",
+      "title",
+      "snippet",
+      "model_name",
+      "algorithm_name",
+      "algorithm_type",
+      "application_scene",
+      "section_type",
+      "score"
+    ],
+    "structured_input": {
+      "user_query": "客户要求区分帽子款式，包括渔夫帽、无檐帽、鸭舌帽、安全帽、open-face helmet、full-face helmet、连衣帽，用什么模型",
+      "failed_rag_trace": [
+        {
+          "round": 1,
+          "query": "客户要求区分帽子款式，包括渔夫帽、无檐帽、鸭舌帽、安全帽、open-face helmet、full-face helmet、连衣帽，用什么模型",
+          "knowledge_base_fully_answered": false,
+          "evidence": [
+            {
+              "evidence_id": "structured::adela::PAR_waistcoat_safetybelt-cpu-ppl2-fp32_34577_95824",
+              "title": "PAR_waistcoat_safetybelt",
+              "snippet": "row_id: PAR_waistcoat_safetybelt-cpu-ppl2-fp32_34577_95824\nmodel_name: PAR_waistcoat_safetybelt\nplatform: cpu-ppl2-fp32\nstatus: SUCCESS\ndid: 95824\nrid: 34577",
+              "model_name": "PAR_waistcoat_safetybelt",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "structured::adela::PAR_waistcoat_safetybelt-cuda11.0-trt7.1-fp16-T4_34577_95802",
+              "title": "PAR_waistcoat_safetybelt",
+              "snippet": "row_id: PAR_waistcoat_safetybelt-cuda11.0-trt7.1-fp16-T4_34577_95802\nmodel_name: PAR_waistcoat_safetybelt\nplatform: cuda11.0-trt7.1-fp16-T4\nstatus: SUCCESS\ndid: 95802\nrid: 34577",
+              "model_name": "PAR_waistcoat_safetybelt",
+              "score": 0.97
+            },
+            {
+              "evidence_id": "structured::adela::PAR_waistcoat_safetybelt-cuda11.0-trt7.1-int8-T4_34577_95821",
+              "title": "PAR_waistcoat_safetybelt",
+              "snippet": "row_id: PAR_waistcoat_safetybelt-cuda11.0-trt7.1-int8-T4_34577_95821\nmodel_name: PAR_waistcoat_safetybelt\nplatform: cuda11.0-trt7.1-int8-T4\nstatus: SUCCESS\ndid: 95821\nrid: 34577",
+              "model_name": "PAR_waistcoat_safetybelt",
+              "score": 0.94
+            },
+            {
+              "evidence_id": "structured::adela::PAR_waistcoat_safetybelt-cuda11.0-trt7.1-int8-P4_34577_95822",
+              "title": "PAR_waistcoat_safetybelt",
+              "snippet": "row_id: PAR_waistcoat_safetybelt-cuda11.0-trt7.1-int8-P4_34577_95822\nmodel_name: PAR_waistcoat_safetybelt\nplatform: cuda11.0-trt7.1-int8-P4\nstatus: SUCCESS\ndid: 95822\nrid: 34577",
+              "model_name": "PAR_waistcoat_safetybelt",
+              "score": 0.91
+            },
+            {
+              "evidence_id": "structured::adela::PAR_waistcoat_safetybelt-cpu-nart-fp32_33307_93156",
+              "title": "PAR_waistcoat_safetybelt",
+              "snippet": "row_id: PAR_waistcoat_safetybelt-cpu-nart-fp32_33307_93156\nmodel_name: PAR_waistcoat_safetybelt\nplatform: cpu-nart-fp32\nstatus: SUCCESS\ndid: 93156\nrid: 33307",
+              "model_name": "PAR_waistcoat_safetybelt",
+              "score": 0.88
+            },
+            {
+              "evidence_id": "structured::adela::safety_rope-cuda11.0-trt7.1-fp16-T4_36274_100635",
+              "title": "safety_rope",
+              "snippet": "row_id: safety_rope-cuda11.0-trt7.1-fp16-T4_36274_100635\nmodel_name: safety_rope\nplatform: cuda11.0-trt7.1-fp16-T4\nstatus: SUCCESS\ndid: 100635\nrid: 36274",
+              "model_name": "safety_rope",
+              "score": 0.85
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "query": "帽子 款式 分类 模型 渔夫帽 鸭舌帽 安全帽 helmet 连衣帽",
+          "knowledge_base_fully_answered": false,
+          "evidence": [
+            {
+              "evidence_id": "bab21bf76719bfe7491f7027",
+              "title": "KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model",
+              "snippet": "target_name: 红马甲/安全带\nalgorithm_type: 属性\nalgorithm_name: 中车工厂-属性模型1\napplication_scene: 中车工厂项目\nowner: 朱帅\nmodel_name: KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\nsupported_device: cpu\nrecommended_config: cpu-ppl2-fp32\nlast_updated: 2023-11-15\nlast_updated_month: 2023-11",
+              "model_name": "KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model",
+              "algorithm_name": "中车工厂-属性模型1",
+              "algorithm_type": "属性",
+              "application_scene": "中车工厂项目",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "b664f87d3d42cb3abb15e73d",
+              "title": "PAR_waistcoat_safetybelt",
+              "snippet": "model_name: PAR_waistcoat_safetybelt\nname: PAR_waistcoat_safetybelt\ntype: classifier\nplatform: cpu-nart-fp32\nstatus: SUCCESS\ndid: 93156\nrid: 33307\nversion: 0.1.0\nversion_train_date: 20230912\nsource_file: data/PAR_waistcoat_safetybelt-cpu-nart-fp32_33307_93156.json",
+              "model_name": "PAR_waistcoat_safetybelt",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "085a4a19f4c436618ff7b838",
+              "title": "PAR_waistcoat_safetybelt",
+              "snippet": "model_name: PAR_waistcoat_safetybelt\nname: PAR_waistcoat_safetybelt\ntype: classifier\nplatform: cpu-ppl2-fp32\nstatus: SUCCESS\ndid: 95824\nrid: 34577\nversion: 0.2.0\nversion_train_date: 20231108\nsource_file: data/PAR_waistcoat_safetybelt-cpu-ppl2-fp32_34577_95824.json",
+              "model_name": "PAR_waistcoat_safetybelt",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "8d7ef86d283d4fce5127ae56",
+              "title": "PAR_waistcoat_safetybelt",
+              "snippet": "model_name: PAR_waistcoat_safetybelt\nname: PAR_waistcoat_safetybelt\ntype: classifier\nplatform: cuda11.0-trt7.1-int8-P4\nstatus: SUCCESS\ndid: 95822\nrid: 34577\nversion: 0.2.0\nversion_train_date: 20231108\nsource_file: data/PAR_waistcoat_safetybelt-cuda11.0-trt7.1-int8-P4_34577_95822.json",
+              "model_name": "PAR_waistcoat_safetybelt",
+              "section_type": "model_artifact",
+              "score": 0.995936
+            },
+            {
+              "evidence_id": "10db7130aad189358f9dae31",
+              "title": "PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p1",
+              "snippet": "穿安全带           穿马甲",
+              "section_type": "general",
+              "score": 0.99124
+            },
+            {
+              "evidence_id": "080b46058b3955b81c4e6546",
+              "title": "KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model",
+              "snippet": "target_name: 红马甲/安全带\nalgorithm_type: 属性\nalgorithm_name: 中车工厂-属性模型1\napplication_scene: 中车工厂项目\nowner: 朱帅\nmodel_name: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model\nsupported_device: T4\nrecommended_config: cuda11.0-trt7.1-fp16-T4\nlast_updated: 2023-11-15\nlast_updated_month: 2023-11",
+              "model_name": "KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model",
+              "algorithm_name": "中车工厂-属性模型1",
+              "algorithm_type": "属性",
+              "application_scene": "中车工厂项目",
+              "section_type": "model_artifact",
+              "score": 0.991211
+            }
+          ]
+        },
+        {
+          "round": 3,
+          "query": "帽子款式 分类 模型 渔夫帽 无檐帽 鸭舌帽 安全帽 helmet full-face helmet 连衣帽",
+          "knowledge_base_fully_answered": false,
+          "evidence": [
+            {
+              "evidence_id": "f586a56a911c80497fa3679c",
+              "title": "PDFs/Classify_3.4.0.pdf p1",
+              "snippet": "Classify_3.4.0                                                                 \n                                                                                    \n                                                                                    \n                                                                                    \n     Highlight...",
+              "section_type": "release_note",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "bab21bf76719bfe7491f7027",
+              "title": "KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model",
+              "snippet": "target_name: 红马甲/安全带\nalgorithm_type: 属性\nalgorithm_name: 中车工厂-属性模型1\napplication_scene: 中车工厂项目\nowner: 朱帅\nmodel_name: KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\nsupported_device: cpu\nrecommended_config: cpu-ppl2-fp32\nlast_updated: 2023-11-15\nlast_updated_month: 2023-11",
+              "model_name": "KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model",
+              "algorithm_name": "中车工厂-属性模型1",
+              "algorithm_type": "属性",
+              "application_scene": "中车工厂项目",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "8d7ef86d283d4fce5127ae56",
+              "title": "PAR_waistcoat_safetybelt",
+              "snippet": "model_name: PAR_waistcoat_safetybelt\nname: PAR_waistcoat_safetybelt\ntype: classifier\nplatform: cuda11.0-trt7.1-int8-P4\nstatus: SUCCESS\ndid: 95822\nrid: 34577\nversion: 0.2.0\nversion_train_date: 20231108\nsource_file: data/PAR_waistcoat_safetybelt-cuda11.0-trt7.1-int8-P4_34577_95822.json",
+              "model_name": "PAR_waistcoat_safetybelt",
+              "section_type": "model_artifact",
+              "score": 0.995936
+            },
+            {
+              "evidence_id": "080b46058b3955b81c4e6546",
+              "title": "KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model",
+              "snippet": "target_name: 红马甲/安全带\nalgorithm_type: 属性\nalgorithm_name: 中车工厂-属性模型1\napplication_scene: 中车工厂项目\nowner: 朱帅\nmodel_name: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model\nsupported_device: T4\nrecommended_config: cuda11.0-trt7.1-fp16-T4\nlast_updated: 2023-11-15\nlast_updated_month: 2023-11",
+              "model_name": "KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model",
+              "algorithm_name": "中车工厂-属性模型1",
+              "algorithm_type": "属性",
+              "application_scene": "中车工厂项目",
+              "section_type": "model_artifact",
+              "score": 0.991211
+            },
+            {
+              "evidence_id": "2a289a7e844b6b9d89079853",
+              "title": "KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model",
+              "snippet": "target_name: 红马甲/安全带\nalgorithm_type: 属性\nalgorithm_name: 中车工厂-属性模型1\napplication_scene: 中车工厂项目\nowner: 朱帅\nmodel_name: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model\nsupported_device: T4\nrecommended_config: cuda11.0-trt7.1-int8-T4\nlast_updated: 2023-11-15\nlast_updated_month: 2023-11",
+              "model_name": "KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model",
+              "algorithm_name": "中车工厂-属性模型1",
+              "algorithm_type": "属性",
+              "application_scene": "中车工厂项目",
+              "section_type": "model_artifact",
+              "score": 0.991211
+            },
+            {
+              "evidence_id": "c4d83a8a93c87ebdc30e46f1",
+              "title": "KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-P4_b8_0.2.0.model",
+              "snippet": "target_name: 红马甲/安全带\nalgorithm_type: 属性\nalgorithm_name: 中车工厂-属性模型1\napplication_scene: 中车工厂项目\nowner: 朱帅\nmodel_name: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-P4_b8_0.2.0.model\nsupported_device: P4\nrecommended_config: cuda11.0-trt7.1-int8-P4\nlast_updated: 2023-11-15\nlast_updated_month: 2023-11",
+              "model_name": "KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-P4_b8_0.2.0.model",
+              "algorithm_name": "中车工厂-属性模型1",
+              "algorithm_type": "属性",
+              "application_scene": "中车工厂项目",
+              "section_type": "model_artifact",
+              "score": 0.991211
+            }
+          ]
+        }
+      ],
+      "required_fields": [
+        {
+          "field": "existing_models",
+          "label": "可直接复用的已有模型"
+        },
+        {
+          "field": "similar_capabilities",
+          "label": "可迁移的相似能力"
+        },
+        {
+          "field": "performance_baseline",
+          "label": "性能与精度基线"
+        },
+        {
+          "field": "data_requirements",
+          "label": "数据、标注与迭代依赖"
+        }
+      ]
+    },
+    "llm_messages": [
+      {
+        "role": "system",
+        "content": "你是视觉模型迁移顾问的检索规划器。用户的问题没有被知识库直接回答。请先抽取目标对象、部件/场景、属性/缺陷、任务类型等核心实体，再补充行业常用同义词。例如电子元器件缺陷检测可扩展为 PCB、PCBA、SMT、AOI、工业视觉、表面缺陷、异常检测。为每个固定字段生成 2-4 条短检索 query，每条 query 只放一组核心实体/同义词和一个检索意图。existing_models 偏已有模型/算法，similar_capabilities 偏可迁移能力，performance_baseline 偏精度/性能/benchmark，data_requirements 偏数据/标注/训练。删除“推荐/有没有/帮我/是否/什么模型”等口语噪声，不要把多组同义词堆成一条长句。禁止编造模型结论，只做检索规划。只输出 JSON。"
+      },
+      {
+        "role": "user",
+        "content": "{\n  \"user_query\": \"客户要求区分帽子款式，包括渔夫帽、无檐帽、鸭舌帽、安全帽、open-face helmet、full-face helmet、连衣帽，用什么模型\",\n  \"failed_rag_trace\": [\n    {\n      \"round\": 1,\n      \"query\": \"客户要求区分帽子款式，包括渔夫帽、无檐帽、鸭舌帽、安全帽、open-face helmet、full-face helmet、连衣帽，用什么模型\",\n      \"knowledge_base_fully_answered\": false,\n      \"evidence\": [\n        {\n          \"evidence_id\": \"structured::adela::PAR_waistcoat_safetybelt-cpu-ppl2-fp32_34577_95824\",\n          \"title\": \"PAR_waistcoat_safetybelt\",\n          \"snippet\": \"row_id: PAR_waistcoat_safetybelt-cpu-ppl2-fp32_34577_95824\\nmodel_name: PAR_waistcoat_safetybelt\\nplatform: cpu-ppl2-fp32\\nstatus: SUCCESS\\ndid: 95824\\nrid: 34577\",\n          \"model_name\": \"PAR_waistcoat_safetybelt\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"structured::adela::PAR_waistcoat_safetybelt-cuda11.0-trt7.1-fp16-T4_34577_95802\",\n          \"title\": \"PAR_waistcoat_safetybelt\",\n          \"snippet\": \"row_id: PAR_waistcoat_safetybelt-cuda11.0-trt7.1-fp16-T4_34577_95802\\nmodel_name: PAR_waistcoat_safetybelt\\nplatform: cuda11.0-trt7.1-fp16-T4\\nstatus: SUCCESS\\ndid: 95802\\nrid: 34577\",\n          \"model_name\": \"PAR_waistcoat_safetybelt\",\n          \"score\": 0.97\n        },\n        {\n          \"evidence_id\": \"structured::adela::PAR_waistcoat_safetybelt-cuda11.0-trt7.1-int8-T4_34577_95821\",\n          \"title\": \"PAR_waistcoat_safetybelt\",\n          \"snippet\": \"row_id: PAR_waistcoat_safetybelt-cuda11.0-trt7.1-int8-T4_34577_95821\\nmodel_name: PAR_waistcoat_safetybelt\\nplatform: cuda11.0-trt7.1-int8-T4\\nstatus: SUCCESS\\ndid: 95821\\nrid: 34577\",\n          \"model_name\": \"PAR_waistcoat_safetybelt\",\n          \"score\": 0.94\n        },\n        {\n          \"evidence_id\": \"structured::adela::PAR_waistcoat_safetybelt-cuda11.0-trt7.1-int8-P4_34577_95822\",\n          \"title\": \"PAR_waistcoat_safetybelt\",\n          \"snippet\": \"row_id: PAR_waistcoat_safetybelt-cuda11.0-trt7.1-int8-P4_34577_95822\\nmodel_name: PAR_waistcoat_safetybelt\\nplatform: cuda11.0-trt7.1-int8-P4\\nstatus: SUCCESS\\ndid: 95822\\nrid: 34577\",\n          \"model_name\": \"PAR_waistcoat_safetybelt\",\n          \"score\": 0.91\n        },\n        {\n          \"evidence_id\": \"structured::adela::PAR_waistcoat_safetybelt-cpu-nart-fp32_33307_93156\",\n          \"title\": \"PAR_waistcoat_safetybelt\",\n          \"snippet\": \"row_id: PAR_waistcoat_safetybelt-cpu-nart-fp32_33307_93156\\nmodel_name: PAR_waistcoat_safetybelt\\nplatform: cpu-nart-fp32\\nstatus: SUCCESS\\ndid: 93156\\nrid: 33307\",\n          \"model_name\": \"PAR_waistcoat_safetybelt\",\n          \"score\": 0.88\n        },\n        {\n          \"evidence_id\": \"structured::adela::safety_rope-cuda11.0-trt7.1-fp16-T4_36274_100635\",\n          \"title\": \"safety_rope\",\n          \"snippet\": \"row_id: safety_rope-cuda11.0-trt7.1-fp16-T4_36274_100635\\nmodel_name: safety_rope\\nplatform: cuda11.0-trt7.1-fp16-T4\\nstatus: SUCCESS\\ndid: 100635\\nrid: 36274\",\n          \"model_name\": \"safety_rope\",\n          \"score\": 0.85\n        }\n      ]\n    },\n    {\n      \"round\": 2,\n      \"query\": \"帽子 款式 分类 模型 渔夫帽 鸭舌帽 安全帽 helmet 连衣帽\",\n      \"knowledge_base_fully_answered\": false,\n      \"evidence\": [\n        {\n          \"evidence_id\": \"bab21bf76719bfe7491f7027\",\n          \"title\": \"KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\",\n          \"snippet\": \"target_name: 红马甲/安全带\\nalgorithm_type: 属性\\nalgorithm_name: 中车工厂-属性模型1\\napplication_scene: 中车工厂项目\\nowner: 朱帅\\nmodel_name: KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\\nsupported_device: cpu\\nrecommended_config: cpu-ppl2-fp32\\nlast_updated: 2023-11-15\\nlast_updated_month: 2023-11\",\n          \"model_name\": \"KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\",\n          \"algorithm_name\": \"中车工厂-属性模型1\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"中车工厂项目\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"b664f87d3d42cb3abb15e73d\",\n          \"title\": \"PAR_waistcoat_safetybelt\",\n          \"snippet\": \"model_name: PAR_waistcoat_safetybelt\\nname: PAR_waistcoat_safetybelt\\ntype: classifier\\nplatform: cpu-nart-fp32\\nstatus: SUCCESS\\ndid: 93156\\nrid: 33307\\nversion: 0.1.0\\nversion_train_date: 20230912\\nsource_file: data/PAR_waistcoat_safetybelt-cpu-nart-fp32_33307_93156.json\",\n          \"model_name\": \"PAR_waistcoat_safetybelt\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"085a4a19f4c436618ff7b838\",\n          \"title\": \"PAR_waistcoat_safetybelt\",\n          \"snippet\": \"model_name: PAR_waistcoat_safetybelt\\nname: PAR_waistcoat_safetybelt\\ntype: classifier\\nplatform: cpu-ppl2-fp32\\nstatus: SUCCESS\\ndid: 95824\\nrid: 34577\\nversion: 0.2.0\\nversion_train_date: 20231108\\nsource_file: data/PAR_waistcoat_safetybelt-cpu-ppl2-fp32_34577_95824.json\",\n          \"model_name\": \"PAR_waistcoat_safetybelt\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"8d7ef86d283d4fce5127ae56\",\n          \"title\": \"PAR_waistcoat_safetybelt\",\n          \"snippet\": \"model_name: PAR_waistcoat_safetybelt\\nname: PAR_waistcoat_safetybelt\\ntype: classifier\\nplatform: cuda11.0-trt7.1-int8-P4\\nstatus: SUCCESS\\ndid: 95822\\nrid: 34577\\nversion: 0.2.0\\nversion_train_date: 20231108\\nsource_file: data/PAR_waistcoat_safetybelt-cuda11.0-trt7.1-int8-P4_34577_95822.json\",\n          \"model_name\": \"PAR_waistcoat_safetybelt\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.995936\n        },\n        {\n          \"evidence_id\": \"10db7130aad189358f9dae31\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p1\",\n          \"snippet\": \"穿安全带           穿马甲\",\n          \"section_type\": \"general\",\n          \"score\": 0.99124\n        },\n        {\n          \"evidence_id\": \"080b46058b3955b81c4e6546\",\n          \"title\": \"KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model\",\n          \"snippet\": \"target_name: 红马甲/安全带\\nalgorithm_type: 属性\\nalgorithm_name: 中车工厂-属性模型1\\napplication_scene: 中车工厂项目\\nowner: 朱帅\\nmodel_name: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model\\nsupported_device: T4\\nrecommended_config: cuda11.0-trt7.1-fp16-T4\\nlast_updated: 2023-11-15\\nlast_updated_month: 2023-11\",\n          \"model_name\": \"KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model\",\n          \"algorithm_name\": \"中车工厂-属性模型1\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"中车工厂项目\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.991211\n        }\n      ]\n    },\n    {\n      \"round\": 3,\n      \"query\": \"帽子款式 分类 模型 渔夫帽 无檐帽 鸭舌帽 安全帽 helmet full-face helmet 连衣帽\",\n      \"knowledge_base_fully_answered\": false,\n      \"evidence\": [\n        {\n          \"evidence_id\": \"f586a56a911c80497fa3679c\",\n          \"title\": \"PDFs/Classify_3.4.0.pdf p1\",\n          \"snippet\": \"Classify_3.4.0                                                                 \\n                                                                                    \\n                                                                                    \\n                                                                                    \\n     Highlight...\",\n          \"section_type\": \"release_note\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"bab21bf76719bfe7491f7027\",\n          \"title\": \"KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\",\n          \"snippet\": \"target_name: 红马甲/安全带\\nalgorithm_type: 属性\\nalgorithm_name: 中车工厂-属性模型1\\napplication_scene: 中车工厂项目\\nowner: 朱帅\\nmodel_name: KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\\nsupported_device: cpu\\nrecommended_config: cpu-ppl2-fp32\\nlast_updated: 2023-11-15\\nlast_updated_month: 2023-11\",\n          \"model_name\": \"KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\",\n          \"algorithm_name\": \"中车工厂-属性模型1\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"中车工厂项目\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"8d7ef86d283d4fce5127ae56\",\n          \"title\": \"PAR_waistcoat_safetybelt\",\n          \"snippet\": \"model_name: PAR_waistcoat_safetybelt\\nname: PAR_waistcoat_safetybelt\\ntype: classifier\\nplatform: cuda11.0-trt7.1-int8-P4\\nstatus: SUCCESS\\ndid: 95822\\nrid: 34577\\nversion: 0.2.0\\nversion_train_date: 20231108\\nsource_file: data/PAR_waistcoat_safetybelt-cuda11.0-trt7.1-int8-P4_34577_95822.json\",\n          \"model_name\": \"PAR_waistcoat_safetybelt\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.995936\n        },\n        {\n          \"evidence_id\": \"080b46058b3955b81c4e6546\",\n          \"title\": \"KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model\",\n          \"snippet\": \"target_name: 红马甲/安全带\\nalgorithm_type: 属性\\nalgorithm_name: 中车工厂-属性模型1\\napplication_scene: 中车工厂项目\\nowner: 朱帅\\nmodel_name: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model\\nsupported_device: T4\\nrecommended_config: cuda11.0-trt7.1-fp16-T4\\nlast_updated: 2023-11-15\\nlast_updated_month: 2023-11\",\n          \"model_name\": \"KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model\",\n          \"algorithm_name\": \"中车工厂-属性模型1\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"中车工厂项目\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.991211\n        },\n        {\n          \"evidence_id\": \"2a289a7e844b6b9d89079853\",\n          \"title\": \"KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model\",\n          \"snippet\": \"target_name: 红马甲/安全带\\nalgorithm_type: 属性\\nalgorithm_name: 中车工厂-属性模型1\\napplication_scene: 中车工厂项目\\nowner: 朱帅\\nmodel_name: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model\\nsupported_device: T4\\nrecommended_config: cuda11.0-trt7.1-int8-T4\\nlast_updated: 2023-11-15\\nlast_updated_month: 2023-11\",\n          \"model_name\": \"KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model\",\n          \"algorithm_name\": \"中车工厂-属性模型1\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"中车工厂项目\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.991211\n        },\n        {\n          \"evidence_id\": \"c4d83a8a93c87ebdc30e46f1\",\n          \"title\": \"KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-P4_b8_0.2.0.model\",\n          \"snippet\": \"target_name: 红马甲/安全带\\nalgorithm_type: 属性\\nalgorithm_name: 中车工厂-属性模型1\\napplication_scene: 中车工厂项目\\nowner: 朱帅\\nmodel_name: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-P4_b8_0.2.0.model\\nsupported_device: P4\\nrecommended_config: cuda11.0-trt7.1-int8-P4\\nlast_updated: 2023-11-15\\nlast_updated_month: 2023-11\",\n          \"model_name\": \"KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-P4_b8_0.2.0.model\",\n          \"algorithm_name\": \"中车工厂-属性模型1\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"中车工厂项目\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.991211\n        }\n      ]\n    }\n  ],\n  \"required_fields\": [\n    {\n      \"field\": \"existing_models\",\n      \"label\": \"可直接复用的已有模型\"\n    },\n    {\n      \"field\": \"similar_capabilities\",\n      \"label\": \"可迁移的相似能力\"\n    },\n    {\n      \"field\": \"performance_baseline\",\n      \"label\": \"性能与精度基线\"\n    },\n    {\n      \"field\": \"data_requirements\",\n      \"label\": \"数据、标注与迭代依赖\"\n    }\n  ]\n}"
+      }
+    ]
+  }
+}

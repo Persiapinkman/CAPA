@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "migration_advisor",
+  "_action_input": {
+    "user_query": "我想先做一个小探针：检测反光条。如果结果模糊，再分析工服反光条检测的复用空间。",
+    "use_image": true,
+    "use_visual_probe": true,
+    "finish_after_tool": true
+  },
+  "_thought": "用户提出了一个明确的计划：先做一个小探针检测反光条，如果效果模糊，再分析复用空间。第一步是执行检测探针。根据决策原则，用户明确要求‘低成本探针/可执行探针/给出检测评估报告’，应优先选择 pipeline_eval 工具，因为它能完成图片生成、目标检测标注和效果评估的一站式流程，比单独调用 qwen_detection/rexomni_detection 更符合‘探针’需求。user_query 已完整（无需 re_question），且提到‘这张图/样例图’（隐含），故使用迁移顾问内的视觉探针参数进行决策。finish_after_tool 设为 true，因为检测评估报告即为当前用户的终极目标（‘小探针’阶段，若模糊再走迁移顾问下一步，但当前仅执行一次探针即可）。"
+}

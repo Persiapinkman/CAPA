@@ -1,0 +1,98 @@
+{
+  "session_id": "ma_dataset_full_12",
+  "run_stamp": "20260529_143211_2194490e",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-05-29T14:33:37+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\"requirement_summary\": \"用户需求：下装颜色要求包含“迷彩”\", \"direct_match\": {\"exists\": false, \"summary\": \"检索到的模型均未明确包含“迷彩”标签，需扩展相似方案参考。\", \"evidence\": []}, \"similar_assets\": [{\"model_or_solution\": \"车辆颜色属性分类模型 (KM_classifier_Vehicle_FullAttr_3.0.2)\", \"label_schema\": \"vehicle_color: ['灰', '白', '红', '黑', '蓝', '绿', '棕', '黄', '紫', '粉', '青', '橙', '无法判断']\", \"training_data\": \"Adela 测试集 (vehicle_color_precision)\", \"reported_metrics\": \"CPU: 0.887/0.874, T4 int8: 0.883/0.869, T4 fp16: 0.887/0.874 (Acc/mP)\", \"covered_capability\": \"多类别颜色分类（涵盖常见色相），未包含“迷彩”\", \"gap\": \"无“迷彩”标签，但结构为单标签/多标签分类，可参考增加“迷彩”标签\", \"evidence\": [\"c2c381f60fd3bdacfc7001db\", \"1de1624938b0181389f409b7\"]}, {\"model_or_solution\": \"服饰属性模型 (KM_classifier_Clothes_SD)\", \"label_schema\": \"police: ['st_jurong_police', 'st_jurong_prisoner', 'st_jurong_others']\", \"training_data\": \"spiral Standard 基模型替换，HL 全量数据训练\", \"reported_metrics\": \"V0.0.2: precision 0.9879, recall 0.9462, F1 0.9666 (torch)\", \"covered_capability\": \"服饰细粒度分类，包含“警服”等特定类型\", \"gap\": \"无“迷彩”标签，但支持细粒度属性定义\", \"evidence\": [\"5ff9aa433792455f49e555b3\"]}, {\"model_or_solution\": \"车牌颜色属性模型 (KM_classifier_Carplate_TypeColor)\", \"label_schema\": \"车辆颜色：['灰', '白', '红', '黑', '蓝', '绿', '棕', '黄', '紫', '粉', '青', '橙', '无法判断']\", \"training_data\": \"未明确具体数量，基于 Adela 测试集\", \"reported_metrics\": \"ACC 0.867 (PAR_merged_model 参考)\", \"covered_capability\": \"多类别颜色属性识别\", \"gap\": \"未包含“迷彩”，但支持平台化部署（Ascend/Trident）\", \"evidence\": [\"1dcbcb73b485fa4bb03fba1d\"]}, {\"model_or_solution\": \"非机动车属性模型 (PDFs/安防方向--非机动车属性大模型更新.pdf)\", \"label_schema\": \"车辆颜色：0.95 (precision), 90*90 (input)\", \"training_data\": \"未明确\", \"reported_metrics\": \"车辆颜色 precision 0.95\", \"covered_capability\": \"非机动车颜色识别\", \"gap\": \"未明确包含“迷彩”，但支持小分辨率输入\", \"evidence\": [\"778ccb22d5acbeafb5afb636\"]}], \"migration_plan\": {\"feasibility\": \"high\", \"approach\": \"采用“车辆颜色/服饰属性”模型为基础，增加“迷彩”标签并微调\", \"data_requirements\": \"证据不足\", \"compute_requirements\": \"证据不足\", \"engineering_work\": \"1. 调整 label_schema 增加“迷彩”标签；2. 收集包含迷彩下装的训练数据；3. 全量或增量微调；4. 重新验证精度\", \"estimated_timeline\": \"证据不足\", \"estimated_cost\": \"证据不足\", \"dependencies\": [\"高质量迷彩下装图像数据集\", \"计算资源（Ascend/T4）\", \"标签体系一致性校验\"], \"risks\": [\"迷彩图案多样性高，泛化能力可能不足\", \"需验证“迷彩”与“其他颜色”的区分度\"]}, \"expected_performance\": {\"baseline\": \"参考车辆颜色模型：Acc 0.887, mP 0.874\", \"target\": \"期望 Acc > 0.85 (证据不足)\", \"uncertainty\": \"证据不足\"}, \"recommendation\": \"建议采用相似模型迁移路径：参考 KM_classifier_Vehicle_FullAttr 或 KM_classifier_Clothes_SD 的标签扩展流程，新增“迷彩”标签并重新训练。若需快速上线，可先用“无法判断”兜底，后续迭代补充。\"}",
+    "structured_output": {
+      "requirement_summary": "用户需求：下装颜色要求包含“迷彩”",
+      "direct_match": {
+        "exists": false,
+        "summary": "检索到的模型均未明确包含“迷彩”标签，需扩展相似方案参考。",
+        "evidence": []
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "车辆颜色属性分类模型 (KM_classifier_Vehicle_FullAttr_3.0.2)",
+          "label_schema": "vehicle_color: ['灰', '白', '红', '黑', '蓝', '绿', '棕', '黄', '紫', '粉', '青', '橙', '无法判断']",
+          "training_data": "Adela 测试集 (vehicle_color_precision)",
+          "reported_metrics": "CPU: 0.887/0.874, T4 int8: 0.883/0.869, T4 fp16: 0.887/0.874 (Acc/mP)",
+          "covered_capability": "多类别颜色分类（涵盖常见色相），未包含“迷彩”",
+          "gap": "无“迷彩”标签，但结构为单标签/多标签分类，可参考增加“迷彩”标签",
+          "evidence": [
+            "c2c381f60fd3bdacfc7001db",
+            "1de1624938b0181389f409b7"
+          ]
+        },
+        {
+          "model_or_solution": "服饰属性模型 (KM_classifier_Clothes_SD)",
+          "label_schema": "police: ['st_jurong_police', 'st_jurong_prisoner', 'st_jurong_others']",
+          "training_data": "spiral Standard 基模型替换，HL 全量数据训练",
+          "reported_metrics": "V0.0.2: precision 0.9879, recall 0.9462, F1 0.9666 (torch)",
+          "covered_capability": "服饰细粒度分类，包含“警服”等特定类型",
+          "gap": "无“迷彩”标签，但支持细粒度属性定义",
+          "evidence": [
+            "5ff9aa433792455f49e555b3"
+          ]
+        },
+        {
+          "model_or_solution": "车牌颜色属性模型 (KM_classifier_Carplate_TypeColor)",
+          "label_schema": "车辆颜色：['灰', '白', '红', '黑', '蓝', '绿', '棕', '黄', '紫', '粉', '青', '橙', '无法判断']",
+          "training_data": "未明确具体数量，基于 Adela 测试集",
+          "reported_metrics": "ACC 0.867 (PAR_merged_model 参考)",
+          "covered_capability": "多类别颜色属性识别",
+          "gap": "未包含“迷彩”，但支持平台化部署（Ascend/Trident）",
+          "evidence": [
+            "1dcbcb73b485fa4bb03fba1d"
+          ]
+        },
+        {
+          "model_or_solution": "非机动车属性模型 (PDFs/安防方向--非机动车属性大模型更新.pdf)",
+          "label_schema": "车辆颜色：0.95 (precision), 90*90 (input)",
+          "training_data": "未明确",
+          "reported_metrics": "车辆颜色 precision 0.95",
+          "covered_capability": "非机动车颜色识别",
+          "gap": "未明确包含“迷彩”，但支持小分辨率输入",
+          "evidence": [
+            "778ccb22d5acbeafb5afb636"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "high",
+        "approach": "采用“车辆颜色/服饰属性”模型为基础，增加“迷彩”标签并微调",
+        "data_requirements": "证据不足",
+        "compute_requirements": "证据不足",
+        "engineering_work": "1. 调整 label_schema 增加“迷彩”标签；2. 收集包含迷彩下装的训练数据；3. 全量或增量微调；4. 重新验证精度",
+        "estimated_timeline": "证据不足",
+        "estimated_cost": "证据不足",
+        "dependencies": [
+          "高质量迷彩下装图像数据集",
+          "计算资源（Ascend/T4）",
+          "标签体系一致性校验"
+        ],
+        "risks": [
+          "迷彩图案多样性高，泛化能力可能不足",
+          "需验证“迷彩”与“其他颜色”的区分度"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "参考车辆颜色模型：Acc 0.887, mP 0.874",
+        "target": "期望 Acc > 0.85 (证据不足)",
+        "uncertainty": "证据不足"
+      },
+      "recommendation": "建议采用相似模型迁移路径：参考 KM_classifier_Vehicle_FullAttr 或 KM_classifier_Clothes_SD 的标签扩展流程，新增“迷彩”标签并重新训练。若需快速上线，可先用“无法判断”兜底，后续迭代补充。"
+    }
+  }
+}

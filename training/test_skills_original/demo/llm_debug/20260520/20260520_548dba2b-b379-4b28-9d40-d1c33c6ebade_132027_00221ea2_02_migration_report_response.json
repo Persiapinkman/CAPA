@@ -1,0 +1,65 @@
+{
+  "session_id": "548dba2b-b379-4b28-9d40-d1c33c6ebade",
+  "run_stamp": "20260520_132027_00221ea2",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-05-20T13:23:33+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"用户需要检测视频监控画面中行人的发型属性（短发、长发、光头、其他），需适配Ascend310/710硬件，覆盖白天/夜间光照条件，分辨率960x960，视频流25fps。\",\n  \"direct_match\": {\n    \"exists\": true,\n    \"summary\": \"有直接证据表明存在针对行人属性检测的现成模型且包含发型相关检测能力，但具体对“发型（短发/长发/光头/其他）”的直接检测结果缺乏明确文档表述\",\n    \"evidence\": [\n      \"PDFs/行人属性大模型2.21.1.pdf p7 – 隐式支持含hair_col类别（e_v2分割准确度0.853~0.9）、但无明确“短发/长发/光头”文本描述\",\n    \"KM_attribute_face_nart_acl-ascend310-fp16_b8_3.4.0.model – 人脸属性模型在Ascend310硬件上支持，人行为人脸属性检测的基础能力\",\n\"KM_attribute_face_nart_acl-ascend710-fp16_b8_3.4.0.model – 同年级的Ascend710硬件支持人脸属性检测\"\n    ]\n  },\n  \"similar_assets\": [\n    {\n      \"model_or_solution\": \"KM_classifier_Ped_33of33_行人属性大模型\",\n      \"covered_capability\": \"支持行人33个属性（含头部属性相关），文档明确包含hair_col类别分割和检测\",\n    \"gap\": \"未直接列出“短发/长发/光头/其他”四分类\",\n    \"evidence\": [\"PDFs/行人属性大模型2.21.0.pdf p1 – 标注行人33个属性，但具体类别未在文本中完整展开\"]\n    }]\n  ,\n  \"migration_plan\": {\n    \"feasibility\": \"high\",\n    \"approach\": \"使用现行人物属性大模型（如KM_Classifier_Ped_33of33）作为基座，微调或追加发型4类分类头\",\n    \"data_requirements\": \"需要包含发型标注的行人数据集（短片、长发、光头等）\",\n    \"compute_requirements\": \"Ascend310支持fp16，适合当前部署环境\",\n    \"engineering_work\": \"需要在现有行人分类模型结构调整输入，增加分类输出头\",\n    \"estimated_timeline\": \"1-2 个月（取决于数据标注与训练周期）\"\n  ,\n  \"estimated_cost\": \"数据标注 + 训练 + 部署：中等（约 5-15 万元/项目组，需依赖数据获取复杂度与训练周期）\",\n    \"dependencies\": [\n      \"已有行人属性模型部署栈\",\n      \"可获取发型类别像素级标注或语义成功分类数据\",\n\"当前硬件（Ascend310/710）支持 fp16 推理与训练\"\n    ]\n  ,\n  \"risks\": [\n    \"夜间/高逆光、雨雪雾等特殊场景下，非结构化小目标（如无长发、部分遮挡的短发）可能精度下降\",\n\"X\"\n  ]\n}\n\n,\n\n  \"expected_performance\": {\n\n    \"baseline\": \"基于现行人物属性大模型，发型精度类似“head_col/face_detail”分类性能\",\n    \"target\": \"精通评估模型对短发、长发、光头、其他四类的mAP预期 0.75-0.92（参考hair_col已有0.853-0.92精度）\",\n    \"uncertainty\": \"影响发型检测的关键因素：头部清晰像素占比、遮挡程度、光照强度、头部pose\"\n  }\n,\n  \"recommendation\": \"建议基于现有行人属性模型基线进行专用发型分类迁移，而非采用通用对象检测模型。首选KM__attribute_face 作为基线，升级支持非人脸头部检测区域。优先在白天光照下验证，夜间或逆光场景精度需预留性能冗余。\"\n}",
+    "structured_output": {
+      "requirement_summary": "用户需要检测视频监控画面中行人的发型属性（短发、长发、光头、其他），需适配Ascend310/710硬件，覆盖白天/夜间光照条件，分辨率960x960，视频流25fps。",
+      "direct_match": {
+        "exists": true,
+        "summary": "有直接证据表明存在针对行人属性检测的现成模型且包含发型相关检测能力，但具体对“发型（短发/长发/光头/其他）”的直接检测结果缺乏明确文档表述",
+        "evidence": [
+          "PDFs/行人属性大模型2.21.1.pdf p7 – 隐式支持含hair_col类别（e_v2分割准确度0.853~0.9）、但无明确“短发/长发/光头”文本描述",
+          "KM_attribute_face_nart_acl-ascend310-fp16_b8_3.4.0.model – 人脸属性模型在Ascend310硬件上支持，人行为人脸属性检测的基础能力",
+          "KM_attribute_face_nart_acl-ascend710-fp16_b8_3.4.0.model – 同年级的Ascend710硬件支持人脸属性检测"
+        ]
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "KM_classifier_Ped_33of33_行人属性大模型",
+          "covered_capability": "支持行人33个属性（含头部属性相关），文档明确包含hair_col类别分割和检测",
+          "gap": "未直接列出“短发/长发/光头/其他”四分类",
+          "evidence": [
+            "PDFs/行人属性大模型2.21.0.pdf p1 – 标注行人33个属性，但具体类别未在文本中完整展开"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "high",
+        "approach": "使用现行人物属性大模型（如KM_Classifier_Ped_33of33）作为基座，微调或追加发型4类分类头",
+        "data_requirements": "需要包含发型标注的行人数据集（短片、长发、光头等）",
+        "compute_requirements": "Ascend310支持fp16，适合当前部署环境",
+        "engineering_work": "需要在现有行人分类模型结构调整输入，增加分类输出头",
+        "estimated_timeline": "1-2 个月（取决于数据标注与训练周期）",
+        "estimated_cost": "数据标注 + 训练 + 部署：中等（约 5-15 万元/项目组，需依赖数据获取复杂度与训练周期）",
+        "dependencies": [
+          "已有行人属性模型部署栈",
+          "可获取发型类别像素级标注或语义成功分类数据",
+          "当前硬件（Ascend310/710）支持 fp16 推理与训练"
+        ],
+        "risks": [
+          "夜间/高逆光、雨雪雾等特殊场景下，非结构化小目标（如无长发、部分遮挡的短发）可能精度下降",
+          "X"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "基于现行人物属性大模型，发型精度类似“head_col/face_detail”分类性能",
+        "target": "精通评估模型对短发、长发、光头、其他四类的mAP预期 0.75-0.92（参考hair_col已有0.853-0.92精度）",
+        "uncertainty": "影响发型检测的关键因素：头部清晰像素占比、遮挡程度、光照强度、头部pose"
+      },
+      "recommendation": "建议基于现有行人属性模型基线进行专用发型分类迁移，而非采用通用对象检测模型。首选KM__attribute_face 作为基线，升级支持非人脸头部检测区域。优先在白天光照下验证，夜间或逆光场景精度需预留性能冗余。"
+    }
+  }
+}

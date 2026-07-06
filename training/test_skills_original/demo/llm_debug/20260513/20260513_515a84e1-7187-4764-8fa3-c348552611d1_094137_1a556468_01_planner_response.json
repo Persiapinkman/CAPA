@@ -1,0 +1,11 @@
+{
+  "session_id": "515a84e1-7187-4764-8fa3-c348552611d1",
+  "run_stamp": "20260513_094137_1a556468",
+  "stage": "planner_response",
+  "step_index": 1,
+  "created_at": "2026-05-13T09:43:40+08:00",
+  "payload": {
+    "raw_response": "{\n  \"thought\": \"用户请求部署人脸检测模型，这是一个具体的业务执行任务。根据工具库，adela_cli_eval 工具专门用于调用 Adela CLI 执行模型部署与评测。但是，该工具要求必须提供 platform（目标部署平台）和 eval_type（评测类型）参数。当前用户输入中缺失这两个关键参数，但用户意图明确（部署），根据决策原则第 10 条（工具参数不全时禁止 clarify），应直接输出 decision_type=\"      \t, \t\"decision_type\": \"tool\", \"action\": \"adela_cli_eval\", \"action_input\": { \"model_name\": \"人脸检测模型\", \"platform\": \"\", \"eval_type\": 0, \"finish_after_tool\": false }, \"final_answer\": \"\"\n  }",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260513_094137_1a556468"
+  }
+}

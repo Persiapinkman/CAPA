@@ -1,0 +1,63 @@
+{
+  "session_id": "548dba2b-b379-4b28-9d40-d1c33c6ebade",
+  "run_stamp": "20260520_132027_00221ea2",
+  "stage": "migration_retrieval_plan_response",
+  "step_index": 1,
+  "created_at": "2026-05-20T13:20:31+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "output_schema": {
+      "abstract_requirement": "object, attribute, task_type, scene, constraints[]",
+      "retrieve_fields": "每项 field + queries[]（2-4 条）"
+    },
+    "used_fallback": false,
+    "output_raw": "{\n  \"abstract_requirement\": {\n    \"object\": \"行人\",\n    \"attribute\": \"发型 (短发、长发、光头、其他)\",\n    \"task_type\": \"零样本/少样本分类 (Hair Classification / Person Attribute Classification)\"\n  ,\n  \"scene\": \"监控 / 视频分析\",\n  \"constraints\": [\n    \"960x960 分辨率及 25 帧/秒 时序需求\",\n    \"Ascend310/Ascend710 硬件支持\",\n    \"白天光照、夜间低照度、逆光场景\"\n  ]\n},\n\n\"retrieve_fields\": [\n  {\n    \"field\": \"existing_models\",\n    \"queries\": [\n      \"行人发型检测模型 短发 长发 光头\",\n      \"{person_ attribute_ classifier_ 发型_ 短发分类 alg } 头部特征分类\",\n      \"人脸属性检测模型 头发类型 视觉 aviation\"\n    ]\n  },\n  {\n    \"field\": \"similar_capabilities\",\n    \"queries\": [\n      \"细粒度行人属性识别 纹理/形状分类\",\n      \"细粒度头部位形分析 视觉 avation classification\",\n      \"头部特征专项模型\"\n    ]\n  },\n  {\n    \"field\": \"performance_baseline\",\n    \"queries\": [\n      \"行人发型检测精度 benchmark mAP\",\n      \"head feature classification 任务精度指标 分类\",\n      \"视觉 avation hair classification mAP 0.85\"\n    ]\n  },\n  {\n    \"field\": \"data_requirements\",\n    \"queries\": [\n      \"行人发型标注数据 类别平衡\",\n      \"face attribute detection 数据量级 10k\",\n      \"无人脸镜面 头部属性数据集\"\n    ]\n  }\n]\n}",
+    "structured_output": {
+      "abstract_requirement": {
+        "object": "行人",
+        "attribute": "发型 (短发、长发、光头、其他)",
+        "task_type": "零样本/少样本分类 (Hair Classification / Person Attribute Classification)",
+        "scene": "监控 / 视频分析",
+        "constraints": [
+          "960x960 分辨率及 25 帧/秒 时序需求",
+          "Ascend310/Ascend710 硬件支持",
+          "白天光照、夜间低照度、逆光场景"
+        ]
+      },
+      "retrieve_fields": [
+        {
+          "field": "existing_models",
+          "queries": [
+            "行人发型检测模型 短发 长发 光头",
+            "{person_ attribute_ classifier_ 发型_ 短发分类 alg } 头部特征分类",
+            "人脸属性检测模型 头发类型 视觉 aviation"
+          ]
+        },
+        {
+          "field": "similar_capabilities",
+          "queries": [
+            "细粒度行人属性识别 纹理/形状分类",
+            "细粒度头部位形分析 视觉 avation classification",
+            "头部特征专项模型"
+          ]
+        },
+        {
+          "field": "performance_baseline",
+          "queries": [
+            "行人发型检测精度 benchmark mAP",
+            "head feature classification 任务精度指标 分类",
+            "视觉 avation hair classification mAP 0.85"
+          ]
+        },
+        {
+          "field": "data_requirements",
+          "queries": [
+            "行人发型标注数据 类别平衡",
+            "face attribute detection 数据量级 10k",
+            "无人脸镜面 头部属性数据集"
+          ]
+        }
+      ]
+    }
+  }
+}

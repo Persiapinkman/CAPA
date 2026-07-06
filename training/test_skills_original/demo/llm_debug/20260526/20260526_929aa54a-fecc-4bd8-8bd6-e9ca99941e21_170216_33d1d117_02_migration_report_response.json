@@ -1,0 +1,102 @@
+{
+  "session_id": "929aa54a-fecc-4bd8-8bd6-e9ca99941e21",
+  "run_stamp": "20260526_170216_33d1d117",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-05-26T17:03:36+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"用户需要识别“头盔颜色”，包括特定类别：黑、白、灰、红、蓝、黄、绿、紫、迷彩。现有城市结构化人体属性模型是否支持？\",\n  \"direct_match\": {\n    \"exists\": false,\n    \"summary\": \"检索到的模型中没有直接支持“头盔颜色识别”的模型。现有模型主要集中在人脸检测、车牌属性、车辆属性（颜色/类型）、横幅检测等。\"\n  ,\"evidence\": [\n    \"evidence_id: e9fdde44540a819e4df7799b 车辆颜色颜色属性模型，标签包括灰白红黑蓝绿棕黄紫粉青橙无法判断\",\n    \"evidence_id: 1de1624938b0181389f409b7 车辆颜色分类属性 ACC/mP 数据\",\n    \"evidence_id: 4bcd9e335142f2b26eae0099 机动车颜色类型分类属性模型边界\"\n  ]\n  },\n  \"similar_assets\": [\n    {\n      \"model_or_solution\": \"KM_classifier_Vehicle_FullAttr_3.0.2 车辆颜色属性模型\",\n      \"label_schema\": \"车辆颜色标签体系：['灰', '白', '红', '黑', '蓝', '绿', '棕', '黄', '紫', '粉', '青', '橙', '无法判断']。无头盔颜色标签，但颜色类别与头盔颜色需求有较高重叠度（灰白红蓝黄绿紫黑均存在）。\",\n      \"training_data\": \"证据不足。PDF文档中未明确标注训练数据来源、标注规范及样本量。\",\n      \"reported_metrics\": \"车辆颜色分类属性精度：cpu-ppl2-fp32平台 0.887/0.874 (ACC/mP)，cuda11.0-trt7.1-fp16-T4平台 0.887/0.874。\",\n      \"covered_capability\": \"支持多颜色分类，覆盖大部分头盔颜色需求（黑、白、灰、红、蓝、黄、绿、紫），不支持迷彩。\",\n      \"gap\": \"无头盔颜色标签，无迷彩类别，非人体/头盔属性。\"\n    ,\n    \"evidence\": [\n      \"evidence_id: e9fdde44540a819e4df7799b\",\n      \"evidence_id: 1de1624938b0181389f409b7\"\n    ]\n    },\n    {\n      \"model_or_solution\": \"SmallFace_Gray_736x1280 人脸检测模型\",\n      \"label_schema\": \"支持人脸检测，无颜色属性标签。灰度图输入，不支持颜色分类。\",\n      \"training_data\": \"证据不足。ADela 记录中未提供训练数据来源和样本量。\",\n      \"reported_metrics\": \"证据不足。ADela 记录中仅包含精度性能信息，未明确具体指标数值。\",\n      \"covered_capability\": \"支持人脸/人体检测，但无颜色属性识别能力。\",\n      \"gap\": \"无颜色属性识别，灰度图，无头盔颜色标签。\"\n    ,\n    \"evidence\": [\n      \"evidence_id: e3147847015c051257e71c5e\"\n    ]\n    },\n    {\n      \"model_or_solution\": \"KM_classifier_Face_BigAngle_SD_nart 人脸属性模型\",\n      \"label_schema\": \"支持人脸属性，具体属性标签未知（二分类大角度）。\",\n      \"training_data\": \"证据不足。\",\n      \"reported_metrics\": \"证据不足。\",\n      \"covered_capability\": \"支持人脸属性，但标签与头盔颜色无关。\",\n      \"gap\": \"无头盔颜色标签，非人体属性。\"\n    ,\n    \"evidence\": [\n      \"evidence_id: 1a002ce065494670317bc200\"\n    ]\n    },\n    {\n      \"model_or_solution\": \"KM_classifier_Carplate_TypeColor_nart 车牌颜色类型属性\",\n      \"label_schema\": \"支持车牌颜色类型属性，具体标签未知（车牌颜色）。\",\n      \"training_data\": \"证据不足。\",\n      \"reported_metrics\": \"证据不足。\",\n      \"covered_capability\": \"支持颜色属性分类，但针对车牌，非人体/头盔。\",\n      \"gap\": \"标签为车牌颜色，非头盔颜色。\"\n    ,\n    \"evidence\": [\n      \"evidence_id: b37f60bf62e6051f3fe455a3\"\n    ]\n    }\n  ]\n  ,\n  \"migration_plan\": {\n    \"feasibility\": \"medium\",\n    \"approach\": \"推荐采用 KM_classifier_Vehicle_FullAttr_3.0.2 作为基座模型进行迁移。该模型已具备成熟的多颜色分类能力，覆盖大部分头盔颜色需求。需移除车辆相关标签，增加头盔颜色标签体系（黑、白、灰、红、蓝、黄、绿、紫、迷彩），并重新采集/标注头盔颜色数据。\",\n    \"data_requirements\": \"需重新采集包含头盔颜色标注的数据集，建议样本量≥5000 张，涵盖不同光照、角度、遮挡场景。\",\n    \"compute_requirements\": \"建议 Ascend 310/710 平台，模型精度要求与车辆模型相当，预计精度损失<5%。\",\n    \"engineering_work\": \"模型结构调整（标签替换）、训练管线改造、测试集构建与验证。\"\n  ,\"estimated_timeline\": \"2-4 周（含数据准备、模型训练、评估部署）\",\n  \"estimated_cost\": \"人力成本为主，硬件成本可复用现有 Ascend 平台。\"\n  ,\n  \"dependencies\": [\n    \"头盔颜色标注数据集\",\n    \"Ascend 310/710 推理环境\",\n    \"模型迁移框架支持\"\n  ]\n  ,\n  \"risks\": [\n    \"头盔遮挡场景复杂，精度可能低于车辆颜色分类。\",\n    \"迷彩类别识别难度大，需重点关注数据质量。\"\n  ]\n  }\n  ,\n  \"expected_performance\": {\n    \"baseline\": \"参考车辆颜色分类精度 0.887 (ACC)\",\n    \"target\": \"期望精度 0.85-0.90 (取决于头盔数据质量)\"\n  ,\n  \"uncertainty\": \"头盔颜色与车辆颜色在纹理、光照适应性上存在差异，精度可能下降。\"\n  }\n  ,\n  \"recommendation\": \"不建议直接使用现有模型。推荐迁移车辆颜色属性模型作为基座，定制头盔颜色标签体系并重新训练。若时间紧迫，可考虑将头盔检测与颜色分类拆分为两阶段任务（先检测头盔，再分类颜色）。\"\n  }",
+    "structured_output": {
+      "requirement_summary": "用户需要识别“头盔颜色”，包括特定类别：黑、白、灰、红、蓝、黄、绿、紫、迷彩。现有城市结构化人体属性模型是否支持？",
+      "direct_match": {
+        "exists": false,
+        "summary": "检索到的模型中没有直接支持“头盔颜色识别”的模型。现有模型主要集中在人脸检测、车牌属性、车辆属性（颜色/类型）、横幅检测等。",
+        "evidence": [
+          "evidence_id: e9fdde44540a819e4df7799b 车辆颜色颜色属性模型，标签包括灰白红黑蓝绿棕黄紫粉青橙无法判断",
+          "evidence_id: 1de1624938b0181389f409b7 车辆颜色分类属性 ACC/mP 数据",
+          "evidence_id: 4bcd9e335142f2b26eae0099 机动车颜色类型分类属性模型边界"
+        ]
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "KM_classifier_Vehicle_FullAttr_3.0.2 车辆颜色属性模型",
+          "label_schema": "车辆颜色标签体系：['灰', '白', '红', '黑', '蓝', '绿', '棕', '黄', '紫', '粉', '青', '橙', '无法判断']。无头盔颜色标签，但颜色类别与头盔颜色需求有较高重叠度（灰白红蓝黄绿紫黑均存在）。",
+          "training_data": "证据不足。PDF文档中未明确标注训练数据来源、标注规范及样本量。",
+          "reported_metrics": "车辆颜色分类属性精度：cpu-ppl2-fp32平台 0.887/0.874 (ACC/mP)，cuda11.0-trt7.1-fp16-T4平台 0.887/0.874。",
+          "covered_capability": "支持多颜色分类，覆盖大部分头盔颜色需求（黑、白、灰、红、蓝、黄、绿、紫），不支持迷彩。",
+          "gap": "无头盔颜色标签，无迷彩类别，非人体/头盔属性。",
+          "evidence": [
+            "evidence_id: e9fdde44540a819e4df7799b",
+            "evidence_id: 1de1624938b0181389f409b7"
+          ]
+        },
+        {
+          "model_or_solution": "SmallFace_Gray_736x1280 人脸检测模型",
+          "label_schema": "支持人脸检测，无颜色属性标签。灰度图输入，不支持颜色分类。",
+          "training_data": "证据不足。ADela 记录中未提供训练数据来源和样本量。",
+          "reported_metrics": "证据不足。ADela 记录中仅包含精度性能信息，未明确具体指标数值。",
+          "covered_capability": "支持人脸/人体检测，但无颜色属性识别能力。",
+          "gap": "无颜色属性识别，灰度图，无头盔颜色标签。",
+          "evidence": [
+            "evidence_id: e3147847015c051257e71c5e"
+          ]
+        },
+        {
+          "model_or_solution": "KM_classifier_Face_BigAngle_SD_nart 人脸属性模型",
+          "label_schema": "支持人脸属性，具体属性标签未知（二分类大角度）。",
+          "training_data": "证据不足。",
+          "reported_metrics": "证据不足。",
+          "covered_capability": "支持人脸属性，但标签与头盔颜色无关。",
+          "gap": "无头盔颜色标签，非人体属性。",
+          "evidence": [
+            "evidence_id: 1a002ce065494670317bc200"
+          ]
+        },
+        {
+          "model_or_solution": "KM_classifier_Carplate_TypeColor_nart 车牌颜色类型属性",
+          "label_schema": "支持车牌颜色类型属性，具体标签未知（车牌颜色）。",
+          "training_data": "证据不足。",
+          "reported_metrics": "证据不足。",
+          "covered_capability": "支持颜色属性分类，但针对车牌，非人体/头盔。",
+          "gap": "标签为车牌颜色，非头盔颜色。",
+          "evidence": [
+            "evidence_id: b37f60bf62e6051f3fe455a3"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "medium",
+        "approach": "推荐采用 KM_classifier_Vehicle_FullAttr_3.0.2 作为基座模型进行迁移。该模型已具备成熟的多颜色分类能力，覆盖大部分头盔颜色需求。需移除车辆相关标签，增加头盔颜色标签体系（黑、白、灰、红、蓝、黄、绿、紫、迷彩），并重新采集/标注头盔颜色数据。",
+        "data_requirements": "需重新采集包含头盔颜色标注的数据集，建议样本量≥5000 张，涵盖不同光照、角度、遮挡场景。",
+        "compute_requirements": "建议 Ascend 310/710 平台，模型精度要求与车辆模型相当，预计精度损失<5%。",
+        "engineering_work": "模型结构调整（标签替换）、训练管线改造、测试集构建与验证。",
+        "estimated_timeline": "2-4 周（含数据准备、模型训练、评估部署）",
+        "estimated_cost": "人力成本为主，硬件成本可复用现有 Ascend 平台。",
+        "dependencies": [
+          "头盔颜色标注数据集",
+          "Ascend 310/710 推理环境",
+          "模型迁移框架支持"
+        ],
+        "risks": [
+          "头盔遮挡场景复杂，精度可能低于车辆颜色分类。",
+          "迷彩类别识别难度大，需重点关注数据质量。"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "参考车辆颜色分类精度 0.887 (ACC)",
+        "target": "期望精度 0.85-0.90 (取决于头盔数据质量)",
+        "uncertainty": "头盔颜色与车辆颜色在纹理、光照适应性上存在差异，精度可能下降。"
+      },
+      "recommendation": "不建议直接使用现有模型。推荐迁移车辆颜色属性模型作为基座，定制头盔颜色标签体系并重新训练。若时间紧迫，可考虑将头盔检测与颜色分类拆分为两阶段任务（先检测头盔，再分类颜色）。"
+    }
+  }
+}

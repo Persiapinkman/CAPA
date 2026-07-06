@@ -1,0 +1,105 @@
+{
+  "session_id": "17331810-2ef0-4515-88f4-206803022aac",
+  "run_stamp": "20260521_175145_942f9768",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-05-21T17:53:21+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"香港项目要求识别“头盔颜色：黑、白、灰、红、蓝、黄、绿、紫、迷彩”，现有城市结构化人体属性模型是否能直接支持？\",\n  \"direct_match\": {\n    \"exists\": false,\n    \"summary\": \"现有证据显示，目前没有针对“头盔”目标的独立属性模型直接支持其颜色识别，主要涉及“非机动车属性”或“头盔风格”但不包含完整颜色类别。近红外（头盔）的识别主要针对“未戴口罩，识别为未戴口罩”，针对“安全帽”类型图片的召回率进行了优化（ma_安全帽 = 84.07%），但并未涉及具体颜色分类（黑、白、灰、红、蓝、黄、绿、紫、迷彩）。\"\n  ,\n  \"evidence\": []\n}\n,\n  \"similar_assets\": [\n    {\n      \"model_or_solution\": \"KM_classifier_Nonmotor_FullAttr_Security_nart_cpu-ppl2-fp32_b8_3.1.0.model\",\n      \"label_schema\": \"分类类别：vehicle_color（车型，非机动车，头盔），取值范围：Nonmotor Attribute（自行车、三轮车、非机动车）\",\n      \"training_data\": \"证据不足\",\n      \"reported_metrics\": \"ma_安全帽：84.07%(优化后的)\",\n      \"covered_capability\": \"涉及头盔颜色识别\"\n    ,\n    \"gap\": \"该模型针对的是非机动车属性（自行车、三轮车、非机动车），颜色类别在证据中未显示包含‘头盔颜色’（如黑、白、灰、红、蓝、黄、绿、紫、迷彩），仅针对头盔风格（安全帽）有优化。不存在直接支持头盔颜色分类能力的证据。\",\n      \"evidence\": [\"ma_安全帽 = 84.07%(+12.01%)\" ]\n    },\n    {\n      \"model_or_solution\": \"KM_classifier_Nonmotor_FullAttr_Security_nart_acl-ascend710-int8_b1_3.1.0.model\",\n      \"label_schema\": \"classification_schema: 非机动车属性（头盔、安全帽）\",\n      \"training_data\": \"证据不足\",\n      \"reported_metrics\": \"ma_安全帽：84.07%(+12.01%)\",\n      \"covered_capability\": \"未涵盖头盔颜色分类\"\n    ,\n    \"gap\": \"该模型与上述型号功能一致，仅部署平台不同。未涉及头盔颜色识别类别。\",\n      \"evidence\": [\"支持 device: ascend710\"]\n    },\n    {\n      \"model_or_solution\": \"KM_classifier_Nonmotor_Complete_Attribute_nart_acl-ascend710-fp16_b16_0.1.0.model\",\n      \"label_schema\": \"classification_schema: helmet_class（头盔类型）\",\n      \"training_data\": \"证据不足\",\n      \"reported_metrics\": \"ma_安全帽：84.07%(+12.01%)\",\n      \"covered_capability\": \"仅涉及头盔类型识别，不包含涉及头盔颜色识别的类别（如黑、白、灰、红、蓝、黄、绿、紫、迷彩）\",\n      \"gap\": \"目标类别不匹配。\",\n      \"evidence\": [\"application_scene: 合并骑手属性V0.1.0\"]\n    }\n    ,\n    {\n      \"model_or_solution\": \"PDFs/安防方向--非机动车属性大模型更新.pdf\",\n      \"label_schema\": \"classification_schema: vehicle_color（车辆颜色）\",\n      \"training_data\": \"证据不足\",\n      \"reported_metrics\": \"车辆颜色分类属性ACC/mP：证据不足\",\n      \"covered_capability\": \"涉及车辆颜色分类，而非头盔颜色\",\n      \"gap\": \"未针对头盔状态分类（如头盔颜色）进行训练或参数优化，且文档中未提及头盔颜色类别（黑、白、灰、红、蓝、黄、绿、紫、迷彩）。\",\n      \"evidence\": [\"颜色：vehicle_color = ['灰', '白', '红', '黑', '蓝', '绿', '棕', '黄', '紫', '粉']\"]\n    }\n,\n    {\n      \"model_or_solution\": \"小图总量：训练集113887，测试集8609\"\n    ,\n      \"label_schema\": \"服饰属性（颜色分类）\",\n      \"training_data\": \"服饰颜色数据集，证据不足\",\n      \"reported_metrics\": \"颜色分割精度：证据不足\",\n      \"covered_capability\": \"涉及服饰颜色识别，但对象不涉及头盔颜色\",\n      \"gap\": \"未直接支持头盔颜色类别（迷彩等干扰类）。\",\n      \"evidence\": [\"小图总量：训练集113887，测试集8609\"]\n    }\n  ]\n,\n  \"migration_plan\": {\n    \"feasibility\": \"low\",\n    \"approach\": \"需要重新训练或迁移头盔颜色专门数据集，不能直接复用现有城市结构化人体属性模型，因为现有文档未提供头盔颜色分类（黑、白、灰、红、蓝、黄、绿、紫、迷彩）的模型。\",\n    \"data_requirements\": \"需要获取头盔颜色训练数据（迷彩是否包含在颜色列表内），样本量证据不足。\",\n    \"compute_requirements\": \"未见现有头盔颜色模型信息，需评估现有模型是否支持基底扩展。\",\n    \"engineering_work\": \"需要重新训练或迁移头盔颜色分类，不能直接复用新能源汽车或车辆颜色模型。\",\n    \"estimated_timeline\": \"需评估训练数据量与当前数据处理能力，视为依赖前提且无证据支持。无法确定\"\n  ,\n  \"estimated_cost\": \"证据不足\",\n  \"dependencies\": [\"需要头盔颜色专用数据集\"]\n  ,\n  \"risks\": [\n    \"无法直接支持头盔颜色（黑、白、灰、红、蓝、黄、绿、紫、迷彩）识别\"\n  ]\n}\n,\n  \"expected_performance\": {\n    \"baseline\": \"证据不足\",\n    \"target\": \"无法在现有模型基础上直接达到0%~100%的准确，需依赖新训练数据。\",\n    \"uncertainty\": \"证据不足\"\n  }\n  ,\n  \"recommendation\": \"建议进行头盔颜色专属模型的训练与迁移，现有文档中未提供头盔颜色分类（黑、白、灰、红、蓝、黄、绿、紫、迷彩）的模型，无法直接复用城市人体属性模型。\"\n}",
+    "structured_output": {
+      "requirement_summary": "香港项目要求识别“头盔颜色：黑、白、灰、红、蓝、黄、绿、紫、迷彩”，现有城市结构化人体属性模型是否能直接支持？",
+      "direct_match": {
+        "exists": false,
+        "summary": "现有证据显示，目前没有针对“头盔”目标的独立属性模型直接支持其颜色识别，主要涉及“非机动车属性”或“头盔风格”但不包含完整颜色类别。近红外（头盔）的识别主要针对“未戴口罩，识别为未戴口罩”，针对“安全帽”类型图片的召回率进行了优化（ma_安全帽 = 84.07%），但并未涉及具体颜色分类（黑、白、灰、红、蓝、黄、绿、紫、迷彩）。",
+        "evidence": []
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "KM_classifier_Nonmotor_FullAttr_Security_nart_cpu-ppl2-fp32_b8_3.1.0.model",
+          "label_schema": "分类类别：vehicle_color（车型，非机动车，头盔），取值范围：Nonmotor Attribute（自行车、三轮车、非机动车）",
+          "training_data": "证据不足",
+          "reported_metrics": "ma_安全帽：84.07%(优化后的)",
+          "covered_capability": "涉及头盔颜色识别",
+          "gap": "该模型针对的是非机动车属性（自行车、三轮车、非机动车），颜色类别在证据中未显示包含‘头盔颜色’（如黑、白、灰、红、蓝、黄、绿、紫、迷彩），仅针对头盔风格（安全帽）有优化。不存在直接支持头盔颜色分类能力的证据。",
+          "evidence": [
+            "ma_安全帽 = 84.07%(+12.01%)"
+          ]
+        },
+        {
+          "model_or_solution": "KM_classifier_Nonmotor_FullAttr_Security_nart_acl-ascend710-int8_b1_3.1.0.model",
+          "label_schema": "classification_schema: 非机动车属性（头盔、安全帽）",
+          "training_data": "证据不足",
+          "reported_metrics": "ma_安全帽：84.07%(+12.01%)",
+          "covered_capability": "未涵盖头盔颜色分类",
+          "gap": "该模型与上述型号功能一致，仅部署平台不同。未涉及头盔颜色识别类别。",
+          "evidence": [
+            "支持 device: ascend710"
+          ]
+        },
+        {
+          "model_or_solution": "KM_classifier_Nonmotor_Complete_Attribute_nart_acl-ascend710-fp16_b16_0.1.0.model",
+          "label_schema": "classification_schema: helmet_class（头盔类型）",
+          "training_data": "证据不足",
+          "reported_metrics": "ma_安全帽：84.07%(+12.01%)",
+          "covered_capability": "仅涉及头盔类型识别，不包含涉及头盔颜色识别的类别（如黑、白、灰、红、蓝、黄、绿、紫、迷彩）",
+          "gap": "目标类别不匹配。",
+          "evidence": [
+            "application_scene: 合并骑手属性V0.1.0"
+          ]
+        },
+        {
+          "model_or_solution": "PDFs/安防方向--非机动车属性大模型更新.pdf",
+          "label_schema": "classification_schema: vehicle_color（车辆颜色）",
+          "training_data": "证据不足",
+          "reported_metrics": "车辆颜色分类属性ACC/mP：证据不足",
+          "covered_capability": "涉及车辆颜色分类，而非头盔颜色",
+          "gap": "未针对头盔状态分类（如头盔颜色）进行训练或参数优化，且文档中未提及头盔颜色类别（黑、白、灰、红、蓝、黄、绿、紫、迷彩）。",
+          "evidence": [
+            "颜色：vehicle_color = ['灰', '白', '红', '黑', '蓝', '绿', '棕', '黄', '紫', '粉']"
+          ]
+        },
+        {
+          "model_or_solution": "小图总量：训练集113887，测试集8609",
+          "label_schema": "服饰属性（颜色分类）",
+          "training_data": "服饰颜色数据集，证据不足",
+          "reported_metrics": "颜色分割精度：证据不足",
+          "covered_capability": "涉及服饰颜色识别，但对象不涉及头盔颜色",
+          "gap": "未直接支持头盔颜色类别（迷彩等干扰类）。",
+          "evidence": [
+            "小图总量：训练集113887，测试集8609"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "low",
+        "approach": "需要重新训练或迁移头盔颜色专门数据集，不能直接复用现有城市结构化人体属性模型，因为现有文档未提供头盔颜色分类（黑、白、灰、红、蓝、黄、绿、紫、迷彩）的模型。",
+        "data_requirements": "需要获取头盔颜色训练数据（迷彩是否包含在颜色列表内），样本量证据不足。",
+        "compute_requirements": "未见现有头盔颜色模型信息，需评估现有模型是否支持基底扩展。",
+        "engineering_work": "需要重新训练或迁移头盔颜色分类，不能直接复用新能源汽车或车辆颜色模型。",
+        "estimated_timeline": "需评估训练数据量与当前数据处理能力，视为依赖前提且无证据支持。无法确定",
+        "estimated_cost": "证据不足",
+        "dependencies": [
+          "需要头盔颜色专用数据集"
+        ],
+        "risks": [
+          "无法直接支持头盔颜色（黑、白、灰、红、蓝、黄、绿、紫、迷彩）识别"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "证据不足",
+        "target": "无法在现有模型基础上直接达到0%~100%的准确，需依赖新训练数据。",
+        "uncertainty": "证据不足"
+      },
+      "recommendation": "建议进行头盔颜色专属模型的训练与迁移，现有文档中未提供头盔颜色分类（黑、白、灰、红、蓝、黄、绿、紫、迷彩）的模型，无法直接复用城市人体属性模型。"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "migration_advisor",
+  "_action_input": {
+    "user_query": "请先用现有开放集能力试反光条，若样例不确定，再给工服反光条检测的风险和验证建议。",
+    "use_image": true,
+    "use_visual_probe": true,
+    "finish_after_tool": true
+  },
+  "_thought": "用户的问题是：‘请先用现有开放集能力试反光条，若样例不确定，再给工服反光条检测的风险和验证建议。’结合上下文，这是一个典型的‘能力边界/迁移可行性’场景：涉及新需求（反光条检测）能否由现有开放集能力解决，若不确定需给出风险评估与验证建议。根据工具路由原则第 5 条和第 6 条，这类需求应优先调用 migration_advisor，而不是拆成单独的检测工具或评测工具。且用户明确提到‘若样例不确定，再给...风险和验证建议’，符合 migration_advisor 的业务范围内。另外，提供了图片 image_available=true，因此可设置 use_image=true，并允许内部做视觉探针 use_visual_probe=true，以便迁移顾问对样例图进行分析。finish_after_tool 应设为 true，因为迁移评估报告本身就是用户预期要的全部结果。”2. rationale”，然后输出 JSON。}，否则出错。}，再根据 schema 校验输出。}，确认最终输出。"
+}

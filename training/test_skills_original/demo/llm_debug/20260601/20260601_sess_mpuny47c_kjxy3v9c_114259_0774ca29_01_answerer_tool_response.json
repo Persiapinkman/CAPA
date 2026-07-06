@@ -1,0 +1,11 @@
+{
+  "session_id": "sess_mpuny47c_kjxy3v9c",
+  "run_stamp": "20260601_114259_0774ca29",
+  "stage": "answerer_tool_response",
+  "step_index": 1,
+  "created_at": "2026-06-01T11:43:02+08:00",
+  "payload": {
+    "raw_response": "{\n  \"final_answer\": \"OCR 检测（Detection）和 OCR 识别（Recognition）是两项紧密相关但功能不同的技术，它们共同构成了完整的光学字符识别流程。\\n\\n1. **OCR 检测**（Character Detection）：\\n   - **功能**：负责在图像中**定位**哪里存在文字，并界定出每个字符或单词的边界。它不关心文字内容是什么，只关注位置。\\n   - **输出**：类似坐标框（box）的数据，例如文字所在的左上角、右下角坐标。通俗地说，就是让系统“找到”有字的区域。\\n\\n2. **OCR 识别**（Character Recognition）：\\n   - **功能**：负责对定位到的文字区域进行**内容解析**。它将提取出的图像块转换为数字化的字符符号（文本）。\\n   - **输出**：具体的文字内容，如“Hello”或“北京”。通俗地说，就是读懂这些字符的“内容”。\\n\\n**总结区别**：\\n如果比喻成阅读过程，OCR 检测就像是扫描医生，它决定你需要阅读哪里；而 OCR 识别则是语言专家，负责将视成品页面。两者缺一不可，先检测再识别，是现代工程中的标准分工。\"\n}",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260601_114259_0774ca29"
+  }
+}

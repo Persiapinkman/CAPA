@@ -26,5 +26,7 @@ AGENTS.md
 ARCHITECTURE.md
 
 # 评测
-demo/eval
+demo/eval/*
+!demo/eval/
+!demo/eval/*.py
 dataset

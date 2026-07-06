@@ -1,0 +1,385 @@
+{
+  "session_id": "548dba2b-b379-4b28-9d40-d1c33c6ebade",
+  "run_stamp": "20260520_132027_00221ea2",
+  "stage": "migration_report_request",
+  "step_index": 2,
+  "created_at": "2026-05-20T13:21:24+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260520_132027_00221ea2",
+    "input_schema": {
+      "user_query": "用户原始问题",
+      "retrieval_plan": "上一步检索规划（abstract_requirement + retrieve_fields）",
+      "field_results": "playbook 分字段检索结果：field, queries, coverage, evidence[]"
+    },
+    "evidence_item_fields": [
+      "evidence_id",
+      "title",
+      "snippet",
+      "model_name",
+      "algorithm_name",
+      "algorithm_type",
+      "application_scene",
+      "section_type",
+      "score"
+    ],
+    "structured_input": {
+      "user_query": "监控画面中要判断行人“短发、长发、光头、其他”，用什么检测模型",
+      "retrieval_plan": {
+        "abstract_requirement": {
+          "object": "行人",
+          "attribute": "发型 (短发、长发、光头、其他)",
+          "task_type": "零样本/少样本分类 (Hair Classification / Person Attribute Classification)",
+          "scene": "监控 / 视频分析",
+          "constraints": [
+            "960x960 分辨率及 25 帧/秒 时序需求",
+            "Ascend310/Ascend710 硬件支持",
+            "白天光照、夜间低照度、逆光场景"
+          ]
+        },
+        "retrieve_fields": [
+          {
+            "field": "existing_models",
+            "queries": [
+              "行人发型检测模型 短发 长发 光头",
+              "{person_ attribute_ classifier_ 发型_ 短发分类 alg } 头部特征分类",
+              "人脸属性检测模型 头发类型 视觉 aviation"
+            ]
+          },
+          {
+            "field": "similar_capabilities",
+            "queries": [
+              "细粒度行人属性识别 纹理/形状分类",
+              "细粒度头部位形分析 视觉 avation classification",
+              "头部特征专项模型"
+            ]
+          },
+          {
+            "field": "performance_baseline",
+            "queries": [
+              "行人发型检测精度 benchmark mAP",
+              "head feature classification 任务精度指标 分类",
+              "视觉 avation hair classification mAP 0.85"
+            ]
+          },
+          {
+            "field": "data_requirements",
+            "queries": [
+              "行人发型标注数据 类别平衡",
+              "face attribute detection 数据量级 10k",
+              "无人脸镜面 头部属性数据集"
+            ]
+          }
+        ]
+      },
+      "field_results": [
+        {
+          "field": "existing_models",
+          "queries": [
+            "行人发型检测模型 短发 长发 光头",
+            "{person_ attribute_ classifier_ 发型_ 短发分类 alg } 头部特征分类",
+            "人脸属性检测模型 头发类型 视觉 aviation"
+          ],
+          "coverage": "strong",
+          "evidence": [
+            {
+              "evidence_id": "4b8b920368f1ef362cd641be",
+              "title": "PDFs/行人属性大模型2.21.1.pdf p7",
+              "snippet": "st_glov                                                                      \n                 0.863      0.853     0.9       90*180                              \n       e_v2                                                                         \n       hair_col                                                                     \n                 0.92       0.807     0.9       60*120...",
+              "section_type": "general",
+              "score": 0.6509
+            },
+            {
+              "evidence_id": "dd622ab3d2c615477dc4f8b1",
+              "title": "KM_essos_BannerSlogan_960x960_nart_acl-ascend710-fp16_b8_3.0.5.model",
+              "snippet": "target_name: 横幅\nalgorithm_type: 检测\nalgorithm_name: 横幅检测模型\napplication_scene: 视频巡逻项目\nowner: 任大发\nmodel_name: KM_essos_BannerSlogan_960x960_nart_acl-ascend710-fp16_b8_3.0.5.model\nsupported_device: ascend710\nrecommended_config: acl-ascend710-fp16\nlast_updated: 2025-06-26\nlast_updated_month: 2025-06",
+              "model_name": "KM_essos_BannerSlogan_960x960_nart_acl-ascend710-fp16_b8_3.0.5.model",
+              "algorithm_name": "横幅检测模型",
+              "algorithm_type": "检测",
+              "application_scene": "视频巡逻项目",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "04d43a3e675839dbbf6a9996",
+              "title": "struct_smaller",
+              "snippet": "did: 105679\nrid: 38316\nmodel_name: struct_smaller\nplatform: cuda11.0-trt7.1-fp16-T4\nlabel_list: pedestrian|cycer|car|cyc",
+              "model_name": "struct_smaller",
+              "section_type": "model_artifact",
+              "score": 0.503005
+            },
+            {
+              "evidence_id": "a1c9c7f5496a38d5c141a75c",
+              "title": "PDFs/safety_rope v0.2.1.pdf p3",
+              "snippet": "场景要求：目前主要针对正常亮度天气良好的白天监控场景；对于夜间场景、以及强逆光导致的目标亮度                                 \n     很低的场景，精度尚无法保证；对于雨雪雾等特殊场景的性能暂时无法保证。                                             \n                                                                                    \n     目标要求（行人）：行人目标大于60(宽)*120(高)像素，目标框与真实框的IoU至少达到0.8，低于这个标准...",
+              "section_type": "algorithm_boundary",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "83807db14b0bbfd44474b7c2",
+              "title": "KM_essos_BannerSlogan_960x960_nart_acl-ascend310-fp16_b8_3.0.5.model",
+              "snippet": "target_name: 横幅\nalgorithm_type: 检测\nalgorithm_name: 横幅检测模型\napplication_scene: 视频巡逻项目\nowner: 任大发\nmodel_name: KM_essos_BannerSlogan_960x960_nart_acl-ascend310-fp16_b8_3.0.5.model\nsupported_device: ascend310\nrecommended_config: acl-ascend310-fp16\nlast_updated: 2025-06-26\nlast_updated_month: 2025-06",
+              "model_name": "KM_essos_BannerSlogan_960x960_nart_acl-ascend310-fp16_b8_3.0.5.model",
+              "algorithm_name": "横幅检测模型",
+              "algorithm_type": "检测",
+              "application_scene": "视频巡逻项目",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "f53d026649b58ea0fecf243a",
+              "title": "PAR_merged_model",
+              "snippet": "model_name: PAR_merged_model\nname: PAR_merged_model\ntype: classifier\nplatform: cpu-ppl2-fp32\nstatus: SUCCESS\ndid: 102019\nrid: 36860\nversion: 1.0.0\nversion_train_date: 20240228\nsource_file: data/PAR_merged_model-cpu-ppl2-fp32_36860_102019.json",
+              "model_name": "PAR_merged_model",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "728cc300ad292e6a2b43d7fd",
+              "title": "PDFs/行人属性大模型2.21.0.pdf p4",
+              "snippet": "st_glov                                                                      \n                 0.863      0.853     0.9       90*180                              \n       e_v2                                                                         \n       hair_col                                                                     \n                 0.92       0.807     0.9       60*120...",
+              "section_type": "model_artifact",
+              "score": 0.648286
+            },
+            {
+              "evidence_id": "7d46e31c0867251721fe60c5",
+              "title": "KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model",
+              "snippet": "target_name: 二维码\nalgorithm_type: 检测\nalgorithm_name: 二维码检测模型\napplication_scene: 网安场景，正方形二维码\nowner: 龚丽君\nmodel_name: KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model\nsupported_device: ascend310\nrecommended_config: ascend310-fp16\nlast_updated: 2023-04-07\nlast_updated_month: 2023-04",
+              "model_name": "KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model",
+              "algorithm_name": "二维码检测模型",
+              "algorithm_type": "检测",
+              "application_scene": "网安场景，正方形二维码",
+              "section_type": "model_artifact",
+              "score": 1.0
+            }
+          ]
+        },
+        {
+          "field": "similar_capabilities",
+          "queries": [
+            "细粒度行人属性识别 纹理/形状分类",
+            "细粒度头部位形分析 视觉 avation classification",
+            "头部特征专项模型"
+          ],
+          "coverage": "strong",
+          "evidence": [
+            {
+              "evidence_id": "e13b8d701a7786d97d5add43",
+              "title": "PDFs/人体状衣二分类-发版.pdf p1",
+              "snippet": "• 类别定义说明",
+              "section_type": "general",
+              "score": 0.49033
+            },
+            {
+              "evidence_id": "a58dcc2eb585de9c7608c5d2",
+              "title": "KM_attribute_face_nart_acl-ascend310-fp16_b8_3.4.0.model",
+              "snippet": "target_name: 人脸\nalgorithm_type: 属性\nalgorithm_name: 人脸属性\napplication_scene: V3.4.0\nowner: 龚丽君\nmodel_name: KM_attribute_face_nart_acl-ascend310-fp16_b8_3.4.0.model\nsupported_device: ascend310\nrecommended_config: ascend310-fp16\nlast_updated: 2022-03-24\nlast_updated_month: 2022-03",
+              "model_name": "KM_attribute_face_nart_acl-ascend310-fp16_b8_3.4.0.model",
+              "algorithm_name": "人脸属性",
+              "algorithm_type": "属性",
+              "application_scene": "V3.4.0",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "cd034a2765ca840c4f687a8e",
+              "title": "full_struct",
+              "snippet": "did: 89271\nrid: 31058\nmodel_name: full_struct\nplatform: hisvp-nnie11-int8\nlabel_list: face|pedestrian|cycer|vehicle|cyc",
+              "model_name": "full_struct",
+              "section_type": "model_artifact",
+              "score": 0.967691
+            },
+            {
+              "evidence_id": "4b8b920368f1ef362cd641be",
+              "title": "PDFs/行人属性大模型2.21.1.pdf p7",
+              "snippet": "st_glov                                                                      \n                 0.863      0.853     0.9       90*180                              \n       e_v2                                                                         \n       hair_col                                                                     \n                 0.92       0.807     0.9       60*120...",
+              "section_type": "general",
+              "score": 0.646617
+            },
+            {
+              "evidence_id": "927b32713e1dafc13735974c",
+              "title": "KM_attribute_face_nart_acl-ascend710-fp16_b8_3.4.0.model",
+              "snippet": "target_name: 人脸\nalgorithm_type: 属性\nalgorithm_name: 人脸属性\napplication_scene: V3.4.0\nowner: 龚丽君\nmodel_name: KM_attribute_face_nart_acl-ascend710-fp16_b8_3.4.0.model\nsupported_device: ascend710\nrecommended_config: ascend710-fp16\nlast_updated: 2022-03-24\nlast_updated_month: 2022-03",
+              "model_name": "KM_attribute_face_nart_acl-ascend710-fp16_b8_3.4.0.model",
+              "algorithm_name": "人脸属性",
+              "algorithm_type": "属性",
+              "application_scene": "V3.4.0",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "1170ad9a633dd8a182c75574",
+              "title": "full_struct",
+              "snippet": "did: 88399\nrid: 31058\nmodel_name: full_struct\nplatform: hisvp-nnie11-int16\nlabel_list: face|pedestrian|cycer|vehicle|cyc",
+              "model_name": "full_struct",
+              "section_type": "deployment",
+              "score": 0.967691
+            },
+            {
+              "evidence_id": "3d68b86fd71fd40af72d1059",
+              "title": "PDFs/香港车牌-旋转框检测模型发版.pdf p6",
+              "snippet": "新增模块                                                                           \n                                                                                    \n     pipelines/image_carplate/modules/carplate_recognition_with_obb · test/1.11.2 · kestrel / flock_pipeline ·\n                                                                                    \n     GitLab...",
+              "section_type": "general",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "ebb74708e8f80eddf18b4448",
+              "title": "KM_classifier_NonMotor_Complete_Attribute_nart_acl-ascend710-fp16_b16_0.1.0.model",
+              "snippet": "target_name: 非机动车\nalgorithm_type: 属性\nalgorithm_name: 非机动车属性全模型\napplication_scene: 合并骑手属性V0.1.0\nowner: 龚丽君\nmodel_name: KM_classifier_NonMotor_Complete_Attribute_nart_acl-ascend710-fp16_b16_0.1.0.model\nsupported_device: ascend710\nrecommended_config: ascend710-fp16\nlast_updated: 2022-04-28\nlast_updated_month: 2022-04",
+              "model_name": "KM_classifier_NonMotor_Complete_Attribute_nart_acl-ascend710-fp16_b16_0.1.0.model",
+              "algorithm_name": "非机动车属性全模型",
+              "algorithm_type": "属性",
+              "application_scene": "合并骑手属性V0.1.0",
+              "section_type": "model_artifact",
+              "score": 0.996451
+            }
+          ]
+        },
+        {
+          "field": "performance_baseline",
+          "queries": [
+            "行人发型检测精度 benchmark mAP",
+            "head feature classification 任务精度指标 分类",
+            "视觉 avation hair classification mAP 0.85"
+          ],
+          "coverage": "strong",
+          "evidence": [
+            {
+              "evidence_id": "b1a3283cf6dcce38440c2170",
+              "title": "PDFs/Shikra-Embedding-V3.7.0.pdf p1",
+              "snippet": "约10.8%                            \n                                                                                    \n          ▪  在 UrbanInsight-Retrieval 数据集上，指标略有下降，平均约    2 个百分点以内。                  \n                                                                                    \n        ◦ SIE-v3.7.0 large 模型相较于 SIE-v3.0.0 large 模型，同样有以下优化：                       \n          ▪  在行人品牌   mAP...",
+              "section_type": "release_note",
+              "score": 0.459982
+            },
+            {
+              "evidence_id": "ddd997d866521c8d3d1f94db",
+              "title": "PDFs/Shikra-Embedding-V3.7.0.pdf p1 table 1",
+              "snippet": "PDF表格: PDFs/Shikra-Embedding-V3.7.0.pdf 第1页 表1\n\n| Shikra-Embedding-V3.7.0 Release note • 发布日期：2026.03.12 • Owner: huxiaoyan1@sensetime.com, zhanglei3@sensetime.com , fanjiarou@sensetime.com • Highlight ◦ SIE-v3.7.0 base 模型相较于 SIE-v3.1.0 base 模型，重点针对品牌、否定描述及重点检索词进行了 优化，同时维持模型原有能力（如多属性、肯定描述）。 ▪ 在行人品牌 mAP 提升 15.02% ，车辆品牌 mAP 提升9.68% ，否定测试集 mAP 提升 9.25% ， 重点检索词 mAP 提升22.77% ▪ 在 150 万底库的时空库检索场景中，整体 mAP...",
+              "section_type": "release_note",
+              "score": 0.462142
+            },
+            {
+              "evidence_id": "dcb7b9813ae47c4866d7f061",
+              "title": "PDFs/Shikra-Embedding-V3.7.0.pdf p1",
+              "snippet": "time.com , fanjiarou@sensetime.com\n                                                                                    \n      • Highlight                                                                   \n        ◦ SIE-v3.7.0 base 模型相较于 SIE-v3.1.0 base 模型，重点针对品牌、否定描述及重点检索词进行了             \n                                                                                    \n          优化，同时维持模型原有能力（如...",
+              "section_type": "release_note",
+              "score": 0.460281
+            },
+            {
+              "evidence_id": "5519e756d087008960d1aa1b",
+              "title": "PDFs/常规版车辆reid模型更新.pdf p26",
+              "snippet": "mAP/      \n                                                mAP/c mAP/  mAP/c  mAP/c            \n                                  cmc1  c1                                cmc1      \n                                                mc1   cmc1  mc1    mc1              \n      KM_senu_                    91.0                67.8  29.3%                   \n                ResN        224 *       96.4%/9 3...",
+              "section_type": "accuracy_metric",
+              "score": 0.479822
+            },
+            {
+              "evidence_id": "02b45c90d49384befdd62de9",
+              "title": "PDFs/行人属性大模型2.21.0.pdf p1",
+              "snippet": "a. pose睡岗模型  训练更新：                                                          \n                                                                                    \n          i. st_lie: prec/recall 0.99/0.78->0.99/0.99                               \n          ii. st_sleep_on_the_table: prec/recall 0.98/0.60->0.98/0.82...",
+              "section_type": "accuracy_metric",
+              "score": 0.582482
+            },
+            {
+              "evidence_id": "c7711b84757a14915a38a72a",
+              "title": "PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2 table 1",
+              "snippet": "PDF表格: PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf 第2页 表1\n\n表格结构化行:\n模型族: 三、模型列表\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model\nOID: beeb6944bdca2dafd0213251951cc47f829efad2981d7f847010b13f486181c5\n平台: cuda11.0-trt7.1-fp16-T4\n\n模型族: 三、模型列表\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model\nOID: fcd2d67fbbaab4fc2064f08ccaf5e6...",
+              "section_type": "accuracy_eval",
+              "score": 0.807289
+            },
+            {
+              "evidence_id": "c3df8f567b44bcd3cf139136",
+              "title": "PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2",
+              "snippet": "58                  \n                 without_safetybelt 0.9269   0.9702   0.9481                        \n     评测平台：cuda11.0-trt7.1-fp16-T4                                                   \n                                                                                    \n                                                                                    \n     模型性能",
+              "section_type": "accuracy_eval",
+              "score": 0.802051
+            },
+            {
+              "evidence_id": "1d4107dd8be5f74f932bdc50",
+              "title": "PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2",
+              "snippet": "ge/project/3/releaseManage?       \n     rid=34577&id=3&model_type=classifier&tabName=deployment                        \n     四、精度性能                                                                         \n                                                                                    \n     模型精度...",
+              "section_type": "accuracy_eval",
+              "score": 0.800952
+            }
+          ]
+        },
+        {
+          "field": "data_requirements",
+          "queries": [
+            "行人发型标注数据 类别平衡",
+            "face attribute detection 数据量级 10k",
+            "无人脸镜面 头部属性数据集"
+          ],
+          "coverage": "strong",
+          "evidence": [
+            {
+              "evidence_id": "fa98e6d066641dc937255e73",
+              "title": "PDFs/横幅标语检测3.0.5-发版.pdf p1 table 1",
+              "snippet": "PDF表格: PDFs/横幅标语检测3.0.5-发版.pdf 第1页 表1\n\n| 横幅标语检测3.0.5-发版 算法功能和边界 • 算法功能：输出图中横幅或标语的坐标 • 前提条件：图中横幅或标语边界清晰、包含文字，目前不支持衣服上的、投影等非常规形式的横幅或标 语 • 目标要求：对于1080x1920分辨率图片输入，ROI区域宽&高不小于60像素 • 潜在风险：对于夜间场景、不规则形状目标、模糊小目标，检测准确率无法保证 KM_essos_BannerSlogan_960x960_3.0.5 release note • 发布时间：20250626 • owner：fengjiangyan@sensetime.com, rendafa@sensetime.com • Highlights： ◦ 配置：增大模型输入尺寸至960x960 ◦ 数据：生成手举竖横幅数据，去除车身横幅数据 ◦ 精...",
+              "section_type": "algorithm_boundary",
+              "score": 0.965383
+            },
+            {
+              "evidence_id": "250a1decfea9ca85b0f2944f",
+              "title": "PDFs/横幅标语检测3.0.5-发版.pdf p1",
+              "snippet": "• 检测图中的横幅/标语                                                                  \n      • 模型仅输出banner一类：{\"id\": 806880, \"label\": \"banner\"}                             \n                                                                                    \n                                                                                    \n     二、算法边界...",
+              "section_type": "algorithm_boundary",
+              "score": 0.944319
+            },
+            {
+              "evidence_id": "250152b471cecf8cab0d58d1",
+              "title": "PDFs/行人属性大模型2.21.1.pdf p1",
+              "snippet": "行人属性大模型2.21.1                                                                  \n                                                                                    \n                                                                                    \n                                                                                    \n     行人属性模型边界参考：...",
+              "section_type": "algorithm_boundary",
+              "score": 0.574324
+            },
+            {
+              "evidence_id": "c57b2097434e5945a04a0bd9",
+              "title": "PDFs/安防方向-人脸误检分类模型发版记录.pdf p1 table 1",
+              "snippet": "PDF表格: PDFs/安防方向-人脸误检分类模型发版记录.pdf 第1页 表1\n\n| 安防方向-人脸误检分类模型发版记录 KM_classifier_Face_None_Security_3.0.2 release note: • release date: 2025.02.17 • owner: fengjiangyan@sensetime.com • highlights ◦ 输出字段与原KM_classifier_FaceNoFace_cls_sz_1.0.2, KM_classifier_Face_None_Security_3.0.1 模型保持一致 ◦ 数据: 清洗原数据集, 并增加58w训练数据, 包含监控场景的大角度/被遮挡人脸、后脑、全遮挡数据 ◦ 精度: 大幅提升监控场景大角度/被遮挡人脸正样本、全遮挡负样本的召回, 其中common测试集人脸 召回+26%、误报召回+...",
+              "section_type": "accuracy_eval",
+              "score": 0.91684
+            },
+            {
+              "evidence_id": "cb677e70bc11b808c26e03ce",
+              "title": "PDFs/行人属性大模型2.21.0.pdf p1 table 1",
+              "snippet": "PDF表格: PDFs/行人属性大模型2.21.0.pdf 第1页 表1\n\n| 行人属性大模型2.21.0 行人属性模型边界参考： 检测类别：行人33个属性，共174个类别标签。 前提条件：摄像头高度2~6米之间，摄像头拍摄方向与地面夹角介于30°以上，拍摄图片清晰，结构化检测 能检测出目标人。 场景要求：目前主要针对正常亮度天气良好的白天监控场景；对于夜间场景、以及强逆光导致的目标亮度 很低的场景，精度尚无法保证，尤其是颜色类属性；对于雨雪雾等特殊场景的性能暂时无法保证。 目标要求：行人目标大于60(宽)*120(高)像素，目标框与真实框的IoU至少达到0.8，低于这个标准的精度无 法保证；目标完整清晰，对于因模糊、遮挡、截断、多人、角度或姿态等原因影响部分属性判断时，对这 些属性的精度无法保证。 KM_Classifier_Ped_33of33_2.21.0 Release Note:...",
+              "section_type": "algorithm_boundary",
+              "score": 0.569097
+            },
+            {
+              "evidence_id": "e07ae4af55757d5513904730",
+              "title": "PDFs/行人属性大模型2.21.0.pdf p1",
+              "snippet": "行人属性大模型2.21.0                                                                  \n                                                                                    \n                                                                                    \n                                                                                    \n     行人属性模型边界参考：...",
+              "section_type": "algorithm_boundary",
+              "score": 0.56858
+            },
+            {
+              "evidence_id": "0ea79d23060c393c49f8c0e0",
+              "title": "PDFs/安防方向-人脸误检分类模型发版记录.pdf p1",
+              "snippet": "KM_classifier_Face_None_Security_3.0.1 模型保持一致                             \n        ◦ 数据: 清洗原数据集,    并增加58w训练数据,    包含监控场景的大角度/被遮挡人脸、后脑、全遮挡数据                   \n                                                                                    \n        ◦ 精度: 大幅提升监控场景大角度/被遮挡人脸正样本、全遮挡负样本的召回,                 其中common测试集人脸         \n          召回+26%、误报召回+43%...",
+              "section_type": "accuracy_eval",
+              "score": 0.911827
+            },
+            {
+              "evidence_id": "1d9d6a2e42f5991f80b7aba5",
+              "title": "PDFs/行人属性大模型2.21.1.pdf p1 table 1",
+              "snippet": "PDF表格: PDFs/行人属性大模型2.21.1.pdf 第1页 表1\n\n| 行人属性大模型2.21.1 行人属性模型边界参考： 检测类别：行人33个属性，共174个类别标签。 前提条件：摄像头高度2~6米之间，摄像头拍摄方向与地面夹角介于30°以上，拍摄图片清晰，结构化检测 能检测出目标人。 场景要求：目前主要针对正常亮度天气良好的白天监控场景；对于夜间场景、以及强逆光导致的目标亮度 很低的场景，精度尚无法保证，尤其是颜色类属性；对于雨雪雾等特殊场景的性能暂时无法保证。 目标要求：行人目标大于60(宽)*120(高)像素，目标框与真实框的IoU至少达到0.8，低于这个标准的精度无 法保证；目标完整清晰，对于因模糊、遮挡、截断、多人、角度或姿态等原因影响部分属性判断时，对这 些属性的精度无法保证。 KM_Classifier_Ped_33of33_2.21.1 Release Note:...",
+              "section_type": "algorithm_boundary",
+              "score": 0.564429
+            }
+          ]
+        }
+      ]
+    },
+    "llm_messages": [
+      {
+        "role": "system",
+        "content": "你是视觉模型迁移顾问。请基于检索证据生成结构化迁移评估报告。必须区分证据支持和合理推断；证据不足时明确写证据不足，不要编造精度、周期或成本。若可估计成本/周期，只能给区间和依赖前提。只输出 JSON。"
+      },
+      {
+        "role": "user",
+        "content": "{\n  \"user_query\": \"监控画面中要判断行人“短发、长发、光头、其他”，用什么检测模型\",\n  \"retrieval_plan\": {\n    \"abstract_requirement\": {\n      \"object\": \"行人\",\n      \"attribute\": \"发型 (短发、长发、光头、其他)\",\n      \"task_type\": \"零样本/少样本分类 (Hair Classification / Person Attribute Classification)\",\n      \"scene\": \"监控 / 视频分析\",\n      \"constraints\": [\n        \"960x960 分辨率及 25 帧/秒 时序需求\",\n        \"Ascend310/Ascend710 硬件支持\",\n        \"白天光照、夜间低照度、逆光场景\"\n      ]\n    },\n    \"retrieve_fields\": [\n      {\n        \"field\": \"existing_models\",\n        \"queries\": [\n          \"行人发型检测模型 短发 长发 光头\",\n          \"{person_ attribute_ classifier_ 发型_ 短发分类 alg } 头部特征分类\",\n          \"人脸属性检测模型 头发类型 视觉 aviation\"\n        ]\n      },\n      {\n        \"field\": \"similar_capabilities\",\n        \"queries\": [\n          \"细粒度行人属性识别 纹理/形状分类\",\n          \"细粒度头部位形分析 视觉 avation classification\",\n          \"头部特征专项模型\"\n        ]\n      },\n      {\n        \"field\": \"performance_baseline\",\n        \"queries\": [\n          \"行人发型检测精度 benchmark mAP\",\n          \"head feature classification 任务精度指标 分类\",\n          \"视觉 avation hair classification mAP 0.85\"\n        ]\n      },\n      {\n        \"field\": \"data_requirements\",\n        \"queries\": [\n          \"行人发型标注数据 类别平衡\",\n          \"face attribute detection 数据量级 10k\",\n          \"无人脸镜面 头部属性数据集\"\n        ]\n      }\n    ]\n  },\n  \"field_results\": [\n    {\n      \"field\": \"existing_models\",\n      \"queries\": [\n        \"行人发型检测模型 短发 长发 光头\",\n        \"{person_ attribute_ classifier_ 发型_ 短发分类 alg } 头部特征分类\",\n        \"人脸属性检测模型 头发类型 视觉 aviation\"\n      ],\n      \"coverage\": \"strong\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"4b8b920368f1ef362cd641be\",\n          \"title\": \"PDFs/行人属性大模型2.21.1.pdf p7\",\n          \"snippet\": \"st_glov                                                                      \\n                 0.863      0.853     0.9       90*180                              \\n       e_v2                                                                         \\n       hair_col                                                                     \\n                 0.92       0.807     0.9       60*120...\",\n          \"section_type\": \"general\",\n          \"score\": 0.6509\n        },\n        {\n          \"evidence_id\": \"dd622ab3d2c615477dc4f8b1\",\n          \"title\": \"KM_essos_BannerSlogan_960x960_nart_acl-ascend710-fp16_b8_3.0.5.model\",\n          \"snippet\": \"target_name: 横幅\\nalgorithm_type: 检测\\nalgorithm_name: 横幅检测模型\\napplication_scene: 视频巡逻项目\\nowner: 任大发\\nmodel_name: KM_essos_BannerSlogan_960x960_nart_acl-ascend710-fp16_b8_3.0.5.model\\nsupported_device: ascend710\\nrecommended_config: acl-ascend710-fp16\\nlast_updated: 2025-06-26\\nlast_updated_month: 2025-06\",\n          \"model_name\": \"KM_essos_BannerSlogan_960x960_nart_acl-ascend710-fp16_b8_3.0.5.model\",\n          \"algorithm_name\": \"横幅检测模型\",\n          \"algorithm_type\": \"检测\",\n          \"application_scene\": \"视频巡逻项目\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"04d43a3e675839dbbf6a9996\",\n          \"title\": \"struct_smaller\",\n          \"snippet\": \"did: 105679\\nrid: 38316\\nmodel_name: struct_smaller\\nplatform: cuda11.0-trt7.1-fp16-T4\\nlabel_list: pedestrian|cycer|car|cyc\",\n          \"model_name\": \"struct_smaller\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.503005\n        },\n        {\n          \"evidence_id\": \"a1c9c7f5496a38d5c141a75c\",\n          \"title\": \"PDFs/safety_rope v0.2.1.pdf p3\",\n          \"snippet\": \"场景要求：目前主要针对正常亮度天气良好的白天监控场景；对于夜间场景、以及强逆光导致的目标亮度                                 \\n     很低的场景，精度尚无法保证；对于雨雪雾等特殊场景的性能暂时无法保证。                                             \\n                                                                                    \\n     目标要求（行人）：行人目标大于60(宽)*120(高)像素，目标框与真实框的IoU至少达到0.8，低于这个标准...\",\n          \"section_type\": \"algorithm_boundary\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"83807db14b0bbfd44474b7c2\",\n          \"title\": \"KM_essos_BannerSlogan_960x960_nart_acl-ascend310-fp16_b8_3.0.5.model\",\n          \"snippet\": \"target_name: 横幅\\nalgorithm_type: 检测\\nalgorithm_name: 横幅检测模型\\napplication_scene: 视频巡逻项目\\nowner: 任大发\\nmodel_name: KM_essos_BannerSlogan_960x960_nart_acl-ascend310-fp16_b8_3.0.5.model\\nsupported_device: ascend310\\nrecommended_config: acl-ascend310-fp16\\nlast_updated: 2025-06-26\\nlast_updated_month: 2025-06\",\n          \"model_name\": \"KM_essos_BannerSlogan_960x960_nart_acl-ascend310-fp16_b8_3.0.5.model\",\n          \"algorithm_name\": \"横幅检测模型\",\n          \"algorithm_type\": \"检测\",\n          \"application_scene\": \"视频巡逻项目\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"f53d026649b58ea0fecf243a\",\n          \"title\": \"PAR_merged_model\",\n          \"snippet\": \"model_name: PAR_merged_model\\nname: PAR_merged_model\\ntype: classifier\\nplatform: cpu-ppl2-fp32\\nstatus: SUCCESS\\ndid: 102019\\nrid: 36860\\nversion: 1.0.0\\nversion_train_date: 20240228\\nsource_file: data/PAR_merged_model-cpu-ppl2-fp32_36860_102019.json\",\n          \"model_name\": \"PAR_merged_model\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"728cc300ad292e6a2b43d7fd\",\n          \"title\": \"PDFs/行人属性大模型2.21.0.pdf p4\",\n          \"snippet\": \"st_glov                                                                      \\n                 0.863      0.853     0.9       90*180                              \\n       e_v2                                                                         \\n       hair_col                                                                     \\n                 0.92       0.807     0.9       60*120...\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.648286\n        },\n        {\n          \"evidence_id\": \"7d46e31c0867251721fe60c5\",\n          \"title\": \"KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model\",\n          \"snippet\": \"target_name: 二维码\\nalgorithm_type: 检测\\nalgorithm_name: 二维码检测模型\\napplication_scene: 网安场景，正方形二维码\\nowner: 龚丽君\\nmodel_name: KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model\\nsupported_device: ascend310\\nrecommended_config: ascend310-fp16\\nlast_updated: 2023-04-07\\nlast_updated_month: 2023-04\",\n          \"model_name\": \"KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model\",\n          \"algorithm_name\": \"二维码检测模型\",\n          \"algorithm_type\": \"检测\",\n          \"application_scene\": \"网安场景，正方形二维码\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        }\n      ]\n    },\n    {\n      \"field\": \"similar_capabilities\",\n      \"queries\": [\n        \"细粒度行人属性识别 纹理/形状分类\",\n        \"细粒度头部位形分析 视觉 avation classification\",\n        \"头部特征专项模型\"\n      ],\n      \"coverage\": \"strong\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"e13b8d701a7786d97d5add43\",\n          \"title\": \"PDFs/人体状衣二分类-发版.pdf p1\",\n          \"snippet\": \"• 类别定义说明\",\n          \"section_type\": \"general\",\n          \"score\": 0.49033\n        },\n        {\n          \"evidence_id\": \"a58dcc2eb585de9c7608c5d2\",\n          \"title\": \"KM_attribute_face_nart_acl-ascend310-fp16_b8_3.4.0.model\",\n          \"snippet\": \"target_name: 人脸\\nalgorithm_type: 属性\\nalgorithm_name: 人脸属性\\napplication_scene: V3.4.0\\nowner: 龚丽君\\nmodel_name: KM_attribute_face_nart_acl-ascend310-fp16_b8_3.4.0.model\\nsupported_device: ascend310\\nrecommended_config: ascend310-fp16\\nlast_updated: 2022-03-24\\nlast_updated_month: 2022-03\",\n          \"model_name\": \"KM_attribute_face_nart_acl-ascend310-fp16_b8_3.4.0.model\",\n          \"algorithm_name\": \"人脸属性\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"V3.4.0\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"cd034a2765ca840c4f687a8e\",\n          \"title\": \"full_struct\",\n          \"snippet\": \"did: 89271\\nrid: 31058\\nmodel_name: full_struct\\nplatform: hisvp-nnie11-int8\\nlabel_list: face|pedestrian|cycer|vehicle|cyc\",\n          \"model_name\": \"full_struct\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.967691\n        },\n        {\n          \"evidence_id\": \"4b8b920368f1ef362cd641be\",\n          \"title\": \"PDFs/行人属性大模型2.21.1.pdf p7\",\n          \"snippet\": \"st_glov                                                                      \\n                 0.863      0.853     0.9       90*180                              \\n       e_v2                                                                         \\n       hair_col                                                                     \\n                 0.92       0.807     0.9       60*120...\",\n          \"section_type\": \"general\",\n          \"score\": 0.646617\n        },\n        {\n          \"evidence_id\": \"927b32713e1dafc13735974c\",\n          \"title\": \"KM_attribute_face_nart_acl-ascend710-fp16_b8_3.4.0.model\",\n          \"snippet\": \"target_name: 人脸\\nalgorithm_type: 属性\\nalgorithm_name: 人脸属性\\napplication_scene: V3.4.0\\nowner: 龚丽君\\nmodel_name: KM_attribute_face_nart_acl-ascend710-fp16_b8_3.4.0.model\\nsupported_device: ascend710\\nrecommended_config: ascend710-fp16\\nlast_updated: 2022-03-24\\nlast_updated_month: 2022-03\",\n          \"model_name\": \"KM_attribute_face_nart_acl-ascend710-fp16_b8_3.4.0.model\",\n          \"algorithm_name\": \"人脸属性\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"V3.4.0\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"1170ad9a633dd8a182c75574\",\n          \"title\": \"full_struct\",\n          \"snippet\": \"did: 88399\\nrid: 31058\\nmodel_name: full_struct\\nplatform: hisvp-nnie11-int16\\nlabel_list: face|pedestrian|cycer|vehicle|cyc\",\n          \"model_name\": \"full_struct\",\n          \"section_type\": \"deployment\",\n          \"score\": 0.967691\n        },\n        {\n          \"evidence_id\": \"3d68b86fd71fd40af72d1059\",\n          \"title\": \"PDFs/香港车牌-旋转框检测模型发版.pdf p6\",\n          \"snippet\": \"新增模块                                                                           \\n                                                                                    \\n     pipelines/image_carplate/modules/carplate_recognition_with_obb · test/1.11.2 · kestrel / flock_pipeline ·\\n                                                                                    \\n     GitLab...\",\n          \"section_type\": \"general\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"ebb74708e8f80eddf18b4448\",\n          \"title\": \"KM_classifier_NonMotor_Complete_Attribute_nart_acl-ascend710-fp16_b16_0.1.0.model\",\n          \"snippet\": \"target_name: 非机动车\\nalgorithm_type: 属性\\nalgorithm_name: 非机动车属性全模型\\napplication_scene: 合并骑手属性V0.1.0\\nowner: 龚丽君\\nmodel_name: KM_classifier_NonMotor_Complete_Attribute_nart_acl-ascend710-fp16_b16_0.1.0.model\\nsupported_device: ascend710\\nrecommended_config: ascend710-fp16\\nlast_updated: 2022-04-28\\nlast_updated_month: 2022-04\",\n          \"model_name\": \"KM_classifier_NonMotor_Complete_Attribute_nart_acl-ascend710-fp16_b16_0.1.0.model\",\n          \"algorithm_name\": \"非机动车属性全模型\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"合并骑手属性V0.1.0\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.996451\n        }\n      ]\n    },\n    {\n      \"field\": \"performance_baseline\",\n      \"queries\": [\n        \"行人发型检测精度 benchmark mAP\",\n        \"head feature classification 任务精度指标 分类\",\n        \"视觉 avation hair classification mAP 0.85\"\n      ],\n      \"coverage\": \"strong\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"b1a3283cf6dcce38440c2170\",\n          \"title\": \"PDFs/Shikra-Embedding-V3.7.0.pdf p1\",\n          \"snippet\": \"约10.8%                            \\n                                                                                    \\n          ▪  在 UrbanInsight-Retrieval 数据集上，指标略有下降，平均约    2 个百分点以内。                  \\n                                                                                    \\n        ◦ SIE-v3.7.0 large 模型相较于 SIE-v3.0.0 large 模型，同样有以下优化：                       \\n          ▪  在行人品牌   mAP...\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.459982\n        },\n        {\n          \"evidence_id\": \"ddd997d866521c8d3d1f94db\",\n          \"title\": \"PDFs/Shikra-Embedding-V3.7.0.pdf p1 table 1\",\n          \"snippet\": \"PDF表格: PDFs/Shikra-Embedding-V3.7.0.pdf 第1页 表1\\n\\n| Shikra-Embedding-V3.7.0 Release note • 发布日期：2026.03.12 • Owner: huxiaoyan1@sensetime.com, zhanglei3@sensetime.com , fanjiarou@sensetime.com • Highlight ◦ SIE-v3.7.0 base 模型相较于 SIE-v3.1.0 base 模型，重点针对品牌、否定描述及重点检索词进行了 优化，同时维持模型原有能力（如多属性、肯定描述）。 ▪ 在行人品牌 mAP 提升 15.02% ，车辆品牌 mAP 提升9.68% ，否定测试集 mAP 提升 9.25% ， 重点检索词 mAP 提升22.77% ▪ 在 150 万底库的时空库检索场景中，整体 mAP...\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.462142\n        },\n        {\n          \"evidence_id\": \"dcb7b9813ae47c4866d7f061\",\n          \"title\": \"PDFs/Shikra-Embedding-V3.7.0.pdf p1\",\n          \"snippet\": \"time.com , fanjiarou@sensetime.com\\n                                                                                    \\n      • Highlight                                                                   \\n        ◦ SIE-v3.7.0 base 模型相较于 SIE-v3.1.0 base 模型，重点针对品牌、否定描述及重点检索词进行了             \\n                                                                                    \\n          优化，同时维持模型原有能力（如...\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.460281\n        },\n        {\n          \"evidence_id\": \"5519e756d087008960d1aa1b\",\n          \"title\": \"PDFs/常规版车辆reid模型更新.pdf p26\",\n          \"snippet\": \"mAP/      \\n                                                mAP/c mAP/  mAP/c  mAP/c            \\n                                  cmc1  c1                                cmc1      \\n                                                mc1   cmc1  mc1    mc1              \\n      KM_senu_                    91.0                67.8  29.3%                   \\n                ResN        224 *       96.4%/9 3...\",\n          \"section_type\": \"accuracy_metric\",\n          \"score\": 0.479822\n        },\n        {\n          \"evidence_id\": \"02b45c90d49384befdd62de9\",\n          \"title\": \"PDFs/行人属性大模型2.21.0.pdf p1\",\n          \"snippet\": \"a. pose睡岗模型  训练更新：                                                          \\n                                                                                    \\n          i. st_lie: prec/recall 0.99/0.78->0.99/0.99                               \\n          ii. st_sleep_on_the_table: prec/recall 0.98/0.60->0.98/0.82...\",\n          \"section_type\": \"accuracy_metric\",\n          \"score\": 0.582482\n        },\n        {\n          \"evidence_id\": \"c7711b84757a14915a38a72a\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2 table 1\",\n          \"snippet\": \"PDF表格: PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf 第2页 表1\\n\\n表格结构化行:\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model\\nOID: beeb6944bdca2dafd0213251951cc47f829efad2981d7f847010b13f486181c5\\n平台: cuda11.0-trt7.1-fp16-T4\\n\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model\\nOID: fcd2d67fbbaab4fc2064f08ccaf5e6...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.807289\n        },\n        {\n          \"evidence_id\": \"c3df8f567b44bcd3cf139136\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2\",\n          \"snippet\": \"58                  \\n                 without_safetybelt 0.9269   0.9702   0.9481                        \\n     评测平台：cuda11.0-trt7.1-fp16-T4                                                   \\n                                                                                    \\n                                                                                    \\n     模型性能\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.802051\n        },\n        {\n          \"evidence_id\": \"1d4107dd8be5f74f932bdc50\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2\",\n          \"snippet\": \"ge/project/3/releaseManage?       \\n     rid=34577&id=3&model_type=classifier&tabName=deployment                        \\n     四、精度性能                                                                         \\n                                                                                    \\n     模型精度...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.800952\n        }\n      ]\n    },\n    {\n      \"field\": \"data_requirements\",\n      \"queries\": [\n        \"行人发型标注数据 类别平衡\",\n        \"face attribute detection 数据量级 10k\",\n        \"无人脸镜面 头部属性数据集\"\n      ],\n      \"coverage\": \"strong\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"fa98e6d066641dc937255e73\",\n          \"title\": \"PDFs/横幅标语检测3.0.5-发版.pdf p1 table 1\",\n          \"snippet\": \"PDF表格: PDFs/横幅标语检测3.0.5-发版.pdf 第1页 表1\\n\\n| 横幅标语检测3.0.5-发版 算法功能和边界 • 算法功能：输出图中横幅或标语的坐标 • 前提条件：图中横幅或标语边界清晰、包含文字，目前不支持衣服上的、投影等非常规形式的横幅或标 语 • 目标要求：对于1080x1920分辨率图片输入，ROI区域宽&高不小于60像素 • 潜在风险：对于夜间场景、不规则形状目标、模糊小目标，检测准确率无法保证 KM_essos_BannerSlogan_960x960_3.0.5 release note • 发布时间：20250626 • owner：fengjiangyan@sensetime.com, rendafa@sensetime.com • Highlights： ◦ 配置：增大模型输入尺寸至960x960 ◦ 数据：生成手举竖横幅数据，去除车身横幅数据 ◦ 精...\",\n          \"section_type\": \"algorithm_boundary\",\n          \"score\": 0.965383\n        },\n        {\n          \"evidence_id\": \"250a1decfea9ca85b0f2944f\",\n          \"title\": \"PDFs/横幅标语检测3.0.5-发版.pdf p1\",\n          \"snippet\": \"• 检测图中的横幅/标语                                                                  \\n      • 模型仅输出banner一类：{\\\"id\\\": 806880, \\\"label\\\": \\\"banner\\\"}                             \\n                                                                                    \\n                                                                                    \\n     二、算法边界...\",\n          \"section_type\": \"algorithm_boundary\",\n          \"score\": 0.944319\n        },\n        {\n          \"evidence_id\": \"250152b471cecf8cab0d58d1\",\n          \"title\": \"PDFs/行人属性大模型2.21.1.pdf p1\",\n          \"snippet\": \"行人属性大模型2.21.1                                                                  \\n                                                                                    \\n                                                                                    \\n                                                                                    \\n     行人属性模型边界参考：...\",\n          \"section_type\": \"algorithm_boundary\",\n          \"score\": 0.574324\n        },\n        {\n          \"evidence_id\": \"c57b2097434e5945a04a0bd9\",\n          \"title\": \"PDFs/安防方向-人脸误检分类模型发版记录.pdf p1 table 1\",\n          \"snippet\": \"PDF表格: PDFs/安防方向-人脸误检分类模型发版记录.pdf 第1页 表1\\n\\n| 安防方向-人脸误检分类模型发版记录 KM_classifier_Face_None_Security_3.0.2 release note: • release date: 2025.02.17 • owner: fengjiangyan@sensetime.com • highlights ◦ 输出字段与原KM_classifier_FaceNoFace_cls_sz_1.0.2, KM_classifier_Face_None_Security_3.0.1 模型保持一致 ◦ 数据: 清洗原数据集, 并增加58w训练数据, 包含监控场景的大角度/被遮挡人脸、后脑、全遮挡数据 ◦ 精度: 大幅提升监控场景大角度/被遮挡人脸正样本、全遮挡负样本的召回, 其中common测试集人脸 召回+26%、误报召回+...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.91684\n        },\n        {\n          \"evidence_id\": \"cb677e70bc11b808c26e03ce\",\n          \"title\": \"PDFs/行人属性大模型2.21.0.pdf p1 table 1\",\n          \"snippet\": \"PDF表格: PDFs/行人属性大模型2.21.0.pdf 第1页 表1\\n\\n| 行人属性大模型2.21.0 行人属性模型边界参考： 检测类别：行人33个属性，共174个类别标签。 前提条件：摄像头高度2~6米之间，摄像头拍摄方向与地面夹角介于30°以上，拍摄图片清晰，结构化检测 能检测出目标人。 场景要求：目前主要针对正常亮度天气良好的白天监控场景；对于夜间场景、以及强逆光导致的目标亮度 很低的场景，精度尚无法保证，尤其是颜色类属性；对于雨雪雾等特殊场景的性能暂时无法保证。 目标要求：行人目标大于60(宽)*120(高)像素，目标框与真实框的IoU至少达到0.8，低于这个标准的精度无 法保证；目标完整清晰，对于因模糊、遮挡、截断、多人、角度或姿态等原因影响部分属性判断时，对这 些属性的精度无法保证。 KM_Classifier_Ped_33of33_2.21.0 Release Note:...\",\n          \"section_type\": \"algorithm_boundary\",\n          \"score\": 0.569097\n        },\n        {\n          \"evidence_id\": \"e07ae4af55757d5513904730\",\n          \"title\": \"PDFs/行人属性大模型2.21.0.pdf p1\",\n          \"snippet\": \"行人属性大模型2.21.0                                                                  \\n                                                                                    \\n                                                                                    \\n                                                                                    \\n     行人属性模型边界参考：...\",\n          \"section_type\": \"algorithm_boundary\",\n          \"score\": 0.56858\n        },\n        {\n          \"evidence_id\": \"0ea79d23060c393c49f8c0e0\",\n          \"title\": \"PDFs/安防方向-人脸误检分类模型发版记录.pdf p1\",\n          \"snippet\": \"KM_classifier_Face_None_Security_3.0.1 模型保持一致                             \\n        ◦ 数据: 清洗原数据集,    并增加58w训练数据,    包含监控场景的大角度/被遮挡人脸、后脑、全遮挡数据                   \\n                                                                                    \\n        ◦ 精度: 大幅提升监控场景大角度/被遮挡人脸正样本、全遮挡负样本的召回,                 其中common测试集人脸         \\n          召回+26%、误报召回+43%...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.911827\n        },\n        {\n          \"evidence_id\": \"1d9d6a2e42f5991f80b7aba5\",\n          \"title\": \"PDFs/行人属性大模型2.21.1.pdf p1 table 1\",\n          \"snippet\": \"PDF表格: PDFs/行人属性大模型2.21.1.pdf 第1页 表1\\n\\n| 行人属性大模型2.21.1 行人属性模型边界参考： 检测类别：行人33个属性，共174个类别标签。 前提条件：摄像头高度2~6米之间，摄像头拍摄方向与地面夹角介于30°以上，拍摄图片清晰，结构化检测 能检测出目标人。 场景要求：目前主要针对正常亮度天气良好的白天监控场景；对于夜间场景、以及强逆光导致的目标亮度 很低的场景，精度尚无法保证，尤其是颜色类属性；对于雨雪雾等特殊场景的性能暂时无法保证。 目标要求：行人目标大于60(宽)*120(高)像素，目标框与真实框的IoU至少达到0.8，低于这个标准的精度无 法保证；目标完整清晰，对于因模糊、遮挡、截断、多人、角度或姿态等原因影响部分属性判断时，对这 些属性的精度无法保证。 KM_Classifier_Ped_33of33_2.21.1 Release Note:...\",\n          \"section_type\": \"algorithm_boundary\",\n          \"score\": 0.564429\n        }\n      ]\n    }\n  ]\n}"
+      }
+    ]
+  }
+}

@@ -1,0 +1,235 @@
+{
+  "session_id": "1e0679aa-4131-438e-932e-7ab0723cad10",
+  "run_stamp": "20260521_164627_ae1e6457",
+  "stage": "migration_retrieval_plan_request",
+  "step_index": 1,
+  "created_at": "2026-05-21T16:46:28+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260521_164627_ae1e6457",
+    "input_schema": {
+      "user_query": "用户原始问题",
+      "failed_rag_trace": "最近最多 3 轮 RAG 失败轨迹（round/query/knowledge_base_fully_answered/evidence[]）",
+      "required_fields": "固定 4 个检索维度 field + label"
+    },
+    "evidence_item_fields": [
+      "evidence_id",
+      "title",
+      "snippet",
+      "model_name",
+      "algorithm_name",
+      "algorithm_type",
+      "application_scene",
+      "section_type",
+      "score"
+    ],
+    "structured_input": {
+      "user_query": "香港项目要求识别“头盔颜色：黑、白、灰、红、蓝、黄、绿、紫、迷彩”，现有城市结构化人体属性模型是否能直接支持？",
+      "failed_rag_trace": [
+        {
+          "round": 1,
+          "query": "香港项目要求识别“头盔颜色：黑、白、灰、红、蓝、黄、绿、紫、迷彩”，现有城市结构化人体属性模型是否能直接支持？",
+          "knowledge_base_fully_answered": false,
+          "evidence": [
+            {
+              "evidence_id": "40c29e8b4229de135e3c09fe",
+              "title": "PDFs/安防方向--车辆属性大模型更新.pdf p3",
+              "snippet": "一、功能介绍                                                                         \n                                                                                    \n      • 输入：结构化车辆小图                                                                  \n                                                                                    \n      • 输出：颜色、粗分类推断结果                                                               \n                                                                                    \n      • 要求：推荐车辆小图尺寸≥90*90，输入低于此尺寸模型精度不能保证                                           \n      • 输出参考：                                                                       \n                                                                                    \n        ◦ 模型输出：category_param.json",
+              "section_type": "algorithm_boundary",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "f53d026649b58ea0fecf243a",
+              "title": "PAR_merged_model",
+              "snippet": "model_name: PAR_merged_model\nname: PAR_merged_model\ntype: classifier\nplatform: cpu-ppl2-fp32\nstatus: SUCCESS\ndid: 102019\nrid: 36860\nversion: 1.0.0\nversion_train_date: 20240228\nsource_file: data/PAR_merged_model-cpu-ppl2-fp32_36860_102019.json",
+              "model_name": "PAR_merged_model",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "facba999c7be3a16d7c70db0",
+              "title": "KM_textrecognition_CarPlateHK_small_nart_acl-ascend710-int8_b8_1.0.0.model",
+              "snippet": "target_name: 车牌\nalgorithm_type: 识别\nalgorithm_name: 香港-车牌文字识别\napplication_scene: 香港车牌文字识别\nowner: 肖坤\nmodel_name: KM_textrecognition_CarPlateHK_small_nart_acl-ascend710-int8_b8_1.0.0.model\nsupported_device: ascend710\nrecommended_config: acl-ascend710-int8\nlast_updated: 2025-07-11\nlast_updated_month: 2025-07",
+              "model_name": "KM_textrecognition_CarPlateHK_small_nart_acl-ascend710-int8_b8_1.0.0.model",
+              "algorithm_name": "香港-车牌文字识别",
+              "algorithm_type": "识别",
+              "application_scene": "香港车牌文字识别",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "e603f74f5ab719dfa1019089",
+              "title": "fight_model",
+              "snippet": "model_name: fight_model\nname: fight_model\ntype: falcon\nplatform: cuda11.0-trt7.1-fp16-T4\nstatus: SUCCESS\ndid: 116885\nrid: 29947\nversion: 1.0.0\nversion_train_date: 20230621\nsource_file: data/fight_model-cuda11.0-trt7.1-fp16-T4_29947_116885.json",
+              "model_name": "fight_model",
+              "section_type": "model_artifact",
+              "score": 0.997628
+            },
+            {
+              "evidence_id": "f01f4352f202edbafab47244",
+              "title": "PAR_merged_model",
+              "snippet": "model_name: PAR_merged_model\nname: PAR_merged_model\ntype: classifier\nplatform: cuda11.0-trt7.1-fp16-T4\nstatus: SUCCESS\ndid: 131495\nrid: 50900\nversion: 1.0.0\nversion_train_date: 20260108\nsource_file: data/PAR_merged_model-cuda11.0-trt7.1-fp16-T4_50900_131495.json",
+              "model_name": "PAR_merged_model",
+              "section_type": "model_artifact",
+              "score": 0.993984
+            },
+            {
+              "evidence_id": "d474a14a6f29371d33f01a87",
+              "title": "PAR_merged_model",
+              "snippet": "model_name: PAR_merged_model\nname: PAR_merged_model\ntype: classifier\nplatform: cuda11.1-trt7.2.1-int8-P4\nstatus: SUCCESS\ndid: 102245\nrid: 36931\nversion: 1.0.0\nversion_train_date: 20240301\nsource_file: data/PAR_merged_model-cuda11.1-trt7.2.1-int8-P4_36931_102245.json",
+              "model_name": "PAR_merged_model",
+              "section_type": "model_artifact",
+              "score": 0.991853
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "query": "头盔颜色 颜色 识别 模型 支持",
+          "knowledge_base_fully_answered": false,
+          "evidence": [
+            {
+              "evidence_id": "f53d026649b58ea0fecf243a",
+              "title": "PAR_merged_model",
+              "snippet": "model_name: PAR_merged_model\nname: PAR_merged_model\ntype: classifier\nplatform: cpu-ppl2-fp32\nstatus: SUCCESS\ndid: 102019\nrid: 36860\nversion: 1.0.0\nversion_train_date: 20240228\nsource_file: data/PAR_merged_model-cpu-ppl2-fp32_36860_102019.json",
+              "model_name": "PAR_merged_model",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "9affabb19036f5d9f85a65bf",
+              "title": "KM_textrecognition_CarPlate_nart_acl-ascend310-int8_b8_3.0.1",
+              "snippet": "target_name: 车牌\nalgorithm_type: 识别\nalgorithm_name: 车牌文字识别small\napplication_scene: 大陆及港澳车牌文字识别小模型，标品，单行\nowner: 冯江燕\nmodel_name: KM_textrecognition_CarPlate_nart_acl-ascend310-int8_b8_3.0.1\nsupported_device: ascend310\nrecommended_config: acl-ascend310-int8\nlast_updated: 2023-05-30\nlast_updated_month: 2023-05",
+              "model_name": "KM_textrecognition_CarPlate_nart_acl-ascend310-int8_b8_3.0.1",
+              "algorithm_name": "车牌文字识别small",
+              "algorithm_type": "识别",
+              "application_scene": "大陆及港澳车牌文字识别小模型，标品，单行",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "e603f74f5ab719dfa1019089",
+              "title": "fight_model",
+              "snippet": "model_name: fight_model\nname: fight_model\ntype: falcon\nplatform: cuda11.0-trt7.1-fp16-T4\nstatus: SUCCESS\ndid: 116885\nrid: 29947\nversion: 1.0.0\nversion_train_date: 20230621\nsource_file: data/fight_model-cuda11.0-trt7.1-fp16-T4_29947_116885.json",
+              "model_name": "fight_model",
+              "section_type": "model_artifact",
+              "score": 0.997628
+            },
+            {
+              "evidence_id": "f01f4352f202edbafab47244",
+              "title": "PAR_merged_model",
+              "snippet": "model_name: PAR_merged_model\nname: PAR_merged_model\ntype: classifier\nplatform: cuda11.0-trt7.1-fp16-T4\nstatus: SUCCESS\ndid: 131495\nrid: 50900\nversion: 1.0.0\nversion_train_date: 20260108\nsource_file: data/PAR_merged_model-cuda11.0-trt7.1-fp16-T4_50900_131495.json",
+              "model_name": "PAR_merged_model",
+              "section_type": "model_artifact",
+              "score": 0.993984
+            },
+            {
+              "evidence_id": "d474a14a6f29371d33f01a87",
+              "title": "PAR_merged_model",
+              "snippet": "model_name: PAR_merged_model\nname: PAR_merged_model\ntype: classifier\nplatform: cuda11.1-trt7.2.1-int8-P4\nstatus: SUCCESS\ndid: 102245\nrid: 36931\nversion: 1.0.0\nversion_train_date: 20240301\nsource_file: data/PAR_merged_model-cuda11.1-trt7.2.1-int8-P4_36931_102245.json",
+              "model_name": "PAR_merged_model",
+              "section_type": "model_artifact",
+              "score": 0.991853
+            },
+            {
+              "evidence_id": "8816f61d8a5298c7917b454b",
+              "title": "KM_textrecognition_CarPlate_vit_nart_cuda11.0-trt7.1-fp16-T4_b1_6.0.0.model",
+              "snippet": "target_name: 车牌\nalgorithm_type: 识别\nalgorithm_name: 车牌文字识别PK模型\napplication_scene: 一所PK项目车牌文字识别模型，单双行\nowner: 冯江燕\nmodel_name: KM_textrecognition_CarPlate_vit_nart_cuda11.0-trt7.1-fp16-T4_b1_6.0.0.model\nsupported_device: T4\nrecommended_config: cuda11.0-trt7.1-fp16-T4\nlast_updated: 2023-05-30\nlast_updated_month: 2023-05",
+              "model_name": "KM_textrecognition_CarPlate_vit_nart_cuda11.0-trt7.1-fp16-T4_b1_6.0.0.model",
+              "algorithm_name": "车牌文字识别PK模型",
+              "algorithm_type": "识别",
+              "application_scene": "一所PK项目车牌文字识别模型，单双行",
+              "section_type": "model_artifact",
+              "score": 0.985791
+            }
+          ]
+        },
+        {
+          "round": 3,
+          "query": "头盔颜色识别 模型 支持",
+          "knowledge_base_fully_answered": false,
+          "evidence": [
+            {
+              "evidence_id": "f53d026649b58ea0fecf243a",
+              "title": "PAR_merged_model",
+              "snippet": "model_name: PAR_merged_model\nname: PAR_merged_model\ntype: classifier\nplatform: cpu-ppl2-fp32\nstatus: SUCCESS\ndid: 102019\nrid: 36860\nversion: 1.0.0\nversion_train_date: 20240228\nsource_file: data/PAR_merged_model-cpu-ppl2-fp32_36860_102019.json",
+              "model_name": "PAR_merged_model",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "4f763d094d342c76ce2366d0",
+              "title": "PDFs/安防方向--车牌属性 PK.pdf p4",
+              "snippet": "支持        \n      KM_classifier_Carplate_TypeColor_na bc7a87ea06f9d8e7ce92652a7a50214d          \n                                        否/8    cpu-ppl2-fp32 不涉及                    \n      rt_cpu-ppl2-fp32_b1_6.0.0.model 18eacd13d16f94119355d7f901bee5ba              \n     四、精度测试                                                                         \n     测试集说明：车牌属性测试集、车牌端到端测试集                                                         \n      1. 车牌属性测试集（pytorch）                                                           \n        版本     颜色  acc                                                              \n        3.0.0       96.52%                                                          \n        6.0.0   96.96%(+0.44%)",
+              "section_type": "accuracy_eval",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "e603f74f5ab719dfa1019089",
+              "title": "fight_model",
+              "snippet": "model_name: fight_model\nname: fight_model\ntype: falcon\nplatform: cuda11.0-trt7.1-fp16-T4\nstatus: SUCCESS\ndid: 116885\nrid: 29947\nversion: 1.0.0\nversion_train_date: 20230621\nsource_file: data/fight_model-cuda11.0-trt7.1-fp16-T4_29947_116885.json",
+              "model_name": "fight_model",
+              "section_type": "model_artifact",
+              "score": 0.997628
+            },
+            {
+              "evidence_id": "f01f4352f202edbafab47244",
+              "title": "PAR_merged_model",
+              "snippet": "model_name: PAR_merged_model\nname: PAR_merged_model\ntype: classifier\nplatform: cuda11.0-trt7.1-fp16-T4\nstatus: SUCCESS\ndid: 131495\nrid: 50900\nversion: 1.0.0\nversion_train_date: 20260108\nsource_file: data/PAR_merged_model-cuda11.0-trt7.1-fp16-T4_50900_131495.json",
+              "model_name": "PAR_merged_model",
+              "section_type": "model_artifact",
+              "score": 0.993984
+            },
+            {
+              "evidence_id": "d474a14a6f29371d33f01a87",
+              "title": "PAR_merged_model",
+              "snippet": "model_name: PAR_merged_model\nname: PAR_merged_model\ntype: classifier\nplatform: cuda11.1-trt7.2.1-int8-P4\nstatus: SUCCESS\ndid: 102245\nrid: 36931\nversion: 1.0.0\nversion_train_date: 20240301\nsource_file: data/PAR_merged_model-cuda11.1-trt7.2.1-int8-P4_36931_102245.json",
+              "model_name": "PAR_merged_model",
+              "section_type": "model_artifact",
+              "score": 0.991853
+            },
+            {
+              "evidence_id": "8816f61d8a5298c7917b454b",
+              "title": "KM_textrecognition_CarPlate_vit_nart_cuda11.0-trt7.1-fp16-T4_b1_6.0.0.model",
+              "snippet": "target_name: 车牌\nalgorithm_type: 识别\nalgorithm_name: 车牌文字识别PK模型\napplication_scene: 一所PK项目车牌文字识别模型，单双行\nowner: 冯江燕\nmodel_name: KM_textrecognition_CarPlate_vit_nart_cuda11.0-trt7.1-fp16-T4_b1_6.0.0.model\nsupported_device: T4\nrecommended_config: cuda11.0-trt7.1-fp16-T4\nlast_updated: 2023-05-30\nlast_updated_month: 2023-05",
+              "model_name": "KM_textrecognition_CarPlate_vit_nart_cuda11.0-trt7.1-fp16-T4_b1_6.0.0.model",
+              "algorithm_name": "车牌文字识别PK模型",
+              "algorithm_type": "识别",
+              "application_scene": "一所PK项目车牌文字识别模型，单双行",
+              "section_type": "model_artifact",
+              "score": 0.985791
+            }
+          ]
+        }
+      ],
+      "required_fields": [
+        {
+          "field": "existing_models",
+          "label": "可直接复用的已有模型"
+        },
+        {
+          "field": "similar_capabilities",
+          "label": "可迁移的相似能力"
+        },
+        {
+          "field": "performance_baseline",
+          "label": "性能与精度基线"
+        },
+        {
+          "field": "data_requirements",
+          "label": "数据、标注与迭代依赖"
+        }
+      ]
+    },
+    "llm_messages": [
+      {
+        "role": "system",
+        "content": "你是视觉模型迁移顾问的检索规划器。用户的问题没有被知识库直接回答。请先抽取目标对象、部件/场景、属性/缺陷、任务类型等核心实体，再补充行业常用同义词。例如电子元器件缺陷检测可扩展为工业视觉、表面缺陷、异常检测。为每个固定字段生成 2-4 条短检索 query，每条 query 只放一组核心实体/同义词和一个检索意图。existing_models 偏已有模型/算法，similar_capabilities 偏可迁移能力，performance_baseline 偏精度/性能/benchmark，data_requirements 偏数据/标注/训练。删除“推荐/有没有/帮我/是否/什么模型”等口语噪声，不要把多组同义词堆成一条长句。禁止编造模型结论，只做检索规划。注意检索词除了缩略词，要求纯中文。只输出 JSON。"
+      },
+      {
+        "role": "user",
+        "content": "{\n  \"user_query\": \"香港项目要求识别“头盔颜色：黑、白、灰、红、蓝、黄、绿、紫、迷彩”，现有城市结构化人体属性模型是否能直接支持？\",\n  \"failed_rag_trace\": [\n    {\n      \"round\": 1,\n      \"query\": \"香港项目要求识别“头盔颜色：黑、白、灰、红、蓝、黄、绿、紫、迷彩”，现有城市结构化人体属性模型是否能直接支持？\",\n      \"knowledge_base_fully_answered\": false,\n      \"evidence\": [\n        {\n          \"evidence_id\": \"40c29e8b4229de135e3c09fe\",\n          \"title\": \"PDFs/安防方向--车辆属性大模型更新.pdf p3\",\n          \"snippet\": \"一、功能介绍                                                                         \\n                                                                                    \\n      • 输入：结构化车辆小图                                                                  \\n                                                                                    \\n      • 输出：颜色、粗分类推断结果                                                               \\n                                                                                    \\n      • 要求：推荐车辆小图尺寸≥90*90，输入低于此尺寸模型精度不能保证                                           \\n      • 输出参考：                                                                       \\n                                                                                    \\n        ◦ 模型输出：category_param.json\",\n          \"section_type\": \"algorithm_boundary\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"f53d026649b58ea0fecf243a\",\n          \"title\": \"PAR_merged_model\",\n          \"snippet\": \"model_name: PAR_merged_model\\nname: PAR_merged_model\\ntype: classifier\\nplatform: cpu-ppl2-fp32\\nstatus: SUCCESS\\ndid: 102019\\nrid: 36860\\nversion: 1.0.0\\nversion_train_date: 20240228\\nsource_file: data/PAR_merged_model-cpu-ppl2-fp32_36860_102019.json\",\n          \"model_name\": \"PAR_merged_model\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"facba999c7be3a16d7c70db0\",\n          \"title\": \"KM_textrecognition_CarPlateHK_small_nart_acl-ascend710-int8_b8_1.0.0.model\",\n          \"snippet\": \"target_name: 车牌\\nalgorithm_type: 识别\\nalgorithm_name: 香港-车牌文字识别\\napplication_scene: 香港车牌文字识别\\nowner: 肖坤\\nmodel_name: KM_textrecognition_CarPlateHK_small_nart_acl-ascend710-int8_b8_1.0.0.model\\nsupported_device: ascend710\\nrecommended_config: acl-ascend710-int8\\nlast_updated: 2025-07-11\\nlast_updated_month: 2025-07\",\n          \"model_name\": \"KM_textrecognition_CarPlateHK_small_nart_acl-ascend710-int8_b8_1.0.0.model\",\n          \"algorithm_name\": \"香港-车牌文字识别\",\n          \"algorithm_type\": \"识别\",\n          \"application_scene\": \"香港车牌文字识别\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"e603f74f5ab719dfa1019089\",\n          \"title\": \"fight_model\",\n          \"snippet\": \"model_name: fight_model\\nname: fight_model\\ntype: falcon\\nplatform: cuda11.0-trt7.1-fp16-T4\\nstatus: SUCCESS\\ndid: 116885\\nrid: 29947\\nversion: 1.0.0\\nversion_train_date: 20230621\\nsource_file: data/fight_model-cuda11.0-trt7.1-fp16-T4_29947_116885.json\",\n          \"model_name\": \"fight_model\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.997628\n        },\n        {\n          \"evidence_id\": \"f01f4352f202edbafab47244\",\n          \"title\": \"PAR_merged_model\",\n          \"snippet\": \"model_name: PAR_merged_model\\nname: PAR_merged_model\\ntype: classifier\\nplatform: cuda11.0-trt7.1-fp16-T4\\nstatus: SUCCESS\\ndid: 131495\\nrid: 50900\\nversion: 1.0.0\\nversion_train_date: 20260108\\nsource_file: data/PAR_merged_model-cuda11.0-trt7.1-fp16-T4_50900_131495.json\",\n          \"model_name\": \"PAR_merged_model\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.993984\n        },\n        {\n          \"evidence_id\": \"d474a14a6f29371d33f01a87\",\n          \"title\": \"PAR_merged_model\",\n          \"snippet\": \"model_name: PAR_merged_model\\nname: PAR_merged_model\\ntype: classifier\\nplatform: cuda11.1-trt7.2.1-int8-P4\\nstatus: SUCCESS\\ndid: 102245\\nrid: 36931\\nversion: 1.0.0\\nversion_train_date: 20240301\\nsource_file: data/PAR_merged_model-cuda11.1-trt7.2.1-int8-P4_36931_102245.json\",\n          \"model_name\": \"PAR_merged_model\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.991853\n        }\n      ]\n    },\n    {\n      \"round\": 2,\n      \"query\": \"头盔颜色 颜色 识别 模型 支持\",\n      \"knowledge_base_fully_answered\": false,\n      \"evidence\": [\n        {\n          \"evidence_id\": \"f53d026649b58ea0fecf243a\",\n          \"title\": \"PAR_merged_model\",\n          \"snippet\": \"model_name: PAR_merged_model\\nname: PAR_merged_model\\ntype: classifier\\nplatform: cpu-ppl2-fp32\\nstatus: SUCCESS\\ndid: 102019\\nrid: 36860\\nversion: 1.0.0\\nversion_train_date: 20240228\\nsource_file: data/PAR_merged_model-cpu-ppl2-fp32_36860_102019.json\",\n          \"model_name\": \"PAR_merged_model\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"9affabb19036f5d9f85a65bf\",\n          \"title\": \"KM_textrecognition_CarPlate_nart_acl-ascend310-int8_b8_3.0.1\",\n          \"snippet\": \"target_name: 车牌\\nalgorithm_type: 识别\\nalgorithm_name: 车牌文字识别small\\napplication_scene: 大陆及港澳车牌文字识别小模型，标品，单行\\nowner: 冯江燕\\nmodel_name: KM_textrecognition_CarPlate_nart_acl-ascend310-int8_b8_3.0.1\\nsupported_device: ascend310\\nrecommended_config: acl-ascend310-int8\\nlast_updated: 2023-05-30\\nlast_updated_month: 2023-05\",\n          \"model_name\": \"KM_textrecognition_CarPlate_nart_acl-ascend310-int8_b8_3.0.1\",\n          \"algorithm_name\": \"车牌文字识别small\",\n          \"algorithm_type\": \"识别\",\n          \"application_scene\": \"大陆及港澳车牌文字识别小模型，标品，单行\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"e603f74f5ab719dfa1019089\",\n          \"title\": \"fight_model\",\n          \"snippet\": \"model_name: fight_model\\nname: fight_model\\ntype: falcon\\nplatform: cuda11.0-trt7.1-fp16-T4\\nstatus: SUCCESS\\ndid: 116885\\nrid: 29947\\nversion: 1.0.0\\nversion_train_date: 20230621\\nsource_file: data/fight_model-cuda11.0-trt7.1-fp16-T4_29947_116885.json\",\n          \"model_name\": \"fight_model\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.997628\n        },\n        {\n          \"evidence_id\": \"f01f4352f202edbafab47244\",\n          \"title\": \"PAR_merged_model\",\n          \"snippet\": \"model_name: PAR_merged_model\\nname: PAR_merged_model\\ntype: classifier\\nplatform: cuda11.0-trt7.1-fp16-T4\\nstatus: SUCCESS\\ndid: 131495\\nrid: 50900\\nversion: 1.0.0\\nversion_train_date: 20260108\\nsource_file: data/PAR_merged_model-cuda11.0-trt7.1-fp16-T4_50900_131495.json\",\n          \"model_name\": \"PAR_merged_model\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.993984\n        },\n        {\n          \"evidence_id\": \"d474a14a6f29371d33f01a87\",\n          \"title\": \"PAR_merged_model\",\n          \"snippet\": \"model_name: PAR_merged_model\\nname: PAR_merged_model\\ntype: classifier\\nplatform: cuda11.1-trt7.2.1-int8-P4\\nstatus: SUCCESS\\ndid: 102245\\nrid: 36931\\nversion: 1.0.0\\nversion_train_date: 20240301\\nsource_file: data/PAR_merged_model-cuda11.1-trt7.2.1-int8-P4_36931_102245.json\",\n          \"model_name\": \"PAR_merged_model\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.991853\n        },\n        {\n          \"evidence_id\": \"8816f61d8a5298c7917b454b\",\n          \"title\": \"KM_textrecognition_CarPlate_vit_nart_cuda11.0-trt7.1-fp16-T4_b1_6.0.0.model\",\n          \"snippet\": \"target_name: 车牌\\nalgorithm_type: 识别\\nalgorithm_name: 车牌文字识别PK模型\\napplication_scene: 一所PK项目车牌文字识别模型，单双行\\nowner: 冯江燕\\nmodel_name: KM_textrecognition_CarPlate_vit_nart_cuda11.0-trt7.1-fp16-T4_b1_6.0.0.model\\nsupported_device: T4\\nrecommended_config: cuda11.0-trt7.1-fp16-T4\\nlast_updated: 2023-05-30\\nlast_updated_month: 2023-05\",\n          \"model_name\": \"KM_textrecognition_CarPlate_vit_nart_cuda11.0-trt7.1-fp16-T4_b1_6.0.0.model\",\n          \"algorithm_name\": \"车牌文字识别PK模型\",\n          \"algorithm_type\": \"识别\",\n          \"application_scene\": \"一所PK项目车牌文字识别模型，单双行\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.985791\n        }\n      ]\n    },\n    {\n      \"round\": 3,\n      \"query\": \"头盔颜色识别 模型 支持\",\n      \"knowledge_base_fully_answered\": false,\n      \"evidence\": [\n        {\n          \"evidence_id\": \"f53d026649b58ea0fecf243a\",\n          \"title\": \"PAR_merged_model\",\n          \"snippet\": \"model_name: PAR_merged_model\\nname: PAR_merged_model\\ntype: classifier\\nplatform: cpu-ppl2-fp32\\nstatus: SUCCESS\\ndid: 102019\\nrid: 36860\\nversion: 1.0.0\\nversion_train_date: 20240228\\nsource_file: data/PAR_merged_model-cpu-ppl2-fp32_36860_102019.json\",\n          \"model_name\": \"PAR_merged_model\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"4f763d094d342c76ce2366d0\",\n          \"title\": \"PDFs/安防方向--车牌属性 PK.pdf p4\",\n          \"snippet\": \"支持        \\n      KM_classifier_Carplate_TypeColor_na bc7a87ea06f9d8e7ce92652a7a50214d          \\n                                        否/8    cpu-ppl2-fp32 不涉及                    \\n      rt_cpu-ppl2-fp32_b1_6.0.0.model 18eacd13d16f94119355d7f901bee5ba              \\n     四、精度测试                                                                         \\n     测试集说明：车牌属性测试集、车牌端到端测试集                                                         \\n      1. 车牌属性测试集（pytorch）                                                           \\n        版本     颜色  acc                                                              \\n        3.0.0       96.52%                                                          \\n        6.0.0   96.96%(+0.44%)\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"e603f74f5ab719dfa1019089\",\n          \"title\": \"fight_model\",\n          \"snippet\": \"model_name: fight_model\\nname: fight_model\\ntype: falcon\\nplatform: cuda11.0-trt7.1-fp16-T4\\nstatus: SUCCESS\\ndid: 116885\\nrid: 29947\\nversion: 1.0.0\\nversion_train_date: 20230621\\nsource_file: data/fight_model-cuda11.0-trt7.1-fp16-T4_29947_116885.json\",\n          \"model_name\": \"fight_model\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.997628\n        },\n        {\n          \"evidence_id\": \"f01f4352f202edbafab47244\",\n          \"title\": \"PAR_merged_model\",\n          \"snippet\": \"model_name: PAR_merged_model\\nname: PAR_merged_model\\ntype: classifier\\nplatform: cuda11.0-trt7.1-fp16-T4\\nstatus: SUCCESS\\ndid: 131495\\nrid: 50900\\nversion: 1.0.0\\nversion_train_date: 20260108\\nsource_file: data/PAR_merged_model-cuda11.0-trt7.1-fp16-T4_50900_131495.json\",\n          \"model_name\": \"PAR_merged_model\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.993984\n        },\n        {\n          \"evidence_id\": \"d474a14a6f29371d33f01a87\",\n          \"title\": \"PAR_merged_model\",\n          \"snippet\": \"model_name: PAR_merged_model\\nname: PAR_merged_model\\ntype: classifier\\nplatform: cuda11.1-trt7.2.1-int8-P4\\nstatus: SUCCESS\\ndid: 102245\\nrid: 36931\\nversion: 1.0.0\\nversion_train_date: 20240301\\nsource_file: data/PAR_merged_model-cuda11.1-trt7.2.1-int8-P4_36931_102245.json\",\n          \"model_name\": \"PAR_merged_model\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.991853\n        },\n        {\n          \"evidence_id\": \"8816f61d8a5298c7917b454b\",\n          \"title\": \"KM_textrecognition_CarPlate_vit_nart_cuda11.0-trt7.1-fp16-T4_b1_6.0.0.model\",\n          \"snippet\": \"target_name: 车牌\\nalgorithm_type: 识别\\nalgorithm_name: 车牌文字识别PK模型\\napplication_scene: 一所PK项目车牌文字识别模型，单双行\\nowner: 冯江燕\\nmodel_name: KM_textrecognition_CarPlate_vit_nart_cuda11.0-trt7.1-fp16-T4_b1_6.0.0.model\\nsupported_device: T4\\nrecommended_config: cuda11.0-trt7.1-fp16-T4\\nlast_updated: 2023-05-30\\nlast_updated_month: 2023-05\",\n          \"model_name\": \"KM_textrecognition_CarPlate_vit_nart_cuda11.0-trt7.1-fp16-T4_b1_6.0.0.model\",\n          \"algorithm_name\": \"车牌文字识别PK模型\",\n          \"algorithm_type\": \"识别\",\n          \"application_scene\": \"一所PK项目车牌文字识别模型，单双行\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.985791\n        }\n      ]\n    }\n  ],\n  \"required_fields\": [\n    {\n      \"field\": \"existing_models\",\n      \"label\": \"可直接复用的已有模型\"\n    },\n    {\n      \"field\": \"similar_capabilities\",\n      \"label\": \"可迁移的相似能力\"\n    },\n    {\n      \"field\": \"performance_baseline\",\n      \"label\": \"性能与精度基线\"\n    },\n    {\n      \"field\": \"data_requirements\",\n      \"label\": \"数据、标注与迭代依赖\"\n    }\n  ]\n}"
+      }
+    ]
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "session_id": "ma_dataset_full_16",
+  "run_stamp": "20260529_143722_6d0fa277",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-05-29T14:38:20+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"识别“颈巾颜色：黑、白、灰、红、蓝、黄、绿、紫”，这是一个单物体的细粒度颜色属性识别任务。\",\n  \"direct_match\": {\n    \"exists\": false,\n    \"summary\": \"检索库中未发现直接针对‘颈巾（围巾）’这一特定物体的颜色识别模型。\",\n    \"evidence\": []\n  },\n  \"similar_assets\": [\n    {\n      \"model_or_solution\": \"KM_classifier_Vehicle_FullAttr_3.0.0\",\n      \"label_schema\": \"颜色标签包含：灰、白、红、黑、蓝、绿、棕、黄、紫、粉、青、橙、无法判断；共13类（含‘无法判断’）。\",\n      \"training_data\": \"训练集来源：未明确。标注规范：基于结构化车辆小图。样本量：未明确。\",\n      \"reported_metrics\": \"全属性 Acc 89.1%；黑色 precision 91.59%，蓝色 90.22%；整体车辆颜色属性精度在 Adela 测试集上约为 0.887/0.874 (Acc/mP)。\",\n      \"covered_capability\": \"颜色属性细粒度分类，覆盖用户所需颜色类别（黑/白/灰/红/蓝/黄/绿/紫）的 7 类（缺粉、青、橙、棕、无法判断）。\",\n      \"gap\": \"目标物体是车辆，不是颈巾；但颜色标签体系与用户需求高度重叠（8 个颜色标签中有 7 个完全匹配），算法结构可复用。\"\n     ,\n    \"evidence\": [\n        \"5610dda1e1727f5359da5193\",\n        \"7c7c025ca9796c52d5be4fad\",\n        \"d63d9e23a2da41bb60b97723\"\n    ]\n    },\n    {\n      \"model_or_solution\": \"PDFs/安防方向--非机动车属性大模型更新.pdf\",\n      \"label_schema\": \"车辆颜色标签（color）；非机动车粗分类（e_class）。具体颜色标签未完全列出，但包含‘车辆颜色’属性。\",\n      \"training_data\": \"训练集来源：未明确。标注规范：基于非机动车属性。样本量：未明确。\",\n      \"reported_metrics\": \"车辆颜色 (color) recall: 76.6%；车辆颜色 (color) precision: 90% 左右（根据输入阈值）。\",\n      \"covered_capability\": \"车辆颜色属性分类，包含颜色标签。\",\n      \"gap\": \"目标物体为非机动车，非颈巾；且颜色标签体系可能不完全覆盖用户需求的具体颜色分类。\"\n    ,\n      \"evidence\": [\n        \"3b429f956353161148093e4e\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"KM_classifier_Carplate_TypeColor_nart_cuda11.4-trt8.2.0-int8-T4_b8_6.0.0.model\",\n      \"label_schema\": \"车牌颜色类型属性，具体颜色分类未明确（仅提及‘车牌颜色属性’）。\",\n      \"training_data\": \"训练集来源：未明确。标注规范：车牌颜色。样本量：未明确。\",\n      \"reported_metrics\": \"文档描述性能较标品差，只保证车牌颜色属性精度，车牌类别无法保证。未提供具体 mAP/ACC。\",\n      \"covered_capability\": \"车牌颜色分类，包含颜色属性识别能力。\",\n      \"gap\": \"目标物体为车牌，非颈巾；且精度和标签体系可能不支持细粒度颜色分类（仅保证车牌颜色）。\"\n    ,\n      \"evidence\": [\n        \"6bfb621758cfa551ceec901f\"\n      ]\n    }\n  ],\n  \"migration_plan\": {\n    \"feasibility\": \"high\",\n    \"approach\": \"基于车辆颜色模型进行 Fine-tuning 迁移。\",\n    \"data_requirements\": \"需要收集‘颈巾’场景下的带颜色标签的图片数据，建议至少覆盖 8 种颜色类别，每类 500-1000 张，包含遮挡、不同光照条件。\",\n    \"compute_requirements\": \"建议使用支持 FP16 的 GPU（如 T4/V100/A100）进行微调。\",\n    \"engineering_work\": \"调整输入尺寸（原模型可能为 224x224 或 384x384，颈巾可能需更小尺寸以适应密集场景）、修改输出层类别数（从 13+ 改为 8+）、调整数据增强策略（增强颜色变换、小目标增强）。\",\n    \"estimated_timeline\": \"数据准备 2 周 + 微调 1 周 + 测试验证 1 周 = 约 4 周。\",\n    \"estimated_cost\": \"取决于数据量和算力，GPU 成本约 0.5 万 - 2 万（按 2 周训练估算）。\"\n  ,\n  \"dependencies\": [\n    \"需确认目标设备支持（如 Ascend 或 GPU）及推理延迟要求\",\n    \"需确认数据标注规范与模型输出格式一致性\"\n  ]\n  ,\n  \"risks\": [\n    \"小目标识别问题：颈巾在图像中可能占比较小，需评估小目标检测/分类精度\",\n    \"颜色歧义：光照/阴影可能导致颜色分类偏差，需引入颜色一致性数据增强\",\n    \"数据分布差异：车辆颜色数据与颈巾颜色数据分布不同，需验证领域适应性\"\n  ]\n  }\n,\n  \"expected_performance\": {\n    \"baseline\": \"直接迁移（无微调）精度预计下降至 50%-60%（因物体差异）\",\n    \"target\": \"微调后精度预计 85%-90%（参考车辆颜色模型 89.1% 全属性 Acc）\",\n    \"uncertainty\": \"受限于数据质量和标注一致性，若颈巾存在模糊/遮挡，精度可能低于 80%\"\n  }\n  ,\n  \"recommendation\": \"推荐使用 KM_classifier_Vehicle_FullAttr_3.0.0 作为基座模型进行微调。该模型颜色标签体系（黑/白/灰/红/蓝/黄/绿/紫）与用户需求完全覆盖，且精度记录（89.1%）可作为预期性能参考。需重点解决小目标分类与领域适应性问题。\"\n}",
+    "structured_output": {
+      "requirement_summary": "识别“颈巾颜色：黑、白、灰、红、蓝、黄、绿、紫”，这是一个单物体的细粒度颜色属性识别任务。",
+      "direct_match": {
+        "exists": false,
+        "summary": "检索库中未发现直接针对‘颈巾（围巾）’这一特定物体的颜色识别模型。",
+        "evidence": []
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "KM_classifier_Vehicle_FullAttr_3.0.0",
+          "label_schema": "颜色标签包含：灰、白、红、黑、蓝、绿、棕、黄、紫、粉、青、橙、无法判断；共13类（含‘无法判断’）。",
+          "training_data": "训练集来源：未明确。标注规范：基于结构化车辆小图。样本量：未明确。",
+          "reported_metrics": "全属性 Acc 89.1%；黑色 precision 91.59%，蓝色 90.22%；整体车辆颜色属性精度在 Adela 测试集上约为 0.887/0.874 (Acc/mP)。",
+          "covered_capability": "颜色属性细粒度分类，覆盖用户所需颜色类别（黑/白/灰/红/蓝/黄/绿/紫）的 7 类（缺粉、青、橙、棕、无法判断）。",
+          "gap": "目标物体是车辆，不是颈巾；但颜色标签体系与用户需求高度重叠（8 个颜色标签中有 7 个完全匹配），算法结构可复用。",
+          "evidence": [
+            "5610dda1e1727f5359da5193",
+            "7c7c025ca9796c52d5be4fad",
+            "d63d9e23a2da41bb60b97723"
+          ]
+        },
+        {
+          "model_or_solution": "PDFs/安防方向--非机动车属性大模型更新.pdf",
+          "label_schema": "车辆颜色标签（color）；非机动车粗分类（e_class）。具体颜色标签未完全列出，但包含‘车辆颜色’属性。",
+          "training_data": "训练集来源：未明确。标注规范：基于非机动车属性。样本量：未明确。",
+          "reported_metrics": "车辆颜色 (color) recall: 76.6%；车辆颜色 (color) precision: 90% 左右（根据输入阈值）。",
+          "covered_capability": "车辆颜色属性分类，包含颜色标签。",
+          "gap": "目标物体为非机动车，非颈巾；且颜色标签体系可能不完全覆盖用户需求的具体颜色分类。",
+          "evidence": [
+            "3b429f956353161148093e4e"
+          ]
+        },
+        {
+          "model_or_solution": "KM_classifier_Carplate_TypeColor_nart_cuda11.4-trt8.2.0-int8-T4_b8_6.0.0.model",
+          "label_schema": "车牌颜色类型属性，具体颜色分类未明确（仅提及‘车牌颜色属性’）。",
+          "training_data": "训练集来源：未明确。标注规范：车牌颜色。样本量：未明确。",
+          "reported_metrics": "文档描述性能较标品差，只保证车牌颜色属性精度，车牌类别无法保证。未提供具体 mAP/ACC。",
+          "covered_capability": "车牌颜色分类，包含颜色属性识别能力。",
+          "gap": "目标物体为车牌，非颈巾；且精度和标签体系可能不支持细粒度颜色分类（仅保证车牌颜色）。",
+          "evidence": [
+            "6bfb621758cfa551ceec901f"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "high",
+        "approach": "基于车辆颜色模型进行 Fine-tuning 迁移。",
+        "data_requirements": "需要收集‘颈巾’场景下的带颜色标签的图片数据，建议至少覆盖 8 种颜色类别，每类 500-1000 张，包含遮挡、不同光照条件。",
+        "compute_requirements": "建议使用支持 FP16 的 GPU（如 T4/V100/A100）进行微调。",
+        "engineering_work": "调整输入尺寸（原模型可能为 224x224 或 384x384，颈巾可能需更小尺寸以适应密集场景）、修改输出层类别数（从 13+ 改为 8+）、调整数据增强策略（增强颜色变换、小目标增强）。",
+        "estimated_timeline": "数据准备 2 周 + 微调 1 周 + 测试验证 1 周 = 约 4 周。",
+        "estimated_cost": "取决于数据量和算力，GPU 成本约 0.5 万 - 2 万（按 2 周训练估算）。",
+        "dependencies": [
+          "需确认目标设备支持（如 Ascend 或 GPU）及推理延迟要求",
+          "需确认数据标注规范与模型输出格式一致性"
+        ],
+        "risks": [
+          "小目标识别问题：颈巾在图像中可能占比较小，需评估小目标检测/分类精度",
+          "颜色歧义：光照/阴影可能导致颜色分类偏差，需引入颜色一致性数据增强",
+          "数据分布差异：车辆颜色数据与颈巾颜色数据分布不同，需验证领域适应性"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "直接迁移（无微调）精度预计下降至 50%-60%（因物体差异）",
+        "target": "微调后精度预计 85%-90%（参考车辆颜色模型 89.1% 全属性 Acc）",
+        "uncertainty": "受限于数据质量和标注一致性，若颈巾存在模糊/遮挡，精度可能低于 80%"
+      },
+      "recommendation": "推荐使用 KM_classifier_Vehicle_FullAttr_3.0.0 作为基座模型进行微调。该模型颜色标签体系（黑/白/灰/红/蓝/黄/绿/紫）与用户需求完全覆盖，且精度记录（89.1%）可作为预期性能参考。需重点解决小目标分类与领域适应性问题。"
+    }
+  }
+}

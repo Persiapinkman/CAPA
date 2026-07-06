@@ -20,7 +20,12 @@ export NO_PROXY="${NO_PROXY:-127.0.0.1,localhost}"
 export no_proxy="${no_proxy:-127.0.0.1,localhost}"
 unset HTTP_PROXY HTTPS_PROXY ALL_PROXY http_proxy https_proxy all_proxy
 
-exec .venv-train/bin/python demo/eval/run_repeated_planner_routing_eval.py \
+PYTHON_BIN="${PYTHON_BIN:-$ROOT_DIR/.venv-train/bin/python}"
+if [[ ! -x "$PYTHON_BIN" ]]; then
+  PYTHON_BIN="$(command -v python3)"
+fi
+
+exec "$PYTHON_BIN" demo/eval/run_repeated_planner_routing_eval.py \
   --cases "$CASES" \
   --out-dir "$OUT_DIR" \
   --report-prefix "$REPORT_PREFIX" \

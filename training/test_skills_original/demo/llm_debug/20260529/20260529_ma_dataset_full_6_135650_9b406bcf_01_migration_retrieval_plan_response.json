@@ -1,0 +1,68 @@
+{
+  "session_id": "ma_dataset_full_6",
+  "run_stamp": "20260529_135650_9b406bcf",
+  "stage": "migration_retrieval_plan_response",
+  "step_index": 1,
+  "created_at": "2026-05-29T13:56:53+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "output_schema": {
+      "abstract_requirement": "object, attribute, task_type, scene, constraints[]",
+      "retrieve_fields": "每项 field + queries[]（2-4 条）"
+    },
+    "used_fallback": false,
+    "output_raw": "{\n  \"abstract_requirement\": {\n    \"object\": \"头部类别分类\",\n    \"attribute\": \"服装样式 + 防护/材质类型混合\",\n    \"task_type\": \"6 类判别（渔夫帽、无檐帽、鸭舌帽、安全帽、头盔、连衣帽）\",\n    \"scene\": \"服装列表、工业质检\",\n    \"constraints\": [\n      \"小个子：服装的帽形判别\",\n      \"具体：6 类硬分类\",\n      \"复杂：帽形混合但两者共用形状/防护功能\",\n      \"需覆盖：\"\n    ]\n  },\n  \"retrieve_fields\": [\n    {\n      \"field\": \"existing_models\",\n      \"queries\": [\n        \"服装头部款式分类模型\",\n        \"安全帽头盔连衣帽检测算法\",\n        \"6 种类服装判别网络\",\n        \"无檐帽鸭舌帽比较模型\"\n      ]\n    },\n    {\n      \"field\": \"similar_capabilities\",\n      \"queries\": [\n        \"小个子服装局部判别能力\",\n        \"防护装备与时装区分能力\",\n        \"多类少类图像判别迁移能力\",\n        \"帽形与防护功能分割网络\"\n      ]\n    },\n    {\n      \"field\": \"performance_baseline\",\n      \"queries\": [\n        \"服装帽形分类准确率%要求\",\n        \"滑板头盔检测模型mIoU阈值\",\n        \"安全帽与鸭舌帽区分率要求\",\n        \"跨类别防护与服装判别精度\"\n      ]\n    },\n    {\n      \"field\": \"data_requirements\",\n      \"queries\": [\n        \"6 类帽型标注数据量\",\n        \"安全帽服装混合数据集\",\n      \"帽子数据集完整标注要求\",\n      \"已知样本数据分布平衡性\"\n      ]\n    }\n  ]\n}",
+    "structured_output": {
+      "abstract_requirement": {
+        "object": "头部类别分类",
+        "attribute": "服装样式 + 防护/材质类型混合",
+        "task_type": "6 类判别（渔夫帽、无檐帽、鸭舌帽、安全帽、头盔、连衣帽）",
+        "scene": "服装列表、工业质检",
+        "constraints": [
+          "小个子：服装的帽形判别",
+          "具体：6 类硬分类",
+          "复杂：帽形混合但两者共用形状/防护功能",
+          "需覆盖："
+        ]
+      },
+      "retrieve_fields": [
+        {
+          "field": "existing_models",
+          "queries": [
+            "服装头部款式分类模型",
+            "安全帽头盔连衣帽检测算法",
+            "6 种类服装判别网络",
+            "无檐帽鸭舌帽比较模型"
+          ]
+        },
+        {
+          "field": "similar_capabilities",
+          "queries": [
+            "小个子服装局部判别能力",
+            "防护装备与时装区分能力",
+            "多类少类图像判别迁移能力",
+            "帽形与防护功能分割网络"
+          ]
+        },
+        {
+          "field": "performance_baseline",
+          "queries": [
+            "服装帽形分类准确率%要求",
+            "滑板头盔检测模型mIoU阈值",
+            "安全帽与鸭舌帽区分率要求",
+            "跨类别防护与服装判别精度"
+          ]
+        },
+        {
+          "field": "data_requirements",
+          "queries": [
+            "6 类帽型标注数据量",
+            "安全帽服装混合数据集",
+            "帽子数据集完整标注要求",
+            "已知样本数据分布平衡性"
+          ]
+        }
+      ]
+    }
+  }
+}

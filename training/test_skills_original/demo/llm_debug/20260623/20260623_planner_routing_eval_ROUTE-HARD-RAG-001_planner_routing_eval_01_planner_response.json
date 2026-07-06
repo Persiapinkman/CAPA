@@ -1,0 +1,11 @@
+{
+  "session_id": "planner_routing_eval_ROUTE-HARD-RAG-001",
+  "run_stamp": "planner_routing_eval",
+  "stage": "planner_response",
+  "step_index": 1,
+  "created_at": "2026-06-23T16:02:53+08:00",
+  "payload": {
+    "raw_response": "{\n  \"thought\": \"用户询问安全帽佩戴检测相关的线上模型版本及支持的标签。这是具体事实类问题，需要从知识库/业务文档中检索。query_trajectories 为空，query 无明确指代，无图像输入，不符合迁移顾问或检测工具的阈值。根据规则第 1 条，应优先通过 RAG 查找。此问题回答后将直接覆盖用户查询（无中间状态），因此 finish_after_tool=true。\",\n  \"decision_type\": \"tool\",\n  \"action\": \"rag_answer\",\n  \"action_input\": {\n    \"query\": \"安全帽佩戴检测线上模型版本有哪些？每个版本支持哪些标签？\",\n    \"finish_after_tool\": true\n  }\n}",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/results/planner_routing_eval"
+  }
+}

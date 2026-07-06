@@ -1,0 +1,60 @@
+{
+  "session_id": "ma_dataset_full_20",
+  "run_stamp": "20260529_143847_f740e98c",
+  "stage": "migration_retrieval_plan_response",
+  "step_index": 1,
+  "created_at": "2026-05-29T14:38:50+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "output_schema": {
+      "abstract_requirement": "object, attribute, task_type, scene, constraints[]",
+      "retrieve_fields": "每项 field + queries[]（2-4 条）"
+    },
+    "used_fallback": false,
+    "output_raw": "{\n  \"abstract_requirement\": {\n    \"object\": \"骑行人\",\n    \"attribute\": \"上衣长度\",\n    \"task_type\": \"视觉分类\"\n  , \n  \"scene\": \"户外/运动场景\"\n ,\n  \"constraints\": [\n    \"肢体遮挡\",\n    \"衣物撕裂/褶皱/变形\",\n    \"光线复杂\",\n    \"多尺度定位\"\n  ]\n} \n,\n  \"retrieve_fields\": [\n    {\n      \"field\": \"existing_models\",\n      \"queries\": [\n        \"骑行者户外长袖袖口赤膊短袖分类检测模型\",\n        \"多尺度人体上半身衣物长度标注识别复发模型\"\n      ]\n    },\n    {\n      \"field\": \"similar_capabilities\",\n      \"queries\": [\n        \"暴力遮挡缺失衣物部分轮廓分类迁移能力\",\n        \"复杂户外光照运动姿态服装分类兼容能力\"\n      ]\n    },\n    {\n      \"field\": \"performance_baseline\",\n      \"queries\": [\n        \"骑行者长袖短袖检测准确率基准评定效率\",\n        \"复杂户外光照衣物状态标签识别 mAP 基准线\"\n      ]\n    },\n    {\n      \"field\": \"data_requirements\",\n      \"queries\": [\n        \"骑行者衣袖赤膊衬衫短款状态图像标注采集\",\n        \"自行骑行者不同样式上衣遮挡光照标注数据迭代\"\n      ]\n    }\n  ]\n}",
+    "structured_output": {
+      "abstract_requirement": {
+        "object": "骑行人",
+        "attribute": "上衣长度",
+        "task_type": "视觉分类",
+        "scene": "户外/运动场景",
+        "constraints": [
+          "肢体遮挡",
+          "衣物撕裂/褶皱/变形",
+          "光线复杂",
+          "多尺度定位"
+        ]
+      },
+      "retrieve_fields": [
+        {
+          "field": "existing_models",
+          "queries": [
+            "骑行者户外长袖袖口赤膊短袖分类检测模型",
+            "多尺度人体上半身衣物长度标注识别复发模型"
+          ]
+        },
+        {
+          "field": "similar_capabilities",
+          "queries": [
+            "暴力遮挡缺失衣物部分轮廓分类迁移能力",
+            "复杂户外光照运动姿态服装分类兼容能力"
+          ]
+        },
+        {
+          "field": "performance_baseline",
+          "queries": [
+            "骑行者长袖短袖检测准确率基准评定效率",
+            "复杂户外光照衣物状态标签识别 mAP 基准线"
+          ]
+        },
+        {
+          "field": "data_requirements",
+          "queries": [
+            "骑行者衣袖赤膊衬衫短款状态图像标注采集",
+            "自行骑行者不同样式上衣遮挡光照标注数据迭代"
+          ]
+        }
+      ]
+    }
+  }
+}

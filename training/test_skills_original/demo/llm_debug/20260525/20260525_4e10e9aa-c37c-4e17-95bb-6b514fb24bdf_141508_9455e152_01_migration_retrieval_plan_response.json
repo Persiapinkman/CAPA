@@ -1,0 +1,67 @@
+{
+  "session_id": "4e10e9aa-c37c-4e17-95bb-6b514fb24bdf",
+  "run_stamp": "20260525_141508_9455e152",
+  "stage": "migration_retrieval_plan_response",
+  "step_index": 1,
+  "created_at": "2026-05-25T14:15:12+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "output_schema": {
+      "abstract_requirement": "object, attribute, task_type, scene, constraints[]",
+      "retrieve_fields": "每项 field + queries[]（2-4 条）"
+    },
+    "used_fallback": false,
+    "output_raw": "{\n  \"abstract_requirement\": {\n    \"object\": \"头盔/安全帽\",\n    \"attribute\": \"颜色识别\"\n  , \n    \"task_type\": \"结构化人体属性检测 / 多分类检测\"\n  , \n    \"scene\": \"城市结构化安全检测\"\n  , \n    \"constraints\": [\"1. 需要包含黑、白、灰、红、蓝、黄、绿、紫、迷彩等颜色类别\", \"2. 需评估现有模型对单个人体配饰的识别能力\", \"3. 聚焦颜色属性的精确分类\"]\n  },\n\n  \"retrieve_fields\": [\n    {\n      \"field\": \"existing_models\",\n      \"queries\": [\n        \"城市结构化人体模型 头盔检测 现有模型 公开模型\",\n        \"安全帽颜色检测 结构属性检测 现有模型\",\n        \" Crowd template detection 安全帽 颜色类别\",\n        \" pedestrian attribute model 带帽颜色检测\"\n      ]\n    },\n    {\n      \"field\": \"similar_capabilities\",\n      \"queries\": [\n        \"类似于颜色分类 结构化检测 辅助属性检测\",\n        \"单一物体多属性检测 自行车/非机动车 当前属性\",\n        \"服装鞋帽颜色检测 检测任务迁移 颜色细粒度分类\",\n        \"轧道检测 辅助属性解析 颜色与服装识别\"\n      ]\n    },\n    {\n      \"field\": \"performance_baseline\",\n      \"queries\": [\n        \"人行道头盔颜色检测 精度指标 mAP\",\n        \"安全帽颜色分类 识别准确率 错误率 基准数据\",\n        \"人体配饰属性分类 AP 颜色分类 基准测试\",\n        \"仿真模型结构安全帽所属属性 mAP 对比\"\n      ]\n    },\n    {\n      \"field\": \"data_requirements\",\n      \"queries\": [\n        \"头盔颜色 数据集 标注要求 训练数据 颜色标签\",\n        \"非机动车特征模型 车辆属性 头盔颜色 标注数据\",\n        \"街头行人属性 头盔配饰颜色 数据需求\",\n        \"安全帽 颜色分类 图像数据 标注 训练样本\"\n      ]\n    }\n  ]\n}",
+    "structured_output": {
+      "abstract_requirement": {
+        "object": "头盔/安全帽",
+        "attribute": "颜色识别",
+        "task_type": "结构化人体属性检测 / 多分类检测",
+        "scene": "城市结构化安全检测",
+        "constraints": [
+          "1. 需要包含黑、白、灰、红、蓝、黄、绿、紫、迷彩等颜色类别",
+          "2. 需评估现有模型对单个人体配饰的识别能力",
+          "3. 聚焦颜色属性的精确分类"
+        ]
+      },
+      "retrieve_fields": [
+        {
+          "field": "existing_models",
+          "queries": [
+            "城市结构化人体模型 头盔检测 现有模型 公开模型",
+            "安全帽颜色检测 结构属性检测 现有模型",
+            "Crowd template detection 安全帽 颜色类别",
+            "pedestrian attribute model 带帽颜色检测"
+          ]
+        },
+        {
+          "field": "similar_capabilities",
+          "queries": [
+            "类似于颜色分类 结构化检测 辅助属性检测",
+            "单一物体多属性检测 自行车/非机动车 当前属性",
+            "服装鞋帽颜色检测 检测任务迁移 颜色细粒度分类",
+            "轧道检测 辅助属性解析 颜色与服装识别"
+          ]
+        },
+        {
+          "field": "performance_baseline",
+          "queries": [
+            "人行道头盔颜色检测 精度指标 mAP",
+            "安全帽颜色分类 识别准确率 错误率 基准数据",
+            "人体配饰属性分类 AP 颜色分类 基准测试",
+            "仿真模型结构安全帽所属属性 mAP 对比"
+          ]
+        },
+        {
+          "field": "data_requirements",
+          "queries": [
+            "头盔颜色 数据集 标注要求 训练数据 颜色标签",
+            "非机动车特征模型 车辆属性 头盔颜色 标注数据",
+            "街头行人属性 头盔配饰颜色 数据需求",
+            "安全帽 颜色分类 图像数据 标注 训练样本"
+          ]
+        }
+      ]
+    }
+  }
+}

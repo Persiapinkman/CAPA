@@ -1,0 +1,104 @@
+{
+  "session_id": "ma_dataset_full_40",
+  "run_stamp": "20260603_103856_a3ee978f",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-06-03T10:40:24+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"用户需要识别非机动车细分类别，包括摩托车、电动车、自行车、三轮车、婴儿车、轮椅、其他非电动车。询问是否支持。\",\n  \"direct_match\": {\n    \"exists\": false,\n    \"summary\": \"当前检索结果中，不存在一个模型直接支持识别用户列出的所有 7 类非机动车。现有的非机动车辆属性模型主要覆盖了摩托车、电动车、自行车、三轮车、婴儿车、轮椅等类别，但类别体系与用户定义不完全一致，部分模型缺少“其他非电动车”或特定细分类别的明确支持，精度数据也显示部分类别（如三轮车、婴儿车、轮椅）精度较低或测试数据量不足。\"\n  ,\n    \"evidence\": []\n  },\n  \"similar_assets\": [\n    {\n      \"model_or_solution\": \"PDFs/非机车属性全模型.pdf\",\n      \"label_schema\": \"检测类别：非机动车；包含细分类别：摩托车、电动车、自行车、三轮车、婴儿车、轮椅。无明确的“其他非电动车”类别，但可能作为“其他”或归入最接近类别。\",\n      \"training_data\": \"测试集包含：整体场景（有无阈值）、纯非机动车场景、完整骑手场景。数据来源：公安图片测试集、公安视频测试集。证据不足具体样本量。\",\n      \"reported_metrics\": \"整体场景（无阈值）：摩托车 P/R 73.0/56.7, 电动车 93.6/93.3, 自行车 84.8/88.2, 三轮车 83.1/79.8, 婴儿车 86.9/80.3, 轮椅 68.2/53.2。纯非机动车场景（无阈值）：摩托车 83.9/91.2, 电动车 97.4/98.1, 自行车 96.4/93.3, 三轮车 73.9/73.9, 婴儿车 85.7/73.0, 轮椅 34.6/50.0。\",\n      \"covered_capability\": \"支持识别非机动车类型，类别覆盖摩托车、电动车、自行车、三轮车、婴儿车、轮椅。\",\n      \"gap\": \"未明确列出“其他非电动车”类别；三轮车、婴儿车、轮椅精度较低，尤其是轮椅在纯非机动车场景召回率仅 50.0%；数据量可能不足（文档提及三轮车测试数据量非常少）。\",\n      \"evidence\": [\n        \"cffe7beb5a41ae2acc42088e\",\n        \"892addb4452361781498dbe6\",\n        \"6eed8f76a88c888f078acfb1\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"KM_classifier_Nonmotor_FullAttr_Security_nart_cuda11.0-trt7.1-int8-T4_b8_3.1.0.model\",\n      \"label_schema\": \"非机动车属性（安防）；类别包含摩托车、电动车、自行车、三轮车、婴儿车、轮椅。\",\n      \"training_data\": \"场景：只有非机动车属性 V3.1.0。证据不足具体训练数据来源和规模。\",\n      \"reported_metrics\": \"无直接精度数据，但文档《安防方向--非机动车属性大模型更新.pdf》显示对应模型（Nonmotor_FullAttr_Security_3.1.0）在公安图片测试集中：摩托车 Recall 92.3%, Precison 97.4%；电动车 Recall 97.2%, Precision 98.9%；自行车 Recall 95.4%, Precision 96.2%；三轮车 Recall 83.2%, Precision 93.0%。\",\n      \"covered_capability\": \"支持非机动车属性识别，覆盖主要非机动类别。\",\n      \"gap\": \"未明确支持“其他非电动车”；三轮车在视频测试集中数据量非常少，指标可能不准；婴儿车、轮椅数据在文档中未详细列出精度，但全模型中有婴儿车、轮椅精度数据。\",\n      \"evidence\": [\n        \"a829df4f89dad159b1ca8a21\",\n        \"dd198159ae80aee3ee6c139c\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"PDFs/非机动车特征发版.pdf (车辆/非机动车 ReID)\",\n      \"label_schema\": \"非机动车 ReID，未明确列出细分类别标签，主要提取特征用于跨摄像头检索。\",\n      \"training_data\": \"场景：泛安防。光照：室外白天和室内正常光照。目标大小：720p 下 35-240 像素，1080p 下 50-360 像素。数据来源：新增广州场景测试集，跨朝向训练数据。\",\n      \"reported_metrics\": \"广州场景 mAP 44.1%->57.8%（v1.1.0）；石家庄 mAP 71.7%->72.8%。\",\n      \"covered_capability\": \"支持非机动车特征提取和检索，但不直接输出分类标签（如摩托车/电动车等），需配合分类模型使用。\",\n      \"gap\": \"不直接支持分类识别，仅支持特征 ReID。\",\n      \"evidence\": [\n        \"1427455616e9e5477fc19985\",\n        \"c21db75e30f652e6b13c9fc7\",\n        \"63a646f2eb69722051046631\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"struct_e5\",\n      \"label_schema\": \"检测类别：pedestrian, cycer, car, cyc。\"\n      ,\n      \"training_data\": \"证据不足。\",\n      \"reported_metrics\": \"证据不足。\",\n      \"covered_capability\": \"支持非机动车（cyc/cycer）检测，但类别粒度较粗，未区分摩托车、电动车、自行车等。\",\n      \"gap\": \"类别粒度太粗，不满足用户细分需求。\",\n      \"evidence\": [\n        \"160b752b9c00fdd6d6ab9e5c\",\n        \"5488192405915f7c5999f38d\"\n      ]\n    }\n  ],\n  \"migration_plan\": {\n    \"feasibility\": \"medium\",\n    \"approach\": \"1. 直接复用 KM_classifier_Nonmotor_FullAttr_Security 模型，但需评估“其他非电动车”是否可作为兜底类别或单独训练。2. 针对三轮车、婴儿车、轮椅精度低问题，需收集更多特定场景数据重新训练或微调。3. 非机动车特征模型可辅助 ReID 场景，但无法直接替代分类任务。\",\n    \"data_requirements\": \"需补充三轮车、婴儿车、轮椅、其他非机动车的样本，特别是视频和复杂光照场景。建议数据量：每类至少 500-1000 张清晰样本，覆盖不同视角、遮挡情况。\",\n    \"compute_requirements\": \"T4/P4/Ascend710 平台支持较好，CPU 版本精度可能略低。建议优先使用 GPU 或 NPU 部署。\",\n    \"engineering_work\": \"标签体系对齐（将模型类别映射到用户需求），精度阈值调优，新增“其他非电动车”类别的标注规范制定。\",\n    \"estimated_timeline\": \"1-2 个月（含数据收集、标注、训练、测试）。\",\n    \"estimated_cost\": \"证据不足，无法给出精确成本。参考模型训练成本通常与数据量、平台资源相关。\"\n  ,\n    \"dependencies\": [\n      \"数据收集与标注\",\n      \"模型训练与评估\",\n      \"精度验证与阈值调优\"\n    ]\n  ,\n    \"risks\": [\n      \"三轮车、婴儿车、轮椅数据稀缺导致精度低\",\n      \"夜间/逆光场景精度下降\",\n      \"“其他非电动车”类别定义模糊影响模型效果\"\n    ]\n  }\n  ,\n  \"expected_performance\": {\n    \"baseline\": \"摩托车、电动车、自行车精度较高（>90% P/R），三轮车、婴儿车、轮椅精度较低（<80% P/R，尤其是轮椅）。\",\n    \"target\": \"通过数据增强和模型微调，目标：主要类别（摩托/电动/自行）>95% P/R，次要类别（三轮/婴儿/轮椅）>85% P/R。\",\n    \"uncertainty\": \"低光照、遮挡、小目标场景精度可能下降；“其他”类别需定义明确特征才能识别。\"\n  }\n  ,\n  \"recommendation\": \"建议采用现有非机动车辆属性模型作为基线，优先保障摩托车、电动车、自行车的识别精度。针对三轮车、婴儿车、轮椅类别，建议进行专项数据收集和模型微调。对于“其他非电动车”，建议定义为兜底类别或根据业务需求补充训练。\"\n}",
+    "structured_output": {
+      "requirement_summary": "用户需要识别非机动车细分类别，包括摩托车、电动车、自行车、三轮车、婴儿车、轮椅、其他非电动车。询问是否支持。",
+      "direct_match": {
+        "exists": false,
+        "summary": "当前检索结果中，不存在一个模型直接支持识别用户列出的所有 7 类非机动车。现有的非机动车辆属性模型主要覆盖了摩托车、电动车、自行车、三轮车、婴儿车、轮椅等类别，但类别体系与用户定义不完全一致，部分模型缺少“其他非电动车”或特定细分类别的明确支持，精度数据也显示部分类别（如三轮车、婴儿车、轮椅）精度较低或测试数据量不足。",
+        "evidence": []
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "PDFs/非机车属性全模型.pdf",
+          "label_schema": "检测类别：非机动车；包含细分类别：摩托车、电动车、自行车、三轮车、婴儿车、轮椅。无明确的“其他非电动车”类别，但可能作为“其他”或归入最接近类别。",
+          "training_data": "测试集包含：整体场景（有无阈值）、纯非机动车场景、完整骑手场景。数据来源：公安图片测试集、公安视频测试集。证据不足具体样本量。",
+          "reported_metrics": "整体场景（无阈值）：摩托车 P/R 73.0/56.7, 电动车 93.6/93.3, 自行车 84.8/88.2, 三轮车 83.1/79.8, 婴儿车 86.9/80.3, 轮椅 68.2/53.2。纯非机动车场景（无阈值）：摩托车 83.9/91.2, 电动车 97.4/98.1, 自行车 96.4/93.3, 三轮车 73.9/73.9, 婴儿车 85.7/73.0, 轮椅 34.6/50.0。",
+          "covered_capability": "支持识别非机动车类型，类别覆盖摩托车、电动车、自行车、三轮车、婴儿车、轮椅。",
+          "gap": "未明确列出“其他非电动车”类别；三轮车、婴儿车、轮椅精度较低，尤其是轮椅在纯非机动车场景召回率仅 50.0%；数据量可能不足（文档提及三轮车测试数据量非常少）。",
+          "evidence": [
+            "cffe7beb5a41ae2acc42088e",
+            "892addb4452361781498dbe6",
+            "6eed8f76a88c888f078acfb1"
+          ]
+        },
+        {
+          "model_or_solution": "KM_classifier_Nonmotor_FullAttr_Security_nart_cuda11.0-trt7.1-int8-T4_b8_3.1.0.model",
+          "label_schema": "非机动车属性（安防）；类别包含摩托车、电动车、自行车、三轮车、婴儿车、轮椅。",
+          "training_data": "场景：只有非机动车属性 V3.1.0。证据不足具体训练数据来源和规模。",
+          "reported_metrics": "无直接精度数据，但文档《安防方向--非机动车属性大模型更新.pdf》显示对应模型（Nonmotor_FullAttr_Security_3.1.0）在公安图片测试集中：摩托车 Recall 92.3%, Precison 97.4%；电动车 Recall 97.2%, Precision 98.9%；自行车 Recall 95.4%, Precision 96.2%；三轮车 Recall 83.2%, Precision 93.0%。",
+          "covered_capability": "支持非机动车属性识别，覆盖主要非机动类别。",
+          "gap": "未明确支持“其他非电动车”；三轮车在视频测试集中数据量非常少，指标可能不准；婴儿车、轮椅数据在文档中未详细列出精度，但全模型中有婴儿车、轮椅精度数据。",
+          "evidence": [
+            "a829df4f89dad159b1ca8a21",
+            "dd198159ae80aee3ee6c139c"
+          ]
+        },
+        {
+          "model_or_solution": "PDFs/非机动车特征发版.pdf (车辆/非机动车 ReID)",
+          "label_schema": "非机动车 ReID，未明确列出细分类别标签，主要提取特征用于跨摄像头检索。",
+          "training_data": "场景：泛安防。光照：室外白天和室内正常光照。目标大小：720p 下 35-240 像素，1080p 下 50-360 像素。数据来源：新增广州场景测试集，跨朝向训练数据。",
+          "reported_metrics": "广州场景 mAP 44.1%->57.8%（v1.1.0）；石家庄 mAP 71.7%->72.8%。",
+          "covered_capability": "支持非机动车特征提取和检索，但不直接输出分类标签（如摩托车/电动车等），需配合分类模型使用。",
+          "gap": "不直接支持分类识别，仅支持特征 ReID。",
+          "evidence": [
+            "1427455616e9e5477fc19985",
+            "c21db75e30f652e6b13c9fc7",
+            "63a646f2eb69722051046631"
+          ]
+        },
+        {
+          "model_or_solution": "struct_e5",
+          "label_schema": "检测类别：pedestrian, cycer, car, cyc。",
+          "training_data": "证据不足。",
+          "reported_metrics": "证据不足。",
+          "covered_capability": "支持非机动车（cyc/cycer）检测，但类别粒度较粗，未区分摩托车、电动车、自行车等。",
+          "gap": "类别粒度太粗，不满足用户细分需求。",
+          "evidence": [
+            "160b752b9c00fdd6d6ab9e5c",
+            "5488192405915f7c5999f38d"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "medium",
+        "approach": "1. 直接复用 KM_classifier_Nonmotor_FullAttr_Security 模型，但需评估“其他非电动车”是否可作为兜底类别或单独训练。2. 针对三轮车、婴儿车、轮椅精度低问题，需收集更多特定场景数据重新训练或微调。3. 非机动车特征模型可辅助 ReID 场景，但无法直接替代分类任务。",
+        "data_requirements": "需补充三轮车、婴儿车、轮椅、其他非机动车的样本，特别是视频和复杂光照场景。建议数据量：每类至少 500-1000 张清晰样本，覆盖不同视角、遮挡情况。",
+        "compute_requirements": "T4/P4/Ascend710 平台支持较好，CPU 版本精度可能略低。建议优先使用 GPU 或 NPU 部署。",
+        "engineering_work": "标签体系对齐（将模型类别映射到用户需求），精度阈值调优，新增“其他非电动车”类别的标注规范制定。",
+        "estimated_timeline": "1-2 个月（含数据收集、标注、训练、测试）。",
+        "estimated_cost": "证据不足，无法给出精确成本。参考模型训练成本通常与数据量、平台资源相关。",
+        "dependencies": [
+          "数据收集与标注",
+          "模型训练与评估",
+          "精度验证与阈值调优"
+        ],
+        "risks": [
+          "三轮车、婴儿车、轮椅数据稀缺导致精度低",
+          "夜间/逆光场景精度下降",
+          "“其他非电动车”类别定义模糊影响模型效果"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "摩托车、电动车、自行车精度较高（>90% P/R），三轮车、婴儿车、轮椅精度较低（<80% P/R，尤其是轮椅）。",
+        "target": "通过数据增强和模型微调，目标：主要类别（摩托/电动/自行）>95% P/R，次要类别（三轮/婴儿/轮椅）>85% P/R。",
+        "uncertainty": "低光照、遮挡、小目标场景精度可能下降；“其他”类别需定义明确特征才能识别。"
+      },
+      "recommendation": "建议采用现有非机动车辆属性模型作为基线，优先保障摩托车、电动车、自行车的识别精度。针对三轮车、婴儿车、轮椅类别，建议进行专项数据收集和模型微调。对于“其他非电动车”，建议定义为兜底类别或根据业务需求补充训练。"
+    }
+  }
+}

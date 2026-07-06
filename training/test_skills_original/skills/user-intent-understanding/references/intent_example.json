@@ -1,0 +1,16 @@
+{
+  "task_type": "detection",
+  "task_name": "钓鱼人员检测",
+  "target_label": "fishing person",
+  "target_keywords": ["fishing", "angler", "rod"],
+  "scene": "河道岸边监控场景，含护栏和草地。",
+  "target": "持鱼竿人员，站姿或坐姿，大小中等。",
+  "camera": "约4米高位俯拍，覆盖岸边与水域边缘。",
+  "requirement_background": "用于违规垂钓监管。",
+  "solution": "采集多时段和天气数据，构建正负样本。",
+  "annotation_spec": "框选可见人体主体与持竿动作，遮挡严重样本标记难例。",
+  "prompts": [
+    "A realistic surveillance image of a fisherman standing near a riverbank...",
+    "Another realistic monitoring scene with one person fishing..."
+  ]
+}

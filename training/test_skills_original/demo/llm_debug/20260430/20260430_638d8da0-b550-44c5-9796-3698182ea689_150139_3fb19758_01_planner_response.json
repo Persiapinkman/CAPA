@@ -1,0 +1,11 @@
+{
+  "session_id": "638d8da0-b550-44c5-9796-3698182ea689",
+  "run_stamp": "20260430_150139_3fb19758",
+  "stage": "planner_response",
+  "step_index": 1,
+  "created_at": "2026-04-30T15:01:40+08:00",
+  "payload": {
+    "raw_response": "{\"thought\":\"用户询问人脸检测模型有哪些，这是一个关于模型知识的问题，可能需要检索企业知识库或通用知识。首先考虑使用rag_answer工具检索企业知识库，如果没有命中再考虑answerer。\",\"decision_type\":\"tool\",\"action\":\"rag_answer\",\"action_input\":{\"query\":\"人脸检测模型有哪些\",\"finish_after_tool\":false},\"final_answer\":\"\"}",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260430_150139_3fb19758"
+  }
+}

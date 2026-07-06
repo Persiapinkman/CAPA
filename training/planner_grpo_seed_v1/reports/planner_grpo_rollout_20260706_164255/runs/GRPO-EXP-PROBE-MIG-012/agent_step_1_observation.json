@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "pipeline_eval",
+  "_action_input": {
+    "task_text": "基于提供的样例图进行垃圾车检测并评估检测效果",
+    "use_image": true,
+    "finish_after_tool": true
+  },
+  "_thought": "用户的问题包含两个明确步骤：1) 先检测图片中是否存在垃圾车；2) 若检测不稳，再评估垃圾车识别任务能否迁移。由于涉及图片分析和后续的能力迁移评估，且任务流分为执行检测 + 迁移可行性报告两个阶段，应采用 pipeline_eval 工具完成从样例图生成 - 检测 - 评估的完整闭环。pipeline_eval 可一次性生成检测图像并运行时检测模型，结果可直接用于判断是否稳定，稳定则结束，不稳定则触发迁移评估。因此决定选择 pipeline_eval 作为第一步。由于pipeline_eval内部会包含最终评估，finish_after_tool设为true合理（如果检测稳定则不需要进一步操作；若迁移需要则pipeline_eval本身的结果会触发后续工具调用，符合finish_after_tool的语义——即工具内输出是本轮请求的最终状态）。同时考虑用户提及有样例图，但pipeline_eval默认会生成所需样本，这里只要提供图片即可触发流程。为了确保迁移评估需要时能看到检测到的垃圾车作为证据，应设置finish_after_tool=true，让pipeline_eval返回完整结果后由系统路由到migration_advisor进行能力边界评估。"
+}

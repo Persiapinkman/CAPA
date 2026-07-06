@@ -1,0 +1,533 @@
+{
+  "session_id": "57130c67-b1df-4798-8f6e-d9b7e57918d6",
+  "run_stamp": "20260522_100619_73119dee",
+  "stage": "migration_report_request",
+  "step_index": 2,
+  "created_at": "2026-05-22T10:08:04+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260522_100619_73119dee",
+    "input_schema": {
+      "user_query": "用户原始问题",
+      "retrieval_plan": "上一步检索规划（abstract_requirement + retrieve_fields）",
+      "field_results": "playbook 分字段检索结果：field, evidence[]"
+    },
+    "evidence_item_fields": [
+      "evidence_id",
+      "title",
+      "snippet",
+      "model_name",
+      "algorithm_name",
+      "algorithm_type",
+      "application_scene",
+      "section_type",
+      "score"
+    ],
+    "structured_input": {
+      "user_query": "香港项目要求识别“头盔颜色：黑、白、灰、红、蓝、黄、绿、紫、迷彩”，现有城市结构化人体属性模型是否能直接支持？",
+      "retrieval_plan": {
+        "abstract_requirement": {
+          "object": "头盔颜色识别",
+          "attribute": "限于黑、白、灰、红、蓝、黄、绿、紫、迷彩",
+          "task_type": "人体属性分类",
+          "scene": "城市结构化人体检测",
+          "constraints": [
+            "香港项目",
+            "朱雀城市结构化人体模型",
+            "不能直接支持",
+            "迁移可行性"
+          ]
+        },
+        "retrieve_fields": [
+          {
+            "field": "existing_models",
+            "queries": [
+              "城市结构化人体模型头盔颜色检测已有模型复用",
+              "已有偏置人体骨架头盔属性分类器",
+              "多颜色头盔分类器预训模型"
+            ]
+          },
+          {
+            "field": "similar_capabilities",
+            "queries": [
+              "结构化人体小图颜色识别能力迁移",
+              "人头部特征区域特定属性颜色分割检测",
+              "安防检测人体部件彩色分类转换"
+            ]
+          },
+          {
+            "field": "performance_baseline",
+            "queries": [
+              "头盔颜色识别精度基准准确率测试集评估",
+              "多色头盔分类混淆基线性能测试",
+              "城市结构化人体模型检测器颜色属性分类效果"
+            ]
+          },
+          {
+            "field": "data_requirements",
+            "queries": [
+              "头盔颜色多类标注数据训练需求数量",
+              "城市化人体场景头盔彩色数据集构建要求",
+              "特定安全帽颜色类别标注样本数备注"
+            ]
+          }
+        ]
+      },
+      "field_results": [
+        {
+          "field": "existing_models",
+          "evidence": [
+            {
+              "evidence_id": "9958f8d12c4ee574135bd2ae",
+              "title": "PDFs/安防场景-城市结构化检测模型3.0.1.pdf p5",
+              "snippet": "Recall@FPPI0.1"
+            },
+            {
+              "evidence_id": "e64331e9486befac16c0f912",
+              "title": "KM_essos_struct_nart_acl-ascend310-int8_b8_3.0.1.model",
+              "snippet": "target_name: 人体、机动车、非机动车、骑手\nalgorithm_type: 检测\nalgorithm_name: 结构化检测\napplication_scene: V3.0.1；essos\nowner: 任大发\nmodel_name: KM_essos_struct_nart_acl-ascend310-int8_b8_3.0.1.model\nsupported_device: ascend310\nrecommended_config: acl-ascend310-int8\nlast_updated: 2025-07-24\nlast_updated_month: 2025-07",
+              "model_name": "KM_essos_struct_nart_acl-ascend310-int8_b8_3.0.1.model",
+              "algorithm_name": "结构化检测",
+              "algorithm_type": "检测",
+              "application_scene": "V3.0.1；essos"
+            },
+            {
+              "evidence_id": "22a1d1b99a258c80ef04d874",
+              "title": "FireSmogRetinatenetEssos0.7.3_rp",
+              "snippet": "model_name: FireSmogRetinatenetEssos0.7.3_rp\nname: FireSmogRetinatenetEssos0.7.3_rp\ntype: essos\nplatform: cuda11.0-trt7.1-fp16-T4\nstatus: SUCCESS\ndid: 86163\nrid: 30238\nversion: 0.7.3\nversion_train_date: 20230630\nsource_file: data/FireSmogRetinatenetEssos0.7.3_rp-cuda11.0-trt7.1-fp16-T4_30238_86163.json",
+              "model_name": "FireSmogRetinatenetEssos0.7.3_rp"
+            }
+          ]
+        },
+        {
+          "field": "similar_capabilities",
+          "evidence": [
+            {
+              "evidence_id": "7c7c025ca9796c52d5be4fad",
+              "title": "PDFs/安防方向--车辆属性大模型更新.pdf p13",
+              "snippet": "6. 车辆颜色属性新增“青色”、“橙色”、“无法判断”标签，青色冷启动precision/recall=99.3%/90.5%，橙色\n冷启动precision/recall=92.9%/74.8%；\n7. 颜色整体优化，全属性Acc 81.6%->89.1%， 黑色 precision 82.74%->91.59%，蓝色 80.85%-\n>90.22% 等；\n8. 车辆粗分类属性标签重构\nc. “卡车”标签拆分为“大卡车”、“小卡车”（注意输出字段的变化）"
+            },
+            {
+              "evidence_id": "71d9995a5ba5a391cc26ae8d",
+              "title": "PDFs/安防方向--车辆属性大模型更新.pdf p14",
+              "snippet": "车辆颜色分类属性ACC/mP："
+            },
+            {
+              "evidence_id": "f2e5fdc0be8880a0d16c48d5",
+              "title": "PDFs/安防方向--车辆属性大模型更新.pdf p14",
+              "snippet": "KB 2023-06-15 17:42\n二、模型精度\n3. Adela测试集\n◦ 颜色：vehicle_color_precision"
+            }
+          ]
+        },
+        {
+          "field": "performance_baseline",
+          "evidence": [
+            {
+              "evidence_id": "3b516e739c46f412291d37bb",
+              "title": "PDFs/安防方向-人脸误检分类模型发版记录.pdf p6",
+              "snippet": "• highlights\n◦ 基于原KM_classifier_FaceNoFace_cls_sz_1.0.2 模型，修正后脑勺，头盔，全遮挡为人脸误检负\n样本\n◦ 新增车内人脸为正样本\n◦ 基于clip蒸馏小模型为预训练模型，平均acc在hardcase上提升38.6%->72.5%\n◦ 输出字段与原KM_classifier_FaceNoFace_cls_sz_1.0.2 模型保持一致"
+            },
+            {
+              "evidence_id": "ae2d10698faed2d83bef2ebd",
+              "title": "PDFs/安防方向-人脸误检分类模型发版记录.pdf p6",
+              "snippet": "common测试集 监控难例测试集\n1- 0- 1-\n0-\n误报阈值 0-recall precisio 1-recall precisio 0-recall precisio 1-recall\nprecision\nn n n\n0.99 0.9980 0.8952 0.9717 0.9995 0.7142 0.0905 0.9932 0.9997\n0.97 0.9963 0.9192 0.9781 0.9991 0.6352 0.1173 0.9934 0.9994\n0.96 0.9956 0.9238 0.9793 0.9989 0.6048 0.1274 0.9934 0.9993\n0.90 0.9922 0.9396 0.9835 0.9980 0.5417 0.1643 0.9937 0.9989"
+            },
+            {
+              "evidence_id": "c7711b84757a14915a38a72a",
+              "title": "PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2 table 1",
+              "snippet": "PDF表格: PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf 第2页 表1\n表格结构化行:\n模型族: 三、模型列表\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model\nOID: beeb6944bdca2dafd0213251951cc47f829efad2981d7f847010b13f486181c5\n平台: cuda11.0-trt7.1-fp16-T4\n模型族: 三、模型列表\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model\nOID: fcd2d67fbbaab4fc2064f08ccaf5e61abf7b9655388c7f39a349c43184c6b102\n平台: cuda11.0-trt7.1-int8-T4\n模型族: 三、模型列表\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-P4_b8_0.2.0.model\nOID: c059a471994cbb3365e4a0e6e6e8c8469f578190e75f31b348867599041e5880\n平台: cuda11.0-trt7.1-int8-P4\n模型族: 三、模型列表\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\nOID: 0cef652610b4f5fef96dd575ba52e283ce7e1908565d..."
+            }
+          ]
+        },
+        {
+          "field": "data_requirements",
+          "evidence": [
+            {
+              "evidence_id": "80320e59c6d48ecbd7bdd9ff",
+              "title": "PDFs/服饰属性模型.pdf p1 table 1",
+              "snippet": "PDF表格: PDFs/服饰属性模型.pdf 第1页 表1\n| 服饰属性模型 HL数据处理 • 第一批次 ◦ 小图总量：312251 ◦ 路径：s3://struct-data2/SDJY/ ◦ 模型训练使用全量，按 8:2 比例切分训练集、测试集。各类别具体数量如下表 ◦ 数据同步 ▪ 251223：已同步采样小图1w张，含训练集8000张（三类各6000/1500/500），测试集2000张 （三类各1000/800/200） ▪ 251224：已同步采样小图10w张，含训练集8w、测试集2w；附带数据采样脚本，采样并直接转 成spiral的数据格式； 0-prisoner 1-police 2-others train 230312 16499 2989 test 57578 4125 748 总计 287890 20624 3737 • 第二批次（HL视频抽帧采样） ◦ 小图总量：训练集113887，测试集8609 ◦ 模型训练：使用两批次全量，数据增强引入随机crop/随机box抖动/色彩变换取hue=0/随机imageio 解码 Kestrel模型部署 1、模型输入输出 • 模型输入要求：人体小图（label=221488） • 输出格式参考： 1 {\"attribute\": {\"st_uniform\": {\"st_jurong_prisoner\": 0.9999734163284302, \"st_juron g_police\": 1.7758437024895102e-05, \"st_jurong_others\": 0.0}}, 'id': 0, 'label': 2 21488, 'image_id': 0} | | | | | | | | | | | | | | | | | | |\n| --- | --- | --- | --- | --- | --- |..."
+            },
+            {
+              "evidence_id": "7571ba32218935d0e761dbff",
+              "title": "KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model",
+              "snippet": "target_name: 车牌\nalgorithm_type: 属性\nalgorithm_name: 车牌颜色类型属性\napplication_scene: V3.0.0，标品\nowner: 冯江燕\nmodel_name: KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model\nsupported_device: cpu\nrecommended_config: cpu-ppl2-fp32\nlast_updated: 2023-05-30\nlast_updated_month: 2023-05",
+              "model_name": "KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model",
+              "algorithm_name": "车牌颜色类型属性",
+              "algorithm_type": "属性",
+              "application_scene": "V3.0.0，标品"
+            },
+            {
+              "evidence_id": "e70e4d2c66d9aa49bfd41778",
+              "title": "LargeFace_224x224",
+              "snippet": "model_name: LargeFace_224x224\nname: LargeFace_224x224\nlabel_list: 1\nlabels: 1\ntype: essos\nplatform: acl-ascend710-fp16\nstatus: SUCCESS\ndid: 125301\nrid: 47266\nversion: 3.0.0\nversion_train_date: 20250304\nsource_file: data/LargeFace_224x224-acl-ascend710-fp16_47266_125301.json",
+              "model_name": "LargeFace_224x224"
+            }
+          ]
+        }
+      ]
+    },
+    "llm_messages": [
+      {
+        "role": "system",
+        "content": "你是视觉模型迁移顾问。请基于检索证据生成结构化迁移评估报告。\n必须区分证据支持和合理推断；证据不足时明确写「证据不足」，不要编造精度、周期或成本。\n若可估计成本/周期，只能给区间和依赖前提。\nsimilar_assets 中每个相似模型/方案必须逐项填写：\n- label_schema：该模型的类别/标签定义（含类别名、取值范围）；\n- training_data：训练集来源、标注规范、样本量或数据要求；\n- reported_metrics：文档中的 mAP、ACC、recall、benchmark 等数值及对应测试集/平台；\n上述三项只能引用 field_results 与 retrieval_plan 中的证据；无对应片段则写「证据不足」。\nevidence 数组可引用 evidence_id 或证据原文短句。只输出 JSON。"
+      },
+      {
+        "role": "user",
+        "content": "{\n  \"user_query\": \"香港项目要求识别“头盔颜色：黑、白、灰、红、蓝、黄、绿、紫、迷彩”，现有城市结构化人体属性模型是否能直接支持？\",\n  \"retrieval_plan\": {\n    \"abstract_requirement\": {\n      \"object\": \"头盔颜色识别\",\n      \"attribute\": \"限于黑、白、灰、红、蓝、黄、绿、紫、迷彩\",\n      \"task_type\": \"人体属性分类\",\n      \"scene\": \"城市结构化人体检测\",\n      \"constraints\": [\n        \"香港项目\",\n        \"朱雀城市结构化人体模型\",\n        \"不能直接支持\",\n        \"迁移可行性\"\n      ]\n    },\n    \"retrieve_fields\": [\n      {\n        \"field\": \"existing_models\",\n        \"queries\": [\n          \"城市结构化人体模型头盔颜色检测已有模型复用\",\n          \"已有偏置人体骨架头盔属性分类器\",\n          \"多颜色头盔分类器预训模型\"\n        ]\n      },\n      {\n        \"field\": \"similar_capabilities\",\n        \"queries\": [\n          \"结构化人体小图颜色识别能力迁移\",\n          \"人头部特征区域特定属性颜色分割检测\",\n          \"安防检测人体部件彩色分类转换\"\n        ]\n      },\n      {\n        \"field\": \"performance_baseline\",\n        \"queries\": [\n          \"头盔颜色识别精度基准准确率测试集评估\",\n          \"多色头盔分类混淆基线性能测试\",\n          \"城市结构化人体模型检测器颜色属性分类效果\"\n        ]\n      },\n      {\n        \"field\": \"data_requirements\",\n        \"queries\": [\n          \"头盔颜色多类标注数据训练需求数量\",\n          \"城市化人体场景头盔彩色数据集构建要求\",\n          \"特定安全帽颜色类别标注样本数备注\"\n        ]\n      }\n    ]\n  },\n  \"field_results\": [\n    {\n      \"field\": \"existing_models\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"9958f8d12c4ee574135bd2ae\",\n          \"title\": \"PDFs/安防场景-城市结构化检测模型3.0.1.pdf p5\",\n          \"snippet\": \"Recall@FPPI0.1\"\n        },\n        {\n          \"evidence_id\": \"e64331e9486befac16c0f912\",\n          \"title\": \"KM_essos_struct_nart_acl-ascend310-int8_b8_3.0.1.model\",\n          \"snippet\": \"target_name: 人体、机动车、非机动车、骑手\\nalgorithm_type: 检测\\nalgorithm_name: 结构化检测\\napplication_scene: V3.0.1；essos\\nowner: 任大发\\nmodel_name: KM_essos_struct_nart_acl-ascend310-int8_b8_3.0.1.model\\nsupported_device: ascend310\\nrecommended_config: acl-ascend310-int8\\nlast_updated: 2025-07-24\\nlast_updated_month: 2025-07\",\n          \"model_name\": \"KM_essos_struct_nart_acl-ascend310-int8_b8_3.0.1.model\",\n          \"algorithm_name\": \"结构化检测\",\n          \"algorithm_type\": \"检测\",\n          \"application_scene\": \"V3.0.1；essos\"\n        },\n        {\n          \"evidence_id\": \"22a1d1b99a258c80ef04d874\",\n          \"title\": \"FireSmogRetinatenetEssos0.7.3_rp\",\n          \"snippet\": \"model_name: FireSmogRetinatenetEssos0.7.3_rp\\nname: FireSmogRetinatenetEssos0.7.3_rp\\ntype: essos\\nplatform: cuda11.0-trt7.1-fp16-T4\\nstatus: SUCCESS\\ndid: 86163\\nrid: 30238\\nversion: 0.7.3\\nversion_train_date: 20230630\\nsource_file: data/FireSmogRetinatenetEssos0.7.3_rp-cuda11.0-trt7.1-fp16-T4_30238_86163.json\",\n          \"model_name\": \"FireSmogRetinatenetEssos0.7.3_rp\"\n        }\n      ]\n    },\n    {\n      \"field\": \"similar_capabilities\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"7c7c025ca9796c52d5be4fad\",\n          \"title\": \"PDFs/安防方向--车辆属性大模型更新.pdf p13\",\n          \"snippet\": \"6. 车辆颜色属性新增“青色”、“橙色”、“无法判断”标签，青色冷启动precision/recall=99.3%/90.5%，橙色\\n冷启动precision/recall=92.9%/74.8%；\\n7. 颜色整体优化，全属性Acc 81.6%->89.1%， 黑色 precision 82.74%->91.59%，蓝色 80.85%-\\n>90.22% 等；\\n8. 车辆粗分类属性标签重构\\nc. “卡车”标签拆分为“大卡车”、“小卡车”（注意输出字段的变化）\"\n        },\n        {\n          \"evidence_id\": \"71d9995a5ba5a391cc26ae8d\",\n          \"title\": \"PDFs/安防方向--车辆属性大模型更新.pdf p14\",\n          \"snippet\": \"车辆颜色分类属性ACC/mP：\"\n        },\n        {\n          \"evidence_id\": \"f2e5fdc0be8880a0d16c48d5\",\n          \"title\": \"PDFs/安防方向--车辆属性大模型更新.pdf p14\",\n          \"snippet\": \"KB 2023-06-15 17:42\\n二、模型精度\\n3. Adela测试集\\n◦ 颜色：vehicle_color_precision\"\n        }\n      ]\n    },\n    {\n      \"field\": \"performance_baseline\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"3b516e739c46f412291d37bb\",\n          \"title\": \"PDFs/安防方向-人脸误检分类模型发版记录.pdf p6\",\n          \"snippet\": \"• highlights\\n◦ 基于原KM_classifier_FaceNoFace_cls_sz_1.0.2 模型，修正后脑勺，头盔，全遮挡为人脸误检负\\n样本\\n◦ 新增车内人脸为正样本\\n◦ 基于clip蒸馏小模型为预训练模型，平均acc在hardcase上提升38.6%->72.5%\\n◦ 输出字段与原KM_classifier_FaceNoFace_cls_sz_1.0.2 模型保持一致\"\n        },\n        {\n          \"evidence_id\": \"ae2d10698faed2d83bef2ebd\",\n          \"title\": \"PDFs/安防方向-人脸误检分类模型发版记录.pdf p6\",\n          \"snippet\": \"common测试集 监控难例测试集\\n1- 0- 1-\\n0-\\n误报阈值 0-recall precisio 1-recall precisio 0-recall precisio 1-recall\\nprecision\\nn n n\\n0.99 0.9980 0.8952 0.9717 0.9995 0.7142 0.0905 0.9932 0.9997\\n0.97 0.9963 0.9192 0.9781 0.9991 0.6352 0.1173 0.9934 0.9994\\n0.96 0.9956 0.9238 0.9793 0.9989 0.6048 0.1274 0.9934 0.9993\\n0.90 0.9922 0.9396 0.9835 0.9980 0.5417 0.1643 0.9937 0.9989\"\n        },\n        {\n          \"evidence_id\": \"c7711b84757a14915a38a72a\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2 table 1\",\n          \"snippet\": \"PDF表格: PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf 第2页 表1\\n表格结构化行:\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model\\nOID: beeb6944bdca2dafd0213251951cc47f829efad2981d7f847010b13f486181c5\\n平台: cuda11.0-trt7.1-fp16-T4\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model\\nOID: fcd2d67fbbaab4fc2064f08ccaf5e61abf7b9655388c7f39a349c43184c6b102\\n平台: cuda11.0-trt7.1-int8-T4\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-P4_b8_0.2.0.model\\nOID: c059a471994cbb3365e4a0e6e6e8c8469f578190e75f31b348867599041e5880\\n平台: cuda11.0-trt7.1-int8-P4\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\\nOID: 0cef652610b4f5fef96dd575ba52e283ce7e1908565d...\"\n        }\n      ]\n    },\n    {\n      \"field\": \"data_requirements\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"80320e59c6d48ecbd7bdd9ff\",\n          \"title\": \"PDFs/服饰属性模型.pdf p1 table 1\",\n          \"snippet\": \"PDF表格: PDFs/服饰属性模型.pdf 第1页 表1\\n| 服饰属性模型 HL数据处理 • 第一批次 ◦ 小图总量：312251 ◦ 路径：s3://struct-data2/SDJY/ ◦ 模型训练使用全量，按 8:2 比例切分训练集、测试集。各类别具体数量如下表 ◦ 数据同步 ▪ 251223：已同步采样小图1w张，含训练集8000张（三类各6000/1500/500），测试集2000张 （三类各1000/800/200） ▪ 251224：已同步采样小图10w张，含训练集8w、测试集2w；附带数据采样脚本，采样并直接转 成spiral的数据格式； 0-prisoner 1-police 2-others train 230312 16499 2989 test 57578 4125 748 总计 287890 20624 3737 • 第二批次（HL视频抽帧采样） ◦ 小图总量：训练集113887，测试集8609 ◦ 模型训练：使用两批次全量，数据增强引入随机crop/随机box抖动/色彩变换取hue=0/随机imageio 解码 Kestrel模型部署 1、模型输入输出 • 模型输入要求：人体小图（label=221488） • 输出格式参考： 1 {\\\"attribute\\\": {\\\"st_uniform\\\": {\\\"st_jurong_prisoner\\\": 0.9999734163284302, \\\"st_juron g_police\\\": 1.7758437024895102e-05, \\\"st_jurong_others\\\": 0.0}}, 'id': 0, 'label': 2 21488, 'image_id': 0} | | | | | | | | | | | | | | | | | | |\\n| --- | --- | --- | --- | --- | --- |...\"\n        },\n        {\n          \"evidence_id\": \"7571ba32218935d0e761dbff\",\n          \"title\": \"KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model\",\n          \"snippet\": \"target_name: 车牌\\nalgorithm_type: 属性\\nalgorithm_name: 车牌颜色类型属性\\napplication_scene: V3.0.0，标品\\nowner: 冯江燕\\nmodel_name: KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model\\nsupported_device: cpu\\nrecommended_config: cpu-ppl2-fp32\\nlast_updated: 2023-05-30\\nlast_updated_month: 2023-05\",\n          \"model_name\": \"KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model\",\n          \"algorithm_name\": \"车牌颜色类型属性\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"V3.0.0，标品\"\n        },\n        {\n          \"evidence_id\": \"e70e4d2c66d9aa49bfd41778\",\n          \"title\": \"LargeFace_224x224\",\n          \"snippet\": \"model_name: LargeFace_224x224\\nname: LargeFace_224x224\\nlabel_list: 1\\nlabels: 1\\ntype: essos\\nplatform: acl-ascend710-fp16\\nstatus: SUCCESS\\ndid: 125301\\nrid: 47266\\nversion: 3.0.0\\nversion_train_date: 20250304\\nsource_file: data/LargeFace_224x224-acl-ascend710-fp16_47266_125301.json\",\n          \"model_name\": \"LargeFace_224x224\"\n        }\n      ]\n    }\n  ]\n}"
+      }
+    ],
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "migration_advisor_report",
+        "strict": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "requirement_summary": {
+              "type": "string"
+            },
+            "direct_match": {
+              "type": "object",
+              "properties": {
+                "exists": {
+                  "type": "boolean"
+                },
+                "summary": {
+                  "type": "string"
+                },
+                "evidence": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "exists",
+                "summary",
+                "evidence"
+              ],
+              "additionalProperties": false
+            },
+            "similar_assets": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "model_or_solution": {
+                    "type": "string"
+                  },
+                  "label_schema": {
+                    "type": "string",
+                    "description": "类别/标签定义；证据无则写「证据不足」。"
+                  },
+                  "training_data": {
+                    "type": "string",
+                    "description": "训练集、标注规范、样本量；证据无则写「证据不足」。"
+                  },
+                  "reported_metrics": {
+                    "type": "string",
+                    "description": "mAP/ACC/召回等精度指标及测试集/平台；证据无则写「证据不足」。"
+                  },
+                  "covered_capability": {
+                    "type": "string"
+                  },
+                  "gap": {
+                    "type": "string"
+                  },
+                  "evidence": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "model_or_solution",
+                  "label_schema",
+                  "training_data",
+                  "reported_metrics",
+                  "covered_capability",
+                  "gap",
+                  "evidence"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "migration_plan": {
+              "type": "object",
+              "properties": {
+                "feasibility": {
+                  "type": "string",
+                  "enum": [
+                    "high",
+                    "medium",
+                    "low"
+                  ]
+                },
+                "approach": {
+                  "type": "string"
+                },
+                "data_requirements": {
+                  "type": "string"
+                },
+                "compute_requirements": {
+                  "type": "string"
+                },
+                "engineering_work": {
+                  "type": "string"
+                },
+                "estimated_timeline": {
+                  "type": "string"
+                },
+                "estimated_cost": {
+                  "type": "string"
+                },
+                "dependencies": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "risks": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "feasibility",
+                "approach",
+                "data_requirements",
+                "compute_requirements",
+                "engineering_work",
+                "estimated_timeline",
+                "estimated_cost",
+                "dependencies",
+                "risks"
+              ],
+              "additionalProperties": false
+            },
+            "expected_performance": {
+              "type": "object",
+              "properties": {
+                "baseline": {
+                  "type": "string"
+                },
+                "target": {
+                  "type": "string"
+                },
+                "uncertainty": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "baseline",
+                "target",
+                "uncertainty"
+              ],
+              "additionalProperties": false
+            },
+            "recommendation": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "requirement_summary",
+            "direct_match",
+            "similar_assets",
+            "migration_plan",
+            "expected_performance",
+            "recommendation"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "assistant_input_name": "migration_advisor_report",
+    "assistant_input": {
+      "messages": [
+        {
+          "role": "system",
+          "content": "你是视觉模型迁移顾问。请基于检索证据生成结构化迁移评估报告。\n必须区分证据支持和合理推断；证据不足时明确写「证据不足」，不要编造精度、周期或成本。\n若可估计成本/周期，只能给区间和依赖前提。\nsimilar_assets 中每个相似模型/方案必须逐项填写：\n- label_schema：该模型的类别/标签定义（含类别名、取值范围）；\n- training_data：训练集来源、标注规范、样本量或数据要求；\n- reported_metrics：文档中的 mAP、ACC、recall、benchmark 等数值及对应测试集/平台；\n上述三项只能引用 field_results 与 retrieval_plan 中的证据；无对应片段则写「证据不足」。\nevidence 数组可引用 evidence_id 或证据原文短句。只输出 JSON。"
+        },
+        {
+          "role": "user",
+          "content": "{\n  \"user_query\": \"香港项目要求识别“头盔颜色：黑、白、灰、红、蓝、黄、绿、紫、迷彩”，现有城市结构化人体属性模型是否能直接支持？\",\n  \"retrieval_plan\": {\n    \"abstract_requirement\": {\n      \"object\": \"头盔颜色识别\",\n      \"attribute\": \"限于黑、白、灰、红、蓝、黄、绿、紫、迷彩\",\n      \"task_type\": \"人体属性分类\",\n      \"scene\": \"城市结构化人体检测\",\n      \"constraints\": [\n        \"香港项目\",\n        \"朱雀城市结构化人体模型\",\n        \"不能直接支持\",\n        \"迁移可行性\"\n      ]\n    },\n    \"retrieve_fields\": [\n      {\n        \"field\": \"existing_models\",\n        \"queries\": [\n          \"城市结构化人体模型头盔颜色检测已有模型复用\",\n          \"已有偏置人体骨架头盔属性分类器\",\n          \"多颜色头盔分类器预训模型\"\n        ]\n      },\n      {\n        \"field\": \"similar_capabilities\",\n        \"queries\": [\n          \"结构化人体小图颜色识别能力迁移\",\n          \"人头部特征区域特定属性颜色分割检测\",\n          \"安防检测人体部件彩色分类转换\"\n        ]\n      },\n      {\n        \"field\": \"performance_baseline\",\n        \"queries\": [\n          \"头盔颜色识别精度基准准确率测试集评估\",\n          \"多色头盔分类混淆基线性能测试\",\n          \"城市结构化人体模型检测器颜色属性分类效果\"\n        ]\n      },\n      {\n        \"field\": \"data_requirements\",\n        \"queries\": [\n          \"头盔颜色多类标注数据训练需求数量\",\n          \"城市化人体场景头盔彩色数据集构建要求\",\n          \"特定安全帽颜色类别标注样本数备注\"\n        ]\n      }\n    ]\n  },\n  \"field_results\": [\n    {\n      \"field\": \"existing_models\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"9958f8d12c4ee574135bd2ae\",\n          \"title\": \"PDFs/安防场景-城市结构化检测模型3.0.1.pdf p5\",\n          \"snippet\": \"Recall@FPPI0.1\"\n        },\n        {\n          \"evidence_id\": \"e64331e9486befac16c0f912\",\n          \"title\": \"KM_essos_struct_nart_acl-ascend310-int8_b8_3.0.1.model\",\n          \"snippet\": \"target_name: 人体、机动车、非机动车、骑手\\nalgorithm_type: 检测\\nalgorithm_name: 结构化检测\\napplication_scene: V3.0.1；essos\\nowner: 任大发\\nmodel_name: KM_essos_struct_nart_acl-ascend310-int8_b8_3.0.1.model\\nsupported_device: ascend310\\nrecommended_config: acl-ascend310-int8\\nlast_updated: 2025-07-24\\nlast_updated_month: 2025-07\",\n          \"model_name\": \"KM_essos_struct_nart_acl-ascend310-int8_b8_3.0.1.model\",\n          \"algorithm_name\": \"结构化检测\",\n          \"algorithm_type\": \"检测\",\n          \"application_scene\": \"V3.0.1；essos\"\n        },\n        {\n          \"evidence_id\": \"22a1d1b99a258c80ef04d874\",\n          \"title\": \"FireSmogRetinatenetEssos0.7.3_rp\",\n          \"snippet\": \"model_name: FireSmogRetinatenetEssos0.7.3_rp\\nname: FireSmogRetinatenetEssos0.7.3_rp\\ntype: essos\\nplatform: cuda11.0-trt7.1-fp16-T4\\nstatus: SUCCESS\\ndid: 86163\\nrid: 30238\\nversion: 0.7.3\\nversion_train_date: 20230630\\nsource_file: data/FireSmogRetinatenetEssos0.7.3_rp-cuda11.0-trt7.1-fp16-T4_30238_86163.json\",\n          \"model_name\": \"FireSmogRetinatenetEssos0.7.3_rp\"\n        }\n      ]\n    },\n    {\n      \"field\": \"similar_capabilities\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"7c7c025ca9796c52d5be4fad\",\n          \"title\": \"PDFs/安防方向--车辆属性大模型更新.pdf p13\",\n          \"snippet\": \"6. 车辆颜色属性新增“青色”、“橙色”、“无法判断”标签，青色冷启动precision/recall=99.3%/90.5%，橙色\\n冷启动precision/recall=92.9%/74.8%；\\n7. 颜色整体优化，全属性Acc 81.6%->89.1%， 黑色 precision 82.74%->91.59%，蓝色 80.85%-\\n>90.22% 等；\\n8. 车辆粗分类属性标签重构\\nc. “卡车”标签拆分为“大卡车”、“小卡车”（注意输出字段的变化）\"\n        },\n        {\n          \"evidence_id\": \"71d9995a5ba5a391cc26ae8d\",\n          \"title\": \"PDFs/安防方向--车辆属性大模型更新.pdf p14\",\n          \"snippet\": \"车辆颜色分类属性ACC/mP：\"\n        },\n        {\n          \"evidence_id\": \"f2e5fdc0be8880a0d16c48d5\",\n          \"title\": \"PDFs/安防方向--车辆属性大模型更新.pdf p14\",\n          \"snippet\": \"KB 2023-06-15 17:42\\n二、模型精度\\n3. Adela测试集\\n◦ 颜色：vehicle_color_precision\"\n        }\n      ]\n    },\n    {\n      \"field\": \"performance_baseline\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"3b516e739c46f412291d37bb\",\n          \"title\": \"PDFs/安防方向-人脸误检分类模型发版记录.pdf p6\",\n          \"snippet\": \"• highlights\\n◦ 基于原KM_classifier_FaceNoFace_cls_sz_1.0.2 模型，修正后脑勺，头盔，全遮挡为人脸误检负\\n样本\\n◦ 新增车内人脸为正样本\\n◦ 基于clip蒸馏小模型为预训练模型，平均acc在hardcase上提升38.6%->72.5%\\n◦ 输出字段与原KM_classifier_FaceNoFace_cls_sz_1.0.2 模型保持一致\"\n        },\n        {\n          \"evidence_id\": \"ae2d10698faed2d83bef2ebd\",\n          \"title\": \"PDFs/安防方向-人脸误检分类模型发版记录.pdf p6\",\n          \"snippet\": \"common测试集 监控难例测试集\\n1- 0- 1-\\n0-\\n误报阈值 0-recall precisio 1-recall precisio 0-recall precisio 1-recall\\nprecision\\nn n n\\n0.99 0.9980 0.8952 0.9717 0.9995 0.7142 0.0905 0.9932 0.9997\\n0.97 0.9963 0.9192 0.9781 0.9991 0.6352 0.1173 0.9934 0.9994\\n0.96 0.9956 0.9238 0.9793 0.9989 0.6048 0.1274 0.9934 0.9993\\n0.90 0.9922 0.9396 0.9835 0.9980 0.5417 0.1643 0.9937 0.9989\"\n        },\n        {\n          \"evidence_id\": \"c7711b84757a14915a38a72a\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2 table 1\",\n          \"snippet\": \"PDF表格: PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf 第2页 表1\\n表格结构化行:\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model\\nOID: beeb6944bdca2dafd0213251951cc47f829efad2981d7f847010b13f486181c5\\n平台: cuda11.0-trt7.1-fp16-T4\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model\\nOID: fcd2d67fbbaab4fc2064f08ccaf5e61abf7b9655388c7f39a349c43184c6b102\\n平台: cuda11.0-trt7.1-int8-T4\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-P4_b8_0.2.0.model\\nOID: c059a471994cbb3365e4a0e6e6e8c8469f578190e75f31b348867599041e5880\\n平台: cuda11.0-trt7.1-int8-P4\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\\nOID: 0cef652610b4f5fef96dd575ba52e283ce7e1908565d...\"\n        }\n      ]\n    },\n    {\n      \"field\": \"data_requirements\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"80320e59c6d48ecbd7bdd9ff\",\n          \"title\": \"PDFs/服饰属性模型.pdf p1 table 1\",\n          \"snippet\": \"PDF表格: PDFs/服饰属性模型.pdf 第1页 表1\\n| 服饰属性模型 HL数据处理 • 第一批次 ◦ 小图总量：312251 ◦ 路径：s3://struct-data2/SDJY/ ◦ 模型训练使用全量，按 8:2 比例切分训练集、测试集。各类别具体数量如下表 ◦ 数据同步 ▪ 251223：已同步采样小图1w张，含训练集8000张（三类各6000/1500/500），测试集2000张 （三类各1000/800/200） ▪ 251224：已同步采样小图10w张，含训练集8w、测试集2w；附带数据采样脚本，采样并直接转 成spiral的数据格式； 0-prisoner 1-police 2-others train 230312 16499 2989 test 57578 4125 748 总计 287890 20624 3737 • 第二批次（HL视频抽帧采样） ◦ 小图总量：训练集113887，测试集8609 ◦ 模型训练：使用两批次全量，数据增强引入随机crop/随机box抖动/色彩变换取hue=0/随机imageio 解码 Kestrel模型部署 1、模型输入输出 • 模型输入要求：人体小图（label=221488） • 输出格式参考： 1 {\\\"attribute\\\": {\\\"st_uniform\\\": {\\\"st_jurong_prisoner\\\": 0.9999734163284302, \\\"st_juron g_police\\\": 1.7758437024895102e-05, \\\"st_jurong_others\\\": 0.0}}, 'id': 0, 'label': 2 21488, 'image_id': 0} | | | | | | | | | | | | | | | | | | |\\n| --- | --- | --- | --- | --- | --- |...\"\n        },\n        {\n          \"evidence_id\": \"7571ba32218935d0e761dbff\",\n          \"title\": \"KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model\",\n          \"snippet\": \"target_name: 车牌\\nalgorithm_type: 属性\\nalgorithm_name: 车牌颜色类型属性\\napplication_scene: V3.0.0，标品\\nowner: 冯江燕\\nmodel_name: KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model\\nsupported_device: cpu\\nrecommended_config: cpu-ppl2-fp32\\nlast_updated: 2023-05-30\\nlast_updated_month: 2023-05\",\n          \"model_name\": \"KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model\",\n          \"algorithm_name\": \"车牌颜色类型属性\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"V3.0.0，标品\"\n        },\n        {\n          \"evidence_id\": \"e70e4d2c66d9aa49bfd41778\",\n          \"title\": \"LargeFace_224x224\",\n          \"snippet\": \"model_name: LargeFace_224x224\\nname: LargeFace_224x224\\nlabel_list: 1\\nlabels: 1\\ntype: essos\\nplatform: acl-ascend710-fp16\\nstatus: SUCCESS\\ndid: 125301\\nrid: 47266\\nversion: 3.0.0\\nversion_train_date: 20250304\\nsource_file: data/LargeFace_224x224-acl-ascend710-fp16_47266_125301.json\",\n          \"model_name\": \"LargeFace_224x224\"\n        }\n      ]\n    }\n  ]\n}"
+        }
+      ],
+      "response_format": {
+        "type": "json_schema",
+        "json_schema": {
+          "name": "migration_advisor_report",
+          "strict": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "requirement_summary": {
+                "type": "string"
+              },
+              "direct_match": {
+                "type": "object",
+                "properties": {
+                  "exists": {
+                    "type": "boolean"
+                  },
+                  "summary": {
+                    "type": "string"
+                  },
+                  "evidence": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "exists",
+                  "summary",
+                  "evidence"
+                ],
+                "additionalProperties": false
+              },
+              "similar_assets": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "model_or_solution": {
+                      "type": "string"
+                    },
+                    "label_schema": {
+                      "type": "string",
+                      "description": "类别/标签定义；证据无则写「证据不足」。"
+                    },
+                    "training_data": {
+                      "type": "string",
+                      "description": "训练集、标注规范、样本量；证据无则写「证据不足」。"
+                    },
+                    "reported_metrics": {
+                      "type": "string",
+                      "description": "mAP/ACC/召回等精度指标及测试集/平台；证据无则写「证据不足」。"
+                    },
+                    "covered_capability": {
+                      "type": "string"
+                    },
+                    "gap": {
+                      "type": "string"
+                    },
+                    "evidence": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "model_or_solution",
+                    "label_schema",
+                    "training_data",
+                    "reported_metrics",
+                    "covered_capability",
+                    "gap",
+                    "evidence"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "migration_plan": {
+                "type": "object",
+                "properties": {
+                  "feasibility": {
+                    "type": "string",
+                    "enum": [
+                      "high",
+                      "medium",
+                      "low"
+                    ]
+                  },
+                  "approach": {
+                    "type": "string"
+                  },
+                  "data_requirements": {
+                    "type": "string"
+                  },
+                  "compute_requirements": {
+                    "type": "string"
+                  },
+                  "engineering_work": {
+                    "type": "string"
+                  },
+                  "estimated_timeline": {
+                    "type": "string"
+                  },
+                  "estimated_cost": {
+                    "type": "string"
+                  },
+                  "dependencies": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "risks": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "feasibility",
+                  "approach",
+                  "data_requirements",
+                  "compute_requirements",
+                  "engineering_work",
+                  "estimated_timeline",
+                  "estimated_cost",
+                  "dependencies",
+                  "risks"
+                ],
+                "additionalProperties": false
+              },
+              "expected_performance": {
+                "type": "object",
+                "properties": {
+                  "baseline": {
+                    "type": "string"
+                  },
+                  "target": {
+                    "type": "string"
+                  },
+                  "uncertainty": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "baseline",
+                  "target",
+                  "uncertainty"
+                ],
+                "additionalProperties": false
+              },
+              "recommendation": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "requirement_summary",
+              "direct_match",
+              "similar_assets",
+              "migration_plan",
+              "expected_performance",
+              "recommendation"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    }
+  }
+}

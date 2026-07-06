@@ -1,0 +1,63 @@
+{
+  "session_id": "a1729ecd-a140-468d-84fb-14ed80627bcc",
+  "run_stamp": "20260521_134305_790ca0a2",
+  "stage": "migration_retrieval_plan_response",
+  "step_index": 1,
+  "created_at": "2026-05-21T13:43:08+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "output_schema": {
+      "abstract_requirement": "object, attribute, task_type, scene, constraints[]",
+      "retrieve_fields": "每项 field + queries[]（2-4 条）"
+    },
+    "used_fallback": false,
+    "output_raw": "{\n  \"abstract_requirement\": {\n    \"object\": \"头盔\",\n    \"attribute\": \"颜色\",\n    \"task_type\": \"属性识别\",\n    \"scene\": \"城市安防 结构化人体属性模型\"\n \n  ,\n  \"constraints\": [\n    \"现有模型是否支持头盔颜色识别\",\n    \"是否支持特定颜色类别 (灰/紫/迷彩)\",\n    \"迁移成本与精度影响\"\n  ]\n}\n  ,\n  \"retrieve_fields\": [\n    {\n      \"field\": \"existing_models\",\n      \"queries\": [\n        \"human attribute model headgear color classification\",\n        \"headgear helmet attribute recognition available models\",\n        \"city surveillance body attribute model object parts\"\n      ]\n    },\n    {\n      \"field\": \"similar_capabilities\",\n      \"queries\": [\n        \"face attribute model accessories headgear prediction\",\n        \"person attribute model output parts hot canopy\",\n        \"pedestrian classification system attribute extension\"\n      ]\n    },\n    {\n      \"field\": \"performance_baseline\",\n      \"queries\": [\n        \"helmet color recognition accuracy benchmark\",\n        \"headgear color classification mAP threshold\",\n        \"attribute detection color classes precision\"\n      ]\n    },\n    {\n      \"field\": \"data_requirements\",\n      \"queries\": [\n        \"helmet color detection dataset train\",\n        \"structured body attribute dataset helmet covering\",\n        \"multi color class 头盔 color sample requirements\"\n      ]\n    }\n  ]\n}",
+    "structured_output": {
+      "abstract_requirement": {
+        "object": "头盔",
+        "attribute": "颜色",
+        "task_type": "属性识别",
+        "scene": "城市安防 结构化人体属性模型",
+        "constraints": [
+          "现有模型是否支持头盔颜色识别",
+          "是否支持特定颜色类别 (灰/紫/迷彩)",
+          "迁移成本与精度影响"
+        ]
+      },
+      "retrieve_fields": [
+        {
+          "field": "existing_models",
+          "queries": [
+            "human attribute model headgear color classification",
+            "headgear helmet attribute recognition available models",
+            "city surveillance body attribute model object parts"
+          ]
+        },
+        {
+          "field": "similar_capabilities",
+          "queries": [
+            "face attribute model accessories headgear prediction",
+            "person attribute model output parts hot canopy",
+            "pedestrian classification system attribute extension"
+          ]
+        },
+        {
+          "field": "performance_baseline",
+          "queries": [
+            "helmet color recognition accuracy benchmark",
+            "headgear color classification mAP threshold",
+            "attribute detection color classes precision"
+          ]
+        },
+        {
+          "field": "data_requirements",
+          "queries": [
+            "helmet color detection dataset train",
+            "structured body attribute dataset helmet covering",
+            "multi color class 头盔 color sample requirements"
+          ]
+        }
+      ]
+    }
+  }
+}

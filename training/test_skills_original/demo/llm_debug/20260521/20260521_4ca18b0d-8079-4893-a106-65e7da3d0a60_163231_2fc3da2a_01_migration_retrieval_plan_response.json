@@ -1,0 +1,63 @@
+{
+  "session_id": "4ca18b0d-8079-4893-a106-65e7da3d0a60",
+  "run_stamp": "20260521_163231_2fc3da2a",
+  "stage": "migration_retrieval_plan_response",
+  "step_index": 1,
+  "created_at": "2026-05-21T16:32:34+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "output_schema": {
+      "abstract_requirement": "object, attribute, task_type, scene, constraints[]",
+      "retrieve_fields": "每项 field + queries[]（2-4 条）"
+    },
+    "used_fallback": false,
+    "output_raw": "{\n\n\"abstract_requirement\": {\n    \"object\": \"头盔颜色识别模型\",\n    \"attribute\": \"颜色分类 (黑/白/灰/红/蓝/黄/绿/紫/迷彩)\",\n    \"task_type\": \"语义属性识别/异常检测\"\n  ,\n    \"scene\": \"城市结构化视频/交通/安防\"\n  ,\n    \"constraints\": [\n        \"精准识别特定颜色类别\",\n        \"处理反光/光照变化\",\n        \"复杂背景干扰\"\n      ]\n  },\n    \"retrieve_fields\": [\n        {\n            \"field\": \"existing_models\",\n            \"queries\": [\n                \"城市人体结构化属性模型头盔颜色类别识别\",\n                \"交通场景头盔颜色分类防护装备属性大模型\",\n                \"安防视频分析模型人体装备生产颜色识别迁移\"\n              ]\n        },\n            {\n          \"field\": \"similar_capabilities\",\n          \"queries\": [\n            \"安全帽颜色识别通用分类算法迁移\",\n            \"服装布料色彩识别复用城市结构化模型\",\n            \"交通执法模型防护装备颜色特征迁移场景\"\n          ]\n        },\n            {\n            \"field\": \"performance_baseline\",\n            \"queries\": [\n                \"头盔颜色分类模型精度指标baseline评估基准测试\",\n                \"八颜色类别安全帽检测准确率mAP计算标准\",\n                \"安防场景防护装备分类色表优化策略效率测试\"\n              ]\n        },\n            {\n            \"field\": \"data_requirements\",\n            \"queries\": [\n                \"头盔多颜色标注数据集构建训练要求需求\",\n                \"城市视频头盔颜色小样本训练替代方案\",\n                \"交通视频头盔反光颜色标注数据增强策略\"\n              ]\n        }\n        ]\n}",
+    "structured_output": {
+      "abstract_requirement": {
+        "object": "头盔颜色识别模型",
+        "attribute": "颜色分类 (黑/白/灰/红/蓝/黄/绿/紫/迷彩)",
+        "task_type": "语义属性识别/异常检测",
+        "scene": "城市结构化视频/交通/安防",
+        "constraints": [
+          "精准识别特定颜色类别",
+          "处理反光/光照变化",
+          "复杂背景干扰"
+        ]
+      },
+      "retrieve_fields": [
+        {
+          "field": "existing_models",
+          "queries": [
+            "城市人体结构化属性模型头盔颜色类别识别",
+            "交通场景头盔颜色分类防护装备属性大模型",
+            "安防视频分析模型人体装备生产颜色识别迁移"
+          ]
+        },
+        {
+          "field": "similar_capabilities",
+          "queries": [
+            "安全帽颜色识别通用分类算法迁移",
+            "服装布料色彩识别复用城市结构化模型",
+            "交通执法模型防护装备颜色特征迁移场景"
+          ]
+        },
+        {
+          "field": "performance_baseline",
+          "queries": [
+            "头盔颜色分类模型精度指标 评估基准测试",
+            "八颜色类别安全帽检测准确率 计算标准",
+            "安防场景防护装备分类色表优化策略效率测试"
+          ]
+        },
+        {
+          "field": "data_requirements",
+          "queries": [
+            "头盔多颜色标注数据集构建训练要求需求",
+            "城市视频头盔颜色小样本训练替代方案",
+            "交通视频头盔反光颜色标注数据增强策略"
+          ]
+        }
+      ]
+    }
+  }
+}

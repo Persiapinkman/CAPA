@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "migration_advisor",
+  "_action_input": {
+    "user_query": "先别直接做完整评测，先看这张图有没有垃圾车，再决定垃圾车识别是否值得低成本验证。",
+    "use_image": true,
+    "use_visual_probe": true,
+    "finish_after_tool": true
+  },
+  "_thought": "用户明确要求先进行视觉探查（vision probe）来判断图中是否存在垃圾车，而不是直接做完整评测。结合用户需求（前瞻picture）和上下文（明确图片可用且目标为垃圾车），符合‘有样例图且需要执行轻量探针’的条件，应优先调用迁移顾问（migration_advisor）执行轻量视觉探针，输出可行性报告。参数中 user_query 保留原始需求，use_image=true 因为用户提供的图片作为样例证据，use_visual_probe=true 因为需要执行探针判断是否存在目标。finish_after_tool=true，因为探针报告本身就是决策依据，可直接结束当前轮次。"
+}

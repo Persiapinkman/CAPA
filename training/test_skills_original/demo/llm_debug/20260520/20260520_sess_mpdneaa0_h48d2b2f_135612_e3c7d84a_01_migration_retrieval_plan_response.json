@@ -1,0 +1,64 @@
+{
+  "session_id": "sess_mpdneaa0_h48d2b2f",
+  "run_stamp": "20260520_135612_e3c7d84a",
+  "stage": "migration_retrieval_plan_response",
+  "step_index": 1,
+  "created_at": "2026-05-20T13:56:15+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "output_schema": {
+      "abstract_requirement": "object, attribute, task_type, scene, constraints[]",
+      "retrieve_fields": "每项 field + queries[]（2-4 条）"
+    },
+    "used_fallback": false,
+    "output_raw": "{\n  \"abstract_requirement\": {\n    \"object\": \"口罩颜色识别\",\n    \"attribute\": \"黑/白/灰/红/蓝/黄/绿/紫/迷彩\"\n  ,\n  \"task_type\": \"多类别分类/异常检测\"\n  ,\n  \"scene\": \"医疗防护/质量控制\"\n  ,\n  \"constraints\": [\n    \"口罩必须作为唯一目标物体\",\n    \"需精准区分九种颜色类别\",\n    \"需考虑口罩材质反光/磨损等光照干扰\",\n    \"需处理多色混合或反光干扰场景\"\n  ]\n  }\n ,\n  \"retrieve_fields\": [\n    {\n      \"field\": \"existing_models\",\n      \"queries\": [\n        \"口罩 multiclass color classification model industrial AI\",\n        \"medical mask color classification CNN tensorflow pytorch\",\n        \"low-resource image color classification model mask detection\"\n      ]\n    },\n    {\n      \"field\": \"similar_capabilities\",\n      \"queries\": [\n        \"industrial vision part inspection color extraction GAN\",\n        \"text recognition OCR color segmentation algorithm\",\n        \"object detection confidence threshold tuning multiclass\"\n      ]\n    },\n    {\n      \"field\": \"performance_baseline\",\n      \"queries\": [\n        \"medical mask classification accuracy benchmark mAP IoU\",\n        \"industrial object detection AUC precision recall mask\",\n        \"low-shot color classification performance evaluation\"\n      ]\n    },\n    {\n      \"field\": \"data_requirements\",\n      \"queries\": [\n        \"mask multiclass color dataset labeling guidelines\",\n        \"industrial defect imaging data collection illumination\",\n        \"color classification data augmentation balancing techniques\"\n      ]\n    }\n  ]\n}",
+    "structured_output": {
+      "abstract_requirement": {
+        "object": "口罩颜色识别",
+        "attribute": "黑/白/灰/红/蓝/黄/绿/紫/迷彩",
+        "task_type": "多类别分类/异常检测",
+        "scene": "医疗防护/质量控制",
+        "constraints": [
+          "口罩必须作为唯一目标物体",
+          "需精准区分九种颜色类别",
+          "需考虑口罩材质反光/磨损等光照干扰",
+          "需处理多色混合或反光干扰场景"
+        ]
+      },
+      "retrieve_fields": [
+        {
+          "field": "existing_models",
+          "queries": [
+            "口罩 multiclass color classification model industrial AI",
+            "medical mask color classification CNN tensorflow pytorch",
+            "low-resource image color classification model mask detection"
+          ]
+        },
+        {
+          "field": "similar_capabilities",
+          "queries": [
+            "industrial vision part inspection color extraction GAN",
+            "text recognition OCR color segmentation algorithm",
+            "object detection confidence threshold tuning multiclass"
+          ]
+        },
+        {
+          "field": "performance_baseline",
+          "queries": [
+            "medical mask classification accuracy benchmark mAP IoU",
+            "industrial object detection AUC precision recall mask",
+            "low-shot color classification performance evaluation"
+          ]
+        },
+        {
+          "field": "data_requirements",
+          "queries": [
+            "mask multiclass color dataset labeling guidelines",
+            "industrial defect imaging data collection illumination",
+            "color classification data augmentation balancing techniques"
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "run_id": "2026-07-06_4b_timing_v2_repro",
+  "type": "repro_eval_vllm_timing_v2",
+  "model": "Qwen3.5-4B",
+  "adapter": null,
+  "cases": "training/planner_dpo_train_seed_v1/eval/planner_routing_eval_90cases.json",
+  "api_base": "http://10.111.32.253:8000/v1",
+  "report_prefix": "qwen35_4b_timing_v2_zip90",
+  "reports": {
+    "aggregate": "results/planner_routing_eval/qwen35_4b_timing_v2_zip90_aggregate.json",
+    "run1": "results/planner_routing_eval/qwen35_4b_timing_v2_zip90_run1.json",
+    "run2": "results/planner_routing_eval/qwen35_4b_timing_v2_zip90_run2.json",
+    "run3": "results/planner_routing_eval/qwen35_4b_timing_v2_zip90_run3.json"
+  },
+  "generation": {
+    "temperature": 0,
+    "top_p": 1,
+    "seed": 42,
+    "do_sample": false
+  },
+  "timeout_seconds": 180,
+  "runs": 3,
+  "recorded_fields": [
+    "timing.end_to_end_ms",
+    "timing.api_call_ms",
+    "timing.prompt_build_ms",
+    "timing.parse_ms",
+    "usage.input_tokens",
+    "usage.output_tokens",
+    "retry.retry_count",
+    "retry.retry_reason",
+    "error.error_type"
+  ]
+}

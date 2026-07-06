@@ -1,0 +1,111 @@
+{
+  "session_id": "b2a252ec-9f92-42dc-87df-179d6d8a3a00",
+  "run_stamp": "20260527_125427_c5b428f3",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-05-27T12:55:53+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"用户询问在普通城市监控场景下，识别“纹身有无”和“纹身位置（面部、颈部、手部、腿部、背部、无法判断）”的可行性。这是一个人体细粒度属性识别任务，涉及二分类（有无）和多分类（位置）的属性识别。\",\n  \"direct_match\": {\n    \"exists\": false,\n    \"summary\": \"检索结果中未找到明确标注为“纹身识别”或“纹身属性”的模型。现有模型主要集中于人体基本属性（年龄、性别、衣着）、人脸检测、车牌检测、横幅检测等，未发现直接匹配纹身识别的模型。\"\n  ,\n  \"evidence\": []\n  },\n  \"similar_assets\": [\n    {\n      \"model_or_solution\": \"KM_classifier_Ped_33of33_nart_acl-ascend710-fp16_b16_2.21.0.model\",\n      \"label_schema\": \"人体属性模型（V2.21.0），包含33类人体属性。具体属性类别未在证据中详细列出，但根据模型名称推测可能包含衣着、配饰、体态等常见属性。标签体系为多类别分类或二分类组合。\",\n      \"training_data\": \"证据不足。模型版本2.21.0，用于V2.21.0应用场景。训练数据来源未明确提及，但属于标准人体属性模型。\",\n      \"reported_metrics\": \"证据不足。模型状态为SUCCESS，未提供具体精度指标（mAP、ACC等）。\",\n      \"covered_capability\": \"人体属性识别，支持Ascend 310/710平台，与需求场景（城市监控）有较高相似性。\",\n      \"gap\": \"未明确支持“纹身”相关属性，需评估是否可在此基础上扩展或微调。\",\n      \"evidence\": [\n        \"evidence_id: 50456af57ca2a020a208c4ce\",\n        \"evidence_id: 5eb1abee773e1d93c2e72f13\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"KM_classifier_Ped_33of33_MTR_nart_cuda11.4-trt8.4.1-fp16-T4_b8_2.20.8.model\",\n      \"label_schema\": \"香港地铁老人属性模型。标签包括：年龄、白发、玩手机、背包。这些属于细粒度人体属性，与纹身识别在任务形态上（细粒度分类）相似。\",\n      \"training_data\": \"证据不足。应用场景为香港地铁，针对老人群体。数据要求未详细列出。\",\n      \"reported_metrics\": \"证据不足。模型版本2.20.8，T4平台。未提供具体精度数据。\",\n      \"covered_capability\": \"细粒度人体属性识别，针对特定人群和场景（老人），证明在监控场景下人体属性模型的技术可行性。\",\n      \"gap\": \"标签体系不包含纹身，需自定义标签体系（纹身有无、位置）。\",\n      \"evidence\": [\n        \"evidence_id: 4ad2e35299e61dd6f05ea621\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"KM_classifier_Clothes_SD_nart_acl-ascend710-fp16_b8_0.0.2.model\",\n      \"label_schema\": \"服饰分类标签，如 st_jurong_prisoner（监狱）、st_jurong_police（警卫）、st_jurong_others（其他）。标签顺序、输入尺寸、F1-score等详细列出。\",\n      \"training_data\": \"HL全量数据。训练集平均精度95.13%（v1223）/99.30%（v1224），测试集平均精度93.00%（v1223）/97.85%（v1224）。\",\n      \"reported_metrics\": \"F1-score 0.9666 (V0.0.1) / 0.9776 (V0.0.2)。Precision/Recall详细数据见PDF证据。\",\n      \"covered_capability\": \"人体服饰属性细粒度分类，精度较高（F1>0.96），证明在监控场景下人体属性分类的可行性。\",\n      \"gap\": \"任务聚焦于服饰，纹身属于人体本体属性，数据标注方式不同（纹身通常基于局部裁剪或全身检测后的特定区域标注）。\",\n      \"evidence\": [\n        \"evidence_id: 5ff9aa433792455f49e555b3\",\n        \"evidence_id: fe4863b392231a077a254b55\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"full_struct\",\n      \"label_schema\": \"人体检测与属性（face, pedestrian, cycer, vehicle, cyc）。支持结构化检测，但属性较粗粒度。\",\n      \"training_data\": \"证据不足。平台artosyn-ar9341-int16等。\",\n      \"reported_metrics\": \"性能测试通过（forward_time 0.045s），但精度测试部分失败。\",\n      \"covered_capability\": \"通用人体检测与基础属性，作为底座可能支持扩展属性。\",\n      \"gap\": \"属性标签体系不支持细粒度人体属性如纹身。\",\n      \"evidence\": [\n        \"evidence_id: eb9d0213f91e0c264a60955a\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"KM_classifier_Ped_ClothBanner_nart_acl-ascend710-fp16_b8_0.0.1.model\",\n      \"label_schema\": \"人体状衣二分类（衣物上有肉眼可辨醒目大字 vs 无）。\",\n      \"training_data\": \"证据不足。pk定制化。\",\n      \"reported_metrics\": \"证据不足。\",\n      \"covered_capability\": \"证明人体属性二分类任务（有无）的技术实现，与“纹身有无”识别类似。\",\n      \"gap\": \"标签为衣物特征，非纹身。\",\n      \"evidence\": [\n        \"evidence_id: 574e8a69ac4e1edd855a3cbe\"\n      ]\n    }\n  ],\n  \"migration_plan\": {\n    \"feasibility\": \"high\",\n    \"approach\": \"基于现有33类人体属性模型（KM_classifier_Ped_33of33）进行迁移微调，增加纹身属性标签。纹身位置识别可建模为多标签分类（有无纹身）+ 多分类（位置）。\",\n    \"data_requirements\": \"需构建包含纹身有无及位置的标注数据集。参考人体服饰属性模型的数据规模（如1w样本），建议准备数千至数万张监控场景下清晰可见纹身的样本。需注意光线、角度、遮挡等难例。\",\n    \"compute_requirements\": \"Ascend 310/710平台，参考现有属性模型配置（fp16, batch size 8-16）。\",\n    \"engineering_work\": \"1. 标签体系定义与数据标注（重点：纹身位置标注规范，如是否需Bounding Box或关键点）。2. 模型微调（Transfer Learning）。3. 精度评估与阈值调优。\",\n    \"estimated_timeline\": \"2-3个月（数据标注1个月，训练与评估1-2个月）。\",\n    \"estimated_cost\": \"证据不足。主要依赖数据标注成本和GPU/Ascend算力成本。\",\n    \"dependencies\": [\"高质量纹身属性标注数据\", \"人体检测底座模型（如full_struct或person）\", \"标注工具支持细粒度属性标注\"]\n  ,\n  \"risks\": [\n    \"数据稀缺：纹身数据获取难度大，尤其是清晰位置标注。\",\n    \"精度不确定性：纹身特征可能因模糊、遮挡、低分辨率导致精度下降。\",\n    \"标签定义歧义：纹身位置（如颈部与肩部边界）可能定义不清。\"\n  ]\n  },\n  \"expected_performance\": {\n    \"baseline\": \"参考服饰属性模型F1-score 0.96+。\",\n    \"target\": \"纹身有无二分类精度目标 > 0.90，位置分类精度 > 0.85。\",\n    \"uncertainty\": \"证据不足。需实际验证。\"\n  },\n  \"recommendation\": \"建议可行性高。基于现有33类人体属性模型进行迁移微调。优先解决“纹身有无”二分类，再扩展位置识别。需注意数据质量与标注规范。\"\n}",
+    "structured_output": {
+      "requirement_summary": "用户询问在普通城市监控场景下，识别“纹身有无”和“纹身位置（面部、颈部、手部、腿部、背部、无法判断）”的可行性。这是一个人体细粒度属性识别任务，涉及二分类（有无）和多分类（位置）的属性识别。",
+      "direct_match": {
+        "exists": false,
+        "summary": "检索结果中未找到明确标注为“纹身识别”或“纹身属性”的模型。现有模型主要集中于人体基本属性（年龄、性别、衣着）、人脸检测、车牌检测、横幅检测等，未发现直接匹配纹身识别的模型。",
+        "evidence": []
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "KM_classifier_Ped_33of33_nart_acl-ascend710-fp16_b16_2.21.0.model",
+          "label_schema": "人体属性模型（V2.21.0），包含33类人体属性。具体属性类别未在证据中详细列出，但根据模型名称推测可能包含衣着、配饰、体态等常见属性。标签体系为多类别分类或二分类组合。",
+          "training_data": "证据不足。模型版本2.21.0，用于V2.21.0应用场景。训练数据来源未明确提及，但属于标准人体属性模型。",
+          "reported_metrics": "证据不足。模型状态为SUCCESS，未提供具体精度指标（mAP、ACC等）。",
+          "covered_capability": "人体属性识别，支持Ascend 310/710平台，与需求场景（城市监控）有较高相似性。",
+          "gap": "未明确支持“纹身”相关属性，需评估是否可在此基础上扩展或微调。",
+          "evidence": [
+            "evidence_id: 50456af57ca2a020a208c4ce",
+            "evidence_id: 5eb1abee773e1d93c2e72f13"
+          ]
+        },
+        {
+          "model_or_solution": "KM_classifier_Ped_33of33_MTR_nart_cuda11.4-trt8.4.1-fp16-T4_b8_2.20.8.model",
+          "label_schema": "香港地铁老人属性模型。标签包括：年龄、白发、玩手机、背包。这些属于细粒度人体属性，与纹身识别在任务形态上（细粒度分类）相似。",
+          "training_data": "证据不足。应用场景为香港地铁，针对老人群体。数据要求未详细列出。",
+          "reported_metrics": "证据不足。模型版本2.20.8，T4平台。未提供具体精度数据。",
+          "covered_capability": "细粒度人体属性识别，针对特定人群和场景（老人），证明在监控场景下人体属性模型的技术可行性。",
+          "gap": "标签体系不包含纹身，需自定义标签体系（纹身有无、位置）。",
+          "evidence": [
+            "evidence_id: 4ad2e35299e61dd6f05ea621"
+          ]
+        },
+        {
+          "model_or_solution": "KM_classifier_Clothes_SD_nart_acl-ascend710-fp16_b8_0.0.2.model",
+          "label_schema": "服饰分类标签，如 st_jurong_prisoner（监狱）、st_jurong_police（警卫）、st_jurong_others（其他）。标签顺序、输入尺寸、F1-score等详细列出。",
+          "training_data": "HL全量数据。训练集平均精度95.13%（v1223）/99.30%（v1224），测试集平均精度93.00%（v1223）/97.85%（v1224）。",
+          "reported_metrics": "F1-score 0.9666 (V0.0.1) / 0.9776 (V0.0.2)。Precision/Recall详细数据见PDF证据。",
+          "covered_capability": "人体服饰属性细粒度分类，精度较高（F1>0.96），证明在监控场景下人体属性分类的可行性。",
+          "gap": "任务聚焦于服饰，纹身属于人体本体属性，数据标注方式不同（纹身通常基于局部裁剪或全身检测后的特定区域标注）。",
+          "evidence": [
+            "evidence_id: 5ff9aa433792455f49e555b3",
+            "evidence_id: fe4863b392231a077a254b55"
+          ]
+        },
+        {
+          "model_or_solution": "full_struct",
+          "label_schema": "人体检测与属性（face, pedestrian, cycer, vehicle, cyc）。支持结构化检测，但属性较粗粒度。",
+          "training_data": "证据不足。平台artosyn-ar9341-int16等。",
+          "reported_metrics": "性能测试通过（forward_time 0.045s），但精度测试部分失败。",
+          "covered_capability": "通用人体检测与基础属性，作为底座可能支持扩展属性。",
+          "gap": "属性标签体系不支持细粒度人体属性如纹身。",
+          "evidence": [
+            "evidence_id: eb9d0213f91e0c264a60955a"
+          ]
+        },
+        {
+          "model_or_solution": "KM_classifier_Ped_ClothBanner_nart_acl-ascend710-fp16_b8_0.0.1.model",
+          "label_schema": "人体状衣二分类（衣物上有肉眼可辨醒目大字 vs 无）。",
+          "training_data": "证据不足。pk定制化。",
+          "reported_metrics": "证据不足。",
+          "covered_capability": "证明人体属性二分类任务（有无）的技术实现，与“纹身有无”识别类似。",
+          "gap": "标签为衣物特征，非纹身。",
+          "evidence": [
+            "evidence_id: 574e8a69ac4e1edd855a3cbe"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "high",
+        "approach": "基于现有33类人体属性模型（KM_classifier_Ped_33of33）进行迁移微调，增加纹身属性标签。纹身位置识别可建模为多标签分类（有无纹身）+ 多分类（位置）。",
+        "data_requirements": "需构建包含纹身有无及位置的标注数据集。参考人体服饰属性模型的数据规模（如1w样本），建议准备数千至数万张监控场景下清晰可见纹身的样本。需注意光线、角度、遮挡等难例。",
+        "compute_requirements": "Ascend 310/710平台，参考现有属性模型配置（fp16, batch size 8-16）。",
+        "engineering_work": "1. 标签体系定义与数据标注（重点：纹身位置标注规范，如是否需Bounding Box或关键点）。2. 模型微调（Transfer Learning）。3. 精度评估与阈值调优。",
+        "estimated_timeline": "2-3个月（数据标注1个月，训练与评估1-2个月）。",
+        "estimated_cost": "证据不足。主要依赖数据标注成本和GPU/Ascend算力成本。",
+        "dependencies": [
+          "高质量纹身属性标注数据",
+          "人体检测底座模型（如full_struct或person）",
+          "标注工具支持细粒度属性标注"
+        ],
+        "risks": [
+          "数据稀缺：纹身数据获取难度大，尤其是清晰位置标注。",
+          "精度不确定性：纹身特征可能因模糊、遮挡、低分辨率导致精度下降。",
+          "标签定义歧义：纹身位置（如颈部与肩部边界）可能定义不清。"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "参考服饰属性模型F1-score 0.96+。",
+        "target": "纹身有无二分类精度目标 > 0.90，位置分类精度 > 0.85。",
+        "uncertainty": "证据不足。需实际验证。"
+      },
+      "recommendation": "建议可行性高。基于现有33类人体属性模型进行迁移微调。优先解决“纹身有无”二分类，再扩展位置识别。需注意数据质量与标注规范。"
+    }
+  }
+}

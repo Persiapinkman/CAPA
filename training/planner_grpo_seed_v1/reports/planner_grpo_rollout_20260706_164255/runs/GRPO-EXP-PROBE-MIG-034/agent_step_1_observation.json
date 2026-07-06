@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "migration_advisor",
+  "_action_input": {
+    "user_query": "先用这张图验证烟雾能不能被现有模型看到；若不稳定，再给烟雾异常检测的轻量验证路径。",
+    "use_image": true,
+    "use_visual_probe": true,
+    "finish_after_tool": true
+  },
+  "_thought": "用户的问题明显属于“新需求能否由现有模型支持；如何验证/评估/迁移”的业务可行性报告场景，特别是提到“先用这张图验证烟雾能不能被现有模型看到；若不稳定，再给烟雾异常检测的轻量验证路径”，属于对新需求的视觉探针 + 迁移建议，符合 migration_advisor 的职责（内部会执行轻量视觉探针后输出迁移评估报告）。当前图片可用于样例证据，user_query 应直接使用原始输入，让迁移评估按图检索。此外主观判断使用 pipeline_eval 不太合适，pipeline_eval 更多是端到端生成样本并做评测，而当前问题是“能否检测到”，更偏向能力边界探索，所以优先选择 migration_advisor。根据规划原则 5，并设置 use_image=true、use_visual_probe=true、finish_after_tool=true 使工具返回可直接收口。"
+}

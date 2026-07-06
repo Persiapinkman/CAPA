@@ -1,0 +1,74 @@
+{
+  "session_id": "a1729ecd-a140-468d-84fb-14ed80627bcc",
+  "run_stamp": "20260521_134305_790ca0a2",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-05-21T13:45:13+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"香港项目需要识别头盔颜色（黑、白、灰、红、蓝、黄、绿、紫、迷彩），需评估现有城市结构化人体属性模型是否直接支持。\",\n  \"direct_match\": {\n    \"exists\": false,\n    \"summary\": \"现有检索证据中未找到直接支持“头盔颜色”识别的属性模型。\"\n  ,\n  \"evidence\": [\n    \"现有模型包括人脸属性、车牌颜色、车辆颜色、非机动车属性等，无头盔颜色专模。\",\n    \"人脸检测模型未发现头盔识别能力。\"\n  ]\n},\n\"similar_assets\": [\n  {\n    \"model_or_solution\": \"KM_classifier_vehicle_attibute（车辆属性模型）\",\n    \"covered_capability\": \"车辆颜色识别（黑、白、灰、红、蓝、绿、黄、紫等）\",\n    \"gap\": \"仅适用于车辆，无法直接用于头盔；头盔颜色与车辆颜色算法不同。\",\n    \"evidence\": [\n      \"vehicle_color_precision 0.892/0.845 (cpu-ppl2-fp32)\",\n      \"车辆颜色类别：灰、白、红、黑、蓝、绿、棕、黄、紫...\"\n    ]\n  },\n  {\n    \"model_or_solution\": \"KM_classifier_Carplate_TypeColor（车牌颜色模型）\",\n    \"covered_capability\": \"车牌颜色类型识别\",\n    \"gap\": \"仅适用于车牌，无法直接用于头盔。\"\n  ,\n  \"evidence\": [\n    \"车牌颜色类型属性模型存在，但为车牌专用。\"\n  ]\n}\n],\n\"migration_plan\": {\n  \"feasibility\": \"medium\",\n  \"approach\": \"1. 在人/车属性模型框架下，新建头盔颜色分支；2. 使用现有颜色分类算法能力（KNN/CNN分类器）；3. 针对迷彩等类别增加测试集训练。\",\n  \"data_requirements\": \"需要头盔颜色样本训练，包括8种纯色+迷彩。证据不足无法给出样本量，需进一步评估。\",\n  \"compute_requirements\": \"证据不足，无法给出具体算力与时间。\",\n  \"engineering_work\": \"需新增模型分支、标注数据集、重新训练与阈值设定。\"\n  ,\n  \"estimated_timeline\": \" exerted 依赖数据获取与训练结果（无明确周期）。\",\n  \"estimated_cost\": \"依赖数据获取与训练方案，无法给出具体金额或硬件投入区间。\",\n  \"dependencies\": [\n    \"头盔颜色数据集获取\",\n    \"模型框架支持属性扩展\",\n    \"评估采集头盔类图片与样本\"\n  ]\n  \n  ,\n  \"risks\": [\n    \"头盔颜色光照差异（大幅度影响识别精度）\",\n    \"迷彩图案在低分辨率下难以区分\",\n    \"现有属性标记缺乏头盔类别\"\n  ]\n}\n  ,\n\"expected_performance\": {\n  \"baseline\": \"参照车辆颜色模型 achieve 0.89 精度量级（若数据充分）。\",\n  \"target\": \"需达到>0.85真实准确度（根据项目要求调整）\",\n  \"uncertainty\": \"mAP/召回率受 helmet size、angle、遮挡影响大，无法精确预测。\"\n  },\n\"recommendation\": \"建议先收集头盔样本数据，验证现有车辆颜色模型或 KNN 分类器在头盔类别上的泛化能力（如反映头盔像素特征相近性），再决定是否迁移\"\n}",
+    "structured_output": {
+      "requirement_summary": "香港项目需要识别头盔颜色（黑、白、灰、红、蓝、黄、绿、紫、迷彩），需评估现有城市结构化人体属性模型是否直接支持。",
+      "direct_match": {
+        "exists": false,
+        "summary": "现有检索证据中未找到直接支持“头盔颜色”识别的属性模型。",
+        "evidence": [
+          "现有模型包括人脸属性、车牌颜色、车辆颜色、非机动车属性等，无头盔颜色专模。",
+          "人脸检测模型未发现头盔识别能力。"
+        ]
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "KM_classifier_vehicle_attibute（车辆属性模型）",
+          "covered_capability": "车辆颜色识别（黑、白、灰、红、蓝、绿、黄、紫等）",
+          "gap": "仅适用于车辆，无法直接用于头盔；头盔颜色与车辆颜色算法不同。",
+          "evidence": [
+            "vehicle_color_precision 0.892/0.845 (cpu-ppl2-fp32)",
+            "车辆颜色类别：灰、白、红、黑、蓝、绿、棕、黄、紫..."
+          ]
+        },
+        {
+          "model_or_solution": "KM_classifier_Carplate_TypeColor（车牌颜色模型）",
+          "covered_capability": "车牌颜色类型识别",
+          "gap": "仅适用于车牌，无法直接用于头盔。",
+          "evidence": [
+            "车牌颜色类型属性模型存在，但为车牌专用。"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "medium",
+        "approach": "1. 在人/车属性模型框架下，新建头盔颜色分支；2. 使用现有颜色分类算法能力（KNN/CNN分类器）；3. 针对迷彩等类别增加测试集训练。",
+        "data_requirements": "需要头盔颜色样本训练，包括8种纯色+迷彩。证据不足无法给出样本量，需进一步评估。",
+        "compute_requirements": "证据不足，无法给出具体算力与时间。",
+        "engineering_work": "需新增模型分支、标注数据集、重新训练与阈值设定。",
+        "estimated_timeline": " exerted 依赖数据获取与训练结果（无明确周期）。",
+        "estimated_cost": "依赖数据获取与训练方案，无法给出具体金额或硬件投入区间。",
+        "dependencies": [
+          "头盔颜色数据集获取",
+          "模型框架支持属性扩展",
+          "评估采集头盔类图片与样本"
+        ],
+        "risks": [
+          "头盔颜色光照差异（大幅度影响识别精度）",
+          "迷彩图案在低分辨率下难以区分",
+          "现有属性标记缺乏头盔类别"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "参照车辆颜色模型 achieve 0.89 精度量级（若数据充分）。",
+        "target": "需达到>0.85真实准确度（根据项目要求调整）",
+        "uncertainty": "mAP/召回率受 helmet size、angle、遮挡影响大，无法精确预测。"
+      },
+      "recommendation": "建议先收集头盔样本数据，验证现有车辆颜色模型或 KNN 分类器在头盔类别上的泛化能力（如反映头盔像素特征相近性），再决定是否迁移"
+    }
+  }
+}

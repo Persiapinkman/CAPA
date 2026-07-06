@@ -1,0 +1,537 @@
+{
+  "session_id": "93d29e3a-d274-4de6-898b-f2b54fd2daaf",
+  "run_stamp": "20260522_141941_0094a565",
+  "stage": "migration_report_request",
+  "step_index": 2,
+  "created_at": "2026-05-22T14:21:39+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260522_141941_0094a565",
+    "input_schema": {
+      "user_query": "用户原始问题",
+      "field_results": "playbook 分字段检索结果：field, evidence[]（每 field 按 source_score/score 取 Top 5）"
+    },
+    "evidence_item_fields": [
+      "evidence_id",
+      "title",
+      "snippet",
+      "model_name",
+      "algorithm_name",
+      "algorithm_type",
+      "application_scene",
+      "section_type",
+      "score"
+    ],
+    "structured_input": {
+      "user_query": "香港项目要求识别“头盔颜色：黑、白、灰、红、蓝、黄、绿、紫、迷彩”，现有城市结构化人体属性模型是否能直接支持？",
+      "field_results": [
+        {
+          "field": "existing_models",
+          "evidence": [
+            {
+              "evidence_id": "f53d026649b58ea0fecf243a",
+              "title": "PAR_merged_model",
+              "snippet": "model_name: PAR_merged_model\nname: PAR_merged_model\ntype: classifier\nplatform: cpu-ppl2-fp32\nstatus: SUCCESS\ndid: 102019\nrid: 36860\nversion: 1.0.0\nversion_train_date: 20240228\nsource_file: data/PAR_merged_model-cpu-ppl2-fp32_36860_102019.json",
+              "model_name": "PAR_merged_model"
+            },
+            {
+              "evidence_id": "e603f74f5ab719dfa1019089",
+              "title": "fight_model",
+              "snippet": "model_name: fight_model\nname: fight_model\ntype: falcon\nplatform: cuda11.0-trt7.1-fp16-T4\nstatus: SUCCESS\ndid: 116885\nrid: 29947\nversion: 1.0.0\nversion_train_date: 20230621\nsource_file: data/fight_model-cuda11.0-trt7.1-fp16-T4_29947_116885.json",
+              "model_name": "fight_model"
+            },
+            {
+              "evidence_id": "f01f4352f202edbafab47244",
+              "title": "PAR_merged_model",
+              "snippet": "model_name: PAR_merged_model\nname: PAR_merged_model\ntype: classifier\nplatform: cuda11.0-trt7.1-fp16-T4\nstatus: SUCCESS\ndid: 131495\nrid: 50900\nversion: 1.0.0\nversion_train_date: 20260108\nsource_file: data/PAR_merged_model-cuda11.0-trt7.1-fp16-T4_50900_131495.json",
+              "model_name": "PAR_merged_model"
+            },
+            {
+              "evidence_id": "8816f61d8a5298c7917b454b",
+              "title": "KM_textrecognition_CarPlate_vit_nart_cuda11.0-trt7.1-fp16-T4_b1_6.0.0.model",
+              "snippet": "target_name: 车牌\nalgorithm_type: 识别\nalgorithm_name: 车牌文字识别PK模型\napplication_scene: 一所PK项目车牌文字识别模型，单双行\nowner: 冯江燕\nmodel_name: KM_textrecognition_CarPlate_vit_nart_cuda11.0-trt7.1-fp16-T4_b1_6.0.0.model\nsupported_device: T4\nrecommended_config: cuda11.0-trt7.1-fp16-T4\nlast_updated: 2023-05-30\nlast_updated_month: 2023-05",
+              "model_name": "KM_textrecognition_CarPlate_vit_nart_cuda11.0-trt7.1-fp16-T4_b1_6.0.0.model",
+              "algorithm_name": "车牌文字识别PK模型",
+              "algorithm_type": "识别",
+              "application_scene": "一所PK项目车牌文字识别模型，单双行"
+            },
+            {
+              "evidence_id": "3b7bd5678c1914cd463a6352",
+              "title": "KM_textrecognition_CarPlate_vit_nart_cuda11.4-trt8.2.0-fp16-A2_b1_6.0.0.model",
+              "snippet": "target_name: 车牌\nalgorithm_type: 识别\nalgorithm_name: 车牌文字识别PK模型\napplication_scene: 一所PK项目车牌文字识别模型，单双行\nowner: 冯江燕\nmodel_name: KM_textrecognition_CarPlate_vit_nart_cuda11.4-trt8.2.0-fp16-A2_b1_6.0.0.model\nsupported_device: A2\nrecommended_config: cuda11.4-trt8.2.0-fp16-A2\nlast_updated: 2023-05-30\nlast_updated_month: 2023-05",
+              "model_name": "KM_textrecognition_CarPlate_vit_nart_cuda11.4-trt8.2.0-fp16-A2_b1_6.0.0.model",
+              "algorithm_name": "车牌文字识别PK模型",
+              "algorithm_type": "识别",
+              "application_scene": "一所PK项目车牌文字识别模型，单双行"
+            }
+          ]
+        },
+        {
+          "field": "similar_capabilities",
+          "evidence": [
+            {
+              "evidence_id": "b664f87d3d42cb3abb15e73d",
+              "title": "PAR_waistcoat_safetybelt",
+              "snippet": "model_name: PAR_waistcoat_safetybelt\nname: PAR_waistcoat_safetybelt\ntype: classifier\nplatform: cpu-nart-fp32\nstatus: SUCCESS\ndid: 93156\nrid: 33307\nversion: 0.1.0\nversion_train_date: 20230912\nsource_file: data/PAR_waistcoat_safetybelt-cpu-nart-fp32_33307_93156.json",
+              "model_name": "PAR_waistcoat_safetybelt"
+            },
+            {
+              "evidence_id": "e457012b71b3b00d6052e491",
+              "title": "PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p1 table 1",
+              "snippet": "PDF表格: PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf 第1页 表1\n| PAR_waistcoat_safetybelt v0.2.0 Release Note: • 发布时间: 2023.11.15 • Owner: @蔡官熊 • Highlight: ◦ 加入唐山安全绳任务的红马甲数据，同时补充了贵阳新回流标注的数据，模型相比上一版更加鲁 棒，在前场回流的误报图片上情况有所改善； 一、功能介绍 识别作业人员的马甲及安全带穿戴属性，马甲分为 \"without_waistcoat\"、 \"with_waistcoat\"、 \"waistcoat_agnostic\"，安全带分为 \"without_safetybelt\"、 \"with_safetybelt\"、 \"safetybelt_agnostic\"。 穿安全带 穿马甲 二、算法边界 图像分辨率：720p以上 目标像素要求：高宽大小在60x120以上，属性清晰可见、无明显遮挡及运动模糊 检测类别：2个行人属性，共6个类别标签 | | | | | | |\n| --- | --- | --- | --- | --- | --- | --- |\n| | PAR_waistcoat_safetybelt v0.2.0 | | | | | |\n| | Release Note: | | | | | |\n| | • 发布时间: 2023.11.15 | | | | | |\n| | • Owner: @蔡官熊 | | | | | |\n| | • Highlight: | | | | | |\n| | ◦ 加入唐山安全绳任务的红马甲数据，同时补充了贵阳新回流标注的数据，模型相比上一版更加鲁 棒，在前场回流的误报图片上情况有所改善； | | | | | |\n| | | | ◦ 加入唐山安全绳任务的红马甲数据..."
+            },
+            {
+              "evidence_id": "085a4a19f4c436618ff7b838",
+              "title": "PAR_waistcoat_safetybelt",
+              "snippet": "model_name: PAR_waistcoat_safetybelt\nname: PAR_waistcoat_safetybelt\ntype: classifier\nplatform: cpu-ppl2-fp32\nstatus: SUCCESS\ndid: 95824\nrid: 34577\nversion: 0.2.0\nversion_train_date: 20231108\nsource_file: data/PAR_waistcoat_safetybelt-cpu-ppl2-fp32_34577_95824.json",
+              "model_name": "PAR_waistcoat_safetybelt"
+            },
+            {
+              "evidence_id": "bab21bf76719bfe7491f7027",
+              "title": "KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model",
+              "snippet": "target_name: 红马甲/安全带\nalgorithm_type: 属性\nalgorithm_name: 中车工厂-属性模型1\napplication_scene: 中车工厂项目\nowner: 朱帅\nmodel_name: KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\nsupported_device: cpu\nrecommended_config: cpu-ppl2-fp32\nlast_updated: 2023-11-15\nlast_updated_month: 2023-11",
+              "model_name": "KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model",
+              "algorithm_name": "中车工厂-属性模型1",
+              "algorithm_type": "属性",
+              "application_scene": "中车工厂项目"
+            },
+            {
+              "evidence_id": "8d7ef86d283d4fce5127ae56",
+              "title": "PAR_waistcoat_safetybelt",
+              "snippet": "model_name: PAR_waistcoat_safetybelt\nname: PAR_waistcoat_safetybelt\ntype: classifier\nplatform: cuda11.0-trt7.1-int8-P4\nstatus: SUCCESS\ndid: 95822\nrid: 34577\nversion: 0.2.0\nversion_train_date: 20231108\nsource_file: data/PAR_waistcoat_safetybelt-cuda11.0-trt7.1-int8-P4_34577_95822.json",
+              "model_name": "PAR_waistcoat_safetybelt"
+            }
+          ]
+        },
+        {
+          "field": "performance_baseline",
+          "evidence": [
+            {
+              "evidence_id": "c7711b84757a14915a38a72a",
+              "title": "PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2 table 1",
+              "snippet": "PDF表格: PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf 第2页 表1\n表格结构化行:\n模型族: 三、模型列表\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model\nOID: beeb6944bdca2dafd0213251951cc47f829efad2981d7f847010b13f486181c5\n平台: cuda11.0-trt7.1-fp16-T4\n模型族: 三、模型列表\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model\nOID: fcd2d67fbbaab4fc2064f08ccaf5e61abf7b9655388c7f39a349c43184c6b102\n平台: cuda11.0-trt7.1-int8-T4\n模型族: 三、模型列表\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-P4_b8_0.2.0.model\nOID: c059a471994cbb3365e4a0e6e6e8c8469f578190e75f31b348867599041e5880\n平台: cuda11.0-trt7.1-int8-P4\n模型族: 三、模型列表\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\nOID: 0cef652610b4f5fef96dd575ba52e283ce7e1908565d..."
+            },
+            {
+              "evidence_id": "c3df8f567b44bcd3cf139136",
+              "title": "PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2",
+              "snippet": "58\nwithout_safetybelt 0.9269 0.9702 0.9481\n评测平台：cuda11.0-trt7.1-fp16-T4\n模型性能"
+            },
+            {
+              "evidence_id": "1d4107dd8be5f74f932bdc50",
+              "title": "PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2",
+              "snippet": "ge/project/3/releaseManage?\nrid=34577&id=3&model_type=classifier&tabName=deployment\n四、精度性能\n模型精度\n属性 类别 precision recall f1-score Acc|mPrec|mA\nwaistcoat_agnostic 0.7439 0.6246 0.6790\nwaistcoat\n0.9680|0.8918|0.86"
+            },
+            {
+              "evidence_id": "16cd20acc1fdc0c0dbbf9f77",
+              "title": "PDFs/安防方向--车牌属性.pdf p6",
+              "snippet": "白牌、\n黄牌的分类精度\n◦ 测试集颜色：黑牌precision69.67%->99.68%(+30.9%)，蓝牌precision84.78%->97.20%\n(+12.42%)，白牌precision60.28%->99.31%(+39.03%)，黄牌precsion55.39%-96.67%\n（+41.28%）"
+            },
+            {
+              "evidence_id": "ae9aeaf69262fd9b82e31bad",
+              "title": "PDFs/安防方向--车牌属性.pdf p6",
+              "snippet": "（+41.28%）\n◦ 测试集颜色Acc76.98%-96.46%(+19.48%)，类型Acc82.38%-96.12%(+13.74%)"
+            }
+          ]
+        },
+        {
+          "field": "data_requirements",
+          "evidence": [
+            {
+              "evidence_id": "dc9fe13e4a2d11574c7a63e5",
+              "title": "PDFs/安防方向--车牌检测.pdf p1",
+              "snippet": "release note\n• 发布时间：20230519\n• owner：gaowanshun@sensetime.com\n• Highlights："
+            },
+            {
+              "evidence_id": "5bd3f6a80c6d0ce27f9a2337",
+              "title": "KM_falcon_fight_UMT_large",
+              "snippet": "model_name: KM_falcon_fight_UMT_large\nname: KM_falcon_fight_UMT_large\ntype: falcon\nplatform: acl-ascend310-fp16\nstatus: SUCCESS\ndid: 126793\nrid: 45903\nversion: 2.0.4\nversion_train_date: 20250107\nsource_file: data/KM_falcon_fight_UMT_large-acl-ascend310-fp16_45903_126793.json",
+              "model_name": "KM_falcon_fight_UMT_large"
+            },
+            {
+              "evidence_id": "27657d9b17c2759fd2a822bd",
+              "title": "PDFs/安防方向--车辆属性大模型更新.pdf p3",
+              "snippet": "KM_classifier_Vehicle_FullAttr_3.0.3\nrelease note：\n• 发布日期：20230821\n• owner: zhanghaodong@sensetime.com\n• Highlight:"
+            },
+            {
+              "evidence_id": "b33f91b62115352de7ab534d",
+              "title": "PDFs/安防方向-人脸误检分类模型发版记录.pdf p6",
+              "snippet": "KM_classifier_Face_None_Security_3.0.1\nrelease note:\n• release date: 2023.11.30\n• owner: gonglijun@sensetime.com\n• highlights"
+            },
+            {
+              "evidence_id": "7571ba32218935d0e761dbff",
+              "title": "KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model",
+              "snippet": "target_name: 车牌\nalgorithm_type: 属性\nalgorithm_name: 车牌颜色类型属性\napplication_scene: V3.0.0，标品\nowner: 冯江燕\nmodel_name: KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model\nsupported_device: cpu\nrecommended_config: cpu-ppl2-fp32\nlast_updated: 2023-05-30\nlast_updated_month: 2023-05",
+              "model_name": "KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model",
+              "algorithm_name": "车牌颜色类型属性",
+              "algorithm_type": "属性",
+              "application_scene": "V3.0.0，标品"
+            }
+          ]
+        }
+      ]
+    },
+    "llm_messages": [
+      {
+        "role": "system",
+        "content": "你是视觉模型迁移顾问。请基于检索证据生成结构化迁移评估报告。\n必须区分证据支持和合理推断；证据不足时明确写「证据不足」，不要编造精度、周期或成本。\n若可估计成本/周期，只能给区间和依赖前提。\nsimilar_assets 中每个相似模型/方案必须逐项填写：\n- label_schema：该模型的类别/标签定义（含类别名、取值范围）；\n- training_data：训练集来源、标注规范、样本量或数据要求；\n- reported_metrics：文档中的 mAP、ACC、recall、benchmark 等数值及对应测试集/平台；\n上述三项只能引用 field_results 中的证据；无对应片段则写「证据不足」。\nevidence 数组可引用 evidence_id 或证据原文短句。只输出 JSON。"
+      },
+      {
+        "role": "user",
+        "content": "{\n  \"user_query\": \"香港项目要求识别“头盔颜色：黑、白、灰、红、蓝、黄、绿、紫、迷彩”，现有城市结构化人体属性模型是否能直接支持？\",\n  \"field_results\": [\n    {\n      \"field\": \"existing_models\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"f53d026649b58ea0fecf243a\",\n          \"title\": \"PAR_merged_model\",\n          \"snippet\": \"model_name: PAR_merged_model\\nname: PAR_merged_model\\ntype: classifier\\nplatform: cpu-ppl2-fp32\\nstatus: SUCCESS\\ndid: 102019\\nrid: 36860\\nversion: 1.0.0\\nversion_train_date: 20240228\\nsource_file: data/PAR_merged_model-cpu-ppl2-fp32_36860_102019.json\",\n          \"model_name\": \"PAR_merged_model\"\n        },\n        {\n          \"evidence_id\": \"e603f74f5ab719dfa1019089\",\n          \"title\": \"fight_model\",\n          \"snippet\": \"model_name: fight_model\\nname: fight_model\\ntype: falcon\\nplatform: cuda11.0-trt7.1-fp16-T4\\nstatus: SUCCESS\\ndid: 116885\\nrid: 29947\\nversion: 1.0.0\\nversion_train_date: 20230621\\nsource_file: data/fight_model-cuda11.0-trt7.1-fp16-T4_29947_116885.json\",\n          \"model_name\": \"fight_model\"\n        },\n        {\n          \"evidence_id\": \"f01f4352f202edbafab47244\",\n          \"title\": \"PAR_merged_model\",\n          \"snippet\": \"model_name: PAR_merged_model\\nname: PAR_merged_model\\ntype: classifier\\nplatform: cuda11.0-trt7.1-fp16-T4\\nstatus: SUCCESS\\ndid: 131495\\nrid: 50900\\nversion: 1.0.0\\nversion_train_date: 20260108\\nsource_file: data/PAR_merged_model-cuda11.0-trt7.1-fp16-T4_50900_131495.json\",\n          \"model_name\": \"PAR_merged_model\"\n        },\n        {\n          \"evidence_id\": \"8816f61d8a5298c7917b454b\",\n          \"title\": \"KM_textrecognition_CarPlate_vit_nart_cuda11.0-trt7.1-fp16-T4_b1_6.0.0.model\",\n          \"snippet\": \"target_name: 车牌\\nalgorithm_type: 识别\\nalgorithm_name: 车牌文字识别PK模型\\napplication_scene: 一所PK项目车牌文字识别模型，单双行\\nowner: 冯江燕\\nmodel_name: KM_textrecognition_CarPlate_vit_nart_cuda11.0-trt7.1-fp16-T4_b1_6.0.0.model\\nsupported_device: T4\\nrecommended_config: cuda11.0-trt7.1-fp16-T4\\nlast_updated: 2023-05-30\\nlast_updated_month: 2023-05\",\n          \"model_name\": \"KM_textrecognition_CarPlate_vit_nart_cuda11.0-trt7.1-fp16-T4_b1_6.0.0.model\",\n          \"algorithm_name\": \"车牌文字识别PK模型\",\n          \"algorithm_type\": \"识别\",\n          \"application_scene\": \"一所PK项目车牌文字识别模型，单双行\"\n        },\n        {\n          \"evidence_id\": \"3b7bd5678c1914cd463a6352\",\n          \"title\": \"KM_textrecognition_CarPlate_vit_nart_cuda11.4-trt8.2.0-fp16-A2_b1_6.0.0.model\",\n          \"snippet\": \"target_name: 车牌\\nalgorithm_type: 识别\\nalgorithm_name: 车牌文字识别PK模型\\napplication_scene: 一所PK项目车牌文字识别模型，单双行\\nowner: 冯江燕\\nmodel_name: KM_textrecognition_CarPlate_vit_nart_cuda11.4-trt8.2.0-fp16-A2_b1_6.0.0.model\\nsupported_device: A2\\nrecommended_config: cuda11.4-trt8.2.0-fp16-A2\\nlast_updated: 2023-05-30\\nlast_updated_month: 2023-05\",\n          \"model_name\": \"KM_textrecognition_CarPlate_vit_nart_cuda11.4-trt8.2.0-fp16-A2_b1_6.0.0.model\",\n          \"algorithm_name\": \"车牌文字识别PK模型\",\n          \"algorithm_type\": \"识别\",\n          \"application_scene\": \"一所PK项目车牌文字识别模型，单双行\"\n        }\n      ]\n    },\n    {\n      \"field\": \"similar_capabilities\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"b664f87d3d42cb3abb15e73d\",\n          \"title\": \"PAR_waistcoat_safetybelt\",\n          \"snippet\": \"model_name: PAR_waistcoat_safetybelt\\nname: PAR_waistcoat_safetybelt\\ntype: classifier\\nplatform: cpu-nart-fp32\\nstatus: SUCCESS\\ndid: 93156\\nrid: 33307\\nversion: 0.1.0\\nversion_train_date: 20230912\\nsource_file: data/PAR_waistcoat_safetybelt-cpu-nart-fp32_33307_93156.json\",\n          \"model_name\": \"PAR_waistcoat_safetybelt\"\n        },\n        {\n          \"evidence_id\": \"e457012b71b3b00d6052e491\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p1 table 1\",\n          \"snippet\": \"PDF表格: PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf 第1页 表1\\n| PAR_waistcoat_safetybelt v0.2.0 Release Note: • 发布时间: 2023.11.15 • Owner: @蔡官熊 • Highlight: ◦ 加入唐山安全绳任务的红马甲数据，同时补充了贵阳新回流标注的数据，模型相比上一版更加鲁 棒，在前场回流的误报图片上情况有所改善； 一、功能介绍 识别作业人员的马甲及安全带穿戴属性，马甲分为 \\\"without_waistcoat\\\"、 \\\"with_waistcoat\\\"、 \\\"waistcoat_agnostic\\\"，安全带分为 \\\"without_safetybelt\\\"、 \\\"with_safetybelt\\\"、 \\\"safetybelt_agnostic\\\"。 穿安全带 穿马甲 二、算法边界 图像分辨率：720p以上 目标像素要求：高宽大小在60x120以上，属性清晰可见、无明显遮挡及运动模糊 检测类别：2个行人属性，共6个类别标签 | | | | | | |\\n| --- | --- | --- | --- | --- | --- | --- |\\n| | PAR_waistcoat_safetybelt v0.2.0 | | | | | |\\n| | Release Note: | | | | | |\\n| | • 发布时间: 2023.11.15 | | | | | |\\n| | • Owner: @蔡官熊 | | | | | |\\n| | • Highlight: | | | | | |\\n| | ◦ 加入唐山安全绳任务的红马甲数据，同时补充了贵阳新回流标注的数据，模型相比上一版更加鲁 棒，在前场回流的误报图片上情况有所改善； | | | | | |\\n| | | | ◦ 加入唐山安全绳任务的红马甲数据...\"\n        },\n        {\n          \"evidence_id\": \"085a4a19f4c436618ff7b838\",\n          \"title\": \"PAR_waistcoat_safetybelt\",\n          \"snippet\": \"model_name: PAR_waistcoat_safetybelt\\nname: PAR_waistcoat_safetybelt\\ntype: classifier\\nplatform: cpu-ppl2-fp32\\nstatus: SUCCESS\\ndid: 95824\\nrid: 34577\\nversion: 0.2.0\\nversion_train_date: 20231108\\nsource_file: data/PAR_waistcoat_safetybelt-cpu-ppl2-fp32_34577_95824.json\",\n          \"model_name\": \"PAR_waistcoat_safetybelt\"\n        },\n        {\n          \"evidence_id\": \"bab21bf76719bfe7491f7027\",\n          \"title\": \"KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\",\n          \"snippet\": \"target_name: 红马甲/安全带\\nalgorithm_type: 属性\\nalgorithm_name: 中车工厂-属性模型1\\napplication_scene: 中车工厂项目\\nowner: 朱帅\\nmodel_name: KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\\nsupported_device: cpu\\nrecommended_config: cpu-ppl2-fp32\\nlast_updated: 2023-11-15\\nlast_updated_month: 2023-11\",\n          \"model_name\": \"KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\",\n          \"algorithm_name\": \"中车工厂-属性模型1\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"中车工厂项目\"\n        },\n        {\n          \"evidence_id\": \"8d7ef86d283d4fce5127ae56\",\n          \"title\": \"PAR_waistcoat_safetybelt\",\n          \"snippet\": \"model_name: PAR_waistcoat_safetybelt\\nname: PAR_waistcoat_safetybelt\\ntype: classifier\\nplatform: cuda11.0-trt7.1-int8-P4\\nstatus: SUCCESS\\ndid: 95822\\nrid: 34577\\nversion: 0.2.0\\nversion_train_date: 20231108\\nsource_file: data/PAR_waistcoat_safetybelt-cuda11.0-trt7.1-int8-P4_34577_95822.json\",\n          \"model_name\": \"PAR_waistcoat_safetybelt\"\n        }\n      ]\n    },\n    {\n      \"field\": \"performance_baseline\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"c7711b84757a14915a38a72a\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2 table 1\",\n          \"snippet\": \"PDF表格: PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf 第2页 表1\\n表格结构化行:\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model\\nOID: beeb6944bdca2dafd0213251951cc47f829efad2981d7f847010b13f486181c5\\n平台: cuda11.0-trt7.1-fp16-T4\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model\\nOID: fcd2d67fbbaab4fc2064f08ccaf5e61abf7b9655388c7f39a349c43184c6b102\\n平台: cuda11.0-trt7.1-int8-T4\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-P4_b8_0.2.0.model\\nOID: c059a471994cbb3365e4a0e6e6e8c8469f578190e75f31b348867599041e5880\\n平台: cuda11.0-trt7.1-int8-P4\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\\nOID: 0cef652610b4f5fef96dd575ba52e283ce7e1908565d...\"\n        },\n        {\n          \"evidence_id\": \"c3df8f567b44bcd3cf139136\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2\",\n          \"snippet\": \"58\\nwithout_safetybelt 0.9269 0.9702 0.9481\\n评测平台：cuda11.0-trt7.1-fp16-T4\\n模型性能\"\n        },\n        {\n          \"evidence_id\": \"1d4107dd8be5f74f932bdc50\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2\",\n          \"snippet\": \"ge/project/3/releaseManage?\\nrid=34577&id=3&model_type=classifier&tabName=deployment\\n四、精度性能\\n模型精度\\n属性 类别 precision recall f1-score Acc|mPrec|mA\\nwaistcoat_agnostic 0.7439 0.6246 0.6790\\nwaistcoat\\n0.9680|0.8918|0.86\"\n        },\n        {\n          \"evidence_id\": \"16cd20acc1fdc0c0dbbf9f77\",\n          \"title\": \"PDFs/安防方向--车牌属性.pdf p6\",\n          \"snippet\": \"白牌、\\n黄牌的分类精度\\n◦ 测试集颜色：黑牌precision69.67%->99.68%(+30.9%)，蓝牌precision84.78%->97.20%\\n(+12.42%)，白牌precision60.28%->99.31%(+39.03%)，黄牌precsion55.39%-96.67%\\n（+41.28%）\"\n        },\n        {\n          \"evidence_id\": \"ae9aeaf69262fd9b82e31bad\",\n          \"title\": \"PDFs/安防方向--车牌属性.pdf p6\",\n          \"snippet\": \"（+41.28%）\\n◦ 测试集颜色Acc76.98%-96.46%(+19.48%)，类型Acc82.38%-96.12%(+13.74%)\"\n        }\n      ]\n    },\n    {\n      \"field\": \"data_requirements\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"dc9fe13e4a2d11574c7a63e5\",\n          \"title\": \"PDFs/安防方向--车牌检测.pdf p1\",\n          \"snippet\": \"release note\\n• 发布时间：20230519\\n• owner：gaowanshun@sensetime.com\\n• Highlights：\"\n        },\n        {\n          \"evidence_id\": \"5bd3f6a80c6d0ce27f9a2337\",\n          \"title\": \"KM_falcon_fight_UMT_large\",\n          \"snippet\": \"model_name: KM_falcon_fight_UMT_large\\nname: KM_falcon_fight_UMT_large\\ntype: falcon\\nplatform: acl-ascend310-fp16\\nstatus: SUCCESS\\ndid: 126793\\nrid: 45903\\nversion: 2.0.4\\nversion_train_date: 20250107\\nsource_file: data/KM_falcon_fight_UMT_large-acl-ascend310-fp16_45903_126793.json\",\n          \"model_name\": \"KM_falcon_fight_UMT_large\"\n        },\n        {\n          \"evidence_id\": \"27657d9b17c2759fd2a822bd\",\n          \"title\": \"PDFs/安防方向--车辆属性大模型更新.pdf p3\",\n          \"snippet\": \"KM_classifier_Vehicle_FullAttr_3.0.3\\nrelease note：\\n• 发布日期：20230821\\n• owner: zhanghaodong@sensetime.com\\n• Highlight:\"\n        },\n        {\n          \"evidence_id\": \"b33f91b62115352de7ab534d\",\n          \"title\": \"PDFs/安防方向-人脸误检分类模型发版记录.pdf p6\",\n          \"snippet\": \"KM_classifier_Face_None_Security_3.0.1\\nrelease note:\\n• release date: 2023.11.30\\n• owner: gonglijun@sensetime.com\\n• highlights\"\n        },\n        {\n          \"evidence_id\": \"7571ba32218935d0e761dbff\",\n          \"title\": \"KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model\",\n          \"snippet\": \"target_name: 车牌\\nalgorithm_type: 属性\\nalgorithm_name: 车牌颜色类型属性\\napplication_scene: V3.0.0，标品\\nowner: 冯江燕\\nmodel_name: KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model\\nsupported_device: cpu\\nrecommended_config: cpu-ppl2-fp32\\nlast_updated: 2023-05-30\\nlast_updated_month: 2023-05\",\n          \"model_name\": \"KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model\",\n          \"algorithm_name\": \"车牌颜色类型属性\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"V3.0.0，标品\"\n        }\n      ]\n    }\n  ]\n}"
+      }
+    ],
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "migration_advisor_report",
+        "strict": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "requirement_summary": {
+              "type": "string"
+            },
+            "direct_match": {
+              "type": "object",
+              "properties": {
+                "exists": {
+                  "type": "boolean"
+                },
+                "summary": {
+                  "type": "string"
+                },
+                "evidence": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "exists",
+                "summary",
+                "evidence"
+              ],
+              "additionalProperties": false
+            },
+            "similar_assets": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "model_or_solution": {
+                    "type": "string"
+                  },
+                  "label_schema": {
+                    "type": "string",
+                    "description": "类别/标签定义；证据无则写「证据不足」。"
+                  },
+                  "training_data": {
+                    "type": "string",
+                    "description": "训练集、标注规范、样本量；证据无则写「证据不足」。"
+                  },
+                  "reported_metrics": {
+                    "type": "string",
+                    "description": "mAP/ACC/召回等精度指标及测试集/平台；证据无则写「证据不足」。"
+                  },
+                  "covered_capability": {
+                    "type": "string"
+                  },
+                  "gap": {
+                    "type": "string"
+                  },
+                  "evidence": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "model_or_solution",
+                  "label_schema",
+                  "training_data",
+                  "reported_metrics",
+                  "covered_capability",
+                  "gap",
+                  "evidence"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "migration_plan": {
+              "type": "object",
+              "properties": {
+                "feasibility": {
+                  "type": "string",
+                  "enum": [
+                    "high",
+                    "medium",
+                    "low"
+                  ]
+                },
+                "approach": {
+                  "type": "string"
+                },
+                "data_requirements": {
+                  "type": "string"
+                },
+                "compute_requirements": {
+                  "type": "string"
+                },
+                "engineering_work": {
+                  "type": "string"
+                },
+                "estimated_timeline": {
+                  "type": "string"
+                },
+                "estimated_cost": {
+                  "type": "string"
+                },
+                "dependencies": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "risks": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "feasibility",
+                "approach",
+                "data_requirements",
+                "compute_requirements",
+                "engineering_work",
+                "estimated_timeline",
+                "estimated_cost",
+                "dependencies",
+                "risks"
+              ],
+              "additionalProperties": false
+            },
+            "expected_performance": {
+              "type": "object",
+              "properties": {
+                "baseline": {
+                  "type": "string"
+                },
+                "target": {
+                  "type": "string"
+                },
+                "uncertainty": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "baseline",
+                "target",
+                "uncertainty"
+              ],
+              "additionalProperties": false
+            },
+            "recommendation": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "requirement_summary",
+            "direct_match",
+            "similar_assets",
+            "migration_plan",
+            "expected_performance",
+            "recommendation"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "assistant_input_name": "migration_advisor_report",
+    "assistant_input": {
+      "messages": [
+        {
+          "role": "system",
+          "content": "你是视觉模型迁移顾问。请基于检索证据生成结构化迁移评估报告。\n必须区分证据支持和合理推断；证据不足时明确写「证据不足」，不要编造精度、周期或成本。\n若可估计成本/周期，只能给区间和依赖前提。\nsimilar_assets 中每个相似模型/方案必须逐项填写：\n- label_schema：该模型的类别/标签定义（含类别名、取值范围）；\n- training_data：训练集来源、标注规范、样本量或数据要求；\n- reported_metrics：文档中的 mAP、ACC、recall、benchmark 等数值及对应测试集/平台；\n上述三项只能引用 field_results 中的证据；无对应片段则写「证据不足」。\nevidence 数组可引用 evidence_id 或证据原文短句。只输出 JSON。"
+        },
+        {
+          "role": "user",
+          "content": "{\n  \"user_query\": \"香港项目要求识别“头盔颜色：黑、白、灰、红、蓝、黄、绿、紫、迷彩”，现有城市结构化人体属性模型是否能直接支持？\",\n  \"field_results\": [\n    {\n      \"field\": \"existing_models\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"f53d026649b58ea0fecf243a\",\n          \"title\": \"PAR_merged_model\",\n          \"snippet\": \"model_name: PAR_merged_model\\nname: PAR_merged_model\\ntype: classifier\\nplatform: cpu-ppl2-fp32\\nstatus: SUCCESS\\ndid: 102019\\nrid: 36860\\nversion: 1.0.0\\nversion_train_date: 20240228\\nsource_file: data/PAR_merged_model-cpu-ppl2-fp32_36860_102019.json\",\n          \"model_name\": \"PAR_merged_model\"\n        },\n        {\n          \"evidence_id\": \"e603f74f5ab719dfa1019089\",\n          \"title\": \"fight_model\",\n          \"snippet\": \"model_name: fight_model\\nname: fight_model\\ntype: falcon\\nplatform: cuda11.0-trt7.1-fp16-T4\\nstatus: SUCCESS\\ndid: 116885\\nrid: 29947\\nversion: 1.0.0\\nversion_train_date: 20230621\\nsource_file: data/fight_model-cuda11.0-trt7.1-fp16-T4_29947_116885.json\",\n          \"model_name\": \"fight_model\"\n        },\n        {\n          \"evidence_id\": \"f01f4352f202edbafab47244\",\n          \"title\": \"PAR_merged_model\",\n          \"snippet\": \"model_name: PAR_merged_model\\nname: PAR_merged_model\\ntype: classifier\\nplatform: cuda11.0-trt7.1-fp16-T4\\nstatus: SUCCESS\\ndid: 131495\\nrid: 50900\\nversion: 1.0.0\\nversion_train_date: 20260108\\nsource_file: data/PAR_merged_model-cuda11.0-trt7.1-fp16-T4_50900_131495.json\",\n          \"model_name\": \"PAR_merged_model\"\n        },\n        {\n          \"evidence_id\": \"8816f61d8a5298c7917b454b\",\n          \"title\": \"KM_textrecognition_CarPlate_vit_nart_cuda11.0-trt7.1-fp16-T4_b1_6.0.0.model\",\n          \"snippet\": \"target_name: 车牌\\nalgorithm_type: 识别\\nalgorithm_name: 车牌文字识别PK模型\\napplication_scene: 一所PK项目车牌文字识别模型，单双行\\nowner: 冯江燕\\nmodel_name: KM_textrecognition_CarPlate_vit_nart_cuda11.0-trt7.1-fp16-T4_b1_6.0.0.model\\nsupported_device: T4\\nrecommended_config: cuda11.0-trt7.1-fp16-T4\\nlast_updated: 2023-05-30\\nlast_updated_month: 2023-05\",\n          \"model_name\": \"KM_textrecognition_CarPlate_vit_nart_cuda11.0-trt7.1-fp16-T4_b1_6.0.0.model\",\n          \"algorithm_name\": \"车牌文字识别PK模型\",\n          \"algorithm_type\": \"识别\",\n          \"application_scene\": \"一所PK项目车牌文字识别模型，单双行\"\n        },\n        {\n          \"evidence_id\": \"3b7bd5678c1914cd463a6352\",\n          \"title\": \"KM_textrecognition_CarPlate_vit_nart_cuda11.4-trt8.2.0-fp16-A2_b1_6.0.0.model\",\n          \"snippet\": \"target_name: 车牌\\nalgorithm_type: 识别\\nalgorithm_name: 车牌文字识别PK模型\\napplication_scene: 一所PK项目车牌文字识别模型，单双行\\nowner: 冯江燕\\nmodel_name: KM_textrecognition_CarPlate_vit_nart_cuda11.4-trt8.2.0-fp16-A2_b1_6.0.0.model\\nsupported_device: A2\\nrecommended_config: cuda11.4-trt8.2.0-fp16-A2\\nlast_updated: 2023-05-30\\nlast_updated_month: 2023-05\",\n          \"model_name\": \"KM_textrecognition_CarPlate_vit_nart_cuda11.4-trt8.2.0-fp16-A2_b1_6.0.0.model\",\n          \"algorithm_name\": \"车牌文字识别PK模型\",\n          \"algorithm_type\": \"识别\",\n          \"application_scene\": \"一所PK项目车牌文字识别模型，单双行\"\n        }\n      ]\n    },\n    {\n      \"field\": \"similar_capabilities\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"b664f87d3d42cb3abb15e73d\",\n          \"title\": \"PAR_waistcoat_safetybelt\",\n          \"snippet\": \"model_name: PAR_waistcoat_safetybelt\\nname: PAR_waistcoat_safetybelt\\ntype: classifier\\nplatform: cpu-nart-fp32\\nstatus: SUCCESS\\ndid: 93156\\nrid: 33307\\nversion: 0.1.0\\nversion_train_date: 20230912\\nsource_file: data/PAR_waistcoat_safetybelt-cpu-nart-fp32_33307_93156.json\",\n          \"model_name\": \"PAR_waistcoat_safetybelt\"\n        },\n        {\n          \"evidence_id\": \"e457012b71b3b00d6052e491\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p1 table 1\",\n          \"snippet\": \"PDF表格: PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf 第1页 表1\\n| PAR_waistcoat_safetybelt v0.2.0 Release Note: • 发布时间: 2023.11.15 • Owner: @蔡官熊 • Highlight: ◦ 加入唐山安全绳任务的红马甲数据，同时补充了贵阳新回流标注的数据，模型相比上一版更加鲁 棒，在前场回流的误报图片上情况有所改善； 一、功能介绍 识别作业人员的马甲及安全带穿戴属性，马甲分为 \\\"without_waistcoat\\\"、 \\\"with_waistcoat\\\"、 \\\"waistcoat_agnostic\\\"，安全带分为 \\\"without_safetybelt\\\"、 \\\"with_safetybelt\\\"、 \\\"safetybelt_agnostic\\\"。 穿安全带 穿马甲 二、算法边界 图像分辨率：720p以上 目标像素要求：高宽大小在60x120以上，属性清晰可见、无明显遮挡及运动模糊 检测类别：2个行人属性，共6个类别标签 | | | | | | |\\n| --- | --- | --- | --- | --- | --- | --- |\\n| | PAR_waistcoat_safetybelt v0.2.0 | | | | | |\\n| | Release Note: | | | | | |\\n| | • 发布时间: 2023.11.15 | | | | | |\\n| | • Owner: @蔡官熊 | | | | | |\\n| | • Highlight: | | | | | |\\n| | ◦ 加入唐山安全绳任务的红马甲数据，同时补充了贵阳新回流标注的数据，模型相比上一版更加鲁 棒，在前场回流的误报图片上情况有所改善； | | | | | |\\n| | | | ◦ 加入唐山安全绳任务的红马甲数据...\"\n        },\n        {\n          \"evidence_id\": \"085a4a19f4c436618ff7b838\",\n          \"title\": \"PAR_waistcoat_safetybelt\",\n          \"snippet\": \"model_name: PAR_waistcoat_safetybelt\\nname: PAR_waistcoat_safetybelt\\ntype: classifier\\nplatform: cpu-ppl2-fp32\\nstatus: SUCCESS\\ndid: 95824\\nrid: 34577\\nversion: 0.2.0\\nversion_train_date: 20231108\\nsource_file: data/PAR_waistcoat_safetybelt-cpu-ppl2-fp32_34577_95824.json\",\n          \"model_name\": \"PAR_waistcoat_safetybelt\"\n        },\n        {\n          \"evidence_id\": \"bab21bf76719bfe7491f7027\",\n          \"title\": \"KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\",\n          \"snippet\": \"target_name: 红马甲/安全带\\nalgorithm_type: 属性\\nalgorithm_name: 中车工厂-属性模型1\\napplication_scene: 中车工厂项目\\nowner: 朱帅\\nmodel_name: KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\\nsupported_device: cpu\\nrecommended_config: cpu-ppl2-fp32\\nlast_updated: 2023-11-15\\nlast_updated_month: 2023-11\",\n          \"model_name\": \"KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\",\n          \"algorithm_name\": \"中车工厂-属性模型1\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"中车工厂项目\"\n        },\n        {\n          \"evidence_id\": \"8d7ef86d283d4fce5127ae56\",\n          \"title\": \"PAR_waistcoat_safetybelt\",\n          \"snippet\": \"model_name: PAR_waistcoat_safetybelt\\nname: PAR_waistcoat_safetybelt\\ntype: classifier\\nplatform: cuda11.0-trt7.1-int8-P4\\nstatus: SUCCESS\\ndid: 95822\\nrid: 34577\\nversion: 0.2.0\\nversion_train_date: 20231108\\nsource_file: data/PAR_waistcoat_safetybelt-cuda11.0-trt7.1-int8-P4_34577_95822.json\",\n          \"model_name\": \"PAR_waistcoat_safetybelt\"\n        }\n      ]\n    },\n    {\n      \"field\": \"performance_baseline\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"c7711b84757a14915a38a72a\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2 table 1\",\n          \"snippet\": \"PDF表格: PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf 第2页 表1\\n表格结构化行:\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model\\nOID: beeb6944bdca2dafd0213251951cc47f829efad2981d7f847010b13f486181c5\\n平台: cuda11.0-trt7.1-fp16-T4\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model\\nOID: fcd2d67fbbaab4fc2064f08ccaf5e61abf7b9655388c7f39a349c43184c6b102\\n平台: cuda11.0-trt7.1-int8-T4\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-P4_b8_0.2.0.model\\nOID: c059a471994cbb3365e4a0e6e6e8c8469f578190e75f31b348867599041e5880\\n平台: cuda11.0-trt7.1-int8-P4\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\\nOID: 0cef652610b4f5fef96dd575ba52e283ce7e1908565d...\"\n        },\n        {\n          \"evidence_id\": \"c3df8f567b44bcd3cf139136\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2\",\n          \"snippet\": \"58\\nwithout_safetybelt 0.9269 0.9702 0.9481\\n评测平台：cuda11.0-trt7.1-fp16-T4\\n模型性能\"\n        },\n        {\n          \"evidence_id\": \"1d4107dd8be5f74f932bdc50\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2\",\n          \"snippet\": \"ge/project/3/releaseManage?\\nrid=34577&id=3&model_type=classifier&tabName=deployment\\n四、精度性能\\n模型精度\\n属性 类别 precision recall f1-score Acc|mPrec|mA\\nwaistcoat_agnostic 0.7439 0.6246 0.6790\\nwaistcoat\\n0.9680|0.8918|0.86\"\n        },\n        {\n          \"evidence_id\": \"16cd20acc1fdc0c0dbbf9f77\",\n          \"title\": \"PDFs/安防方向--车牌属性.pdf p6\",\n          \"snippet\": \"白牌、\\n黄牌的分类精度\\n◦ 测试集颜色：黑牌precision69.67%->99.68%(+30.9%)，蓝牌precision84.78%->97.20%\\n(+12.42%)，白牌precision60.28%->99.31%(+39.03%)，黄牌precsion55.39%-96.67%\\n（+41.28%）\"\n        },\n        {\n          \"evidence_id\": \"ae9aeaf69262fd9b82e31bad\",\n          \"title\": \"PDFs/安防方向--车牌属性.pdf p6\",\n          \"snippet\": \"（+41.28%）\\n◦ 测试集颜色Acc76.98%-96.46%(+19.48%)，类型Acc82.38%-96.12%(+13.74%)\"\n        }\n      ]\n    },\n    {\n      \"field\": \"data_requirements\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"dc9fe13e4a2d11574c7a63e5\",\n          \"title\": \"PDFs/安防方向--车牌检测.pdf p1\",\n          \"snippet\": \"release note\\n• 发布时间：20230519\\n• owner：gaowanshun@sensetime.com\\n• Highlights：\"\n        },\n        {\n          \"evidence_id\": \"5bd3f6a80c6d0ce27f9a2337\",\n          \"title\": \"KM_falcon_fight_UMT_large\",\n          \"snippet\": \"model_name: KM_falcon_fight_UMT_large\\nname: KM_falcon_fight_UMT_large\\ntype: falcon\\nplatform: acl-ascend310-fp16\\nstatus: SUCCESS\\ndid: 126793\\nrid: 45903\\nversion: 2.0.4\\nversion_train_date: 20250107\\nsource_file: data/KM_falcon_fight_UMT_large-acl-ascend310-fp16_45903_126793.json\",\n          \"model_name\": \"KM_falcon_fight_UMT_large\"\n        },\n        {\n          \"evidence_id\": \"27657d9b17c2759fd2a822bd\",\n          \"title\": \"PDFs/安防方向--车辆属性大模型更新.pdf p3\",\n          \"snippet\": \"KM_classifier_Vehicle_FullAttr_3.0.3\\nrelease note：\\n• 发布日期：20230821\\n• owner: zhanghaodong@sensetime.com\\n• Highlight:\"\n        },\n        {\n          \"evidence_id\": \"b33f91b62115352de7ab534d\",\n          \"title\": \"PDFs/安防方向-人脸误检分类模型发版记录.pdf p6\",\n          \"snippet\": \"KM_classifier_Face_None_Security_3.0.1\\nrelease note:\\n• release date: 2023.11.30\\n• owner: gonglijun@sensetime.com\\n• highlights\"\n        },\n        {\n          \"evidence_id\": \"7571ba32218935d0e761dbff\",\n          \"title\": \"KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model\",\n          \"snippet\": \"target_name: 车牌\\nalgorithm_type: 属性\\nalgorithm_name: 车牌颜色类型属性\\napplication_scene: V3.0.0，标品\\nowner: 冯江燕\\nmodel_name: KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model\\nsupported_device: cpu\\nrecommended_config: cpu-ppl2-fp32\\nlast_updated: 2023-05-30\\nlast_updated_month: 2023-05\",\n          \"model_name\": \"KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model\",\n          \"algorithm_name\": \"车牌颜色类型属性\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"V3.0.0，标品\"\n        }\n      ]\n    }\n  ]\n}"
+        }
+      ],
+      "response_format": {
+        "type": "json_schema",
+        "json_schema": {
+          "name": "migration_advisor_report",
+          "strict": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "requirement_summary": {
+                "type": "string"
+              },
+              "direct_match": {
+                "type": "object",
+                "properties": {
+                  "exists": {
+                    "type": "boolean"
+                  },
+                  "summary": {
+                    "type": "string"
+                  },
+                  "evidence": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "exists",
+                  "summary",
+                  "evidence"
+                ],
+                "additionalProperties": false
+              },
+              "similar_assets": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "model_or_solution": {
+                      "type": "string"
+                    },
+                    "label_schema": {
+                      "type": "string",
+                      "description": "类别/标签定义；证据无则写「证据不足」。"
+                    },
+                    "training_data": {
+                      "type": "string",
+                      "description": "训练集、标注规范、样本量；证据无则写「证据不足」。"
+                    },
+                    "reported_metrics": {
+                      "type": "string",
+                      "description": "mAP/ACC/召回等精度指标及测试集/平台；证据无则写「证据不足」。"
+                    },
+                    "covered_capability": {
+                      "type": "string"
+                    },
+                    "gap": {
+                      "type": "string"
+                    },
+                    "evidence": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "model_or_solution",
+                    "label_schema",
+                    "training_data",
+                    "reported_metrics",
+                    "covered_capability",
+                    "gap",
+                    "evidence"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "migration_plan": {
+                "type": "object",
+                "properties": {
+                  "feasibility": {
+                    "type": "string",
+                    "enum": [
+                      "high",
+                      "medium",
+                      "low"
+                    ]
+                  },
+                  "approach": {
+                    "type": "string"
+                  },
+                  "data_requirements": {
+                    "type": "string"
+                  },
+                  "compute_requirements": {
+                    "type": "string"
+                  },
+                  "engineering_work": {
+                    "type": "string"
+                  },
+                  "estimated_timeline": {
+                    "type": "string"
+                  },
+                  "estimated_cost": {
+                    "type": "string"
+                  },
+                  "dependencies": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "risks": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "feasibility",
+                  "approach",
+                  "data_requirements",
+                  "compute_requirements",
+                  "engineering_work",
+                  "estimated_timeline",
+                  "estimated_cost",
+                  "dependencies",
+                  "risks"
+                ],
+                "additionalProperties": false
+              },
+              "expected_performance": {
+                "type": "object",
+                "properties": {
+                  "baseline": {
+                    "type": "string"
+                  },
+                  "target": {
+                    "type": "string"
+                  },
+                  "uncertainty": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "baseline",
+                  "target",
+                  "uncertainty"
+                ],
+                "additionalProperties": false
+              },
+              "recommendation": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "requirement_summary",
+              "direct_match",
+              "similar_assets",
+              "migration_plan",
+              "expected_performance",
+              "recommendation"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    }
+  }
+}

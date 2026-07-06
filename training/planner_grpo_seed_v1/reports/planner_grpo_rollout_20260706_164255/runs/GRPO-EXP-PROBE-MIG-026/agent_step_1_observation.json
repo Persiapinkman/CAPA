@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "厨师帽",
+    "image_path": "person_with_bag.png"
+  },
+  "_thought": "用户提出一个复合分析需求：先用开放集模型检测后厨场景中的厨师帽（前景渣男穿搭图中有戴着厚重帽子的厨师），若检测结果置信度不高，则进一步输出该任务在当前蓝图下的迁移可行性报告。但其提供的图片（person_with_bag.png）显示的是地铁站emple场景，图中并未出现典型的厨师帽，这存在语义和视觉上的不一致。因此，第一步应调用 open_set_model 进行开放集检测，以得到目标置信度评估；一旦检测到低置信或无人检结果，再根据流程切换到 migration_advisor 输出迁移建议。但用户要求“如果信心不足，再输出迁移建议”，而当前第一步是执行检测，因此第一步 configurable_tool 设为 open_set_model，参数为 label=\"厨师帽\"]=true,finish_after_tool=false，以便根据检测结果决定下一步动作。}"
+}

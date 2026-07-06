@@ -1,0 +1,550 @@
+{
+  "session_id": "bbb82a49-7537-4b2e-8b23-53b4335e7fc9",
+  "run_stamp": "20260522_144425_9eee633d",
+  "stage": "migration_report_request",
+  "step_index": 2,
+  "created_at": "2026-05-22T14:45:11+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260522_144425_9eee633d",
+    "input_schema": {
+      "user_query": "用户原始问题",
+      "field_results": "playbook 分字段检索结果：field, evidence[]（每 field 按 source_score/score 取 Top 5）"
+    },
+    "evidence_item_fields": [
+      "evidence_id",
+      "title",
+      "snippet",
+      "model_name",
+      "algorithm_name",
+      "algorithm_type",
+      "application_scene",
+      "section_type",
+      "score"
+    ],
+    "structured_input": {
+      "user_query": "香港人体属性中要求识别“纹身有无”和“纹身位置：面部、颈部、手部、腿部、背部、无法判断”，普通城市监控场景是否可行？",
+      "field_results": [
+        {
+          "field": "existing_models",
+          "evidence": [
+            {
+              "evidence_id": "a46c652a232601d718d0d858",
+              "title": "KM_essos_det_small_nart_acl-ascend710-fp16_b1_1.0.0.model",
+              "snippet": "target_name: 人体\nalgorithm_type: 检测\nalgorithm_name: 钓鱼人体检测\napplication_scene: 呈贡CV长尾业务\nowner: 苏舒婷\nmodel_name: KM_essos_det_small_nart_acl-ascend710-fp16_b1_1.0.0.model\nsupported_device: ascend710\nrecommended_config: acl-ascend710-fp16\nlast_updated: 2025-12-30\nlast_updated_month: 2025-12",
+              "model_name": "KM_essos_det_small_nart_acl-ascend710-fp16_b1_1.0.0.model",
+              "algorithm_name": "钓鱼人体检测",
+              "algorithm_type": "检测",
+              "application_scene": "呈贡CV长尾业务"
+            },
+            {
+              "evidence_id": "f53d026649b58ea0fecf243a",
+              "title": "PAR_merged_model",
+              "snippet": "model_name: PAR_merged_model\nname: PAR_merged_model\ntype: classifier\nplatform: cpu-ppl2-fp32\nstatus: SUCCESS\ndid: 102019\nrid: 36860\nversion: 1.0.0\nversion_train_date: 20240228\nsource_file: data/PAR_merged_model-cpu-ppl2-fp32_36860_102019.json",
+              "model_name": "PAR_merged_model"
+            },
+            {
+              "evidence_id": "ebd2f37e91c04b39a259bc71",
+              "title": "PDFs/安防方向-人脸质量3.1.0模型更新.pdf p6 table 1",
+              "snippet": "PDF表格: PDFs/安防方向-人脸质量3.1.0模型更新.pdf 第6页 表1\n| 眼镜（glass_style）：0-不戴眼镜（glasses_style_none）、1-透明眼镜（transparent_glasses）、2-有 色眼镜（sunglasses） 口罩位置（st_respirator）：0-full（st_respirator_full）、1-漏鼻（st_respirator_nose）、2-漏嘴 （st_respirator_mouth）、3-未戴口罩（st_respirator_none） 其它遮挡（st_face_otherocc）：0-非其它遮挡（st_otherocc_none）、1-其它遮挡（st_otherocc） Precisio n Recall • 5.3 各维度推荐阈值：见第一部分功能介绍输出参考proposal_threshold以及使用逻辑与各维度得分计算 人脸质量模型使用逻辑； | （glass_style）：0-不戴眼镜（glasses_style_none）、1-透明眼镜（transparent_glasses）、2-有 镜（sunglasses） | | | | | | | | | | | | | |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| | 位置（st_respirator）：0-full（st_respirator_full）、1-漏鼻（st_respirator_nose）、2-漏嘴 _respirator_mouth）、3-未戴口罩（st_respirator_none） | | | | | | | | | | | | | |\n| | 遮挡（st_face_oth..."
+            },
+            {
+              "evidence_id": "ac3a0f7a51ac569faf830a53",
+              "title": "KM_essos_det_small_nart_acl-ascend710-fp16_b1_1.0.0.model",
+              "snippet": "target_name: 人体\nalgorithm_type: 检测\nalgorithm_name: 睡岗人体检测\napplication_scene: 呈贡CV长尾业务\nowner: 苏舒婷\nmodel_name: KM_essos_det_small_nart_acl-ascend710-fp16_b1_1.0.0.model\nsupported_device: ascend710\nrecommended_config: acl-ascend710-fp16\nlast_updated: 2025-12-30\nlast_updated_month: 2025-12",
+              "model_name": "KM_essos_det_small_nart_acl-ascend710-fp16_b1_1.0.0.model",
+              "algorithm_name": "睡岗人体检测",
+              "algorithm_type": "检测",
+              "application_scene": "呈贡CV长尾业务"
+            },
+            {
+              "evidence_id": "e603f74f5ab719dfa1019089",
+              "title": "fight_model",
+              "snippet": "model_name: fight_model\nname: fight_model\ntype: falcon\nplatform: cuda11.0-trt7.1-fp16-T4\nstatus: SUCCESS\ndid: 116885\nrid: 29947\nversion: 1.0.0\nversion_train_date: 20230621\nsource_file: data/fight_model-cuda11.0-trt7.1-fp16-T4_29947_116885.json",
+              "model_name": "fight_model"
+            }
+          ]
+        },
+        {
+          "field": "similar_capabilities",
+          "evidence": [
+            {
+              "evidence_id": "dd622ab3d2c615477dc4f8b1",
+              "title": "KM_essos_BannerSlogan_960x960_nart_acl-ascend710-fp16_b8_3.0.5.model",
+              "snippet": "target_name: 横幅\nalgorithm_type: 检测\nalgorithm_name: 横幅检测模型\napplication_scene: 视频巡逻项目\nowner: 任大发\nmodel_name: KM_essos_BannerSlogan_960x960_nart_acl-ascend710-fp16_b8_3.0.5.model\nsupported_device: ascend710\nrecommended_config: acl-ascend710-fp16\nlast_updated: 2025-06-26\nlast_updated_month: 2025-06",
+              "model_name": "KM_essos_BannerSlogan_960x960_nart_acl-ascend710-fp16_b8_3.0.5.model",
+              "algorithm_name": "横幅检测模型",
+              "algorithm_type": "检测",
+              "application_scene": "视频巡逻项目"
+            },
+            {
+              "evidence_id": "83807db14b0bbfd44474b7c2",
+              "title": "KM_essos_BannerSlogan_960x960_nart_acl-ascend310-fp16_b8_3.0.5.model",
+              "snippet": "target_name: 横幅\nalgorithm_type: 检测\nalgorithm_name: 横幅检测模型\napplication_scene: 视频巡逻项目\nowner: 任大发\nmodel_name: KM_essos_BannerSlogan_960x960_nart_acl-ascend310-fp16_b8_3.0.5.model\nsupported_device: ascend310\nrecommended_config: acl-ascend310-fp16\nlast_updated: 2025-06-26\nlast_updated_month: 2025-06",
+              "model_name": "KM_essos_BannerSlogan_960x960_nart_acl-ascend310-fp16_b8_3.0.5.model",
+              "algorithm_name": "横幅检测模型",
+              "algorithm_type": "检测",
+              "application_scene": "视频巡逻项目"
+            },
+            {
+              "evidence_id": "f53d026649b58ea0fecf243a",
+              "title": "PAR_merged_model",
+              "snippet": "model_name: PAR_merged_model\nname: PAR_merged_model\ntype: classifier\nplatform: cpu-ppl2-fp32\nstatus: SUCCESS\ndid: 102019\nrid: 36860\nversion: 1.0.0\nversion_train_date: 20240228\nsource_file: data/PAR_merged_model-cpu-ppl2-fp32_36860_102019.json",
+              "model_name": "PAR_merged_model"
+            },
+            {
+              "evidence_id": "9fd98b5d39280407c8318780",
+              "title": "PDFs/港澳台车牌文字识别模型发版.pdf p2",
+              "snippet": "_textrecognition_CarPlateHK_small_nart_cuda11.0-trt7.1-int8- e276ab2bafa2e4c51b9e447547e99e1c51637633baf57b9f9d019e89d4\nint8-T4 T4_b16_1.0.0.model 382072 8 2.85\n16 4.90\n五、精度测试\n量化数据集：textrecognition_quant_hk\n测试集：textrecognition_precision_hk\n模型 precision"
+            },
+            {
+              "evidence_id": "7d46e31c0867251721fe60c5",
+              "title": "KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model",
+              "snippet": "target_name: 二维码\nalgorithm_type: 检测\nalgorithm_name: 二维码检测模型\napplication_scene: 网安场景，正方形二维码\nowner: 龚丽君\nmodel_name: KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model\nsupported_device: ascend310\nrecommended_config: ascend310-fp16\nlast_updated: 2023-04-07\nlast_updated_month: 2023-04",
+              "model_name": "KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model",
+              "algorithm_name": "二维码检测模型",
+              "algorithm_type": "检测",
+              "application_scene": "网安场景，正方形二维码"
+            }
+          ]
+        },
+        {
+          "field": "performance_baseline",
+          "evidence": [
+            {
+              "evidence_id": "c7711b84757a14915a38a72a",
+              "title": "PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2 table 1",
+              "snippet": "PDF表格: PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf 第2页 表1\n表格结构化行:\n模型族: 三、模型列表\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model\nOID: beeb6944bdca2dafd0213251951cc47f829efad2981d7f847010b13f486181c5\n平台: cuda11.0-trt7.1-fp16-T4\n模型族: 三、模型列表\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model\nOID: fcd2d67fbbaab4fc2064f08ccaf5e61abf7b9655388c7f39a349c43184c6b102\n平台: cuda11.0-trt7.1-int8-T4\n模型族: 三、模型列表\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-P4_b8_0.2.0.model\nOID: c059a471994cbb3365e4a0e6e6e8c8469f578190e75f31b348867599041e5880\n平台: cuda11.0-trt7.1-int8-P4\n模型族: 三、模型列表\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\nOID: 0cef652610b4f5fef96dd575ba52e283ce7e1908565d..."
+            },
+            {
+              "evidence_id": "c3df8f567b44bcd3cf139136",
+              "title": "PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2",
+              "snippet": "58\nwithout_safetybelt 0.9269 0.9702 0.9481\n评测平台：cuda11.0-trt7.1-fp16-T4\n模型性能"
+            },
+            {
+              "evidence_id": "1d4107dd8be5f74f932bdc50",
+              "title": "PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2",
+              "snippet": "ge/project/3/releaseManage?\nrid=34577&id=3&model_type=classifier&tabName=deployment\n四、精度性能\n模型精度\n属性 类别 precision recall f1-score Acc|mPrec|mA\nwaistcoat_agnostic 0.7439 0.6246 0.6790\nwaistcoat\n0.9680|0.8918|0.86"
+            },
+            {
+              "evidence_id": "a7b70b74aef131da9461cc7e",
+              "title": "PDFs/安防场景-城市结构化检测模型3.0.1.pdf p1 table 1",
+              "snippet": "PDF表格: PDFs/安防场景-城市结构化检测模型3.0.1.pdf 第1页 表1\n| 安防场景-城市结构化检测模型3.0.1 检测模型算法边界 • 行业场景：安防结构化场景 • 1920*1080输入尺寸大小下： ◦ 最小检测目标：32*32 ◦ 最大检测目标：512*512 ◦ 其它输入图像尺寸按比例变化 • 亮度要求：白天，对于夜间场景、或者目标模糊的场景，精度尚无法保证 • 边界要求：有边界遮挡的目标检测精度无法保证 • 遮挡要求：对于目标存在严重遮挡的情况，检测性能暂时无法保证 • 场景要求：对于夜晚、雨雪雾等场景的结构化性能暂时无法保证 KM_essos_struct 3.0.1 release note • 发布时间：20250722 • owner：rendafa@sensetime.com • Highlights： ◦ 数据：新增了室内摔倒数据，裁剪数据和网络爬取的带棚电动车数据，完成训练集扩充。新增业务 回流数据和室内摔倒数据，完成测试集扩充。 ◦ 损失函数：优化损失函数，忽略多 GT 重叠场景下将相关类别（人体/非机动车）视为骑手的\"负样 本\"强力惩罚，提高多 GT 重叠场景下召回率。 ◦ 精度：监控场景下与3.0.0精度相当，大幅提升占画面大比例的人体召回、室内躺卧人体召回和带棚 非机动车召回。其中人体recall@fppi0.1相对于3.0.0模型，在nanjing测试集（监控测试集）提升 2%，回流测试集提升15%。非机动车recall@fppi0.1相对于3.0.0模型，在nanjing测试集（监控测试 集）提升3%，回流测试集提升34%。骑手recall@fppi0.1相对于3.0.0模型，回流测试集提升46%。 ◦ 阈值选取 人体 骑手 机动车 非机动车 备注 默认阈值，人体和机动 车对应FPPI0.1，骑手 0.5021 0.3984..."
+            },
+            {
+              "evidence_id": "0bd4b00de07c1e5c2419c0d8",
+              "title": "PDFs/人体二分类发版记录.pdf p1",
+              "snippet": "常见误报\n◦ 精度: 大幅提升监控场景遮挡截断躺卧人体正样本、猫狗负样本的召回, 其中遮挡人体召回+8.2%，\n躺卧人体召回+8.8%，猫狗过滤+12.2%\n◦ 精度: 大幅提升监控场景遮挡截断躺卧人体正样本、猫狗负样本的召回, 其中遮挡人体召回+8.5%，\n躺卧人体召回+10.2%，猫狗过滤+12.9%\n◦ 阈值：模型无内置阈值, 阈值设定可参考如下精度测试中表格, 根据实际需求调整阈值\n▪ 含义：negative score阈值，即 result[\"st_ped_none\"][\"st_none\"] > negative score的人体为误"
+            }
+          ]
+        },
+        {
+          "field": "data_requirements",
+          "evidence": [
+            {
+              "evidence_id": "5bd3f6a80c6d0ce27f9a2337",
+              "title": "KM_falcon_fight_UMT_large",
+              "snippet": "model_name: KM_falcon_fight_UMT_large\nname: KM_falcon_fight_UMT_large\ntype: falcon\nplatform: acl-ascend310-fp16\nstatus: SUCCESS\ndid: 126793\nrid: 45903\nversion: 2.0.4\nversion_train_date: 20250107\nsource_file: data/KM_falcon_fight_UMT_large-acl-ascend310-fp16_45903_126793.json",
+              "model_name": "KM_falcon_fight_UMT_large"
+            },
+            {
+              "evidence_id": "9a81fbe28f4b8e9650e2e71c",
+              "title": "PDFs/安防场景-城市结构化检测模型3.0.1.pdf p1",
+              "snippet": "• 发布时间：20250722\n• owner：rendafa@sensetime.com\n• Highlights：\n◦ 数据：新增了室内摔倒数据，裁剪数据和网络爬取的带棚电动车数据，完成训练集扩充。新增业务\n回流数据和室内摔倒数据，完成测试集扩充。\n◦ 损失函数：优化损失函数，忽略多 GT 重叠场景下将相关类别（人体/非机动车）视为骑手的\"负样"
+            },
+            {
+              "evidence_id": "a46c652a232601d718d0d858",
+              "title": "KM_essos_det_small_nart_acl-ascend710-fp16_b1_1.0.0.model",
+              "snippet": "target_name: 人体\nalgorithm_type: 检测\nalgorithm_name: 钓鱼人体检测\napplication_scene: 呈贡CV长尾业务\nowner: 苏舒婷\nmodel_name: KM_essos_det_small_nart_acl-ascend710-fp16_b1_1.0.0.model\nsupported_device: ascend710\nrecommended_config: acl-ascend710-fp16\nlast_updated: 2025-12-30\nlast_updated_month: 2025-12",
+              "model_name": "KM_essos_det_small_nart_acl-ascend710-fp16_b1_1.0.0.model",
+              "algorithm_name": "钓鱼人体检测",
+              "algorithm_type": "检测",
+              "application_scene": "呈贡CV长尾业务"
+            },
+            {
+              "evidence_id": "a1a8bdce4386a76eacaecdb6",
+              "title": "KM_senu_reid_156_nart_acl-ascend710-int8_b32_1.56.0.model",
+              "snippet": "target_name: 人体\nalgorithm_type: 特征\nalgorithm_name: 人体特征\napplication_scene: ReID_1.56.0\nowner: 黄德亮\nmodel_name: KM_senu_reid_156_nart_acl-ascend710-int8_b32_1.56.0.model\nsupported_device: ascend710\nrecommended_config: acl-ascend710-int8\nlast_updated: 2023-09-07\nlast_updated_month: 2023-09",
+              "model_name": "KM_senu_reid_156_nart_acl-ascend710-int8_b32_1.56.0.model",
+              "algorithm_name": "人体特征",
+              "algorithm_type": "特征",
+              "application_scene": "ReID_1.56.0"
+            },
+            {
+              "evidence_id": "574e8a69ac4e1edd855a3cbe",
+              "title": "KM_classifier_Ped_ClothBanner_nart_acl-ascend710-fp16_b8_0.0.1.model",
+              "snippet": "target_name: 人体\nalgorithm_type: 属性\nalgorithm_name: 人体状衣二分类\napplication_scene: pk定制化，未集成入横幅app，召回衣物上有肉眼可辨醒目大字的人体的二分类模型；V0.0.1\nowner: 冯江燕\nmodel_name: KM_classifier_Ped_ClothBanner_nart_acl-ascend710-fp16_b8_0.0.1.model\nsupported_device: ascend710\nrecommended_config: acl-ascend710-fp16\nlast_updated: 2025-06-16\nlast_updated_month: 2025-06",
+              "model_name": "KM_classifier_Ped_ClothBanner_nart_acl-ascend710-fp16_b8_0.0.1.model",
+              "algorithm_name": "人体状衣二分类",
+              "algorithm_type": "属性",
+              "application_scene": "pk定制化，未集成入横幅app，召回衣物上有肉眼可辨醒目大字的人体的二分类模型；V0.0.1"
+            }
+          ]
+        }
+      ]
+    },
+    "llm_messages": [
+      {
+        "role": "system",
+        "content": "你是视觉模型迁移顾问。请基于检索证据生成结构化迁移评估报告。\n必须区分证据支持和合理推断；证据不足时明确写「证据不足」，不要编造精度、周期或成本。\n若可估计成本/周期，只能给区间和依赖前提。\nsimilar_assets 中每个相似模型/方案必须逐项填写：\n- label_schema：该模型的类别/标签定义（含类别名、取值范围）；\n- training_data：训练集来源、标注规范、样本量或数据要求；\n- reported_metrics：文档中的 mAP、ACC、recall、benchmark 等数值及对应测试集/平台；\n上述三项只能引用 field_results 中的证据；无对应片段则写「证据不足」。\nevidence 数组可引用 evidence_id 或证据原文短句。只输出 JSON。"
+      },
+      {
+        "role": "user",
+        "content": "{\n  \"user_query\": \"香港人体属性中要求识别“纹身有无”和“纹身位置：面部、颈部、手部、腿部、背部、无法判断”，普通城市监控场景是否可行？\",\n  \"field_results\": [\n    {\n      \"field\": \"existing_models\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"a46c652a232601d718d0d858\",\n          \"title\": \"KM_essos_det_small_nart_acl-ascend710-fp16_b1_1.0.0.model\",\n          \"snippet\": \"target_name: 人体\\nalgorithm_type: 检测\\nalgorithm_name: 钓鱼人体检测\\napplication_scene: 呈贡CV长尾业务\\nowner: 苏舒婷\\nmodel_name: KM_essos_det_small_nart_acl-ascend710-fp16_b1_1.0.0.model\\nsupported_device: ascend710\\nrecommended_config: acl-ascend710-fp16\\nlast_updated: 2025-12-30\\nlast_updated_month: 2025-12\",\n          \"model_name\": \"KM_essos_det_small_nart_acl-ascend710-fp16_b1_1.0.0.model\",\n          \"algorithm_name\": \"钓鱼人体检测\",\n          \"algorithm_type\": \"检测\",\n          \"application_scene\": \"呈贡CV长尾业务\"\n        },\n        {\n          \"evidence_id\": \"f53d026649b58ea0fecf243a\",\n          \"title\": \"PAR_merged_model\",\n          \"snippet\": \"model_name: PAR_merged_model\\nname: PAR_merged_model\\ntype: classifier\\nplatform: cpu-ppl2-fp32\\nstatus: SUCCESS\\ndid: 102019\\nrid: 36860\\nversion: 1.0.0\\nversion_train_date: 20240228\\nsource_file: data/PAR_merged_model-cpu-ppl2-fp32_36860_102019.json\",\n          \"model_name\": \"PAR_merged_model\"\n        },\n        {\n          \"evidence_id\": \"ebd2f37e91c04b39a259bc71\",\n          \"title\": \"PDFs/安防方向-人脸质量3.1.0模型更新.pdf p6 table 1\",\n          \"snippet\": \"PDF表格: PDFs/安防方向-人脸质量3.1.0模型更新.pdf 第6页 表1\\n| 眼镜（glass_style）：0-不戴眼镜（glasses_style_none）、1-透明眼镜（transparent_glasses）、2-有 色眼镜（sunglasses） 口罩位置（st_respirator）：0-full（st_respirator_full）、1-漏鼻（st_respirator_nose）、2-漏嘴 （st_respirator_mouth）、3-未戴口罩（st_respirator_none） 其它遮挡（st_face_otherocc）：0-非其它遮挡（st_otherocc_none）、1-其它遮挡（st_otherocc） Precisio n Recall • 5.3 各维度推荐阈值：见第一部分功能介绍输出参考proposal_threshold以及使用逻辑与各维度得分计算 人脸质量模型使用逻辑； | （glass_style）：0-不戴眼镜（glasses_style_none）、1-透明眼镜（transparent_glasses）、2-有 镜（sunglasses） | | | | | | | | | | | | | |\\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |\\n| | 位置（st_respirator）：0-full（st_respirator_full）、1-漏鼻（st_respirator_nose）、2-漏嘴 _respirator_mouth）、3-未戴口罩（st_respirator_none） | | | | | | | | | | | | | |\\n| | 遮挡（st_face_oth...\"\n        },\n        {\n          \"evidence_id\": \"ac3a0f7a51ac569faf830a53\",\n          \"title\": \"KM_essos_det_small_nart_acl-ascend710-fp16_b1_1.0.0.model\",\n          \"snippet\": \"target_name: 人体\\nalgorithm_type: 检测\\nalgorithm_name: 睡岗人体检测\\napplication_scene: 呈贡CV长尾业务\\nowner: 苏舒婷\\nmodel_name: KM_essos_det_small_nart_acl-ascend710-fp16_b1_1.0.0.model\\nsupported_device: ascend710\\nrecommended_config: acl-ascend710-fp16\\nlast_updated: 2025-12-30\\nlast_updated_month: 2025-12\",\n          \"model_name\": \"KM_essos_det_small_nart_acl-ascend710-fp16_b1_1.0.0.model\",\n          \"algorithm_name\": \"睡岗人体检测\",\n          \"algorithm_type\": \"检测\",\n          \"application_scene\": \"呈贡CV长尾业务\"\n        },\n        {\n          \"evidence_id\": \"e603f74f5ab719dfa1019089\",\n          \"title\": \"fight_model\",\n          \"snippet\": \"model_name: fight_model\\nname: fight_model\\ntype: falcon\\nplatform: cuda11.0-trt7.1-fp16-T4\\nstatus: SUCCESS\\ndid: 116885\\nrid: 29947\\nversion: 1.0.0\\nversion_train_date: 20230621\\nsource_file: data/fight_model-cuda11.0-trt7.1-fp16-T4_29947_116885.json\",\n          \"model_name\": \"fight_model\"\n        }\n      ]\n    },\n    {\n      \"field\": \"similar_capabilities\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"dd622ab3d2c615477dc4f8b1\",\n          \"title\": \"KM_essos_BannerSlogan_960x960_nart_acl-ascend710-fp16_b8_3.0.5.model\",\n          \"snippet\": \"target_name: 横幅\\nalgorithm_type: 检测\\nalgorithm_name: 横幅检测模型\\napplication_scene: 视频巡逻项目\\nowner: 任大发\\nmodel_name: KM_essos_BannerSlogan_960x960_nart_acl-ascend710-fp16_b8_3.0.5.model\\nsupported_device: ascend710\\nrecommended_config: acl-ascend710-fp16\\nlast_updated: 2025-06-26\\nlast_updated_month: 2025-06\",\n          \"model_name\": \"KM_essos_BannerSlogan_960x960_nart_acl-ascend710-fp16_b8_3.0.5.model\",\n          \"algorithm_name\": \"横幅检测模型\",\n          \"algorithm_type\": \"检测\",\n          \"application_scene\": \"视频巡逻项目\"\n        },\n        {\n          \"evidence_id\": \"83807db14b0bbfd44474b7c2\",\n          \"title\": \"KM_essos_BannerSlogan_960x960_nart_acl-ascend310-fp16_b8_3.0.5.model\",\n          \"snippet\": \"target_name: 横幅\\nalgorithm_type: 检测\\nalgorithm_name: 横幅检测模型\\napplication_scene: 视频巡逻项目\\nowner: 任大发\\nmodel_name: KM_essos_BannerSlogan_960x960_nart_acl-ascend310-fp16_b8_3.0.5.model\\nsupported_device: ascend310\\nrecommended_config: acl-ascend310-fp16\\nlast_updated: 2025-06-26\\nlast_updated_month: 2025-06\",\n          \"model_name\": \"KM_essos_BannerSlogan_960x960_nart_acl-ascend310-fp16_b8_3.0.5.model\",\n          \"algorithm_name\": \"横幅检测模型\",\n          \"algorithm_type\": \"检测\",\n          \"application_scene\": \"视频巡逻项目\"\n        },\n        {\n          \"evidence_id\": \"f53d026649b58ea0fecf243a\",\n          \"title\": \"PAR_merged_model\",\n          \"snippet\": \"model_name: PAR_merged_model\\nname: PAR_merged_model\\ntype: classifier\\nplatform: cpu-ppl2-fp32\\nstatus: SUCCESS\\ndid: 102019\\nrid: 36860\\nversion: 1.0.0\\nversion_train_date: 20240228\\nsource_file: data/PAR_merged_model-cpu-ppl2-fp32_36860_102019.json\",\n          \"model_name\": \"PAR_merged_model\"\n        },\n        {\n          \"evidence_id\": \"9fd98b5d39280407c8318780\",\n          \"title\": \"PDFs/港澳台车牌文字识别模型发版.pdf p2\",\n          \"snippet\": \"_textrecognition_CarPlateHK_small_nart_cuda11.0-trt7.1-int8- e276ab2bafa2e4c51b9e447547e99e1c51637633baf57b9f9d019e89d4\\nint8-T4 T4_b16_1.0.0.model 382072 8 2.85\\n16 4.90\\n五、精度测试\\n量化数据集：textrecognition_quant_hk\\n测试集：textrecognition_precision_hk\\n模型 precision\"\n        },\n        {\n          \"evidence_id\": \"7d46e31c0867251721fe60c5\",\n          \"title\": \"KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model\",\n          \"snippet\": \"target_name: 二维码\\nalgorithm_type: 检测\\nalgorithm_name: 二维码检测模型\\napplication_scene: 网安场景，正方形二维码\\nowner: 龚丽君\\nmodel_name: KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model\\nsupported_device: ascend310\\nrecommended_config: ascend310-fp16\\nlast_updated: 2023-04-07\\nlast_updated_month: 2023-04\",\n          \"model_name\": \"KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model\",\n          \"algorithm_name\": \"二维码检测模型\",\n          \"algorithm_type\": \"检测\",\n          \"application_scene\": \"网安场景，正方形二维码\"\n        }\n      ]\n    },\n    {\n      \"field\": \"performance_baseline\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"c7711b84757a14915a38a72a\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2 table 1\",\n          \"snippet\": \"PDF表格: PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf 第2页 表1\\n表格结构化行:\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model\\nOID: beeb6944bdca2dafd0213251951cc47f829efad2981d7f847010b13f486181c5\\n平台: cuda11.0-trt7.1-fp16-T4\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model\\nOID: fcd2d67fbbaab4fc2064f08ccaf5e61abf7b9655388c7f39a349c43184c6b102\\n平台: cuda11.0-trt7.1-int8-T4\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-P4_b8_0.2.0.model\\nOID: c059a471994cbb3365e4a0e6e6e8c8469f578190e75f31b348867599041e5880\\n平台: cuda11.0-trt7.1-int8-P4\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\\nOID: 0cef652610b4f5fef96dd575ba52e283ce7e1908565d...\"\n        },\n        {\n          \"evidence_id\": \"c3df8f567b44bcd3cf139136\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2\",\n          \"snippet\": \"58\\nwithout_safetybelt 0.9269 0.9702 0.9481\\n评测平台：cuda11.0-trt7.1-fp16-T4\\n模型性能\"\n        },\n        {\n          \"evidence_id\": \"1d4107dd8be5f74f932bdc50\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2\",\n          \"snippet\": \"ge/project/3/releaseManage?\\nrid=34577&id=3&model_type=classifier&tabName=deployment\\n四、精度性能\\n模型精度\\n属性 类别 precision recall f1-score Acc|mPrec|mA\\nwaistcoat_agnostic 0.7439 0.6246 0.6790\\nwaistcoat\\n0.9680|0.8918|0.86\"\n        },\n        {\n          \"evidence_id\": \"a7b70b74aef131da9461cc7e\",\n          \"title\": \"PDFs/安防场景-城市结构化检测模型3.0.1.pdf p1 table 1\",\n          \"snippet\": \"PDF表格: PDFs/安防场景-城市结构化检测模型3.0.1.pdf 第1页 表1\\n| 安防场景-城市结构化检测模型3.0.1 检测模型算法边界 • 行业场景：安防结构化场景 • 1920*1080输入尺寸大小下： ◦ 最小检测目标：32*32 ◦ 最大检测目标：512*512 ◦ 其它输入图像尺寸按比例变化 • 亮度要求：白天，对于夜间场景、或者目标模糊的场景，精度尚无法保证 • 边界要求：有边界遮挡的目标检测精度无法保证 • 遮挡要求：对于目标存在严重遮挡的情况，检测性能暂时无法保证 • 场景要求：对于夜晚、雨雪雾等场景的结构化性能暂时无法保证 KM_essos_struct 3.0.1 release note • 发布时间：20250722 • owner：rendafa@sensetime.com • Highlights： ◦ 数据：新增了室内摔倒数据，裁剪数据和网络爬取的带棚电动车数据，完成训练集扩充。新增业务 回流数据和室内摔倒数据，完成测试集扩充。 ◦ 损失函数：优化损失函数，忽略多 GT 重叠场景下将相关类别（人体/非机动车）视为骑手的\\\"负样 本\\\"强力惩罚，提高多 GT 重叠场景下召回率。 ◦ 精度：监控场景下与3.0.0精度相当，大幅提升占画面大比例的人体召回、室内躺卧人体召回和带棚 非机动车召回。其中人体recall@fppi0.1相对于3.0.0模型，在nanjing测试集（监控测试集）提升 2%，回流测试集提升15%。非机动车recall@fppi0.1相对于3.0.0模型，在nanjing测试集（监控测试 集）提升3%，回流测试集提升34%。骑手recall@fppi0.1相对于3.0.0模型，回流测试集提升46%。 ◦ 阈值选取 人体 骑手 机动车 非机动车 备注 默认阈值，人体和机动 车对应FPPI0.1，骑手 0.5021 0.3984...\"\n        },\n        {\n          \"evidence_id\": \"0bd4b00de07c1e5c2419c0d8\",\n          \"title\": \"PDFs/人体二分类发版记录.pdf p1\",\n          \"snippet\": \"常见误报\\n◦ 精度: 大幅提升监控场景遮挡截断躺卧人体正样本、猫狗负样本的召回, 其中遮挡人体召回+8.2%，\\n躺卧人体召回+8.8%，猫狗过滤+12.2%\\n◦ 精度: 大幅提升监控场景遮挡截断躺卧人体正样本、猫狗负样本的召回, 其中遮挡人体召回+8.5%，\\n躺卧人体召回+10.2%，猫狗过滤+12.9%\\n◦ 阈值：模型无内置阈值, 阈值设定可参考如下精度测试中表格, 根据实际需求调整阈值\\n▪ 含义：negative score阈值，即 result[\\\"st_ped_none\\\"][\\\"st_none\\\"] > negative score的人体为误\"\n        }\n      ]\n    },\n    {\n      \"field\": \"data_requirements\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"5bd3f6a80c6d0ce27f9a2337\",\n          \"title\": \"KM_falcon_fight_UMT_large\",\n          \"snippet\": \"model_name: KM_falcon_fight_UMT_large\\nname: KM_falcon_fight_UMT_large\\ntype: falcon\\nplatform: acl-ascend310-fp16\\nstatus: SUCCESS\\ndid: 126793\\nrid: 45903\\nversion: 2.0.4\\nversion_train_date: 20250107\\nsource_file: data/KM_falcon_fight_UMT_large-acl-ascend310-fp16_45903_126793.json\",\n          \"model_name\": \"KM_falcon_fight_UMT_large\"\n        },\n        {\n          \"evidence_id\": \"9a81fbe28f4b8e9650e2e71c\",\n          \"title\": \"PDFs/安防场景-城市结构化检测模型3.0.1.pdf p1\",\n          \"snippet\": \"• 发布时间：20250722\\n• owner：rendafa@sensetime.com\\n• Highlights：\\n◦ 数据：新增了室内摔倒数据，裁剪数据和网络爬取的带棚电动车数据，完成训练集扩充。新增业务\\n回流数据和室内摔倒数据，完成测试集扩充。\\n◦ 损失函数：优化损失函数，忽略多 GT 重叠场景下将相关类别（人体/非机动车）视为骑手的\\\"负样\"\n        },\n        {\n          \"evidence_id\": \"a46c652a232601d718d0d858\",\n          \"title\": \"KM_essos_det_small_nart_acl-ascend710-fp16_b1_1.0.0.model\",\n          \"snippet\": \"target_name: 人体\\nalgorithm_type: 检测\\nalgorithm_name: 钓鱼人体检测\\napplication_scene: 呈贡CV长尾业务\\nowner: 苏舒婷\\nmodel_name: KM_essos_det_small_nart_acl-ascend710-fp16_b1_1.0.0.model\\nsupported_device: ascend710\\nrecommended_config: acl-ascend710-fp16\\nlast_updated: 2025-12-30\\nlast_updated_month: 2025-12\",\n          \"model_name\": \"KM_essos_det_small_nart_acl-ascend710-fp16_b1_1.0.0.model\",\n          \"algorithm_name\": \"钓鱼人体检测\",\n          \"algorithm_type\": \"检测\",\n          \"application_scene\": \"呈贡CV长尾业务\"\n        },\n        {\n          \"evidence_id\": \"a1a8bdce4386a76eacaecdb6\",\n          \"title\": \"KM_senu_reid_156_nart_acl-ascend710-int8_b32_1.56.0.model\",\n          \"snippet\": \"target_name: 人体\\nalgorithm_type: 特征\\nalgorithm_name: 人体特征\\napplication_scene: ReID_1.56.0\\nowner: 黄德亮\\nmodel_name: KM_senu_reid_156_nart_acl-ascend710-int8_b32_1.56.0.model\\nsupported_device: ascend710\\nrecommended_config: acl-ascend710-int8\\nlast_updated: 2023-09-07\\nlast_updated_month: 2023-09\",\n          \"model_name\": \"KM_senu_reid_156_nart_acl-ascend710-int8_b32_1.56.0.model\",\n          \"algorithm_name\": \"人体特征\",\n          \"algorithm_type\": \"特征\",\n          \"application_scene\": \"ReID_1.56.0\"\n        },\n        {\n          \"evidence_id\": \"574e8a69ac4e1edd855a3cbe\",\n          \"title\": \"KM_classifier_Ped_ClothBanner_nart_acl-ascend710-fp16_b8_0.0.1.model\",\n          \"snippet\": \"target_name: 人体\\nalgorithm_type: 属性\\nalgorithm_name: 人体状衣二分类\\napplication_scene: pk定制化，未集成入横幅app，召回衣物上有肉眼可辨醒目大字的人体的二分类模型；V0.0.1\\nowner: 冯江燕\\nmodel_name: KM_classifier_Ped_ClothBanner_nart_acl-ascend710-fp16_b8_0.0.1.model\\nsupported_device: ascend710\\nrecommended_config: acl-ascend710-fp16\\nlast_updated: 2025-06-16\\nlast_updated_month: 2025-06\",\n          \"model_name\": \"KM_classifier_Ped_ClothBanner_nart_acl-ascend710-fp16_b8_0.0.1.model\",\n          \"algorithm_name\": \"人体状衣二分类\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"pk定制化，未集成入横幅app，召回衣物上有肉眼可辨醒目大字的人体的二分类模型；V0.0.1\"\n        }\n      ]\n    }\n  ]\n}"
+      }
+    ],
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "migration_advisor_report",
+        "strict": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "requirement_summary": {
+              "type": "string"
+            },
+            "direct_match": {
+              "type": "object",
+              "properties": {
+                "exists": {
+                  "type": "boolean"
+                },
+                "summary": {
+                  "type": "string"
+                },
+                "evidence": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "exists",
+                "summary",
+                "evidence"
+              ],
+              "additionalProperties": false
+            },
+            "similar_assets": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "model_or_solution": {
+                    "type": "string"
+                  },
+                  "label_schema": {
+                    "type": "string",
+                    "description": "类别/标签定义；证据无则写「证据不足」。"
+                  },
+                  "training_data": {
+                    "type": "string",
+                    "description": "训练集、标注规范、样本量；证据无则写「证据不足」。"
+                  },
+                  "reported_metrics": {
+                    "type": "string",
+                    "description": "mAP/ACC/召回等精度指标及测试集/平台；证据无则写「证据不足」。"
+                  },
+                  "covered_capability": {
+                    "type": "string"
+                  },
+                  "gap": {
+                    "type": "string"
+                  },
+                  "evidence": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "model_or_solution",
+                  "label_schema",
+                  "training_data",
+                  "reported_metrics",
+                  "covered_capability",
+                  "gap",
+                  "evidence"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "migration_plan": {
+              "type": "object",
+              "properties": {
+                "feasibility": {
+                  "type": "string",
+                  "enum": [
+                    "high",
+                    "medium",
+                    "low"
+                  ]
+                },
+                "approach": {
+                  "type": "string"
+                },
+                "data_requirements": {
+                  "type": "string"
+                },
+                "compute_requirements": {
+                  "type": "string"
+                },
+                "engineering_work": {
+                  "type": "string"
+                },
+                "estimated_timeline": {
+                  "type": "string"
+                },
+                "estimated_cost": {
+                  "type": "string"
+                },
+                "dependencies": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "risks": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "feasibility",
+                "approach",
+                "data_requirements",
+                "compute_requirements",
+                "engineering_work",
+                "estimated_timeline",
+                "estimated_cost",
+                "dependencies",
+                "risks"
+              ],
+              "additionalProperties": false
+            },
+            "expected_performance": {
+              "type": "object",
+              "properties": {
+                "baseline": {
+                  "type": "string"
+                },
+                "target": {
+                  "type": "string"
+                },
+                "uncertainty": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "baseline",
+                "target",
+                "uncertainty"
+              ],
+              "additionalProperties": false
+            },
+            "recommendation": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "requirement_summary",
+            "direct_match",
+            "similar_assets",
+            "migration_plan",
+            "expected_performance",
+            "recommendation"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "assistant_input_name": "migration_advisor_report",
+    "assistant_input": {
+      "messages": [
+        {
+          "role": "system",
+          "content": "你是视觉模型迁移顾问。请基于检索证据生成结构化迁移评估报告。\n必须区分证据支持和合理推断；证据不足时明确写「证据不足」，不要编造精度、周期或成本。\n若可估计成本/周期，只能给区间和依赖前提。\nsimilar_assets 中每个相似模型/方案必须逐项填写：\n- label_schema：该模型的类别/标签定义（含类别名、取值范围）；\n- training_data：训练集来源、标注规范、样本量或数据要求；\n- reported_metrics：文档中的 mAP、ACC、recall、benchmark 等数值及对应测试集/平台；\n上述三项只能引用 field_results 中的证据；无对应片段则写「证据不足」。\nevidence 数组可引用 evidence_id 或证据原文短句。只输出 JSON。"
+        },
+        {
+          "role": "user",
+          "content": "{\n  \"user_query\": \"香港人体属性中要求识别“纹身有无”和“纹身位置：面部、颈部、手部、腿部、背部、无法判断”，普通城市监控场景是否可行？\",\n  \"field_results\": [\n    {\n      \"field\": \"existing_models\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"a46c652a232601d718d0d858\",\n          \"title\": \"KM_essos_det_small_nart_acl-ascend710-fp16_b1_1.0.0.model\",\n          \"snippet\": \"target_name: 人体\\nalgorithm_type: 检测\\nalgorithm_name: 钓鱼人体检测\\napplication_scene: 呈贡CV长尾业务\\nowner: 苏舒婷\\nmodel_name: KM_essos_det_small_nart_acl-ascend710-fp16_b1_1.0.0.model\\nsupported_device: ascend710\\nrecommended_config: acl-ascend710-fp16\\nlast_updated: 2025-12-30\\nlast_updated_month: 2025-12\",\n          \"model_name\": \"KM_essos_det_small_nart_acl-ascend710-fp16_b1_1.0.0.model\",\n          \"algorithm_name\": \"钓鱼人体检测\",\n          \"algorithm_type\": \"检测\",\n          \"application_scene\": \"呈贡CV长尾业务\"\n        },\n        {\n          \"evidence_id\": \"f53d026649b58ea0fecf243a\",\n          \"title\": \"PAR_merged_model\",\n          \"snippet\": \"model_name: PAR_merged_model\\nname: PAR_merged_model\\ntype: classifier\\nplatform: cpu-ppl2-fp32\\nstatus: SUCCESS\\ndid: 102019\\nrid: 36860\\nversion: 1.0.0\\nversion_train_date: 20240228\\nsource_file: data/PAR_merged_model-cpu-ppl2-fp32_36860_102019.json\",\n          \"model_name\": \"PAR_merged_model\"\n        },\n        {\n          \"evidence_id\": \"ebd2f37e91c04b39a259bc71\",\n          \"title\": \"PDFs/安防方向-人脸质量3.1.0模型更新.pdf p6 table 1\",\n          \"snippet\": \"PDF表格: PDFs/安防方向-人脸质量3.1.0模型更新.pdf 第6页 表1\\n| 眼镜（glass_style）：0-不戴眼镜（glasses_style_none）、1-透明眼镜（transparent_glasses）、2-有 色眼镜（sunglasses） 口罩位置（st_respirator）：0-full（st_respirator_full）、1-漏鼻（st_respirator_nose）、2-漏嘴 （st_respirator_mouth）、3-未戴口罩（st_respirator_none） 其它遮挡（st_face_otherocc）：0-非其它遮挡（st_otherocc_none）、1-其它遮挡（st_otherocc） Precisio n Recall • 5.3 各维度推荐阈值：见第一部分功能介绍输出参考proposal_threshold以及使用逻辑与各维度得分计算 人脸质量模型使用逻辑； | （glass_style）：0-不戴眼镜（glasses_style_none）、1-透明眼镜（transparent_glasses）、2-有 镜（sunglasses） | | | | | | | | | | | | | |\\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |\\n| | 位置（st_respirator）：0-full（st_respirator_full）、1-漏鼻（st_respirator_nose）、2-漏嘴 _respirator_mouth）、3-未戴口罩（st_respirator_none） | | | | | | | | | | | | | |\\n| | 遮挡（st_face_oth...\"\n        },\n        {\n          \"evidence_id\": \"ac3a0f7a51ac569faf830a53\",\n          \"title\": \"KM_essos_det_small_nart_acl-ascend710-fp16_b1_1.0.0.model\",\n          \"snippet\": \"target_name: 人体\\nalgorithm_type: 检测\\nalgorithm_name: 睡岗人体检测\\napplication_scene: 呈贡CV长尾业务\\nowner: 苏舒婷\\nmodel_name: KM_essos_det_small_nart_acl-ascend710-fp16_b1_1.0.0.model\\nsupported_device: ascend710\\nrecommended_config: acl-ascend710-fp16\\nlast_updated: 2025-12-30\\nlast_updated_month: 2025-12\",\n          \"model_name\": \"KM_essos_det_small_nart_acl-ascend710-fp16_b1_1.0.0.model\",\n          \"algorithm_name\": \"睡岗人体检测\",\n          \"algorithm_type\": \"检测\",\n          \"application_scene\": \"呈贡CV长尾业务\"\n        },\n        {\n          \"evidence_id\": \"e603f74f5ab719dfa1019089\",\n          \"title\": \"fight_model\",\n          \"snippet\": \"model_name: fight_model\\nname: fight_model\\ntype: falcon\\nplatform: cuda11.0-trt7.1-fp16-T4\\nstatus: SUCCESS\\ndid: 116885\\nrid: 29947\\nversion: 1.0.0\\nversion_train_date: 20230621\\nsource_file: data/fight_model-cuda11.0-trt7.1-fp16-T4_29947_116885.json\",\n          \"model_name\": \"fight_model\"\n        }\n      ]\n    },\n    {\n      \"field\": \"similar_capabilities\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"dd622ab3d2c615477dc4f8b1\",\n          \"title\": \"KM_essos_BannerSlogan_960x960_nart_acl-ascend710-fp16_b8_3.0.5.model\",\n          \"snippet\": \"target_name: 横幅\\nalgorithm_type: 检测\\nalgorithm_name: 横幅检测模型\\napplication_scene: 视频巡逻项目\\nowner: 任大发\\nmodel_name: KM_essos_BannerSlogan_960x960_nart_acl-ascend710-fp16_b8_3.0.5.model\\nsupported_device: ascend710\\nrecommended_config: acl-ascend710-fp16\\nlast_updated: 2025-06-26\\nlast_updated_month: 2025-06\",\n          \"model_name\": \"KM_essos_BannerSlogan_960x960_nart_acl-ascend710-fp16_b8_3.0.5.model\",\n          \"algorithm_name\": \"横幅检测模型\",\n          \"algorithm_type\": \"检测\",\n          \"application_scene\": \"视频巡逻项目\"\n        },\n        {\n          \"evidence_id\": \"83807db14b0bbfd44474b7c2\",\n          \"title\": \"KM_essos_BannerSlogan_960x960_nart_acl-ascend310-fp16_b8_3.0.5.model\",\n          \"snippet\": \"target_name: 横幅\\nalgorithm_type: 检测\\nalgorithm_name: 横幅检测模型\\napplication_scene: 视频巡逻项目\\nowner: 任大发\\nmodel_name: KM_essos_BannerSlogan_960x960_nart_acl-ascend310-fp16_b8_3.0.5.model\\nsupported_device: ascend310\\nrecommended_config: acl-ascend310-fp16\\nlast_updated: 2025-06-26\\nlast_updated_month: 2025-06\",\n          \"model_name\": \"KM_essos_BannerSlogan_960x960_nart_acl-ascend310-fp16_b8_3.0.5.model\",\n          \"algorithm_name\": \"横幅检测模型\",\n          \"algorithm_type\": \"检测\",\n          \"application_scene\": \"视频巡逻项目\"\n        },\n        {\n          \"evidence_id\": \"f53d026649b58ea0fecf243a\",\n          \"title\": \"PAR_merged_model\",\n          \"snippet\": \"model_name: PAR_merged_model\\nname: PAR_merged_model\\ntype: classifier\\nplatform: cpu-ppl2-fp32\\nstatus: SUCCESS\\ndid: 102019\\nrid: 36860\\nversion: 1.0.0\\nversion_train_date: 20240228\\nsource_file: data/PAR_merged_model-cpu-ppl2-fp32_36860_102019.json\",\n          \"model_name\": \"PAR_merged_model\"\n        },\n        {\n          \"evidence_id\": \"9fd98b5d39280407c8318780\",\n          \"title\": \"PDFs/港澳台车牌文字识别模型发版.pdf p2\",\n          \"snippet\": \"_textrecognition_CarPlateHK_small_nart_cuda11.0-trt7.1-int8- e276ab2bafa2e4c51b9e447547e99e1c51637633baf57b9f9d019e89d4\\nint8-T4 T4_b16_1.0.0.model 382072 8 2.85\\n16 4.90\\n五、精度测试\\n量化数据集：textrecognition_quant_hk\\n测试集：textrecognition_precision_hk\\n模型 precision\"\n        },\n        {\n          \"evidence_id\": \"7d46e31c0867251721fe60c5\",\n          \"title\": \"KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model\",\n          \"snippet\": \"target_name: 二维码\\nalgorithm_type: 检测\\nalgorithm_name: 二维码检测模型\\napplication_scene: 网安场景，正方形二维码\\nowner: 龚丽君\\nmodel_name: KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model\\nsupported_device: ascend310\\nrecommended_config: ascend310-fp16\\nlast_updated: 2023-04-07\\nlast_updated_month: 2023-04\",\n          \"model_name\": \"KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model\",\n          \"algorithm_name\": \"二维码检测模型\",\n          \"algorithm_type\": \"检测\",\n          \"application_scene\": \"网安场景，正方形二维码\"\n        }\n      ]\n    },\n    {\n      \"field\": \"performance_baseline\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"c7711b84757a14915a38a72a\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2 table 1\",\n          \"snippet\": \"PDF表格: PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf 第2页 表1\\n表格结构化行:\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model\\nOID: beeb6944bdca2dafd0213251951cc47f829efad2981d7f847010b13f486181c5\\n平台: cuda11.0-trt7.1-fp16-T4\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model\\nOID: fcd2d67fbbaab4fc2064f08ccaf5e61abf7b9655388c7f39a349c43184c6b102\\n平台: cuda11.0-trt7.1-int8-T4\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-P4_b8_0.2.0.model\\nOID: c059a471994cbb3365e4a0e6e6e8c8469f578190e75f31b348867599041e5880\\n平台: cuda11.0-trt7.1-int8-P4\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\\nOID: 0cef652610b4f5fef96dd575ba52e283ce7e1908565d...\"\n        },\n        {\n          \"evidence_id\": \"c3df8f567b44bcd3cf139136\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2\",\n          \"snippet\": \"58\\nwithout_safetybelt 0.9269 0.9702 0.9481\\n评测平台：cuda11.0-trt7.1-fp16-T4\\n模型性能\"\n        },\n        {\n          \"evidence_id\": \"1d4107dd8be5f74f932bdc50\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2\",\n          \"snippet\": \"ge/project/3/releaseManage?\\nrid=34577&id=3&model_type=classifier&tabName=deployment\\n四、精度性能\\n模型精度\\n属性 类别 precision recall f1-score Acc|mPrec|mA\\nwaistcoat_agnostic 0.7439 0.6246 0.6790\\nwaistcoat\\n0.9680|0.8918|0.86\"\n        },\n        {\n          \"evidence_id\": \"a7b70b74aef131da9461cc7e\",\n          \"title\": \"PDFs/安防场景-城市结构化检测模型3.0.1.pdf p1 table 1\",\n          \"snippet\": \"PDF表格: PDFs/安防场景-城市结构化检测模型3.0.1.pdf 第1页 表1\\n| 安防场景-城市结构化检测模型3.0.1 检测模型算法边界 • 行业场景：安防结构化场景 • 1920*1080输入尺寸大小下： ◦ 最小检测目标：32*32 ◦ 最大检测目标：512*512 ◦ 其它输入图像尺寸按比例变化 • 亮度要求：白天，对于夜间场景、或者目标模糊的场景，精度尚无法保证 • 边界要求：有边界遮挡的目标检测精度无法保证 • 遮挡要求：对于目标存在严重遮挡的情况，检测性能暂时无法保证 • 场景要求：对于夜晚、雨雪雾等场景的结构化性能暂时无法保证 KM_essos_struct 3.0.1 release note • 发布时间：20250722 • owner：rendafa@sensetime.com • Highlights： ◦ 数据：新增了室内摔倒数据，裁剪数据和网络爬取的带棚电动车数据，完成训练集扩充。新增业务 回流数据和室内摔倒数据，完成测试集扩充。 ◦ 损失函数：优化损失函数，忽略多 GT 重叠场景下将相关类别（人体/非机动车）视为骑手的\\\"负样 本\\\"强力惩罚，提高多 GT 重叠场景下召回率。 ◦ 精度：监控场景下与3.0.0精度相当，大幅提升占画面大比例的人体召回、室内躺卧人体召回和带棚 非机动车召回。其中人体recall@fppi0.1相对于3.0.0模型，在nanjing测试集（监控测试集）提升 2%，回流测试集提升15%。非机动车recall@fppi0.1相对于3.0.0模型，在nanjing测试集（监控测试 集）提升3%，回流测试集提升34%。骑手recall@fppi0.1相对于3.0.0模型，回流测试集提升46%。 ◦ 阈值选取 人体 骑手 机动车 非机动车 备注 默认阈值，人体和机动 车对应FPPI0.1，骑手 0.5021 0.3984...\"\n        },\n        {\n          \"evidence_id\": \"0bd4b00de07c1e5c2419c0d8\",\n          \"title\": \"PDFs/人体二分类发版记录.pdf p1\",\n          \"snippet\": \"常见误报\\n◦ 精度: 大幅提升监控场景遮挡截断躺卧人体正样本、猫狗负样本的召回, 其中遮挡人体召回+8.2%，\\n躺卧人体召回+8.8%，猫狗过滤+12.2%\\n◦ 精度: 大幅提升监控场景遮挡截断躺卧人体正样本、猫狗负样本的召回, 其中遮挡人体召回+8.5%，\\n躺卧人体召回+10.2%，猫狗过滤+12.9%\\n◦ 阈值：模型无内置阈值, 阈值设定可参考如下精度测试中表格, 根据实际需求调整阈值\\n▪ 含义：negative score阈值，即 result[\\\"st_ped_none\\\"][\\\"st_none\\\"] > negative score的人体为误\"\n        }\n      ]\n    },\n    {\n      \"field\": \"data_requirements\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"5bd3f6a80c6d0ce27f9a2337\",\n          \"title\": \"KM_falcon_fight_UMT_large\",\n          \"snippet\": \"model_name: KM_falcon_fight_UMT_large\\nname: KM_falcon_fight_UMT_large\\ntype: falcon\\nplatform: acl-ascend310-fp16\\nstatus: SUCCESS\\ndid: 126793\\nrid: 45903\\nversion: 2.0.4\\nversion_train_date: 20250107\\nsource_file: data/KM_falcon_fight_UMT_large-acl-ascend310-fp16_45903_126793.json\",\n          \"model_name\": \"KM_falcon_fight_UMT_large\"\n        },\n        {\n          \"evidence_id\": \"9a81fbe28f4b8e9650e2e71c\",\n          \"title\": \"PDFs/安防场景-城市结构化检测模型3.0.1.pdf p1\",\n          \"snippet\": \"• 发布时间：20250722\\n• owner：rendafa@sensetime.com\\n• Highlights：\\n◦ 数据：新增了室内摔倒数据，裁剪数据和网络爬取的带棚电动车数据，完成训练集扩充。新增业务\\n回流数据和室内摔倒数据，完成测试集扩充。\\n◦ 损失函数：优化损失函数，忽略多 GT 重叠场景下将相关类别（人体/非机动车）视为骑手的\\\"负样\"\n        },\n        {\n          \"evidence_id\": \"a46c652a232601d718d0d858\",\n          \"title\": \"KM_essos_det_small_nart_acl-ascend710-fp16_b1_1.0.0.model\",\n          \"snippet\": \"target_name: 人体\\nalgorithm_type: 检测\\nalgorithm_name: 钓鱼人体检测\\napplication_scene: 呈贡CV长尾业务\\nowner: 苏舒婷\\nmodel_name: KM_essos_det_small_nart_acl-ascend710-fp16_b1_1.0.0.model\\nsupported_device: ascend710\\nrecommended_config: acl-ascend710-fp16\\nlast_updated: 2025-12-30\\nlast_updated_month: 2025-12\",\n          \"model_name\": \"KM_essos_det_small_nart_acl-ascend710-fp16_b1_1.0.0.model\",\n          \"algorithm_name\": \"钓鱼人体检测\",\n          \"algorithm_type\": \"检测\",\n          \"application_scene\": \"呈贡CV长尾业务\"\n        },\n        {\n          \"evidence_id\": \"a1a8bdce4386a76eacaecdb6\",\n          \"title\": \"KM_senu_reid_156_nart_acl-ascend710-int8_b32_1.56.0.model\",\n          \"snippet\": \"target_name: 人体\\nalgorithm_type: 特征\\nalgorithm_name: 人体特征\\napplication_scene: ReID_1.56.0\\nowner: 黄德亮\\nmodel_name: KM_senu_reid_156_nart_acl-ascend710-int8_b32_1.56.0.model\\nsupported_device: ascend710\\nrecommended_config: acl-ascend710-int8\\nlast_updated: 2023-09-07\\nlast_updated_month: 2023-09\",\n          \"model_name\": \"KM_senu_reid_156_nart_acl-ascend710-int8_b32_1.56.0.model\",\n          \"algorithm_name\": \"人体特征\",\n          \"algorithm_type\": \"特征\",\n          \"application_scene\": \"ReID_1.56.0\"\n        },\n        {\n          \"evidence_id\": \"574e8a69ac4e1edd855a3cbe\",\n          \"title\": \"KM_classifier_Ped_ClothBanner_nart_acl-ascend710-fp16_b8_0.0.1.model\",\n          \"snippet\": \"target_name: 人体\\nalgorithm_type: 属性\\nalgorithm_name: 人体状衣二分类\\napplication_scene: pk定制化，未集成入横幅app，召回衣物上有肉眼可辨醒目大字的人体的二分类模型；V0.0.1\\nowner: 冯江燕\\nmodel_name: KM_classifier_Ped_ClothBanner_nart_acl-ascend710-fp16_b8_0.0.1.model\\nsupported_device: ascend710\\nrecommended_config: acl-ascend710-fp16\\nlast_updated: 2025-06-16\\nlast_updated_month: 2025-06\",\n          \"model_name\": \"KM_classifier_Ped_ClothBanner_nart_acl-ascend710-fp16_b8_0.0.1.model\",\n          \"algorithm_name\": \"人体状衣二分类\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"pk定制化，未集成入横幅app，召回衣物上有肉眼可辨醒目大字的人体的二分类模型；V0.0.1\"\n        }\n      ]\n    }\n  ]\n}"
+        }
+      ],
+      "response_format": {
+        "type": "json_schema",
+        "json_schema": {
+          "name": "migration_advisor_report",
+          "strict": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "requirement_summary": {
+                "type": "string"
+              },
+              "direct_match": {
+                "type": "object",
+                "properties": {
+                  "exists": {
+                    "type": "boolean"
+                  },
+                  "summary": {
+                    "type": "string"
+                  },
+                  "evidence": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "exists",
+                  "summary",
+                  "evidence"
+                ],
+                "additionalProperties": false
+              },
+              "similar_assets": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "model_or_solution": {
+                      "type": "string"
+                    },
+                    "label_schema": {
+                      "type": "string",
+                      "description": "类别/标签定义；证据无则写「证据不足」。"
+                    },
+                    "training_data": {
+                      "type": "string",
+                      "description": "训练集、标注规范、样本量；证据无则写「证据不足」。"
+                    },
+                    "reported_metrics": {
+                      "type": "string",
+                      "description": "mAP/ACC/召回等精度指标及测试集/平台；证据无则写「证据不足」。"
+                    },
+                    "covered_capability": {
+                      "type": "string"
+                    },
+                    "gap": {
+                      "type": "string"
+                    },
+                    "evidence": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "model_or_solution",
+                    "label_schema",
+                    "training_data",
+                    "reported_metrics",
+                    "covered_capability",
+                    "gap",
+                    "evidence"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "migration_plan": {
+                "type": "object",
+                "properties": {
+                  "feasibility": {
+                    "type": "string",
+                    "enum": [
+                      "high",
+                      "medium",
+                      "low"
+                    ]
+                  },
+                  "approach": {
+                    "type": "string"
+                  },
+                  "data_requirements": {
+                    "type": "string"
+                  },
+                  "compute_requirements": {
+                    "type": "string"
+                  },
+                  "engineering_work": {
+                    "type": "string"
+                  },
+                  "estimated_timeline": {
+                    "type": "string"
+                  },
+                  "estimated_cost": {
+                    "type": "string"
+                  },
+                  "dependencies": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "risks": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "feasibility",
+                  "approach",
+                  "data_requirements",
+                  "compute_requirements",
+                  "engineering_work",
+                  "estimated_timeline",
+                  "estimated_cost",
+                  "dependencies",
+                  "risks"
+                ],
+                "additionalProperties": false
+              },
+              "expected_performance": {
+                "type": "object",
+                "properties": {
+                  "baseline": {
+                    "type": "string"
+                  },
+                  "target": {
+                    "type": "string"
+                  },
+                  "uncertainty": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "baseline",
+                  "target",
+                  "uncertainty"
+                ],
+                "additionalProperties": false
+              },
+              "recommendation": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "requirement_summary",
+              "direct_match",
+              "similar_assets",
+              "migration_plan",
+              "expected_performance",
+              "recommendation"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    }
+  }
+}

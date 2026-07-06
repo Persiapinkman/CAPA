@@ -1,0 +1,10 @@
+{
+  "background_and_goals": "（示例）河岸/水库监管场景，需从现有球机视频中自动发现持竿垂钓人员，降低人工巡查成本；目标为实时告警与取证截图。",
+  "model_training_plan": "（示例）采用检测范式，负样本含路人；两阶段：开源预训练骨干 + 域内微调；数据增强含天气变化与遮挡；预计 2～4 周迭代周期（视标注速度而定）。",
+  "annotation_data_format": "（示例）MS COCO detection：images/file_name、annotations bbox [x,y,w,h]、categories；或导出 YOLO txt（class cx cy w h 归一化）。",
+  "annotation_howto": "（示例）框住完整人体含鱼竿；遮挡 >50% 标为难例；仅露头不标；双人重叠分开框；质检 10% 双人复核。",
+  "data_volume_requirements": "（示例）冷启动 ≥3000 张带框图片，验证集 ≥300，覆盖昼夜与雨天；每季度增量 ≥500 张长尾场景。",
+  "evaluation_metrics": "（示例）离线 mAP@0.5:0.95、召回率@固定误报率；在线 FPS、端到端告警延迟、每路流 GPU 占用。",
+  "deployment_plan": "（示例）边缘盒子 TensorRT 或云端 Triton；Kafka 订阅帧；模型多轨灰度；Prometheus 指标与自动回滚。",
+  "performance_estimate": "（示例）单卡 A10 约 XX 路 1080p@5fps（示意）；CPU 回退延迟增加；风险为夜间模糊导致漏检，需补光增强与长尾数据。"
+}

@@ -1,0 +1,98 @@
+{
+  "session_id": "57130c67-b1df-4798-8f6e-d9b7e57918d6",
+  "run_stamp": "20260522_100619_73119dee",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-05-22T10:08:11+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{ \"requirement_summary\": \"香港项目头盔颜色识别\", \"direct_match\": { \"exists\": false, \"summary\": \"直接支持结论：证据不足\" , \"evidence\":  [] }, \"similar_assets\": [ { \"model_or_solution\": \"KM_Classifier_PAR_waistcoat_safetybelt\", \"label_schema\": \"服装属性分类（Wearable Safetybelt/Uniform）\", \"training_data\": \"证据不足\", \"reported_metrics\": \"证据不足\" , \"covered_capability\": \"小图属性分类，支持分类器结构复用\" , \"gap\": \"目标对象为头盔颜色，非服装材质，作业场景不同\" , \"evidence\": [ \"c7711b84757a14915a38a72a\" ] }, { \"model_or_solution\": \"车辆属性大模型\", \"label_schema\": \"车辆颜色属性（quantized color labels）\", \"training_data\": \"证据不足\", \"reported_metrics\": \"ACC:91.6%（颜色属性能量级）\" , \"covered_capability\": \"颜色属性分类器结构可迁移\" , \"gap\": \"目标对象是头盔而非车辆，颜色空间包含‘迷彩’等特殊类别，需验证特定类别精度\" , \"evidence\": [ \"7c7c025ca9796c52d5be4fad\" , \"e70e4d2c66d9aa49bfd41778\" ] }, { \"model_or_solution\": \"多类头盔颜色检测模型（假设现有训练模型）\", \"label_schema\": \"头盔颜色（9 类色彩）\", \"training_data\": \"证据不足\", \"reported_metrics\": \"证据不足\" , \"covered_capability\": \"目标场景直接匹配，无需特征变换\" , \"gap\": \"当前检索结果仅显示安装模型列表，未发现头盔颜色模型的文件或训练集信息\" , \"evidence\": [ \"e64331e9486befac16c0f912\" ] }, { \"model_or_solution\": \"安全帽属性模型（仅部分推荐配置）\", \"label_schema\": \"帽型/颜色多属性模式\", \"training_data\": \"证据不足\", \"reported_metrics\": \"证据不足\" , \"covered_capability\": \"帽具颜色识别逻辑可复用\" , \"gap\": \"可能存在颜色标签未覆盖‘迷彩’或‘紫/绿/黄’等类别风险\" , \"evidence\": [ \"7571ba32218935d0e761dbff\" ] } ], \"migration_plan\": { \"feasibility\": \"low\", \"approach\": \"建议采用领域适配（domain adaptation）训练方式：保留原有结构化检测框架，新增头盔颜色分支头部检测头，使用多五颜六头盔区域标注数据集进行迁移训练\" , \"data_requirements\": \"证据不足，建议查询头盔颜色标注数据集规模，颜色标签需覆盖9 类类别\" , \"compute_requirements\": \"证据不足，需根据目标端设备类型（ascend 310/710）及精度需求（fp16/int8）评估训练部署成本\" , \"engineering_work\": \"建议迁移热度：需要调整输出日志、标签空间、模型配置\" , \"estimated_timeline\": \"无明确日期或日数\" , \"estimated_cost\": \"无预算数据\" , \"dependencies\": [\"需要确认头盔颜色标注数据的可用性和规模\", \"需要明确目标端算力约束（cpuvs cudavs ascend）\", \"需要评估头盔分割模块是否直接支持颜色属性检测\"] , \"risks\": [ \"颜色泛化性能可能在目标端降低\", \"特定颜色类别（迷彩/紫色）可能因低数据条件导致精度不足\" ] }, \"expected_performance\": { \"baseline\": \"证据不足\", \"target\": \"需实验验证头盔颜色类别 Accuracy 和 Recall\" , \"uncertainty\": \"高（专家评估需实测）\" }, \"recommendation\": \"建议：将头盔颜色识别任务作为独立头模块集成到结构化检测系统中，进行专项数据收集、迁移实验及精度比对，避免直接使用不确定的预训模型。\" }",
+    "structured_output": {
+      "requirement_summary": "香港项目头盔颜色识别",
+      "direct_match": {
+        "exists": false,
+        "summary": "直接支持结论：证据不足",
+        "evidence": []
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "KM_Classifier_PAR_waistcoat_safetybelt",
+          "label_schema": "服装属性分类（Wearable Safetybelt/Uniform）",
+          "training_data": "证据不足",
+          "reported_metrics": "证据不足",
+          "covered_capability": "小图属性分类，支持分类器结构复用",
+          "gap": "目标对象为头盔颜色，非服装材质，作业场景不同",
+          "evidence": [
+            "c7711b84757a14915a38a72a"
+          ]
+        },
+        {
+          "model_or_solution": "车辆属性大模型",
+          "label_schema": "车辆颜色属性（quantized color labels）",
+          "training_data": "证据不足",
+          "reported_metrics": "ACC:91.6%（颜色属性能量级）",
+          "covered_capability": "颜色属性分类器结构可迁移",
+          "gap": "目标对象是头盔而非车辆，颜色空间包含‘迷彩’等特殊类别，需验证特定类别精度",
+          "evidence": [
+            "7c7c025ca9796c52d5be4fad",
+            "e70e4d2c66d9aa49bfd41778"
+          ]
+        },
+        {
+          "model_or_solution": "多类头盔颜色检测模型（假设现有训练模型）",
+          "label_schema": "头盔颜色（9 类色彩）",
+          "training_data": "证据不足",
+          "reported_metrics": "证据不足",
+          "covered_capability": "目标场景直接匹配，无需特征变换",
+          "gap": "当前检索结果仅显示安装模型列表，未发现头盔颜色模型的文件或训练集信息",
+          "evidence": [
+            "e64331e9486befac16c0f912"
+          ]
+        },
+        {
+          "model_or_solution": "安全帽属性模型（仅部分推荐配置）",
+          "label_schema": "帽型/颜色多属性模式",
+          "training_data": "证据不足",
+          "reported_metrics": "证据不足",
+          "covered_capability": "帽具颜色识别逻辑可复用",
+          "gap": "可能存在颜色标签未覆盖‘迷彩’或‘紫/绿/黄’等类别风险",
+          "evidence": [
+            "7571ba32218935d0e761dbff"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "low",
+        "approach": "建议采用领域适配（domain adaptation）训练方式：保留原有结构化检测框架，新增头盔颜色分支头部检测头，使用多五颜六头盔区域标注数据集进行迁移训练",
+        "data_requirements": "证据不足，建议查询头盔颜色标注数据集规模，颜色标签需覆盖9 类类别",
+        "compute_requirements": "证据不足，需根据目标端设备类型（ascend 310/710）及精度需求（fp16/int8）评估训练部署成本",
+        "engineering_work": "建议迁移热度：需要调整输出日志、标签空间、模型配置",
+        "estimated_timeline": "无明确日期或日数",
+        "estimated_cost": "无预算数据",
+        "dependencies": [
+          "需要确认头盔颜色标注数据的可用性和规模",
+          "需要明确目标端算力约束（cpuvs cudavs ascend）",
+          "需要评估头盔分割模块是否直接支持颜色属性检测"
+        ],
+        "risks": [
+          "颜色泛化性能可能在目标端降低",
+          "特定颜色类别（迷彩/紫色）可能因低数据条件导致精度不足"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "证据不足",
+        "target": "需实验验证头盔颜色类别 Accuracy 和 Recall",
+        "uncertainty": "高（专家评估需实测）"
+      },
+      "recommendation": "建议：将头盔颜色识别任务作为独立头模块集成到结构化检测系统中，进行专项数据收集、迁移实验及精度比对，避免直接使用不确定的预训模型。"
+    }
+  }
+}

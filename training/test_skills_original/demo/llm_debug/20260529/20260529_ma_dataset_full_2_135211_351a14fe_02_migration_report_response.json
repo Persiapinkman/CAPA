@@ -1,0 +1,146 @@
+{
+  "session_id": "ma_dataset_full_2",
+  "run_stamp": "20260529_135211_351a14fe",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-05-29T13:53:19+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"识别行人发型属性（短发、长发、光头、其他）\"\n  , \"direct_match\": {\n    \"exists\": false,\n    \"summary\": \"无直接匹配模型，检索结果中未发现专门针对‘发型’属性的模型，仅有行人属性大模型覆盖头发颜色（hair_color）和发型（hair_style）但未明确包含‘光头’或具体的短发/长发分类。\"\n  , \"evidence\": []\n  }\n  , \"similar_assets\": [\n    {\n      \"model_or_solution\": \"行人属性大模型 (KM_Classifier_Ped_33of33)\",\n      \"label_schema\": \"包含 hair_color (头发颜色) 和 hair_style (发型) 两个属性。hair_color 可能包含 black/brown/blonde 等，hair_style 包含具体发型特征。但文档未明确显示‘短发、长发、光头、其他’的具体类别定义，推测 hair_style 可能涵盖部分需求。\",\n      \"training_data\": \"基于行人检测数据集，要求目标大于 60*120 像素，场景为白天监控。数据来源未明确提及具体行数，但作为大模型通常涉及大规模数据。\",\n      \"reported_metrics\": \"hair_color: Acc 0.92, mPrec 0.807; hair_style: Acc 0.84, mPrec 0.802 (PDFs/行人属性大模型 2.21.0/2.21.1.pdf p4/p7)。\"\n    , \"covered_capability\": \"行人属性分析（头发颜色、发型）\",\n    \"gap\": \"未明确区分‘光头’类别，‘短发/长发’可能包含在 hair_style 中但需确认具体标签定义。\"\n  , \"evidence\": [\n    \"PDFs/行人属性大模型 2.21.0.pdf p4 table 1\",\n    \"PDFs/行人属性大模型 2.21.1.pdf p7 table 1\"\n    ]\n  }\n  , {\n    \"model_or_solution\": \"Classifier_PAR (属性分类器)\",\n    \"label_schema\": \"行人属性分类，包含 coat_style (外套样式), coat_color (外套颜色) 等，但未明确包含发型属性。文档中 benchmark_info 显示包含 hair 相关分析（如 hair_col, hair_sty 在 PDF 模型中），但在 Classifier_PAR 的 adela 记录中未详细列出 hair 具体类别，仅列出 coat 等属性。\",\n    \"training_data\": \"基于 UCG 城市计算数据集，包含多属性标注数据。\",\n    \"reported_metrics\": \"整体 Acc 84.715% (Classifier_PAR benchmark_info)，但具体 hair 属性精度未在此记录中详细列出（需参考 PDF 模型）。\",\n    \"covered_capability\": \"通用行人属性分类\",\n    \"gap\": \"文档记录未明确列出发型相关精度，需结合行人属性大模型确认。\"\n  , \"evidence\": [\n    \"adela/adela_release_records.jsonl (Classifier_PAR)\"\n    ]\n  }\n  , {\n    \"model_or_solution\": \"Full Struct (全结构化检测模型)\",\n    \"label_schema\": \"检测类别包括 face, pedestrian, cycer, vehicle, cyc 等，不涉及行人属性细分（如发型）。\",\n    \"training_data\": \"城市计算结构化数据。\",\n    \"reported_metrics\": \"未提供具体的属性分类精度，主要为检测/识别性能。\",\n    \"covered_capability\": \"目标检测（行人、人脸等），非属性识别。\",\n    \"gap\": \"不适用于发型属性识别。\"\n  , \"evidence\": [\n    \"adela/adela_release_records.jsonl (full_struct)\"\n    ]\n  }\n  , {\n    \"model_or_solution\": \"非机动车特征模型 (ENU_NonMotorVehicleFeature)\",\n    \"label_schema\": \"非机动车特征，不适用于行人发型。\",\n    \"training_data\": \"非机动车相关数据。\",\n    \"reported_metrics\": \"1:N top1 acc +8.77% (v0.0.2 vs v0.0.1)。\",\n    \"covered_capability\": \"非机动车特征提取，非行人属性。\",\n    \"gap\": \"对象不匹配。\"\n  , \"evidence\": [\n    \"PDFs/非机动车特征发版.pdf p24\"\n    ]\n  }\n  , {\n    \"model_or_solution\": \"车牌文字识别模型 (KM_textrecognition_CarPlate)\",\n    \"label_schema\": \"车牌文字，不适用于行人发型。\",\n    \"training_data\": \"内地及港澳车牌数据。\",\n    \"reported_metrics\": \"端到端识别准确率 0.9482 (香港通用车牌数据集)。\",\n    \"covered_capability\": \"文本识别，非行人属性。\",\n    \"gap\": \"对象不匹配。\"\n  , \"evidence\": [\n    \"tables/model_release_records.jsonl (KM_textrecognition_CarPlate)\",\n    \"PDFs/香港车牌 - 旋转框检测模型发版.pdf p2\"\n    ]\n  }\n  , {\n    \"model_or_solution\": \"人脸检测/特征模型 (LargeFace/SmallFace/KM_feature_face)\",\n    \"label_schema\": \"人脸检测、人脸特征，不涉及发型属性分类。\",\n    \"training_data\": \"人脸数据集。\",\n    \"reported_metrics\": \"检测 mAP > 0.94 (LargeFace_224x224)。\",\n    \"covered_capability\": \"人脸检测与特征提取，非行人属性。\",\n    \"gap\": \"对象不匹配（虽涉及人脸，但任务是发型属性分类）。\"\n  , \"evidence\": [\n    \"adela/adela_release_records.jsonl (LargeFace_224x224)\",\n    \"tables/model_release_records.jsonl (KM_feature_face)\"\n    ]\n  }\n  , {\n    \"model_or_solution\": \"安全帽/安全带检测 (PAR_2.21.5/St_Dog_leash)\",\n    \"label_schema\": \"安全帽、安全带、狗绳等，属于特定属性分类。\",\n    \"training_data\": \"特定场景属性数据。\",\n    \"reported_metrics\": \"safetybelt Acc 0.2567; waistcoat Acc 0.8960。\",\n    \"covered_capability\": \"特定物体/属性分类，证明分类器架构支持。\",\n    \"gap\": \"标签体系不匹配，但架构可复用。\"\n  , \"evidence\": [\n    \"adela/adela_release_records.jsonl (PAR_2.21.5)\",\n    \"adela/adela_release_records.jsonl (St_Dog_leash)\"\n    ]\n  }\n  , {\n    \"model_or_solution\": \"人体/衣物特征 (KM_classifier_Ped_ClothBanner)\",\n    \"label_schema\": \"人体衣物特征（二分类），非发型属性。\",\n    \"training_data\": \"定制化数据。\",\n    \"reported_metrics\": \"未明确列出具体精度。\",\n    \"covered_capability\": \"人体属性分类。\",\n    \"gap\": \"标签体系不匹配。\"\n  , \"evidence\": [\n    \"tables/model_release_records.jsonl (KM_classifier_Ped_ClothBanner)\"\n    ]\n  }\n  ], \"migration_plan\": {\n    \"feasibility\": \"medium\",\n    \"approach\": \"建议复用行人属性大模型作为 base model，针对 hair_color 和 hair_style 进行微调。需明确标签定义（短发/长发/光头/其他），并准备对应的训练数据（标注头发特征的人行图片）。\",\n    \"data_requirements\": \"需收集监控画面中清晰可见头部及头发的行人图片，按短发、长发、光头、其他进行标注。建议至少数万张样本，覆盖不同角度、光照和遮挡情况。\",\n    \"compute_requirements\": \"基于 T4/Ascend 710 等平台，参考同类属性模型配置（batch_size 8-16）。\",\n    \"engineering_work\": \"1. 定义发型标签体系；2. 数据清洗与标注；3. 基于行人属性大模型进行迁移学习或微调；4. 测试集验证与阈值调整。\"\n  , \"estimated_timeline\": \"证据不足（取决于数据准备情况）\",\n  \"estimated_cost\": \"证据不足（取决于数据标注成本与算力需求）\"\n  , \"dependencies\": [\n    \"行人属性大模型代码库\",\n    \"标注工具与人力\",\n    \"算力资源（T4/Ascend710）\"\n    ]\n  , \"risks\": [\n    \"数据标注难度大（头发细节识别易混淆）\",\n    \"遮挡/低分辨率场景精度下降\",\n    \"‘光头’与‘短发’在极端情况下的区分难度\"\n    ]\n  }\n  , \"expected_performance\": {\n    \"baseline\": \"参考行人属性大模型 hair_style Acc 0.84, mPrec 0.802。预计微调后发型分类精度可提升至 0.85-0.90，取决于数据质量。\",\n    \"target\": \"mAP > 0.85 (针对发型分类任务)。\"\n  , \"uncertainty\": \"高（发型识别受光照、遮挡影响大）\"\n  }\n  , \"recommendation\": \"优先采用行人属性大模型作为基座，针对头发属性进行微调。建议引入更细粒度的头发标注标准，并准备充足的数据集。若对精度要求极高，可考虑多模型融合（结合人脸关键点定位头发区域）。\"\n  }",
+    "structured_output": {
+      "requirement_summary": "识别行人发型属性（短发、长发、光头、其他）",
+      "direct_match": {
+        "exists": false,
+        "summary": "无直接匹配模型，检索结果中未发现专门针对‘发型’属性的模型，仅有行人属性大模型覆盖头发颜色（hair_color）和发型（hair_style）但未明确包含‘光头’或具体的短发/长发分类。",
+        "evidence": []
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "行人属性大模型 (KM_Classifier_Ped_33of33)",
+          "label_schema": "包含 hair_color (头发颜色) 和 hair_style (发型) 两个属性。hair_color 可能包含 black/brown/blonde 等，hair_style 包含具体发型特征。但文档未明确显示‘短发、长发、光头、其他’的具体类别定义，推测 hair_style 可能涵盖部分需求。",
+          "training_data": "基于行人检测数据集，要求目标大于 60*120 像素，场景为白天监控。数据来源未明确提及具体行数，但作为大模型通常涉及大规模数据。",
+          "reported_metrics": "hair_color: Acc 0.92, mPrec 0.807; hair_style: Acc 0.84, mPrec 0.802 (PDFs/行人属性大模型 2.21.0/2.21.1.pdf p4/p7)。",
+          "covered_capability": "行人属性分析（头发颜色、发型）",
+          "gap": "未明确区分‘光头’类别，‘短发/长发’可能包含在 hair_style 中但需确认具体标签定义。",
+          "evidence": [
+            "PDFs/行人属性大模型 2.21.0.pdf p4 table 1",
+            "PDFs/行人属性大模型 2.21.1.pdf p7 table 1"
+          ]
+        },
+        {
+          "model_or_solution": "Classifier_PAR (属性分类器)",
+          "label_schema": "行人属性分类，包含 coat_style (外套样式), coat_color (外套颜色) 等，但未明确包含发型属性。文档中 benchmark_info 显示包含 hair 相关分析（如 hair_col, hair_sty 在 PDF 模型中），但在 Classifier_PAR 的 adela 记录中未详细列出 hair 具体类别，仅列出 coat 等属性。",
+          "training_data": "基于 UCG 城市计算数据集，包含多属性标注数据。",
+          "reported_metrics": "整体 Acc 84.715% (Classifier_PAR benchmark_info)，但具体 hair 属性精度未在此记录中详细列出（需参考 PDF 模型）。",
+          "covered_capability": "通用行人属性分类",
+          "gap": "文档记录未明确列出发型相关精度，需结合行人属性大模型确认。",
+          "evidence": [
+            "adela/adela_release_records.jsonl (Classifier_PAR)"
+          ]
+        },
+        {
+          "model_or_solution": "Full Struct (全结构化检测模型)",
+          "label_schema": "检测类别包括 face, pedestrian, cycer, vehicle, cyc 等，不涉及行人属性细分（如发型）。",
+          "training_data": "城市计算结构化数据。",
+          "reported_metrics": "未提供具体的属性分类精度，主要为检测/识别性能。",
+          "covered_capability": "目标检测（行人、人脸等），非属性识别。",
+          "gap": "不适用于发型属性识别。",
+          "evidence": [
+            "adela/adela_release_records.jsonl (full_struct)"
+          ]
+        },
+        {
+          "model_or_solution": "非机动车特征模型 (ENU_NonMotorVehicleFeature)",
+          "label_schema": "非机动车特征，不适用于行人发型。",
+          "training_data": "非机动车相关数据。",
+          "reported_metrics": "1:N top1 acc +8.77% (v0.0.2 vs v0.0.1)。",
+          "covered_capability": "非机动车特征提取，非行人属性。",
+          "gap": "对象不匹配。",
+          "evidence": [
+            "PDFs/非机动车特征发版.pdf p24"
+          ]
+        },
+        {
+          "model_or_solution": "车牌文字识别模型 (KM_textrecognition_CarPlate)",
+          "label_schema": "车牌文字，不适用于行人发型。",
+          "training_data": "内地及港澳车牌数据。",
+          "reported_metrics": "端到端识别准确率 0.9482 (香港通用车牌数据集)。",
+          "covered_capability": "文本识别，非行人属性。",
+          "gap": "对象不匹配。",
+          "evidence": [
+            "tables/model_release_records.jsonl (KM_textrecognition_CarPlate)",
+            "PDFs/香港车牌 - 旋转框检测模型发版.pdf p2"
+          ]
+        },
+        {
+          "model_or_solution": "人脸检测/特征模型 (LargeFace/SmallFace/KM_feature_face)",
+          "label_schema": "人脸检测、人脸特征，不涉及发型属性分类。",
+          "training_data": "人脸数据集。",
+          "reported_metrics": "检测 mAP > 0.94 (LargeFace_224x224)。",
+          "covered_capability": "人脸检测与特征提取，非行人属性。",
+          "gap": "对象不匹配（虽涉及人脸，但任务是发型属性分类）。",
+          "evidence": [
+            "adela/adela_release_records.jsonl (LargeFace_224x224)",
+            "tables/model_release_records.jsonl (KM_feature_face)"
+          ]
+        },
+        {
+          "model_or_solution": "安全帽/安全带检测 (PAR_2.21.5/St_Dog_leash)",
+          "label_schema": "安全帽、安全带、狗绳等，属于特定属性分类。",
+          "training_data": "特定场景属性数据。",
+          "reported_metrics": "safetybelt Acc 0.2567; waistcoat Acc 0.8960。",
+          "covered_capability": "特定物体/属性分类，证明分类器架构支持。",
+          "gap": "标签体系不匹配，但架构可复用。",
+          "evidence": [
+            "adela/adela_release_records.jsonl (PAR_2.21.5)",
+            "adela/adela_release_records.jsonl (St_Dog_leash)"
+          ]
+        },
+        {
+          "model_or_solution": "人体/衣物特征 (KM_classifier_Ped_ClothBanner)",
+          "label_schema": "人体衣物特征（二分类），非发型属性。",
+          "training_data": "定制化数据。",
+          "reported_metrics": "未明确列出具体精度。",
+          "covered_capability": "人体属性分类。",
+          "gap": "标签体系不匹配。",
+          "evidence": [
+            "tables/model_release_records.jsonl (KM_classifier_Ped_ClothBanner)"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "medium",
+        "approach": "建议复用行人属性大模型作为 base model，针对 hair_color 和 hair_style 进行微调。需明确标签定义（短发/长发/光头/其他），并准备对应的训练数据（标注头发特征的人行图片）。",
+        "data_requirements": "需收集监控画面中清晰可见头部及头发的行人图片，按短发、长发、光头、其他进行标注。建议至少数万张样本，覆盖不同角度、光照和遮挡情况。",
+        "compute_requirements": "基于 T4/Ascend 710 等平台，参考同类属性模型配置（batch_size 8-16）。",
+        "engineering_work": "1. 定义发型标签体系；2. 数据清洗与标注；3. 基于行人属性大模型进行迁移学习或微调；4. 测试集验证与阈值调整。",
+        "estimated_timeline": "证据不足（取决于数据准备情况）",
+        "estimated_cost": "证据不足（取决于数据标注成本与算力需求）",
+        "dependencies": [
+          "行人属性大模型代码库",
+          "标注工具与人力",
+          "算力资源（T4/Ascend710）"
+        ],
+        "risks": [
+          "数据标注难度大（头发细节识别易混淆）",
+          "遮挡/低分辨率场景精度下降",
+          "‘光头’与‘短发’在极端情况下的区分难度"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "参考行人属性大模型 hair_style Acc 0.84, mPrec 0.802。预计微调后发型分类精度可提升至 0.85-0.90，取决于数据质量。",
+        "target": "mAP > 0.85 (针对发型分类任务)。",
+        "uncertainty": "高（发型识别受光照、遮挡影响大）"
+      },
+      "recommendation": "优先采用行人属性大模型作为基座，针对头发属性进行微调。建议引入更细粒度的头发标注标准，并准备充足的数据集。若对精度要求极高，可考虑多模型融合（结合人脸关键点定位头发区域）。"
+    }
+  }
+}

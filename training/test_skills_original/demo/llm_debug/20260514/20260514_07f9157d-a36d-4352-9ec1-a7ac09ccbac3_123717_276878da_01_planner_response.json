@@ -1,0 +1,11 @@
+{
+  "session_id": "07f9157d-a36d-4352-9ec1-a7ac09ccbac3",
+  "run_stamp": "20260514_123717_276878da",
+  "stage": "planner_response",
+  "step_index": 1,
+  "created_at": "2026-05-14T12:37:18+08:00",
+  "payload": {
+    "raw_response": "{\n  \"thought\": \"用户询问\"  ,\"decision_type\": \"tool\",\n  \"action\": \"rag_answer\",\n  \"action_input\": {\n    \"query\": \"检测电子元器异常，用什么模型？\",\n    \"finish_after_tool\": false\n  }\n}",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260514_123717_276878da"
+  }
+}

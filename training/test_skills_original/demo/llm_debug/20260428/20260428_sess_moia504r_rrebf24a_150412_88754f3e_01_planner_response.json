@@ -1,0 +1,11 @@
+{
+  "session_id": "sess_moia504r_rrebf24a",
+  "run_stamp": "20260428_150412_88754f3e",
+  "stage": "planner_response",
+  "step_index": 1,
+  "created_at": "2026-04-28T15:04:14+08:00",
+  "payload": {
+    "raw_response": "{\n  \"thought\": \"用户询问当前系统中的Embedding模型有哪些，这属于企业内部知识库/配置类问题，需要调用 rag_answer 工具进行检索。由于 query_trajectories 中该 query 为第一轮查询，无历史指代，直接调用 rag_answer 即可。\",\n  \"decision_type\": \"tool\",\n  \"action\": \"rag_answer\",\n  \"action_input\": {\n    \"query\": \"当前我们Embedding模型有哪些\",\n    \"finish_after_tool\": false\n  }\n}",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260428_150412_88754f3e"
+  }
+}

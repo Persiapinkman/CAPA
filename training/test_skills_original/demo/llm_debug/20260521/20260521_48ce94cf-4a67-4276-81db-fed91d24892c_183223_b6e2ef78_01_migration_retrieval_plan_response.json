@@ -1,0 +1,65 @@
+{
+  "session_id": "48ce94cf-4a67-4276-81db-fed91d24892c",
+  "run_stamp": "20260521_183223_b6e2ef78",
+  "stage": "migration_retrieval_plan_response",
+  "step_index": 1,
+  "created_at": "2026-05-21T18:32:26+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "output_schema": {
+      "abstract_requirement": "object, attribute, task_type, scene, constraints[]",
+      "retrieve_fields": "每项 field + queries[]（2-4 条）"
+    },
+    "used_fallback": false,
+    "output_raw": "{\n  \"abstract_requirement\": {\n    \"object\": \"城市结构化人体属性模型\",\n    \"attribute\": \"头盔颜色识别\",\n    \"task_type\": \"属性分类/识别\",\n    \"scene\": \"项目适配/迁移评估\"\n  ,\n  \"constraints\": [\n    \"头盔颜色类别\"\n  ]\n},\n  \"retrieve_fields\": [\n    {\n      \"field\": \"existing_models\",\n      \"queries\": [\n        \"城市结构化人体属性模型复用头盔颜色分类\",\n        \"人体属性模型现有头盔颜色识别功能评估\",\n        \"结构化人体模型属性识别任务支持头盔颜色\",\n        \"安防模型头盔颜色分类鉴定复用性\"\n      ]\n    },\n    {\n      \"field\": \"similar_capabilities\",\n      \"queries\": [\n        \"安全帽颜色识别迁移可行模型适配\",\n        \"服饰颜色分类能力迁移头盔属性识别\",\n        \"行人属性模型迁移头盔颜色检测模板\",\n        \"服装颜色分类技术迁移头盔识别任务\"\n      ]\n    },\n    {\n      \"field\": \"performance_baseline\",\n      \"queries\": [\n        \"人体属性模型头盔颜色识别基础精度性能\",\n        \"安全帽颜色识别模型精度基准参数\",\n        \"多色头盔分类任务模型性能基线比较\",\n        \"混合颜色头盔检测模型性能指标\"\n      ]\n    },\n    {\n      \"field\": \"data_requirements\",\n      \"queries\": [\n        \"头盔颜色识别任务数据标注采集要求\",\n        \"颜色属性分类视觉模型训练数据需求\",\n        \"安全帽颜色识别数据样本类型标注\",\n        \"多色头盔检测任务数据集构建条件\"\n      ]\n    }\n  ]\n}",
+    "structured_output": {
+      "abstract_requirement": {
+        "object": "城市结构化人体属性模型",
+        "attribute": "头盔颜色识别",
+        "task_type": "属性分类/识别",
+        "scene": "项目适配/迁移评估",
+        "constraints": [
+          "头盔颜色类别"
+        ]
+      },
+      "retrieve_fields": [
+        {
+          "field": "existing_models",
+          "queries": [
+            "城市结构化人体属性模型复用头盔颜色分类",
+            "人体属性模型现有头盔颜色识别功能评估",
+            "结构化人体模型属性识别任务支持头盔颜色",
+            "安防模型头盔颜色分类鉴定复用性"
+          ]
+        },
+        {
+          "field": "similar_capabilities",
+          "queries": [
+            "安全帽颜色识别迁移可行模型适配",
+            "服饰颜色分类能力迁移头盔属性识别",
+            "行人属性模型迁移头盔颜色检测模板",
+            "服装颜色分类技术迁移头盔识别任务"
+          ]
+        },
+        {
+          "field": "performance_baseline",
+          "queries": [
+            "人体属性模型头盔颜色识别基础精度性能",
+            "安全帽颜色识别模型精度基准参数",
+            "多色头盔分类任务模型性能基线比较",
+            "混合颜色头盔检测模型性能指标"
+          ]
+        },
+        {
+          "field": "data_requirements",
+          "queries": [
+            "头盔颜色识别任务数据标注采集要求",
+            "颜色属性分类视觉模型训练数据需求",
+            "安全帽颜色识别数据样本类型标注",
+            "多色头盔检测任务数据集构建条件"
+          ]
+        }
+      ]
+    }
+  }
+}

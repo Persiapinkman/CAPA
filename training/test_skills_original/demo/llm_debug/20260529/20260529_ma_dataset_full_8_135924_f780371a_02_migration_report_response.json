@@ -1,0 +1,68 @@
+{
+  "session_id": "ma_dataset_full_8",
+  "run_stamp": "20260529_135924_f780371a",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-05-29T14:00:31+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\"requirement_summary\": \"我需要基于检索证据生成结构化迁移评估报告（JSON 格式），重点回答“人脸属性中‘口罩位置：正常佩戴、露出鼻孔、露出嘴巴、未戴口罩’是否已支持”这个问题。\", \"direct_match\": {\"exists\": true, \"summary\": \"检索到证据（PDFs/Classify_3.4.0.pdf p11、PDFs/安防方向 - 人脸质量 3.1.0 模型更新.pdf p6）明确列出了‘口罩位置’属性，标签定义与用户查询完全一致：0-full（正常佩戴/全口罩）、1-漏鼻（露出鼻孔）、2-漏嘴（露出嘴巴）、3-未戴口罩。\", \"evidence\": [\"PDFs/Classify_3.4.0.pdf p11\", \"PDFs/安防方向 - 人脸质量 3.1.0 模型更新.pdf p6\"]}, \"similar_assets\": [{\"model_or_solution\": \"KM_classifier_Face_Mask_nart_acl-ascend310-fp16_3.1.0.model\", \"label_schema\": \"st_respirator: 0-full(正常佩戴), 1-漏鼻(露出鼻孔), 2-漏嘴(露出嘴巴), 3-未戴口罩，参考：PDFs/Classify_3.4.0.pdf p11、PDFs/安防方向 - 人脸质量 3.1.0 模型更新.pdf p6\", \"training_data\": \"证据不足（文档提及使用数据集但未明确样本量、分布或清洗规范，仅提到在特定数据集上测试）\", \"reported_metrics\": \"Precision 96.84%-99.79%, Recall 96.84%-99.79%，测试集：Classify_3.4.0.pdf p11（包含 mask、防毒面具、漏鼻、漏嘴、未戴口罩等类别），平台：ascend310\", \"covered_capability\": \"mask 类别、漏鼻、漏嘴、未戴口罩\", \"gap\": \"标签体系完全匹配；训练集详情、评测细节待补充\", \"evidence\": [\"PDFs/Classify_3.4.0.pdf p11\", \"PDFs/安防方向 - 人脸质量 3.1.0 模型更新.pdf p6\"]}], \"migration_plan\": {\"feasibility\": \"high\", \"approach\": \"直接复用 3.1.0/3.4.0 版本人脸属性模型中的口罩位置标签体系\", \"data_requirements\": \"需收集口罩佩戴、露鼻、露嘴、未戴口罩四类样本，建议参考 Classify_3.4.0.pdf 测试集分布\", \"compute_requirements\": \"Ascend 310/710、T4/GPU 均支持，根据部署硬件选择对应模型版本\", \"engineering_work\": \"低：模型配置兼容性强，主要工作为标签映射与接口适配\", \"estimated_timeline\": \"1-2 周（假设已有测试数据）\", \"estimated_cost\": \"中等（依赖数据准备与测试规模，需预留 1-2 周数据标注与验证周期）\", \"dependencies\": [\"模型版本兼容性\", \"硬件部署环境\", \"测试数据集可用性\"], \"risks\": [\"小样本类别（如防毒面具）可能需额外数据增强\", \"极端角度/光照下的漏检风险\"]}, \"expected_performance\": {\"baseline\": \"口罩全 mask 96.84%，漏鼻 98.60%，漏嘴 98.01%，未戴口罩 99.79%（Classify_3.4.0.pdf p11）\", \"target\": \"建议设置 mAP > 96% 为验收标准\", \"uncertainty\": \"不同硬件平台精度略有差异（ascend310/710/T4 均有实测数据）\"}, \"recommendation\": \"已支持，建议直接复用现有 3.1.0/3.4.0 模型或微调适配特定场景\"}",
+    "structured_output": {
+      "requirement_summary": "我需要基于检索证据生成结构化迁移评估报告（JSON 格式），重点回答“人脸属性中‘口罩位置：正常佩戴、露出鼻孔、露出嘴巴、未戴口罩’是否已支持”这个问题。",
+      "direct_match": {
+        "exists": true,
+        "summary": "检索到证据（PDFs/Classify_3.4.0.pdf p11、PDFs/安防方向 - 人脸质量 3.1.0 模型更新.pdf p6）明确列出了‘口罩位置’属性，标签定义与用户查询完全一致：0-full（正常佩戴/全口罩）、1-漏鼻（露出鼻孔）、2-漏嘴（露出嘴巴）、3-未戴口罩。",
+        "evidence": [
+          "PDFs/Classify_3.4.0.pdf p11",
+          "PDFs/安防方向 - 人脸质量 3.1.0 模型更新.pdf p6"
+        ]
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "KM_classifier_Face_Mask_nart_acl-ascend310-fp16_3.1.0.model",
+          "label_schema": "st_respirator: 0-full(正常佩戴), 1-漏鼻(露出鼻孔), 2-漏嘴(露出嘴巴), 3-未戴口罩，参考：PDFs/Classify_3.4.0.pdf p11、PDFs/安防方向 - 人脸质量 3.1.0 模型更新.pdf p6",
+          "training_data": "证据不足（文档提及使用数据集但未明确样本量、分布或清洗规范，仅提到在特定数据集上测试）",
+          "reported_metrics": "Precision 96.84%-99.79%, Recall 96.84%-99.79%，测试集：Classify_3.4.0.pdf p11（包含 mask、防毒面具、漏鼻、漏嘴、未戴口罩等类别），平台：ascend310",
+          "covered_capability": "mask 类别、漏鼻、漏嘴、未戴口罩",
+          "gap": "标签体系完全匹配；训练集详情、评测细节待补充",
+          "evidence": [
+            "PDFs/Classify_3.4.0.pdf p11",
+            "PDFs/安防方向 - 人脸质量 3.1.0 模型更新.pdf p6"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "high",
+        "approach": "直接复用 3.1.0/3.4.0 版本人脸属性模型中的口罩位置标签体系",
+        "data_requirements": "需收集口罩佩戴、露鼻、露嘴、未戴口罩四类样本，建议参考 Classify_3.4.0.pdf 测试集分布",
+        "compute_requirements": "Ascend 310/710、T4/GPU 均支持，根据部署硬件选择对应模型版本",
+        "engineering_work": "低：模型配置兼容性强，主要工作为标签映射与接口适配",
+        "estimated_timeline": "1-2 周（假设已有测试数据）",
+        "estimated_cost": "中等（依赖数据准备与测试规模，需预留 1-2 周数据标注与验证周期）",
+        "dependencies": [
+          "模型版本兼容性",
+          "硬件部署环境",
+          "测试数据集可用性"
+        ],
+        "risks": [
+          "小样本类别（如防毒面具）可能需额外数据增强",
+          "极端角度/光照下的漏检风险"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "口罩全 mask 96.84%，漏鼻 98.60%，漏嘴 98.01%，未戴口罩 99.79%（Classify_3.4.0.pdf p11）",
+        "target": "建议设置 mAP > 96% 为验收标准",
+        "uncertainty": "不同硬件平台精度略有差异（ascend310/710/T4 均有实测数据）"
+      },
+      "recommendation": "已支持，建议直接复用现有 3.1.0/3.4.0 模型或微调适配特定场景"
+    }
+  }
+}

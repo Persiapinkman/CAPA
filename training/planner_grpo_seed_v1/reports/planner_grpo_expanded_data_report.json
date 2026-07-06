@@ -1,0 +1,43 @@
+{
+  "seed_count": 20,
+  "expanded_count": 225,
+  "train_count": 245,
+  "expanded_by_category": {
+    "single_image_probe": 70,
+    "probe_then_migration": 60,
+    "migration_feasibility_with_image": 50,
+    "migration_feasibility": 35,
+    "historical_asset_qa": 4,
+    "general_answer": 4,
+    "full_detection_eval": 2
+  },
+  "train_by_category": {
+    "single_image_probe": 74,
+    "full_detection_eval": 5,
+    "migration_feasibility": 38,
+    "migration_feasibility_with_image": 51,
+    "historical_asset_qa": 7,
+    "general_answer": 6,
+    "adela_eval": 2,
+    "intent_ambiguity": 1,
+    "probe_then_migration": 61
+  },
+  "train_by_first_expected_action": {
+    "qwen_detection": 135,
+    "pipeline_eval": 5,
+    "migration_advisor": 89,
+    "rag_answer": 7,
+    "answerer": 6,
+    "adela_cli_eval": 2,
+    "clarify": 1
+  },
+  "train_by_expected_decision_action": {
+    "qwen_detection": 135,
+    "pipeline_eval": 5,
+    "migration_advisor": 150,
+    "rag_answer": 7,
+    "answerer": 6,
+    "adela_cli_eval": 2,
+    "clarify": 1
+  }
+}

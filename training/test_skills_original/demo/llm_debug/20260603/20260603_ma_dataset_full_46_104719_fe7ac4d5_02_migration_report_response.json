@@ -1,0 +1,114 @@
+{
+  "session_id": "ma_dataset_full_46",
+  "run_stamp": "20260603_104719_fe7ac4d5",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-06-03T10:48:19+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"用户需要识别“电动车车辆朝向”：车头正前、正后、偏左、偏右、无法判断。这属于车辆属性识别中的“车辆朝向”或“车辆角度”细分。\",\n  \"direct_match\": {\n    \"exists\": false,\n    \"summary\": \"检索到的模型中，没有直接提供“电动车车辆朝向：车头正前、正后、偏左、偏右、无法判断”这一特定标签体系的模型。现有的车辆属性模型（如 KM_classifier_VehicleSubtypeStyles_nart、KM_classifier_Vehicle_FullAttr_nart）主要关注车辆颜色、品牌、车型分类等，未包含用户需求的朝向细分。\",\n    \"evidence\": [\n      \"证据：KM_classifier_Vehicle_FullAttr_nart 标签体系为车辆颜色、类型、品牌等，无朝向属性。\",\n      \"证据：KM_classifier_CarPlate_TypeColor_nart 标签体系为车牌颜色、类型，无朝向。\",\n      \"证据：full_struct 标签体系为 face, pedestrian, cycer, vehicle, cyc，无朝向细分。\"\n    ]\n  },\n  \"similar_assets\": [\n    {\n      \"model_or_solution\": \"KM_classifier_Vehicle_FullAttr_nart\",\n      \"label_schema\": \"车辆颜色、车辆类型（客车/货车等）、特种车辆等，未见车辆朝向属性。\",\n      \"training_data\": \"训练数据来源未详述，通常为多场景车辆属性数据集，样本量未见具体公开数值。\",\n      \"reported_metrics\": \"精度数据未在检索证据中直接给出，仅知模型版本为 3.0.3。\",\n      \"covered_capability\": \"车辆属性识别（颜色、类型、特种车辆等），可作为车辆属性识别的参考架构。\",\n      \"gap\": \"缺少用户所需的“朝向”标签，需定制开发。\"\n    ,\n    \"evidence\": [\n      \"evidence_id: b80440587abe9b75d7a1b99a\",\n      \"evidence_id: 422930c2e9a2439885634922\"\n    ]\n  },\n    {\n      \"model_or_solution\": \"KM_classifier_VehicleSubtypeStyles_nart\",\n      \"label_schema\": \"车辆品牌/型号分类（如宝马、奔驰等），无朝向属性。\",\n      \"training_data\": \"未详述。\",\n      \"reported_metrics\": \"未详述。\",\n      \"covered_capability\": \"车辆细分类识别。\",\n      \"gap\": \"标签体系不匹配，无朝向类别。\"\n    ,\n    \"evidence\": [\n      \"evidence_id: 01fd6876b96073544aa41b9f\"\n    ]\n  },\n    {\n      \"model_or_solution\": \"gaokong_lz\",\n      \"label_schema\": \"道路标线分类（车道线、斑马线等），车辆类型。\",\n      \"training_data\": \"未详述。\",\n      \"reported_metrics\": \"mIoU 0.4627, mAcc 0.5042, allAcc 0.9852 (RDTEST_v1_Segmentor_gaokong_v1)。\",\n      \"covered_capability\": \"场景分割，可辅助车辆位置判断，但无朝向分类。\",\n      \"gap\": \"任务形态不同，非车辆属性分类。\"\n    ,\n    \"evidence\": [\n      \"evidence_id: c1c607546e8a0b6c0e71b214\"\n    ]\n  },\n    {\n      \"model_or_solution\": \"KM_classifier_CarPlate_TypeColor_nart\",\n      \"label_schema\": \"车牌颜色、车牌类型。\",\n      \"training_data\": \"未详述。\",\n      \"reported_metrics\": \"未详述。\",\n      \"covered_capability\": \"车牌属性识别，可辅助判断车牌位置，进而辅助车辆朝向。\",\n      \"gap\": \"目标对象不同（车牌 vs 整车）。\"\n    ,\n    \"evidence\": [\n      \"evidence_id: 91ad5fc78952e3e370d5af54\"\n    ]\n  },\n    {\n      \"model_or_solution\": \"PDFs/交通方向--车辆大模型更新.pdf\",\n      \"label_schema\": \"包含“车辆角度 st_automobile_angle”属性，精度 95.8/96.1 (100%recall/90%recall)。\",\n      \"training_data\": \"未详述。\",\n      \"reported_metrics\": \"车辆角度属性：95.8% (100%recall) / 96.1% (90%recall)。\",\n      \"covered_capability\": \"车辆角度识别，与用户需求最接近。\",\n      \"gap\": \"标签为通用车辆角度，可能未细分“车头正前、正后”等 5 类，且未特指“电动车”。\"\n    ,\n    \"evidence\": [\n      \"evidence_id: a236aa777b9992667e4b985d\"\n    ]\n  }\n  ],\n  \"migration_plan\": {\n    \"feasibility\": \"medium\",\n    \"approach\": \"可基于现有车辆属性模型（如 KM_classifier_Vehicle_FullAttr_nart）或车辆角度模型（PDFs/交通方向--车辆大模型更新.pdf）进行微调或扩展。需增加“朝向”标签，补充电动车数据训练。\",\n    \"data_requirements\": \"需标注电动车车辆朝向数据（正前、正后、偏左、偏右、无法判断），建议样本量 5 万+。\",\n    \"compute_requirements\": \"建议 GPU 训练，参考模型资源 T4/A2/Ascend710。\",\n    \"engineering_work\": \"需要调整标签体系，重新训练或微调，并验证电动车场景下的泛化能力。\"\n  ,\n  \"estimated_timeline\": \"3-6 个月（含数据标注、模型训练、验证）。\",\n  \"estimated_cost\": \"依赖数据标注成本和算力资源，区间 10 万 -50 万人民币。\",\n  \"dependencies\": [\n    \"电动车车辆朝向标注数据\",\n    \"GPU 算力资源\",\n    \"模型微调框架支持\"\n  ]\n  ,\n  \"risks\": [\n    \"电动车数据不足，模型泛化性差\",\n    \"朝向定义模糊（如偏左 45 度算偏左还是正前）\",\n    \"遮挡、夜间场景精度下降\"\n  ]\n  }\n  ,\n  \"expected_performance\": {\n    \"baseline\": \"车辆角度模型（PDFs/交通方向--车辆大模型更新.pdf）达到 96% 左右，但针对电动车需重新验证。\",\n    \"target\": \"期望精度 90% 以上。\",\n    \"uncertainty\": \"电动车视角与常规汽车差异大，存在不确定性。\"\n  }\n  ,\n  \"recommendation\": \"建议采用车辆角度模型作为基座，补充电动车朝向数据微调。若精度不达标，考虑定制开发。\"\n  }",
+    "structured_output": {
+      "requirement_summary": "用户需要识别“电动车车辆朝向”：车头正前、正后、偏左、偏右、无法判断。这属于车辆属性识别中的“车辆朝向”或“车辆角度”细分。",
+      "direct_match": {
+        "exists": false,
+        "summary": "检索到的模型中，没有直接提供“电动车车辆朝向：车头正前、正后、偏左、偏右、无法判断”这一特定标签体系的模型。现有的车辆属性模型（如 KM_classifier_VehicleSubtypeStyles_nart、KM_classifier_Vehicle_FullAttr_nart）主要关注车辆颜色、品牌、车型分类等，未包含用户需求的朝向细分。",
+        "evidence": [
+          "证据：KM_classifier_Vehicle_FullAttr_nart 标签体系为车辆颜色、类型、品牌等，无朝向属性。",
+          "证据：KM_classifier_CarPlate_TypeColor_nart 标签体系为车牌颜色、类型，无朝向。",
+          "证据：full_struct 标签体系为 face, pedestrian, cycer, vehicle, cyc，无朝向细分。"
+        ]
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "KM_classifier_Vehicle_FullAttr_nart",
+          "label_schema": "车辆颜色、车辆类型（客车/货车等）、特种车辆等，未见车辆朝向属性。",
+          "training_data": "训练数据来源未详述，通常为多场景车辆属性数据集，样本量未见具体公开数值。",
+          "reported_metrics": "精度数据未在检索证据中直接给出，仅知模型版本为 3.0.3。",
+          "covered_capability": "车辆属性识别（颜色、类型、特种车辆等），可作为车辆属性识别的参考架构。",
+          "gap": "缺少用户所需的“朝向”标签，需定制开发。",
+          "evidence": [
+            "evidence_id: b80440587abe9b75d7a1b99a",
+            "evidence_id: 422930c2e9a2439885634922"
+          ]
+        },
+        {
+          "model_or_solution": "KM_classifier_VehicleSubtypeStyles_nart",
+          "label_schema": "车辆品牌/型号分类（如宝马、奔驰等），无朝向属性。",
+          "training_data": "未详述。",
+          "reported_metrics": "未详述。",
+          "covered_capability": "车辆细分类识别。",
+          "gap": "标签体系不匹配，无朝向类别。",
+          "evidence": [
+            "evidence_id: 01fd6876b96073544aa41b9f"
+          ]
+        },
+        {
+          "model_or_solution": "gaokong_lz",
+          "label_schema": "道路标线分类（车道线、斑马线等），车辆类型。",
+          "training_data": "未详述。",
+          "reported_metrics": "mIoU 0.4627, mAcc 0.5042, allAcc 0.9852 (RDTEST_v1_Segmentor_gaokong_v1)。",
+          "covered_capability": "场景分割，可辅助车辆位置判断，但无朝向分类。",
+          "gap": "任务形态不同，非车辆属性分类。",
+          "evidence": [
+            "evidence_id: c1c607546e8a0b6c0e71b214"
+          ]
+        },
+        {
+          "model_or_solution": "KM_classifier_CarPlate_TypeColor_nart",
+          "label_schema": "车牌颜色、车牌类型。",
+          "training_data": "未详述。",
+          "reported_metrics": "未详述。",
+          "covered_capability": "车牌属性识别，可辅助判断车牌位置，进而辅助车辆朝向。",
+          "gap": "目标对象不同（车牌 vs 整车）。",
+          "evidence": [
+            "evidence_id: 91ad5fc78952e3e370d5af54"
+          ]
+        },
+        {
+          "model_or_solution": "PDFs/交通方向--车辆大模型更新.pdf",
+          "label_schema": "包含“车辆角度 st_automobile_angle”属性，精度 95.8/96.1 (100%recall/90%recall)。",
+          "training_data": "未详述。",
+          "reported_metrics": "车辆角度属性：95.8% (100%recall) / 96.1% (90%recall)。",
+          "covered_capability": "车辆角度识别，与用户需求最接近。",
+          "gap": "标签为通用车辆角度，可能未细分“车头正前、正后”等 5 类，且未特指“电动车”。",
+          "evidence": [
+            "evidence_id: a236aa777b9992667e4b985d"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "medium",
+        "approach": "可基于现有车辆属性模型（如 KM_classifier_Vehicle_FullAttr_nart）或车辆角度模型（PDFs/交通方向--车辆大模型更新.pdf）进行微调或扩展。需增加“朝向”标签，补充电动车数据训练。",
+        "data_requirements": "需标注电动车车辆朝向数据（正前、正后、偏左、偏右、无法判断），建议样本量 5 万+。",
+        "compute_requirements": "建议 GPU 训练，参考模型资源 T4/A2/Ascend710。",
+        "engineering_work": "需要调整标签体系，重新训练或微调，并验证电动车场景下的泛化能力。",
+        "estimated_timeline": "3-6 个月（含数据标注、模型训练、验证）。",
+        "estimated_cost": "依赖数据标注成本和算力资源，区间 10 万 -50 万人民币。",
+        "dependencies": [
+          "电动车车辆朝向标注数据",
+          "GPU 算力资源",
+          "模型微调框架支持"
+        ],
+        "risks": [
+          "电动车数据不足，模型泛化性差",
+          "朝向定义模糊（如偏左 45 度算偏左还是正前）",
+          "遮挡、夜间场景精度下降"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "车辆角度模型（PDFs/交通方向--车辆大模型更新.pdf）达到 96% 左右，但针对电动车需重新验证。",
+        "target": "期望精度 90% 以上。",
+        "uncertainty": "电动车视角与常规汽车差异大，存在不确定性。"
+      },
+      "recommendation": "建议采用车辆角度模型作为基座，补充电动车朝向数据微调。若精度不达标，考虑定制开发。"
+    }
+  }
+}

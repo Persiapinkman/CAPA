@@ -1,0 +1,103 @@
+{
+  "session_id": "ma_dataset_full_14",
+  "run_stamp": "20260529_143452_c4c33e7b",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-05-29T14:36:09+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"用户需要识别人体下装图案（纯色、条纹、图案、拼接、格子），询问是否支持。\",\n  \"direct_match\": {\n    \"exists\": false,\n    \"summary\": \"未检索到直接支持“人体下装图案”细粒度属性分类的模型。现有模型主要针对人体检测、非机车型号分类、车牌识别、横幅检测等，未包含人体下装图案属性。\",\n    \"evidence\": [\n      \"所有检索资产中，target_name 为“人体”的模型仅包含“钓鱼人体检测”、“睡岗人体检测”、“SDJY 服饰分类”等，未见“下装图案”相关标签。\",\n      \"检索到的服饰属性模型（KM_classifier_Clothes_SD）仅支持警服、囚服分类，标签为 ['st_jurong_police', 'st_jurong_prisoner', 'st_jurong_others']，无下装图案细分。\",\n      \"README 中提及“人体二分类、行人属性等”，但具体属性列表未包含下装图案。\"\n    ]\n  },\n  \"similar_assets\": [\n    {\n      \"model_or_solution\": \"KM_classifier_Clothes_SD_nart_cuda11.0-trt7.1-fp16-T4_b8_0.0.2.model\",\n      \"label_schema\": \"标签体系：警服分类（st_jurong_police）、囚服分类（st_jurong_prisoner）、其他（st_jurong_others）。无下装图案细分标签。\",\n      \"training_data\": \"数据来源：山东监狱场景（sdjy_cloth_standard_v1223），使用 HL 全量数据训练，输入尺寸 128x64。无下装图案样本标注规范。\",\n      \"reported_metrics\": \"V0.0.1: Precision 0.9879, Recall 0.9462, F1 0.9666; V0.0.2: Precision 0.9772, Recall 0.9779, F1 0.9776。数据集未公开。\",\n      \"covered_capability\": \"支持衣物分类，但仅限于特定制服（警/囚），不支持通用下装图案属性（如条纹、格子等）。\",\n      \"gap\": \"不支持细粒度图案属性；需针对目标图案重新标注训练。\"\n    ,\n    \"evidence\": [\n      \"PDFs/服饰属性模型.pdf p3: 标签列表包含 st_jurong_police, st_jurong_prisoner, st_jurong_others\",\n      \"tables/model_release_records.jsonl: 算法名称 SDJY 服饰分类，应用场景山东监狱人体服饰分类\"\n    ]\n  },\n  {\n    \"model_or_solution\": \"struct (行人结构化检测模型)\",\n    \"label_schema\": \"标签：pedestrian（行人）、cycer（骑行者）、car（汽车）、cyc（自行车）。为人脸/人体/车辆检测，无属性分类。\",\n    \"training_data\": \"数据集：struct_cleaned（1507442/221488/2125610 样本）。\",\n    \"reported_metrics\": \"mAP 0.529-0.743（不同 IoU 和 batch size 下）。\",\n    \"covered_capability\": \"提供人体检测框，可截取 ROI 用于后续属性分类，但本身无下装图案属性输出。\",\n    \"gap\": \"仅为检测任务，属性需另接分类模型。\",\n    \"evidence\": [\n      \"adela/adela_release_records.jsonl: struct 模型，labels: pedestrian, cycer, car, cyc\",\n      \"benchmark_info: mAP 0.529464@0.5 IoU\"\n    ]\n  },\n  {\n    \"model_or_solution\": \"KM_textrecognition_CarPlate 车牌识别模型\",\n    \"label_schema\": \"车牌字符及省份识别。与人体属性无关。\",\n    \"training_data\": \"训练数据～39w，评测数据～4w（含内地/港澳台/新加坡）。\",\n    \"reported_metrics\": \"准确率 0.94-0.99（车牌检测），文字识别准确率 0.94-0.98。\",\n    \"covered_capability\": \"OCR 能力强，可参考其细粒度分类能力（如车牌字符），但领域不同。\",\n    \"gap\": \"领域不匹配，但可借鉴其训练流程和评测方法。\",\n    \"evidence\": [\n      \"PDFs/香港车牌-旋转框检测模型发版.pdf p2: MAP50 0.99366\",\n      \"tables/model_release_records.jsonl: 车牌文字识别 PK 模型\"\n    ]\n  },\n  {\n    \"model_or_solution\": \"非机车属性全模型\",\n    \"label_schema\": \"非机车型号：摩托车、电动车、自行车、三轮车、婴儿车、轮椅。无下装图案。\",\n    \"training_data\": \"非机动车场景，无具体样本量。\",\n    \"reported_metrics\": \"整体准确率 77.6%-97.2%（有阈值），各车型 Precision/Recall 差异大。\",\n    \"covered_capability\": \"具备细粒度物体属性分类能力（车型），可作为属性分类任务的技术参考。\",\n    \"gap\": \"属性对象为车辆而非人体下装；需适配人体姿态和衣着特征。\",\n    \"evidence\": [\n      \"PDFs/非机车属性全模型.pdf p2: 精度表格展示摩托车、电动车等分类指标\"\n    ]\n  }\n  ],\n  \"migration_plan\": {\n    \"feasibility\": \"high\",\n    \"approach\": \"基于现有“服饰属性分类”模型框架，增加下装图案属性标签，收集对应数据（纯色/条纹/拼接/格子/图案）进行增量训练。\",\n    \"data_requirements\": \"需采集含不同下装图案的人体图像，标注至少每种 500-1000 张（建议 5000+），确保光照、遮挡、尺度变化覆盖。\",\n    \"compute_requirements\": \"建议使用与 KM_classifier_Clothes_SD 相同配置（如 T4/Ascend710），预训练模型迁移学习。\",\n    \"engineering_work\": \"1. 修改分类头输出层；2. 数据增强策略参考原服饰模型；3. 部署配置沿用现有推理 pipeline。\",\n    \"estimated_timeline\": \"2-4 周（数据标注 + 训练 + 验证）。\"\n  ,\n  \"estimated_cost\": \"人力标注 1-2 人周，训练资源 0.5 GPU 月。\"\n  ,\n  \"dependencies\": [\n    \"需确认用户自有下装图案数据源\",\n    \"需与现有“服饰属性”模型技术栈兼容（PyTorch + ResNet/EfficientNet）\"\n  ]\n  ,\n  \"risks\": [\n    \"图案属性易受光线/遮挡影响，精度可能低于制服分类\",\n    \"样本不平衡风险（如格子 vs 纯色）\"\n  ]\n  },\n  \"expected_performance\": {\n    \"baseline\": \"参考非机车属性模型，在充足数据下 mAP/ACC 可达 85%-95%\",\n    \"target\": \"建议设置阈值 0.7-0.9，精度目标>90%。\",\n    \"uncertainty\": \"精度依赖于数据质量，证据不足无法承诺具体数值。\"\n  },\n  \"recommendation\": \"当前不支持直接迁移，建议复用“服饰属性分类”模型架构，针对下装图案属性定制训练。优先收集数据验证可行性。\"\n}",
+    "structured_output": {
+      "requirement_summary": "用户需要识别人体下装图案（纯色、条纹、图案、拼接、格子），询问是否支持。",
+      "direct_match": {
+        "exists": false,
+        "summary": "未检索到直接支持“人体下装图案”细粒度属性分类的模型。现有模型主要针对人体检测、非机车型号分类、车牌识别、横幅检测等，未包含人体下装图案属性。",
+        "evidence": [
+          "所有检索资产中，target_name 为“人体”的模型仅包含“钓鱼人体检测”、“睡岗人体检测”、“SDJY 服饰分类”等，未见“下装图案”相关标签。",
+          "检索到的服饰属性模型（KM_classifier_Clothes_SD）仅支持警服、囚服分类，标签为 ['st_jurong_police', 'st_jurong_prisoner', 'st_jurong_others']，无下装图案细分。",
+          "README 中提及“人体二分类、行人属性等”，但具体属性列表未包含下装图案。"
+        ]
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "KM_classifier_Clothes_SD_nart_cuda11.0-trt7.1-fp16-T4_b8_0.0.2.model",
+          "label_schema": "标签体系：警服分类（st_jurong_police）、囚服分类（st_jurong_prisoner）、其他（st_jurong_others）。无下装图案细分标签。",
+          "training_data": "数据来源：山东监狱场景（sdjy_cloth_standard_v1223），使用 HL 全量数据训练，输入尺寸 128x64。无下装图案样本标注规范。",
+          "reported_metrics": "V0.0.1: Precision 0.9879, Recall 0.9462, F1 0.9666; V0.0.2: Precision 0.9772, Recall 0.9779, F1 0.9776。数据集未公开。",
+          "covered_capability": "支持衣物分类，但仅限于特定制服（警/囚），不支持通用下装图案属性（如条纹、格子等）。",
+          "gap": "不支持细粒度图案属性；需针对目标图案重新标注训练。",
+          "evidence": [
+            "PDFs/服饰属性模型.pdf p3: 标签列表包含 st_jurong_police, st_jurong_prisoner, st_jurong_others",
+            "tables/model_release_records.jsonl: 算法名称 SDJY 服饰分类，应用场景山东监狱人体服饰分类"
+          ]
+        },
+        {
+          "model_or_solution": "struct (行人结构化检测模型)",
+          "label_schema": "标签：pedestrian（行人）、cycer（骑行者）、car（汽车）、cyc（自行车）。为人脸/人体/车辆检测，无属性分类。",
+          "training_data": "数据集：struct_cleaned（1507442/221488/2125610 样本）。",
+          "reported_metrics": "mAP 0.529-0.743（不同 IoU 和 batch size 下）。",
+          "covered_capability": "提供人体检测框，可截取 ROI 用于后续属性分类，但本身无下装图案属性输出。",
+          "gap": "仅为检测任务，属性需另接分类模型。",
+          "evidence": [
+            "adela/adela_release_records.jsonl: struct 模型，labels: pedestrian, cycer, car, cyc",
+            "benchmark_info: mAP 0.529464@0.5 IoU"
+          ]
+        },
+        {
+          "model_or_solution": "KM_textrecognition_CarPlate 车牌识别模型",
+          "label_schema": "车牌字符及省份识别。与人体属性无关。",
+          "training_data": "训练数据～39w，评测数据～4w（含内地/港澳台/新加坡）。",
+          "reported_metrics": "准确率 0.94-0.99（车牌检测），文字识别准确率 0.94-0.98。",
+          "covered_capability": "OCR 能力强，可参考其细粒度分类能力（如车牌字符），但领域不同。",
+          "gap": "领域不匹配，但可借鉴其训练流程和评测方法。",
+          "evidence": [
+            "PDFs/香港车牌-旋转框检测模型发版.pdf p2: MAP50 0.99366",
+            "tables/model_release_records.jsonl: 车牌文字识别 PK 模型"
+          ]
+        },
+        {
+          "model_or_solution": "非机车属性全模型",
+          "label_schema": "非机车型号：摩托车、电动车、自行车、三轮车、婴儿车、轮椅。无下装图案。",
+          "training_data": "非机动车场景，无具体样本量。",
+          "reported_metrics": "整体准确率 77.6%-97.2%（有阈值），各车型 Precision/Recall 差异大。",
+          "covered_capability": "具备细粒度物体属性分类能力（车型），可作为属性分类任务的技术参考。",
+          "gap": "属性对象为车辆而非人体下装；需适配人体姿态和衣着特征。",
+          "evidence": [
+            "PDFs/非机车属性全模型.pdf p2: 精度表格展示摩托车、电动车等分类指标"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "high",
+        "approach": "基于现有“服饰属性分类”模型框架，增加下装图案属性标签，收集对应数据（纯色/条纹/拼接/格子/图案）进行增量训练。",
+        "data_requirements": "需采集含不同下装图案的人体图像，标注至少每种 500-1000 张（建议 5000+），确保光照、遮挡、尺度变化覆盖。",
+        "compute_requirements": "建议使用与 KM_classifier_Clothes_SD 相同配置（如 T4/Ascend710），预训练模型迁移学习。",
+        "engineering_work": "1. 修改分类头输出层；2. 数据增强策略参考原服饰模型；3. 部署配置沿用现有推理 pipeline。",
+        "estimated_timeline": "2-4 周（数据标注 + 训练 + 验证）。",
+        "estimated_cost": "人力标注 1-2 人周，训练资源 0.5 GPU 月。",
+        "dependencies": [
+          "需确认用户自有下装图案数据源",
+          "需与现有“服饰属性”模型技术栈兼容（PyTorch + ResNet/EfficientNet）"
+        ],
+        "risks": [
+          "图案属性易受光线/遮挡影响，精度可能低于制服分类",
+          "样本不平衡风险（如格子 vs 纯色）"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "参考非机车属性模型，在充足数据下 mAP/ACC 可达 85%-95%",
+        "target": "建议设置阈值 0.7-0.9，精度目标>90%。",
+        "uncertainty": "精度依赖于数据质量，证据不足无法承诺具体数值。"
+      },
+      "recommendation": "当前不支持直接迁移，建议复用“服饰属性分类”模型架构，针对下装图案属性定制训练。优先收集数据验证可行性。"
+    }
+  }
+}

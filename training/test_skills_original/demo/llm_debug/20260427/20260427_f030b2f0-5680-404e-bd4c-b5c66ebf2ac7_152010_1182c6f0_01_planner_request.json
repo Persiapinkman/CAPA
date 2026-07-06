@@ -1,0 +1,83 @@
+{
+  "session_id": "f030b2f0-5680-404e-bd4c-b5c66ebf2ac7",
+  "run_stamp": "20260427_152010_1182c6f0",
+  "stage": "planner_request",
+  "step_index": 1,
+  "created_at": "2026-04-27T15:20:10+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "agent_step_decision",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "thought": {
+              "type": "string",
+              "description": "当前回合的分析与计划，中文，简洁但要说明为什么选择该动作。"
+            },
+            "decision_type": {
+              "type": "string",
+              "enum": [
+                "tool",
+                "end"
+              ],
+              "description": "本轮决策类型：tool(执行动作) / end(结束该轮次的任务)。"
+            },
+            "action": {
+              "type": "string",
+              "enum": [
+                "rag_answer",
+                "re_question",
+                "answerer",
+                "flux-image-generation",
+                "qwen_detection",
+                "rexomni_detection",
+                "pipeline_eval",
+                "final_answer"
+              ],
+              "description": "当 decision_type='end' 时，此项必须固定填 'final_answer'。"
+            },
+            "action_input": {
+              "type": "object",
+              "description": "当 decision_type=tool 时，填写对应工具入参，且必须包含 finish_after_tool 字段；当 decision_type=end 时，填空对象 {}。"
+            },
+            "end_reason": {
+              "type": "string",
+              "enum": [
+                "recheck_done",
+                "memory_hit"
+              ],
+              "description": "当 decision_type=end 时，必须填写结束原因：recheck_done / memory_hit。"
+            },
+            "final_answer": {
+              "type": "string",
+              "description": "当 decision_type=end 且无需再调用 Answerer 时，可直接填写最终答复。"
+            }
+          },
+          "required": [
+            "thought",
+            "decision_type",
+            "action",
+            "action_input",
+            "end_reason",
+            "final_answer"
+          ]
+        }
+      }
+    },
+    "image_paths": [],
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 Demo 系统中的规划智能体（Planner）。\n\n【角色与核心目标】\n你是一个专注于“下一步决策”的 Agent 规划中枢。\n你必须基于当前上下文环境，严格遵循 ReAct 模式（Thought -> Action -> Action Input），并在满足条件时及时结束任务。\n\n【决策与路由原则】\n1. 知识检索 (rag_answer)：当问题涉及企业规范、业务文档、标准指标等具体事实，首选本工具。\n2. 通用问答 (answerer)：仅用于通用常识和闲聊，或无需检索即可直接解答的场景。\n3. 视觉与评测工具：必须确保前置条件（如存在明确的目标描述及 image_path）满足后方可调用，切勿凭空编造。\n4. 补充追问：若当前记忆（Memory）仅为摘要，缺少回答所需的具体细节，必须继续调用工具，切勿草率结束。\n\n【状态流转规则 (finish_after_tool)】\n当 decision_type = \"tool\" 时，你必须在 action_input 中设置 finish_after_tool（布尔值）：\n- 设置为 true：若该工具的输出结果已直接解答了用户的终极问题，不需要你再做后续加工。\n- 设置为 false：若该工具仅获取中间信息（如生成了图片还需要评测），你还需要根据它的返回结果来规划下一步。\n\n【全局硬约束】\n1. 绝对忠实：禁止捏造任何事实、工具结果或不存在的上下文。\n2. 纯净思考：thought 字段必须使用纯中文，简明扼要说明本次决策原因。\n3. 严格结束：当 decision_type=\"end\" 时，必须只使用以下两种 end_reason：\n   - recheck_done：表示仅用于收口复核，不需要给用户任何新增输出。\n   - memory_hit：表示之前调用过工具，Memory 中有结果，后续由系统调用 Answerer 生成答复。\n4. 当 decision_type=\"end\" 时：\n   - action 固定为 \"final_answer\"；\n   - action_input 固定为 {}；\n   - final_answer 固定为空字符串 \"\"（最终文本由系统按 end_reason 决定是否生成）。\n\n【工具库】\n[\n  {\n    \"name\": \"rag_answer\",\n    \"description\": \"适合用**知识库 / RAG 检索**回答的问题：如公司内部私有业务知识、项目文档、模型版本、标签含义、safety_rope 等业务与配置类问答；用户的整段输入会作为 RAG 的 query。\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"query\": {\n          \"type\": \"string\",\n          \"description\": \"完全使用“用户原始输入”\"\n        },\n        \"finish_after_tool\": {\n          \"type\": \"boolean\",\n          \"description\": \"该工具执行完成后是否可以直接结束本轮请求。若工具结果只是中间状态、后续还要继续规划其它工具，则填 false；若该工具结果就是用户要的最终结果，则填 true。\"\n        }\n      },\n      \"required\": [\n        \"query\"\n      ]\n    }\n  },\n  {\n    \"name\": \"re_question\",\n    \"description\": \"内部 query 改写动作：在 RAG 未命中时，针对当前问题进行小步改写后继续检索。\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"query\": {\n          \"type\": \"string\",\n          \"description\": \"待改写的原始查询（通常为用户问题或上一轮查询）。\"\n        },\n        \"rewrite_reason\": {\n          \"type\": \"string\",\n          \"description\": \"改写原因（如 rag_miss / coref_resolve / narrow_scope）。\"\n        },\n        \"retrieval_round\": {\n          \"type\": \"integer\",\n          \"minimum\": 1,\n          \"maximum\": 3,\n          \"description\": \"当前检索轮次（1~3）。\"\n        },\n        \"context_hint\": {\n          \"type\": \"string\",\n          \"description\": \"可选上下文提示，用于指代消解（例如上一问中的实体）。\"\n        },\n        \"finish_after_tool\": {\n          \"type\": \"boolean\",\n          \"description\": \"该工具执行完成后是否可以直接结束本轮请求。若工具结果只是中间状态、后续还要继续规划其它工具，则填 false；若该工具结果就是用户要的最终结果，则填 true。\"\n        }\n      },\n      \"required\": [\n        \"query\",\n        \"rewrite_reason\",\n        \"retrieval_round\"\n      ]\n    }\n  },\n  {\n    \"name\": \"answerer\",\n    \"description\": \"无需查阅公司内部文档的问题，比如：苹果是当季水果吗\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"mode\": {\n          \"type\": \"string\",\n          \"description\": \"回答模式标识（如 rag_answer / rag_answer_fallback / direct）。\"\n        },\n        \"finish_after_tool\": {\n          \"type\": \"boolean\",\n          \"description\": \"该工具执行完成后是否可以直接结束本轮请求。若工具结果只是中间状态、后续还要继续规划其它工具，则填 false；若该工具结果就是用户要的最终结果，则填 true。\"\n        }\n      },\n      \"required\": []\n    }\n  },\n  {\n    \"name\": \"flux-image-generation\",\n    \"description\": \"图像生成工具。可纯文本生成，也可结合参考图进行变化生成。\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"task_text\": {\n          \"type\": \"string\"\n        },\n        \"source_image_required\": {\n          \"type\": \"boolean\"\n        },\n        \"num_images\": {\n          \"type\": \"integer\",\n          \"minimum\": 1,\n          \"maximum\": 5\n        },\n        \"finish_after_tool\": {\n          \"type\": \"boolean\",\n          \"description\": \"该工具执行完成后是否可以直接结束本轮请求。若工具结果只是中间状态、后续还要继续规划其它工具，则填 false；若该工具结果就是用户要的最终结果，则填 true。\"\n        }\n      },\n      \"required\": [\n        \"task_text\",\n        \"source_image_required\",\n        \"num_images\"\n      ]\n    }\n  },\n  {\n    \"name\": \"qwen_detection\",\n    \"description\": \"适用于检测目标的任务 Qwen。\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"label\": {\n          \"type\": \"string\"\n        },\n        \"finish_after_tool\": {\n          \"type\": \"boolean\",\n          \"description\": \"该工具执行完成后是否可以直接结束本轮请求。若工具结果只是中间状态、后续还要继续规划其它工具，则填 false；若该工具结果就是用户要的最终结果，则填 true。\"\n        }\n      },\n      \"required\": [\n        \"label\"\n      ]\n    }\n  },\n  {\n    \"name\": \"rexomni_detection\",\n    \"description\": \"适用于检测目标的任务 Rex-Omni\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"label\": {\n          \"type\": \"string\"\n        },\n        \"finish_after_tool\": {\n          \"type\": \"boolean\",\n          \"description\": \"该工具执行完成后是否可以直接结束本轮请求。若工具结果只是中间状态、后续还要继续规划其它工具，则填 false；若该工具结果就是用户要的最终结果，则填 true。\"\n        }\n      },\n      \"required\": [\n        \"label\"\n      ]\n    }\n  },\n  {\n    \"name\": \"pipeline_eval\",\n    \"description\": \"完整目标检测评测流水线：图片生成 - 分别使用 Qwen 和 Rex-Omni 进行标注 - 评估模型检测效果\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"task_text\": {\n          \"type\": \"string\"\n        },\n        \"finish_after_tool\": {\n          \"type\": \"boolean\",\n          \"description\": \"该工具执行完成后是否可以直接结束本轮请求。若工具结果只是中间状态、后续还要继续规划其它工具，则填 false；若该工具结果就是用户要的最终结果，则填 true。\"\n        }\n      },\n      \"required\": [\n        \"task_text\"\n      ]\n    }\n  }\n]\n\n"
+      },
+      {
+        "role": "user",
+        "content": "请基于下面的结构化上下文决定下一步，只输出符合 schema 的 JSON。\n\n{\n  \"query\": \"人脸检测相关的模型有几个\",\n  \"query_trajectories\": [\n    {\n      \"session_id\": \"f030b2f0-5680-404e-bd4c-b5c66ebf2ac7\",\n      \"thread_id\": \"thread_e66b55b42cbbe0fa\",\n      \"query_id\": \"qry_4086871b40720f04\",\n      \"query\": \"请问RD现有跟人脸相关的模型有多少个\",\n      \"result_summary\": \"通过RAG检索成功获取RD现有与人脸相关的模型信息，共找到12个模型。最终答案已生成，包含各模型名称、算法类型、支持设备及所有者等详细信息。\",\n      \"steps\": [\n        {\n          \"step_id\": \"step_1\",\n          \"action\": \"rag_answer\",\n          \"observation_event_id\": \"evt_db34af5dbf9a81a3cd7231fb\",\n          \"observation\": {\n            \"summary\": \"依据提供的跨来源检索证据，RD现有与“人脸”相关的模型共有**12个**。\\n\\n以下是各模型的具体信息汇总：\\n\\n1.  **KM_essos_SmallFace_544x960_nart_cuda11.4-trt8.2.0-fp16-A2_b64_3.0.0.model**\\n    *   算法：人脸检测3系列1\\n    *   支持设备：A2\\n    *   所有者：任大发\\n\\n2.  **KM_essos_LargeFace_224x224_nart_cuda11.0-trt7.1-int8-T4_b64_8.0.1.model**\\n    *   算法：人脸检测8系列\\n    *   支持设备：T4\\n    *   所有者：任大发, 冯江燕\\n\\n3.  **KM_essos_SmallFace_544x960_nart_cuda11.0-trt7.1-int8-T4_b48_3.0.0.model**\\n    *   算法：人脸检测3系列1\\n    *   支持设备：T4\\n    *   所有者：任大发\\n\\n4.  **KM_essos_LargeFace_224x224_nart_cuda11.4-trt8.2.0-fp16-A2_b64_8.0.1.model**\\n    *   算法：人脸检测8系列\\n    *   支持设备：A2\\n    *   所有者：任大发, 冯江燕\\n\\n5…\",\n            \"answer\": \"依据提供的跨来源检索证据，RD现有与“人脸”相关的模型共有**12个**。\\n\\n以下是各模型的具体信息汇总：\\n\\n1.  **KM_essos_SmallFace_544x960_nart_cuda11.4-trt8.2.0-fp16-A2_b64_3.0.0.model**\\n    *   算法：人脸检测3系列1\\n    *   支持设备：A2\\n    *   所有者：任大发\\n\\n2.  **KM_essos_LargeFace_224x224_nart_cuda11.0-trt7.1-int8-T4_b64_8.0.1.model**\\n    *   算法：人脸检测8系列\\n    *   支持设备：T4\\n    *   所有者：任大发, 冯江燕\\n\\n3.  **KM_essos_SmallFace_544x960_nart_cuda11.0-trt7.1-int8-T4_b48_3.0.0.model**\\n    *   算法：人脸检测3系列1\\n    *   支持设备：T4\\n    *   所有者：任大发\\n\\n4.  **KM_essos_LargeFace_224x224_nart_cuda11.4-trt8.2.0-fp16-A2_b64_8.0.1.model**\\n    *   算法：人脸检测8系列\\n    *   支持设备：A2\\n    *   所有者：任大发, 冯江燕\\n\\n5.  **KM_essos_LargeFace_224x224_nart_cuda11.0-trt7.1-int8-P4_b32_8.0.1.model**\\n    *   算法：人脸检测8系列\\n    *   支持设备：P4\\n    *   所有者：任大发, 冯江燕\\n\\n6.  **KM_essos_SmallFace_544x960_nart_cuda11.0-trt7.1-fp32-P4_b24_3.0.0.model**\\n    *   算法：人脸检测3系列1\\n    *   支持设备：P4\\n    *   所有者：任大发\\n\\n7.  **KM_classifier_Face_BigAngle_SD_nart_cuda11.0-trt7.1-int8-T4_b8_0.0.1.model**\\n    *   算法：安防方向-人脸大角度二分类\\n    *   支持设备：T4\\n    *   所有者：冯江燕\\n\\n8.  **KM_feature_face-pro512d_nart_cuda11.0-trt7.1-fp16-T4_b8_2.56.0.model**\\n    *   算法：人脸特征-PK\\n    *   支持设备：T4\\n    *   所有者：马东宇\\n\\n9.  **KM_pageant_Pageant_88id_nart_cuda11.0-trt7.1-int8-T4_b16_1.0.8.model**\\n    *   算法：pageant\\n    *   支持设备：T4\\n    *   所有者：马东宇\\n\\n10. **KM_essos_SmallFace_gray_448x800_nart_cuda11.0-trt7.1-int8-T4_b48_3.0.1.model**\\n    *   算法：人脸检测3系列2\\n    *   支持设备：T4\\n    *   所有者：任大发\\n\\n11. **KM_essos_SmallFace_gray_448x800_nart_cuda11.4-trt8.2.0-fp16-A2_b64_3.0.1.model**\\n    *   算法：人脸检测3系列2\\n    *   支持设备：A2\\n    *   所有者：任大发\\n\\n12. **KM_bifrost_face-deepcode-64d_nart_cuda11.0-trt7.1-fp16-T4_b128_2.54.0.model**\\n    *   算法：deepcode-方舟标品\\n    *   支持设备：T4\\n    *   所有者：马东宇\",\n            \"retrieved_chunks\": [],\n            \"elapsed_ms\": 8533,\n            \"action\": \"rag_answer\",\n            \"_action\": \"rag_answer\",\n            \"_action_input\": {\n              \"query\": \"RD现有跟人脸相关的模型有多少个\",\n              \"finish_after_tool\": false\n            },\n            \"_thought\": \"用户询问的是RD现有跟人脸相关的模型数量，这涉及到企业内部的业务文档或项目信息，属于RAG检索场景。当前query_trajectories中没有历史结果（result_summary为空），因此需要首先调用rag_answer工具进行知识检索。如果检索成功，可以直接结束；如果未命中，可能需要改写query。这里优先尝试RAG。\"\n          },\n          \"external_ref\": \"/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260427_151534_f653a8ce/agent_step_1_observation.json\"\n        },\n        {\n          \"step_id\": \"step_2\",\n          \"action\": \"final_answer\",\n          \"observation_event_id\": \"evt_005cdc388c2fc9dce000855a\",\n          \"observation\": {\n            \"final_answer\": \"依据提供的跨来源检索证据，RD现有与“人脸”相关的模型共有**12个**。\\n\\n以下是各模型的具体信息汇总：\\n\\n1.  **KM_essos_SmallFace_544x960_nart_cuda11.4-trt8.2.0-fp16-A2_b64_3.0.0.model**\\n    *   算法：人脸检测3系列1\\n    *   支持设备：A2\\n    *   所有者：任大发\\n\\n2.  **KM_essos_LargeFace_224x224_nart_cuda11.0-trt7.1-int8-T4_b64_8.0.1.model**\\n    *   算法：人脸检测8系列\\n    *   支持设备：T4\\n    *   所有者：任大发, 冯江燕\\n\\n3.  **KM_essos_SmallFace_544x960_nart_cuda11.0-trt7.1-int8-T4_b48_3.0.0.model**\\n    *   算法：人脸检测3系列1\\n    *   支持设备：T4\\n    *   所有者：任大发\\n\\n4.  **KM_essos_LargeFace_224x224_nart_cuda11.4-trt8.2.0-fp16-A2_b64_8.0.1.model**\\n    *   算法：人脸检测8系列\\n    *   支持设备：A2\\n    *   所有者：任大发, 冯江燕\\n\\n5.  **KM_essos_LargeFace_224x224_nart_cuda11.0-trt7.1-int8-P4_b32_8.0.1.model**\\n    *   算法：人脸检测8系列\\n    *   支持设备：P4\\n    *   所有者：任大发, 冯江燕\\n\\n6.  **KM_essos_SmallFace_544x960_nart_cuda11.0-trt7.1-fp32-P4_b24_3.0.0.model**\\n    *   算法：人脸检测3系列1\\n    *   支持设备：P4\\n    *   所有者：任大发\\n\\n7.  **KM_classifier_Face_BigAngle_SD_nart_cuda11.0-trt7.1-int8-T4_b8_0.0.1.model**\\n    *   算法：安防方向-人脸大角度二分类\\n    *   支持设备：T4\\n    *   所有者：冯江燕\\n\\n8.  **KM_feature_face-pro512d_nart_cuda11.0-trt7.1-fp16-T4_b8_2.56.0.model**\\n    *   算法：人脸特征-PK\\n    *   支持设备：T4\\n    *   所有者：马东宇\\n\\n9.  **KM_pageant_Pageant_88id_nart_cuda11.0-trt7.1-int8-T4_b16_1.0.8.model**\\n    *   算法：pageant\\n    *   支持设备：T4\\n    *   所有者：马东宇\\n\\n10. **KM_essos_SmallFace_gray_448x800_nart_cuda11.0-trt7.1-int8-T4_b48_3.0.1.model**\\n    *   算法：人脸检测3系列2\\n    *   支持设备：T4\\n    *   所有者：任大发\\n\\n11. **KM_essos_SmallFace_gray_448x800_nart_cuda11.4-trt8.2.0-fp16-A2_b64_3.0.1.model**\\n    *   算法：人脸检测3系列2\\n    *   支持设备：A2\\n    *   所有者：任大发\\n\\n12. **KM_bifrost_face-deepcode-64d_nart_cuda11.0-trt7.1-fp16-T4_b128_2.54.0.model**\\n    *   算法：deepcode-方舟标品\\n    *   支持设备：T4\\n    *   所有者：马东宇\"\n          },\n          \"external_ref\": \"/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260427_151534_f653a8ce\"\n        }\n      ]\n    },\n    {\n      \"session_id\": \"f030b2f0-5680-404e-bd4c-b5c66ebf2ac7\",\n      \"thread_id\": \"thread_e66b55b42cbbe0fa\",\n      \"query_id\": \"qry_2702a0e634b99269\",\n      \"query\": \"统计目标为人脸的算法都有哪些\",\n      \"result_summary\": \"本轮通过查询知识库，获取了RD平台当前共有的12个人脸相关算法模型的具体列表。这些模型涵盖了人脸检测、特征提取、大角度分类等学科领域，并针对不同设备及算法类型进行了优化。\",\n      \"steps\": [\n        {\n          \"step_id\": \"step_1\",\n          \"action\": \"final_answer\",\n          \"observation_event_id\": \"evt_ce95f5862530a0893dc89117\",\n          \"observation\": {\n            \"final_answer\": \"根据知识库记录，RD目前共有**12个**人脸相关算法模型。具体列表如下：\\n\\n1.  **KM_essos_SmallFace_544x960_nart_cuda11.4-trt8.2.0-fp16-A2_b64_3.0.0.model**\\n2.  **KM_essos_LargeFace_224x224_nart_cuda11.0-trt7.1-int8-T4_b64_8.0.1.model**\\n3.  **KM_essos_SmallFace_544x960_nart_cuda11.0-trt7.1-int8-T4_b48_3.0.0.model**\\n4.  **KM_essos_LargeFace_224x224_nart_cuda11.4-trt8.2.0-fp16-A2_b64_8.0.1.model**\\n5.  **KM_essos_LargeFace_224x224_nart_cuda11.0-trt7.1-int8-P4_b32_8.0.1.model**\\n6.  **KM_essos_SmallFace_544x960_nart_cuda11.0-trt7.1-fp32-P4_b24_3.0.0.model**\\n7.  **KM_classifier_Face_BigAngle_SD_nart_cuda11.0-trt7.1-int8-T4_b8_0.0.1.model**\\n8.  **KM_feature_face-pro512d_nart_cuda11.0-trt7.1-fp16-T4_b8_2.56.0.model**\\n9.  **KM_pageant_Pageant_88id_nart_cuda11.0-trt7.1-int8-T4_b16_1.0.8.model**\\n10. **KM_essos_SmallFace_gray_448x800_nart_cuda11.0-trt7.1-int8-T4_b48_3.0.1.model**\\n11. **KM_essos_SmallFace_gray_448x800_nart_cuda11.4-trt8.2.0-fp16-A2_b64_3.0.1.model**\\n12. **KM_bifrost_face-deepcode-64d_nart_cuda11.0-trt7.1-fp16-T4_b128_2.54.0.model**\\n\\n这些模型涵盖人脸检测、特征提取、大角度分类等学科领域，并针对不同设备及算法类型进行了优化。\"\n          },\n          \"external_ref\": \"/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260427_151611_f996a118\"\n        }\n      ]\n    },\n    {\n      \"session_id\": \"f030b2f0-5680-404e-bd4c-b5c66ebf2ac7\",\n      \"thread_id\": \"thread_e66b55b42cbbe0fa\",\n      \"query_id\": \"qry_aad733934df000d8\",\n      \"query\": \"人脸检测相关的模型有几个\",\n      \"result_summary\": \"\",\n      \"steps\": []\n    }\n  ]\n}"
+      }
+    ],
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260427_152010_1182c6f0"
+  }
+}

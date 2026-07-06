@@ -1,0 +1,1342 @@
+{
+  "schema_version": "1.0",
+  "description": "多轮/澄清/闭环标准 case + 会话挖掘 case；ground_truth 待补充。",
+  "generated_at": "2026-05-18T17:21:53",
+  "stats": {
+    "total_cases": 26,
+    "template_cases": 14,
+    "mined_cases": 12,
+    "by_interaction": {
+      "multi_turn": 16,
+      "clarification_resume": 2,
+      "single_turn": 7,
+      "fragment": 1
+    }
+  },
+  "cases": [
+    {
+      "case_id": "MT-01-001",
+      "title": "RAG 事实问 + 短追问（性能）",
+      "interaction": "multi_turn",
+      "source": {
+        "type": "template"
+      },
+      "turns": [
+        {
+          "role": "user",
+          "text": "安全绳检测在adela平台有部署模型吗"
+        },
+        {
+          "role": "user",
+          "text": "评测性能怎么样"
+        }
+      ],
+      "setup": {
+        "same_session": true,
+        "same_thread": true,
+        "image": null
+      },
+      "expect": {
+        "suggested_tags": [
+          "MT-01",
+          "lookup_fact",
+          "adela_benchmark",
+          "MT-fragment",
+          "PL-1"
+        ],
+        "tool_sequence": [
+          [
+            "rag_answer",
+            {
+              "finish_after_tool": true
+            }
+          ],
+          [
+            "rag_answer",
+            {
+              "finish_after_tool": true
+            }
+          ]
+        ],
+        "tool_sequence_alternatives": [
+          [
+            [
+              "rag_answer",
+              {
+                "finish_after_tool": true
+              }
+            ],
+            [
+              "adela_cli_eval",
+              {
+                "finish_after_tool": true
+              }
+            ]
+          ]
+        ],
+        "max_planner_steps": 6,
+        "must_not": [
+          "pipeline_eval"
+        ]
+      },
+      "ground_truth": {
+        "per_turn": [
+          "",
+          ""
+        ]
+      },
+      "judge": {
+        "mode": "trajectory_plus_answer"
+      }
+    },
+    {
+      "case_id": "MT-01-002",
+      "title": "指代消解：推荐模型 → 精度",
+      "interaction": "multi_turn",
+      "source": {
+        "type": "template"
+      },
+      "turns": [
+        {
+          "role": "user",
+          "text": "安全绳检测有哪些模型"
+        },
+        {
+          "role": "user",
+          "text": "这个模型在 T4 上精度怎么样"
+        }
+      ],
+      "setup": {
+        "same_session": true,
+        "same_thread": true,
+        "image": null
+      },
+      "expect": {
+        "suggested_tags": [
+          "MT-01",
+          "recommend_model",
+          "coreference",
+          "PL-4",
+          "finish:mixed"
+        ],
+        "tool_sequence": [
+          [
+            "rag_answer",
+            {
+              "finish_after_tool": false
+            }
+          ],
+          [
+            "re_question",
+            {
+              "finish_after_tool": false
+            }
+          ],
+          [
+            "rag_answer",
+            {
+              "finish_after_tool": true
+            }
+          ]
+        ],
+        "tool_sequence_alternatives": [
+          [
+            [
+              "rag_answer",
+              {
+                "finish_after_tool": true
+              }
+            ],
+            [
+              "adela_cli_eval",
+              {
+                "finish_after_tool": true
+              }
+            ]
+          ]
+        ],
+        "max_planner_steps": 8,
+        "must_not": []
+      },
+      "ground_truth": {
+        "per_turn": [
+          "",
+          ""
+        ]
+      },
+      "judge": {
+        "mode": "trajectory_plus_answer"
+      }
+    },
+    {
+      "case_id": "MT-01-003",
+      "title": "时间追问：2025 → 2024",
+      "interaction": "multi_turn",
+      "source": {
+        "type": "template"
+      },
+      "turns": [
+        {
+          "role": "user",
+          "text": "2025年RD部门总共发布了多少个模型？"
+        },
+        {
+          "role": "user",
+          "text": "那2024年呢？"
+        }
+      ],
+      "setup": {
+        "same_session": true,
+        "same_thread": true,
+        "image": null
+      },
+      "expect": {
+        "suggested_tags": [
+          "MT-01",
+          "lookup_fact",
+          "PL-1",
+          "finish:true"
+        ],
+        "tool_sequence": [
+          [
+            "rag_answer",
+            {
+              "finish_after_tool": true
+            }
+          ],
+          [
+            "rag_answer",
+            {
+              "finish_after_tool": true
+            }
+          ]
+        ],
+        "max_planner_steps": 4,
+        "must_not": [
+          "clarify"
+        ]
+      },
+      "ground_truth": {
+        "per_turn": [
+          "",
+          ""
+        ]
+      },
+      "judge": {
+        "mode": "trajectory_plus_answer"
+      }
+    },
+    {
+      "case_id": "CL-01-001",
+      "title": "Adela 澄清：部署意图 → 平台 → 模型名 → 精度",
+      "interaction": "clarification_resume",
+      "source": {
+        "type": "template"
+      },
+      "turns": [
+        {
+          "role": "user",
+          "text": "部署钓鱼人检测模型"
+        },
+        {
+          "role": "user",
+          "text": "cuda11.0-trt7.1-int8-T4"
+        },
+        {
+          "role": "user",
+          "text": "fishing_det_small"
+        },
+        {
+          "role": "user",
+          "text": "精度评测"
+        }
+      ],
+      "setup": {
+        "same_session": true,
+        "same_thread": true,
+        "image": null
+      },
+      "expect": {
+        "suggested_tags": [
+          "CL-01",
+          "MT-02",
+          "CL-slot",
+          "adela_benchmark",
+          "PL-1",
+          "finish:true"
+        ],
+        "tool_sequence": [
+          [
+            "adela_cli_eval",
+            {
+              "finish_after_tool": true
+            }
+          ]
+        ],
+        "tool_sequence_notes": "前几轮应为 clarification；最后一轮 forced adela_cli_eval",
+        "max_planner_steps": 2,
+        "must_not": [
+          "rag_answer"
+        ]
+      },
+      "ground_truth": {
+        "final_summary": ""
+      },
+      "judge": {
+        "mode": "clarification_then_tool"
+      }
+    },
+    {
+      "case_id": "CL-01-002",
+      "title": "Adela 模型名歧义澄清",
+      "interaction": "clarification_resume",
+      "source": {
+        "type": "template"
+      },
+      "turns": [
+        {
+          "role": "user",
+          "text": "帮我看一下 struct_blackbox_crop_224x224 部署到 cuda11.0-trt7.1-fp16-T4 后的精度怎么样？"
+        }
+      ],
+      "setup": {
+        "same_session": true,
+        "same_thread": true,
+        "image": null
+      },
+      "expect": {
+        "suggested_tags": [
+          "ST-01",
+          "adela_benchmark",
+          "PL-1",
+          "finish:true"
+        ],
+        "tool_sequence": [
+          [
+            "adela_cli_eval",
+            {
+              "finish_after_tool": true
+            }
+          ]
+        ],
+        "tool_sequence_alternatives": [
+          [
+            [
+              "rag_answer",
+              {
+                "finish_after_tool": true
+              }
+            ],
+            [
+              "adela_cli_eval",
+              {
+                "finish_after_tool": true
+              }
+            ]
+          ]
+        ],
+        "max_planner_steps": 4,
+        "must_not": []
+      },
+      "ground_truth": {
+        "final_summary": ""
+      },
+      "judge": {
+        "mode": "trajectory_plus_answer"
+      }
+    },
+    {
+      "case_id": "PL-4-001",
+      "title": "RAG 未命中闭环（冷门推荐）",
+      "interaction": "single_turn",
+      "source": {
+        "type": "template"
+      },
+      "turns": [
+        {
+          "role": "user",
+          "text": "检测电子元器异常，用什么模型？"
+        }
+      ],
+      "setup": {
+        "same_session": true,
+        "new_thread": true,
+        "image": null
+      },
+      "expect": {
+        "suggested_tags": [
+          "ST-01",
+          "recommend_model",
+          "PL-4",
+          "finish:mixed"
+        ],
+        "tool_sequence": [
+          [
+            "rag_answer",
+            {
+              "finish_after_tool": false
+            }
+          ],
+          [
+            "re_question",
+            {
+              "finish_after_tool": false
+            }
+          ],
+          [
+            "rag_answer",
+            {
+              "finish_after_tool": false
+            }
+          ],
+          [
+            "answerer",
+            {
+              "mode": "rag_evidence",
+              "finish_after_tool": true
+            }
+          ]
+        ],
+        "tool_sequence_notes": "允许状态机强制 re_question；3 轮 miss 后 answerer",
+        "max_planner_steps": 10,
+        "must_not": []
+      },
+      "ground_truth": {
+        "final_answer": ""
+      },
+      "judge": {
+        "mode": "trajectory_plus_answer"
+      }
+    },
+    {
+      "case_id": "PL-2-001",
+      "title": "生图 → 检测（finish 串联）",
+      "interaction": "multi_turn",
+      "source": {
+        "type": "template"
+      },
+      "turns": [
+        {
+          "role": "user",
+          "text": "生成3张钓鱼的图片"
+        },
+        {
+          "role": "user",
+          "text": "用qwen模型标注钓鱼的人"
+        }
+      ],
+      "setup": {
+        "same_session": true,
+        "same_thread": true,
+        "image": null
+      },
+      "expect": {
+        "suggested_tags": [
+          "MT-01",
+          "vision_generate",
+          "vision_detect",
+          "PL-2",
+          "finish:mixed"
+        ],
+        "tool_sequence": [
+          [
+            "flux-image-generation",
+            {
+              "finish_after_tool": false
+            }
+          ],
+          [
+            "qwen_detection",
+            {
+              "finish_after_tool": true
+            }
+          ]
+        ],
+        "max_planner_steps": 6,
+        "must_not": []
+      },
+      "ground_truth": {
+        "per_turn": [
+          "",
+          ""
+        ]
+      },
+      "judge": {
+        "mode": "trajectory_plus_answer"
+      }
+    },
+    {
+      "case_id": "PL-3-001",
+      "title": "评测流水线（需参考图）",
+      "interaction": "single_turn",
+      "source": {
+        "type": "template"
+      },
+      "turns": [
+        {
+          "role": "user",
+          "text": "钓鱼的人，生成一个精度评估报告"
+        }
+      ],
+      "setup": {
+        "same_session": true,
+        "new_thread": true,
+        "image": "fixture/fishing_scene.jpg"
+      },
+      "expect": {
+        "suggested_tags": [
+          "ST-01",
+          "vision_pipeline",
+          "PL-3",
+          "finish:true"
+        ],
+        "tool_sequence": [
+          [
+            "pipeline_eval",
+            {
+              "finish_after_tool": true
+            }
+          ]
+        ],
+        "tool_sequence_alternatives": [
+          [
+            [
+              "flux-image-generation",
+              {
+                "finish_after_tool": false
+              }
+            ],
+            [
+              "qwen_detection",
+              {
+                "finish_after_tool": false
+              }
+            ],
+            [
+              "pipeline_eval",
+              {
+                "finish_after_tool": true
+              }
+            ]
+          ]
+        ],
+        "max_planner_steps": 8,
+        "must_not": []
+      },
+      "ground_truth": {
+        "final_answer": ""
+      },
+      "judge": {
+        "mode": "trajectory_plus_answer"
+      }
+    },
+    {
+      "case_id": "ST-CL-001",
+      "title": "意图歧义应 clarify",
+      "interaction": "single_turn",
+      "source": {
+        "type": "template"
+      },
+      "turns": [
+        {
+          "role": "user",
+          "text": "黑夜检测黑猫"
+        }
+      ],
+      "setup": {
+        "same_session": true,
+        "new_thread": true,
+        "image": null
+      },
+      "expect": {
+        "suggested_tags": [
+          "ST-01",
+          "needs_clarify",
+          "PL-1",
+          "finish:true"
+        ],
+        "decision_type": "clarify",
+        "tool_sequence": [],
+        "max_planner_steps": 1,
+        "must_not": [
+          "rag_answer",
+          "flux-image-generation",
+          "pipeline_eval"
+        ]
+      },
+      "ground_truth": {
+        "clarification_question": ""
+      },
+      "judge": {
+        "mode": "clarify_only"
+      }
+    },
+    {
+      "case_id": "ST-01-001",
+      "title": "单轮事实查库",
+      "interaction": "single_turn",
+      "source": {
+        "type": "template",
+        "linked_question_id": "q_0012"
+      },
+      "turns": [
+        {
+          "role": "user",
+          "text": "城市结构化检测模型 3.0.1是目前最新的支持人体检测的模型么"
+        }
+      ],
+      "setup": {
+        "same_session": true,
+        "new_thread": true,
+        "image": null
+      },
+      "expect": {
+        "suggested_tags": [
+          "ST-01",
+          "lookup_fact",
+          "PL-1",
+          "finish:true"
+        ],
+        "tool_sequence": [
+          [
+            "rag_answer",
+            {
+              "finish_after_tool": true
+            }
+          ]
+        ],
+        "max_planner_steps": 2,
+        "must_not": []
+      },
+      "ground_truth": {
+        "final_answer": ""
+      },
+      "judge": {
+        "mode": "trajectory_plus_answer"
+      }
+    },
+    {
+      "case_id": "MIG-01-001",
+      "title": "迁移顾问：能力边界评估",
+      "interaction": "single_turn",
+      "source": {
+        "type": "template",
+        "linked_question_id": "q_0111"
+      },
+      "turns": [
+        {
+          "role": "user",
+          "text": "香港项目要求识别“头盔颜色：黑、白、灰、红、蓝、黄、绿、紫、迷彩”，现有城市结构化人体属性模型是否能直接支持？"
+        }
+      ],
+      "setup": {
+        "same_session": true,
+        "new_thread": true,
+        "image": null
+      },
+      "expect": {
+        "suggested_tags": [
+          "ST-01",
+          "migration_advisor",
+          "PL-1",
+          "finish:true"
+        ],
+        "tool_sequence": [],
+        "tool_sequence_notes": "期望 migration 抽象+多路检索+固定章节报告；或 rag 后提供迁移追问",
+        "max_planner_steps": 6,
+        "must_not": []
+      },
+      "ground_truth": {
+        "final_answer": ""
+      },
+      "judge": {
+        "mode": "trajectory_plus_answer"
+      }
+    },
+    {
+      "case_id": "GEN-01-001",
+      "title": "通用知识 / 自我介绍",
+      "interaction": "single_turn",
+      "source": {
+        "type": "template",
+        "linked_question_id": "q_0055"
+      },
+      "turns": [
+        {
+          "role": "user",
+          "text": "介绍一下自己"
+        }
+      ],
+      "setup": {
+        "same_session": true,
+        "new_thread": true,
+        "image": null
+      },
+      "expect": {
+        "suggested_tags": [
+          "ST-01",
+          "general_chat",
+          "PL-1",
+          "finish:true"
+        ],
+        "tool_sequence": [],
+        "tool_sequence_alternatives": [
+          [
+            [
+              "answerer",
+              {
+                "mode": "direct",
+                "finish_after_tool": true
+              }
+            ]
+          ]
+        ],
+        "max_planner_steps": 1,
+        "must_not": [
+          "rag_answer"
+        ]
+      },
+      "ground_truth": {
+        "final_answer": ""
+      },
+      "judge": {
+        "mode": "answer_only"
+      }
+    },
+    {
+      "case_id": "MT-FRAG-001",
+      "title": "无效单轮片段（应用例绑定）",
+      "interaction": "fragment",
+      "source": {
+        "type": "template",
+        "linked_question_id": "q_0017"
+      },
+      "turns": [
+        {
+          "role": "user",
+          "text": "性能评测怎么样"
+        }
+      ],
+      "setup": {
+        "invalid_standalone": true,
+        "bind_to_case_id": "MT-01-001"
+      },
+      "expect": {
+        "suggested_tags": [
+          "MT-fragment",
+          "adela_benchmark",
+          "PL-1"
+        ],
+        "notes": "禁止单独跑；仅作为 MT-01-001 第 2 轮"
+      },
+      "ground_truth": {},
+      "judge": {
+        "mode": "skip_standalone"
+      }
+    },
+    {
+      "case_id": "VIS-01-001",
+      "title": "检测缺参应澄清",
+      "interaction": "single_turn",
+      "source": {
+        "type": "template",
+        "linked_question_id": "q_0033"
+      },
+      "turns": [
+        {
+          "role": "user",
+          "text": "检测背书包的人"
+        }
+      ],
+      "setup": {
+        "same_session": true,
+        "new_thread": true,
+        "image": null
+      },
+      "expect": {
+        "suggested_tags": [
+          "ST-01",
+          "vision_detect",
+          "needs_clarify",
+          "PL-1"
+        ],
+        "decision_type": "clarify",
+        "tool_sequence_notes": "无图无 label 时应 tool_precondition 或 clarify",
+        "max_planner_steps": 2,
+        "must_not": [
+          "pipeline_eval"
+        ]
+      },
+      "ground_truth": {
+        "clarification_question": ""
+      },
+      "judge": {
+        "mode": "clarify_or_precondition"
+      }
+    },
+    {
+      "case_id": "MT-MINED-001",
+      "title": "会话挖掘：安全绳检测在adela平台有部署模型吗… → 评测性能怎么样…",
+      "interaction": "multi_turn",
+      "source": {
+        "type": "session_mined",
+        "session_id": "sess_moi00xu2_sb0b6gut",
+        "thread_id": "thread_01e53ff49463cea5"
+      },
+      "turns": [
+        {
+          "role": "user",
+          "text": "安全绳检测在adela平台有部署模型吗"
+        },
+        {
+          "role": "user",
+          "text": "评测性能怎么样"
+        }
+      ],
+      "setup": {
+        "same_session": true,
+        "same_thread": true,
+        "image": null
+      },
+      "expect": {
+        "suggested_tags": [
+          "MT-01",
+          "ST-01",
+          "lookup_fact",
+          "PL-1",
+          "finish:true"
+        ],
+        "tool_sequence": [],
+        "tool_sequence_notes": "第二轮依赖 query_trajectories；请按实际标注 tool_sequence",
+        "max_planner_steps": 8,
+        "must_not": []
+      },
+      "ground_truth": {
+        "per_turn": [
+          "",
+          ""
+        ]
+      },
+      "judge": {
+        "mode": "trajectory_plus_answer"
+      }
+    },
+    {
+      "case_id": "MT-MINED-002",
+      "title": "会话挖掘：生成3张钓鱼的图片… → 用qwen模型标注钓鱼的人…",
+      "interaction": "multi_turn",
+      "source": {
+        "type": "session_mined",
+        "session_id": "sess_moi0fkbe_jqep50yf",
+        "thread_id": "thread_1e5e400a3e7a5d77"
+      },
+      "turns": [
+        {
+          "role": "user",
+          "text": "生成3张钓鱼的图片"
+        },
+        {
+          "role": "user",
+          "text": "用qwen模型标注钓鱼的人"
+        }
+      ],
+      "setup": {
+        "same_session": true,
+        "same_thread": true,
+        "image": null
+      },
+      "expect": {
+        "suggested_tags": [
+          "MT-01",
+          "ST-01",
+          "vision_detect",
+          "PL-1",
+          "finish:true"
+        ],
+        "tool_sequence": [],
+        "tool_sequence_notes": "第二轮依赖 query_trajectories；请按实际标注 tool_sequence",
+        "max_planner_steps": 8,
+        "must_not": []
+      },
+      "ground_truth": {
+        "per_turn": [
+          "",
+          ""
+        ]
+      },
+      "judge": {
+        "mode": "trajectory_plus_answer"
+      }
+    },
+    {
+      "case_id": "MT-MINED-003",
+      "title": "会话挖掘：我要做室内场景的人体计数，请帮忙设计一个算法流程… → 城市结构化检测模型 3.0.1是目前最新的支持人…",
+      "interaction": "multi_turn",
+      "source": {
+        "type": "session_mined",
+        "session_id": "sess_moi9xf9l_yz40grhv",
+        "thread_id": "thread_a7c01c56709a2636"
+      },
+      "turns": [
+        {
+          "role": "user",
+          "text": "我要做室内场景的人体计数，请帮忙设计一个算法流程，并推荐其中的关键模型版本"
+        },
+        {
+          "role": "user",
+          "text": "城市结构化检测模型 3.0.1是目前最新的支持人体检测的模型么"
+        }
+      ],
+      "setup": {
+        "same_session": true,
+        "same_thread": true,
+        "image": null
+      },
+      "expect": {
+        "suggested_tags": [
+          "MT-01",
+          "ST-01",
+          "lookup_fact",
+          "PL-1",
+          "finish:true"
+        ],
+        "tool_sequence": [],
+        "tool_sequence_notes": "第二轮依赖 query_trajectories；请按实际标注 tool_sequence",
+        "max_planner_steps": 8,
+        "must_not": []
+      },
+      "ground_truth": {
+        "per_turn": [
+          "",
+          ""
+        ]
+      },
+      "judge": {
+        "mode": "trajectory_plus_answer"
+      }
+    },
+    {
+      "case_id": "MT-MINED-004",
+      "title": "会话挖掘：RD部门中车业务的模型数量… → 现在RD部门总共有多少个模型？…",
+      "interaction": "multi_turn",
+      "source": {
+        "type": "session_mined",
+        "session_id": "sess_moia336x_5mzmispc",
+        "thread_id": "thread_208d6078124004be"
+      },
+      "turns": [
+        {
+          "role": "user",
+          "text": "RD部门中车业务的模型数量"
+        },
+        {
+          "role": "user",
+          "text": "现在RD部门总共有多少个模型？"
+        }
+      ],
+      "setup": {
+        "same_session": true,
+        "same_thread": true,
+        "image": null
+      },
+      "expect": {
+        "suggested_tags": [
+          "MT-01",
+          "ST-01",
+          "lookup_fact",
+          "PL-1",
+          "finish:true"
+        ],
+        "tool_sequence": [],
+        "tool_sequence_notes": "第二轮依赖 query_trajectories；请按实际标注 tool_sequence",
+        "max_planner_steps": 8,
+        "must_not": []
+      },
+      "ground_truth": {
+        "per_turn": [
+          "",
+          ""
+        ]
+      },
+      "judge": {
+        "mode": "trajectory_plus_answer"
+      }
+    },
+    {
+      "case_id": "MT-MINED-005",
+      "title": "会话挖掘：现在RD部门总共有多少个模型？… → 现在中车业务总共有多少个模型？…",
+      "interaction": "multi_turn",
+      "source": {
+        "type": "session_mined",
+        "session_id": "sess_moia336x_5mzmispc",
+        "thread_id": "thread_208d6078124004be"
+      },
+      "turns": [
+        {
+          "role": "user",
+          "text": "现在RD部门总共有多少个模型？"
+        },
+        {
+          "role": "user",
+          "text": "现在中车业务总共有多少个模型？"
+        }
+      ],
+      "setup": {
+        "same_session": true,
+        "same_thread": true,
+        "image": null
+      },
+      "expect": {
+        "suggested_tags": [
+          "MT-01",
+          "ST-01",
+          "lookup_fact",
+          "PL-1",
+          "finish:true"
+        ],
+        "tool_sequence": [],
+        "tool_sequence_notes": "第二轮依赖 query_trajectories；请按实际标注 tool_sequence",
+        "max_planner_steps": 8,
+        "must_not": []
+      },
+      "ground_truth": {
+        "per_turn": [
+          "",
+          ""
+        ]
+      },
+      "judge": {
+        "mode": "trajectory_plus_answer"
+      }
+    },
+    {
+      "case_id": "MT-MINED-006",
+      "title": "会话挖掘：钓鱼有推荐的模型吗？… → 违法钓鱼有检测的模型吗？…",
+      "interaction": "multi_turn",
+      "source": {
+        "type": "session_mined",
+        "session_id": "sess_moia336x_5mzmispc",
+        "thread_id": "thread_31c4a078e4263f5e"
+      },
+      "turns": [
+        {
+          "role": "user",
+          "text": "钓鱼有推荐的模型吗？"
+        },
+        {
+          "role": "user",
+          "text": "违法钓鱼有检测的模型吗？"
+        }
+      ],
+      "setup": {
+        "same_session": true,
+        "same_thread": true,
+        "image": null
+      },
+      "expect": {
+        "suggested_tags": [
+          "MT-01",
+          "ST-01",
+          "lookup_fact",
+          "PL-1",
+          "finish:true"
+        ],
+        "tool_sequence": [],
+        "tool_sequence_notes": "第二轮依赖 query_trajectories；请按实际标注 tool_sequence",
+        "max_planner_steps": 8,
+        "must_not": []
+      },
+      "ground_truth": {
+        "per_turn": [
+          "",
+          ""
+        ]
+      },
+      "judge": {
+        "mode": "trajectory_plus_answer"
+      }
+    },
+    {
+      "case_id": "MT-MINED-007",
+      "title": "会话挖掘：你是谁… → 现在RD部门总共有多少个模型？…",
+      "interaction": "multi_turn",
+      "source": {
+        "type": "session_mined",
+        "session_id": "sess_moia504r_rrebf24a",
+        "thread_id": "thread_2cfa692071555382"
+      },
+      "turns": [
+        {
+          "role": "user",
+          "text": "你是谁"
+        },
+        {
+          "role": "user",
+          "text": "现在RD部门总共有多少个模型？"
+        }
+      ],
+      "setup": {
+        "same_session": true,
+        "same_thread": true,
+        "image": null
+      },
+      "expect": {
+        "suggested_tags": [
+          "MT-01",
+          "ST-01",
+          "lookup_fact",
+          "PL-1",
+          "finish:true"
+        ],
+        "tool_sequence": [],
+        "tool_sequence_notes": "第二轮依赖 query_trajectories；请按实际标注 tool_sequence",
+        "max_planner_steps": 8,
+        "must_not": []
+      },
+      "ground_truth": {
+        "per_turn": [
+          "",
+          ""
+        ]
+      },
+      "judge": {
+        "mode": "trajectory_plus_answer"
+      }
+    },
+    {
+      "case_id": "MT-MINED-008",
+      "title": "会话挖掘：当前我们Embedding模型有哪些… → 查一下reid模型的使用边界…",
+      "interaction": "multi_turn",
+      "source": {
+        "type": "session_mined",
+        "session_id": "sess_moia504r_rrebf24a",
+        "thread_id": "thread_ddf6c9a8a0680b17"
+      },
+      "turns": [
+        {
+          "role": "user",
+          "text": "当前我们Embedding模型有哪些"
+        },
+        {
+          "role": "user",
+          "text": "查一下reid模型的使用边界"
+        }
+      ],
+      "setup": {
+        "same_session": true,
+        "same_thread": true,
+        "image": null
+      },
+      "expect": {
+        "suggested_tags": [
+          "MT-01",
+          "ST-01",
+          "lookup_fact",
+          "PL-1",
+          "finish:true"
+        ],
+        "tool_sequence": [],
+        "tool_sequence_notes": "第二轮依赖 query_trajectories；请按实际标注 tool_sequence",
+        "max_planner_steps": 8,
+        "must_not": []
+      },
+      "ground_truth": {
+        "per_turn": [
+          "",
+          ""
+        ]
+      },
+      "judge": {
+        "mode": "trajectory_plus_answer"
+      }
+    },
+    {
+      "case_id": "MT-MINED-009",
+      "title": "会话挖掘：生成3张鬼火少年的图片… → 生成3张吸食笑气的图片…",
+      "interaction": "multi_turn",
+      "source": {
+        "type": "session_mined",
+        "session_id": "sess_moia504r_rrebf24a",
+        "thread_id": "thread_3a1d622679be88b8"
+      },
+      "turns": [
+        {
+          "role": "user",
+          "text": "生成3张鬼火少年的图片"
+        },
+        {
+          "role": "user",
+          "text": "生成3张吸食笑气的图片"
+        }
+      ],
+      "setup": {
+        "same_session": true,
+        "same_thread": true,
+        "image": null
+      },
+      "expect": {
+        "suggested_tags": [
+          "MT-01",
+          "ST-01",
+          "vision_generate",
+          "PL-1",
+          "finish:true"
+        ],
+        "tool_sequence": [],
+        "tool_sequence_notes": "第二轮依赖 query_trajectories；请按实际标注 tool_sequence",
+        "max_planner_steps": 8,
+        "must_not": []
+      },
+      "ground_truth": {
+        "per_turn": [
+          "",
+          ""
+        ]
+      },
+      "judge": {
+        "mode": "trajectory_plus_answer"
+      }
+    },
+    {
+      "case_id": "MT-MINED-010",
+      "title": "会话挖掘：生成3张吸食笑气的图片… → 生成3张吸食笑气的图片…",
+      "interaction": "multi_turn",
+      "source": {
+        "type": "session_mined",
+        "session_id": "sess_moia504r_rrebf24a",
+        "thread_id": "thread_3a1d622679be88b8"
+      },
+      "turns": [
+        {
+          "role": "user",
+          "text": "生成3张吸食笑气的图片"
+        },
+        {
+          "role": "user",
+          "text": "生成3张吸食笑气的图片"
+        }
+      ],
+      "setup": {
+        "same_session": true,
+        "same_thread": true,
+        "image": null
+      },
+      "expect": {
+        "suggested_tags": [
+          "MT-01",
+          "ST-01",
+          "vision_generate",
+          "PL-1",
+          "finish:true"
+        ],
+        "tool_sequence": [],
+        "tool_sequence_notes": "第二轮依赖 query_trajectories；请按实际标注 tool_sequence",
+        "max_planner_steps": 8,
+        "must_not": []
+      },
+      "ground_truth": {
+        "per_turn": [
+          "",
+          ""
+        ]
+      },
+      "judge": {
+        "mode": "trajectory_plus_answer"
+      }
+    },
+    {
+      "case_id": "MT-MINED-011",
+      "title": "会话挖掘：我要实现一个横幅检测，可以用什么模型… → 我要实现大货车违停的需求，可以用到哪些模型…",
+      "interaction": "multi_turn",
+      "source": {
+        "type": "session_mined",
+        "session_id": "sess_moiakby1_q87axi0u",
+        "thread_id": "thread_e268deeaac71fa26"
+      },
+      "turns": [
+        {
+          "role": "user",
+          "text": "我要实现一个横幅检测，可以用什么模型"
+        },
+        {
+          "role": "user",
+          "text": "我要实现大货车违停的需求，可以用到哪些模型"
+        }
+      ],
+      "setup": {
+        "same_session": true,
+        "same_thread": true,
+        "image": null
+      },
+      "expect": {
+        "suggested_tags": [
+          "MT-01",
+          "ST-01",
+          "lookup_fact",
+          "PL-1",
+          "finish:true"
+        ],
+        "tool_sequence": [],
+        "tool_sequence_notes": "第二轮依赖 query_trajectories；请按实际标注 tool_sequence",
+        "max_planner_steps": 8,
+        "must_not": []
+      },
+      "ground_truth": {
+        "per_turn": [
+          "",
+          ""
+        ]
+      },
+      "judge": {
+        "mode": "trajectory_plus_answer"
+      }
+    },
+    {
+      "case_id": "MT-MINED-012",
+      "title": "会话挖掘：我要实现大货车违停的需求，可以用到哪些模型… → 我要实现大图检小脸，该用什么模型…",
+      "interaction": "multi_turn",
+      "source": {
+        "type": "session_mined",
+        "session_id": "sess_moiakby1_q87axi0u",
+        "thread_id": "thread_e268deeaac71fa26"
+      },
+      "turns": [
+        {
+          "role": "user",
+          "text": "我要实现大货车违停的需求，可以用到哪些模型"
+        },
+        {
+          "role": "user",
+          "text": "我要实现大图检小脸，该用什么模型"
+        }
+      ],
+      "setup": {
+        "same_session": true,
+        "same_thread": true,
+        "image": null
+      },
+      "expect": {
+        "suggested_tags": [
+          "MT-01",
+          "ST-01",
+          "recommend_model",
+          "PL-4",
+          "finish:mixed"
+        ],
+        "tool_sequence": [],
+        "tool_sequence_notes": "第二轮依赖 query_trajectories；请按实际标注 tool_sequence",
+        "max_planner_steps": 8,
+        "must_not": []
+      },
+      "ground_truth": {
+        "per_turn": [
+          "",
+          ""
+        ]
+      },
+      "judge": {
+        "mode": "trajectory_plus_answer"
+      }
+    }
+  ]
+}

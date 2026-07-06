@@ -1,0 +1,61 @@
+{
+  "session_id": "e0433ccb-94e8-44d9-8728-327149cac24e",
+  "run_stamp": "20260526_174229_6972c5e7",
+  "stage": "migration_retrieval_plan_response",
+  "step_index": 1,
+  "created_at": "2026-05-26T17:42:32+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "output_schema": {
+      "abstract_requirement": "object, attribute, task_type, scene, constraints[]",
+      "retrieve_fields": "每项 field + queries[]（2-4 条）"
+    },
+    "used_fallback": false,
+    "output_raw": "{\n\n    \"abstract_requirement\": {\n      \"object\" : \"行人\",\n      \"attribute\" : \"头发特征\",\n      \"task_type\" : \"属性分类\",\n      \"scene\" : \"监控画面\",\n      \"constraints\" : [\"短发、长发、光头、其他\"]\n    },\n    \"retrieve_fields\": [\n      {\n        \"field\": \"existing_models\",\n        \"queries\": [\n          \"行人属性检测模型短发长发光头\",\n          \"人脸人脸开化样式检测模型 视频巡逻项目\",\n          \"头部毛发特征识别 行人属性检测算法\"\n        ]\n      },\n      {\n        \"field\": \"similar_capabilities\",\n        \"queries\": [\n          \"面部年龄性别特征提取 分类检测能力\",\n          \"人体细粒度特征识别 行人细分类别\",\n          \"头部发式识别算法 视频结构化能力\"\n        ]\n      },\n      {\n        \"field\": \"performance_baseline\",\n        \"queries\": [\n          \"行人属性识别精度 短发长发指标 毛发分类准确度\",\n          \"video monitoring scene pedestrian attribute accuracy benchmark\",\n          \"头发特征检测 分类准确率 召回率 噪声\"\n        ]\n      },\n      {\n        \"field\": \"data_requirements\",\n        \"queries\": [\n          \"行人属性检测数据集 头部绘制标注 多来源监控视频\",\n          \"发型识别数据集 短发长发光头标注样本 视频抓拍\",\n          \"视频结构化数据 行人属性数据集 标注精类 训练样本规模\"\n        ]\n      }\n    ]\n}",
+    "structured_output": {
+      "abstract_requirement": {
+        "object": "行人",
+        "attribute": "头发特征",
+        "task_type": "属性分类",
+        "scene": "监控画面",
+        "constraints": [
+          "短发、长发、光头、其他"
+        ]
+      },
+      "retrieve_fields": [
+        {
+          "field": "existing_models",
+          "queries": [
+            "行人属性检测模型短发长发光头",
+            "人脸人脸开化样式检测模型 视频巡逻项目",
+            "头部毛发特征识别 行人属性检测算法"
+          ]
+        },
+        {
+          "field": "similar_capabilities",
+          "queries": [
+            "面部年龄性别特征提取 分类检测能力",
+            "人体细粒度特征识别 行人细分类别",
+            "头部发式识别算法 视频结构化能力"
+          ]
+        },
+        {
+          "field": "performance_baseline",
+          "queries": [
+            "行人属性识别精度 短发长发指标 毛发分类准确度",
+            "video monitoring scene pedestrian attribute accuracy benchmark",
+            "头发特征检测 分类准确率 召回率 噪声"
+          ]
+        },
+        {
+          "field": "data_requirements",
+          "queries": [
+            "行人属性检测数据集 头部绘制标注 多来源监控视频",
+            "发型识别数据集 短发长发光头标注样本 视频抓拍",
+            "视频结构化数据 行人属性数据集 标注精类 训练样本规模"
+          ]
+        }
+      ]
+    }
+  }
+}

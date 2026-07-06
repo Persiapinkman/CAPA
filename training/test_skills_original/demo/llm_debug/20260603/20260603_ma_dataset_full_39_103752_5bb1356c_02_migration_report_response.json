@@ -1,0 +1,100 @@
+{
+  "session_id": "ma_dataset_full_39",
+  "run_stamp": "20260603_103752_5bb1356c",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-06-03T10:38:56+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"用户需求：判断行人“是否抽烟”，人体属性是否支持？\",\n  \"direct_match\": {\n    \"exists\": false,\n    \"summary\": \"检索到的模型库中没有直接名为“行人抽烟检测”或包含“smoking”标签的独立人体属性模型。\"\n  ,\n  \"evidence\": [\n    \"证据不足（未检索到明确包含 'smoking' 或 '抽烟' 标签的人体属性模型）\"\n  ]\n  },\n  \"similar_assets\": [\n    {\n      \"model_or_solution\": \"KM_Classifier_Ped_33of33_2.21.0 (行人属性大模型)\",\n      \"label_schema\": \"检测类别：行人33个属性，共174个类别标签。其中包含 'st_smoking' 标签（smoke抽烟模型），对应标签名可能为 'smoking' 或 '抽烟'。\",\n      \"training_data\": \"文档未明确列出训练集大小，但提及属性模型经过优化更新，包含针对特定场景的训练数据。证据中未提及具体数据量，建议标注数据需包含抽烟行为样本。\",\n      \"reported_metrics\": \"smoke抽烟模型训练更新：prec/recall 0.41/0.77 -> 0.76/0.75 (版本 2.21.0 更新前后对比)。\",\n      \"covered_capability\": \"人体属性、行为属性（抽烟）。\",\n      \"gap\": \"需要确认模型是否支持实时推理及具体部署平台。\",\n      \"evidence\": [\n        \"PDFs/行人属性大模型2.21.0.pdf p1 table 1 (证据 ID: cb677e70bc11b808c26e03ce)\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"smoke_detect\",\n      \"label_schema\": \"单一标签：smoke (烟雾/烟火检测)。注意：该模型可能侧重于物体检测（烟雾），而非人体属性中的“人是否手持香烟”。\",\n      \"training_data\": \"证据不足。\",\n      \"reported_metrics\": \"证据不足。\",\n      \"covered_capability\": \"烟雾检测（可能无法区分人为手持香烟）。\",\n      \"gap\": \"此模型可能检测环境烟雾，而非行人抽烟动作，存在语义差异。\",\n      \"evidence\": [\n        \"adela/adela_release_records.jsonl (证据 ID: 6fcc91757cd0876a7a341a04)\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"KM_falcon_KM_falcon_fight_UMT_large_nart_acl-ascend710-fp16_b8_2.0.5.model (安防方向 - 打架识别-large)\",\n      \"label_schema\": \"动作类别：打架。\",\n      \"training_data\": \"证据不足。\",\n      \"reported_metrics\": \"证据不足。\",\n      \"covered_capability\": \"人体动作识别（打架）。\",\n      \"gap\": \"打架识别属于复杂动作，抽烟属于细粒度属性/小动作，任务难度不同，迁移需重新训练。\",\n      \"evidence\": [\n        \"tables/model_release_records.jsonl (证据 ID: 767a8cfde5342b0fb42cab9c)\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"KM_classifier_Ped_None_Security_nart_acl-ascend710-int8_b8_3.1.1.model (安防方向 - 人体二分类)\",\n      \"label_schema\": \"二分类：人体/非人体（误检分类）。\",\n      \"training_data\": \"清洗原数据集，增加 75w 训练数据，包含监控场景的遮挡/截断/躺卧人体，补充猫狗、植物等常见误报。\",\n      \"reported_metrics\": \"遮挡人体召回 +8.2%，躺卧人体召回 +8.8%，猫狗过滤 +12.2%。\",\n      \"covered_capability\": \"人体属性（误检过滤）\",\n      \"gap\": \"不支持抽烟属性。\",\n      \"evidence\": [\n        \"PDFs/人体二分类发版记录.pdf p1 (证据 ID: 49ee838c72e1488bd615d7a4)\"\n      ]\n    }\n  ],\n  \"migration_plan\": {\n    \"feasibility\": \"medium\",\n    \"approach\": \"利用 KM_Classifier_Ped_33of33_2.21.0 模型作为基础模型或参考。该模型已包含 'smoking' 相关标签和属性定义。\",\n    \"data_requirements\": \"需准备抽烟行为样本（手持香烟、吸烟姿势），建议参考 33 个属性模型的数据标注规范。\",\n    \"compute_requirements\": \"Ascend 710 或 T4 平台，需确认模型版本兼容性。\",\n    \"engineering_work\": \"需验证 33 个属性模型中 'smoking' 标签在特定场景下的精度，可能需针对客户场景微调（Fine-tuning）。\",\n    \"estimated_timeline\": \"模型验证 + 微调 + 部署：2-4 周（基于已有基础模型），若从头训练则时间待定。\",\n    \"estimated_cost\": \"人力投入为主，数据标注成本待评估（若客户场景复杂）。\",\n    \"dependencies\": [\n      \"客户场景视频数据质量（光照、角度）\",\n      \"Ascend 710 或 T4 硬件支持\",\n      \"行人属性大模型 2.21.0 授权\"\n    ],\n    \"risks\": [\n      \"抽烟动作隐蔽性强，小目标检测难度大，可能影响精度。\",\n      \"模型 33 属性中抽烟标签可能仅在特定数据集中优化过，泛化性需验证。\",\n      \"烟雾检测模型（smoke_detect）不可直接替代行人抽烟检测。\"\n    ]\n  },\n  \"expected_performance\": {\n    \"baseline\": \"参考 KM_Classifier_Ped_33of33_2.21.0 版本更新记录，smoking 标签 Recall 从 0.77 提升至 0.75 (可能指 precision/recall 变化)。\",\n    \"target\": \"取决于客户场景光照、遮挡情况及样本量。\",\n    \"uncertainty\": \"证据不足，无法精确预测精度。\"\n  }\n  \t,\n  \"recommendation\": \"推荐使用 KM_Classifier_Ped_33of33_2.21.0 行人属性大模型，其中已包含 'st_smoking' 属性标签。建议先通过 POC 验证该模型在客户场景下的抽烟检测效果，若效果不佳，需采集客户场景数据对模型进行微调。\"\n  }",
+    "structured_output": {
+      "requirement_summary": "用户需求：判断行人“是否抽烟”，人体属性是否支持？",
+      "direct_match": {
+        "exists": false,
+        "summary": "检索到的模型库中没有直接名为“行人抽烟检测”或包含“smoking”标签的独立人体属性模型。",
+        "evidence": [
+          "证据不足（未检索到明确包含 'smoking' 或 '抽烟' 标签的人体属性模型）"
+        ]
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "KM_Classifier_Ped_33of33_2.21.0 (行人属性大模型)",
+          "label_schema": "检测类别：行人33个属性，共174个类别标签。其中包含 'st_smoking' 标签（smoke抽烟模型），对应标签名可能为 'smoking' 或 '抽烟'。",
+          "training_data": "文档未明确列出训练集大小，但提及属性模型经过优化更新，包含针对特定场景的训练数据。证据中未提及具体数据量，建议标注数据需包含抽烟行为样本。",
+          "reported_metrics": "smoke抽烟模型训练更新：prec/recall 0.41/0.77 -> 0.76/0.75 (版本 2.21.0 更新前后对比)。",
+          "covered_capability": "人体属性、行为属性（抽烟）。",
+          "gap": "需要确认模型是否支持实时推理及具体部署平台。",
+          "evidence": [
+            "PDFs/行人属性大模型2.21.0.pdf p1 table 1 (证据 ID: cb677e70bc11b808c26e03ce)"
+          ]
+        },
+        {
+          "model_or_solution": "smoke_detect",
+          "label_schema": "单一标签：smoke (烟雾/烟火检测)。注意：该模型可能侧重于物体检测（烟雾），而非人体属性中的“人是否手持香烟”。",
+          "training_data": "证据不足。",
+          "reported_metrics": "证据不足。",
+          "covered_capability": "烟雾检测（可能无法区分人为手持香烟）。",
+          "gap": "此模型可能检测环境烟雾，而非行人抽烟动作，存在语义差异。",
+          "evidence": [
+            "adela/adela_release_records.jsonl (证据 ID: 6fcc91757cd0876a7a341a04)"
+          ]
+        },
+        {
+          "model_or_solution": "KM_falcon_KM_falcon_fight_UMT_large_nart_acl-ascend710-fp16_b8_2.0.5.model (安防方向 - 打架识别-large)",
+          "label_schema": "动作类别：打架。",
+          "training_data": "证据不足。",
+          "reported_metrics": "证据不足。",
+          "covered_capability": "人体动作识别（打架）。",
+          "gap": "打架识别属于复杂动作，抽烟属于细粒度属性/小动作，任务难度不同，迁移需重新训练。",
+          "evidence": [
+            "tables/model_release_records.jsonl (证据 ID: 767a8cfde5342b0fb42cab9c)"
+          ]
+        },
+        {
+          "model_or_solution": "KM_classifier_Ped_None_Security_nart_acl-ascend710-int8_b8_3.1.1.model (安防方向 - 人体二分类)",
+          "label_schema": "二分类：人体/非人体（误检分类）。",
+          "training_data": "清洗原数据集，增加 75w 训练数据，包含监控场景的遮挡/截断/躺卧人体，补充猫狗、植物等常见误报。",
+          "reported_metrics": "遮挡人体召回 +8.2%，躺卧人体召回 +8.8%，猫狗过滤 +12.2%。",
+          "covered_capability": "人体属性（误检过滤）",
+          "gap": "不支持抽烟属性。",
+          "evidence": [
+            "PDFs/人体二分类发版记录.pdf p1 (证据 ID: 49ee838c72e1488bd615d7a4)"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "medium",
+        "approach": "利用 KM_Classifier_Ped_33of33_2.21.0 模型作为基础模型或参考。该模型已包含 'smoking' 相关标签和属性定义。",
+        "data_requirements": "需准备抽烟行为样本（手持香烟、吸烟姿势），建议参考 33 个属性模型的数据标注规范。",
+        "compute_requirements": "Ascend 710 或 T4 平台，需确认模型版本兼容性。",
+        "engineering_work": "需验证 33 个属性模型中 'smoking' 标签在特定场景下的精度，可能需针对客户场景微调（Fine-tuning）。",
+        "estimated_timeline": "模型验证 + 微调 + 部署：2-4 周（基于已有基础模型），若从头训练则时间待定。",
+        "estimated_cost": "人力投入为主，数据标注成本待评估（若客户场景复杂）。",
+        "dependencies": [
+          "客户场景视频数据质量（光照、角度）",
+          "Ascend 710 或 T4 硬件支持",
+          "行人属性大模型 2.21.0 授权"
+        ],
+        "risks": [
+          "抽烟动作隐蔽性强，小目标检测难度大，可能影响精度。",
+          "模型 33 属性中抽烟标签可能仅在特定数据集中优化过，泛化性需验证。",
+          "烟雾检测模型（smoke_detect）不可直接替代行人抽烟检测。"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "参考 KM_Classifier_Ped_33of33_2.21.0 版本更新记录，smoking 标签 Recall 从 0.77 提升至 0.75 (可能指 precision/recall 变化)。",
+        "target": "取决于客户场景光照、遮挡情况及样本量。",
+        "uncertainty": "证据不足，无法精确预测精度。"
+      },
+      "recommendation": "推荐使用 KM_Classifier_Ped_33of33_2.21.0 行人属性大模型，其中已包含 'st_smoking' 属性标签。建议先通过 POC 验证该模型在客户场景下的抽烟检测效果，若效果不佳，需采集客户场景数据对模型进行微调。"
+    }
+  }
+}

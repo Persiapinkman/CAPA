@@ -1,0 +1,401 @@
+{
+  "session_id": "45cb78aa-7694-48db-801a-f03bb7b2c066",
+  "run_stamp": "20260520_133506_a7067acb",
+  "stage": "migration_report_request",
+  "step_index": 2,
+  "created_at": "2026-05-20T13:36:07+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260520_133506_a7067acb",
+    "input_schema": {
+      "user_query": "用户原始问题",
+      "retrieval_plan": "上一步检索规划（abstract_requirement + retrieve_fields）",
+      "field_results": "playbook 分字段检索结果：field, queries, coverage, evidence[]"
+    },
+    "evidence_item_fields": [
+      "evidence_id",
+      "title",
+      "snippet",
+      "model_name",
+      "algorithm_name",
+      "algorithm_type",
+      "application_scene",
+      "section_type",
+      "score"
+    ],
+    "structured_input": {
+      "user_query": "口罩颜色要识别黑、白、灰、红、蓝、黄、绿、紫、迷彩，用什么模型？",
+      "retrieval_plan": {
+        "abstract_requirement": {
+          "object": "口罩检测分类",
+          "attribute": "颜色识别 (黑、白、灰、红、蓝、黄、绿、紫、迷彩)",
+          "task_type": "分类识别",
+          "scene": "SPM 口罩分类",
+          "constraints": [
+            "目标对象：口罩，部件/场景：位置/颜色/图案，属性/缺陷：特定颜色识别，任务类型：颜色分类。",
+            "行业术语同义词：3D mask,急诊口罩，防疫口罩，P3/N95 mask,医用口罩，色调/颜色/类别，five colors,多色，camouflage/camo/迷彩",
+            "现有模型/算法：Color classification,色分类，Pan-classification,palette analysis/调色盘分析,color-based segmentation/基于色的分割，polychromatic detection/多彩检测，multi-class classification/多类分类，K-based detection，YOLO-ColorNet,Lab plot/色度图分析",
+            "性能与基准：mAP/mIoU,accuracy,precision/recall,F1 score,mean PAE/FPD,valid@N,kappa系数,confusion matrix/C矩阵,ROC/AUC,Hybrid score",
+            "数据与标注：color specific imagery/特定色图像，labeling guidelines，color calibration/颜色校正，multi-scale/anymulti-shot/多尺度，transformer/attention-based/注意力机制，pose estimation/姿态估计，ROI extraction/感兴趣区域提取，color histogram/直方图/色值，color thresholding/阈值分割"
+          ]
+        },
+        "retrieve_fields": [
+          {
+            "field": "existing_models",
+            "queries": [
+              "口罩颜色识别模型",
+              "医用口罩多色分类器",
+              "颜色分类 mask 多类别"
+            ]
+          },
+          {
+            "field": "similar_capabilities",
+            "queries": [
+              "颜色分类任务迁移实现",
+              "多类别视觉分类迁移",
+              "迷彩颜色识别灵活性"
+            ]
+          },
+          {
+            "field": "performance_baseline",
+            "queries": [
+              "口罩颜色检测性能基准",
+              "多色分类模型评估指标",
+              "医疗口罩精度指标"
+            ]
+          },
+          {
+            "field": "data_requirements",
+            "queries": [
+              "口罩颜色标注数据集要求",
+              "多色视觉检测数据需求",
+              "颜色校准图像标注标准"
+            ]
+          }
+        ]
+      },
+      "field_results": [
+        {
+          "field": "existing_models",
+          "queries": [
+            "口罩颜色识别模型",
+            "医用口罩多色分类器",
+            "颜色分类 mask 多类别"
+          ],
+          "coverage": "strong",
+          "evidence": [
+            {
+              "evidence_id": "61ade30548ab54447ef31525",
+              "title": "PDFs/Classify_3.4.0.pdf p16",
+              "snippet": "e_typ                                                           \n                    e_ot                                                            \n                    her                                                             \n                            • 口罩                                                    \n                              相关...",
+              "section_type": "general",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "8816f61d8a5298c7917b454b",
+              "title": "KM_textrecognition_CarPlate_vit_nart_cuda11.0-trt7.1-fp16-T4_b1_6.0.0.model",
+              "snippet": "target_name: 车牌\nalgorithm_type: 识别\nalgorithm_name: 车牌文字识别PK模型\napplication_scene: 一所PK项目车牌文字识别模型，单双行\nowner: 冯江燕\nmodel_name: KM_textrecognition_CarPlate_vit_nart_cuda11.0-trt7.1-fp16-T4_b1_6.0.0.model\nsupported_device: T4\nrecommended_config: cuda11.0-trt7.1-fp16-T4\nlast_updated: 2023-05-30\nlast_updated_month: 2023-05",
+              "model_name": "KM_textrecognition_CarPlate_vit_nart_cuda11.0-trt7.1-fp16-T4_b1_6.0.0.model",
+              "algorithm_name": "车牌文字识别PK模型",
+              "algorithm_type": "识别",
+              "application_scene": "一所PK项目车牌文字识别模型，单双行",
+              "section_type": "model_artifact",
+              "score": 0.98643
+            },
+            {
+              "evidence_id": "ee44956ffa2fa6ec7f4b00a3",
+              "title": "SmallFace_gray_448x800",
+              "snippet": "model_name: SmallFace_gray_448x800\nname: SmallFace_gray_448x800\nlabel_list: 1\nlabels: 1\ntype: essos\nplatform: acl-ascend310-int8\nstatus: SUCCESS\ndid: 127274\nrid: 47733\nversion: 3.0.1\nversion_train_date: 20250304\nsource_file: data/SmallFace_gray_448x800-acl-ascend310-int8_47733_127274.json",
+              "model_name": "SmallFace_gray_448x800",
+              "section_type": "release_note",
+              "score": 0.521954
+            },
+            {
+              "evidence_id": "ddf6e5d5f461c5b4baef44c9",
+              "title": "PDFs/Classify_3.4.0.pdf p16 table 1",
+              "snippet": "PDF表格: PDFs/Classify_3.4.0.pdf 第16页 表1\n\n|  |  | 属性名 | 当前支持 属性值 | 备注 |  |  |\n| --- | --- | --- | --- | --- | --- | --- |\n|  |  | st_age_ value 年龄 | • st_ag e_val ue |  |  |  |\n|  |  | mustach e_style 胡子 | • must ache _styl e_typ e_wit hout • a_wo rd_of _bea rd • goatt e • must ache _styl e_typ e_ot her |  |  |  |\n|  |  | respirato r_color 口罩颜色 （实际用 来表示是 否戴口 罩） | • color _type _with out • color _typ...",
+              "section_type": "general",
+              "score": 0.925168
+            },
+            {
+              "evidence_id": "3b7bd5678c1914cd463a6352",
+              "title": "KM_textrecognition_CarPlate_vit_nart_cuda11.4-trt8.2.0-fp16-A2_b1_6.0.0.model",
+              "snippet": "target_name: 车牌\nalgorithm_type: 识别\nalgorithm_name: 车牌文字识别PK模型\napplication_scene: 一所PK项目车牌文字识别模型，单双行\nowner: 冯江燕\nmodel_name: KM_textrecognition_CarPlate_vit_nart_cuda11.4-trt8.2.0-fp16-A2_b1_6.0.0.model\nsupported_device: A2\nrecommended_config: cuda11.4-trt8.2.0-fp16-A2\nlast_updated: 2023-05-30\nlast_updated_month: 2023-05",
+              "model_name": "KM_textrecognition_CarPlate_vit_nart_cuda11.4-trt8.2.0-fp16-A2_b1_6.0.0.model",
+              "algorithm_name": "车牌文字识别PK模型",
+              "algorithm_type": "识别",
+              "application_scene": "一所PK项目车牌文字识别模型，单双行",
+              "section_type": "model_artifact",
+              "score": 0.982839
+            },
+            {
+              "evidence_id": "f53d026649b58ea0fecf243a",
+              "title": "PAR_merged_model",
+              "snippet": "model_name: PAR_merged_model\nname: PAR_merged_model\ntype: classifier\nplatform: cpu-ppl2-fp32\nstatus: SUCCESS\ndid: 102019\nrid: 36860\nversion: 1.0.0\nversion_train_date: 20240228\nsource_file: data/PAR_merged_model-cpu-ppl2-fp32_36860_102019.json",
+              "model_name": "PAR_merged_model",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "e9fdde44540a819e4df7799b",
+              "title": "PDFs/安防方向--车辆属性大模型更新.pdf p7",
+              "snippet": "▪  颜色 ”无法判断“  标签字段调整为\"color_type_agnostic\"                                \n                                                                                    \n                                                                                    \n                                                                                    \n       1 输出字段：...",
+              "section_type": "label_schema",
+              "score": 0.715045
+            },
+            {
+              "evidence_id": "7bb6ccc58ee5b683b01832fd",
+              "title": "KM_textrecognition_CarPlate_vit_nart_cuda11.4-trt8.2.0-fp16-T4_b1_6.0.0.model",
+              "snippet": "target_name: 车牌\nalgorithm_type: 识别\nalgorithm_name: 车牌文字识别PK模型\napplication_scene: 一所PK项目车牌文字识别模型，单双行\nowner: 冯江燕\nmodel_name: KM_textrecognition_CarPlate_vit_nart_cuda11.4-trt8.2.0-fp16-T4_b1_6.0.0.model\nsupported_device: T4\nrecommended_config: cuda11.4-trt8.2.0-fp16-T4\nlast_updated: 2023-05-30\nlast_updated_month: 2023-05",
+              "model_name": "KM_textrecognition_CarPlate_vit_nart_cuda11.4-trt8.2.0-fp16-T4_b1_6.0.0.model",
+              "algorithm_name": "车牌文字识别PK模型",
+              "algorithm_type": "识别",
+              "application_scene": "一所PK项目车牌文字识别模型，单双行",
+              "section_type": "model_artifact",
+              "score": 0.982839
+            }
+          ]
+        },
+        {
+          "field": "similar_capabilities",
+          "queries": [
+            "颜色分类任务迁移实现",
+            "多类别视觉分类迁移",
+            "迷彩颜色识别灵活性"
+          ],
+          "coverage": "strong",
+          "evidence": [
+            {
+              "evidence_id": "e9fdde44540a819e4df7799b",
+              "title": "PDFs/安防方向--车辆属性大模型更新.pdf p7",
+              "snippet": "▪  颜色 ”无法判断“  标签字段调整为\"color_type_agnostic\"                                \n                                                                                    \n                                                                                    \n                                                                                    \n       1 输出字段：...",
+              "section_type": "label_schema",
+              "score": 0.741296
+            },
+            {
+              "evidence_id": "b37f60bf62e6051f3fe455a3",
+              "title": "KM_classifier_Carplate_TypeColor_nart_acl-ascend310-int8_b8_3.0.0.model",
+              "snippet": "target_name: 车牌\nalgorithm_type: 属性\nalgorithm_name: 车牌颜色类型属性\napplication_scene: V3.0.0，标品\nowner: 冯江燕\nmodel_name: KM_classifier_Carplate_TypeColor_nart_acl-ascend310-int8_b8_3.0.0.model\nsupported_device: ascend310\nrecommended_config: acl-ascend310-int8\nlast_updated: 2023-05-30\nlast_updated_month: 2023-05",
+              "model_name": "KM_classifier_Carplate_TypeColor_nart_acl-ascend310-int8_b8_3.0.0.model",
+              "algorithm_name": "车牌颜色类型属性",
+              "algorithm_type": "属性",
+              "application_scene": "V3.0.0，标品",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "ee44956ffa2fa6ec7f4b00a3",
+              "title": "SmallFace_gray_448x800",
+              "snippet": "model_name: SmallFace_gray_448x800\nname: SmallFace_gray_448x800\nlabel_list: 1\nlabels: 1\ntype: essos\nplatform: acl-ascend310-int8\nstatus: SUCCESS\ndid: 127274\nrid: 47733\nversion: 3.0.1\nversion_train_date: 20250304\nsource_file: data/SmallFace_gray_448x800-acl-ascend310-int8_47733_127274.json",
+              "model_name": "SmallFace_gray_448x800",
+              "section_type": "release_note",
+              "score": 0.085206
+            },
+            {
+              "evidence_id": "71d9995a5ba5a391cc26ae8d",
+              "title": "PDFs/安防方向--车辆属性大模型更新.pdf p14",
+              "snippet": "车辆颜色分类属性ACC/mP：",
+              "section_type": "general",
+              "score": 0.738842
+            },
+            {
+              "evidence_id": "ce7a770d1382489fb63496cf",
+              "title": "KM_classifier_Carplate_TypeColor_nart_acl-ascend710-int8_b8_3.0.0.model",
+              "snippet": "target_name: 车牌\nalgorithm_type: 属性\nalgorithm_name: 车牌颜色类型属性\napplication_scene: V3.0.0，标品\nowner: 冯江燕\nmodel_name: KM_classifier_Carplate_TypeColor_nart_acl-ascend710-int8_b8_3.0.0.model\nsupported_device: ascend710\nrecommended_config: acl-ascend710-int8\nlast_updated: 2023-05-30\nlast_updated_month: 2023-05",
+              "model_name": "KM_classifier_Carplate_TypeColor_nart_acl-ascend710-int8_b8_3.0.0.model",
+              "algorithm_name": "车牌颜色类型属性",
+              "algorithm_type": "属性",
+              "application_scene": "V3.0.0，标品",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "e3147847015c051257e71c5e",
+              "title": "SmallFace_Gray_736x1280",
+              "snippet": "model_name: SmallFace_Gray_736x1280\nname: SmallFace_Gray_736x1280\ntype: hunter\nplatform: acl-ascend310-int8\nstatus: SUCCESS\ndid: 128356\nrid: 48621\nversion: 4.15.3\nversion_train_date: 20250224\nsource_file: data/SmallFace_Gray_736x1280-acl-ascend310-int8_48621_128356.json",
+              "model_name": "SmallFace_Gray_736x1280",
+              "section_type": "release_note",
+              "score": 0.090789
+            },
+            {
+              "evidence_id": "ec1d68983588099dcbea10a4",
+              "title": "PDFs/安防方向--车辆属性大模型更新.pdf p14",
+              "snippet": "vehicle_color_precisio                              \n       cuda11.0-trt7.1-fp32-P4                       0.887/0.873                    \n                                n                                                   \n       cuda11.0-trt7.1-int8-T4  vehicle_type_precision 0.885/0.864...",
+              "section_type": "release_note",
+              "score": 0.736894
+            },
+            {
+              "evidence_id": "7571ba32218935d0e761dbff",
+              "title": "KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model",
+              "snippet": "target_name: 车牌\nalgorithm_type: 属性\nalgorithm_name: 车牌颜色类型属性\napplication_scene: V3.0.0，标品\nowner: 冯江燕\nmodel_name: KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model\nsupported_device: cpu\nrecommended_config: cpu-ppl2-fp32\nlast_updated: 2023-05-30\nlast_updated_month: 2023-05",
+              "model_name": "KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model",
+              "algorithm_name": "车牌颜色类型属性",
+              "algorithm_type": "属性",
+              "application_scene": "V3.0.0，标品",
+              "section_type": "model_artifact",
+              "score": 1.0
+            }
+          ]
+        },
+        {
+          "field": "performance_baseline",
+          "queries": [
+            "口罩颜色检测性能基准",
+            "多色分类模型评估指标",
+            "医疗口罩精度指标"
+          ],
+          "coverage": "strong",
+          "evidence": [
+            {
+              "evidence_id": "aa66b4dbf234a5ebdc4cc92c",
+              "title": "PDFs/安防方向--车牌属性 PK.pdf p5 table 1",
+              "snippet": "PDF表格: PDFs/安防方向--车牌属性 PK.pdf 第5页 表1\n\n| • 3.0.0：车牌检测312（阈值0.2627）+ 文字检测3.1.0 + 文字识别5.0.1 + 车牌属性3.0.0 • 6.0.0：车牌检测312（阈值0.2627）+ 文字检测3.1.0 + 文字识别5.0.1 + 车牌属性6.0.0 结构化测试集（难例） 深圳测试集 ucg卡口测试集 wuchang测试集 nanjing测试集 模型版 3.0.0 6.0.0 3.0.0 6.0.0 3.0.0 6.0.0 3.0.0 6.0.0 3.0.0 6.0.0 本 99.28% 99.61% 属性acc 98.69% 99.04%(+0.35%) 99.26% 99.52% 99.56% 99.51% 99.93% 100%(+0.07%) (+0.02%) (+0.09%) 五、性能测试 测试集（adela...",
+              "section_type": "release_note",
+              "score": 0.561797
+            },
+            {
+              "evidence_id": "82e4125f3d962c9cf9645519",
+              "title": "PDFs/deepcode_v254_64.pdf p1 table 1",
+              "snippet": "PDF表格: PDFs/deepcode_v254_64.pdf 第1页 表1\n\n表格结构化行:\n模型名称: deepcode_v254_64 发布日期:2023.12.07Highlight1. 各个测试集上与256d暴搜的精度差距： a.stpu平台： i. 粗搜TopK=200后用长特征精搜：Top1精度最大下降约1%（ blur_thailand），其余下降均在1% 以内，所有测试集平均下降0.18%； ii. 粗搜TopK=100后用长特征精搜：Top1精度最大下降约2%（mask, blur_thailand），其余下降 均在1%以内，所有测试集平均下降0.44%； 模型基本信息 是否序列 对应平 模型名称 OID 化/max_bat 台 chsizehalnn0KM_bifrost_face-deepcode-a736652d9c6e04b14f540910dcb188b9a...",
+              "section_type": "release_note",
+              "score": 0.916956
+            },
+            {
+              "evidence_id": "122651c1ca24d02c4f63d6d2",
+              "title": "PDFs/deepcode_v254_64.pdf p1",
+              "snippet": "128                  499MB                                         \n       p16 64d              ms",
+              "section_type": "performance_eval",
+              "score": 0.893089
+            },
+            {
+              "evidence_id": "7113e159f6f7dd8d5699ab81",
+              "title": "PDFs/deepcode_v254_64.pdf p1",
+              "snippet": "T4         \n     性能测试                                                                           \n     模型结构没有变化，所以速度和v1版本保持一致                                                         \n                 batchsiz   process   gpu_me                                        \n       model                                                                        \n                 e          _time     m...",
+              "section_type": "model_artifact",
+              "score": 0.889342
+            },
+            {
+              "evidence_id": "b991b5b15cc2feacd665d9be",
+              "title": "PDFs/deepcode_v254_64.pdf p1",
+              "snippet": "1        ppl2-      \n                           c5dcabc99305b986                                         \n      fp32_b1_2.54.0.model                                               fp32       \n                                                                         cuda1      \n      KM_bifrost_face-deepcode-                                          1.0-       \n                           7257cd7d55f0...",
+              "section_type": "model_artifact",
+              "score": 0.884307
+            },
+            {
+              "evidence_id": "61ade30548ab54447ef31525",
+              "title": "PDFs/Classify_3.4.0.pdf p16",
+              "snippet": "e_typ                                                           \n                    e_ot                                                            \n                    her                                                             \n                            • 口罩                                                    \n                              相关...",
+              "section_type": "general",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "ddf6e5d5f461c5b4baef44c9",
+              "title": "PDFs/Classify_3.4.0.pdf p16 table 1",
+              "snippet": "PDF表格: PDFs/Classify_3.4.0.pdf 第16页 表1\n\n|  |  | 属性名 | 当前支持 属性值 | 备注 |  |  |\n| --- | --- | --- | --- | --- | --- | --- |\n|  |  | st_age_ value 年龄 | • st_ag e_val ue |  |  |  |\n|  |  | mustach e_style 胡子 | • must ache _styl e_typ e_wit hout • a_wo rd_of _bea rd • goatt e • must ache _styl e_typ e_ot her |  |  |  |\n|  |  | respirato r_color 口罩颜色 （实际用 来表示是 否戴口 罩） | • color _type _with out • color _typ...",
+              "section_type": "general",
+              "score": 0.969271
+            },
+            {
+              "evidence_id": "fbee261dcfe85de56e04be07",
+              "title": "PDFs/Classify_3.4.0.pdf p16",
+              "snippet": "out       spirat                                                \n       （实际用                   or                                                    \n                  • color                                                           \n       来表示是         _type     （口                                                    \n       否戴口          _oth      罩位...",
+              "section_type": "general",
+              "score": 0.979019
+            }
+          ]
+        },
+        {
+          "field": "data_requirements",
+          "queries": [
+            "口罩颜色标注数据集要求",
+            "多色视觉检测数据需求",
+            "颜色校准图像标注标准"
+          ],
+          "coverage": "strong",
+          "evidence": [
+            {
+              "evidence_id": "f1d7b684162492149e1b528f",
+              "title": "PDFs/安防方向--车辆属性大模型更新.pdf p13",
+              "snippet": "• 要求：推荐车辆小图尺寸≥90*90，输入低于此尺寸模型精度不能保证                                           \n      • 输出参考：                                                                       \n                                                                                    \n        ◦ 模型输出：category_param.json                                                  \n        ◦ 标签字段：...",
+              "section_type": "algorithm_boundary",
+              "score": 0.834219
+            },
+            {
+              "evidence_id": "ce7a770d1382489fb63496cf",
+              "title": "KM_classifier_Carplate_TypeColor_nart_acl-ascend710-int8_b8_3.0.0.model",
+              "snippet": "target_name: 车牌\nalgorithm_type: 属性\nalgorithm_name: 车牌颜色类型属性\napplication_scene: V3.0.0，标品\nowner: 冯江燕\nmodel_name: KM_classifier_Carplate_TypeColor_nart_acl-ascend710-int8_b8_3.0.0.model\nsupported_device: ascend710\nrecommended_config: acl-ascend710-int8\nlast_updated: 2023-05-30\nlast_updated_month: 2023-05",
+              "model_name": "KM_classifier_Carplate_TypeColor_nart_acl-ascend710-int8_b8_3.0.0.model",
+              "algorithm_name": "车牌颜色类型属性",
+              "algorithm_type": "属性",
+              "application_scene": "V3.0.0，标品",
+              "section_type": "model_artifact",
+              "score": 0.989156
+            },
+            {
+              "evidence_id": "25babcf98a3f8fcb7b78b03c",
+              "title": "ClothColor",
+              "snippet": "did: 126728\nrid: 47901\nmodel_name: ClothColor\nplatform: cuda11.0-trt7.1-fp16-T4",
+              "model_name": "ClothColor",
+              "section_type": "model_artifact",
+              "score": 0.966689
+            },
+            {
+              "evidence_id": "e9fdde44540a819e4df7799b",
+              "title": "PDFs/安防方向--车辆属性大模型更新.pdf p7",
+              "snippet": "▪  颜色 ”无法判断“  标签字段调整为\"color_type_agnostic\"                                \n                                                                                    \n                                                                                    \n                                                                                    \n       1 输出字段：...",
+              "section_type": "label_schema",
+              "score": 0.616033
+            },
+            {
+              "evidence_id": "b37f60bf62e6051f3fe455a3",
+              "title": "KM_classifier_Carplate_TypeColor_nart_acl-ascend310-int8_b8_3.0.0.model",
+              "snippet": "target_name: 车牌\nalgorithm_type: 属性\nalgorithm_name: 车牌颜色类型属性\napplication_scene: V3.0.0，标品\nowner: 冯江燕\nmodel_name: KM_classifier_Carplate_TypeColor_nart_acl-ascend310-int8_b8_3.0.0.model\nsupported_device: ascend310\nrecommended_config: acl-ascend310-int8\nlast_updated: 2023-05-30\nlast_updated_month: 2023-05",
+              "model_name": "KM_classifier_Carplate_TypeColor_nart_acl-ascend310-int8_b8_3.0.0.model",
+              "algorithm_name": "车牌颜色类型属性",
+              "algorithm_type": "属性",
+              "application_scene": "V3.0.0，标品",
+              "section_type": "model_artifact",
+              "score": 0.989156
+            },
+            {
+              "evidence_id": "ee44956ffa2fa6ec7f4b00a3",
+              "title": "SmallFace_gray_448x800",
+              "snippet": "model_name: SmallFace_gray_448x800\nname: SmallFace_gray_448x800\nlabel_list: 1\nlabels: 1\ntype: essos\nplatform: acl-ascend310-int8\nstatus: SUCCESS\ndid: 127274\nrid: 47733\nversion: 3.0.1\nversion_train_date: 20250304\nsource_file: data/SmallFace_gray_448x800-acl-ascend310-int8_47733_127274.json",
+              "model_name": "SmallFace_gray_448x800",
+              "section_type": "release_note",
+              "score": 0.549924
+            },
+            {
+              "evidence_id": "61ade30548ab54447ef31525",
+              "title": "PDFs/Classify_3.4.0.pdf p16",
+              "snippet": "e_typ                                                           \n                    e_ot                                                            \n                    her                                                             \n                            • 口罩                                                    \n                              相关...",
+              "section_type": "general",
+              "score": 0.645414
+            },
+            {
+              "evidence_id": "7571ba32218935d0e761dbff",
+              "title": "KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model",
+              "snippet": "target_name: 车牌\nalgorithm_type: 属性\nalgorithm_name: 车牌颜色类型属性\napplication_scene: V3.0.0，标品\nowner: 冯江燕\nmodel_name: KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model\nsupported_device: cpu\nrecommended_config: cpu-ppl2-fp32\nlast_updated: 2023-05-30\nlast_updated_month: 2023-05",
+              "model_name": "KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model",
+              "algorithm_name": "车牌颜色类型属性",
+              "algorithm_type": "属性",
+              "application_scene": "V3.0.0，标品",
+              "section_type": "model_artifact",
+              "score": 0.989156
+            }
+          ]
+        }
+      ]
+    },
+    "llm_messages": [
+      {
+        "role": "system",
+        "content": "你是视觉模型迁移顾问。请基于检索证据生成结构化迁移评估报告。必须区分证据支持和合理推断；证据不足时明确写证据不足，不要编造精度、周期或成本。若可估计成本/周期，只能给区间和依赖前提。只输出 JSON。"
+      },
+      {
+        "role": "user",
+        "content": "{\n  \"user_query\": \"口罩颜色要识别黑、白、灰、红、蓝、黄、绿、紫、迷彩，用什么模型？\",\n  \"retrieval_plan\": {\n    \"abstract_requirement\": {\n      \"object\": \"口罩检测分类\",\n      \"attribute\": \"颜色识别 (黑、白、灰、红、蓝、黄、绿、紫、迷彩)\",\n      \"task_type\": \"分类识别\",\n      \"scene\": \"SPM 口罩分类\",\n      \"constraints\": [\n        \"目标对象：口罩，部件/场景：位置/颜色/图案，属性/缺陷：特定颜色识别，任务类型：颜色分类。\",\n        \"行业术语同义词：3D mask,急诊口罩，防疫口罩，P3/N95 mask,医用口罩，色调/颜色/类别，five colors,多色，camouflage/camo/迷彩\",\n        \"现有模型/算法：Color classification,色分类，Pan-classification,palette analysis/调色盘分析,color-based segmentation/基于色的分割，polychromatic detection/多彩检测，multi-class classification/多类分类，K-based detection，YOLO-ColorNet,Lab plot/色度图分析\",\n        \"性能与基准：mAP/mIoU,accuracy,precision/recall,F1 score,mean PAE/FPD,valid@N,kappa系数,confusion matrix/C矩阵,ROC/AUC,Hybrid score\",\n        \"数据与标注：color specific imagery/特定色图像，labeling guidelines，color calibration/颜色校正，multi-scale/anymulti-shot/多尺度，transformer/attention-based/注意力机制，pose estimation/姿态估计，ROI extraction/感兴趣区域提取，color histogram/直方图/色值，color thresholding/阈值分割\"\n      ]\n    },\n    \"retrieve_fields\": [\n      {\n        \"field\": \"existing_models\",\n        \"queries\": [\n          \"口罩颜色识别模型\",\n          \"医用口罩多色分类器\",\n          \"颜色分类 mask 多类别\"\n        ]\n      },\n      {\n        \"field\": \"similar_capabilities\",\n        \"queries\": [\n          \"颜色分类任务迁移实现\",\n          \"多类别视觉分类迁移\",\n          \"迷彩颜色识别灵活性\"\n        ]\n      },\n      {\n        \"field\": \"performance_baseline\",\n        \"queries\": [\n          \"口罩颜色检测性能基准\",\n          \"多色分类模型评估指标\",\n          \"医疗口罩精度指标\"\n        ]\n      },\n      {\n        \"field\": \"data_requirements\",\n        \"queries\": [\n          \"口罩颜色标注数据集要求\",\n          \"多色视觉检测数据需求\",\n          \"颜色校准图像标注标准\"\n        ]\n      }\n    ]\n  },\n  \"field_results\": [\n    {\n      \"field\": \"existing_models\",\n      \"queries\": [\n        \"口罩颜色识别模型\",\n        \"医用口罩多色分类器\",\n        \"颜色分类 mask 多类别\"\n      ],\n      \"coverage\": \"strong\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"61ade30548ab54447ef31525\",\n          \"title\": \"PDFs/Classify_3.4.0.pdf p16\",\n          \"snippet\": \"e_typ                                                           \\n                    e_ot                                                            \\n                    her                                                             \\n                            • 口罩                                                    \\n                              相关...\",\n          \"section_type\": \"general\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"8816f61d8a5298c7917b454b\",\n          \"title\": \"KM_textrecognition_CarPlate_vit_nart_cuda11.0-trt7.1-fp16-T4_b1_6.0.0.model\",\n          \"snippet\": \"target_name: 车牌\\nalgorithm_type: 识别\\nalgorithm_name: 车牌文字识别PK模型\\napplication_scene: 一所PK项目车牌文字识别模型，单双行\\nowner: 冯江燕\\nmodel_name: KM_textrecognition_CarPlate_vit_nart_cuda11.0-trt7.1-fp16-T4_b1_6.0.0.model\\nsupported_device: T4\\nrecommended_config: cuda11.0-trt7.1-fp16-T4\\nlast_updated: 2023-05-30\\nlast_updated_month: 2023-05\",\n          \"model_name\": \"KM_textrecognition_CarPlate_vit_nart_cuda11.0-trt7.1-fp16-T4_b1_6.0.0.model\",\n          \"algorithm_name\": \"车牌文字识别PK模型\",\n          \"algorithm_type\": \"识别\",\n          \"application_scene\": \"一所PK项目车牌文字识别模型，单双行\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.98643\n        },\n        {\n          \"evidence_id\": \"ee44956ffa2fa6ec7f4b00a3\",\n          \"title\": \"SmallFace_gray_448x800\",\n          \"snippet\": \"model_name: SmallFace_gray_448x800\\nname: SmallFace_gray_448x800\\nlabel_list: 1\\nlabels: 1\\ntype: essos\\nplatform: acl-ascend310-int8\\nstatus: SUCCESS\\ndid: 127274\\nrid: 47733\\nversion: 3.0.1\\nversion_train_date: 20250304\\nsource_file: data/SmallFace_gray_448x800-acl-ascend310-int8_47733_127274.json\",\n          \"model_name\": \"SmallFace_gray_448x800\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.521954\n        },\n        {\n          \"evidence_id\": \"ddf6e5d5f461c5b4baef44c9\",\n          \"title\": \"PDFs/Classify_3.4.0.pdf p16 table 1\",\n          \"snippet\": \"PDF表格: PDFs/Classify_3.4.0.pdf 第16页 表1\\n\\n|  |  | 属性名 | 当前支持 属性值 | 备注 |  |  |\\n| --- | --- | --- | --- | --- | --- | --- |\\n|  |  | st_age_ value 年龄 | • st_ag e_val ue |  |  |  |\\n|  |  | mustach e_style 胡子 | • must ache _styl e_typ e_wit hout • a_wo rd_of _bea rd • goatt e • must ache _styl e_typ e_ot her |  |  |  |\\n|  |  | respirato r_color 口罩颜色 （实际用 来表示是 否戴口 罩） | • color _type _with out • color _typ...\",\n          \"section_type\": \"general\",\n          \"score\": 0.925168\n        },\n        {\n          \"evidence_id\": \"3b7bd5678c1914cd463a6352\",\n          \"title\": \"KM_textrecognition_CarPlate_vit_nart_cuda11.4-trt8.2.0-fp16-A2_b1_6.0.0.model\",\n          \"snippet\": \"target_name: 车牌\\nalgorithm_type: 识别\\nalgorithm_name: 车牌文字识别PK模型\\napplication_scene: 一所PK项目车牌文字识别模型，单双行\\nowner: 冯江燕\\nmodel_name: KM_textrecognition_CarPlate_vit_nart_cuda11.4-trt8.2.0-fp16-A2_b1_6.0.0.model\\nsupported_device: A2\\nrecommended_config: cuda11.4-trt8.2.0-fp16-A2\\nlast_updated: 2023-05-30\\nlast_updated_month: 2023-05\",\n          \"model_name\": \"KM_textrecognition_CarPlate_vit_nart_cuda11.4-trt8.2.0-fp16-A2_b1_6.0.0.model\",\n          \"algorithm_name\": \"车牌文字识别PK模型\",\n          \"algorithm_type\": \"识别\",\n          \"application_scene\": \"一所PK项目车牌文字识别模型，单双行\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.982839\n        },\n        {\n          \"evidence_id\": \"f53d026649b58ea0fecf243a\",\n          \"title\": \"PAR_merged_model\",\n          \"snippet\": \"model_name: PAR_merged_model\\nname: PAR_merged_model\\ntype: classifier\\nplatform: cpu-ppl2-fp32\\nstatus: SUCCESS\\ndid: 102019\\nrid: 36860\\nversion: 1.0.0\\nversion_train_date: 20240228\\nsource_file: data/PAR_merged_model-cpu-ppl2-fp32_36860_102019.json\",\n          \"model_name\": \"PAR_merged_model\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"e9fdde44540a819e4df7799b\",\n          \"title\": \"PDFs/安防方向--车辆属性大模型更新.pdf p7\",\n          \"snippet\": \"▪  颜色 ”无法判断“  标签字段调整为\\\"color_type_agnostic\\\"                                \\n                                                                                    \\n                                                                                    \\n                                                                                    \\n       1 输出字段：...\",\n          \"section_type\": \"label_schema\",\n          \"score\": 0.715045\n        },\n        {\n          \"evidence_id\": \"7bb6ccc58ee5b683b01832fd\",\n          \"title\": \"KM_textrecognition_CarPlate_vit_nart_cuda11.4-trt8.2.0-fp16-T4_b1_6.0.0.model\",\n          \"snippet\": \"target_name: 车牌\\nalgorithm_type: 识别\\nalgorithm_name: 车牌文字识别PK模型\\napplication_scene: 一所PK项目车牌文字识别模型，单双行\\nowner: 冯江燕\\nmodel_name: KM_textrecognition_CarPlate_vit_nart_cuda11.4-trt8.2.0-fp16-T4_b1_6.0.0.model\\nsupported_device: T4\\nrecommended_config: cuda11.4-trt8.2.0-fp16-T4\\nlast_updated: 2023-05-30\\nlast_updated_month: 2023-05\",\n          \"model_name\": \"KM_textrecognition_CarPlate_vit_nart_cuda11.4-trt8.2.0-fp16-T4_b1_6.0.0.model\",\n          \"algorithm_name\": \"车牌文字识别PK模型\",\n          \"algorithm_type\": \"识别\",\n          \"application_scene\": \"一所PK项目车牌文字识别模型，单双行\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.982839\n        }\n      ]\n    },\n    {\n      \"field\": \"similar_capabilities\",\n      \"queries\": [\n        \"颜色分类任务迁移实现\",\n        \"多类别视觉分类迁移\",\n        \"迷彩颜色识别灵活性\"\n      ],\n      \"coverage\": \"strong\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"e9fdde44540a819e4df7799b\",\n          \"title\": \"PDFs/安防方向--车辆属性大模型更新.pdf p7\",\n          \"snippet\": \"▪  颜色 ”无法判断“  标签字段调整为\\\"color_type_agnostic\\\"                                \\n                                                                                    \\n                                                                                    \\n                                                                                    \\n       1 输出字段：...\",\n          \"section_type\": \"label_schema\",\n          \"score\": 0.741296\n        },\n        {\n          \"evidence_id\": \"b37f60bf62e6051f3fe455a3\",\n          \"title\": \"KM_classifier_Carplate_TypeColor_nart_acl-ascend310-int8_b8_3.0.0.model\",\n          \"snippet\": \"target_name: 车牌\\nalgorithm_type: 属性\\nalgorithm_name: 车牌颜色类型属性\\napplication_scene: V3.0.0，标品\\nowner: 冯江燕\\nmodel_name: KM_classifier_Carplate_TypeColor_nart_acl-ascend310-int8_b8_3.0.0.model\\nsupported_device: ascend310\\nrecommended_config: acl-ascend310-int8\\nlast_updated: 2023-05-30\\nlast_updated_month: 2023-05\",\n          \"model_name\": \"KM_classifier_Carplate_TypeColor_nart_acl-ascend310-int8_b8_3.0.0.model\",\n          \"algorithm_name\": \"车牌颜色类型属性\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"V3.0.0，标品\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"ee44956ffa2fa6ec7f4b00a3\",\n          \"title\": \"SmallFace_gray_448x800\",\n          \"snippet\": \"model_name: SmallFace_gray_448x800\\nname: SmallFace_gray_448x800\\nlabel_list: 1\\nlabels: 1\\ntype: essos\\nplatform: acl-ascend310-int8\\nstatus: SUCCESS\\ndid: 127274\\nrid: 47733\\nversion: 3.0.1\\nversion_train_date: 20250304\\nsource_file: data/SmallFace_gray_448x800-acl-ascend310-int8_47733_127274.json\",\n          \"model_name\": \"SmallFace_gray_448x800\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.085206\n        },\n        {\n          \"evidence_id\": \"71d9995a5ba5a391cc26ae8d\",\n          \"title\": \"PDFs/安防方向--车辆属性大模型更新.pdf p14\",\n          \"snippet\": \"车辆颜色分类属性ACC/mP：\",\n          \"section_type\": \"general\",\n          \"score\": 0.738842\n        },\n        {\n          \"evidence_id\": \"ce7a770d1382489fb63496cf\",\n          \"title\": \"KM_classifier_Carplate_TypeColor_nart_acl-ascend710-int8_b8_3.0.0.model\",\n          \"snippet\": \"target_name: 车牌\\nalgorithm_type: 属性\\nalgorithm_name: 车牌颜色类型属性\\napplication_scene: V3.0.0，标品\\nowner: 冯江燕\\nmodel_name: KM_classifier_Carplate_TypeColor_nart_acl-ascend710-int8_b8_3.0.0.model\\nsupported_device: ascend710\\nrecommended_config: acl-ascend710-int8\\nlast_updated: 2023-05-30\\nlast_updated_month: 2023-05\",\n          \"model_name\": \"KM_classifier_Carplate_TypeColor_nart_acl-ascend710-int8_b8_3.0.0.model\",\n          \"algorithm_name\": \"车牌颜色类型属性\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"V3.0.0，标品\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"e3147847015c051257e71c5e\",\n          \"title\": \"SmallFace_Gray_736x1280\",\n          \"snippet\": \"model_name: SmallFace_Gray_736x1280\\nname: SmallFace_Gray_736x1280\\ntype: hunter\\nplatform: acl-ascend310-int8\\nstatus: SUCCESS\\ndid: 128356\\nrid: 48621\\nversion: 4.15.3\\nversion_train_date: 20250224\\nsource_file: data/SmallFace_Gray_736x1280-acl-ascend310-int8_48621_128356.json\",\n          \"model_name\": \"SmallFace_Gray_736x1280\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.090789\n        },\n        {\n          \"evidence_id\": \"ec1d68983588099dcbea10a4\",\n          \"title\": \"PDFs/安防方向--车辆属性大模型更新.pdf p14\",\n          \"snippet\": \"vehicle_color_precisio                              \\n       cuda11.0-trt7.1-fp32-P4                       0.887/0.873                    \\n                                n                                                   \\n       cuda11.0-trt7.1-int8-T4  vehicle_type_precision 0.885/0.864...\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.736894\n        },\n        {\n          \"evidence_id\": \"7571ba32218935d0e761dbff\",\n          \"title\": \"KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model\",\n          \"snippet\": \"target_name: 车牌\\nalgorithm_type: 属性\\nalgorithm_name: 车牌颜色类型属性\\napplication_scene: V3.0.0，标品\\nowner: 冯江燕\\nmodel_name: KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model\\nsupported_device: cpu\\nrecommended_config: cpu-ppl2-fp32\\nlast_updated: 2023-05-30\\nlast_updated_month: 2023-05\",\n          \"model_name\": \"KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model\",\n          \"algorithm_name\": \"车牌颜色类型属性\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"V3.0.0，标品\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        }\n      ]\n    },\n    {\n      \"field\": \"performance_baseline\",\n      \"queries\": [\n        \"口罩颜色检测性能基准\",\n        \"多色分类模型评估指标\",\n        \"医疗口罩精度指标\"\n      ],\n      \"coverage\": \"strong\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"aa66b4dbf234a5ebdc4cc92c\",\n          \"title\": \"PDFs/安防方向--车牌属性 PK.pdf p5 table 1\",\n          \"snippet\": \"PDF表格: PDFs/安防方向--车牌属性 PK.pdf 第5页 表1\\n\\n| • 3.0.0：车牌检测312（阈值0.2627）+ 文字检测3.1.0 + 文字识别5.0.1 + 车牌属性3.0.0 • 6.0.0：车牌检测312（阈值0.2627）+ 文字检测3.1.0 + 文字识别5.0.1 + 车牌属性6.0.0 结构化测试集（难例） 深圳测试集 ucg卡口测试集 wuchang测试集 nanjing测试集 模型版 3.0.0 6.0.0 3.0.0 6.0.0 3.0.0 6.0.0 3.0.0 6.0.0 3.0.0 6.0.0 本 99.28% 99.61% 属性acc 98.69% 99.04%(+0.35%) 99.26% 99.52% 99.56% 99.51% 99.93% 100%(+0.07%) (+0.02%) (+0.09%) 五、性能测试 测试集（adela...\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.561797\n        },\n        {\n          \"evidence_id\": \"82e4125f3d962c9cf9645519\",\n          \"title\": \"PDFs/deepcode_v254_64.pdf p1 table 1\",\n          \"snippet\": \"PDF表格: PDFs/deepcode_v254_64.pdf 第1页 表1\\n\\n表格结构化行:\\n模型名称: deepcode_v254_64 发布日期:2023.12.07Highlight1. 各个测试集上与256d暴搜的精度差距： a.stpu平台： i. 粗搜TopK=200后用长特征精搜：Top1精度最大下降约1%（ blur_thailand），其余下降均在1% 以内，所有测试集平均下降0.18%； ii. 粗搜TopK=100后用长特征精搜：Top1精度最大下降约2%（mask, blur_thailand），其余下降 均在1%以内，所有测试集平均下降0.44%； 模型基本信息 是否序列 对应平 模型名称 OID 化/max_bat 台 chsizehalnn0KM_bifrost_face-deepcode-a736652d9c6e04b14f540910dcb188b9a...\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.916956\n        },\n        {\n          \"evidence_id\": \"122651c1ca24d02c4f63d6d2\",\n          \"title\": \"PDFs/deepcode_v254_64.pdf p1\",\n          \"snippet\": \"128                  499MB                                         \\n       p16 64d              ms\",\n          \"section_type\": \"performance_eval\",\n          \"score\": 0.893089\n        },\n        {\n          \"evidence_id\": \"7113e159f6f7dd8d5699ab81\",\n          \"title\": \"PDFs/deepcode_v254_64.pdf p1\",\n          \"snippet\": \"T4         \\n     性能测试                                                                           \\n     模型结构没有变化，所以速度和v1版本保持一致                                                         \\n                 batchsiz   process   gpu_me                                        \\n       model                                                                        \\n                 e          _time     m...\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.889342\n        },\n        {\n          \"evidence_id\": \"b991b5b15cc2feacd665d9be\",\n          \"title\": \"PDFs/deepcode_v254_64.pdf p1\",\n          \"snippet\": \"1        ppl2-      \\n                           c5dcabc99305b986                                         \\n      fp32_b1_2.54.0.model                                               fp32       \\n                                                                         cuda1      \\n      KM_bifrost_face-deepcode-                                          1.0-       \\n                           7257cd7d55f0...\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.884307\n        },\n        {\n          \"evidence_id\": \"61ade30548ab54447ef31525\",\n          \"title\": \"PDFs/Classify_3.4.0.pdf p16\",\n          \"snippet\": \"e_typ                                                           \\n                    e_ot                                                            \\n                    her                                                             \\n                            • 口罩                                                    \\n                              相关...\",\n          \"section_type\": \"general\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"ddf6e5d5f461c5b4baef44c9\",\n          \"title\": \"PDFs/Classify_3.4.0.pdf p16 table 1\",\n          \"snippet\": \"PDF表格: PDFs/Classify_3.4.0.pdf 第16页 表1\\n\\n|  |  | 属性名 | 当前支持 属性值 | 备注 |  |  |\\n| --- | --- | --- | --- | --- | --- | --- |\\n|  |  | st_age_ value 年龄 | • st_ag e_val ue |  |  |  |\\n|  |  | mustach e_style 胡子 | • must ache _styl e_typ e_wit hout • a_wo rd_of _bea rd • goatt e • must ache _styl e_typ e_ot her |  |  |  |\\n|  |  | respirato r_color 口罩颜色 （实际用 来表示是 否戴口 罩） | • color _type _with out • color _typ...\",\n          \"section_type\": \"general\",\n          \"score\": 0.969271\n        },\n        {\n          \"evidence_id\": \"fbee261dcfe85de56e04be07\",\n          \"title\": \"PDFs/Classify_3.4.0.pdf p16\",\n          \"snippet\": \"out       spirat                                                \\n       （实际用                   or                                                    \\n                  • color                                                           \\n       来表示是         _type     （口                                                    \\n       否戴口          _oth      罩位...\",\n          \"section_type\": \"general\",\n          \"score\": 0.979019\n        }\n      ]\n    },\n    {\n      \"field\": \"data_requirements\",\n      \"queries\": [\n        \"口罩颜色标注数据集要求\",\n        \"多色视觉检测数据需求\",\n        \"颜色校准图像标注标准\"\n      ],\n      \"coverage\": \"strong\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"f1d7b684162492149e1b528f\",\n          \"title\": \"PDFs/安防方向--车辆属性大模型更新.pdf p13\",\n          \"snippet\": \"• 要求：推荐车辆小图尺寸≥90*90，输入低于此尺寸模型精度不能保证                                           \\n      • 输出参考：                                                                       \\n                                                                                    \\n        ◦ 模型输出：category_param.json                                                  \\n        ◦ 标签字段：...\",\n          \"section_type\": \"algorithm_boundary\",\n          \"score\": 0.834219\n        },\n        {\n          \"evidence_id\": \"ce7a770d1382489fb63496cf\",\n          \"title\": \"KM_classifier_Carplate_TypeColor_nart_acl-ascend710-int8_b8_3.0.0.model\",\n          \"snippet\": \"target_name: 车牌\\nalgorithm_type: 属性\\nalgorithm_name: 车牌颜色类型属性\\napplication_scene: V3.0.0，标品\\nowner: 冯江燕\\nmodel_name: KM_classifier_Carplate_TypeColor_nart_acl-ascend710-int8_b8_3.0.0.model\\nsupported_device: ascend710\\nrecommended_config: acl-ascend710-int8\\nlast_updated: 2023-05-30\\nlast_updated_month: 2023-05\",\n          \"model_name\": \"KM_classifier_Carplate_TypeColor_nart_acl-ascend710-int8_b8_3.0.0.model\",\n          \"algorithm_name\": \"车牌颜色类型属性\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"V3.0.0，标品\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.989156\n        },\n        {\n          \"evidence_id\": \"25babcf98a3f8fcb7b78b03c\",\n          \"title\": \"ClothColor\",\n          \"snippet\": \"did: 126728\\nrid: 47901\\nmodel_name: ClothColor\\nplatform: cuda11.0-trt7.1-fp16-T4\",\n          \"model_name\": \"ClothColor\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.966689\n        },\n        {\n          \"evidence_id\": \"e9fdde44540a819e4df7799b\",\n          \"title\": \"PDFs/安防方向--车辆属性大模型更新.pdf p7\",\n          \"snippet\": \"▪  颜色 ”无法判断“  标签字段调整为\\\"color_type_agnostic\\\"                                \\n                                                                                    \\n                                                                                    \\n                                                                                    \\n       1 输出字段：...\",\n          \"section_type\": \"label_schema\",\n          \"score\": 0.616033\n        },\n        {\n          \"evidence_id\": \"b37f60bf62e6051f3fe455a3\",\n          \"title\": \"KM_classifier_Carplate_TypeColor_nart_acl-ascend310-int8_b8_3.0.0.model\",\n          \"snippet\": \"target_name: 车牌\\nalgorithm_type: 属性\\nalgorithm_name: 车牌颜色类型属性\\napplication_scene: V3.0.0，标品\\nowner: 冯江燕\\nmodel_name: KM_classifier_Carplate_TypeColor_nart_acl-ascend310-int8_b8_3.0.0.model\\nsupported_device: ascend310\\nrecommended_config: acl-ascend310-int8\\nlast_updated: 2023-05-30\\nlast_updated_month: 2023-05\",\n          \"model_name\": \"KM_classifier_Carplate_TypeColor_nart_acl-ascend310-int8_b8_3.0.0.model\",\n          \"algorithm_name\": \"车牌颜色类型属性\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"V3.0.0，标品\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.989156\n        },\n        {\n          \"evidence_id\": \"ee44956ffa2fa6ec7f4b00a3\",\n          \"title\": \"SmallFace_gray_448x800\",\n          \"snippet\": \"model_name: SmallFace_gray_448x800\\nname: SmallFace_gray_448x800\\nlabel_list: 1\\nlabels: 1\\ntype: essos\\nplatform: acl-ascend310-int8\\nstatus: SUCCESS\\ndid: 127274\\nrid: 47733\\nversion: 3.0.1\\nversion_train_date: 20250304\\nsource_file: data/SmallFace_gray_448x800-acl-ascend310-int8_47733_127274.json\",\n          \"model_name\": \"SmallFace_gray_448x800\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.549924\n        },\n        {\n          \"evidence_id\": \"61ade30548ab54447ef31525\",\n          \"title\": \"PDFs/Classify_3.4.0.pdf p16\",\n          \"snippet\": \"e_typ                                                           \\n                    e_ot                                                            \\n                    her                                                             \\n                            • 口罩                                                    \\n                              相关...\",\n          \"section_type\": \"general\",\n          \"score\": 0.645414\n        },\n        {\n          \"evidence_id\": \"7571ba32218935d0e761dbff\",\n          \"title\": \"KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model\",\n          \"snippet\": \"target_name: 车牌\\nalgorithm_type: 属性\\nalgorithm_name: 车牌颜色类型属性\\napplication_scene: V3.0.0，标品\\nowner: 冯江燕\\nmodel_name: KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model\\nsupported_device: cpu\\nrecommended_config: cpu-ppl2-fp32\\nlast_updated: 2023-05-30\\nlast_updated_month: 2023-05\",\n          \"model_name\": \"KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model\",\n          \"algorithm_name\": \"车牌颜色类型属性\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"V3.0.0，标品\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.989156\n        }\n      ]\n    }\n  ]\n}"
+      }
+    ]
+  }
+}

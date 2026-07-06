@@ -1,0 +1,72 @@
+{
+  "session_id": "70314d2f-b1da-4a4f-933b-9c3cf4b3d2bd",
+  "run_stamp": "20260518_161715_a9eb3646",
+  "stage": "migration_abstraction_request",
+  "step_index": 1,
+  "created_at": "2026-05-18T16:17:15+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "migration_requirement_abstraction",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "raw_requirement": {
+              "type": "string"
+            },
+            "task_family": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "visual_targets": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "capability_types": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "constraints": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "retrieval_queries": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "must_answer_sections": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "raw_requirement",
+            "task_family",
+            "constraints",
+            "retrieval_queries",
+            "must_answer_sections"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "system_prompt": "你是迁移顾问的需求抽象器。\n任务：把用户的新需求抽象成便于后续多路检索的结构化任务画像。\n当前只做抽象，不做检索、不生成最终迁移建议。\n要求：\n1) raw_requirement 保留用户原始需求核心，不要改写成结论；\n2) task_family 输出 2-5 个可迁移任务族，例如人脸相关、人体属性分类、颜色分类、目标检测；\n3) visual_targets 输出视觉目标或业务对象；若无法判断可为空数组；\n4) capability_types 输出能力类型，例如检测、分类、属性识别、OCR、分割、跟踪；\n5) constraints 输出潜在约束、数据域差异、合规/公平性、部署限制、细粒度难点等；\n6) retrieval_queries 生成 4-8 条中文检索 query，覆盖相似历史需求、模型能力边界、counter case、部署难点；\n7) must_answer_sections 固定包含 coverage, gaps, iteration, performance, cost, dependencies, counter_cases, deploy_risks, uncertainties, next_steps；\n8) 禁止编造已有模型、性能指标、客户名称或历史项目结论。\n只输出 JSON。",
+    "user_prompt": "{\n  \"raw_requirement\": \"检测电子元器异常，用什么模型？\",\n  \"context\": {}\n}",
+    "combined_prompt": "你是迁移顾问的需求抽象器。\n任务：把用户的新需求抽象成便于后续多路检索的结构化任务画像。\n当前只做抽象，不做检索、不生成最终迁移建议。\n要求：\n1) raw_requirement 保留用户原始需求核心，不要改写成结论；\n2) task_family 输出 2-5 个可迁移任务族，例如人脸相关、人体属性分类、颜色分类、目标检测；\n3) visual_targets 输出视觉目标或业务对象；若无法判断可为空数组；\n4) capability_types 输出能力类型，例如检测、分类、属性识别、OCR、分割、跟踪；\n5) constraints 输出潜在约束、数据域差异、合规/公平性、部署限制、细粒度难点等；\n6) retrieval_queries 生成 4-8 条中文检索 query，覆盖相似历史需求、模型能力边界、counter case、部署难点；\n7) must_answer_sections 固定包含 coverage, gaps, iteration, performance, cost, dependencies, counter_cases, deploy_risks, uncertainties, next_steps；\n8) 禁止编造已有模型、性能指标、客户名称或历史项目结论。\n只输出 JSON。\n\n{\n  \"raw_requirement\": \"检测电子元器异常，用什么模型？\",\n  \"context\": {}\n}",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260518_161715_a9eb3646"
+  }
+}

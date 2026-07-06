@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "pipeline_eval",
+  "_action_input": {
+    "task_text": "用开放集模型检测横幅目标",
+    "finish_after_tool": false
+  },
+  "_thought": "用户明确要求用开放集模型先试横幅检测，如果效果不足再输出迁移建议。根据决策原则7（pipeline_eval 用于生成样本 + 目标检测评测/模型效果对比/精度评估报告/给定样例图时优先选 pipeline_eval），应优先调用 pipeline_eval 执行完整探测。由于有图且场景从开放性探测逐步过渡到迁移评估，需要确保 finish_after_tool 根据工具结果判断：若 eval 能直接给出迁移结论可设 true，通常需要获取检测结果后再判断是否触发 next move，安全起见设为 false。因此用 pipeline_eval 执行完整目标检测评测流水线。"
+}

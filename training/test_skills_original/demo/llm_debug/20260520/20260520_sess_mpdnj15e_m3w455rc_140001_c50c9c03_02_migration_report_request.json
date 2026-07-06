@@ -1,0 +1,398 @@
+{
+  "session_id": "sess_mpdnj15e_m3w455rc",
+  "run_stamp": "20260520_140001_c50c9c03",
+  "stage": "migration_report_request",
+  "step_index": 2,
+  "created_at": "2026-05-20T14:01:09+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260520_140001_c50c9c03",
+    "input_schema": {
+      "user_query": "用户原始问题",
+      "retrieval_plan": "上一步检索规划（abstract_requirement + retrieve_fields）",
+      "field_results": "playbook 分字段检索结果：field, queries, coverage, evidence[]"
+    },
+    "evidence_item_fields": [
+      "evidence_id",
+      "title",
+      "snippet",
+      "model_name",
+      "algorithm_name",
+      "algorithm_type",
+      "application_scene",
+      "section_type",
+      "score"
+    ],
+    "structured_input": {
+      "user_query": "香港人体属性中要求识别“纹身有无”和“纹身位置：面部、颈部、手部、腿部、背部、无法判断”，普通城市监控场景是否可行？",
+      "retrieval_plan": {
+        "abstract_requirement": {
+          "object": "模特、纹身",
+          "attribute": "纹身有无、纹身位置：面部、颈部、手部、腿部、背部、无法判断",
+          "task_type": "人体属性检测、体征识别、异常检测",
+          "scene": "普通城市监控",
+          "constraints": [
+            "香港",
+            "小红书",
+            "认罪/感悟/权重/在线娱乐/认罪态度",
+            "非机车属性全模型",
+            "骑手属性",
+            "骑手类型",
+            "街头/公共场所",
+            "门禁/监控/会议/安防"
+          ]
+        },
+        "retrieve_fields": [
+          {
+            "field": "existing_models",
+            "queries": [
+              "纹身边",
+              "纹身 检测",
+              "body tattoo detection",
+              "纹身 识别 模型"
+            ]
+          },
+          {
+            "field": "similar_capabilities",
+            "queries": [
+              "人脸特征检测",
+              "人体局部纹理检测",
+              "非结构特征检测",
+              "异常特征检测"
+            ]
+          },
+          {
+            "field": "performance_baseline",
+            "queries": [
+              "人体局部特征检测精度",
+              "纹身检测 f1 分数",
+              "监控场景模型精度",
+              "人脸属性检测 Baseline"
+            ]
+          },
+          {
+            "field": "data_requirements",
+            "queries": [
+              "纹身检测训练数据",
+              "人体部位纹理数据",
+              "异常特征标注数据",
+              "小额数据 迁移学习"
+            ]
+          }
+        ]
+      },
+      "field_results": [
+        {
+          "field": "existing_models",
+          "queries": [
+            "纹身边",
+            "纹身 检测",
+            "body tattoo detection",
+            "纹身 识别 模型"
+          ],
+          "coverage": "strong",
+          "evidence": [
+            {
+              "evidence_id": "60dca68c88f209e19b266a0b",
+              "title": "PDFs/CommonFace_Gray_0.1.0.pdf p6",
+              "snippet": "围                                                                         \n          内，                                                                        \n          则会                                                                        \n          按照...",
+              "section_type": "general",
+              "score": 0.484293
+            },
+            {
+              "evidence_id": "7d46e31c0867251721fe60c5",
+              "title": "KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model",
+              "snippet": "target_name: 二维码\nalgorithm_type: 检测\nalgorithm_name: 二维码检测模型\napplication_scene: 网安场景，正方形二维码\nowner: 龚丽君\nmodel_name: KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model\nsupported_device: ascend310\nrecommended_config: ascend310-fp16\nlast_updated: 2023-04-07\nlast_updated_month: 2023-04",
+              "model_name": "KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model",
+              "algorithm_name": "二维码检测模型",
+              "algorithm_type": "检测",
+              "application_scene": "网安场景，正方形二维码",
+              "section_type": "model_artifact",
+              "score": 0.638828
+            },
+            {
+              "evidence_id": "aff912ec0dbdbd61fb804284",
+              "title": "full_struct_480x768",
+              "snippet": "did: 81961\nrid: 28670\nmodel_name: full_struct_480x768\nplatform: rknn-rv1126-int8\nlabel_list: face|pedestrian|cycer|vehicle|cyc",
+              "model_name": "full_struct_480x768",
+              "section_type": "model_artifact",
+              "score": 0.424498
+            },
+            {
+              "evidence_id": "5202d2f8b0bf19ed28afeabb",
+              "title": "PDFs/Shikra-Embedding-V3.1.0.pdf p1",
+              "snippet": "二  模型边界                                                                        \n                                                                                    \n                                                                                    \n      1. 边界：                                                                        \n        a. 图片侧：  支持最小图片的长边不低于150像素，短边不低于80像素，图片像素太小或者太模糊，会...",
+              "section_type": "algorithm_boundary",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "4e854c10e9ef5cf71f5d69c7",
+              "title": "KM_essos_qrcode_Det_nart_acl-ascend710-fp16_b8_1.0.0.model",
+              "snippet": "target_name: 二维码\nalgorithm_type: 检测\nalgorithm_name: 二维码检测模型\napplication_scene: 网安场景，正方形二维码\nowner: 龚丽君\nmodel_name: KM_essos_qrcode_Det_nart_acl-ascend710-fp16_b8_1.0.0.model\nsupported_device: ascend710\nrecommended_config: ascend710-fp16\nlast_updated: 2023-04-07\nlast_updated_month: 2023-04",
+              "model_name": "KM_essos_qrcode_Det_nart_acl-ascend710-fp16_b8_1.0.0.model",
+              "algorithm_name": "二维码检测模型",
+              "algorithm_type": "检测",
+              "application_scene": "网安场景，正方形二维码",
+              "section_type": "model_artifact",
+              "score": 0.638828
+            },
+            {
+              "evidence_id": "31e3bffe4b51c490864d7ca7",
+              "title": "full_struct",
+              "snippet": "did: 82005\nrid: 28671\nmodel_name: full_struct\nplatform: rknn-rv1126-int8\nlabel_list: face|pedestrian|cycer|vehicle|cyc",
+              "model_name": "full_struct",
+              "section_type": "model_artifact",
+              "score": 0.424234
+            },
+            {
+              "evidence_id": "6514a11d7afee941fa5dba31",
+              "title": "PDFs/Shikra-Embedding-V3.7.0.pdf p3",
+              "snippet": "• 穿Levi's的人                      \n      品牌检索测试集    共200个品牌检索词，其中行人衣服/附属物品牌70个，和车牌品牌30个                                \n                                                   • 穿Lining的人                      \n                                                   ...                              \n                                                   • 遛狗不牵绳的人                        \n                 共41个含都否定的...",
+              "section_type": "accuracy_metric",
+              "score": 0.460279
+            },
+            {
+              "evidence_id": "49c54c8b14def9bea56835c1",
+              "title": "KM_obb_carplate_480x480_n_nart_acl-ascend710-fp16_b8_1.0.0.model",
+              "snippet": "target_name: 车牌\nalgorithm_type: 检测\nalgorithm_name: 旋转框车牌检测\napplication_scene: 旋转目标车牌检测\nowner: 肖坤\nmodel_name: KM_obb_carplate_480x480_n_nart_acl-ascend710-fp16_b8_1.0.0.model\nsupported_device: ascend710\nrecommended_config: acl-ascend710-fp16\nlast_updated: 2026-01-06\nlast_updated_month: 2026-01",
+              "model_name": "KM_obb_carplate_480x480_n_nart_acl-ascend710-fp16_b8_1.0.0.model",
+              "algorithm_name": "旋转框车牌检测",
+              "algorithm_type": "检测",
+              "application_scene": "旋转目标车牌检测",
+              "section_type": "model_artifact",
+              "score": 0.63748
+            }
+          ]
+        },
+        {
+          "field": "similar_capabilities",
+          "queries": [
+            "人脸特征检测",
+            "人体局部纹理检测",
+            "非结构特征检测",
+            "异常特征检测"
+          ],
+          "coverage": "strong",
+          "evidence": [
+            {
+              "evidence_id": "137691d3edd6c1b135b49405",
+              "title": "PDFs/安防方向-人脸误检分类模型发版记录.pdf p7",
+              "snippet": "1 {'attribute': {'imagenet': {'0': 0.5389107465744019, '1': 0.46108928322792053}},\n          'id': 0, 'label': 37017, 'image_id': 0}",
+              "section_type": "label_schema",
+              "score": 0.715076
+            },
+            {
+              "evidence_id": "0a2f666707aaef62d90c921a",
+              "title": "PDFs/非机动车特征发版.pdf p24 table 1",
+              "snippet": "PDF表格: PDFs/非机动车特征发版.pdf 第24页 表1\n\n表格结构化行:\n模型族: h\n模型名称: enu_NonMotorVehicleFeature_nart10.0-trt5.0-fp32-2_0.0.2.model\n平台: ) etca0.0 模型 1、相 2、新 模型 特征 模型 模型 ModepytorcKM_s_cudaP4_b3KM_s_cudaP4_b1KM_s_cudaT4_b3KM_s_cudaP4_b3KM_s_cudaP4_b1KM_s_cudaT4_b3KM_s_acl-a\n\n模型族: h\n模型名称: enu_NonMotorVehicleFeature_nart10.0-trt5.0-fp32-_0.0.2.model\n平台: ) etca0.0 模型 1、相 2、新 模型 特征 模型 模型 ModepytorcKM_s_cudaP4_b3KM_s_...",
+              "section_type": "release_note",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "4a734b1579cb85b04016247e",
+              "title": "PDFs/安防方向-人脸误检分类模型发版记录.pdf p7",
+              "snippet": "一 功能介绍                                                                         \n                                                                                    \n      • 模型功能：判断输入图片是否是人脸                                                            \n      • 模型输入要求：人脸检测中心外扩0.5倍，支持facebody，smallface，struct      full等人脸检测...",
+              "section_type": "algorithm_boundary",
+              "score": 0.710256
+            },
+            {
+              "evidence_id": "ca8a004740bf1f57f9abea5e",
+              "title": "PDFs/v0.1.1.pdf p1",
+              "snippet": "v0.1.1                                                                         \n                                                                                    \n                                                                                    \n     Release  Note:...",
+              "section_type": "owner_metadata",
+              "score": 0.954157
+            },
+            {
+              "evidence_id": "e84ff757d18bbab4155f30d6",
+              "title": "PDFs/安防方向-人脸误检分类模型发版记录.pdf p7",
+              "snippet": "• 类别定义说明",
+              "section_type": "general",
+              "score": 0.705931
+            },
+            {
+              "evidence_id": "061c8800674b47f6112edddb",
+              "title": "PDFs/0.0.3.pdf p1",
+              "snippet": "0.0.3                                                                          \n                                                                                    \n                                                                                    \n     Release  Note:...",
+              "section_type": "owner_metadata",
+              "score": 0.948367
+            },
+            {
+              "evidence_id": "c129a5a4defdfd9ebbe86ad7",
+              "title": "PDFs/安防方向-人脸误检分类模型发版记录.pdf p7 table 1",
+              "snippet": "PDF表格: PDFs/安防方向-人脸误检分类模型发版记录.pdf 第7页 表1\n\n|  | 一 功能介绍 |  |  |  |\n| --- | --- | --- | --- | --- |\n|  | • 模型功能：判断输入图片是否是人脸 |  |  |  |\n|  | • 模型输入要求：人脸检测中心外扩0.5倍，支持facebody，smallface，struct full等人脸检测 |  |  |  |\n|  | • 输出格式参考：其中“0” 代表非人脸，“1”代表人脸 |  |  |  |\n|  |  | 1 {'attribute': {'imagenet': {'0': 0.5389107465744019, '1': 0.46108928322792053}}, 'id': 0, 'label': 37017, 'image_id': 0} |  |  |\n|  | • 类...",
+              "section_type": "algorithm_boundary",
+              "score": 0.705607
+            },
+            {
+              "evidence_id": "84516197deb594e4e97c1daf",
+              "title": "PDFs/v0.1.1.pdf p1 table 1",
+              "snippet": "PDF表格: PDFs/v0.1.1.pdf 第1页 表1\n\n| v0.1.1 Release Note: • 发布时间: 20240529 • Owner: @朱帅 • Highlight: 回流两个场景容易误报视频，模型针对误报的优化迭代。 一、功能介绍 工厂车间，相机俯拍场景下进行行人检测，业务层通过统计检测框的数量实现行人计数任务。 |  |  |\n| --- | --- | --- |\n|  | v0.1.1 |  |\n|  | Release Note: |  |\n|  | • 发布时间: 20240529 |  |\n|  | • Owner: @朱帅 |  |\n|  | • Highlight: 回流两个场景容易误报视频，模型针对误报的优化迭代。 |  |\n|  | 一、功能介绍 |  |\n|  | 工厂车间，相机俯拍场景下进行行人检测，业务层通过统计检测框的数量实现行人计数...",
+              "section_type": "owner_metadata",
+              "score": 0.947957
+            }
+          ]
+        },
+        {
+          "field": "performance_baseline",
+          "queries": [
+            "人体局部特征检测精度",
+            "纹身检测 f1 分数",
+            "监控场景模型精度",
+            "人脸属性检测 Baseline"
+          ],
+          "coverage": "strong",
+          "evidence": [
+            {
+              "evidence_id": "0bd4b00de07c1e5c2419c0d8",
+              "title": "PDFs/人体二分类发版记录.pdf p1",
+              "snippet": "常见误报                                                                      \n        ◦ 精度: 大幅提升监控场景遮挡截断躺卧人体正样本、猫狗负样本的召回,                 其中遮挡人体召回+8.2%，          \n                                                                                    \n          躺卧人体召回+8.8%，猫狗过滤+12.2%                                                    \n        ◦ 精度: 大幅提升监控场景遮挡截断躺卧人体正样本、猫狗负样本的召回,                 其中遮挡人体召回+8...",
+              "section_type": "accuracy_eval",
+              "score": 0.290347
+            },
+            {
+              "evidence_id": "89e3fcc34cc23cf9031163e3",
+              "title": "PDFs/人体二分类发版记录.pdf p1 table 1",
+              "snippet": "PDF表格: PDFs/人体二分类发版记录.pdf 第1页 表1\n\n| 人体二分类发版记录 KM_classifier_Ped_None_Security_3.1.1 release note: • release date: 2025.07.31 • owner: fengjiangyan@sensetime.com • highlights ◦ 数据: 清洗原数据集, 并增加75w训练数据, 包含监控场景的遮挡/截断/躺卧人体，补充猫狗、植物等 常见误报 ◦ 精度: 大幅提升监控场景遮挡截断躺卧人体正样本、猫狗负样本的召回, 其中遮挡人体召回+8.2%， 躺卧人体召回+8.8%，猫狗过滤+12.2% ◦ 精度: 大幅提升监控场景遮挡截断躺卧人体正样本、猫狗负样本的召回, 其中遮挡人体召回+8.5%， 躺卧人体召回+10.2%，猫狗过滤+12.9% ◦ 阈值：模型无内置阈值, 阈值设定可...",
+              "section_type": "accuracy_eval",
+              "score": 0.290801
+            },
+            {
+              "evidence_id": "c7711b84757a14915a38a72a",
+              "title": "PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2 table 1",
+              "snippet": "PDF表格: PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf 第2页 表1\n\n表格结构化行:\n模型族: 三、模型列表\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model\nOID: beeb6944bdca2dafd0213251951cc47f829efad2981d7f847010b13f486181c5\n平台: cuda11.0-trt7.1-fp16-T4\n\n模型族: 三、模型列表\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model\nOID: fcd2d67fbbaab4fc2064f08ccaf5e6...",
+              "section_type": "accuracy_eval",
+              "score": 0.807289
+            },
+            {
+              "evidence_id": "c8df1c194e028b7e002ac065",
+              "title": "PDFs/安防方向-人体质量3.0.1发版.pdf p1 table 1",
+              "snippet": "PDF表格: PDFs/安防方向-人体质量3.0.1发版.pdf 第1页 表1\n\n| 安防方向-人体质量3.0.1发版 KM_classifier_Ped_Quality_Security_3.0.1 release note： 1 release date： 2023.07.06 2 owner：hutao2@sensetime.com 3 highlights: 4 • 输入为人体小图，Ped_Quality_Security进行人体模糊、亮度、上半身完整、下半身完整的功能判 定，Ped_None_Multi_Security进行多人体无人体判定； 5 • 多人体precision为98.7%，无人体的precision为98.1%，模糊的precision为98.0，上半身完整 的precision为98.0，下半身完整precision为90.3。 Adela推荐清单：清单详情 -...",
+              "section_type": "release_note",
+              "score": 0.62689
+            },
+            {
+              "evidence_id": "c3df8f567b44bcd3cf139136",
+              "title": "PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2",
+              "snippet": "58                  \n                 without_safetybelt 0.9269   0.9702   0.9481                        \n     评测平台：cuda11.0-trt7.1-fp16-T4                                                   \n                                                                                    \n                                                                                    \n     模型性能",
+              "section_type": "accuracy_eval",
+              "score": 0.802051
+            },
+            {
+              "evidence_id": "1d4107dd8be5f74f932bdc50",
+              "title": "PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2",
+              "snippet": "ge/project/3/releaseManage?       \n     rid=34577&id=3&model_type=classifier&tabName=deployment                        \n     四、精度性能                                                                         \n                                                                                    \n     模型精度...",
+              "section_type": "accuracy_eval",
+              "score": 0.800952
+            },
+            {
+              "evidence_id": "b5c1032332b3503421a8294e",
+              "title": "PDFs/safety_rope v0.2.1.pdf p1 table 1",
+              "snippet": "PDF表格: PDFs/safety_rope v0.2.1.pdf 第1页 表1\n\n| safety_rope v0.2.1 Release Note: • 发布时间: 2024.01.29 • Owner: zhushuai@sensetime.com • Highlight: ◦ 追加了长客场景回流误报的工人图片，以提升该场景下的精度，目前对应数据点位 top1 acc从原先 0.55提升到0.97。 ◦ 在通用测试集上无掉点，各项精度指标有略微提升0.1%-0.5% 标签解释: ▪ \"safety_rope\": • \"safety_rope_connected\" （安全绳已连接） • \"safety_rope_unconnected\" （安全绳未连接） • \"safety_rope_without\" （无安全绳） • \"safety_rope_agnostic\" （无法判断） |...",
+              "section_type": "release_note",
+              "score": 0.472662
+            },
+            {
+              "evidence_id": "ae2d10698faed2d83bef2ebd",
+              "title": "PDFs/安防方向-人脸误检分类模型发版记录.pdf p6",
+              "snippet": "common测试集                       监控难例测试集                   \n                                  1-              0-              1-                \n                  0-                                                                \n       误报阈值             0-recall precisio 1-recall precisio 0-recall precisio 1-recall\n                precision...",
+              "section_type": "accuracy_metric",
+              "score": 0.60391
+            }
+          ]
+        },
+        {
+          "field": "data_requirements",
+          "queries": [
+            "纹身检测训练数据",
+            "人体部位纹理数据",
+            "异常特征标注数据",
+            "小额数据 迁移学习"
+          ],
+          "coverage": "strong",
+          "evidence": [
+            {
+              "evidence_id": "80320e59c6d48ecbd7bdd9ff",
+              "title": "PDFs/服饰属性模型.pdf p1 table 1",
+              "snippet": "PDF表格: PDFs/服饰属性模型.pdf 第1页 表1\n\n| 服饰属性模型 HL数据处理 • 第一批次 ◦ 小图总量：312251 ◦ 路径：s3://struct-data2/SDJY/ ◦ 模型训练使用全量，按 8:2 比例切分训练集、测试集。各类别具体数量如下表 ◦ 数据同步 ▪ 251223：已同步采样小图1w张，含训练集8000张（三类各6000/1500/500），测试集2000张 （三类各1000/800/200） ▪ 251224：已同步采样小图10w张，含训练集8w、测试集2w；附带数据采样脚本，采样并直接转 成spiral的数据格式； 0-prisoner 1-police 2-others train 230312 16499 2989 test 57578 4125 748 总计 287890 20624 3737 • 第二批次（HL视频抽帧采样） ◦ 小图总量...",
+              "section_type": "algorithm_boundary",
+              "score": 0.623418
+            },
+            {
+              "evidence_id": "a46c652a232601d718d0d858",
+              "title": "KM_essos_det_small_nart_acl-ascend710-fp16_b1_1.0.0.model",
+              "snippet": "target_name: 人体\nalgorithm_type: 检测\nalgorithm_name: 钓鱼人体检测\napplication_scene: 呈贡CV长尾业务\nowner: 苏舒婷\nmodel_name: KM_essos_det_small_nart_acl-ascend710-fp16_b1_1.0.0.model\nsupported_device: ascend710\nrecommended_config: acl-ascend710-fp16\nlast_updated: 2025-12-30\nlast_updated_month: 2025-12",
+              "model_name": "KM_essos_det_small_nart_acl-ascend710-fp16_b1_1.0.0.model",
+              "algorithm_name": "钓鱼人体检测",
+              "algorithm_type": "检测",
+              "application_scene": "呈贡CV长尾业务",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "3fa50f2bc1e43647832018e3",
+              "title": "swim_detect",
+              "snippet": "did: 132433\nrid: 51840\nmodel_name: swim_detect\nplatform: acl-ascend710-fp16\nlabel_list: in_water|no_water",
+              "model_name": "swim_detect",
+              "section_type": "model_artifact",
+              "score": 0.524588
+            },
+            {
+              "evidence_id": "dc9fe13e4a2d11574c7a63e5",
+              "title": "PDFs/安防方向--车牌检测.pdf p1",
+              "snippet": "release note                                                                   \n                                                                                    \n                                                                                    \n      • 发布时间：20230519                                                               \n      • owner：gaowanshun@sensetime.com...",
+              "section_type": "owner_metadata",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "31357ff5c3d8b6a4bcdb9ea9",
+              "title": "KM_essos_fisher_det_small_nart_cuda11.0-trt7.1-fp16-T4_b1_1.0.0.model",
+              "snippet": "target_name: 人体\nalgorithm_type: 检测\nalgorithm_name: 钓鱼人体检测\napplication_scene: 呈贡CV长尾业务\nowner: 苏舒婷\nmodel_name: KM_essos_fisher_det_small_nart_cuda11.0-trt7.1-fp16-T4_b1_1.0.0.model\nsupported_device: T4\nrecommended_config: cuda11.0-trt7.1-fp16-T4\nlast_updated: 2025-12-30\nlast_updated_month: 2025-12",
+              "model_name": "KM_essos_fisher_det_small_nart_cuda11.0-trt7.1-fp16-T4_b1_1.0.0.model",
+              "algorithm_name": "钓鱼人体检测",
+              "algorithm_type": "检测",
+              "application_scene": "呈贡CV长尾业务",
+              "section_type": "model_artifact",
+              "score": 0.984896
+            },
+            {
+              "evidence_id": "5bd3f6a80c6d0ce27f9a2337",
+              "title": "KM_falcon_fight_UMT_large",
+              "snippet": "model_name: KM_falcon_fight_UMT_large\nname: KM_falcon_fight_UMT_large\ntype: falcon\nplatform: acl-ascend310-fp16\nstatus: SUCCESS\ndid: 126793\nrid: 45903\nversion: 2.0.4\nversion_train_date: 20250107\nsource_file: data/KM_falcon_fight_UMT_large-acl-ascend310-fp16_45903_126793.json",
+              "model_name": "KM_falcon_fight_UMT_large",
+              "section_type": "release_note",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "f860d99ac91fa73c4f8940d4",
+              "title": "PDFs/服饰属性模型.pdf p1",
+              "snippet": ".9999734163284302, \"st_juron\n         g_police\": 1.7758437024895102e-05, \"st_jurong_others\": 0.0}}, 'id': 0, 'label': 2\n         21488, 'image_id': 0}",
+              "section_type": "label_schema",
+              "score": 0.622619
+            },
+            {
+              "evidence_id": "7d46e31c0867251721fe60c5",
+              "title": "KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model",
+              "snippet": "target_name: 二维码\nalgorithm_type: 检测\nalgorithm_name: 二维码检测模型\napplication_scene: 网安场景，正方形二维码\nowner: 龚丽君\nmodel_name: KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model\nsupported_device: ascend310\nrecommended_config: ascend310-fp16\nlast_updated: 2023-04-07\nlast_updated_month: 2023-04",
+              "model_name": "KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model",
+              "algorithm_name": "二维码检测模型",
+              "algorithm_type": "检测",
+              "application_scene": "网安场景，正方形二维码",
+              "section_type": "model_artifact",
+              "score": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    "llm_messages": [
+      {
+        "role": "system",
+        "content": "你是视觉模型迁移顾问。请基于检索证据生成结构化迁移评估报告。必须区分证据支持和合理推断；证据不足时明确写证据不足，不要编造精度、周期或成本。若可估计成本/周期，只能给区间和依赖前提。只输出 JSON。"
+      },
+      {
+        "role": "user",
+        "content": "{\n  \"user_query\": \"香港人体属性中要求识别“纹身有无”和“纹身位置：面部、颈部、手部、腿部、背部、无法判断”，普通城市监控场景是否可行？\",\n  \"retrieval_plan\": {\n    \"abstract_requirement\": {\n      \"object\": \"模特、纹身\",\n      \"attribute\": \"纹身有无、纹身位置：面部、颈部、手部、腿部、背部、无法判断\",\n      \"task_type\": \"人体属性检测、体征识别、异常检测\",\n      \"scene\": \"普通城市监控\",\n      \"constraints\": [\n        \"香港\",\n        \"小红书\",\n        \"认罪/感悟/权重/在线娱乐/认罪态度\",\n        \"非机车属性全模型\",\n        \"骑手属性\",\n        \"骑手类型\",\n        \"街头/公共场所\",\n        \"门禁/监控/会议/安防\"\n      ]\n    },\n    \"retrieve_fields\": [\n      {\n        \"field\": \"existing_models\",\n        \"queries\": [\n          \"纹身边\",\n          \"纹身 检测\",\n          \"body tattoo detection\",\n          \"纹身 识别 模型\"\n        ]\n      },\n      {\n        \"field\": \"similar_capabilities\",\n        \"queries\": [\n          \"人脸特征检测\",\n          \"人体局部纹理检测\",\n          \"非结构特征检测\",\n          \"异常特征检测\"\n        ]\n      },\n      {\n        \"field\": \"performance_baseline\",\n        \"queries\": [\n          \"人体局部特征检测精度\",\n          \"纹身检测 f1 分数\",\n          \"监控场景模型精度\",\n          \"人脸属性检测 Baseline\"\n        ]\n      },\n      {\n        \"field\": \"data_requirements\",\n        \"queries\": [\n          \"纹身检测训练数据\",\n          \"人体部位纹理数据\",\n          \"异常特征标注数据\",\n          \"小额数据 迁移学习\"\n        ]\n      }\n    ]\n  },\n  \"field_results\": [\n    {\n      \"field\": \"existing_models\",\n      \"queries\": [\n        \"纹身边\",\n        \"纹身 检测\",\n        \"body tattoo detection\",\n        \"纹身 识别 模型\"\n      ],\n      \"coverage\": \"strong\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"60dca68c88f209e19b266a0b\",\n          \"title\": \"PDFs/CommonFace_Gray_0.1.0.pdf p6\",\n          \"snippet\": \"围                                                                         \\n          内，                                                                        \\n          则会                                                                        \\n          按照...\",\n          \"section_type\": \"general\",\n          \"score\": 0.484293\n        },\n        {\n          \"evidence_id\": \"7d46e31c0867251721fe60c5\",\n          \"title\": \"KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model\",\n          \"snippet\": \"target_name: 二维码\\nalgorithm_type: 检测\\nalgorithm_name: 二维码检测模型\\napplication_scene: 网安场景，正方形二维码\\nowner: 龚丽君\\nmodel_name: KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model\\nsupported_device: ascend310\\nrecommended_config: ascend310-fp16\\nlast_updated: 2023-04-07\\nlast_updated_month: 2023-04\",\n          \"model_name\": \"KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model\",\n          \"algorithm_name\": \"二维码检测模型\",\n          \"algorithm_type\": \"检测\",\n          \"application_scene\": \"网安场景，正方形二维码\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.638828\n        },\n        {\n          \"evidence_id\": \"aff912ec0dbdbd61fb804284\",\n          \"title\": \"full_struct_480x768\",\n          \"snippet\": \"did: 81961\\nrid: 28670\\nmodel_name: full_struct_480x768\\nplatform: rknn-rv1126-int8\\nlabel_list: face|pedestrian|cycer|vehicle|cyc\",\n          \"model_name\": \"full_struct_480x768\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.424498\n        },\n        {\n          \"evidence_id\": \"5202d2f8b0bf19ed28afeabb\",\n          \"title\": \"PDFs/Shikra-Embedding-V3.1.0.pdf p1\",\n          \"snippet\": \"二  模型边界                                                                        \\n                                                                                    \\n                                                                                    \\n      1. 边界：                                                                        \\n        a. 图片侧：  支持最小图片的长边不低于150像素，短边不低于80像素，图片像素太小或者太模糊，会...\",\n          \"section_type\": \"algorithm_boundary\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"4e854c10e9ef5cf71f5d69c7\",\n          \"title\": \"KM_essos_qrcode_Det_nart_acl-ascend710-fp16_b8_1.0.0.model\",\n          \"snippet\": \"target_name: 二维码\\nalgorithm_type: 检测\\nalgorithm_name: 二维码检测模型\\napplication_scene: 网安场景，正方形二维码\\nowner: 龚丽君\\nmodel_name: KM_essos_qrcode_Det_nart_acl-ascend710-fp16_b8_1.0.0.model\\nsupported_device: ascend710\\nrecommended_config: ascend710-fp16\\nlast_updated: 2023-04-07\\nlast_updated_month: 2023-04\",\n          \"model_name\": \"KM_essos_qrcode_Det_nart_acl-ascend710-fp16_b8_1.0.0.model\",\n          \"algorithm_name\": \"二维码检测模型\",\n          \"algorithm_type\": \"检测\",\n          \"application_scene\": \"网安场景，正方形二维码\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.638828\n        },\n        {\n          \"evidence_id\": \"31e3bffe4b51c490864d7ca7\",\n          \"title\": \"full_struct\",\n          \"snippet\": \"did: 82005\\nrid: 28671\\nmodel_name: full_struct\\nplatform: rknn-rv1126-int8\\nlabel_list: face|pedestrian|cycer|vehicle|cyc\",\n          \"model_name\": \"full_struct\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.424234\n        },\n        {\n          \"evidence_id\": \"6514a11d7afee941fa5dba31\",\n          \"title\": \"PDFs/Shikra-Embedding-V3.7.0.pdf p3\",\n          \"snippet\": \"• 穿Levi's的人                      \\n      品牌检索测试集    共200个品牌检索词，其中行人衣服/附属物品牌70个，和车牌品牌30个                                \\n                                                   • 穿Lining的人                      \\n                                                   ...                              \\n                                                   • 遛狗不牵绳的人                        \\n                 共41个含都否定的...\",\n          \"section_type\": \"accuracy_metric\",\n          \"score\": 0.460279\n        },\n        {\n          \"evidence_id\": \"49c54c8b14def9bea56835c1\",\n          \"title\": \"KM_obb_carplate_480x480_n_nart_acl-ascend710-fp16_b8_1.0.0.model\",\n          \"snippet\": \"target_name: 车牌\\nalgorithm_type: 检测\\nalgorithm_name: 旋转框车牌检测\\napplication_scene: 旋转目标车牌检测\\nowner: 肖坤\\nmodel_name: KM_obb_carplate_480x480_n_nart_acl-ascend710-fp16_b8_1.0.0.model\\nsupported_device: ascend710\\nrecommended_config: acl-ascend710-fp16\\nlast_updated: 2026-01-06\\nlast_updated_month: 2026-01\",\n          \"model_name\": \"KM_obb_carplate_480x480_n_nart_acl-ascend710-fp16_b8_1.0.0.model\",\n          \"algorithm_name\": \"旋转框车牌检测\",\n          \"algorithm_type\": \"检测\",\n          \"application_scene\": \"旋转目标车牌检测\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.63748\n        }\n      ]\n    },\n    {\n      \"field\": \"similar_capabilities\",\n      \"queries\": [\n        \"人脸特征检测\",\n        \"人体局部纹理检测\",\n        \"非结构特征检测\",\n        \"异常特征检测\"\n      ],\n      \"coverage\": \"strong\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"137691d3edd6c1b135b49405\",\n          \"title\": \"PDFs/安防方向-人脸误检分类模型发版记录.pdf p7\",\n          \"snippet\": \"1 {'attribute': {'imagenet': {'0': 0.5389107465744019, '1': 0.46108928322792053}},\\n          'id': 0, 'label': 37017, 'image_id': 0}\",\n          \"section_type\": \"label_schema\",\n          \"score\": 0.715076\n        },\n        {\n          \"evidence_id\": \"0a2f666707aaef62d90c921a\",\n          \"title\": \"PDFs/非机动车特征发版.pdf p24 table 1\",\n          \"snippet\": \"PDF表格: PDFs/非机动车特征发版.pdf 第24页 表1\\n\\n表格结构化行:\\n模型族: h\\n模型名称: enu_NonMotorVehicleFeature_nart10.0-trt5.0-fp32-2_0.0.2.model\\n平台: ) etca0.0 模型 1、相 2、新 模型 特征 模型 模型 ModepytorcKM_s_cudaP4_b3KM_s_cudaP4_b1KM_s_cudaT4_b3KM_s_cudaP4_b3KM_s_cudaP4_b1KM_s_cudaT4_b3KM_s_acl-a\\n\\n模型族: h\\n模型名称: enu_NonMotorVehicleFeature_nart10.0-trt5.0-fp32-_0.0.2.model\\n平台: ) etca0.0 模型 1、相 2、新 模型 特征 模型 模型 ModepytorcKM_s_cudaP4_b3KM_s_...\",\n          \"section_type\": \"release_note\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"4a734b1579cb85b04016247e\",\n          \"title\": \"PDFs/安防方向-人脸误检分类模型发版记录.pdf p7\",\n          \"snippet\": \"一 功能介绍                                                                         \\n                                                                                    \\n      • 模型功能：判断输入图片是否是人脸                                                            \\n      • 模型输入要求：人脸检测中心外扩0.5倍，支持facebody，smallface，struct      full等人脸检测...\",\n          \"section_type\": \"algorithm_boundary\",\n          \"score\": 0.710256\n        },\n        {\n          \"evidence_id\": \"ca8a004740bf1f57f9abea5e\",\n          \"title\": \"PDFs/v0.1.1.pdf p1\",\n          \"snippet\": \"v0.1.1                                                                         \\n                                                                                    \\n                                                                                    \\n     Release  Note:...\",\n          \"section_type\": \"owner_metadata\",\n          \"score\": 0.954157\n        },\n        {\n          \"evidence_id\": \"e84ff757d18bbab4155f30d6\",\n          \"title\": \"PDFs/安防方向-人脸误检分类模型发版记录.pdf p7\",\n          \"snippet\": \"• 类别定义说明\",\n          \"section_type\": \"general\",\n          \"score\": 0.705931\n        },\n        {\n          \"evidence_id\": \"061c8800674b47f6112edddb\",\n          \"title\": \"PDFs/0.0.3.pdf p1\",\n          \"snippet\": \"0.0.3                                                                          \\n                                                                                    \\n                                                                                    \\n     Release  Note:...\",\n          \"section_type\": \"owner_metadata\",\n          \"score\": 0.948367\n        },\n        {\n          \"evidence_id\": \"c129a5a4defdfd9ebbe86ad7\",\n          \"title\": \"PDFs/安防方向-人脸误检分类模型发版记录.pdf p7 table 1\",\n          \"snippet\": \"PDF表格: PDFs/安防方向-人脸误检分类模型发版记录.pdf 第7页 表1\\n\\n|  | 一 功能介绍 |  |  |  |\\n| --- | --- | --- | --- | --- |\\n|  | • 模型功能：判断输入图片是否是人脸 |  |  |  |\\n|  | • 模型输入要求：人脸检测中心外扩0.5倍，支持facebody，smallface，struct full等人脸检测 |  |  |  |\\n|  | • 输出格式参考：其中“0” 代表非人脸，“1”代表人脸 |  |  |  |\\n|  |  | 1 {'attribute': {'imagenet': {'0': 0.5389107465744019, '1': 0.46108928322792053}}, 'id': 0, 'label': 37017, 'image_id': 0} |  |  |\\n|  | • 类...\",\n          \"section_type\": \"algorithm_boundary\",\n          \"score\": 0.705607\n        },\n        {\n          \"evidence_id\": \"84516197deb594e4e97c1daf\",\n          \"title\": \"PDFs/v0.1.1.pdf p1 table 1\",\n          \"snippet\": \"PDF表格: PDFs/v0.1.1.pdf 第1页 表1\\n\\n| v0.1.1 Release Note: • 发布时间: 20240529 • Owner: @朱帅 • Highlight: 回流两个场景容易误报视频，模型针对误报的优化迭代。 一、功能介绍 工厂车间，相机俯拍场景下进行行人检测，业务层通过统计检测框的数量实现行人计数任务。 |  |  |\\n| --- | --- | --- |\\n|  | v0.1.1 |  |\\n|  | Release Note: |  |\\n|  | • 发布时间: 20240529 |  |\\n|  | • Owner: @朱帅 |  |\\n|  | • Highlight: 回流两个场景容易误报视频，模型针对误报的优化迭代。 |  |\\n|  | 一、功能介绍 |  |\\n|  | 工厂车间，相机俯拍场景下进行行人检测，业务层通过统计检测框的数量实现行人计数...\",\n          \"section_type\": \"owner_metadata\",\n          \"score\": 0.947957\n        }\n      ]\n    },\n    {\n      \"field\": \"performance_baseline\",\n      \"queries\": [\n        \"人体局部特征检测精度\",\n        \"纹身检测 f1 分数\",\n        \"监控场景模型精度\",\n        \"人脸属性检测 Baseline\"\n      ],\n      \"coverage\": \"strong\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"0bd4b00de07c1e5c2419c0d8\",\n          \"title\": \"PDFs/人体二分类发版记录.pdf p1\",\n          \"snippet\": \"常见误报                                                                      \\n        ◦ 精度: 大幅提升监控场景遮挡截断躺卧人体正样本、猫狗负样本的召回,                 其中遮挡人体召回+8.2%，          \\n                                                                                    \\n          躺卧人体召回+8.8%，猫狗过滤+12.2%                                                    \\n        ◦ 精度: 大幅提升监控场景遮挡截断躺卧人体正样本、猫狗负样本的召回,                 其中遮挡人体召回+8...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.290347\n        },\n        {\n          \"evidence_id\": \"89e3fcc34cc23cf9031163e3\",\n          \"title\": \"PDFs/人体二分类发版记录.pdf p1 table 1\",\n          \"snippet\": \"PDF表格: PDFs/人体二分类发版记录.pdf 第1页 表1\\n\\n| 人体二分类发版记录 KM_classifier_Ped_None_Security_3.1.1 release note: • release date: 2025.07.31 • owner: fengjiangyan@sensetime.com • highlights ◦ 数据: 清洗原数据集, 并增加75w训练数据, 包含监控场景的遮挡/截断/躺卧人体，补充猫狗、植物等 常见误报 ◦ 精度: 大幅提升监控场景遮挡截断躺卧人体正样本、猫狗负样本的召回, 其中遮挡人体召回+8.2%， 躺卧人体召回+8.8%，猫狗过滤+12.2% ◦ 精度: 大幅提升监控场景遮挡截断躺卧人体正样本、猫狗负样本的召回, 其中遮挡人体召回+8.5%， 躺卧人体召回+10.2%，猫狗过滤+12.9% ◦ 阈值：模型无内置阈值, 阈值设定可...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.290801\n        },\n        {\n          \"evidence_id\": \"c7711b84757a14915a38a72a\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2 table 1\",\n          \"snippet\": \"PDF表格: PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf 第2页 表1\\n\\n表格结构化行:\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model\\nOID: beeb6944bdca2dafd0213251951cc47f829efad2981d7f847010b13f486181c5\\n平台: cuda11.0-trt7.1-fp16-T4\\n\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model\\nOID: fcd2d67fbbaab4fc2064f08ccaf5e6...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.807289\n        },\n        {\n          \"evidence_id\": \"c8df1c194e028b7e002ac065\",\n          \"title\": \"PDFs/安防方向-人体质量3.0.1发版.pdf p1 table 1\",\n          \"snippet\": \"PDF表格: PDFs/安防方向-人体质量3.0.1发版.pdf 第1页 表1\\n\\n| 安防方向-人体质量3.0.1发版 KM_classifier_Ped_Quality_Security_3.0.1 release note： 1 release date： 2023.07.06 2 owner：hutao2@sensetime.com 3 highlights: 4 • 输入为人体小图，Ped_Quality_Security进行人体模糊、亮度、上半身完整、下半身完整的功能判 定，Ped_None_Multi_Security进行多人体无人体判定； 5 • 多人体precision为98.7%，无人体的precision为98.1%，模糊的precision为98.0，上半身完整 的precision为98.0，下半身完整precision为90.3。 Adela推荐清单：清单详情 -...\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.62689\n        },\n        {\n          \"evidence_id\": \"c3df8f567b44bcd3cf139136\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2\",\n          \"snippet\": \"58                  \\n                 without_safetybelt 0.9269   0.9702   0.9481                        \\n     评测平台：cuda11.0-trt7.1-fp16-T4                                                   \\n                                                                                    \\n                                                                                    \\n     模型性能\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.802051\n        },\n        {\n          \"evidence_id\": \"1d4107dd8be5f74f932bdc50\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2\",\n          \"snippet\": \"ge/project/3/releaseManage?       \\n     rid=34577&id=3&model_type=classifier&tabName=deployment                        \\n     四、精度性能                                                                         \\n                                                                                    \\n     模型精度...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.800952\n        },\n        {\n          \"evidence_id\": \"b5c1032332b3503421a8294e\",\n          \"title\": \"PDFs/safety_rope v0.2.1.pdf p1 table 1\",\n          \"snippet\": \"PDF表格: PDFs/safety_rope v0.2.1.pdf 第1页 表1\\n\\n| safety_rope v0.2.1 Release Note: • 发布时间: 2024.01.29 • Owner: zhushuai@sensetime.com • Highlight: ◦ 追加了长客场景回流误报的工人图片，以提升该场景下的精度，目前对应数据点位 top1 acc从原先 0.55提升到0.97。 ◦ 在通用测试集上无掉点，各项精度指标有略微提升0.1%-0.5% 标签解释: ▪ \\\"safety_rope\\\": • \\\"safety_rope_connected\\\" （安全绳已连接） • \\\"safety_rope_unconnected\\\" （安全绳未连接） • \\\"safety_rope_without\\\" （无安全绳） • \\\"safety_rope_agnostic\\\" （无法判断） |...\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.472662\n        },\n        {\n          \"evidence_id\": \"ae2d10698faed2d83bef2ebd\",\n          \"title\": \"PDFs/安防方向-人脸误检分类模型发版记录.pdf p6\",\n          \"snippet\": \"common测试集                       监控难例测试集                   \\n                                  1-              0-              1-                \\n                  0-                                                                \\n       误报阈值             0-recall precisio 1-recall precisio 0-recall precisio 1-recall\\n                precision...\",\n          \"section_type\": \"accuracy_metric\",\n          \"score\": 0.60391\n        }\n      ]\n    },\n    {\n      \"field\": \"data_requirements\",\n      \"queries\": [\n        \"纹身检测训练数据\",\n        \"人体部位纹理数据\",\n        \"异常特征标注数据\",\n        \"小额数据 迁移学习\"\n      ],\n      \"coverage\": \"strong\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"80320e59c6d48ecbd7bdd9ff\",\n          \"title\": \"PDFs/服饰属性模型.pdf p1 table 1\",\n          \"snippet\": \"PDF表格: PDFs/服饰属性模型.pdf 第1页 表1\\n\\n| 服饰属性模型 HL数据处理 • 第一批次 ◦ 小图总量：312251 ◦ 路径：s3://struct-data2/SDJY/ ◦ 模型训练使用全量，按 8:2 比例切分训练集、测试集。各类别具体数量如下表 ◦ 数据同步 ▪ 251223：已同步采样小图1w张，含训练集8000张（三类各6000/1500/500），测试集2000张 （三类各1000/800/200） ▪ 251224：已同步采样小图10w张，含训练集8w、测试集2w；附带数据采样脚本，采样并直接转 成spiral的数据格式； 0-prisoner 1-police 2-others train 230312 16499 2989 test 57578 4125 748 总计 287890 20624 3737 • 第二批次（HL视频抽帧采样） ◦ 小图总量...\",\n          \"section_type\": \"algorithm_boundary\",\n          \"score\": 0.623418\n        },\n        {\n          \"evidence_id\": \"a46c652a232601d718d0d858\",\n          \"title\": \"KM_essos_det_small_nart_acl-ascend710-fp16_b1_1.0.0.model\",\n          \"snippet\": \"target_name: 人体\\nalgorithm_type: 检测\\nalgorithm_name: 钓鱼人体检测\\napplication_scene: 呈贡CV长尾业务\\nowner: 苏舒婷\\nmodel_name: KM_essos_det_small_nart_acl-ascend710-fp16_b1_1.0.0.model\\nsupported_device: ascend710\\nrecommended_config: acl-ascend710-fp16\\nlast_updated: 2025-12-30\\nlast_updated_month: 2025-12\",\n          \"model_name\": \"KM_essos_det_small_nart_acl-ascend710-fp16_b1_1.0.0.model\",\n          \"algorithm_name\": \"钓鱼人体检测\",\n          \"algorithm_type\": \"检测\",\n          \"application_scene\": \"呈贡CV长尾业务\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"3fa50f2bc1e43647832018e3\",\n          \"title\": \"swim_detect\",\n          \"snippet\": \"did: 132433\\nrid: 51840\\nmodel_name: swim_detect\\nplatform: acl-ascend710-fp16\\nlabel_list: in_water|no_water\",\n          \"model_name\": \"swim_detect\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.524588\n        },\n        {\n          \"evidence_id\": \"dc9fe13e4a2d11574c7a63e5\",\n          \"title\": \"PDFs/安防方向--车牌检测.pdf p1\",\n          \"snippet\": \"release note                                                                   \\n                                                                                    \\n                                                                                    \\n      • 发布时间：20230519                                                               \\n      • owner：gaowanshun@sensetime.com...\",\n          \"section_type\": \"owner_metadata\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"31357ff5c3d8b6a4bcdb9ea9\",\n          \"title\": \"KM_essos_fisher_det_small_nart_cuda11.0-trt7.1-fp16-T4_b1_1.0.0.model\",\n          \"snippet\": \"target_name: 人体\\nalgorithm_type: 检测\\nalgorithm_name: 钓鱼人体检测\\napplication_scene: 呈贡CV长尾业务\\nowner: 苏舒婷\\nmodel_name: KM_essos_fisher_det_small_nart_cuda11.0-trt7.1-fp16-T4_b1_1.0.0.model\\nsupported_device: T4\\nrecommended_config: cuda11.0-trt7.1-fp16-T4\\nlast_updated: 2025-12-30\\nlast_updated_month: 2025-12\",\n          \"model_name\": \"KM_essos_fisher_det_small_nart_cuda11.0-trt7.1-fp16-T4_b1_1.0.0.model\",\n          \"algorithm_name\": \"钓鱼人体检测\",\n          \"algorithm_type\": \"检测\",\n          \"application_scene\": \"呈贡CV长尾业务\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.984896\n        },\n        {\n          \"evidence_id\": \"5bd3f6a80c6d0ce27f9a2337\",\n          \"title\": \"KM_falcon_fight_UMT_large\",\n          \"snippet\": \"model_name: KM_falcon_fight_UMT_large\\nname: KM_falcon_fight_UMT_large\\ntype: falcon\\nplatform: acl-ascend310-fp16\\nstatus: SUCCESS\\ndid: 126793\\nrid: 45903\\nversion: 2.0.4\\nversion_train_date: 20250107\\nsource_file: data/KM_falcon_fight_UMT_large-acl-ascend310-fp16_45903_126793.json\",\n          \"model_name\": \"KM_falcon_fight_UMT_large\",\n          \"section_type\": \"release_note\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"f860d99ac91fa73c4f8940d4\",\n          \"title\": \"PDFs/服饰属性模型.pdf p1\",\n          \"snippet\": \".9999734163284302, \\\"st_juron\\n         g_police\\\": 1.7758437024895102e-05, \\\"st_jurong_others\\\": 0.0}}, 'id': 0, 'label': 2\\n         21488, 'image_id': 0}\",\n          \"section_type\": \"label_schema\",\n          \"score\": 0.622619\n        },\n        {\n          \"evidence_id\": \"7d46e31c0867251721fe60c5\",\n          \"title\": \"KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model\",\n          \"snippet\": \"target_name: 二维码\\nalgorithm_type: 检测\\nalgorithm_name: 二维码检测模型\\napplication_scene: 网安场景，正方形二维码\\nowner: 龚丽君\\nmodel_name: KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model\\nsupported_device: ascend310\\nrecommended_config: ascend310-fp16\\nlast_updated: 2023-04-07\\nlast_updated_month: 2023-04\",\n          \"model_name\": \"KM_essos_qrcode_Det_nart_acl-ascend310-fp16_b8_1.0.0.model\",\n          \"algorithm_name\": \"二维码检测模型\",\n          \"algorithm_type\": \"检测\",\n          \"application_scene\": \"网安场景，正方形二维码\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        }\n      ]\n    }\n  ]\n}"
+      }
+    ]
+  }
+}

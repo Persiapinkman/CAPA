@@ -1,0 +1,103 @@
+{
+  "session_id": "ma_dataset_full_7",
+  "run_stamp": "20260529_135820_42d33b99",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-05-29T13:59:23+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"用户需要区分骑行人佩戴的帽子款式，具体为 open-face helmet（半盔）和 full-face helmet（全盔）。目标是寻找支持该细粒度属性分类的模型推荐。\",\n  \"direct_match\": {\n    \"exists\": false,\n    \"summary\": \"在现有模型库中未发现明确标注支持区分'open-face helmet'和'full-face helmet'的现成模型。部分模型具备头盔检测能力，但未明确区分头盔类型（如安全帽、全盔、半盔）。\"\n  ,\n  \"evidence\": []\n  },\n  \"similar_assets\": [\n    {\n      \"model_or_solution\": \"Classify_3.4.0 (PDFs/Classify_3.4.0.pdf)\",\n      \"label_schema\": \"具备头盔（st_helmet_style）属性分支，但标签体系仅支持“安全帽”等粗粒度类别，未包含“半盔/全盔”的细粒度区分。具体标签：安全帽（已知），其他类别未知（需查阅完整文档）。\",\n      \"training_data\": \"证据未提供具体的训练集来源和样本量，仅提及优化了“安全帽”类型的召回率。推测训练数据包含头盔相关样本，但针对半盔/全盔的标注情况不明确。\",\n      \"reported_metrics\": \"ma_安全帽 = 84.07%（+12.01%）；未提供其他头盔类型（如全盔、半盔）的精度指标。\",\n      \"covered_capability\": \"头盔检测与部分属性识别（安全帽），与用户需求部分重合（对象一致，但类别细粒度不足）。\",\n      \"gap\": \"缺乏对'open-face helmet'和'full-face helmet'的显式标签定义和精度验证。\"\n    ,\n      \"evidence\": [\n        \"evidence_id: f586a56a911c80497fa3679c\",\n        \"evidence_id: 864d157ed16434b83193f000\",\n        \"evidence_id: 2741426ac024679add7bea88\"\n      ]\n    }\n  ,\n    {\n      \"model_or_solution\": \"full_struct (adela/adela_release_records.jsonl)\",\n      \"label_schema\": \"结构化检测模型，类别包含：face（人脸）、pedestrian（行人）、cycer（骑车人）、vehicle（车辆）、cyc（自行车）。未包含头盔属性标签。\",\n      \"training_data\": \"证据未明确标注训练数据量，但标注规范为 UCG 城市计算场景下的结构化目标。\",\n      \"reported_metrics\": \"性能测试部分结果为 FAILURE（未运行），精度测试部分结果为 FAILURE（未运行），部分性能测试 SUCCESS（如 detection_speed_structure），但无头盔相关精度。\",\n      \"covered_capability\": \"可检测“骑车人”（cycer），但无法识别头盔细节。\",\n      \"gap\": \"缺少头盔属性（类型/款式）的检测与分类能力。\"\n    ,\n      \"evidence\": [\n        \"evidence_id: eb9d0213f91e0c264a60955a\",\n        \"evidence_id: a8c6b5eb64db852dd04161c8\",\n        \"evidence_id: f596123e72f07910b639b364\"\n      ]\n    }\n  ,\n    {\n      \"model_or_solution\": \"KM_classifier_Ped_Quality_Security (PDFs/安防方向--人脸质量3.1.0模型更新.pdf)\",\n      \"label_schema\": \"人脸质量属性模型，包含：眼镜（glass_style）、口罩位置（st_respirator）、其它遮挡（st_face_otherocc）。未直接包含头盔类型标签，但“其它遮挡”可能涵盖部分遮挡情况，与头盔无直接对应关系。\",\n      \"training_data\": \"证据未明确说明训练数据的具体构成，但提及了各维度推荐阈值。\",\n      \"reported_metrics\": \"证据仅列出了标签定义和阈值说明，未提供具体的精度数值（如 mA、ACC）。\",\n      \"covered_capability\": \"具备人脸属性分析能力，可识别遮挡、眼镜、口罩等，但无法区分头盔款式。\",\n      \"gap\": \"缺乏对头盔特定款式（全盔/半盔）的分类能力。\"\n    ,\n      \"evidence\": [\n        \"evidence_id: 4338a2bf3508d3f4e1596642\",\n        \"evidence_id: 685a02907c182c283238d9cd\"\n      ]\n    }\n  ,\n    {\n      \"model_or_solution\": \"vehicle_type (adela/adela_release_records.jsonl)\",\n      \"label_schema\": \"车辆属性分类，未涉及行人或头盔属性。\",\n      \"training_data\": \"证据未提供训练数据详情。\",\n      \"reported_metrics\": \"无公开精度信息。\",\n      \"covered_capability\": \"无法识别头盔或骑车人属性。\",\n      \"gap\": \"领域不相关。\"\n    ,\n      \"evidence\": [\n        \"evidence_id: 47cb8ada0cf40e1b77952200\",\n        \"evidence_id: dfec85f7a9af95d6603b7971\",\n        \"evidence_id: 2bb05126fd207b5fcbced74e\"\n      ]\n    }\n  ]\n  ,\n  \"migration_plan\": {\n    \"feasibility\": \"low\",\n    \"approach\": \"由于现有模型缺乏细粒度头盔款式标签，建议基于 'Classify_3.4.0' 的头盔检测能力进行扩展，或基于 'full_struct' 的骑车人检测框进行二次属性推理。\",\n    \"data_requirements\": \"需要收集区分 'open-face helmet' 和 'full-face helmet' 的骑行图像，并标注对应的属性标签。\",\n    \"compute_requirements\": \"证据不足。\",\n    \"engineering_work\": \"需对 'Classify_3.4.0' 的 'st_helmet_style' 分支进行模型微调或重新训练，以纳入新的头盔款式类别。\"\n  ,\n    \"estimated_timeline\": \"证据不足（取决于数据准备情况）。\",\n    \"estimated_cost\": \"证据不足。\",\n    \"dependencies\": [\n      \"数据标注\",\n      \"模型重训练或微调\"\n    ]\n  ,\n    \"risks\": [\n      \"现有模型可能不支持细粒度头盔分类\",\n      \"新类别的样本量可能不足导致精度下降\"\n    ]\n  }\n  ,\n  \"expected_performance\": {\n    \"baseline\": \"Classify_3.4.0 中 'st_helmet_style' 分支对 '安全帽' 的 mA 为 84.07%，但未知 'full-face'/'open-face' 的 baseline 指标。\",\n    \"target\": \"未知，需根据新标注数据训练后的验证集精度确定。\",\n    \"uncertainty\": \"高（缺乏直接对应的基线模型）。\"\n  }\n  ,\n  \"recommendation\": \"暂无直接匹配模型。建议参考 'Classify_3.4.0' 进行模型扩展开发，专门针对头盔款式进行分类训练。\"\n}",
+    "structured_output": {
+      "requirement_summary": "用户需要区分骑行人佩戴的帽子款式，具体为 open-face helmet（半盔）和 full-face helmet（全盔）。目标是寻找支持该细粒度属性分类的模型推荐。",
+      "direct_match": {
+        "exists": false,
+        "summary": "在现有模型库中未发现明确标注支持区分'open-face helmet'和'full-face helmet'的现成模型。部分模型具备头盔检测能力，但未明确区分头盔类型（如安全帽、全盔、半盔）。",
+        "evidence": []
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "Classify_3.4.0 (PDFs/Classify_3.4.0.pdf)",
+          "label_schema": "具备头盔（st_helmet_style）属性分支，但标签体系仅支持“安全帽”等粗粒度类别，未包含“半盔/全盔”的细粒度区分。具体标签：安全帽（已知），其他类别未知（需查阅完整文档）。",
+          "training_data": "证据未提供具体的训练集来源和样本量，仅提及优化了“安全帽”类型的召回率。推测训练数据包含头盔相关样本，但针对半盔/全盔的标注情况不明确。",
+          "reported_metrics": "ma_安全帽 = 84.07%（+12.01%）；未提供其他头盔类型（如全盔、半盔）的精度指标。",
+          "covered_capability": "头盔检测与部分属性识别（安全帽），与用户需求部分重合（对象一致，但类别细粒度不足）。",
+          "gap": "缺乏对'open-face helmet'和'full-face helmet'的显式标签定义和精度验证。",
+          "evidence": [
+            "evidence_id: f586a56a911c80497fa3679c",
+            "evidence_id: 864d157ed16434b83193f000",
+            "evidence_id: 2741426ac024679add7bea88"
+          ]
+        },
+        {
+          "model_or_solution": "full_struct (adela/adela_release_records.jsonl)",
+          "label_schema": "结构化检测模型，类别包含：face（人脸）、pedestrian（行人）、cycer（骑车人）、vehicle（车辆）、cyc（自行车）。未包含头盔属性标签。",
+          "training_data": "证据未明确标注训练数据量，但标注规范为 UCG 城市计算场景下的结构化目标。",
+          "reported_metrics": "性能测试部分结果为 FAILURE（未运行），精度测试部分结果为 FAILURE（未运行），部分性能测试 SUCCESS（如 detection_speed_structure），但无头盔相关精度。",
+          "covered_capability": "可检测“骑车人”（cycer），但无法识别头盔细节。",
+          "gap": "缺少头盔属性（类型/款式）的检测与分类能力。",
+          "evidence": [
+            "evidence_id: eb9d0213f91e0c264a60955a",
+            "evidence_id: a8c6b5eb64db852dd04161c8",
+            "evidence_id: f596123e72f07910b639b364"
+          ]
+        },
+        {
+          "model_or_solution": "KM_classifier_Ped_Quality_Security (PDFs/安防方向--人脸质量3.1.0模型更新.pdf)",
+          "label_schema": "人脸质量属性模型，包含：眼镜（glass_style）、口罩位置（st_respirator）、其它遮挡（st_face_otherocc）。未直接包含头盔类型标签，但“其它遮挡”可能涵盖部分遮挡情况，与头盔无直接对应关系。",
+          "training_data": "证据未明确说明训练数据的具体构成，但提及了各维度推荐阈值。",
+          "reported_metrics": "证据仅列出了标签定义和阈值说明，未提供具体的精度数值（如 mA、ACC）。",
+          "covered_capability": "具备人脸属性分析能力，可识别遮挡、眼镜、口罩等，但无法区分头盔款式。",
+          "gap": "缺乏对头盔特定款式（全盔/半盔）的分类能力。",
+          "evidence": [
+            "evidence_id: 4338a2bf3508d3f4e1596642",
+            "evidence_id: 685a02907c182c283238d9cd"
+          ]
+        },
+        {
+          "model_or_solution": "vehicle_type (adela/adela_release_records.jsonl)",
+          "label_schema": "车辆属性分类，未涉及行人或头盔属性。",
+          "training_data": "证据未提供训练数据详情。",
+          "reported_metrics": "无公开精度信息。",
+          "covered_capability": "无法识别头盔或骑车人属性。",
+          "gap": "领域不相关。",
+          "evidence": [
+            "evidence_id: 47cb8ada0cf40e1b77952200",
+            "evidence_id: dfec85f7a9af95d6603b7971",
+            "evidence_id: 2bb05126fd207b5fcbced74e"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "low",
+        "approach": "由于现有模型缺乏细粒度头盔款式标签，建议基于 'Classify_3.4.0' 的头盔检测能力进行扩展，或基于 'full_struct' 的骑车人检测框进行二次属性推理。",
+        "data_requirements": "需要收集区分 'open-face helmet' 和 'full-face helmet' 的骑行图像，并标注对应的属性标签。",
+        "compute_requirements": "证据不足。",
+        "engineering_work": "需对 'Classify_3.4.0' 的 'st_helmet_style' 分支进行模型微调或重新训练，以纳入新的头盔款式类别。",
+        "estimated_timeline": "证据不足（取决于数据准备情况）。",
+        "estimated_cost": "证据不足。",
+        "dependencies": [
+          "数据标注",
+          "模型重训练或微调"
+        ],
+        "risks": [
+          "现有模型可能不支持细粒度头盔分类",
+          "新类别的样本量可能不足导致精度下降"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "Classify_3.4.0 中 'st_helmet_style' 分支对 '安全帽' 的 mA 为 84.07%，但未知 'full-face'/'open-face' 的 baseline 指标。",
+        "target": "未知，需根据新标注数据训练后的验证集精度确定。",
+        "uncertainty": "高（缺乏直接对应的基线模型）。"
+      },
+      "recommendation": "暂无直接匹配模型。建议参考 'Classify_3.4.0' 进行模型扩展开发，专门针对头盔款式进行分类训练。"
+    }
+  }
+}

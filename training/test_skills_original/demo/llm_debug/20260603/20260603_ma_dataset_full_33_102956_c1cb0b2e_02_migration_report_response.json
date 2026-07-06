@@ -1,0 +1,92 @@
+{
+  "session_id": "ma_dataset_full_33",
+  "run_stamp": "20260603_102956_c1cb0b2e",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-06-03T10:31:07+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"客户想要判断‘行人胸前是否抱物’，现有人体属性是否支持。\",\n  \"direct_match\": {\n    \"exists\": false,\n    \"summary\": \"检索到的资产中没有直接支持‘行人胸前是否抱物’属性分类的模型。最接近的是‘行人属性大模型’（KM_Classifier_Ped_33of33）支持174个标签，但未明确包含‘胸前抱物’；‘人体状衣二分类’模型针对衣物上有醒目大字，非抱物；‘钓鱼人体检测’模型关注垂钓姿态。\",\n    \"evidence\": []\n  },\n  \"similar_assets\": [\n    {\n      \"model_or_solution\": \"行人属性大模型 (KM_Classifier_Ped_33of33_2.21.0/2.21.1)\",\n      \"label_schema\": \"行人33个属性，共174个类别标签。包含年龄、性别、衣着颜色、配饰等属性。\",\n      \"training_data\": \"文档中未明确提及训练集来源及样本量，仅提及“正常亮度天气良好的白天监控场景”。\",\n      \"reported_metrics\": \"部分属性如年龄 (acc 0.976, mPrec 0.858)、衣物颜色 (acc 0.949, mPrec 0.891)、包颜色 (acc 0.949, mPrec 0.891) 等精度较高。但‘胸前抱物’相关属性无直接数据。\",\n      \"covered_capability\": \"支持人体属性检测，但需确认是否包含‘抱物’类别。若‘包/衣物’属性覆盖该场景，可参考其精度标准。\",\n      \"gap\": \"需确认标签体系中是否包含‘抱物/手持物’类别。若不存在，需新开发。\",\n      \"evidence\": [\n        \"02b45c90d49384befdd62de9\",\n        \"3170a505e04ce55e4c46af1d\",\n        \"d0f661eb13a938e4b3be857b\",\n        \"4175c9b150e26cd71132c74b\",\n        \"3e53cb9252870b4aa86da917\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"人体状衣二分类 (KM_classifier_Ped_ClothBanner)\",\n      \"label_schema\": \"二分类：有醒目大字 vs 无。\",\n      \"training_data\": \"文档中未明确提及训练集来源。\",\n      \"reported_metrics\": \"文档中未明确提及精度。\",\n      \"covered_capability\": \"支持人体衣着属性检测（文字内容）。\",\n      \"gap\": \"任务是‘抱物’，非‘衣物文字’，相似度较低，仅作为属性检测能力的参考。\",\n      \"evidence\": [\n        \"574e8a69ac4e1edd855a3cbe\",\n        \"e1ce9c64a50a803497e733aa\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"钓鱼人体检测 (KM_essos_det_small_nart_acl-ascend710-fp16_b1_1.0.0.model)\",\n      \"label_schema\": \"person_fishing (垂钓), person_fishing_agnostic (疑似垂钓), person_fishing_without (非垂钓)。\",\n      \"training_data\":  \"未明确提及。\",\n      \"reported_metrics\":  \"mAP 0.246~0.388 (IoU=0.5)，recall@fppi0.01 较低 (0.005~0.186)。\",\n      \"covered_capability\": \"检测人体特定行为（垂钓），与‘抱物’属于同一层级的属性/行为识别。\",\n      \"gap\": \"‘垂钓’是动作/姿态，‘抱物’是物体持有状态。若‘抱物’可被解释为一种‘持有状态’，其精度表现（mAP~0.3）可能具有参考性，表明细粒度行为/状态检测难度较大。\",\n      \"evidence\": [\n        \"a46c652a232601d718d0d858\",\n        \"ac3a0f7a51ac569faf830a53\",\n        \"1e88c2ab33502064fd58bdf8\",\n        \"1a9ae2897d36f9d1aace1f6d\"\n      ]\n    }\n  ],\n  \"migration_plan\": {\n    \"feasibility\": \"medium\",\n    \"approach\": \"1. 查询‘行人属性大模型’标签详情，确认是否已有‘抱物/手持物’类别；\\n2. 若无，需基于‘行人属性大模型’或‘结构化检测模型’进行增量训练或微调；\\n3. 参考‘钓鱼人体检测’的精度表现，预期‘抱物’属性检测精度可能低于人体检测，需准备更多难例样本。\",\n    \"data_requirements\": \"需收集‘行人胸前抱物’场景图片，标注需明确‘抱物’的边界框（物体 + 手部交互）；建议参考‘行人属性大模型’的60*120像素最小目标要求。\",\n    \"compute_requirements\": \"支持Ascend 310/710、CUDA等主流平台，推荐Ascend 310-Int8以降低成本。\",\n    \"engineering_work\": \"若标签不兼容，需调整模型输出头；若使用‘钓鱼’模型为参考，可能需重新设计网络结构或引入多任务学习。\",\n    \"estimated_timeline\": \"若仅微调现有属性模型：2-4周；若全新开发：1-2个月（含数据采集、标注、训练、评估）。\",\n    \"estimated_cost\": \"成本波动大，取决于数据收集难度。参考同类型人体属性模型，建议预留数据标注预算约 100-500k RMB。\",\n    \"dependencies\": [\n      \"‘行人属性大模型’现有架构兼容性；\\n数据标注资源 availability。\"\n    ]\n  ,\n  \"risks\": [\n    \"‘抱物’语义定义模糊，需与业务方对齐（是‘抱’还是‘拿’？是否包含背包？）；\\n遮挡场景精度下降明显；\\n夜间/低光照场景支持有限。\",\n    \"evidence: []\"\n  ]\n  }\n  ,\n  \"expected_performance\": {\n    \"baseline\": \"参考‘钓鱼人体检测’及‘行人属性大模型’同类属性（如包颜色、衣物颜色）的精度。人体属性一般 Acc 0.85-0.95，mAP 0.25-0.35 左右。\",\n    \"target\": \"mAP 0.35+ (IoU=0.5), Acc 0.85+ (类别平衡)。\",\n    \"uncertainty\": \"抱物任务对遮挡、姿态敏感度高于一般属性，精度可能波动。\"\n  }\n  ,\n  \"recommendation\": \"1. 建议优先检索‘行人属性大模型’标签列表确认是否有‘抱物’类；\\n2. 若无，建议采用‘行人属性大模型’作为基座，针对‘抱物’标签进行增量训练；\\n3. 若需更高精度，可参考‘钓鱼人体检测’的数据清洗策略，增加难负样本。\"\n}",
+    "structured_output": {
+      "requirement_summary": "客户想要判断‘行人胸前是否抱物’，现有人体属性是否支持。",
+      "direct_match": {
+        "exists": false,
+        "summary": "检索到的资产中没有直接支持‘行人胸前是否抱物’属性分类的模型。最接近的是‘行人属性大模型’（KM_Classifier_Ped_33of33）支持174个标签，但未明确包含‘胸前抱物’；‘人体状衣二分类’模型针对衣物上有醒目大字，非抱物；‘钓鱼人体检测’模型关注垂钓姿态。",
+        "evidence": []
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "行人属性大模型 (KM_Classifier_Ped_33of33_2.21.0/2.21.1)",
+          "label_schema": "行人33个属性，共174个类别标签。包含年龄、性别、衣着颜色、配饰等属性。",
+          "training_data": "文档中未明确提及训练集来源及样本量，仅提及“正常亮度天气良好的白天监控场景”。",
+          "reported_metrics": "部分属性如年龄 (acc 0.976, mPrec 0.858)、衣物颜色 (acc 0.949, mPrec 0.891)、包颜色 (acc 0.949, mPrec 0.891) 等精度较高。但‘胸前抱物’相关属性无直接数据。",
+          "covered_capability": "支持人体属性检测，但需确认是否包含‘抱物’类别。若‘包/衣物’属性覆盖该场景，可参考其精度标准。",
+          "gap": "需确认标签体系中是否包含‘抱物/手持物’类别。若不存在，需新开发。",
+          "evidence": [
+            "02b45c90d49384befdd62de9",
+            "3170a505e04ce55e4c46af1d",
+            "d0f661eb13a938e4b3be857b",
+            "4175c9b150e26cd71132c74b",
+            "3e53cb9252870b4aa86da917"
+          ]
+        },
+        {
+          "model_or_solution": "人体状衣二分类 (KM_classifier_Ped_ClothBanner)",
+          "label_schema": "二分类：有醒目大字 vs 无。",
+          "training_data": "文档中未明确提及训练集来源。",
+          "reported_metrics": "文档中未明确提及精度。",
+          "covered_capability": "支持人体衣着属性检测（文字内容）。",
+          "gap": "任务是‘抱物’，非‘衣物文字’，相似度较低，仅作为属性检测能力的参考。",
+          "evidence": [
+            "574e8a69ac4e1edd855a3cbe",
+            "e1ce9c64a50a803497e733aa"
+          ]
+        },
+        {
+          "model_or_solution": "钓鱼人体检测 (KM_essos_det_small_nart_acl-ascend710-fp16_b1_1.0.0.model)",
+          "label_schema": "person_fishing (垂钓), person_fishing_agnostic (疑似垂钓), person_fishing_without (非垂钓)。",
+          "training_data": "未明确提及。",
+          "reported_metrics": "mAP 0.246~0.388 (IoU=0.5)，recall@fppi0.01 较低 (0.005~0.186)。",
+          "covered_capability": "检测人体特定行为（垂钓），与‘抱物’属于同一层级的属性/行为识别。",
+          "gap": "‘垂钓’是动作/姿态，‘抱物’是物体持有状态。若‘抱物’可被解释为一种‘持有状态’，其精度表现（mAP~0.3）可能具有参考性，表明细粒度行为/状态检测难度较大。",
+          "evidence": [
+            "a46c652a232601d718d0d858",
+            "ac3a0f7a51ac569faf830a53",
+            "1e88c2ab33502064fd58bdf8",
+            "1a9ae2897d36f9d1aace1f6d"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "medium",
+        "approach": "1. 查询‘行人属性大模型’标签详情，确认是否已有‘抱物/手持物’类别；\n2. 若无，需基于‘行人属性大模型’或‘结构化检测模型’进行增量训练或微调；\n3. 参考‘钓鱼人体检测’的精度表现，预期‘抱物’属性检测精度可能低于人体检测，需准备更多难例样本。",
+        "data_requirements": "需收集‘行人胸前抱物’场景图片，标注需明确‘抱物’的边界框（物体 + 手部交互）；建议参考‘行人属性大模型’的60*120像素最小目标要求。",
+        "compute_requirements": "支持Ascend 310/710、CUDA等主流平台，推荐Ascend 310-Int8以降低成本。",
+        "engineering_work": "若标签不兼容，需调整模型输出头；若使用‘钓鱼’模型为参考，可能需重新设计网络结构或引入多任务学习。",
+        "estimated_timeline": "若仅微调现有属性模型：2-4周；若全新开发：1-2个月（含数据采集、标注、训练、评估）。",
+        "estimated_cost": "成本波动大，取决于数据收集难度。参考同类型人体属性模型，建议预留数据标注预算约 100-500k RMB。",
+        "dependencies": [
+          "‘行人属性大模型’现有架构兼容性；\n数据标注资源 availability。"
+        ],
+        "risks": [
+          "‘抱物’语义定义模糊，需与业务方对齐（是‘抱’还是‘拿’？是否包含背包？）；\n遮挡场景精度下降明显；\n夜间/低光照场景支持有限。",
+          "evidence: []"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "参考‘钓鱼人体检测’及‘行人属性大模型’同类属性（如包颜色、衣物颜色）的精度。人体属性一般 Acc 0.85-0.95，mAP 0.25-0.35 左右。",
+        "target": "mAP 0.35+ (IoU=0.5), Acc 0.85+ (类别平衡)。",
+        "uncertainty": "抱物任务对遮挡、姿态敏感度高于一般属性，精度可能波动。"
+      },
+      "recommendation": "1. 建议优先检索‘行人属性大模型’标签列表确认是否有‘抱物’类；\n2. 若无，建议采用‘行人属性大模型’作为基座，针对‘抱物’标签进行增量训练；\n3. 若需更高精度，可参考‘钓鱼人体检测’的数据清洗策略，增加难负样本。"
+    }
+  }
+}

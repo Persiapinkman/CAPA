@@ -1,0 +1,98 @@
+{
+  "session_id": "ma_dataset_full_13",
+  "run_stamp": "20260529_143337_833c27d6",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-05-29T14:34:51+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"用户需求是识别‘人体属性：上衣图案（纯色、条纹、图案、拼接、格子）’，需要评估现有模型是否支持该属性标签。\",\n  \"direct_match\": {\n    \"exists\": false,\n    \"summary\": \"现有模型中未找到明确支持‘上衣图案（纯色、条纹、图案、拼接、格子）’标签的模型。\"\n  ,\n  \"evidence\": [\n    \"检索到的模型中，行人属性相关模型（如行人属性大模型、人体状衣二分类等）的标签体系未包含‘上衣图案’这一具体属性。\"\n  ]\n  }\n  ,\n  \"similar_assets\": [\n    {\n      \"model_or_solution\": \"行人属性大模型 (PDFs/行人属性大模型 2.21.0.pdf)\",\n      \"label_schema\": \"包含性别、年龄、包颜色、包样式、是否戴帽、是否戴眼镜、是否戴手套等属性。未发现‘上衣图案’类别，仅有‘性别’、‘年龄’、‘包颜色’、‘包样式’等基础属性。\",\n      \"training_data\": \"证据不足，仅提及模型版本2.21.0，未提供具体训练集来源、规模或标注规范。\",\n      \"reported_metrics\": \"st_age: mPrec=0.858, st_pedestrian_angle: mPrec=0.846, bag_color: mPrec=0.891, bag_style: mPrec=0.93, st_fishing: mPrec=0.903, st_gas_alarm: mPrec=0.862, gender_code: mPrec=0.798, glass_style: mPrec=0.947, st_glove: mPrec=0.863。测试集/平台：未明确，文档仅列数值。\",\n      \"covered_capability\": \"支持人体基础属性识别（年龄、性别、包相关），但不包含衣物图案分类。\",\n      \"gap\": \"无法直接识别上衣图案，需自定义模型或数据标注方案。\"\n    ,\n    \"evidence\": [\n      \"evidence_id: d0f661eb13a938e4b3be857b\"\n    ]\n    }\n  ,\n    {\n      \"model_or_solution\": \"人体状衣二分类 (KM_classifier_Ped_ClothBanner_nart...)\",\n      \"label_schema\": \"二分类标签（有醒目大字 vs 无醒目大字），非多类别图案分类。\",\n      \"training_data\": \"证据不足，未提及训练数据规模或来源。\",\n      \"reported_metrics\": \"证据不足，无具体精度数值，仅发布记录。\",\n      \"covered_capability\": \"支持衣物上的显著文字检测，而非图案分类。\",\n      \"gap\": \"任务形态为二分类（是否有字），非图案属性（纯色/条纹等）分类。\"\n    ,\n    \"evidence\": [\n      \"evidence_id: 415cfacb726c399a33e408c3\"\n    ]\n    }\n  ,\n    {\n      \"model_or_solution\": \"中车工厂工服属性模型 (KM_classifier_zc_uniform_v4...)\",\n      \"label_schema\": \"包含灰色T恤、灰色衬衣、浅蓝警卫短袖、黑色警卫长袖、白色防护服、蓝色静电服、银灰色静电服、荧光色马甲（绿/红）、白色冬天棉袄、灰色冬天棉袄、非人体、夏季白色工服等。\",\n      \"training_data\": \"证据不足，未提及训练集规模。\",\n      \"reported_metrics\": \"证据不足，仅列出模型文件，无精度指标。\",\n      \"covered_capability\": \"支持特定工服类型（颜色/款式）识别，可视为细粒度上衣属性识别的参考。\",\n      \"gap\": \"标签为工服类别而非通用图案（纯色/条纹等），但展示了基于颜色/款式的上衣属性建模能力。\"\n    ,\n    \"evidence\": [\n      \"evidence_id: 072e5ffdfd5fae6c478cb2f3\"\n    ]\n    }\n  ,\n    {\n      \"model_or_solution\": \"非机动车属性模型 (PDFs/安防方向--非机动车属性大模型更新.pdf)\",\n      \"label_schema\": \"车辆颜色、三轮车细分类、非机动车粗分类（motor/ebike/bicycle/tricycle/pram/wheel）。\",\n      \"training_data\": \"证据不足，仅提及模型更新。\",\n      \"reported_metrics\": \"vehicle_color: recall=95%, 90% input, 0.95 thres; st_tricycle_type: recall=98.6%。\",\n      \"covered_capability\": \"支持非机动车颜色分类，类似属性识别任务。\",\n      \"gap\": \"对象为非机动车，非人体，但颜色分类任务与图案分类任务在属性识别上有相似性。\"\n    ,\n    \"evidence\": [\n      \"evidence_id: 3b429f956353161148093e4e\"\n    ]\n    }\n  ]\n  ,\n  \"migration_plan\": {\n    \"feasibility\": \"medium\",\n    \"approach\": \"利用现有上衣/工服属性模型（如中车工服模型）的架构和训练流程作为参考，重新构建‘上衣图案’标签体系。\",\n    \"data_requirements\": \"需要收集包含‘纯色、条纹、图案、拼接、格子’标签的上衣图像数据，建议参考现有工服模型的数据标注规范。\",\n    \"compute_requirements\": \"参考工服模型，建议使用 T4/Ascend710 平台，batch_size=8 进行测试。\",\n    \"engineering_work\": \"重新标注数据集，适配标签体系，微调或训练新模型，集成到属性识别流水线。\"\n  ,\n    \"estimated_timeline\": \"1-2 个月（假设已有数据，若需数据收集则延长）\",\n    \"estimated_cost\": \"中等（参考工服模型训练成本）\"\n  ,\n    \"dependencies\": [\n      \"明确的上衣图案标注规范\",\n      \"足够的数据量（建议参考工服模型规模）\"\n    ]\n  ,\n    \"risks\": [\n      \"图案分类可能受光照、遮挡影响较大\",\n      \"模型泛化性需验证\"\n    ]\n  }\n  ,\n  \"expected_performance\": {\n    \"baseline\": \"参考行人属性模型，mPrec 约 0.8-0.9（针对明确属性）\",\n    \"target\": \"上衣图案识别精度预期 0.75-0.85，视数据质量而定\"\n  ,\n    \"uncertainty\": \"证据不足，需实测验证\"\n  }\n  ,\n  \"recommendation\": \"建议基于中车工服属性模型经验，构建专门的上衣图案识别模型。现有行人属性模型不支持该标签，但提供了属性识别的整体框架。\"\n  }",
+    "structured_output": {
+      "requirement_summary": "用户需求是识别‘人体属性：上衣图案（纯色、条纹、图案、拼接、格子）’，需要评估现有模型是否支持该属性标签。",
+      "direct_match": {
+        "exists": false,
+        "summary": "现有模型中未找到明确支持‘上衣图案（纯色、条纹、图案、拼接、格子）’标签的模型。",
+        "evidence": [
+          "检索到的模型中，行人属性相关模型（如行人属性大模型、人体状衣二分类等）的标签体系未包含‘上衣图案’这一具体属性。"
+        ]
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "行人属性大模型 (PDFs/行人属性大模型 2.21.0.pdf)",
+          "label_schema": "包含性别、年龄、包颜色、包样式、是否戴帽、是否戴眼镜、是否戴手套等属性。未发现‘上衣图案’类别，仅有‘性别’、‘年龄’、‘包颜色’、‘包样式’等基础属性。",
+          "training_data": "证据不足，仅提及模型版本2.21.0，未提供具体训练集来源、规模或标注规范。",
+          "reported_metrics": "st_age: mPrec=0.858, st_pedestrian_angle: mPrec=0.846, bag_color: mPrec=0.891, bag_style: mPrec=0.93, st_fishing: mPrec=0.903, st_gas_alarm: mPrec=0.862, gender_code: mPrec=0.798, glass_style: mPrec=0.947, st_glove: mPrec=0.863。测试集/平台：未明确，文档仅列数值。",
+          "covered_capability": "支持人体基础属性识别（年龄、性别、包相关），但不包含衣物图案分类。",
+          "gap": "无法直接识别上衣图案，需自定义模型或数据标注方案。",
+          "evidence": [
+            "evidence_id: d0f661eb13a938e4b3be857b"
+          ]
+        },
+        {
+          "model_or_solution": "人体状衣二分类 (KM_classifier_Ped_ClothBanner_nart...)",
+          "label_schema": "二分类标签（有醒目大字 vs 无醒目大字），非多类别图案分类。",
+          "training_data": "证据不足，未提及训练数据规模或来源。",
+          "reported_metrics": "证据不足，无具体精度数值，仅发布记录。",
+          "covered_capability": "支持衣物上的显著文字检测，而非图案分类。",
+          "gap": "任务形态为二分类（是否有字），非图案属性（纯色/条纹等）分类。",
+          "evidence": [
+            "evidence_id: 415cfacb726c399a33e408c3"
+          ]
+        },
+        {
+          "model_or_solution": "中车工厂工服属性模型 (KM_classifier_zc_uniform_v4...)",
+          "label_schema": "包含灰色T恤、灰色衬衣、浅蓝警卫短袖、黑色警卫长袖、白色防护服、蓝色静电服、银灰色静电服、荧光色马甲（绿/红）、白色冬天棉袄、灰色冬天棉袄、非人体、夏季白色工服等。",
+          "training_data": "证据不足，未提及训练集规模。",
+          "reported_metrics": "证据不足，仅列出模型文件，无精度指标。",
+          "covered_capability": "支持特定工服类型（颜色/款式）识别，可视为细粒度上衣属性识别的参考。",
+          "gap": "标签为工服类别而非通用图案（纯色/条纹等），但展示了基于颜色/款式的上衣属性建模能力。",
+          "evidence": [
+            "evidence_id: 072e5ffdfd5fae6c478cb2f3"
+          ]
+        },
+        {
+          "model_or_solution": "非机动车属性模型 (PDFs/安防方向--非机动车属性大模型更新.pdf)",
+          "label_schema": "车辆颜色、三轮车细分类、非机动车粗分类（motor/ebike/bicycle/tricycle/pram/wheel）。",
+          "training_data": "证据不足，仅提及模型更新。",
+          "reported_metrics": "vehicle_color: recall=95%, 90% input, 0.95 thres; st_tricycle_type: recall=98.6%。",
+          "covered_capability": "支持非机动车颜色分类，类似属性识别任务。",
+          "gap": "对象为非机动车，非人体，但颜色分类任务与图案分类任务在属性识别上有相似性。",
+          "evidence": [
+            "evidence_id: 3b429f956353161148093e4e"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "medium",
+        "approach": "利用现有上衣/工服属性模型（如中车工服模型）的架构和训练流程作为参考，重新构建‘上衣图案’标签体系。",
+        "data_requirements": "需要收集包含‘纯色、条纹、图案、拼接、格子’标签的上衣图像数据，建议参考现有工服模型的数据标注规范。",
+        "compute_requirements": "参考工服模型，建议使用 T4/Ascend710 平台，batch_size=8 进行测试。",
+        "engineering_work": "重新标注数据集，适配标签体系，微调或训练新模型，集成到属性识别流水线。",
+        "estimated_timeline": "1-2 个月（假设已有数据，若需数据收集则延长）",
+        "estimated_cost": "中等（参考工服模型训练成本）",
+        "dependencies": [
+          "明确的上衣图案标注规范",
+          "足够的数据量（建议参考工服模型规模）"
+        ],
+        "risks": [
+          "图案分类可能受光照、遮挡影响较大",
+          "模型泛化性需验证"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "参考行人属性模型，mPrec 约 0.8-0.9（针对明确属性）",
+        "target": "上衣图案识别精度预期 0.75-0.85，视数据质量而定",
+        "uncertainty": "证据不足，需实测验证"
+      },
+      "recommendation": "建议基于中车工服属性模型经验，构建专门的上衣图案识别模型。现有行人属性模型不支持该标签，但提供了属性识别的整体框架。"
+    }
+  }
+}

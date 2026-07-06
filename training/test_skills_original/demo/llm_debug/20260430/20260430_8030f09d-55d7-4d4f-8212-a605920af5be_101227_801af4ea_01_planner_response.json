@@ -1,0 +1,11 @@
+{
+  "session_id": "8030f09d-55d7-4d4f-8212-a605920af5be",
+  "run_stamp": "20260430_101227_801af4ea",
+  "stage": "planner_response",
+  "step_index": 1,
+  "created_at": "2026-04-30T10:12:29+08:00",
+  "payload": {
+    "raw_response": "{\n  \"thought\": \"用户请求检测钓鱼的人，这是一个目标检测任务。从上下文看这是当前会话的第一个问题，没有指代需要消解，也不是关于企业规范的知识查询。根据工具库，有 qwen_detection 和 rexomni_detection 两个检测工具可选。由于没有指定具体的检测器偏好，我需要选择一个合适的检测工具来执行目标检测任务。这里选择 qwen_detection，因为它是通用目标检测工具，适合处理用户的一般性检测请求。\",\n  \"decision_type\": \"tool\",\n  \"action\": \"qwen_detection\",\n  \"action_input\": {\n    \"label\": \"钓鱼的人\",\n    \"finish_after_tool\": true\n  }\n}",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260430_101227_801af4ea"
+  }
+}

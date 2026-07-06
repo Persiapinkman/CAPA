@@ -1,0 +1,14 @@
+{
+  "session_id": "7cf03ba7-57b8-43d1-a884-fa564d11f77c",
+  "run_stamp": "20260430_113231_cf879319",
+  "stage": "answerer_fallback",
+  "step_index": 1,
+  "created_at": "2026-04-30T11:32:31+08:00",
+  "payload": {
+    "mode": "direct",
+    "reason": "empty_after_sanitize_or_exception",
+    "error": "Error code: 401 - {'error': 'unauthorized'}",
+    "has_answerer_input": true,
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260430_113231_cf879319"
+  }
+}

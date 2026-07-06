@@ -1,0 +1,11 @@
+{
+  "session_id": "3924fec8-2def-4377-935c-f1d94462af17",
+  "run_stamp": "20260514_105519_fa0154fc",
+  "stage": "planner_response",
+  "step_index": 1,
+  "created_at": "2026-05-14T10:55:21+08:00",
+  "payload": {
+    "raw_response": "{\n  \"thought\": \"用户询问监控大图上人脸检测应使用什么模型，这是一个涉及企业技术方案和知识库的问题。应该使用rag_answer工具来检索相关业务知识。由于这是首轮查询，没有指代消解或歧义，直接检索知识库获取答案即可。\",\n  \"decision_type\": \"tool\",\n  \"action\": \"rag_answer\",\n  \"action_input\": {\n    \"query\": \"我要实现在监控大图上检测人脸，该用什么模型\",\n    \"finish_after_tool\": true\n  },\n  \"final_answer\": \"\"\n}",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260514_105519_fa0154fc"
+  }
+}

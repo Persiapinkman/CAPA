@@ -1,0 +1,3484 @@
+{
+  "schema_version": "1.1",
+  "description": "单轮题库 + suggested_tags；ground_truth 待补充。",
+  "source_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/sessions",
+  "generated_at": "2026-05-18T17:21:53",
+  "stats": {
+    "session_files_scanned": 107,
+    "user_input_events": 212,
+    "unique_questions": 116
+  },
+  "tag_legend": {
+    "interaction": [
+      "ST-01",
+      "MT-01",
+      "MT-fragment",
+      "MT-02",
+      "CL-01",
+      "CL-slot"
+    ],
+    "intent": [
+      "lookup_fact",
+      "recommend_model",
+      "migration_advisor",
+      "adela_benchmark",
+      "vision_generate",
+      "vision_detect",
+      "vision_pipeline",
+      "general_chat",
+      "needs_clarify"
+    ],
+    "planner": [
+      "PL-1",
+      "PL-2",
+      "PL-3",
+      "PL-4"
+    ],
+    "finish": [
+      "finish:true",
+      "finish:false",
+      "finish:mixed"
+    ]
+  },
+  "items": [
+    {
+      "id": "q_0001",
+      "question": "RD部门中车业务的模型数量",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moia336x_5mzmispc"
+        ],
+        "thread_ids": [
+          "thread_208d6078124004be"
+        ],
+        "query_ids": [
+          "qry_56400ea7ebfd09ef"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0002",
+      "question": "RD部门模型数量的统计",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "cb204e12-dfe5-455d-aded-e6a9cd3e8fbb"
+        ],
+        "thread_ids": [
+          "thread_a9c3ed9a6623011b"
+        ],
+        "query_ids": [
+          "qry_a2fa9f428dc248c2"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0003",
+      "question": "SIE-3.0-base的特征输出维度是多少",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moibvpbz_fs0mmnw5"
+        ],
+        "thread_ids": [
+          "thread_4588ab8e6bf3fc48"
+        ],
+        "query_ids": [
+          "qry_a5dcde75a10ed120"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0004",
+      "question": "SmallFace最新的模型是哪个",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moibvpbz_fs0mmnw5"
+        ],
+        "thread_ids": [
+          "thread_238a07495bd1d316"
+        ],
+        "query_ids": [
+          "qry_49975dac9e174c98"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0005",
+      "question": "人体二分类模型有哪些",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moia336x_5mzmispc"
+        ],
+        "thread_ids": [
+          "thread_ce49043bfb7e101b"
+        ],
+        "query_ids": [
+          "qry_0b0274a72192e9ed"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0006",
+      "question": "人脸检测3系列 最新的模型是哪个",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moibvpbz_fs0mmnw5"
+        ],
+        "thread_ids": [
+          "thread_238a07495bd1d316"
+        ],
+        "query_ids": [
+          "qry_b6844104e5892b87"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0007",
+      "question": "人脸检测最新的模型是哪个",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moibvpbz_fs0mmnw5"
+        ],
+        "thread_ids": [
+          "thread_238a07495bd1d316"
+        ],
+        "query_ids": [
+          "qry_ed7ee0affdf01636"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0008",
+      "question": "人脸识别把男的和女的的比对分数识别的很高，怎么办",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "迁移顾问：抽象+多路检索+报告，对外单 query 收口",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moi9fpzf_myc56egn"
+        ],
+        "thread_ids": [
+          "thread_4f2c3486b93875d4"
+        ],
+        "query_ids": [
+          "qry_1baf81e0de99d1e1"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "migration_advisor",
+        "vision_detect",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0009",
+      "question": "你啥时",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_mohzenst_tqcmfiub"
+        ],
+        "thread_ids": [
+          "thread_b788469c0132140e"
+        ],
+        "query_ids": [
+          "qry_62b5bf1013a86d32"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0010",
+      "question": "全部部署的有多少模型",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moiczvch_c6ka8e3z"
+        ],
+        "thread_ids": [
+          "thread_088fc70ce03e7079"
+        ],
+        "query_ids": [
+          "qry_3ca32fb95342eccf"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0011",
+      "question": "发布的有多少模型",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moiczvch_c6ka8e3z"
+        ],
+        "thread_ids": [
+          "thread_088fc70ce03e7079"
+        ],
+        "query_ids": [
+          "qry_beaa7279f2875b1d"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0012",
+      "question": "城市结构化检测模型 3.0.1是目前最新的支持人体检测的模型么",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "高频题，适合回归",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 4,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moi9xf9l_yz40grhv",
+          "sess_mp035rrp_2x8e31qz",
+          "sess_mp3mdkxi_zvg3q8e5",
+          "sess_mp3nljcs_s7jjffwq"
+        ],
+        "thread_ids": [
+          "thread_a7c01c56709a2636",
+          "thread_69514c2df4d4163a",
+          "thread_31336ceb91487c20",
+          "thread_f04a2f8b22d3b3a8"
+        ],
+        "query_ids": [
+          "qry_8b8d336abb7ebe60",
+          "qry_d52694a20161515b",
+          "qry_b08c5a94a8062832",
+          "qry_9d24fb28dbe784c7"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0013",
+      "question": "安全绳检测在adela平台有部署模型吗",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moi00xu2_sb0b6gut"
+        ],
+        "thread_ids": [
+          "thread_01e53ff49463cea5"
+        ],
+        "query_ids": [
+          "qry_591442dbaab360b3"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0014",
+      "question": "安全绳检测在安德拉、",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "缺图时应 clarify；case 需带 image fixture",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_mohzenst_tqcmfiub"
+        ],
+        "thread_ids": [
+          "thread_d847d0c48173ff8a"
+        ],
+        "query_ids": [
+          "qry_18a43d3ac328e7a8"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "vision_detect",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0015",
+      "question": "帮我评估一下 用摄像头分析餐厅每张桌子上是否存在空的餐盘与杯子的需求，用视觉模型能不能做，能多做到多少的精度。",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "迁移顾问：抽象+多路检索+报告，对外单 query 收口",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moi9j6wt_dbbba0cq"
+        ],
+        "thread_ids": [
+          "thread_ca9de53f2f7913ff"
+        ],
+        "query_ids": [
+          "qry_155e81fc186426ff"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "migration_advisor",
+        "vision_generate",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0016",
+      "question": "当前我们Embedding模型有哪些",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moia504r_rrebf24a"
+        ],
+        "thread_ids": [
+          "thread_ddf6c9a8a0680b17"
+        ],
+        "query_ids": [
+          "qry_a0e88e177e51310e"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0017",
+      "question": "性能评测怎么样",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_mohzenst_tqcmfiub"
+        ],
+        "thread_ids": [
+          "thread_58d6fb02b09720ce"
+        ],
+        "query_ids": [
+          "qry_b25978fa80f1812f"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0018",
+      "question": "我想识别工人高空作业时有没有佩戴安全带、安全绳，请帮忙推荐模型",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "常 rag miss -> re_question -> rag/answerer",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moiac6j9_kyqqkut4"
+        ],
+        "thread_ids": [
+          "thread_f87d7593c0ae783b"
+        ],
+        "query_ids": [
+          "qry_2193520ea2b22dcc"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "recommend_model",
+        "PL-4",
+        "finish:mixed"
+      ]
+    },
+    {
+      "id": "q_0019",
+      "question": "我想识别是否有人违法放烟花，请推荐相关的算法模型",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "常 rag miss -> re_question -> rag/answerer",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 2,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moiac6j9_kyqqkut4",
+          "sess_mp3mdkxi_zvg3q8e5"
+        ],
+        "thread_ids": [
+          "thread_13978a618be1385f",
+          "thread_e4ff74dd64da8027"
+        ],
+        "query_ids": [
+          "qry_0f98f031413c53f7",
+          "qry_78a218200ccbe59c"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "recommend_model",
+        "PL-4",
+        "finish:mixed"
+      ]
+    },
+    {
+      "id": "q_0020",
+      "question": "我想识别是否有人违法钓鱼，请推荐相关的算法模型",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "常 rag miss -> re_question -> rag/answerer",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 2,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moiac6j9_kyqqkut4",
+          "sess_moib01x0_g625ffca"
+        ],
+        "thread_ids": [
+          "thread_d28536b38b6644c2",
+          "thread_b534989ed6db5c14"
+        ],
+        "query_ids": [
+          "qry_cb807802bad8e420",
+          "qry_1dfc915ff45ae3ef"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "recommend_model",
+        "PL-4",
+        "finish:mixed"
+      ]
+    },
+    {
+      "id": "q_0021",
+      "question": "我想识别道路上是否有积水，请帮忙推荐模型",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "常 rag miss -> re_question -> rag/answerer",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moiac6j9_kyqqkut4"
+        ],
+        "thread_ids": [
+          "thread_c2152f0e6a92de3e"
+        ],
+        "query_ids": [
+          "qry_a231cf157a8e29f7"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "recommend_model",
+        "PL-4",
+        "finish:mixed"
+      ]
+    },
+    {
+      "id": "q_0022",
+      "question": "我要做大图小人脸的人脸检测，用什么模型",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "常 rag miss -> re_question -> rag/answerer",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moib84gu_d1w2ihh3"
+        ],
+        "thread_ids": [
+          "thread_76589dfeb00f0099"
+        ],
+        "query_ids": [
+          "qry_e0be09ae51d4a4b6"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "recommend_model",
+        "PL-4",
+        "finish:mixed"
+      ]
+    },
+    {
+      "id": "q_0023",
+      "question": "我要做室内场景的人体计数，请帮忙设计一个算法流程，并推荐其中的关键模型版本",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "常 rag miss -> re_question -> rag/answerer",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moi9xf9l_yz40grhv"
+        ],
+        "thread_ids": [
+          "thread_a7c01c56709a2636"
+        ],
+        "query_ids": [
+          "qry_1a97a389caacb6c2"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "recommend_model",
+        "PL-4",
+        "finish:mixed"
+      ]
+    },
+    {
+      "id": "q_0024",
+      "question": "我要实现一个横幅检测，可以用什么模型",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "常 rag miss -> re_question -> rag/answerer",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moiakby1_q87axi0u"
+        ],
+        "thread_ids": [
+          "thread_e268deeaac71fa26"
+        ],
+        "query_ids": [
+          "qry_6187ab2159259b3f"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "recommend_model",
+        "PL-4",
+        "finish:mixed"
+      ]
+    },
+    {
+      "id": "q_0025",
+      "question": "我要实现国内车牌识别，该用哪些模型",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "常 rag miss -> re_question -> rag/answerer",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moiakby1_q87axi0u"
+        ],
+        "thread_ids": [
+          "thread_e268deeaac71fa26"
+        ],
+        "query_ids": [
+          "qry_d8d7ff807945bf40"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "recommend_model",
+        "PL-4",
+        "finish:mixed"
+      ]
+    },
+    {
+      "id": "q_0026",
+      "question": "我要实现在监控大图上检测人脸，该用什么模型",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "常 rag miss -> re_question -> rag/answerer",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 4,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moiakby1_q87axi0u",
+          "sess_moib84gu_d1w2ihh3",
+          "sess_mp04yp7n_xmpf318s",
+          "3924fec8-2def-4377-935c-f1d94462af17"
+        ],
+        "thread_ids": [
+          "thread_e268deeaac71fa26",
+          "thread_76589dfeb00f0099",
+          "thread_e03bfff266c3be13",
+          "thread_d98b657ffeec914f"
+        ],
+        "query_ids": [
+          "qry_820300c41e4e66c7",
+          "qry_907c4b9a69ce6a0a",
+          "qry_dd446194a4094289",
+          "qry_96474c2ebbe484ce"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "recommend_model",
+        "PL-4",
+        "finish:mixed"
+      ]
+    },
+    {
+      "id": "q_0027",
+      "question": "我要实现大图检小脸，该用什么模型",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "常 rag miss -> re_question -> rag/answerer",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moiakby1_q87axi0u"
+        ],
+        "thread_ids": [
+          "thread_e268deeaac71fa26"
+        ],
+        "query_ids": [
+          "qry_c19f54b304d94e2f"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "recommend_model",
+        "PL-4",
+        "finish:mixed"
+      ]
+    },
+    {
+      "id": "q_0028",
+      "question": "我要实现大货车违停的需求，可以用到哪些模型",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moiakby1_q87axi0u"
+        ],
+        "thread_ids": [
+          "thread_e268deeaac71fa26"
+        ],
+        "query_ids": [
+          "qry_f5f764fe98b68275"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0029",
+      "question": "文搜图特征维度是多少",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 2,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moibvpbz_fs0mmnw5",
+          "sess_moic5kp6_dvlnurs5"
+        ],
+        "thread_ids": [
+          "thread_4588ab8e6bf3fc48",
+          "thread_7b024874c4689281"
+        ],
+        "query_ids": [
+          "qry_a30db8532cdd2edf",
+          "qry_c7dfef37fcfac5ce"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0030",
+      "question": "文搜图用什么模型",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "常 rag miss -> re_question -> rag/answerer",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moic5kp6_dvlnurs5"
+        ],
+        "thread_ids": [
+          "thread_7b024874c4689281"
+        ],
+        "query_ids": [
+          "qry_d2753f0058a8051c"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "recommend_model",
+        "PL-4",
+        "finish:mixed"
+      ]
+    },
+    {
+      "id": "q_0031",
+      "question": "查一下reid模型的使用边界",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moia504r_rrebf24a"
+        ],
+        "thread_ids": [
+          "thread_ddf6c9a8a0680b17"
+        ],
+        "query_ids": [
+          "qry_a0eec285409d78d4"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0032",
+      "question": "树葡萄和黑提是同一个东西吗",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_mohzi0nm_bdxlkv0w"
+        ],
+        "thread_ids": [
+          "thread_7542e94626832652"
+        ],
+        "query_ids": [
+          "qry_3cac7745c4228dcb"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "general_chat",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0033",
+      "question": "检测背书包的人",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "缺图时应 clarify；case 需带 image fixture",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "0c43d97d-ec59-45ce-9ff2-dfb827f8cd56"
+        ],
+        "thread_ids": [
+          "thread_49b7d4e7ca6730be"
+        ],
+        "query_ids": [
+          "qry_334706293d46c22e"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "vision_detect",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0034",
+      "question": "现在RD部门总共有多少个模型？",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "高频题，适合回归",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 8,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moi9vodc_i001cyoj",
+          "sess_moia336x_5mzmispc",
+          "sess_moia504r_rrebf24a",
+          "sess_moiczvch_c6ka8e3z",
+          "sess_mp03475g_yrqsoxjx",
+          "sess_mp0zr1xf_qj0as7iy",
+          "sess_mp3nljcs_s7jjffwq"
+        ],
+        "thread_ids": [
+          "thread_960cba0ab741cc3f",
+          "thread_208d6078124004be",
+          "thread_2cfa692071555382",
+          "thread_088fc70ce03e7079",
+          "thread_f41203c80d576bb2",
+          "thread_e213b9fb4812f7b1",
+          "thread_f04a2f8b22d3b3a8"
+        ],
+        "query_ids": [
+          "qry_924157ff0e930240",
+          "qry_0b3bcada164ac745",
+          "qry_fb62018eb8c6d4f0",
+          "qry_628a693a3a094868",
+          "qry_9042b5a3c4910df2",
+          "qry_620c1ba57c2a6823",
+          "qry_c353e5d8a05f94da",
+          "qry_df7e0eaf6a4b1d33"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0035",
+      "question": "现在RD部门总共有多少模型",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "5debba3b-62f7-48f9-bda1-9f6a6b28eca4"
+        ],
+        "thread_ids": [
+          "thread_9bc400efa535c22e"
+        ],
+        "query_ids": [
+          "qry_c318a8718dbbcf73"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0036",
+      "question": "现在中车业务总共有多少个模型？",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moia336x_5mzmispc"
+        ],
+        "thread_ids": [
+          "thread_208d6078124004be"
+        ],
+        "query_ids": [
+          "qry_d6964fddcf1129ea"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0037",
+      "question": "生成1张烟雾的图片",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 2,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moi1hgew_2vjtdb0m",
+          "sess_moibvpbz_fs0mmnw5"
+        ],
+        "thread_ids": [
+          "thread_f153cfb291404db6",
+          "thread_bad064f42708c2f4"
+        ],
+        "query_ids": [
+          "qry_1695f4e96e57106e",
+          "qry_cd76aba2a0095bd9"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "vision_generate",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0038",
+      "question": "生成3张吸食笑气的图片",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 3,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moia504r_rrebf24a",
+          "sess_moic5rhw_12go6q8n"
+        ],
+        "thread_ids": [
+          "thread_3a1d622679be88b8",
+          "thread_04437c79e5fbfc2a"
+        ],
+        "query_ids": [
+          "qry_3f77eb9aa203df97",
+          "qry_067a55f859838c4e",
+          "qry_37f71e0ea5b85556"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "vision_generate",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0039",
+      "question": "生成3张钓鱼的图片",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moi0fkbe_jqep50yf"
+        ],
+        "thread_ids": [
+          "thread_1e5e400a3e7a5d77"
+        ],
+        "query_ids": [
+          "qry_e819bde5a2014c43"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "vision_generate",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0040",
+      "question": "生成3张鬼火少年的图片",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 2,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moia504r_rrebf24a",
+          "sess_moic5kp6_dvlnurs5"
+        ],
+        "thread_ids": [
+          "thread_3a1d622679be88b8",
+          "thread_23e5e2f174f6530d"
+        ],
+        "query_ids": [
+          "qry_1579e6e89bbda220",
+          "qry_54f7c5b19eb34ef9"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "vision_generate",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0041",
+      "question": "用qwen模型标注钓鱼的人",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "缺图时应 clarify；case 需带 image fixture",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moi0fkbe_jqep50yf"
+        ],
+        "thread_ids": [
+          "thread_1e5e400a3e7a5d77"
+        ],
+        "query_ids": [
+          "qry_9ca8bfd2af61881f"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "vision_detect",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0042",
+      "question": "用于视频输入的人脸检测模型有什么?",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "缺图时应 clarify；case 需带 image fixture",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moib84gu_d1w2ihh3"
+        ],
+        "thread_ids": [
+          "thread_76589dfeb00f0099"
+        ],
+        "query_ids": [
+          "qry_dc186a506ae1a6bb"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "vision_detect",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0043",
+      "question": "评测性能怎么样",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moi00xu2_sb0b6gut"
+        ],
+        "thread_ids": [
+          "thread_01e53ff49463cea5"
+        ],
+        "query_ids": [
+          "qry_c50a261dbd7a0250"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0044",
+      "question": "车辆属性最新的模型是哪个",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moiakby1_q87axi0u"
+        ],
+        "thread_ids": [
+          "thread_7aaa5a47e152b0b2"
+        ],
+        "query_ids": [
+          "qry_4beecf93a3d6fd35"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0045",
+      "question": "违法钓鱼有检测的模型吗？",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moia336x_5mzmispc"
+        ],
+        "thread_ids": [
+          "thread_31c4a078e4263f5e"
+        ],
+        "query_ids": [
+          "qry_63cca200482ea88e"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0046",
+      "question": "针对 视频流做人脸检测的模型最新的版本是多少？",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "缺图时应 clarify；case 需带 image fixture",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moi9ecv4_l9f5ivx5"
+        ],
+        "thread_ids": [
+          "thread_5718b719fe5ec6e7"
+        ],
+        "query_ids": [
+          "qry_14de041b82e6ee61"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "vision_detect",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0047",
+      "question": "针对 视频流做人脸检测，有哪些模型",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "常 rag miss -> re_question -> rag/answerer",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moib84gu_d1w2ihh3"
+        ],
+        "thread_ids": [
+          "thread_76589dfeb00f0099"
+        ],
+        "query_ids": [
+          "qry_b79757b7c4361738"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "recommend_model",
+        "PL-4",
+        "finish:mixed"
+      ]
+    },
+    {
+      "id": "q_0048",
+      "question": "钓鱼有推荐的模型吗？",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "常 rag miss -> re_question -> rag/answerer",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moia336x_5mzmispc"
+        ],
+        "thread_ids": [
+          "thread_31c4a078e4263f5e"
+        ],
+        "query_ids": [
+          "qry_b5e19d9e41e9f39d"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "recommend_model",
+        "PL-4",
+        "finish:mixed"
+      ]
+    },
+    {
+      "id": "q_0049",
+      "question": "钓鱼的人，生成一个精度评估报告",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260428",
+        "occurrence_count": 2,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_moi0t99g_7j6r07ee",
+          "sess_moi1hgew_2vjtdb0m"
+        ],
+        "thread_ids": [
+          "thread_a4c5d7f3c00974a7",
+          "thread_486665ac8c12f9f6"
+        ],
+        "query_ids": [
+          "qry_f49a5bdba07c90cf",
+          "qry_004aee3cb7a383a2"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "vision_generate",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0050",
+      "question": "RD部门的主要研究方向有哪些",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260429",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_mojnf7vg_ukag1w3q"
+        ],
+        "thread_ids": [
+          "thread_a8c1d24f37a06f83"
+        ],
+        "query_ids": [
+          "qry_da975b4cfa3994bf"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0051",
+      "question": "qwen3 embedding模型的特征维度是多少",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260429",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_mojnf7vg_ukag1w3q"
+        ],
+        "thread_ids": [
+          "thread_a760daee068f5f6c"
+        ],
+        "query_ids": [
+          "qry_e36f9aac8d5ffcbe"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0052",
+      "question": "与人体相关的模型有哪些",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260429",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_mojnf7vg_ukag1w3q"
+        ],
+        "thread_ids": [
+          "thread_2413afce5384cc73"
+        ],
+        "query_ids": [
+          "qry_2bb6c8cf620d3738"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0053",
+      "question": "人脸特征模型最新版本T4模型的oid",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260429",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_mojnf7vg_ukag1w3q"
+        ],
+        "thread_ids": [
+          "thread_2413afce5384cc73"
+        ],
+        "query_ids": [
+          "qry_fae68b992ef336aa"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0054",
+      "question": "人脸质量模型输出几个标签",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260429",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_mojnf7vg_ukag1w3q"
+        ],
+        "thread_ids": [
+          "thread_2413afce5384cc73"
+        ],
+        "query_ids": [
+          "qry_a421ce424d5f9330"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0055",
+      "question": "介绍一下自己",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260429",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_mojnf7vg_ukag1w3q"
+        ],
+        "thread_ids": [
+          "thread_ef2a59ddfb072988"
+        ],
+        "query_ids": [
+          "qry_d2a9f537e464aa85"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "general_chat",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0056",
+      "question": "你能干什么呢",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260429",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_mojnf7vg_ukag1w3q"
+        ],
+        "thread_ids": [
+          "thread_e8d0683e827c5615"
+        ],
+        "query_ids": [
+          "qry_284d76f17e7d1a4c"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "general_chat",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0057",
+      "question": "可以汇总一下现在RD有哪些模型吗",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "常 rag miss -> re_question -> rag/answerer",
+      "metadata": {
+        "first_seen_date": "20260429",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_mojnf7vg_ukag1w3q"
+        ],
+        "thread_ids": [
+          "thread_a8c1d24f37a06f83"
+        ],
+        "query_ids": [
+          "qry_17a2674b73132dac"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "recommend_model",
+        "PL-4",
+        "finish:mixed"
+      ]
+    },
+    {
+      "id": "q_0058",
+      "question": "和人脸相关的模型有哪些",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260429",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_mojoa5q5_9tu1jqvg"
+        ],
+        "thread_ids": [
+          "thread_d5ba82db12dccd05"
+        ],
+        "query_ids": [
+          "qry_096f5549309330b9"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0059",
+      "question": "帮我检测横幅",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "缺图时应 clarify；case 需带 image fixture",
+      "metadata": {
+        "first_seen_date": "20260430",
+        "occurrence_count": 2,
+        "is_clarification_reply_seen": true,
+        "session_ids": [
+          "9463f8c2-8f1c-422d-ae5e-a4b133820426"
+        ],
+        "thread_ids": [
+          "thread_93d69c89cf41ec45"
+        ],
+        "query_ids": [
+          "qry_e83e5895c7309d5c"
+        ]
+      },
+      "suggested_tags": [
+        "CL-01",
+        "vision_detect",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0060",
+      "question": "苹果是当季水果吗",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260506",
+        "occurrence_count": 4,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "0ba28dd7-166d-4e6f-b2fe-b05ddfcb768f",
+          "15cd19e9-e34c-468c-ba9b-a77054baff72",
+          "3dc2597c-3315-43b0-a643-eec0cb855144",
+          "5b7c522f-1c38-4a65-b64f-be13b1a6793b"
+        ],
+        "thread_ids": [
+          "thread_680c5042295e4417",
+          "thread_ad5e117e4714d8f8",
+          "thread_e9934eada2407238",
+          "thread_7a74836ef4c91c5d"
+        ],
+        "query_ids": [
+          "qry_32c444772782e298",
+          "qry_749c2ee157eb7630",
+          "qry_e2d7339d5d9585cc",
+          "qry_c848bcd57249479e"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "general_chat",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0061",
+      "question": "黑夜检测黑猫",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "意图歧义，期望 clarify 而非直接选工具",
+      "metadata": {
+        "first_seen_date": "20260508",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "b8ed493d-cd73-4761-a861-35c616a6d1f3"
+        ],
+        "thread_ids": [
+          "thread_6924ca28e086bc60"
+        ],
+        "query_ids": [
+          "qry_d7e77bb3cfed0795"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "needs_clarify",
+        "vision_detect",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0062",
+      "question": "2024年呢",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260511",
+        "occurrence_count": 2,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "a6273567-65d5-4f0e-b94f-bddf8970919b",
+          "4677962a-3fd0-45f0-beef-7cc41ca47b1d"
+        ],
+        "thread_ids": [
+          "thread_b944e1576692c72b",
+          "thread_4f8cd3ab79f7ede1"
+        ],
+        "query_ids": [
+          "qry_d44c4dec548a149d",
+          "qry_a8856e76eca9e393"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0063",
+      "question": "2025年RD部分发布了几个模型",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260511",
+        "occurrence_count": 2,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "a6273567-65d5-4f0e-b94f-bddf8970919b",
+          "4677962a-3fd0-45f0-beef-7cc41ca47b1d"
+        ],
+        "thread_ids": [
+          "thread_b944e1576692c72b",
+          "thread_4f8cd3ab79f7ede1"
+        ],
+        "query_ids": [
+          "qry_f3285e0c9621bf2a",
+          "qry_ef0136105b49ad36"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0064",
+      "question": "2025年RD部门总共发布了多少个模型？",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260511",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_mp0zr1xf_qj0as7iy"
+        ],
+        "thread_ids": [
+          "thread_e213b9fb4812f7b1"
+        ],
+        "query_ids": [
+          "qry_d43c0c739c56731c"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0065",
+      "question": "2025年RD部门总共发布了多少个模型？ 用户补充说明：那2024年呢？",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "澄清续跑/槽位补充，须与前置轮次组成 case",
+      "metadata": {
+        "first_seen_date": "20260511",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": true,
+        "session_ids": [
+          "sess_mp0zr1xf_qj0as7iy"
+        ],
+        "thread_ids": [
+          "thread_e213b9fb4812f7b1"
+        ],
+        "query_ids": [
+          "qry_d43c0c739c56731c"
+        ]
+      },
+      "suggested_tags": [
+        "MT-02",
+        "CL-slot",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0066",
+      "question": "2025年RD部门总共发布了多少个模型？ 用户补充说明：那2024年呢？ 用户补充说明：2024年RD部门总共发布了多少个模型？",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "澄清续跑/槽位补充，须与前置轮次组成 case",
+      "metadata": {
+        "first_seen_date": "20260511",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": true,
+        "session_ids": [
+          "sess_mp0zr1xf_qj0as7iy"
+        ],
+        "thread_ids": [
+          "thread_e213b9fb4812f7b1"
+        ],
+        "query_ids": [
+          "qry_d43c0c739c56731c"
+        ]
+      },
+      "suggested_tags": [
+        "MT-02",
+        "CL-slot",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0067",
+      "question": "RD部门一共几个模型",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "高频题，适合回归",
+      "metadata": {
+        "first_seen_date": "20260511",
+        "occurrence_count": 5,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "a6273567-65d5-4f0e-b94f-bddf8970919b",
+          "sess_mp17lw31_2gg6yq91",
+          "4677962a-3fd0-45f0-beef-7cc41ca47b1d",
+          "55c51753-6254-468b-9a66-7c6b182b8f00",
+          "fd2d3d3f-1dab-4810-ba34-ea9c5c71389c"
+        ],
+        "thread_ids": [
+          "thread_b944e1576692c72b",
+          "thread_f716d4a38012fbc0",
+          "thread_4f8cd3ab79f7ede1",
+          "thread_a14b8d3300621be7",
+          "thread_ef6475324f976795"
+        ],
+        "query_ids": [
+          "qry_be893d805c6316a8",
+          "qry_def505be84f7f585",
+          "qry_1bba91bee55e5579",
+          "qry_6afe42ec5dcdd111",
+          "qry_d2d1d8938073a38a"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0068",
+      "question": "安全绳检测有哪些模型",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "常 rag miss -> re_question -> rag/answerer",
+      "metadata": {
+        "first_seen_date": "20260511",
+        "occurrence_count": 5,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "8972a1e6-f061-496d-aee0-4b96cd71983c",
+          "43a844d4-2806-4c55-9748-5907d01c529a",
+          "44dd6ee7-8677-4c51-a079-78fc81c91b59",
+          "90e94f90-6c98-4d0b-88a0-9e2158e2047b",
+          "a77fc9a6-8521-42f7-a5f9-4313bc47c330"
+        ],
+        "thread_ids": [
+          "thread_14ca94c2fa2edead",
+          "thread_7330bd06cbf25b5f",
+          "thread_dde4a1eb01936927",
+          "thread_c70526dde7dfc7b7",
+          "thread_5903e763134314d7"
+        ],
+        "query_ids": [
+          "qry_58c2c847c1afc261",
+          "qry_c55a2745b22c2b4f",
+          "qry_afaca0a2a6da5b09",
+          "qry_87b9ecca09233b25",
+          "qry_7eae810bfbce2504"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "recommend_model",
+        "PL-4",
+        "finish:mixed"
+      ]
+    },
+    {
+      "id": "q_0069",
+      "question": "帮我看一下 struct_blackbox_crop_224x224 部署到 cuda11.0-trt7.1-fp16-T4 后的精度怎么样？",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260511",
+        "occurrence_count": 8,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "50fc6079-5e32-4519-a261-64513aa8a1ff",
+          "5685fd89-5f9f-45c4-9f97-194b9074a2ff",
+          "ac18dcbd-d85f-423e-85e9-a2a7ea945d93",
+          "b2b6cec5-5c8d-4d84-bcd7-b75b8f34b452",
+          "45801209-2957-4758-95d2-a3196fb0ca5b",
+          "5af42b66-13fc-43ac-b1de-3c8e19886ae0",
+          "98e44923-fe58-4cd5-8731-294f3670b202",
+          "abcd8a3c-5d36-4907-a27d-6d37e30d69f4"
+        ],
+        "thread_ids": [
+          "thread_ca90299282891d9c",
+          "thread_ba998337f958407d",
+          "thread_be7c336755ebd5fd",
+          "thread_984606d7a99b4c9d",
+          "thread_5bcfb8edf76e4cd4",
+          "thread_5216036909c14e66",
+          "thread_d6df26171ed7195f",
+          "thread_9e041672a8634c3a"
+        ],
+        "query_ids": [
+          "qry_2cf9675a6eda5cc1",
+          "qry_2259fdc1d633465c",
+          "qry_51fc7d75647af6f8",
+          "qry_eee3a39790fc9e12",
+          "qry_867c13240ca14bb1",
+          "qry_8271ecd8b228c874",
+          "qry_cea68b45cafdf676",
+          "qry_72e0c322700b7d27"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "adela_benchmark",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0070",
+      "question": "怎么解释条件随机场解码",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260511",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "686c5a87-bbf0-483b-89a2-dc0365668229"
+        ],
+        "thread_ids": [
+          "thread_09a22427925e90af"
+        ],
+        "query_ids": [
+          "qry_266a1085ae4f489b"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "general_chat",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0071",
+      "question": "检测钓鱼的人",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "缺图时应 clarify；case 需带 image fixture",
+      "metadata": {
+        "first_seen_date": "20260511",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "5b7c522f-1c38-4a65-b64f-be13b1a6793b"
+        ],
+        "thread_ids": [
+          "thread_547c749b8bdbb1cd"
+        ],
+        "query_ids": [
+          "qry_f02d42e045345a97"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "vision_detect",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0072",
+      "question": "模型精度如何",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260511",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "8972a1e6-f061-496d-aee0-4b96cd71983c"
+        ],
+        "thread_ids": [
+          "thread_14ca94c2fa2edead"
+        ],
+        "query_ids": [
+          "qry_0ae570c9a1f9ee38"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0073",
+      "question": "生成三张横幅检测图片",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260511",
+        "occurrence_count": 2,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "3dc2597c-3315-43b0-a643-eec0cb855144",
+          "5b7c522f-1c38-4a65-b64f-be13b1a6793b"
+        ],
+        "thread_ids": [
+          "thread_e9934eada2407238",
+          "thread_547c749b8bdbb1cd"
+        ],
+        "query_ids": [
+          "qry_b6e9c1052c3f6640",
+          "qry_310a6139f569a569"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "vision_generate",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0074",
+      "question": "那2024年呢？",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260511",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_mp17lw31_2gg6yq91"
+        ],
+        "thread_ids": [
+          "thread_f716d4a38012fbc0"
+        ],
+        "query_ids": [
+          "qry_e532692b99397f9a"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0075",
+      "question": "那2025年RD部门发布了几个模型",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260511",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_mp17lw31_2gg6yq91"
+        ],
+        "thread_ids": [
+          "thread_f716d4a38012fbc0"
+        ],
+        "query_ids": [
+          "qry_39bc4432a9a5c983"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0076",
+      "question": "cuda11.0-trt7.1-fp16-T4",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "Adela 槽位补充",
+      "metadata": {
+        "first_seen_date": "20260512",
+        "occurrence_count": 2,
+        "is_clarification_reply_seen": true,
+        "session_ids": [
+          "800d3800-3811-40b4-99a9-368f0e8f5327",
+          "ad76b36d-de10-4975-ad5d-c6bca2379e4c"
+        ],
+        "thread_ids": [
+          "thread_0ddb6e879c35c715",
+          "thread_6ec88a84ecbf94b5"
+        ],
+        "query_ids": [
+          "qry_93442782824a2d85",
+          "qry_51017bbf61428c66"
+        ]
+      },
+      "suggested_tags": [
+        "CL-slot",
+        "MT-02",
+        "adela_benchmark",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0077",
+      "question": "换成这个平台：cuda11.0-trt7.1-fp16-T4",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "Adela 槽位补充",
+      "metadata": {
+        "first_seen_date": "20260512",
+        "occurrence_count": 3,
+        "is_clarification_reply_seen": true,
+        "session_ids": [
+          "88e47f80-62fd-41df-9430-7a0a9be9ba90",
+          "92f24346-f282-49a6-8ee3-81928bab0f1c",
+          "f9ce2380-e375-435a-a5e6-4eb189c71e58"
+        ],
+        "thread_ids": [
+          "thread_b055edcf7d4869a0",
+          "thread_ba026540d1a3d569",
+          "thread_e2974b188851e61f"
+        ],
+        "query_ids": [
+          "qry_2d771f3ca01a0dd5",
+          "qry_aa62c7215c677339",
+          "qry_c227d4b386caf45b"
+        ]
+      },
+      "suggested_tags": [
+        "CL-slot",
+        "MT-02",
+        "adela_benchmark",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0078",
+      "question": "部署钓鱼人检测模型",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "缺图时应 clarify；case 需带 image fixture",
+      "metadata": {
+        "first_seen_date": "20260512",
+        "occurrence_count": 10,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "800d3800-3811-40b4-99a9-368f0e8f5327",
+          "88e47f80-62fd-41df-9430-7a0a9be9ba90",
+          "bc6e6020-d96f-4eac-90fc-79ad133aca67",
+          "2ec89d44-b59a-4121-a772-1afeb169ec8f",
+          "92f24346-f282-49a6-8ee3-81928bab0f1c",
+          "9cc892a3-1715-4e63-a63e-7e4e1f5ad05a",
+          "ad76b36d-de10-4975-ad5d-c6bca2379e4c",
+          "b7934f48-ee61-4fd4-8857-faae89c5af9c",
+          "f9ce2380-e375-435a-a5e6-4eb189c71e58",
+          "a6aefdfb-6d97-4ad6-9e3a-840270f16a39"
+        ],
+        "thread_ids": [
+          "thread_0ddb6e879c35c715",
+          "thread_b055edcf7d4869a0",
+          "thread_d9fc96c4f1588940",
+          "thread_9e86e4f86223b212",
+          "thread_ba026540d1a3d569",
+          "thread_6463f37fc2708796",
+          "thread_6ec88a84ecbf94b5",
+          "thread_068a11dfd0d58101",
+          "thread_e2974b188851e61f",
+          "thread_fba072b677c60faa"
+        ],
+        "query_ids": [
+          "qry_93442782824a2d85",
+          "qry_2624460070c55387",
+          "qry_973e6a5eb9cb6bd8",
+          "qry_cf87753036927e24",
+          "qry_f894234fd0649748",
+          "qry_77ad0c3a394045c7",
+          "qry_51017bbf61428c66",
+          "qry_f886cf389d962b0a",
+          "qry_99bc3f5963fddfd0",
+          "qry_ea404739e97e670b"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "vision_detect",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0079",
+      "question": "部署钓鱼人检测模型 用户补充说明：cuda11.0-trt7.1-int8-T4",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "澄清续跑/槽位补充，须与前置轮次组成 case；Adela 多轮槽位填充典型题",
+      "metadata": {
+        "first_seen_date": "20260512",
+        "occurrence_count": 4,
+        "is_clarification_reply_seen": true,
+        "session_ids": [
+          "88e47f80-62fd-41df-9430-7a0a9be9ba90",
+          "bc6e6020-d96f-4eac-90fc-79ad133aca67",
+          "9cc892a3-1715-4e63-a63e-7e4e1f5ad05a",
+          "b7934f48-ee61-4fd4-8857-faae89c5af9c"
+        ],
+        "thread_ids": [
+          "thread_b055edcf7d4869a0",
+          "thread_d9fc96c4f1588940",
+          "thread_6463f37fc2708796",
+          "thread_068a11dfd0d58101"
+        ],
+        "query_ids": [
+          "qry_2624460070c55387",
+          "qry_973e6a5eb9cb6bd8",
+          "qry_77ad0c3a394045c7",
+          "qry_f886cf389d962b0a"
+        ]
+      },
+      "suggested_tags": [
+        "MT-02",
+        "CL-slot",
+        "adela_benchmark",
+        "vision_detect",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0080",
+      "question": "部署钓鱼人检测模型 用户补充说明：cuda11.0-trt7.1-int8-T4 用户补充说明：fishing_det_small",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "澄清续跑/槽位补充，须与前置轮次组成 case",
+      "metadata": {
+        "first_seen_date": "20260512",
+        "occurrence_count": 3,
+        "is_clarification_reply_seen": true,
+        "session_ids": [
+          "88e47f80-62fd-41df-9430-7a0a9be9ba90",
+          "9cc892a3-1715-4e63-a63e-7e4e1f5ad05a",
+          "b7934f48-ee61-4fd4-8857-faae89c5af9c"
+        ],
+        "thread_ids": [
+          "thread_b055edcf7d4869a0",
+          "thread_6463f37fc2708796",
+          "thread_068a11dfd0d58101"
+        ],
+        "query_ids": [
+          "qry_2624460070c55387",
+          "qry_77ad0c3a394045c7",
+          "qry_f886cf389d962b0a"
+        ]
+      },
+      "suggested_tags": [
+        "MT-02",
+        "CL-slot",
+        "adela_benchmark",
+        "vision_detect",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0081",
+      "question": "部署钓鱼人检测模型 用户补充说明：cuda11.0-trt7.1-int8-T4 用户补充说明：精度评测",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "澄清续跑/槽位补充，须与前置轮次组成 case；Adela 多轮槽位填充典型题",
+      "metadata": {
+        "first_seen_date": "20260512",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": true,
+        "session_ids": [
+          "bc6e6020-d96f-4eac-90fc-79ad133aca67"
+        ],
+        "thread_ids": [
+          "thread_d9fc96c4f1588940"
+        ],
+        "query_ids": [
+          "qry_973e6a5eb9cb6bd8"
+        ]
+      },
+      "suggested_tags": [
+        "MT-02",
+        "CL-slot",
+        "adela_benchmark",
+        "vision_detect",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0082",
+      "question": "部署钓鱼人检测模型 用户补充说明：fishing_det_small",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "澄清续跑/槽位补充，须与前置轮次组成 case；缺图时应 clarify；case 需带 image fixture",
+      "metadata": {
+        "first_seen_date": "20260512",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": true,
+        "session_ids": [
+          "800d3800-3811-40b4-99a9-368f0e8f5327"
+        ],
+        "thread_ids": [
+          "thread_0ddb6e879c35c715"
+        ],
+        "query_ids": [
+          "qry_93442782824a2d85"
+        ]
+      },
+      "suggested_tags": [
+        "MT-02",
+        "CL-slot",
+        "vision_detect",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0083",
+      "question": "RD部门在2024年总共发布了多少模型？",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260513",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_mp3nljcs_s7jjffwq"
+        ],
+        "thread_ids": [
+          "thread_a175aaaed940d65e"
+        ],
+        "query_ids": [
+          "qry_283b5887bf322791"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0084",
+      "question": "RD部门在2025年总共发布了多少模型？",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260513",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_mp3nljcs_s7jjffwq"
+        ],
+        "thread_ids": [
+          "thread_f04a2f8b22d3b3a8"
+        ],
+        "query_ids": [
+          "qry_4707bf6dae0d8f7e"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0085",
+      "question": "cuda11.0-trt7.1-int8-T4",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "Adela 槽位补充",
+      "metadata": {
+        "first_seen_date": "20260513",
+        "occurrence_count": 3,
+        "is_clarification_reply_seen": true,
+        "session_ids": [
+          "92f24346-f282-49a6-8ee3-81928bab0f1c",
+          "b1a88719-2814-4e27-b74c-e7d83cc0a101",
+          "f9ce2380-e375-435a-a5e6-4eb189c71e58"
+        ],
+        "thread_ids": [
+          "thread_ba026540d1a3d569",
+          "thread_c0a9c2f12a24152a",
+          "thread_e2974b188851e61f"
+        ],
+        "query_ids": [
+          "qry_f894234fd0649748",
+          "qry_1a51765914b7cc43",
+          "qry_99bc3f5963fddfd0"
+        ]
+      },
+      "suggested_tags": [
+        "CL-slot",
+        "MT-02",
+        "adela_benchmark",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0086",
+      "question": "struct_blackbox_crop_224x224模型，部署到cuda11.0-trt7.1-fp32-T4的准确率精度是多少",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260513",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_mp3hce48_3hyv4vrz"
+        ],
+        "thread_ids": [
+          "thread_5299ee400105c15c"
+        ],
+        "query_ids": [
+          "qry_66a1e9edeea53a81"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "adela_benchmark",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0087",
+      "question": "struct_blackbox_crop_224x224，部署到cuda11.0-trt7.1-fp32-T4的准确率精度是多少",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260513",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_mp3hce48_3hyv4vrz"
+        ],
+        "thread_ids": [
+          "thread_5299ee400105c15c"
+        ],
+        "query_ids": [
+          "qry_d98053a2ded80184"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "adela_benchmark",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0088",
+      "question": "我要实现在监控大图上检测人脸，该用什么模型？",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "常 rag miss -> re_question -> rag/answerer",
+      "metadata": {
+        "first_seen_date": "20260513",
+        "occurrence_count": 2,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_mp3ndgjt_6yjvp5ty",
+          "sess_mp3nljcs_s7jjffwq"
+        ],
+        "thread_ids": [
+          "thread_faf5dd6f1bedcef3",
+          "thread_f04a2f8b22d3b3a8"
+        ],
+        "query_ids": [
+          "qry_42a57ed0e97484b0",
+          "qry_c2867ce4942c7300"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "recommend_model",
+        "PL-4",
+        "finish:mixed"
+      ]
+    },
+    {
+      "id": "q_0089",
+      "question": "文搜图模型的特征维度是多少？",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260513",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_mp3ndgjt_6yjvp5ty"
+        ],
+        "thread_ids": [
+          "thread_faf5dd6f1bedcef3"
+        ],
+        "query_ids": [
+          "qry_93152a82f9ff014d"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0090",
+      "question": "部署人脸检测模型",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "缺图时应 clarify；case 需带 image fixture",
+      "metadata": {
+        "first_seen_date": "20260513",
+        "occurrence_count": 8,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "515a84e1-7187-4764-8fa3-c348552611d1",
+          "a040c623-73af-42f2-beb2-0ef7b47662d7",
+          "a84fbcaf-4e88-4c0b-9534-d0ba2efe7d09",
+          "ad7c238f-4506-4fff-8d2b-cb1f392f44fa",
+          "b1a88719-2814-4e27-b74c-e7d83cc0a101",
+          "e26c3df3-8e00-46d6-9e18-beb4b5585d6b",
+          "edded2f1-f048-49c5-a8d3-2ffe95e65e9b",
+          "f111bc36-d207-401d-91ce-22a47e9ef70e"
+        ],
+        "thread_ids": [
+          "thread_82a5b40df0f41786",
+          "thread_4e3d282b41dfeecc",
+          "thread_2fcbd3ed7e823fb9",
+          "thread_45ec9cb9ef46fcf2",
+          "thread_c0a9c2f12a24152a",
+          "thread_bf4d4b450c99f4bd",
+          "thread_51781ef139d3d0b8",
+          "thread_684cfd22d9082e77"
+        ],
+        "query_ids": [
+          "qry_70beb0434d9885f6",
+          "qry_50c64c69ff8db2dc",
+          "qry_b33c11b81d6568d3",
+          "qry_c0cce113ab09b991",
+          "qry_1a51765914b7cc43",
+          "qry_88bb10a4332ef46e",
+          "qry_fb1c2c6da65f2839",
+          "qry_d54a2b9958066367"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "vision_detect",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0091",
+      "question": "部署人脸检测模型 用户补充说明：cuda11.0-trt7.1-int8-T4",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "澄清续跑/槽位补充，须与前置轮次组成 case；Adela 多轮槽位填充典型题",
+      "metadata": {
+        "first_seen_date": "20260513",
+        "occurrence_count": 4,
+        "is_clarification_reply_seen": true,
+        "session_ids": [
+          "515a84e1-7187-4764-8fa3-c348552611d1",
+          "ad7c238f-4506-4fff-8d2b-cb1f392f44fa",
+          "edded2f1-f048-49c5-a8d3-2ffe95e65e9b",
+          "f111bc36-d207-401d-91ce-22a47e9ef70e"
+        ],
+        "thread_ids": [
+          "thread_82a5b40df0f41786",
+          "thread_45ec9cb9ef46fcf2",
+          "thread_51781ef139d3d0b8",
+          "thread_684cfd22d9082e77"
+        ],
+        "query_ids": [
+          "qry_70beb0434d9885f6",
+          "qry_c0cce113ab09b991",
+          "qry_fb1c2c6da65f2839",
+          "qry_d54a2b9958066367"
+        ]
+      },
+      "suggested_tags": [
+        "MT-02",
+        "CL-slot",
+        "adela_benchmark",
+        "vision_detect",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0092",
+      "question": "部署人脸检测模型 用户补充说明：cuda11.0-trt7.1-int8-T4 用户补充说明：SmallFace_Gray_736x1280",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "澄清续跑/槽位补充，须与前置轮次组成 case；Adela 多轮槽位填充典型题",
+      "metadata": {
+        "first_seen_date": "20260513",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": true,
+        "session_ids": [
+          "515a84e1-7187-4764-8fa3-c348552611d1"
+        ],
+        "thread_ids": [
+          "thread_82a5b40df0f41786"
+        ],
+        "query_ids": [
+          "qry_70beb0434d9885f6"
+        ]
+      },
+      "suggested_tags": [
+        "MT-02",
+        "CL-slot",
+        "adela_benchmark",
+        "vision_detect",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0093",
+      "question": "部署人脸检测模型 用户补充说明：{\"_structured_type\":\"adela_slot_form\",\"model_name\":\"人脸检测模型\",\"rawmodel_id\":\"\",\"platform\":\"cuda11.0-trt7.1-int8-T4\",\"eval_type\":0}",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "澄清续跑/槽位补充，须与前置轮次组成 case",
+      "metadata": {
+        "first_seen_date": "20260513",
+        "occurrence_count": 2,
+        "is_clarification_reply_seen": true,
+        "session_ids": [
+          "a040c623-73af-42f2-beb2-0ef7b47662d7",
+          "e26c3df3-8e00-46d6-9e18-beb4b5585d6b"
+        ],
+        "thread_ids": [
+          "thread_4e3d282b41dfeecc",
+          "thread_bf4d4b450c99f4bd"
+        ],
+        "query_ids": [
+          "qry_50c64c69ff8db2dc",
+          "qry_88bb10a4332ef46e"
+        ]
+      },
+      "suggested_tags": [
+        "MT-02",
+        "CL-slot",
+        "adela_benchmark",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0094",
+      "question": "部署人脸检测模型 用户补充说明：{\"_structured_type\":\"adela_slot_form\",\"model_name\":\"人脸检测模型\",\"rawmodel_id\":\"\",\"platform\":\"cuda11.0-trt7.1-int8-T4\",\"eval_type\":0} 用户补充说明：{\"_structured_type\":\"adela_slot_form\",\"model_name\":\"SmallFace_Gray_736x1280\",\"rawmodel_id\":\"\",\"platform\":\"cuda11.0-trt7.1-int8-T4\",\"eval_type\":0}",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "澄清续跑/槽位补充，须与前置轮次组成 case",
+      "metadata": {
+        "first_seen_date": "20260513",
+        "occurrence_count": 2,
+        "is_clarification_reply_seen": true,
+        "session_ids": [
+          "a040c623-73af-42f2-beb2-0ef7b47662d7",
+          "e26c3df3-8e00-46d6-9e18-beb4b5585d6b"
+        ],
+        "thread_ids": [
+          "thread_4e3d282b41dfeecc",
+          "thread_bf4d4b450c99f4bd"
+        ],
+        "query_ids": [
+          "qry_50c64c69ff8db2dc",
+          "qry_88bb10a4332ef46e"
+        ]
+      },
+      "suggested_tags": [
+        "MT-02",
+        "CL-slot",
+        "adela_benchmark",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0095",
+      "question": "部署人脸检测模型 用户补充说明：精度",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "澄清续跑/槽位补充，须与前置轮次组成 case；Adela 多轮槽位填充典型题",
+      "metadata": {
+        "first_seen_date": "20260513",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": true,
+        "session_ids": [
+          "b1a88719-2814-4e27-b74c-e7d83cc0a101"
+        ],
+        "thread_ids": [
+          "thread_c0a9c2f12a24152a"
+        ],
+        "query_ids": [
+          "qry_1a51765914b7cc43"
+        ]
+      },
+      "suggested_tags": [
+        "MT-02",
+        "CL-slot",
+        "adela_benchmark",
+        "vision_detect",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0096",
+      "question": "部署钓鱼人检测模型 用户补充说明：精度",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "澄清续跑/槽位补充，须与前置轮次组成 case；Adela 多轮槽位填充典型题",
+      "metadata": {
+        "first_seen_date": "20260513",
+        "occurrence_count": 3,
+        "is_clarification_reply_seen": true,
+        "session_ids": [
+          "92f24346-f282-49a6-8ee3-81928bab0f1c",
+          "ad76b36d-de10-4975-ad5d-c6bca2379e4c",
+          "f9ce2380-e375-435a-a5e6-4eb189c71e58"
+        ],
+        "thread_ids": [
+          "thread_ba026540d1a3d569",
+          "thread_6ec88a84ecbf94b5",
+          "thread_e2974b188851e61f"
+        ],
+        "query_ids": [
+          "qry_f894234fd0649748",
+          "qry_51017bbf61428c66",
+          "qry_99bc3f5963fddfd0"
+        ]
+      },
+      "suggested_tags": [
+        "MT-02",
+        "CL-slot",
+        "adela_benchmark",
+        "vision_detect",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0097",
+      "question": "部署钓鱼人检测模型 用户补充说明：精度 用户补充说明：fishing_det_small",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "澄清续跑/槽位补充，须与前置轮次组成 case",
+      "metadata": {
+        "first_seen_date": "20260513",
+        "occurrence_count": 3,
+        "is_clarification_reply_seen": true,
+        "session_ids": [
+          "92f24346-f282-49a6-8ee3-81928bab0f1c",
+          "ad76b36d-de10-4975-ad5d-c6bca2379e4c",
+          "f9ce2380-e375-435a-a5e6-4eb189c71e58"
+        ],
+        "thread_ids": [
+          "thread_ba026540d1a3d569",
+          "thread_6ec88a84ecbf94b5",
+          "thread_e2974b188851e61f"
+        ],
+        "query_ids": [
+          "qry_f894234fd0649748",
+          "qry_51017bbf61428c66",
+          "qry_99bc3f5963fddfd0"
+        ]
+      },
+      "suggested_tags": [
+        "MT-02",
+        "CL-slot",
+        "adela_benchmark",
+        "vision_detect",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0098",
+      "question": "monolith_small_ebike_102模型，部署到cuda11.0-trt7.1-fp16-T4的准确率精度结果是多少",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260514",
+        "occurrence_count": 2,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_mp4vsuf5_jf03bgtl",
+          "sess_mp4vt79p_twt5oi71"
+        ],
+        "thread_ids": [
+          "thread_e9c554519089eda7",
+          "thread_0c7e714ac5666dcf"
+        ],
+        "query_ids": [
+          "qry_ccb12261bbcdf836",
+          "qry_18fd54709bfac207"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "adela_benchmark",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0099",
+      "question": "”我要实现在监控大图上检测人脸，该用什么模型",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "常 rag miss -> re_question -> rag/answerer",
+      "metadata": {
+        "first_seen_date": "20260514",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "c856c8b4-1c68-47a6-a70f-df69a0d94351"
+        ],
+        "thread_ids": [
+          "thread_3127491dd4962e76"
+        ],
+        "query_ids": [
+          "qry_a92732724b7a6f88"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "recommend_model",
+        "PL-4",
+        "finish:mixed"
+      ]
+    },
+    {
+      "id": "q_0100",
+      "question": "口罩颜色要识别黑、白、灰、红、蓝、黄、绿、紫、迷彩，用什么模型？",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "常 rag miss -> re_question -> rag/answerer",
+      "metadata": {
+        "first_seen_date": "20260514",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "b06e889f-dc00-4cd5-8cbe-2d988c11a477"
+        ],
+        "thread_ids": [
+          "thread_5fbf6b31dd904f19"
+        ],
+        "query_ids": [
+          "qry_883a17e0d769bb20"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "recommend_model",
+        "PL-4",
+        "finish:mixed"
+      ]
+    },
+    {
+      "id": "q_0101",
+      "question": "头盔花纹模型是否有无花纹",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260514",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "b811dcc2-c7d2-4a0f-b651-4099fc3a551c"
+        ],
+        "thread_ids": [
+          "thread_22a7de689054e714"
+        ],
+        "query_ids": [
+          "qry_9e0f6ad339e3e96d"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0102",
+      "question": "客户要求区分帽子款式，包括渔夫帽、无檐帽、鸭舌帽、安全帽、open-face helmet、full-face helmet、连衣帽，用什么模型？",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "常 rag miss -> re_question -> rag/answerer",
+      "metadata": {
+        "first_seen_date": "20260514",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "aea035a2-006e-401c-b591-e6bf48d8fa3d"
+        ],
+        "thread_ids": [
+          "thread_a7515e43b4d006d4"
+        ],
+        "query_ids": [
+          "qry_68d5e6e250ad9b98"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "recommend_model",
+        "PL-4",
+        "finish:mixed"
+      ]
+    },
+    {
+      "id": "q_0103",
+      "question": "客户要识别“头盔是否有花纹”，推荐什么模型",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "常 rag miss -> re_question -> rag/answerer",
+      "metadata": {
+        "first_seen_date": "20260514",
+        "occurrence_count": 3,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "b811dcc2-c7d2-4a0f-b651-4099fc3a551c",
+          "2160a32c-bb7b-4bf6-84a8-490d076bbf1c",
+          "60a269f5-2c58-4fc0-b99b-8c63b3a5e739"
+        ],
+        "thread_ids": [
+          "thread_22a7de689054e714",
+          "thread_4f32f30df74ac66a",
+          "thread_672b2db1a4da0c0e"
+        ],
+        "query_ids": [
+          "qry_ed87b990b63dfda7",
+          "qry_17571aa141d372ba",
+          "qry_9d6c9b3f7ef437cd"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "recommend_model",
+        "PL-4",
+        "finish:mixed"
+      ]
+    },
+    {
+      "id": "q_0104",
+      "question": "检测机械结构异常，用什么模型？",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "常 rag miss -> re_question -> rag/answerer",
+      "metadata": {
+        "first_seen_date": "20260514",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "63243a34-3752-4630-b26b-7e695e8ce8b5"
+        ],
+        "thread_ids": [
+          "thread_d9f01d3f8a55e9b4"
+        ],
+        "query_ids": [
+          "qry_6a94a1041f139827"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "recommend_model",
+        "PL-4",
+        "finish:mixed"
+      ]
+    },
+    {
+      "id": "q_0105",
+      "question": "检测电子元器异常，用什么模型？",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "常 rag miss -> re_question -> rag/answerer",
+      "metadata": {
+        "first_seen_date": "20260514",
+        "occurrence_count": 10,
+        "is_clarification_reply_seen": true,
+        "session_ids": [
+          "07f9157d-a36d-4352-9ec1-a7ac09ccbac3",
+          "99d76590-08a2-4b51-a424-3e7d0b443fdd",
+          "431b1987-c68b-4496-9ccf-5a600d88f683",
+          "70314d2f-b1da-4a4f-933b-9c3cf4b3d2bd",
+          "8a242ee8-1830-44bc-9832-ef6d5f6aea58",
+          "cd393ded-0a07-4c95-9e73-e8d96ccbe518",
+          "f77d3fab-d443-40c7-ae26-cacb7fd316b8"
+        ],
+        "thread_ids": [
+          "thread_c45d2a680b82cbd8",
+          "thread_e34e13911ffe657d",
+          "thread_5d9a7fbb92093bae",
+          "thread_425c5149fa1fbd83",
+          "thread_1b921c6b6beb1619",
+          "thread_7b3d579fe64c8d97",
+          "thread_6e023f34c42475c8"
+        ],
+        "query_ids": [
+          "qry_04c018888dea0e83",
+          "qry_af5f73695811e7c4",
+          "qry_d8b428d36110c8db",
+          "qry_1f6989ebdc48d972",
+          "qry_daaedba4cb5e13cd",
+          "qry_409f4a1e3798cacd",
+          "qry_1383736d22990e8f",
+          "qry_611837b75460b49f"
+        ]
+      },
+      "suggested_tags": [
+        "CL-01",
+        "recommend_model",
+        "PL-4",
+        "finish:mixed"
+      ]
+    },
+    {
+      "id": "q_0106",
+      "question": "用户说“导靴靴衬”，如何区分轿厢导靴、对重靴衬、导靴上部/下部组件？",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260514",
+        "occurrence_count": 2,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "78f25a8f-2bb6-4b21-a5af-14029923995f",
+          "dc37801d-38e6-42a6-bf8c-67ebcfe89596"
+        ],
+        "thread_ids": [
+          "thread_bac4145d7657e0d3",
+          "thread_dcddcc89407ffabb"
+        ],
+        "query_ids": [
+          "qry_1191901fe6bd65d8",
+          "qry_3f0fdc84ed78679b"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0107",
+      "question": "监控画面中要判断行人“短发、长发、光头、其他”，用什么检测模型",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "缺图时应 clarify；case 需带 image fixture",
+      "metadata": {
+        "first_seen_date": "20260514",
+        "occurrence_count": 2,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "7687d564-dfdc-407c-bac3-dd6883afb93c",
+          "992dc233-4fa2-458a-a976-5c153ecd7974"
+        ],
+        "thread_ids": [
+          "thread_6469bc567e6fdb37",
+          "thread_6065d8e61451e393"
+        ],
+        "query_ids": [
+          "qry_59d5b9da304b0868",
+          "qry_4ad3ac1efeb1280e"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "vision_detect",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0108",
+      "question": "识别“肤色：黑色、白色、黄色”的模型",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "缺图时应 clarify；case 需带 image fixture",
+      "metadata": {
+        "first_seen_date": "20260514",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "677ffca3-8f4d-43d7-8fb8-9fcfabb37c20"
+        ],
+        "thread_ids": [
+          "thread_1c284517b3a11953"
+        ],
+        "query_ids": [
+          "qry_7b95c974b8d683f3"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "vision_detect",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0109",
+      "question": "那应该怎么办",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "迁移顾问：抽象+多路检索+报告，对外单 query 收口",
+      "metadata": {
+        "first_seen_date": "20260514",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "931e2802-4add-4295-a938-620c8dd3127b"
+        ],
+        "thread_ids": [
+          "thread_c841e0833320aa0d"
+        ],
+        "query_ids": [
+          "qry_675bb97e765097e5"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "migration_advisor",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0110",
+      "question": "香港人体属性中要求识别“纹身有无”和“纹身位置：面部、颈部、手部、腿部、背部、无法判断”，普通城市监控场景是否可行？",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "缺图时应 clarify；case 需带 image fixture",
+      "metadata": {
+        "first_seen_date": "20260514",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "e0ff4aa5-beb7-4939-a484-7f68fdbe157f"
+        ],
+        "thread_ids": [
+          "thread_3b35c29edfaa402c"
+        ],
+        "query_ids": [
+          "qry_5006e1f9ceee397b"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "vision_detect",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0111",
+      "question": "香港项目要求识别“头盔颜色：黑、白、灰、红、蓝、黄、绿、紫、迷彩”，现有城市结构化人体属性模型是否能直接支持？",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "迁移顾问：抽象+多路检索+报告，对外单 query 收口",
+      "metadata": {
+        "first_seen_date": "20260514",
+        "occurrence_count": 4,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "931e2802-4add-4295-a938-620c8dd3127b",
+          "25327595-cd9e-46c5-942a-6bab80788a47",
+          "8780df88-4ce8-4d40-b02d-d3a7049a0097",
+          "9f590109-7b60-4865-bca1-2d222cc0c078"
+        ],
+        "thread_ids": [
+          "thread_c841e0833320aa0d",
+          "thread_45b96914179e9fe4",
+          "thread_8078cf6e7601f907",
+          "thread_7f27a6f62a7ac217"
+        ],
+        "query_ids": [
+          "qry_c49343c54fdf08cc",
+          "qry_5c334bfac7658f54",
+          "qry_b43a27e5d8490f16",
+          "qry_c6312c81bb9c3e5a"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "migration_advisor",
+        "vision_detect",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0112",
+      "question": "2025年有多少个",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260518",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "55c51753-6254-468b-9a66-7c6b182b8f00"
+        ],
+        "thread_ids": [
+          "thread_7bbc2e5c5fe674d7"
+        ],
+        "query_ids": [
+          "qry_5c2efd6c6363a267"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0113",
+      "question": "adela平台上电动车检测模型有哪些",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "缺图时应 clarify；case 需带 image fixture",
+      "metadata": {
+        "first_seen_date": "20260518",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_mpayw4dn_f0h8ptwy"
+        ],
+        "thread_ids": [
+          "thread_bc5a8986644d8470"
+        ],
+        "query_ids": [
+          "qry_c8e10956dd097d9e"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "vision_detect",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0114",
+      "question": "monolith_small_ebike_102模型，部署在cuda11.0-trt7.1-fp16-T4平台的性能结果是多少？",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "",
+      "metadata": {
+        "first_seen_date": "20260518",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_mpayw4dn_f0h8ptwy"
+        ],
+        "thread_ids": [
+          "thread_101b4ebda9bf234c"
+        ],
+        "query_ids": [
+          "qry_585de17394ce03f9"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "adela_benchmark",
+        "lookup_fact",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0115",
+      "question": "电动车检测模型有哪些",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "缺图时应 clarify；case 需带 image fixture",
+      "metadata": {
+        "first_seen_date": "20260518",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "sess_mpayw4dn_f0h8ptwy"
+        ],
+        "thread_ids": [
+          "thread_101b4ebda9bf234c"
+        ],
+        "query_ids": [
+          "qry_5287ca3da50e119d"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "vision_detect",
+        "PL-1",
+        "finish:true"
+      ]
+    },
+    {
+      "id": "q_0116",
+      "question": "香港项目要求识别“头盔颜色：黑、白、灰、红、蓝、黄、绿、紫、迷彩”，现有城市结构化人体属性模型是否能直接支持？ 不能的话，怎么办？",
+      "ground_truth": "",
+      "tags": [],
+      "notes": "迁移顾问：抽象+多路检索+报告，对外单 query 收口",
+      "metadata": {
+        "first_seen_date": "20260518",
+        "occurrence_count": 1,
+        "is_clarification_reply_seen": false,
+        "session_ids": [
+          "ae89f676-fb31-4806-9cb3-803d68dcc3ff"
+        ],
+        "thread_ids": [
+          "thread_8db8840c5e81a9e5"
+        ],
+        "query_ids": [
+          "qry_b7b290a763fb73c2"
+        ]
+      },
+      "suggested_tags": [
+        "ST-01",
+        "migration_advisor",
+        "vision_detect",
+        "PL-1",
+        "finish:true"
+      ]
+    }
+  ]
+}

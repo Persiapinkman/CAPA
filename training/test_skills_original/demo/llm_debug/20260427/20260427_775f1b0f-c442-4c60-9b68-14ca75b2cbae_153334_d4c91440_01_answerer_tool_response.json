@@ -1,0 +1,11 @@
+{
+  "session_id": "775f1b0f-c442-4c60-9b68-14ca75b2cbae",
+  "run_stamp": "20260427_153334_d4c91440",
+  "stage": "answerer_tool_response",
+  "step_index": 1,
+  "created_at": "2026-04-27T15:35:32+08:00",
+  "payload": {
+    "raw_response": "{\n  \"final_answer\": \"人脸检测领域有多种主流模型，广泛应用于安防、安防监控、金融安防等领域。常见的模型包括：\\n1. 谷歌的 SSD（Single Shot Multi-box Detector）系列\\n2. MTCNN（多实例卷积神经分类器）\\n3. RetinaFace（RetinaNet 结合 FACE 检测）\\n4. YOLOv4 的改进版人脸检测算法\\n5. FaceNet（主要用于人脸识别）\\n\\n此外，OpenCV 等开源库也提供了多种人脸检测器的 API，开发者可以选择性使用不同模型的优缺点。根据需求选择适合的模型通常需要权衡实时性与精度。\"\n}",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260427_153334_d4c91440"
+  }
+}

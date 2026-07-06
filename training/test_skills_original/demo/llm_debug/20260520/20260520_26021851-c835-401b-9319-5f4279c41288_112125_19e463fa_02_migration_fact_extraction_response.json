@@ -1,0 +1,33 @@
+{
+  "session_id": "26021851-c835-401b-9319-5f4279c41288",
+  "run_stamp": "20260520_112125_19e463fa",
+  "stage": "migration_fact_extraction_response",
+  "step_index": 2,
+  "created_at": "2026-05-20T11:22:37+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "output_schema": {
+      "facts": "结构化事实数组。每条必须有 fact_type/field/subject/fact/value/unit/evidence_ids/doc_ids/quote/confidence"
+    },
+    "extracted_count": 1,
+    "output_raw": "{\n  \"facts\": [\n    {\n      \"fact_type\": \"model_identity\",\n      \"field\": \"existing_models\",\n      \"subject\": \"KM_essos_struct_nart_acl-ascend310-fp16_b8_3.0.1.model\",\n      \"fact\": \"人体、机动车、非机动车、骑手结构化检测\",\n      \"value\": \"KM_essos_struct_nart_acl-ascend310-fp16_b8_3.0.1.model\",\n      \"unit\": \"模型\",\n      \"evidence_ids\": [\"38ac92e10b1a47b07fbd277a\"],\n      \"doc_ids\": []\n    ,\n    \"quote\": \"model_name: KM_essos_struct_nart_acl-ascend310-fp16_b8_3.0.1.model\",\n      \"confidence\":  \n\n\n\n\n\n\n\n      \"high\"\n    }\n  ]\n}",
+    "structured_output": {
+      "facts": [
+        {
+          "fact_type": "model_identity",
+          "field": "existing_models",
+          "subject": "KM_essos_struct_nart_acl-ascend310-fp16_b8_3.0.1.model",
+          "fact": "人体、机动车、非机动车、骑手结构化检测",
+          "value": "KM_essos_struct_nart_acl-ascend310-fp16_b8_3.0.1.model",
+          "unit": "模型",
+          "evidence_ids": [
+            "38ac92e10b1a47b07fbd277a"
+          ],
+          "doc_ids": [],
+          "quote": "model_name: KM_essos_struct_nart_acl-ascend310-fp16_b8_3.0.1.model",
+          "confidence": "high"
+        }
+      ]
+    }
+  }
+}

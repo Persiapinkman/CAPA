@@ -1,0 +1,11 @@
+{
+  "session_id": "sess_moib84gu_d1w2ihh3",
+  "run_stamp": "20260428_153358_cee3c537",
+  "stage": "planner_response",
+  "step_index": 1,
+  "created_at": "2026-04-28T15:34:00+08:00",
+  "payload": {
+    "raw_response": "{\n  \"thought\": \"用户查询是针对视频流做人脸检测有哪些模型，这是一个关于企业内部知识或业务模型选择的问题。根据工具库说明，rag_answer 适合用于公司内部私有业务知识、项目文档、模型版本等问答。当前 query_trajectories 为空，这是第一轮检索，没有指代改写需求。因此，优先调用 rag_answer 进行检索。\",\n  \"decision_type\": \"tool\",\n  \"action\": \"rag_answer\",\n  \"action_input\": {\n    \"query\": \"针对 视频流做人脸检测，有哪些模型\",\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260428_153358_cee3c537"
+  }
+}

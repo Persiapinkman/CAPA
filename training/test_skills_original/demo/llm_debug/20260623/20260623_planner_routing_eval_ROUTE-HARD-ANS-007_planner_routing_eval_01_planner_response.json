@@ -1,0 +1,11 @@
+{
+  "session_id": "planner_routing_eval_ROUTE-HARD-ANS-007",
+  "run_stamp": "planner_routing_eval",
+  "stage": "planner_response",
+  "step_index": 1,
+  "created_at": "2026-06-23T16:04:32+08:00",
+  "payload": {
+    "raw_response": "{\n    \"thought\":\n    \"用户询问的是视觉模型中的 OOV（Out Of Vocabulary）概念。这是一个通用的技术概念问题，不是需要使用知识库检索的企业规范、业务文档或标准指标。OOV 是 NLP 和计算机视觉中常见的术语，指的是模型训练时未见过的词汇或类别。这属于通用知识范畴，不需要 RAG 检索，直接使用 answerer 工具回答。\"\n    , \"decision_type\": \"tool\", \"action\": \"answerer\", \"action_input\": {\n      \"mode\": \"direct\",\n      \"finish_after_tool\": true\n    }\n  }",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/results/planner_routing_eval"
+  }
+}

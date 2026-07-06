@@ -1,0 +1,115 @@
+{
+  "session_id": "ma_dataset_full_4",
+  "run_stamp": "20260529_135442_65c6ac7d",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-05-29T13:55:44+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"识别纹身位置（面部、颈部、手部、腿部、背部、无法判断）\",\n  \"direct_match\": {\n    \"exists\": false,\n    \"summary\": \"检索到的模型均为人脸检测、人体检测、车牌检测、视频检索等，未发现专门针对“纹身”及其位置分类的模型。\"\n  ,\n  \"evidence\": [\n    \"检索结果中无“纹身”相关关键词，目标名称主要为：人体、人脸、机动车、非机动车、车牌、横幅、车辆、行人等\"\n  ]\n  },\n  \"similar_assets\": [\n    {\n      \"model_or_solution\": \"人体结构化检测模型系列 (KM_essos_struct, KM_hunter_facebody)\",\n      \"label_schema\": \"目标：人体；属性：姿态、遮挡、着装、是否完整、是否戴帽等（非纹身位置）。标签示例：face, pedestrian, vehicle, cycer 等。\",\n      \"training_data\": \"公开数据集（如 COCO、KITTI 等）+ 内部安防场景数据。未提及纹身相关数据。\",\n      \"reported_metrics\": \"mAP 0.89-0.99（人脸/人体检测）；特定场景下 Recall 0.9+（如结构化检测）。\",\n      \"covered_capability\": \"人体检测、人脸检测、姿态估计、属性分类。\",\n      \"gap\": \"缺少纹身位置细粒度分类（如面部、颈部、手部等）。\",\n      \"evidence\": [\n        \"KM_essos_struct_nart...：target_name: 人体、机动车...\",\n        \"KM_hunter_facebody：target_name: 人脸人体\",\n        \"SmallFace_448x800：人脸识别，mAP 0.89-0.99\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"多模态检索模型 (Shikra)\",\n      \"label_schema\": \"多模态特征；支持文本/图像检索。无特定属性标签。\",\n      \"training_data\": \"通用图文对数据。未提及纹身数据。\",\n      \"reported_metrics\": \"Recall 0.89, Accuracy 0.81 (Shikra-V0.1.0 视频检索测试集)。\",\n      \"covered_capability\": \"通用图像/视频特征检索，支持语义查询。\",\n      \"gap\": \"非专用属性识别模型，需额外训练分类头。\",\n      \"evidence\": [\n        \"KM_senu_shikra-embedding：target_name: 通用\",\n        \"Shikra-Video-Embedding：Recall 0.8969, Accuracy 0.8116\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"人体属性分类模型 (KM_classifier_Ped_ClothBanner)\",\n      \"label_schema\": \"二分类：是否有醒目大字。\",\n      \"training_data\": \"内部定制化数据（衣物上有醒目大字的人体）。\",\n      \"reported_metrics\": \"未公开。\",\n      \"covered_capability\": \"人体属性分类（衣物文字）。\",\n      \"gap\": \"属性为衣物文字，非纹身位置。\",\n      \"evidence\": [\n        \"KM_classifier_Ped_ClothBanner：人体状衣二分类\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"通用人脸检测模型 (KM_essos_SmallFace)\",\n      \"label_schema\": \"人脸。\",\n      \"training_data\": \"监控场景人脸数据（GZ/WC 测试集）。\",\n      \"reported_metrics\": \"mAP 0.89-0.99；小尺寸人脸 Recall 提升 5-19%。\",\n      \"covered_capability\": \"人脸检测，可定位面部区域。\",\n      \"gap\": \"不识别纹身，仅检测人脸。\",\n      \"evidence\": [\n        \"KM_essos_SmallFace_448x800：人脸识别\",\n        \"KM_essos_SmallFace_544x960：人脸识别\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"人体检测模型 (KM_essos_det_small_nart)\",\n      \"label_schema\": \"人体。\",\n      \"training_data\": \"呈贡 CV 长尾业务数据。\",\n      \"reported_metrics\": \"未公开具体数值。\",\n      \"covered_capability\": \"人体检测、睡岗/钓鱼人检测。\",\n      \"gap\": \"仅检测人，不识别身体部位或纹身。\",\n      \"evidence\": [\n        \"KM_essos_det_small_nart：target_name: 人体，algorithm_name: 钓鱼人体检测/睡岗人体检测\"\n      ]\n    }\n  ],\n  \"migration_plan\": {\n    \"feasibility\": \"medium\",\n    \"approach\": \"基于人体检测（定位部位）+ 图像分类（识别纹身）+ 属性识别（定位位置）的组合方案\",\n    \"data_requirements\": \"需收集纹身位置标注数据（至少 1000+ 张，覆盖面部、颈部、手部、腿部、背部等），包含遮挡、光照、分辨率等场景。\",\n    \"compute_requirements\": \"Ascend 310/710 或 NVIDIA T4/A2 支持。\",\n    \"engineering_work\": \"1. 数据标注（人体部位+纹身类别）；2. 模型微调（YOLO 类检测 + ResNet 分类）；3. 部署适配。\",\n    \"estimated_timeline\": \"2-4 周（假设数据准备充分）\",\n    \"estimated_cost\": \"人力成本为主，约 2-4 人/月；设备成本视规模而定。\",\n    \"dependencies\": [\"数据标注质量\", \"部位定位精度\", \"纹身样本多样性\"]\n  ,\n  \"risks\": [\n    \"纹身样本稀缺，导致模型泛化差\",\n    \"部位定位困难（如颈部、腿部遮挡）\",\n    \"无法判断样本的标注一致性\"\n  ]\n  },\n  \"expected_performance\": {\n    \"baseline\": \"Recall 80%-90%（依赖数据质量）\",\n    \"target\": \"Recall 95%+\",\n    \"uncertainty\": \"高（无直接基线）\"\n  },\n  \"recommendation\": \"1. 直接模型不存在，需定制开发。2. 建议先构建人体部位检测模型（Face/Hand/Leg/Back），再叠加纹身分类器。3. 优先收集高价值样本（面部、手部），再扩展至其他部位。4. 若业务紧急，可考虑使用多模态检索模型进行初步筛选，再人工复核。\"\n}",
+    "structured_output": {
+      "requirement_summary": "识别纹身位置（面部、颈部、手部、腿部、背部、无法判断）",
+      "direct_match": {
+        "exists": false,
+        "summary": "检索到的模型均为人脸检测、人体检测、车牌检测、视频检索等，未发现专门针对“纹身”及其位置分类的模型。",
+        "evidence": [
+          "检索结果中无“纹身”相关关键词，目标名称主要为：人体、人脸、机动车、非机动车、车牌、横幅、车辆、行人等"
+        ]
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "人体结构化检测模型系列 (KM_essos_struct, KM_hunter_facebody)",
+          "label_schema": "目标：人体；属性：姿态、遮挡、着装、是否完整、是否戴帽等（非纹身位置）。标签示例：face, pedestrian, vehicle, cycer 等。",
+          "training_data": "公开数据集（如 COCO、KITTI 等）+ 内部安防场景数据。未提及纹身相关数据。",
+          "reported_metrics": "mAP 0.89-0.99（人脸/人体检测）；特定场景下 Recall 0.9+（如结构化检测）。",
+          "covered_capability": "人体检测、人脸检测、姿态估计、属性分类。",
+          "gap": "缺少纹身位置细粒度分类（如面部、颈部、手部等）。",
+          "evidence": [
+            "KM_essos_struct_nart...：target_name: 人体、机动车...",
+            "KM_hunter_facebody：target_name: 人脸人体",
+            "SmallFace_448x800：人脸识别，mAP 0.89-0.99"
+          ]
+        },
+        {
+          "model_or_solution": "多模态检索模型 (Shikra)",
+          "label_schema": "多模态特征；支持文本/图像检索。无特定属性标签。",
+          "training_data": "通用图文对数据。未提及纹身数据。",
+          "reported_metrics": "Recall 0.89, Accuracy 0.81 (Shikra-V0.1.0 视频检索测试集)。",
+          "covered_capability": "通用图像/视频特征检索，支持语义查询。",
+          "gap": "非专用属性识别模型，需额外训练分类头。",
+          "evidence": [
+            "KM_senu_shikra-embedding：target_name: 通用",
+            "Shikra-Video-Embedding：Recall 0.8969, Accuracy 0.8116"
+          ]
+        },
+        {
+          "model_or_solution": "人体属性分类模型 (KM_classifier_Ped_ClothBanner)",
+          "label_schema": "二分类：是否有醒目大字。",
+          "training_data": "内部定制化数据（衣物上有醒目大字的人体）。",
+          "reported_metrics": "未公开。",
+          "covered_capability": "人体属性分类（衣物文字）。",
+          "gap": "属性为衣物文字，非纹身位置。",
+          "evidence": [
+            "KM_classifier_Ped_ClothBanner：人体状衣二分类"
+          ]
+        },
+        {
+          "model_or_solution": "通用人脸检测模型 (KM_essos_SmallFace)",
+          "label_schema": "人脸。",
+          "training_data": "监控场景人脸数据（GZ/WC 测试集）。",
+          "reported_metrics": "mAP 0.89-0.99；小尺寸人脸 Recall 提升 5-19%。",
+          "covered_capability": "人脸检测，可定位面部区域。",
+          "gap": "不识别纹身，仅检测人脸。",
+          "evidence": [
+            "KM_essos_SmallFace_448x800：人脸识别",
+            "KM_essos_SmallFace_544x960：人脸识别"
+          ]
+        },
+        {
+          "model_or_solution": "人体检测模型 (KM_essos_det_small_nart)",
+          "label_schema": "人体。",
+          "training_data": "呈贡 CV 长尾业务数据。",
+          "reported_metrics": "未公开具体数值。",
+          "covered_capability": "人体检测、睡岗/钓鱼人检测。",
+          "gap": "仅检测人，不识别身体部位或纹身。",
+          "evidence": [
+            "KM_essos_det_small_nart：target_name: 人体，algorithm_name: 钓鱼人体检测/睡岗人体检测"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "medium",
+        "approach": "基于人体检测（定位部位）+ 图像分类（识别纹身）+ 属性识别（定位位置）的组合方案",
+        "data_requirements": "需收集纹身位置标注数据（至少 1000+ 张，覆盖面部、颈部、手部、腿部、背部等），包含遮挡、光照、分辨率等场景。",
+        "compute_requirements": "Ascend 310/710 或 NVIDIA T4/A2 支持。",
+        "engineering_work": "1. 数据标注（人体部位+纹身类别）；2. 模型微调（YOLO 类检测 + ResNet 分类）；3. 部署适配。",
+        "estimated_timeline": "2-4 周（假设数据准备充分）",
+        "estimated_cost": "人力成本为主，约 2-4 人/月；设备成本视规模而定。",
+        "dependencies": [
+          "数据标注质量",
+          "部位定位精度",
+          "纹身样本多样性"
+        ],
+        "risks": [
+          "纹身样本稀缺，导致模型泛化差",
+          "部位定位困难（如颈部、腿部遮挡）",
+          "无法判断样本的标注一致性"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "Recall 80%-90%（依赖数据质量）",
+        "target": "Recall 95%+",
+        "uncertainty": "高（无直接基线）"
+      },
+      "recommendation": "1. 直接模型不存在，需定制开发。2. 建议先构建人体部位检测模型（Face/Hand/Leg/Back），再叠加纹身分类器。3. 优先收集高价值样本（面部、手部），再扩展至其他部位。4. 若业务紧急，可考虑使用多模态检索模型进行初步筛选，再人工复核。"
+    }
+  }
+}

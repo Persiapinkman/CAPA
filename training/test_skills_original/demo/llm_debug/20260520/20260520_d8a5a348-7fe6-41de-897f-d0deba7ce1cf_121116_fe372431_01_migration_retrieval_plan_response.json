@@ -1,0 +1,63 @@
+{
+  "session_id": "d8a5a348-7fe6-41de-897f-d0deba7ce1cf",
+  "run_stamp": "20260520_121116_fe372431",
+  "stage": "migration_retrieval_plan_response",
+  "step_index": 1,
+  "created_at": "2026-05-20T12:12:19+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "output_schema": {
+      "abstract_requirement": "object, attribute, task_type, scene, constraints[]",
+      "retrieve_fields": "每项 field + queries[]（2-4 条）"
+    },
+    "used_fallback": false,
+    "output_raw": "{\n  \"abstract_requirement\": {\n    \"object\": \"头盔\",\n    \"attribute\": \"花纹\",\n    \"task_type\": \"检测/识别\",\n    \"scene\": \"安防/监控\"\n  ,\n  \"constraints\": [\n    \"轻量化\",\n    \"边缘设备\",\n    \"实时性\"\n  ]\n  },\n  \"retrieve_fields\": [\n    {\n      \"field\": \"existing_models\",\n      \"queries\": [\n        \"头盔花纹检测 分类模型\",\n        \"头盔识别 人脸误检\",\n        \"头盔分类 安防算法 纹理识别\"\n      ]\n    },\n    {\n      \"field\": \"similar_capabilities\",\n      \"queries\": [\n        \"头盔纹理识别 迁移学习\",\n        \"工装检测 安全帽识别 特征纹理\",\n        \"头部佩戴物检测 纹理图案分类\"\n      ]\n    },\n    {\n      \"field\": \"performance_baseline\",\n      \"queries\": [\n        \"头盔检测 精度 召回率 指标\",\n        \"纹理识别 F1-Score AUC\",\n        \"复杂场景 小目标检测 精度\"\n      ]\n    },\n    {\n      \"field\": \"data_requirements\",\n      \"queries\": [\n        \"头盔花纹 标注数据集 样本\",\n        \"安全帽纹理 正负样本 类别\",\n        \"场景类 头盔佩戴 训练数据\"\n      ]\n    }\n  ]\n}",
+    "structured_output": {
+      "abstract_requirement": {
+        "object": "头盔",
+        "attribute": "花纹",
+        "task_type": "检测/识别",
+        "scene": "安防/监控",
+        "constraints": [
+          "轻量化",
+          "边缘设备",
+          "实时性"
+        ]
+      },
+      "retrieve_fields": [
+        {
+          "field": "existing_models",
+          "queries": [
+            "头盔花纹检测 分类模型",
+            "头盔识别 人脸误检",
+            "头盔分类 安防算法 纹理识别"
+          ]
+        },
+        {
+          "field": "similar_capabilities",
+          "queries": [
+            "头盔纹理识别 迁移学习",
+            "工装检测 安全帽识别 特征纹理",
+            "头部佩戴物检测 纹理图案分类"
+          ]
+        },
+        {
+          "field": "performance_baseline",
+          "queries": [
+            "头盔检测 精度 召回率 指标",
+            "纹理识别 F1-Score AUC",
+            "复杂场景 小目标检测 精度"
+          ]
+        },
+        {
+          "field": "data_requirements",
+          "queries": [
+            "头盔花纹 标注数据集 样本",
+            "安全帽纹理 正负样本 类别",
+            "场景类 头盔佩戴 训练数据"
+          ]
+        }
+      ]
+    }
+  }
+}

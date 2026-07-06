@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "migration_advisor",
+  "_action_input": {
+    "user_query": "我想先做一个小探针：检测垃圾车。如果结果模糊，再分析垃圾车识别的复用空间。",
+    "use_image": true,
+    "use_visual_probe": true,
+    "finish_after_tool": true
+  },
+  "_thought": "用户意图很明确：先做一个小规模探针任务，基于当前图片检测垃圾车（task 1），如果结果不理想再去评估这个任务的复用空间，需要迁移评估（task 2）。这符合迁移顾问和视觉评测流程中的典型分阶段路径。根据 decision_principle 原则 6、12，当用户要“低成本探针/可执行探针/检测评估报告/对比开放集模型效果”时应优先选择 pipeline_eval；但这里用户也明确提到“如果结果模糊，再分析垃圾车识别的复用空间”，说明目标不仅是生成一批样本+跑评测，更包含了后续的能力边界评估与迁移分析，因此更适合先调用 migration_advisor，直接走迁移评估报告出结果 + 给出后续行动建议。由于当前有样例图（trash_truck.jpg），可开启 use_visual_probe=true 增强评估准确性。最终 decision_type=tool，action=migration_advisor，应在 action_input 中设置 finish_after_tool=true，因为迁移评估报告会直接回答用户的可行性与后续可行路径，满足其“小探针 + 复用空间分析”的终极需求。"
+}

@@ -1,0 +1,87 @@
+{
+  "session_id": "ma_dataset_full_23",
+  "run_stamp": "20260529_144309_5f1aff35",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-05-29T14:44:16+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"用户咨询香港车辆颜色识别是否只支持常规十种颜色，需要参考现有的车辆颜色识别模型能力。\",\n  \"direct_match\": {\n    \"exists\": false,\n    \"summary\": \"当前检索到的模型中，没有专门针对“香港车辆颜色”且明确列出支持颜色列表的模型。大部分模型是针对大陆车辆颜色识别，且包含的常规颜色数量超过10种。\"\n  ,\n  \"evidence\": []\n  },\n  \"similar_assets\": [\n    {\n      \"model_or_solution\": \"KM_classifier_Vehicle_FullAttr (交通方向-车辆属性)\",\n      \"label_schema\": \"vehicle_color = ['灰', '白', '红', '黑', '蓝', '绿', '棕', '黄', '紫', '粉', '青', '橙', '无法判断'] (13 种颜色 +1 个无法判断)\",\n      \"training_data\": \"未明确具体标注规范，参考 Adela 测试集验证，数据源为城市计算相关车辆图像\",\n      \"reported_metrics\": \"vehicle_color_precision 未给出具体数值，但 3.0 版本全属性 Acc 81.6%->89.1%，黑色 precision 82.74%->91.59%，蓝色 80.85%->90.22%\",\n      \"covered_capability\": \"常规车辆颜色识别，涵盖 13 种颜色\",\n      \"gap\": \"不支持专门针对香港车牌颜色的定制，且包含颜色超过 10 种，可能存在颜色类别不一致\"\n    ,\n    \"evidence\": [\n      \"d63d9e23a2da41bb60b97723\",\n      \"7c7c025ca9796c52d5be4fad\",\n      \"28d11e731adb475351a4549f\"\n    ]\n  },\n    {\n      \"model_or_solution\": \"PAR_merged_model\",\n      \"label_schema\": \"vehicle_color (未列出具体颜色列表)\",\n      \"training_data\": \"Vehicle_FullAttr 模型基础，参考 Adela 测试集\",\n      \"reported_metrics\": \"vehicle_color_acc=0.867129502337091, mPrec=0.8122685579960941, mA=0.749907709176286\",\n      \"covered_capability\": \"车辆颜色属性识别\",\n      \"gap\": \"未公开具体颜色类别定义，可能包含颜色数量与用户需求不符\",\n      \"evidence\": [\n        \"cb65cdef3571f8e586a95e1c\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"KM_classifier_Carplate_TypeColor_nart_acl-ascend310-int8_b8_3.0.0.model (车牌颜色类型属性)\",\n      \"label_schema\": \"车辆颜色 (含多种颜色，未具体列出)\",\n      \"training_data\": \"未明确标注规范\",\n      \"reported_metrics\": \"未给出具体精度数值\",\n      \"covered_capability\": \"车牌颜色属性识别\",\n      \"gap\": \"未明确是否包含香港车牌特有的颜色，且支持颜色数量未明确是否为 10 种\",\n      \"evidence\": [\n        \"b37f60bf62e6051f3fe455a3\"\n      ]\n    }\n  ]\n,\n  \"migration_plan\": {\n    \"feasibility\": \"medium\",\n    \"approach\": \"1. 确认香港车辆颜色分类标准与现有模型（如 KM_classifier_Vehicle_FullAttr）的颜色类别是否兼容。若现有模型包含 13 种颜色（灰、白、红、黑、蓝、绿、棕、黄、紫、粉、青、橙、无法判断），需评估是否满足香港法规的常规十种颜色要求。2. 若现有模型颜色类别过多，可考虑进行标签重映射或模型剪枝。3. 若现有模型颜色类别不匹配，需重新训练模型或引入迁移学习。\",\n    \"data_requirements\": \"需收集香港车辆颜色数据用于验证或微调，建议样本量不低于 5000 张（基于类似车辆属性模型经验）。\",\n    \"compute_requirements\": \"Ascend 310/710 或 NVIDIA T4/A2 平台，基于现有模型发行记录，推荐 Ascend 310 或 T4 进行推理。\",\n    \"engineering_work\": \"调整输出类别映射，验证精度，可能需要模型蒸馏或重训练。\",\n    \"estimated_timeline\": \"4-8 周（含数据准备、模型适配、测试验证）\",\n    \"estimated_cost\": \"证据不足\"\n  ,\n  \"dependencies\": [\n    \"用户需提供香港车辆颜色分类的具体定义\",\n    \"验证现有模型在港车数据集上的表现\"\n  ]\n  ,\n  \"risks\": [\n    \"现有模型颜色类别可能与香港法规不一致\",\n    \"精度可能因场景差异下降\"\n  ]\n}\n,\n  \"expected_performance\": {\n    \"baseline\": \"参考 KM_classifier_Vehicle_FullAttr，全属性 Acc 81.6%->89.1%，车辆颜色精度较高（黑色 91.59%，蓝色 90.22%）\",\n    \"target\": \"建议设定车辆颜色识别 Acc > 90%, Recall > 90%\",\n    \"uncertainty\": \"高（需根据实际港车数据验证）\"\n  },\n  \"recommendation\": \"建议直接使用 KM_classifier_Vehicle_FullAttr 作为基础模型，但需验证其颜色类别是否满足香港车辆颜色的常规十种颜色要求。若现有模型颜色类别过多（13 种），需进行类别筛选或映射。另外，KM_classifier_Carplate_TypeColor 系列模型可能更贴近车牌颜色识别需求，可进一步评估其类别定义。若现有模型不满足，需重新训练。\"\n}",
+    "structured_output": {
+      "requirement_summary": "用户咨询香港车辆颜色识别是否只支持常规十种颜色，需要参考现有的车辆颜色识别模型能力。",
+      "direct_match": {
+        "exists": false,
+        "summary": "当前检索到的模型中，没有专门针对“香港车辆颜色”且明确列出支持颜色列表的模型。大部分模型是针对大陆车辆颜色识别，且包含的常规颜色数量超过10种。",
+        "evidence": []
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "KM_classifier_Vehicle_FullAttr (交通方向-车辆属性)",
+          "label_schema": "vehicle_color = ['灰', '白', '红', '黑', '蓝', '绿', '棕', '黄', '紫', '粉', '青', '橙', '无法判断'] (13 种颜色 +1 个无法判断)",
+          "training_data": "未明确具体标注规范，参考 Adela 测试集验证，数据源为城市计算相关车辆图像",
+          "reported_metrics": "vehicle_color_precision 未给出具体数值，但 3.0 版本全属性 Acc 81.6%->89.1%，黑色 precision 82.74%->91.59%，蓝色 80.85%->90.22%",
+          "covered_capability": "常规车辆颜色识别，涵盖 13 种颜色",
+          "gap": "不支持专门针对香港车牌颜色的定制，且包含颜色超过 10 种，可能存在颜色类别不一致",
+          "evidence": [
+            "d63d9e23a2da41bb60b97723",
+            "7c7c025ca9796c52d5be4fad",
+            "28d11e731adb475351a4549f"
+          ]
+        },
+        {
+          "model_or_solution": "PAR_merged_model",
+          "label_schema": "vehicle_color (未列出具体颜色列表)",
+          "training_data": "Vehicle_FullAttr 模型基础，参考 Adela 测试集",
+          "reported_metrics": "vehicle_color_acc=0.867129502337091, mPrec=0.8122685579960941, mA=0.749907709176286",
+          "covered_capability": "车辆颜色属性识别",
+          "gap": "未公开具体颜色类别定义，可能包含颜色数量与用户需求不符",
+          "evidence": [
+            "cb65cdef3571f8e586a95e1c"
+          ]
+        },
+        {
+          "model_or_solution": "KM_classifier_Carplate_TypeColor_nart_acl-ascend310-int8_b8_3.0.0.model (车牌颜色类型属性)",
+          "label_schema": "车辆颜色 (含多种颜色，未具体列出)",
+          "training_data": "未明确标注规范",
+          "reported_metrics": "未给出具体精度数值",
+          "covered_capability": "车牌颜色属性识别",
+          "gap": "未明确是否包含香港车牌特有的颜色，且支持颜色数量未明确是否为 10 种",
+          "evidence": [
+            "b37f60bf62e6051f3fe455a3"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "medium",
+        "approach": "1. 确认香港车辆颜色分类标准与现有模型（如 KM_classifier_Vehicle_FullAttr）的颜色类别是否兼容。若现有模型包含 13 种颜色（灰、白、红、黑、蓝、绿、棕、黄、紫、粉、青、橙、无法判断），需评估是否满足香港法规的常规十种颜色要求。2. 若现有模型颜色类别过多，可考虑进行标签重映射或模型剪枝。3. 若现有模型颜色类别不匹配，需重新训练模型或引入迁移学习。",
+        "data_requirements": "需收集香港车辆颜色数据用于验证或微调，建议样本量不低于 5000 张（基于类似车辆属性模型经验）。",
+        "compute_requirements": "Ascend 310/710 或 NVIDIA T4/A2 平台，基于现有模型发行记录，推荐 Ascend 310 或 T4 进行推理。",
+        "engineering_work": "调整输出类别映射，验证精度，可能需要模型蒸馏或重训练。",
+        "estimated_timeline": "4-8 周（含数据准备、模型适配、测试验证）",
+        "estimated_cost": "证据不足",
+        "dependencies": [
+          "用户需提供香港车辆颜色分类的具体定义",
+          "验证现有模型在港车数据集上的表现"
+        ],
+        "risks": [
+          "现有模型颜色类别可能与香港法规不一致",
+          "精度可能因场景差异下降"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "参考 KM_classifier_Vehicle_FullAttr，全属性 Acc 81.6%->89.1%，车辆颜色精度较高（黑色 91.59%，蓝色 90.22%）",
+        "target": "建议设定车辆颜色识别 Acc > 90%, Recall > 90%",
+        "uncertainty": "高（需根据实际港车数据验证）"
+      },
+      "recommendation": "建议直接使用 KM_classifier_Vehicle_FullAttr 作为基础模型，但需验证其颜色类别是否满足香港车辆颜色的常规十种颜色要求。若现有模型颜色类别过多（13 种），需进行类别筛选或映射。另外，KM_classifier_Carplate_TypeColor 系列模型可能更贴近车牌颜色识别需求，可进一步评估其类别定义。若现有模型不满足，需重新训练。"
+    }
+  }
+}

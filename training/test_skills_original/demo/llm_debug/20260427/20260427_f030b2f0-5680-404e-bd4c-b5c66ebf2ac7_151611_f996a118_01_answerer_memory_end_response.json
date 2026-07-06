@@ -1,0 +1,11 @@
+{
+  "session_id": "f030b2f0-5680-404e-bd4c-b5c66ebf2ac7",
+  "run_stamp": "20260427_151611_f996a118",
+  "stage": "answerer_memory_end_response",
+  "step_index": 1,
+  "created_at": "2026-04-27T15:17:33+08:00",
+  "payload": {
+    "raw_response": "{\n  \"final_answer\": \"根据知识库记录，RD目前共有**12个**人脸相关算法模型。具体列表如下：\\n\\n1.  **KM_essos_SmallFace_544x960_nart_cuda11.4-trt8.2.0-fp16-A2_b64_3.0.0.model**\\n2.  **KM_essos_LargeFace_224x224_nart_cuda11.0-trt7.1-int8-T4_b64_8.0.1.model**\\n3.  **KM_essos_SmallFace_544x960_nart_cuda11.0-trt7.1-int8-T4_b48_3.0.0.model**\\n4.  **KM_essos_LargeFace_224x224_nart_cuda11.4-trt8.2.0-fp16-A2_b64_8.0.1.model**\\n5.  **KM_essos_LargeFace_224x224_nart_cuda11.0-trt7.1-int8-P4_b32_8.0.1.model**\\n6.  **KM_essos_SmallFace_544x960_nart_cuda11.0-trt7.1-fp32-P4_b24_3.0.0.model**\\n7.  **KM_classifier_Face_BigAngle_SD_nart_cuda11.0-trt7.1-int8-T4_b8_0.0.1.model**\\n8.  **KM_feature_face-pro512d_nart_cuda11.0-trt7.1-fp16-T4_b8_2.56.0.model**\\n9.  **KM_pageant_Pageant_88id_nart_cuda11.0-trt7.1-int8-T4_b16_1.0.8.model**\\n10. **KM_essos_SmallFace_gray_448x800_nart_cuda11.0-trt7.1-int8-T4_b48_3.0.1.model**\\n11. **KM_essos_SmallFace_gray_448x800_nart_cuda11.4-trt8.2.0-fp16-A2_b64_3.0.1.model**\\n12. **KM_bifrost_face-deepcode-64d_nart_cuda11.0-trt7.1-fp16-T4_b128_2.54.0.model**\\n\\n这些模型涵盖人脸检测、特征提取、大角度分类等学科领域，并针对不同设备及算法类型进行了优化。\"\n}",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260427_151611_f996a118"
+  }
+}

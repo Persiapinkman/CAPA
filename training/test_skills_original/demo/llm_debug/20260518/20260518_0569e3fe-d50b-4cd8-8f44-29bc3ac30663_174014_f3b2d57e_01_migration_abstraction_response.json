@@ -1,0 +1,11 @@
+{
+  "session_id": "0569e3fe-d50b-4cd8-8f44-29bc3ac30663",
+  "run_stamp": "20260518_174014_f3b2d57e",
+  "stage": "migration_abstraction_response",
+  "step_index": 1,
+  "created_at": "2026-05-18T17:40:17+08:00",
+  "payload": {
+    "raw_response": "{\n  \"raw_requirement\": \"检测电子元件异常，用什么模型？\",\n  \"task_family\": [\"缺陷检测\", \"异常检测\", \"工业视觉检测\", \"二值图像特征识别\"],\n  \"visual_targets\": [\"电子元件\", \"PCB 板\", \"电子元器件\", \"电路板\"],\n  \"capability_types\": [\"目标检测\", \"缺陷检测\", \"异常检测\", \"形态特征分析\"],\n  \"constraints\": [\n    \"工业场景对检测精度要求极高，漏检可能导致生产事故\",\n    \"电子元件形状多样，需考虑泛化能力\",\n    \"工业环境光线复杂，光照稳定性影响检测\",\n    \"产线节拍高，需要模型运行速度快\",\n    \"缺陷类型不明，需要多维度特征提取\"\n  ],\n  \"retrieval_queries\": [\n    \"工业电路缺陷检测模型选择\",\n    \"精密电子元件异常识别方法\",\n    \"零样本缺陷检测技术应用\",\n    \"电气元件质量监控的视觉方案\",\n    \"工业检测框架对比与选型\",\n    \"电路板缺陷检测的微小特征提取\",\n    \"在线视觉检测系统部署难点\",\n    \"电子元件漏检原因分析与模型优化\"\n  ],\n  \"must_answer_sections\": [\n    \"coverage\",\n    \"gaps\",\n    \"iteration\",\n    \"performance\",\n    \"cost\",\n    \"dependencies\",\n    \"counter_cases\",\n    \"deploy_risks\",\n    \"uncertainties\",\n    \"next_steps\"\n  ]\n}",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260518_174014_f3b2d57e"
+  }
+}

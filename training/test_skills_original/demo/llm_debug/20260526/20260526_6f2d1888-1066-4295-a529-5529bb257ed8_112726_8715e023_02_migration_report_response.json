@@ -1,0 +1,113 @@
+{
+  "session_id": "6f2d1888-1066-4295-a529-5529bb257ed8",
+  "run_stamp": "20260526_112726_8715e023",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-05-26T11:28:20+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"用户需要识别香港项目的头盔颜色，具体类别为：黑、白、灰、红、蓝、黄、绿、紫、迷彩。需要评估现有城市结构化人体属性模型是否支持此需求。\",\n  \"direct_match\": {\n    \"exists\": false,\n    \"summary\": \"现有检索证据中未发现专门针对“头盔颜色”且包含“黑、白、灰、红、蓝、黄、绿、紫、迷彩”类别的现成模型。虽然有“安全帽”相关的头盔属性分支（Classify_3.4.0），但证据显示其类别较少（仅“安全帽”），未明确包含上述颜色列表。同时，有“车牌颜色”模型（KM_classifier_Carplate_TypeColor），但目标对象为车辆，非人体/头盔。\"\n  ,\n    \"evidence\": [\n      \"PDFs/Classify_3.4.0.pdf p1: 提到 st_helmet_style 优化了“安全帽”类型图片，未列出颜色类别\",\n      \"KM_classifier_Carplate_TypeColor_*: 仅针对车牌颜色\"\n    ]\n  },\n  \"similar_assets\": [\n    {\n      \"model_or_solution\": \"KM_classifier_Face_BigAngle_SD_nart (或类似人脸属性模型)\",\n      \"label_schema\": \"证据不足。检索到的“KM_classifier_Face_BigAngle_SD_nart”文档未明确列出标签定义（仅提及人脸小图、大角度人脸过滤），未找到“头盔颜色”相关类别定义。\",\n      \"training_data\": \"证据不足。证据仅提到测试集“SD 1450 张人脸小图，正常人脸 1000 张，大角度人脸 450 张”，未明确训练集来源及标注规范，也未提及头盔颜色类别的样本要求。\",\n      \"reported_metrics\": \"证据不足。精度测试指标针对“正常人脸 recall\"  \t\t\t\t\t\t\t\t\t, \"covered_capability\": \"无直接证据。检索到的证据显示模型主要针对人脸检测与属性（如大角度过滤），未见明确证据表明该模型具备头盔颜色识别能力。Classify_3.4.0 版本优化了“安全帽”分支的召回率，但仅提及“安全帽”类型（可能指“戴了安全帽”vs“未戴”），而非颜色细分。\"\n    ,\n      \"gap\": \"需要确认现有结构化模型中 st_helmet_style 分支的具体标签体系（是否包含颜色细分）。若无，则需重新训练或微调。\"\n    ,\n      \"evidence\": [\n        \"PDFs/Classify_3.4.0.pdf p1: 提到 st_helmet_style 优化了“安全帽”类型图片的召回率，但仅强调“安全帽”类别（可能对应“有/无”或单一种类），未提及颜色细分\",\n        \"KM_classifier_Carplate_TypeColor_*: 仅支持车牌颜色，非头盔颜色\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"KM_classifier_Carplate_TypeColor_nart_* (车牌颜色类型属性)\",\n      \"label_schema\": \"证据不足。文档仅提及“车牌颜色类型属性”，未展开具体颜色标签定义（如是否包含黑、白、灰等）。即使包含，对象是车牌而非头盔。\",\n      \"training_data\": \"证据不足。文档未提及训练集来源、标注规范或样本量，仅描述为“V3.0.0，标品”或\"\n      ,\n      \"reported_metrics\": \"证据不足。无具体精度数值（如 mAP, ACC）。\",\n      \"covered_capability\": \"低。仅针对车牌颜色，不针对头盔。但颜色识别任务本身具有相似性。\",\n      \"gap\": \"目标对象不匹配（车牌 vs 头盔），需迁移任务。\",\n      \"evidence\": [\n        \"tables/model_release_records.jsonl: KM_classifier_Carplate_TypeColor_* 模型\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"PDFs/非机车属性全模型 (非机动车属性模型)\",\n      \"label_schema\": \"证据不足。证据显示包含“非机动车颜色”分类，但具体颜色标签列表未明确列出（表格中有“非机动车颜色”一行，但具体类别名如“黑、白”等未显示）。\",\n      \"training_data\": \"证据不足。文档未提供训练集细节。\",\n      \"reported_metrics\": \"证据不足。无针对颜色分类的精度数值（表格中颜色行无数据），仅提供了机动车/非机动车的检测/粗分类精度。\",\n      \"covered_capability\": \"中。存在“非机动车颜色”属性，可能包含多种颜色，但未明确确认是否包含“头盔颜色”所需类别（如迷彩），且针对非机动车（可能是人骑非机动车）的属性，与头盔颜色可能有重叠但需确认。\",\n      \"gap\": \"需确认“非机动车颜色”标签体系是否覆盖目标类别，以及模型是否专门针对头盔区域进行颜色识别。\",\n      \"evidence\": [\n        \"PDFs/非机车属性全模型.pdf p2: 表格中包含“非机动车颜色”属性，但具体标签值未展开\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"PDFs/安防方向--车辆属性大模型更新.pdf (车辆颜色属性)\",\n      \"label_schema\": \"证据不足。文档明确列出 vehicle_color 类别：['灰', '白', '红', '黑', '蓝', '绿', '棕', '黄', '紫', '粉', '青', '橙', '无法判断']，接近用户需求（缺“迷彩”）。但目标对象为车辆。\",\n      \"training_data\": \"证据不足。未提及训练集细节。\",\n      \"reported_metrics\": \"证据不足。仅提到 Adela 测试集上有颜色精度，无具体数值。\",\n      \"covered_capability\": \"中。颜色类别定义高度相似（除“迷彩”外），且包含灰、白、红、黑、蓝、绿、黄、紫。但对象是车辆，非头盔。\",\n      \"gap\": \"目标对象不匹配，需迁移。且缺“迷彩”类别。\",\n      \"evidence\": [\n        \"PDFs/安防方向--车辆属性大模型更新.pdf p14: vehicle_color = ['灰', '白', '红', '黑', '蓝', '绿', '棕', '黄', '紫', '粉', '青', '橙', '无法判断']\"\n      ]\n    },\n    {\n      \"model_or_solution\": \"Classify_3.4.0 (Classify 模型)\",\n      \"label_schema\": \"证据不足。证据提到 st_helmet_style 分支优化了“安全帽”类型，但未列出详细标签（如是否包含颜色，或仅“有/无”）。\",\n      \"training_data\": \"证据不足。无训练集细节。\",\n      \"reported_metrics\": \"证据不足。仅提到“安全帽”召回率优化到 84.07%（识别成未戴口罩），未提供颜色识别精度。\",\n      \"covered_capability\": \"低。针对头盔，但仅提及“安全帽”属性，未见颜色细分证据。\",\n      \"gap\": \"需确认是否支持颜色识别。若不支持，需修改标签体系并重新训练。\",\n      \"evidence\": [\n        \"PDFs/Classify_3.4.0.pdf p1: st_helmet_style 优化了“安全帽”类型图片的召回率\"\n      ]\n    }\n  ],\n  \"migration_plan\": {\n    \"feasibility\": \"medium\",\n    \"approach\": \"基于现有的结构化人体属性模型（如 Classify 3.4.0 或车辆属性大模型）进行微调或迁移。\",\n    \"data_requirements\": \"证据不足。需准备头盔颜色标注数据集（黑、白、灰、红、蓝、黄、绿、紫、迷彩），数量需参考车辆颜色或非机动车颜色模型的训练规模（文档中无具体数字）。\",\n    \"compute_requirements\": \"证据不足。参考类似模型（如 KM_classifier_Face_BigAngle_SD_nart）使用 Ascend 310/710 或 T4/A2 设备。\",\n    \"engineering_work\": \"1. 确认现有模型标签体系（st_helmet_style）是否支持多类别颜色。2. 扩展标签体系至 9 类。3. 准备标注数据。4. 微调训练。5. 验证精度。\",\n    \"estimated_timeline\": \"证据不足。微调周期取决于数据量和算力。建议预估 2-4 周（假设已有基座模型且数据齐备）。\",\n    \"estimated_cost\": \"证据不足。仅能给出区间，如：算力成本 5000-20000 元（参考 Ascend/T4 算力价格），标注成本视数据量而定。\"\n  ,\n    \"dependencies\": [\n      \"确认基座模型支持头盔属性\",\n      \"准备头盔颜色标注数据\",\n      \"算力资源（Ascend 或 T4）\"\n    ]\n  ,\n    \"risks\": [\n      \"现有基座模型可能不支持头盔颜色多分类，需从头训练或大改\",\n      \"迷彩类别在训练数据中可能较少，导致精度低\",\n      \"现有模型在人体/头盔区域的特征提取可能不如车辆模型，需验证\"\n    ]\n  }\n  ,\n  \"expected_performance\": {\n    \"baseline\": \"证据不足。参考 Classify_3.4.0 头盔召回率 84.07%（但未区分颜色），车辆颜色精度无具体数值。\",\n    \"target\": \"建议目标：颜色识别 ACC > 90%（参考 Classify 3.4.0 红黄口罩准确率 92.59% 作为基准）。\",\n    \"uncertainty\": \"高。因无头盔颜色直接测试集数据。\"\n  }\n  ,\n  \"recommendation\": \"建议：1. 优先评估 Classify_3.4.0 模型中 st_helmet_style 分支的标签体系。若仅支持“安全帽”vs“无”，则需重新训练。2. 若需颜色识别，参考车辆颜色模型（vehicle_color）的定义，补充“迷彩”类别，进行微调。3. 收集香港场景下的头盔颜色数据，重点覆盖迷彩等难例。\"\n}",
+    "structured_output": {
+      "requirement_summary": "用户需要识别香港项目的头盔颜色，具体类别为：黑、白、灰、红、蓝、黄、绿、紫、迷彩。需要评估现有城市结构化人体属性模型是否支持此需求。",
+      "direct_match": {
+        "exists": false,
+        "summary": "现有检索证据中未发现专门针对“头盔颜色”且包含“黑、白、灰、红、蓝、黄、绿、紫、迷彩”类别的现成模型。虽然有“安全帽”相关的头盔属性分支（Classify_3.4.0），但证据显示其类别较少（仅“安全帽”），未明确包含上述颜色列表。同时，有“车牌颜色”模型（KM_classifier_Carplate_TypeColor），但目标对象为车辆，非人体/头盔。",
+        "evidence": [
+          "PDFs/Classify_3.4.0.pdf p1: 提到 st_helmet_style 优化了“安全帽”类型图片，未列出颜色类别",
+          "KM_classifier_Carplate_TypeColor_*: 仅针对车牌颜色"
+        ]
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "KM_classifier_Face_BigAngle_SD_nart (或类似人脸属性模型)",
+          "label_schema": "证据不足。检索到的“KM_classifier_Face_BigAngle_SD_nart”文档未明确列出标签定义（仅提及人脸小图、大角度人脸过滤），未找到“头盔颜色”相关类别定义。",
+          "training_data": "证据不足。证据仅提到测试集“SD 1450 张人脸小图，正常人脸 1000 张，大角度人脸 450 张”，未明确训练集来源及标注规范，也未提及头盔颜色类别的样本要求。",
+          "reported_metrics": "证据不足。精度测试指标针对“正常人脸 recall",
+          "covered_capability": "无直接证据。检索到的证据显示模型主要针对人脸检测与属性（如大角度过滤），未见明确证据表明该模型具备头盔颜色识别能力。Classify_3.4.0 版本优化了“安全帽”分支的召回率，但仅提及“安全帽”类型（可能指“戴了安全帽”vs“未戴”），而非颜色细分。",
+          "gap": "需要确认现有结构化模型中 st_helmet_style 分支的具体标签体系（是否包含颜色细分）。若无，则需重新训练或微调。",
+          "evidence": [
+            "PDFs/Classify_3.4.0.pdf p1: 提到 st_helmet_style 优化了“安全帽”类型图片的召回率，但仅强调“安全帽”类别（可能对应“有/无”或单一种类），未提及颜色细分",
+            "KM_classifier_Carplate_TypeColor_*: 仅支持车牌颜色，非头盔颜色"
+          ]
+        },
+        {
+          "model_or_solution": "KM_classifier_Carplate_TypeColor_nart_* (车牌颜色类型属性)",
+          "label_schema": "证据不足。文档仅提及“车牌颜色类型属性”，未展开具体颜色标签定义（如是否包含黑、白、灰等）。即使包含，对象是车牌而非头盔。",
+          "training_data": "证据不足。文档未提及训练集来源、标注规范或样本量，仅描述为“V3.0.0，标品”或",
+          "reported_metrics": "证据不足。无具体精度数值（如 mAP, ACC）。",
+          "covered_capability": "低。仅针对车牌颜色，不针对头盔。但颜色识别任务本身具有相似性。",
+          "gap": "目标对象不匹配（车牌 vs 头盔），需迁移任务。",
+          "evidence": [
+            "tables/model_release_records.jsonl: KM_classifier_Carplate_TypeColor_* 模型"
+          ]
+        },
+        {
+          "model_or_solution": "PDFs/非机车属性全模型 (非机动车属性模型)",
+          "label_schema": "证据不足。证据显示包含“非机动车颜色”分类，但具体颜色标签列表未明确列出（表格中有“非机动车颜色”一行，但具体类别名如“黑、白”等未显示）。",
+          "training_data": "证据不足。文档未提供训练集细节。",
+          "reported_metrics": "证据不足。无针对颜色分类的精度数值（表格中颜色行无数据），仅提供了机动车/非机动车的检测/粗分类精度。",
+          "covered_capability": "中。存在“非机动车颜色”属性，可能包含多种颜色，但未明确确认是否包含“头盔颜色”所需类别（如迷彩），且针对非机动车（可能是人骑非机动车）的属性，与头盔颜色可能有重叠但需确认。",
+          "gap": "需确认“非机动车颜色”标签体系是否覆盖目标类别，以及模型是否专门针对头盔区域进行颜色识别。",
+          "evidence": [
+            "PDFs/非机车属性全模型.pdf p2: 表格中包含“非机动车颜色”属性，但具体标签值未展开"
+          ]
+        },
+        {
+          "model_or_solution": "PDFs/安防方向--车辆属性大模型更新.pdf (车辆颜色属性)",
+          "label_schema": "证据不足。文档明确列出 vehicle_color 类别：['灰', '白', '红', '黑', '蓝', '绿', '棕', '黄', '紫', '粉', '青', '橙', '无法判断']，接近用户需求（缺“迷彩”）。但目标对象为车辆。",
+          "training_data": "证据不足。未提及训练集细节。",
+          "reported_metrics": "证据不足。仅提到 Adela 测试集上有颜色精度，无具体数值。",
+          "covered_capability": "中。颜色类别定义高度相似（除“迷彩”外），且包含灰、白、红、黑、蓝、绿、黄、紫。但对象是车辆，非头盔。",
+          "gap": "目标对象不匹配，需迁移。且缺“迷彩”类别。",
+          "evidence": [
+            "PDFs/安防方向--车辆属性大模型更新.pdf p14: vehicle_color = ['灰', '白', '红', '黑', '蓝', '绿', '棕', '黄', '紫', '粉', '青', '橙', '无法判断']"
+          ]
+        },
+        {
+          "model_or_solution": "Classify_3.4.0 (Classify 模型)",
+          "label_schema": "证据不足。证据提到 st_helmet_style 分支优化了“安全帽”类型，但未列出详细标签（如是否包含颜色，或仅“有/无”）。",
+          "training_data": "证据不足。无训练集细节。",
+          "reported_metrics": "证据不足。仅提到“安全帽”召回率优化到 84.07%（识别成未戴口罩），未提供颜色识别精度。",
+          "covered_capability": "低。针对头盔，但仅提及“安全帽”属性，未见颜色细分证据。",
+          "gap": "需确认是否支持颜色识别。若不支持，需修改标签体系并重新训练。",
+          "evidence": [
+            "PDFs/Classify_3.4.0.pdf p1: st_helmet_style 优化了“安全帽”类型图片的召回率"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "medium",
+        "approach": "基于现有的结构化人体属性模型（如 Classify 3.4.0 或车辆属性大模型）进行微调或迁移。",
+        "data_requirements": "证据不足。需准备头盔颜色标注数据集（黑、白、灰、红、蓝、黄、绿、紫、迷彩），数量需参考车辆颜色或非机动车颜色模型的训练规模（文档中无具体数字）。",
+        "compute_requirements": "证据不足。参考类似模型（如 KM_classifier_Face_BigAngle_SD_nart）使用 Ascend 310/710 或 T4/A2 设备。",
+        "engineering_work": "1. 确认现有模型标签体系（st_helmet_style）是否支持多类别颜色。2. 扩展标签体系至 9 类。3. 准备标注数据。4. 微调训练。5. 验证精度。",
+        "estimated_timeline": "证据不足。微调周期取决于数据量和算力。建议预估 2-4 周（假设已有基座模型且数据齐备）。",
+        "estimated_cost": "证据不足。仅能给出区间，如：算力成本 5000-20000 元（参考 Ascend/T4 算力价格），标注成本视数据量而定。",
+        "dependencies": [
+          "确认基座模型支持头盔属性",
+          "准备头盔颜色标注数据",
+          "算力资源（Ascend 或 T4）"
+        ],
+        "risks": [
+          "现有基座模型可能不支持头盔颜色多分类，需从头训练或大改",
+          "迷彩类别在训练数据中可能较少，导致精度低",
+          "现有模型在人体/头盔区域的特征提取可能不如车辆模型，需验证"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "证据不足。参考 Classify_3.4.0 头盔召回率 84.07%（但未区分颜色），车辆颜色精度无具体数值。",
+        "target": "建议目标：颜色识别 ACC > 90%（参考 Classify 3.4.0 红黄口罩准确率 92.59% 作为基准）。",
+        "uncertainty": "高。因无头盔颜色直接测试集数据。"
+      },
+      "recommendation": "建议：1. 优先评估 Classify_3.4.0 模型中 st_helmet_style 分支的标签体系。若仅支持“安全帽”vs“无”，则需重新训练。2. 若需颜色识别，参考车辆颜色模型（vehicle_color）的定义，补充“迷彩”类别，进行微调。3. 收集香港场景下的头盔颜色数据，重点覆盖迷彩等难例。"
+    }
+  }
+}

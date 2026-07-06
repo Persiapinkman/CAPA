@@ -1,0 +1,68 @@
+{
+  "session_id": "ma_dataset_full_48",
+  "run_stamp": "20260603_104928_1cc9392b",
+  "stage": "migration_retrieval_plan_response",
+  "step_index": 1,
+  "created_at": "2026-06-03T10:49:31+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "output_schema": {
+      "abstract_requirement": "object, attribute, task_type, scene, constraints[]",
+      "retrieve_fields": "每项 field + queries[]（2-4 条）"
+    },
+    "used_fallback": false,
+    "output_raw": "{\n  \"abstract_requirement\": {\n    \"object\": \"机动车\",\n    \"attribute\": \"天窗状态识别\",\n    \"task_type\": \"图像分类/异常检测\"\n \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  ,\n    \"scene\": \"汽车零部件检测\",\n    \"constraints\": [\n      \"纯中文\",\n      \"短查询\",\n      \"每一行一组\",\n      \"2-4 条/组\"\n    ]\n  },\n  \"retrieve_fields\": [\n    {\"field\": \"existing_models\", \"queries\": [\"机动车天窗状态识别模型\", \"汽车图像分类已有方案\", \"存在天窗有无检测算法\", \"通用视觉分类迁移模型\"]},\n    {\"field\": \"similar_capabilities\", \"queries\": [\"物体检测部件识别能力迁移\", \"视觉光学特征提取复用方案\", \"已有分类模型快速迁移适配\", \"小语种跨模型特征复用\"]},\n    {\"field\": \"performance_baseline\", \"queries\": [\"天窗检测精度指标基准\", \"汽车零部件缺陷检测准确率\", \"图像分类性能测试标准\", \"车辆外观识别测试数据基准\"]},\n    {\"field\": \"data_requirements\", \"queries\": [\"车辆天窗图像标注标准\", \"汽车部件数据集训练要求\", \"场景化影像标注需求说明\", \"视觉模型图像标注迭代样本\"]\n  }\n]\n\n}",
+    "structured_output": {
+      "abstract_requirement": {
+        "object": "机动车",
+        "attribute": "天窗状态识别",
+        "task_type": "图像分类/异常检测",
+        "scene": "汽车零部件检测",
+        "constraints": [
+          "纯中文",
+          "短查询",
+          "每一行一组",
+          "2-4 条/组"
+        ]
+      },
+      "retrieve_fields": [
+        {
+          "field": "existing_models",
+          "queries": [
+            "机动车天窗状态识别模型",
+            "汽车图像分类已有方案",
+            "存在天窗有无检测算法",
+            "通用视觉分类迁移模型"
+          ]
+        },
+        {
+          "field": "similar_capabilities",
+          "queries": [
+            "物体检测部件识别能力迁移",
+            "视觉光学特征提取复用方案",
+            "已有分类模型快速迁移适配",
+            "小语种跨模型特征复用"
+          ]
+        },
+        {
+          "field": "performance_baseline",
+          "queries": [
+            "天窗检测精度指标基准",
+            "汽车零部件缺陷检测准确率",
+            "图像分类性能测试标准",
+            "车辆外观识别测试数据基准"
+          ]
+        },
+        {
+          "field": "data_requirements",
+          "queries": [
+            "车辆天窗图像标注标准",
+            "汽车部件数据集训练要求",
+            "场景化影像标注需求说明",
+            "视觉模型图像标注迭代样本"
+          ]
+        }
+      ]
+    }
+  }
+}

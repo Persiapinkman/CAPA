@@ -1,0 +1,11 @@
+{
+  "session_id": "28fd233e-fbf5-422e-9e59-0e4d38d3fe7c",
+  "run_stamp": "20260428_144122_a3910052",
+  "stage": "answerer_memory_end_response",
+  "step_index": 1,
+  "created_at": "2026-04-28T14:41:35+08:00",
+  "payload": {
+    "raw_response": "{\n  \"final_answer\": \"根据知识库历史查询轨迹，RD 现有 12 个跟人脸相关的算法，均来自“模型发版信息汇总表”。\\n\\n1.  **KM_essos_SmallFace_544x960_nart_cuda11.4-trt8.2.0-fp16-A2_b64_3.0.0.model** (OID: a7834c49f28a4c7d0f6817cd59c5ebe20dab2c269a983c56a714292b2564f29e)\\n2.  **KM_essos_LargeFace_224x224_nart_cuda11.0-trt7.1-int8-T4_b64_8.0.1.model** (OID: 378df917a6fb4535c8b515cd780f4c9dc21a977a7cb8d22dc2001bad5e524ae9)\\n3.  **KM_essos_SmallFace_544x960_nart_cuda11.0-trt7.1-int8-T4_b48_3.0.0.model** (OID: 1543abeeb80da75f855ba33ad62ed5756926b1e72aa6e022211315908b5b4c6f)\\n4.  **KM_essos_LargeFace_224x224_nart_cuda11.4-trt8.2.0-fp16-A2_b64_8.0.1.model** (OID: 54f75e09f5e03418854a33e347f64586de0dc264eff2d64acd97927b0dc0f10c)\\n5.  **KM_essos_SmallFace_544x960_nart_cuda11.0-trt7.1-fp32-P4_b24_3.0.0.model** (OID: 1c2e53b4e2c752b15b75fdb44176bffa4c9d2a763ea1b3e031ed706a4c1bf5e2)\\n6.  **KM_essos_LargeFace_224x224_nart_cuda11.0-trt7.1-int8-P4_b32_8.0.1.model** (OID: 44b72454c9f81d7c61c9ee67e919532f8acc610a85210e500fe6468e4dbdb16b)\\n7.  **KM_classifier_Face_BigAngle_SD_nart_cuda11.0-trt7.1-int8-T4_b8_0.0.1.model** (OID: 47d1c0fa0c63c085c22a3351d7f79bfee6053c2045b9ccab5304799758bd353c)\\n8.  **KM_essos_SmallFace_gray_448x800_nart_cuda11.0-trt7.1-int8-T4_b48_3.0.1.model** (OID: b7d08e1556a80583e8bc4ec46cbec5e1889a08f791dd07ccea33c9140118adae)\\n9.  **KM_feature_face-pro512d_nart_cuda11.0-trt7.1-fp16-T4_b8_2.56.0.model** (OID: 49b0ab63863dd47393bc1743b686a42cb1d705779330912a1cf814f48b6394b3)\\n10. **KM_essos_SmallFace_gray_448x800_nart_cuda11.4-trt8.2.0-fp16-A2_b64_3.0.1.model** (OID: c5172daad55f65dc8e29829f27dabbf19a58033fb2b5c2a9d7ed84e955a2d7d9)\\n11. **KM_essos_SmallFace_gray_448x800_nart_cuda11.0-trt7.1-fp32-P4_b24_3.0.1.model** (OID: 2ea54b63391e3bf99f701be444204c790ba67029dc3974cd311359ee6ee22214)\\n12. **KM_bifrost_face-deepcode-64d_nart_cuda11.0-trt7.1-fp16-T4_b128_2.54.0.model** (OID: 7257cd7d55f0bac3bcb16c4609d32b272484e66141dd8720d9b7bbaf33a6b3dc)\\n\\n以上信息均来自 RD 模型发版信息汇总，可视为当前系统中已部署的人脸算法清单。\"\n}",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260428_144122_a3910052"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "session_id": "ma_dataset_full_34",
+  "run_stamp": "20260603_103107_f4ee65d7",
+  "stage": "migration_retrieval_plan_response",
+  "step_index": 1,
+  "created_at": "2026-06-03T10:31:09+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "output_schema": {
+      "abstract_requirement": "object, attribute, task_type, scene, constraints[]",
+      "retrieve_fields": "每项 field + queries[]（2-4 条）"
+    },
+    "used_fallback": false,
+    "output_raw": "{\n  \"abstract_requirement\": {\n    \"object\": \"行人衣物特征\",\n    \"attribute\": \"佩戴手套\",\n    \"task_type\": \"二分类检测\"\n  ,\n  \"scene\": \"监控场景\"\n  ,\n  \"constraints\": []\n  },\n  \"retrieve_fields\": [\n    {\n      \"field\": \"existing_models\",\n      \"queries\": [\n        \"行人手套检测模型\",\n        \"二分类行人手部问题视觉模型\"\n      ]\n    },\n    {\n      \"field\": \"similar_capabilities\",\n      \"queries\": [\n        \"手部异常检测能力迁移\",\n        \"细粒度服装部件检测迁移\"\n      ]\n    },\n    {\n      \"field\": \"performance_baseline\",\n      \"queries\": [\n        \"二分类检测精度基线\",\n        \"行人监测手套识别准确率\"\n      ]\n    },\n    {\n      \"field\": \"data_requirements\",\n      \"queries\": [\n        \"行人手部手套标注数据\",\n        \"细粒度服装部件数据量需求\"\n      ]\n    }\n  ]\n}",
+    "structured_output": {
+      "abstract_requirement": {
+        "object": "行人衣物特征",
+        "attribute": "佩戴手套",
+        "task_type": "二分类检测",
+        "scene": "监控场景",
+        "constraints": []
+      },
+      "retrieve_fields": [
+        {
+          "field": "existing_models",
+          "queries": [
+            "行人手套检测模型",
+            "二分类行人手部问题视觉模型"
+          ]
+        },
+        {
+          "field": "similar_capabilities",
+          "queries": [
+            "手部异常检测能力迁移",
+            "细粒度服装部件检测迁移"
+          ]
+        },
+        {
+          "field": "performance_baseline",
+          "queries": [
+            "二分类检测精度基线",
+            "行人监测手套识别准确率"
+          ]
+        },
+        {
+          "field": "data_requirements",
+          "queries": [
+            "行人手部手套标注数据",
+            "细粒度服装部件数据量需求"
+          ]
+        }
+      ]
+    }
+  }
+}

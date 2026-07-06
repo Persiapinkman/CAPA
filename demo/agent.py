@@ -19,6 +19,7 @@ import json
 import os
 import re
 import sys
+import time
 from collections.abc import Callable
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -541,6 +542,41 @@ def _write_llm_debug_record(
         return
 
 
+def _merge_planner_usage(metrics: dict, metadata: dict, *, prefix: str = "") -> None:
+    if not isinstance(metadata, dict):
+        return
+    api_ms = metadata.get("api_call_ms")
+    key = f"{prefix}api_call_ms" if prefix else "api_call_ms"
+    if isinstance(api_ms, (int, float)):
+        metrics[key] = round(float(api_ms), 3)
+        metrics["api_call_ms"] = round(float(metrics.get("api_call_ms") or 0) + float(api_ms), 3)
+    for src_key, dst_key in (
+        ("input_tokens", "input_tokens"),
+        ("output_tokens", "output_tokens"),
+        ("total_tokens", "total_tokens"),
+    ):
+        value = metadata.get(src_key)
+        if isinstance(value, int):
+            metrics[dst_key] = int(metrics.get(dst_key) or 0) + value
+            if prefix:
+                metrics[f"{prefix}{dst_key}"] = value
+    if metadata.get("finish_reason") is not None:
+        metrics[f"{prefix}finish_reason" if prefix else "finish_reason"] = metadata.get("finish_reason")
+    if metadata.get("error_type"):
+        metrics[f"{prefix}error_type" if prefix else "error_type"] = metadata.get("error_type")
+        metrics[f"{prefix}error" if prefix else "error"] = metadata.get("error")
+
+
+def _attach_planner_metrics(step: dict, metrics: dict) -> dict:
+    if isinstance(step, dict):
+        cleaned = dict(metrics)
+        for key in ("prompt_build_ms", "parse_ms", "retry_parse_ms", "api_call_ms"):
+            if isinstance(cleaned.get(key), (int, float)):
+                cleaned[key] = round(float(cleaned[key]), 3)
+        step["_planner_metrics"] = cleaned
+    return step
+
+
 def choose_agent_step_llm(
     text: str,
     image_path: str | None,
@@ -551,6 +587,8 @@ def choose_agent_step_llm(
     model: str | None = None,
     debug_meta: dict | None = None,
 ) -> dict:
+    total_start = time.perf_counter()
+    prompt_start = time.perf_counter()
     use_model = model or DEMO_ROUTE_MODEL
     system_prompt = build_agent_system_prompt(max_steps=max_steps)
     user_prompt = build_agent_user_prompt(
@@ -564,6 +602,11 @@ def choose_agent_step_llm(
         {"role": "system", "content": system_prompt},
         {"role": "user", "content": user_prompt},
     ]
+    metrics: dict = {
+        "prompt_build_ms": round((time.perf_counter() - prompt_start) * 1000, 3),
+        "retry_count": 0,
+        "retry_reason": "",
+    }
     image_paths = [image_path] if image_path and Path(image_path).is_file() else None
     debug_info = debug_meta if isinstance(debug_meta, dict) else {}
     pctx = planner_context if isinstance(planner_context, dict) else {}
@@ -591,6 +634,7 @@ def choose_agent_step_llm(
         model=use_model,
         response_format=AGENT_STEP_RESPONSE_FORMAT,
     )
+    _merge_planner_usage(metrics, vlm.last_response_metadata, prefix="first_")
     _write_llm_debug_record(
         session_id=session_id,
         run_stamp=run_stamp,
@@ -599,8 +643,14 @@ def choose_agent_step_llm(
         payload={"raw_response": raw, "run_dir": str(debug_info.get("run_dir") or "")},
     )
     try:
-        return _parse_agent_step_response(raw)
+        parse_start = time.perf_counter()
+        step = _parse_agent_step_response(raw)
+        metrics["parse_ms"] = round((time.perf_counter() - parse_start) * 1000, 3)
+        metrics["planner_total_ms"] = round((time.perf_counter() - total_start) * 1000, 3)
+        return _attach_planner_metrics(step, metrics)
     except Exception as first_exc:
+        metrics["retry_count"] = 1
+        metrics["retry_reason"] = f"parse_error: {str(first_exc)}"
         retry_messages = list(planner_messages)
         retry_messages.append(
             {
@@ -632,6 +682,7 @@ def choose_agent_step_llm(
             model=use_model,
             response_format=AGENT_STEP_RESPONSE_FORMAT,
         )
+        _merge_planner_usage(metrics, vlm.last_response_metadata, prefix="retry_")
         _write_llm_debug_record(
             session_id=session_id,
             run_stamp=run_stamp,
@@ -640,7 +691,11 @@ def choose_agent_step_llm(
             payload={"raw_response": retry_raw, "run_dir": str(debug_info.get("run_dir") or "")},
         )
         try:
-            return _parse_agent_step_response(retry_raw)
+            parse_start = time.perf_counter()
+            step = _parse_agent_step_response(retry_raw)
+            metrics["retry_parse_ms"] = round((time.perf_counter() - parse_start) * 1000, 3)
+            metrics["planner_total_ms"] = round((time.perf_counter() - total_start) * 1000, 3)
+            return _attach_planner_metrics(step, metrics)
         except Exception as retry_exc:
             raise ValueError(
                 f"planner schema parse failed after retry: first={first_exc}; retry={retry_exc}"
@@ -993,12 +1048,19 @@ def choose_agent_step_with_fallback(
             debug_meta=debug_meta,
         )
     except Exception as exc:
+        error_type = type(exc).__name__
         return {
             "thought": f"Agent 决策异常：{exc}。本轮停止工具调用，直接向用户说明。",
             "decision_type": DECISION_TYPE_TOOL,
             "action": TOOL_ANSWERER,
             "action_input": {},
             "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。",
+            "_planner_metrics": {
+                "retry_count": 0,
+                "retry_reason": "",
+                "error_type": error_type,
+                "error": str(exc),
+            },
         }
 
 

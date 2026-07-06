@@ -1,0 +1,58 @@
+{
+  "session_id": "sess_mpdn84r2_yvbfrdt2",
+  "run_stamp": "20260520_135410_b4829abc",
+  "stage": "migration_retrieval_plan_response",
+  "step_index": 1,
+  "created_at": "2026-05-20T13:54:12+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "output_schema": {
+      "abstract_requirement": "object, attribute, task_type, scene, constraints[]",
+      "retrieve_fields": "每项 field + queries[]（2-4 条）"
+    },
+    "used_fallback": false,
+    "output_raw": "{\n  \"abstract_requirement\": {\n    \"object\": \"帽子款式分类\",\n    \"attribute\": \"渔夫帽 无檐帽 鸭舌帽 安全帽 open-face helmet full-face helmet 连衣帽\"\n  \t,\n  \"task_type\": \"物体分类\"\n  ,\n  \"scene\": \"工业视觉/服装工业\"\n  ,\n  \"constraints\": [\n    \"已有模型不可用\",\n    \"需找类似功能的迁移模型或方法\"\n  ]\n  },\n  \"retrieve_fields\": [\n    {\n    \"field\": \"existing_models\",\n    \"queries\": [\n    \"帽子 款式 分类 模型 渔夫帽 鸭舌帽 安全帽 helmet\",\n    \"headwear classification model 棒球帽 背心帽 安全帽 classify\"\n    ]\n    },\n    {\n    \"field\": \"similar_capabilities\",\n    \"queries\": [\n    \"服装外观识别 物品属性分类 多类别分类模型\",\n    \"headwear visual recognition attribute classification\"\n    ]\n    },\n    {\n    \"field\": \"performance_baseline\",\n    \"queries\": [\n    \"视觉分类任务 精度指标 模型评估 准确率\",\n    \"image classification accuracy benchmark gss.csv\"\n    ]\n    },\n    {\n    \"field\": \"data_requirements\",\n    \"queries\": [\n    \"帽子 类别 训练数据 图像标注\",\n    \"巾帽检测识别数据集 可视化标注 网络\"\n    ]\n    }\n  ]\n}",
+    "structured_output": {
+      "abstract_requirement": {
+        "object": "帽子款式分类",
+        "attribute": "渔夫帽 无檐帽 鸭舌帽 安全帽 open-face helmet full-face helmet 连衣帽",
+        "task_type": "物体分类",
+        "scene": "工业视觉/服装工业",
+        "constraints": [
+          "已有模型不可用",
+          "需找类似功能的迁移模型或方法"
+        ]
+      },
+      "retrieve_fields": [
+        {
+          "field": "existing_models",
+          "queries": [
+            "帽子 款式 分类 模型 渔夫帽 鸭舌帽 安全帽 helmet",
+            "headwear classification model 棒球帽 背心帽 安全帽 classify"
+          ]
+        },
+        {
+          "field": "similar_capabilities",
+          "queries": [
+            "服装外观识别 物品属性分类 多类别分类模型",
+            "headwear visual recognition attribute classification"
+          ]
+        },
+        {
+          "field": "performance_baseline",
+          "queries": [
+            "视觉分类任务 精度指标 模型评估 准确率",
+            "image classification accuracy benchmark gss.csv"
+          ]
+        },
+        {
+          "field": "data_requirements",
+          "queries": [
+            "帽子 类别 训练数据 图像标注",
+            "巾帽检测识别数据集 可视化标注 网络"
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "session_id": "ma_dataset_full_11",
+  "run_stamp": "20260529_140237_e5a8d614",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-05-29T14:04:51+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"用户询问上衣颜色枚举是否应保留“迷彩”选项，需要评估该枚举是否合理或建议。\",\n  \"direct_match\": {\n    \"exists\": false,\n    \"summary\": \"检索结果中未找到直接针对“上衣颜色”或“迷彩”枚举的具体模型文档，但存在多个车辆、人脸、非机动车等目标的颜色属性模型，可作为颜色枚举体系的迁移参考。\"\n  ,\n  \"evidence\": []\n  },\n  \"similar_assets\": [\n    {\n      \"model_or_solution\": \"KM_classifier_Vehicle_FullAttr_3.0.2\",\n      \"label_schema\": \"颜色（vehicle_color）：灰、白、红、黑、蓝、绿、棕、黄、紫、粉、青、橙、无法判断\",\n      \"training_data\": \"未提及具体训练集规模，基于 Adela 测试集评估\",\n      \"reported_metrics\": \"颜色属性在 CPU-PPL2-FP32 平台 Acc=0.887, mP=0.874; CUDA11.0-TRT7.1-INT8-T4 平台 Acc=0.883, mP=0.869\",\n      \"covered_capability\": \"颜色枚举体系设计，支持细粒度颜色分类及‘无法判断’兜底标签\",\n      \"gap\": \"未提及迷彩等复杂纹理/图案颜色\"\n    ,\n      \"evidence\": [\"e9fdde44540a819e4df7799b\", \"b5b40a95961f47b9793aa60a\", \"f2e5fdc0be8880a0d16c48d5\", \"1de1624938b0181389f409b7\"]\n    },\n    {\n      \"model_or_solution\": \"KM_classifier_Carplate_TypeColor_nart_3.0.0\",\n      \"label_schema\": \"车牌颜色：蓝、黄、黑、白、绿、黄绿、白、黄绿等（部分变体）\",\n      \"training_data\": \"基于历史数据标注，具体数量未知\",\n      \"reported_metrics\": \"未公开具体精度数值，作为标品模型部署\",\n      \"covered_capability\": \"多平台适配（CUDA、Ascend），颜色属性作为固定枚举输出\",\n      \"gap\": \"颜色为纯色/标准色，不支持迷彩等特殊图案\"\n    ,\n      \"evidence\": [\"459256d48c63a9aec26aa06a\", \"d014490029b4ecc1ae208f79\", \"f644bee2f2887484196ec1ac\", \"ce7a770d1382489fb63496cf\"]\n    },\n    {\n      \"model_or_solution\": \"PDFs/安防方向--非机动车属性大模型更新\",\n      \"label_schema\": \"车辆颜色：灰、白、红、黑、蓝、绿、棕、黄、紫、粉；三轮车细分类\",\n      \"training_data\": \"基于 Adela 测试集\",\n      \"reported_metrics\": \"车辆颜色准确率 71.6%/76.6%（90% recall 下）\",\n      \"covered_capability\": \"颜色枚举体系，包含基础色和复杂色（青、橙）\",\n      \"gap\": \"未包含迷彩、条纹等特殊纹理颜色\"\n    ,\n      \"evidence\": [\"3b429f956353161148093e4e\", \"d00d767df5dcfcfdb68b96f2\", \"b117ccd21ba2e66e05f9b224\"]\n    },\n    {\n      \"model_or_solution\": \"KM_classifier_Ped_ClothBanner_nart_0.0.1\",\n      \"label_schema\": \"衣物特征：二分类（有无醒目大字）\",\n      \"training_data\": \"特定场景定制数据\",\n      \"reported_metrics\": \"未公开具体精度数值\",\n      \"covered_capability\": \"衣物属性分类，支持定制场景\",\n      \"gap\": \"未提供颜色细粒度枚举，仅支持二分类特征\"\n    ,\n      \"evidence\": [\"574e8a69ac4e1edd855a3cbe\", \"415cfacb726c399a33e408c3\"]\n    }\n  ],\n  \"migration_plan\": {\n    \"feasibility\": \"medium\",\n    \"approach\": \"参考车辆颜色模型的结构化输出设计，若需支持‘迷彩’，需在枚举中显式增加该标签，并确保训练数据包含足够的迷彩样本（建议≥500 张），且需考虑迷彩与近色（如绿色、褐色）的区分难度，建议设置阈值过滤或引入‘无法判断’兜底标签。\",\n    \"data_requirements\": \"需要标注包含迷彩图案的上衣图片，建议包含不同光照、遮挡、模糊程度样本；训练数据量建议≥500 张，覆盖多品牌、多场景。\",\n    \"compute_requirements\": \"建议使用 GPU 平台（如 CUDA11.0-TRT8.0）进行推理，Ascend 310/710 亦可，但需验证颜色感知能力。\",\n    \"engineering_work\": \"修改 label_schema 枚举列表，增加'camouflage'；调整预处理参数（如色域变换 csc），确保颜色特征稳定；在部署时增加阈值过滤策略。\",\n    \"estimated_timeline\": \"标签体系调整 1 周；数据标注与清洗 2-3 周；模型训练与调优 3-4 周；测试与上线 1-2 周，合计约 7-10 周（取决于数据可用性）。\",\n    \"estimated_cost\": \"数据标注成本 1-2 万元（取决于数据质量要求）；GPU 资源训练 0.5-1 万元；人力与测试 2-3 万元，合计约 4-6 万元（仅估算，不含人力）。\"\n  ,\n    \"dependencies\": [\"迷彩样本标注质量\", \"阈值策略优化效果\", \"模型精度是否满足业务需求\"]\n  ,\n    \"risks\": [\"迷彩颜色识别精度可能低于纯色（预计 mAP 下降 10-15%）\", \"‘迷彩’标签可能被误识别为其他相近颜色\", \"数据分布不均导致模型泛化能力下降\"]\n  },\n  \"expected_performance\": {\n    \"baseline\": \"参考车辆颜色模型 mAP 0.87 左右，迷彩类可能降至 0.75-0.80\",\n    \"target\": \"mAP≥0.75，召回率≥0.80（90% recall 下）\",\n    \"uncertainty\": \"数据质量与标注一致性将显著影响最终精度\"\n  },\n  \"recommendation\": \"建议保留‘迷彩’枚举，但需明确其适用场景（如特定制服、工装），并配套建立阈值过滤与兜底策略，降低误报风险。同时需补充训练数据覆盖，避免模型仅学习到特定迷彩图案。\"\n}",
+    "structured_output": {
+      "requirement_summary": "用户询问上衣颜色枚举是否应保留“迷彩”选项，需要评估该枚举是否合理或建议。",
+      "direct_match": {
+        "exists": false,
+        "summary": "检索结果中未找到直接针对“上衣颜色”或“迷彩”枚举的具体模型文档，但存在多个车辆、人脸、非机动车等目标的颜色属性模型，可作为颜色枚举体系的迁移参考。",
+        "evidence": []
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "KM_classifier_Vehicle_FullAttr_3.0.2",
+          "label_schema": "颜色（vehicle_color）：灰、白、红、黑、蓝、绿、棕、黄、紫、粉、青、橙、无法判断",
+          "training_data": "未提及具体训练集规模，基于 Adela 测试集评估",
+          "reported_metrics": "颜色属性在 CPU-PPL2-FP32 平台 Acc=0.887, mP=0.874; CUDA11.0-TRT7.1-INT8-T4 平台 Acc=0.883, mP=0.869",
+          "covered_capability": "颜色枚举体系设计，支持细粒度颜色分类及‘无法判断’兜底标签",
+          "gap": "未提及迷彩等复杂纹理/图案颜色",
+          "evidence": [
+            "e9fdde44540a819e4df7799b",
+            "b5b40a95961f47b9793aa60a",
+            "f2e5fdc0be8880a0d16c48d5",
+            "1de1624938b0181389f409b7"
+          ]
+        },
+        {
+          "model_or_solution": "KM_classifier_Carplate_TypeColor_nart_3.0.0",
+          "label_schema": "车牌颜色：蓝、黄、黑、白、绿、黄绿、白、黄绿等（部分变体）",
+          "training_data": "基于历史数据标注，具体数量未知",
+          "reported_metrics": "未公开具体精度数值，作为标品模型部署",
+          "covered_capability": "多平台适配（CUDA、Ascend），颜色属性作为固定枚举输出",
+          "gap": "颜色为纯色/标准色，不支持迷彩等特殊图案",
+          "evidence": [
+            "459256d48c63a9aec26aa06a",
+            "d014490029b4ecc1ae208f79",
+            "f644bee2f2887484196ec1ac",
+            "ce7a770d1382489fb63496cf"
+          ]
+        },
+        {
+          "model_or_solution": "PDFs/安防方向--非机动车属性大模型更新",
+          "label_schema": "车辆颜色：灰、白、红、黑、蓝、绿、棕、黄、紫、粉；三轮车细分类",
+          "training_data": "基于 Adela 测试集",
+          "reported_metrics": "车辆颜色准确率 71.6%/76.6%（90% recall 下）",
+          "covered_capability": "颜色枚举体系，包含基础色和复杂色（青、橙）",
+          "gap": "未包含迷彩、条纹等特殊纹理颜色",
+          "evidence": [
+            "3b429f956353161148093e4e",
+            "d00d767df5dcfcfdb68b96f2",
+            "b117ccd21ba2e66e05f9b224"
+          ]
+        },
+        {
+          "model_or_solution": "KM_classifier_Ped_ClothBanner_nart_0.0.1",
+          "label_schema": "衣物特征：二分类（有无醒目大字）",
+          "training_data": "特定场景定制数据",
+          "reported_metrics": "未公开具体精度数值",
+          "covered_capability": "衣物属性分类，支持定制场景",
+          "gap": "未提供颜色细粒度枚举，仅支持二分类特征",
+          "evidence": [
+            "574e8a69ac4e1edd855a3cbe",
+            "415cfacb726c399a33e408c3"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "medium",
+        "approach": "参考车辆颜色模型的结构化输出设计，若需支持‘迷彩’，需在枚举中显式增加该标签，并确保训练数据包含足够的迷彩样本（建议≥500 张），且需考虑迷彩与近色（如绿色、褐色）的区分难度，建议设置阈值过滤或引入‘无法判断’兜底标签。",
+        "data_requirements": "需要标注包含迷彩图案的上衣图片，建议包含不同光照、遮挡、模糊程度样本；训练数据量建议≥500 张，覆盖多品牌、多场景。",
+        "compute_requirements": "建议使用 GPU 平台（如 CUDA11.0-TRT8.0）进行推理，Ascend 310/710 亦可，但需验证颜色感知能力。",
+        "engineering_work": "修改 label_schema 枚举列表，增加'camouflage'；调整预处理参数（如色域变换 csc），确保颜色特征稳定；在部署时增加阈值过滤策略。",
+        "estimated_timeline": "标签体系调整 1 周；数据标注与清洗 2-3 周；模型训练与调优 3-4 周；测试与上线 1-2 周，合计约 7-10 周（取决于数据可用性）。",
+        "estimated_cost": "数据标注成本 1-2 万元（取决于数据质量要求）；GPU 资源训练 0.5-1 万元；人力与测试 2-3 万元，合计约 4-6 万元（仅估算，不含人力）。",
+        "dependencies": [
+          "迷彩样本标注质量",
+          "阈值策略优化效果",
+          "模型精度是否满足业务需求"
+        ],
+        "risks": [
+          "迷彩颜色识别精度可能低于纯色（预计 mAP 下降 10-15%）",
+          "‘迷彩’标签可能被误识别为其他相近颜色",
+          "数据分布不均导致模型泛化能力下降"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "参考车辆颜色模型 mAP 0.87 左右，迷彩类可能降至 0.75-0.80",
+        "target": "mAP≥0.75，召回率≥0.80（90% recall 下）",
+        "uncertainty": "数据质量与标注一致性将显著影响最终精度"
+      },
+      "recommendation": "建议保留‘迷彩’枚举，但需明确其适用场景（如特定制服、工装），并配套建立阈值过滤与兜底策略，降低误报风险。同时需补充训练数据覆盖，避免模型仅学习到特定迷彩图案。"
+    }
+  }
+}

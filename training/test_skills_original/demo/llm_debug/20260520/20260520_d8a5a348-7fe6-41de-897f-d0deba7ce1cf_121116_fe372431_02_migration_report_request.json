@@ -1,0 +1,399 @@
+{
+  "session_id": "d8a5a348-7fe6-41de-897f-d0deba7ce1cf",
+  "run_stamp": "20260520_121116_fe372431",
+  "stage": "migration_report_request",
+  "step_index": 2,
+  "created_at": "2026-05-20T12:13:09+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "run_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/demo/runs/20260520_121116_fe372431",
+    "input_schema": {
+      "user_query": "用户原始问题",
+      "retrieval_plan": "上一步检索规划（abstract_requirement + retrieve_fields）",
+      "field_results": "playbook 分字段检索结果：field, queries, coverage, evidence[]"
+    },
+    "evidence_item_fields": [
+      "evidence_id",
+      "title",
+      "snippet",
+      "model_name",
+      "algorithm_name",
+      "algorithm_type",
+      "application_scene",
+      "section_type",
+      "score"
+    ],
+    "structured_input": {
+      "user_query": "客户要识别“头盔是否有花纹”，推荐什么模型",
+      "retrieval_plan": {
+        "abstract_requirement": {
+          "object": "头盔",
+          "attribute": "花纹",
+          "task_type": "检测/识别",
+          "scene": "安防/监控",
+          "constraints": [
+            "轻量化",
+            "边缘设备",
+            "实时性"
+          ]
+        },
+        "retrieve_fields": [
+          {
+            "field": "existing_models",
+            "queries": [
+              "头盔花纹检测 分类模型",
+              "头盔识别 人脸误检",
+              "头盔分类 安防算法 纹理识别"
+            ]
+          },
+          {
+            "field": "similar_capabilities",
+            "queries": [
+              "头盔纹理识别 迁移学习",
+              "工装检测 安全帽识别 特征纹理",
+              "头部佩戴物检测 纹理图案分类"
+            ]
+          },
+          {
+            "field": "performance_baseline",
+            "queries": [
+              "头盔检测 精度 召回率 指标",
+              "纹理识别 F1-Score AUC",
+              "复杂场景 小目标检测 精度"
+            ]
+          },
+          {
+            "field": "data_requirements",
+            "queries": [
+              "头盔花纹 标注数据集 样本",
+              "安全帽纹理 正负样本 类别",
+              "场景类 头盔佩戴 训练数据"
+            ]
+          }
+        ]
+      },
+      "field_results": [
+        {
+          "field": "existing_models",
+          "queries": [
+            "头盔花纹检测 分类模型",
+            "头盔识别 人脸误检",
+            "头盔分类 安防算法 纹理识别"
+          ],
+          "coverage": "strong",
+          "evidence": [
+            {
+              "evidence_id": "f586a56a911c80497fa3679c",
+              "title": "PDFs/Classify_3.4.0.pdf p1",
+              "snippet": "Classify_3.4.0                                                                 \n                                                                                    \n                                                                                    \n                                                                                    \n     Highlight...",
+              "section_type": "release_note",
+              "score": 0.880009
+            },
+            {
+              "evidence_id": "574e8a69ac4e1edd855a3cbe",
+              "title": "KM_classifier_Ped_ClothBanner_nart_acl-ascend710-fp16_b8_0.0.1.model",
+              "snippet": "target_name: 人体\nalgorithm_type: 属性\nalgorithm_name: 人体状衣二分类\napplication_scene: pk定制化，未集成入横幅app，召回衣物上有肉眼可辨醒目大字的人体的二分类模型；V0.0.1\nowner: 冯江燕\nmodel_name: KM_classifier_Ped_ClothBanner_nart_acl-ascend710-fp16_b8_0.0.1.model\nsupported_device: ascend710\nrecommended_config: acl-ascend710-fp16\nlast_updated: 2025-06-16\nlast_updated_month: 2025-06",
+              "model_name": "KM_classifier_Ped_ClothBanner_nart_acl-ascend710-fp16_b8_0.0.1.model",
+              "algorithm_name": "人体状衣二分类",
+              "algorithm_type": "属性",
+              "application_scene": "pk定制化，未集成入横幅app，召回衣物上有肉眼可辨醒目大字的人体的二分类模型；V0.0.1",
+              "section_type": "release_note",
+              "score": 0.593953
+            },
+            {
+              "evidence_id": "efa609ebb25bfa704c3dd749",
+              "title": "nonmotor",
+              "snippet": "did: 106936\nrid: 38074\nmodel_name: nonmotor\nplatform: acl-ascend310-int8",
+              "model_name": "nonmotor",
+              "section_type": "model_artifact",
+              "score": 0.956993
+            },
+            {
+              "evidence_id": "864d157ed16434b83193f000",
+              "title": "PDFs/Classify_3.4.0.pdf p1 table 1",
+              "snippet": "PDF表格: PDFs/Classify_3.4.0.pdf 第1页 表1\n\n| Classify_3.4.0 Highlight • 优化st_helmet_style（头盔）分支下“安全帽”类型图片的召回率（识别成未戴口罩），ma_安全帽 = 84.07%(+12.01%) • 优化 st_respirator(口罩位置) 分支下 “红黄口罩” 类型图片的准确率（识别成未戴口罩，由于口罩位置 有多个类别，且测试集很少且各类别很不平衡，mA不能很好反映效果，使用准确率（所有类别预测错 误数量/样本总数），也是因此，st_respirator的mA计算时并未加入红黄口罩测试集），acc_红黄口罩 = 92.59%(+3.7%)。 • 各属性分支有对应的推荐阈值，经过推荐阈值过滤后的精度详见“推荐阈值表”，阈值表已打包进模型中 • 未经属性阈值过滤的精度见“精度评测”表格 • 由于网络模型和...",
+              "section_type": "accuracy_eval",
+              "score": 0.861907
+            },
+            {
+              "evidence_id": "415cfacb726c399a33e408c3",
+              "title": "KM_classifier_Ped_ClothBanner_nart_cuda11.0-trt7.1-fp16-T4_b1_0.0.1.model",
+              "snippet": "target_name: 人体\nalgorithm_type: 属性\nalgorithm_name: 人体状衣二分类\napplication_scene: pk定制化，未集成入横幅app，召回衣物上有肉眼可辨醒目大字的人体的二分类模型V0.0.1\nowner: 冯江燕\nmodel_name: KM_classifier_Ped_ClothBanner_nart_cuda11.0-trt7.1-fp16-T4_b1_0.0.1.model\nsupported_device: T4\nrecommended_config: cuda11.0-trt7.1-fp16-T4\nlast_updated: 2025-06-16\nlast_updated_month: 2025-06",
+              "model_name": "KM_classifier_Ped_ClothBanner_nart_cuda11.0-trt7.1-fp16-T4_b1_0.0.1.model",
+              "algorithm_name": "人体状衣二分类",
+              "algorithm_type": "属性",
+              "application_scene": "pk定制化，未集成入横幅app，召回衣物上有肉眼可辨醒目大字的人体的二分类模型V0.0.1",
+              "section_type": "release_note",
+              "score": 0.582221
+            },
+            {
+              "evidence_id": "84b5f7030263cc15d9cb36ab",
+              "title": "wearing",
+              "snippet": "did: 127584\nrid: 47901\nmodel_name: wearing\nplatform: acl-ascend710-fp16",
+              "model_name": "wearing",
+              "section_type": "model_artifact",
+              "score": 0.956993
+            },
+            {
+              "evidence_id": "4d7ea99f16cc85d11b5c12eb",
+              "title": "PDFs/Classify_3.4.0.pdf p1",
+              "snippet": "• 优化 st_respirator(口罩位置) 分支下 “红黄口罩” 类型图片的准确率（识别成未戴口罩，由于口罩位置                   \n        有多个类别，且测试集很少且各类别很不平衡，mA不能很好反映效果，使用准确率（所有类别预测错                               \n        误数量/样本总数），也是因此，st_respirator的mA计算时并未加入红黄口罩测试集），acc_红黄口罩                     \n                                                                                    \n        = 92.59%(+3.7%)。...",
+              "section_type": "accuracy_eval",
+              "score": 0.832188
+            },
+            {
+              "evidence_id": "e1ce9c64a50a803497e733aa",
+              "title": "人体状衣二分类",
+              "snippet": "目标名称: 人体\n算法类型: 属性\n算法名称: 人体状衣二分类\nones发版链接: https://ones.ainewera.com/wiki/#/team/JNwe8qUX/space/GebSt74Y/page/RQZB1pjU\n应用场景: pk定制化，未集成入横幅app，召回衣物上有肉眼可辨醒目大字的人体的二分类模型；V0.0.1\n负责人(人员): 冯江燕\n模型名称: KM_classifier_Ped_ClothBanner_nart_acl-ascend710-fp16_b8_0.0.1.model\nOID: 997960340789eee7b96235ef8c1f349a300401a7776956e0b6d2db3a07d12691\n支持设备: ascend710\n推荐配置: acl-ascend710-fp16\n最近更新时间: 2025/6/16\n最近更新时间-提取年月:...",
+              "model_name": "KM_classifier_Ped_ClothBanner_nart_acl-ascend710-fp16_b8_0.0.1.model",
+              "algorithm_name": "人体状衣二分类",
+              "algorithm_type": "属性",
+              "application_scene": "pk定制化，未集成入横幅app，召回衣物上有肉眼可辨醒目大字的人体的二分类模型；V0.0.1",
+              "section_type": "accuracy_metric",
+              "score": 0.610191
+            }
+          ]
+        },
+        {
+          "field": "similar_capabilities",
+          "queries": [
+            "头盔纹理识别 迁移学习",
+            "工装检测 安全帽识别 特征纹理",
+            "头部佩戴物检测 纹理图案分类"
+          ],
+          "coverage": "strong",
+          "evidence": [
+            {
+              "evidence_id": "80320e59c6d48ecbd7bdd9ff",
+              "title": "PDFs/服饰属性模型.pdf p1 table 1",
+              "snippet": "PDF表格: PDFs/服饰属性模型.pdf 第1页 表1\n\n| 服饰属性模型 HL数据处理 • 第一批次 ◦ 小图总量：312251 ◦ 路径：s3://struct-data2/SDJY/ ◦ 模型训练使用全量，按 8:2 比例切分训练集、测试集。各类别具体数量如下表 ◦ 数据同步 ▪ 251223：已同步采样小图1w张，含训练集8000张（三类各6000/1500/500），测试集2000张 （三类各1000/800/200） ▪ 251224：已同步采样小图10w张，含训练集8w、测试集2w；附带数据采样脚本，采样并直接转 成spiral的数据格式； 0-prisoner 1-police 2-others train 230312 16499 2989 test 57578 4125 748 总计 287890 20624 3737 • 第二批次（HL视频抽帧采样） ◦ 小图总量...",
+              "section_type": "algorithm_boundary",
+              "score": 0.588865
+            },
+            {
+              "evidence_id": "9affabb19036f5d9f85a65bf",
+              "title": "KM_textrecognition_CarPlate_nart_acl-ascend310-int8_b8_3.0.1",
+              "snippet": "target_name: 车牌\nalgorithm_type: 识别\nalgorithm_name: 车牌文字识别small\napplication_scene: 大陆及港澳车牌文字识别小模型，标品，单行\nowner: 冯江燕\nmodel_name: KM_textrecognition_CarPlate_nart_acl-ascend310-int8_b8_3.0.1\nsupported_device: ascend310\nrecommended_config: acl-ascend310-int8\nlast_updated: 2023-05-30\nlast_updated_month: 2023-05",
+              "model_name": "KM_textrecognition_CarPlate_nart_acl-ascend310-int8_b8_3.0.1",
+              "algorithm_name": "车牌文字识别small",
+              "algorithm_type": "识别",
+              "application_scene": "大陆及港澳车牌文字识别小模型，标品，单行",
+              "section_type": "model_artifact",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "de5a61c30493c3a03c167b6d",
+              "title": "struct",
+              "snippet": "model_name: struct\nname: struct\nlabel_list: pedestrian|cycer|car|cyc\nlabels: pedestrian cycer car cyc\ntype: essos\nplatform: acl-ascend310-fp16\nstatus: SUCCESS\ndid: 129099\nrid: 48870\nversion: 3.0.1\nversion_train_date: 20250716\nsource_file: data/struct-acl-ascend310-fp16_48870_129099.json",
+              "model_name": "struct",
+              "section_type": "release_note",
+              "score": 0.761354
+            },
+            {
+              "evidence_id": "f586a56a911c80497fa3679c",
+              "title": "PDFs/Classify_3.4.0.pdf p1",
+              "snippet": "Classify_3.4.0                                                                 \n                                                                                    \n                                                                                    \n                                                                                    \n     Highlight...",
+              "section_type": "release_note",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "0f8955a74a2e982b85e53443",
+              "title": "车牌文字识别small",
+              "snippet": "目标名称: 车牌\n算法类型: 识别\n算法名称: 车牌文字识别small\nones发版链接: https://ones.ainewera.com/wiki/#/team/JNwe8qUX/space/GebSt74Y/page/Mw5XKZm7\n应用场景: 大陆及港澳车牌文字识别小模型，标品，单行\n负责人(人员): 冯江燕\n模型名称: KM_textrecognition_CarPlate_nart_acl-ascend310-int8_b8_3.0.1\nOID: efe7dfc7652293353d5e180ecc63bab6f937fbf86b616b38d9822f1ae75c9d46\n支持设备: ascend310\n推荐配置: acl-ascend310-int8\n最近更新时间: 2023/5/30\n最近更新时间-提取年月: 2023年05月\n计数: 0",
+              "model_name": "KM_textrecognition_CarPlate_nart_acl-ascend310-int8_b8_3.0.1",
+              "algorithm_name": "车牌文字识别small",
+              "algorithm_type": "识别",
+              "application_scene": "大陆及港澳车牌文字识别小模型，标品，单行",
+              "section_type": "model_artifact",
+              "score": 0.973315
+            },
+            {
+              "evidence_id": "3e187867d0dc03b7fc02c241",
+              "title": "SmallFace_Gray_800x1333",
+              "snippet": "model_name: SmallFace_Gray_800x1333\nname: SmallFace_Gray_800x1333\ntype: hunter\nplatform: acl-ascend310-fp16\nstatus: SUCCESS\ndid: 123917\nrid: 46717\nversion: 4.15.3\nversion_train_date: 20250224\nsource_file: data/SmallFace_Gray_800x1333-acl-ascend310-fp16_46717_123917.json",
+              "model_name": "SmallFace_Gray_800x1333",
+              "section_type": "release_note",
+              "score": 0.766216
+            },
+            {
+              "evidence_id": "5ff9aa433792455f49e555b3",
+              "title": "PDFs/服饰属性模型.pdf p3",
+              "snippet": "p                    \n                  \"st_jurong_others\"]                                               \n                  [\"st_jurong_others\",                                              \n                                                               sdjy_cloth_standard_v1224.s\n      v1224 HL全量  \"st_jurong_police\", [224, 224]     0.9751...",
+              "section_type": "accuracy_eval",
+              "score": 0.569402
+            },
+            {
+              "evidence_id": "215c5727ee5975b5dfcbf1ab",
+              "title": "车牌文字识别small",
+              "snippet": "目标名称: 车牌\n算法类型: 识别\n算法名称: 车牌文字识别small\nones发版链接: https://ones.ainewera.com/wiki/#/team/JNwe8qUX/space/GebSt74Y/page/Mw5XKZm7\n应用场景: 大陆及港澳车牌文字识别小模型，标品，单行\n负责人(人员): 冯江燕\n模型名称: KM_textrecognition_CarPlate_nart_acl-ascend710-int8_b8_3.0.1\nOID: d7c41a1fd13cacec3b0f53f4f54407375ee3e967148e9f4b5f74cccc1ccbb7d3\n支持设备: ascend710\n推荐配置: acl-ascend710-int8\n最近更新时间: 2023/5/30\n最近更新时间-提取年月: 2023年05月\n计数: 0",
+              "model_name": "KM_textrecognition_CarPlate_nart_acl-ascend710-int8_b8_3.0.1",
+              "algorithm_name": "车牌文字识别small",
+              "algorithm_type": "识别",
+              "application_scene": "大陆及港澳车牌文字识别小模型，标品，单行",
+              "section_type": "model_artifact",
+              "score": 0.973315
+            }
+          ]
+        },
+        {
+          "field": "performance_baseline",
+          "queries": [
+            "头盔检测 精度 召回率 指标",
+            "纹理识别 F1-Score AUC",
+            "复杂场景 小目标检测 精度"
+          ],
+          "coverage": "strong",
+          "evidence": [
+            {
+              "evidence_id": "845c80ff5ab8496401ac78c0",
+              "title": "PDFs/安防方向--车牌检测.pdf p6",
+              "snippet": "recall@fppi0.01 (IoU=0.5,    mAP(IoU=0.5,         \n       指标                                                                           \n                                      metric_level=0)          metric_level=0)      \n       平台                     1.4.0     3.0.0     3.1.2     3.0.0     3.1.2         \n       cuda11.0-trt7.1-int8-T4 0.9865   0.9878    0.9866    0.9866    0.9907...",
+              "section_type": "accuracy_metric",
+              "score": 0.393934
+            },
+            {
+              "evidence_id": "034b9e86e3a4cfeb9efd33ab",
+              "title": "PDFs/安防场景-城市结构化检测模型3.0.1.pdf p1",
+              "snippet": "◦ 损失函数：优化损失函数，忽略多          GT 重叠场景下将相关类别（人体/非机动车）视为骑手的\"负样                   \n                                                                                    \n          本\"强力惩罚，提高多      GT 重叠场景下召回率。                                              \n        ◦ 精度：监控场景下与3.0.0精度相当，大幅提升占画面大比例的人体召回、室内躺卧人体召回和带棚...",
+              "section_type": "release_note",
+              "score": 0.62663
+            },
+            {
+              "evidence_id": "c7711b84757a14915a38a72a",
+              "title": "PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2 table 1",
+              "snippet": "PDF表格: PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf 第2页 表1\n\n表格结构化行:\n模型族: 三、模型列表\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model\nOID: beeb6944bdca2dafd0213251951cc47f829efad2981d7f847010b13f486181c5\n平台: cuda11.0-trt7.1-fp16-T4\n\n模型族: 三、模型列表\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model\nOID: fcd2d67fbbaab4fc2064f08ccaf5e6...",
+              "section_type": "accuracy_eval",
+              "score": 0.807289
+            },
+            {
+              "evidence_id": "c3df8f567b44bcd3cf139136",
+              "title": "PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2",
+              "snippet": "58                  \n                 without_safetybelt 0.9269   0.9702   0.9481                        \n     评测平台：cuda11.0-trt7.1-fp16-T4                                                   \n                                                                                    \n                                                                                    \n     模型性能",
+              "section_type": "accuracy_eval",
+              "score": 0.802051
+            },
+            {
+              "evidence_id": "1d4107dd8be5f74f932bdc50",
+              "title": "PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2",
+              "snippet": "ge/project/3/releaseManage?       \n     rid=34577&id=3&model_type=classifier&tabName=deployment                        \n     四、精度性能                                                                         \n                                                                                    \n     模型精度...",
+              "section_type": "accuracy_eval",
+              "score": 0.800952
+            },
+            {
+              "evidence_id": "0ea79d23060c393c49f8c0e0",
+              "title": "PDFs/安防方向-人脸误检分类模型发版记录.pdf p1",
+              "snippet": "KM_classifier_Face_None_Security_3.0.1 模型保持一致                             \n        ◦ 数据: 清洗原数据集,    并增加58w训练数据,    包含监控场景的大角度/被遮挡人脸、后脑、全遮挡数据                   \n                                                                                    \n        ◦ 精度: 大幅提升监控场景大角度/被遮挡人脸正样本、全遮挡负样本的召回,                 其中common测试集人脸         \n          召回+26%、误报召回+43%...",
+              "section_type": "accuracy_eval",
+              "score": 0.480241
+            },
+            {
+              "evidence_id": "c57b2097434e5945a04a0bd9",
+              "title": "PDFs/安防方向-人脸误检分类模型发版记录.pdf p1 table 1",
+              "snippet": "PDF表格: PDFs/安防方向-人脸误检分类模型发版记录.pdf 第1页 表1\n\n| 安防方向-人脸误检分类模型发版记录 KM_classifier_Face_None_Security_3.0.2 release note: • release date: 2025.02.17 • owner: fengjiangyan@sensetime.com • highlights ◦ 输出字段与原KM_classifier_FaceNoFace_cls_sz_1.0.2, KM_classifier_Face_None_Security_3.0.1 模型保持一致 ◦ 数据: 清洗原数据集, 并增加58w训练数据, 包含监控场景的大角度/被遮挡人脸、后脑、全遮挡数据 ◦ 精度: 大幅提升监控场景大角度/被遮挡人脸正样本、全遮挡负样本的召回, 其中common测试集人脸 召回+26%、误报召回+...",
+              "section_type": "accuracy_eval",
+              "score": 0.480066
+            },
+            {
+              "evidence_id": "b5c1032332b3503421a8294e",
+              "title": "PDFs/safety_rope v0.2.1.pdf p1 table 1",
+              "snippet": "PDF表格: PDFs/safety_rope v0.2.1.pdf 第1页 表1\n\n| safety_rope v0.2.1 Release Note: • 发布时间: 2024.01.29 • Owner: zhushuai@sensetime.com • Highlight: ◦ 追加了长客场景回流误报的工人图片，以提升该场景下的精度，目前对应数据点位 top1 acc从原先 0.55提升到0.97。 ◦ 在通用测试集上无掉点，各项精度指标有略微提升0.1%-0.5% 标签解释: ▪ \"safety_rope\": • \"safety_rope_connected\" （安全绳已连接） • \"safety_rope_unconnected\" （安全绳未连接） • \"safety_rope_without\" （无安全绳） • \"safety_rope_agnostic\" （无法判断） |...",
+              "section_type": "release_note",
+              "score": 0.472662
+            }
+          ]
+        },
+        {
+          "field": "data_requirements",
+          "queries": [
+            "头盔花纹 标注数据集 样本",
+            "安全帽纹理 正负样本 类别",
+            "场景类 头盔佩戴 训练数据"
+          ],
+          "coverage": "strong",
+          "evidence": [
+            {
+              "evidence_id": "5ff9aa433792455f49e555b3",
+              "title": "PDFs/服饰属性模型.pdf p3",
+              "snippet": "p                    \n                  \"st_jurong_others\"]                                               \n                  [\"st_jurong_others\",                                              \n                                                               sdjy_cloth_standard_v1224.s\n      v1224 HL全量  \"st_jurong_police\", [224, 224]     0.9751...",
+              "section_type": "accuracy_eval",
+              "score": 0.595268
+            },
+            {
+              "evidence_id": "bab21bf76719bfe7491f7027",
+              "title": "KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model",
+              "snippet": "target_name: 红马甲/安全带\nalgorithm_type: 属性\nalgorithm_name: 中车工厂-属性模型1\napplication_scene: 中车工厂项目\nowner: 朱帅\nmodel_name: KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\nsupported_device: cpu\nrecommended_config: cpu-ppl2-fp32\nlast_updated: 2023-11-15\nlast_updated_month: 2023-11",
+              "model_name": "KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model",
+              "algorithm_name": "中车工厂-属性模型1",
+              "algorithm_type": "属性",
+              "application_scene": "中车工厂项目",
+              "section_type": "model_artifact",
+              "score": 0.988526
+            },
+            {
+              "evidence_id": "1c0d75be51b8f026f0287984",
+              "title": "head_det",
+              "snippet": "did: 105478\nrid: 37572\nmodel_name: head_det\nplatform: acl-ascend710-fp16",
+              "model_name": "head_det",
+              "section_type": "model_artifact",
+              "score": 0.969083
+            },
+            {
+              "evidence_id": "3b516e739c46f412291d37bb",
+              "title": "PDFs/安防方向-人脸误检分类模型发版记录.pdf p6",
+              "snippet": "• highlights                                                                  \n                                                                                    \n        ◦ 基于原KM_classifier_FaceNoFace_cls_sz_1.0.2 模型，修正后脑勺，头盔，全遮挡为人脸误检负            \n          样本...",
+              "section_type": "release_note",
+              "score": 1.0
+            },
+            {
+              "evidence_id": "7571ba32218935d0e761dbff",
+              "title": "KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model",
+              "snippet": "target_name: 车牌\nalgorithm_type: 属性\nalgorithm_name: 车牌颜色类型属性\napplication_scene: V3.0.0，标品\nowner: 冯江燕\nmodel_name: KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model\nsupported_device: cpu\nrecommended_config: cpu-ppl2-fp32\nlast_updated: 2023-05-30\nlast_updated_month: 2023-05",
+              "model_name": "KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model",
+              "algorithm_name": "车牌颜色类型属性",
+              "algorithm_type": "属性",
+              "application_scene": "V3.0.0，标品",
+              "section_type": "model_artifact",
+              "score": 0.989156
+            },
+            {
+              "evidence_id": "84b5f7030263cc15d9cb36ab",
+              "title": "wearing",
+              "snippet": "did: 127584\nrid: 47901\nmodel_name: wearing\nplatform: acl-ascend710-fp16",
+              "model_name": "wearing",
+              "section_type": "model_artifact",
+              "score": 0.971488
+            },
+            {
+              "evidence_id": "6244f8d3e4a4cfe0ba6d96a7",
+              "title": "PDFs/安防方向--车牌文字识别-small.pdf p6",
+              "snippet": "adela模型清单：http://adela.sensetime.com/#/recommend/listInfo/listInfoMain?        \n     lid=257&parent_lid=0&creator_id=1394",
+              "section_type": "deployment",
+              "score": 0.564196
+            },
+            {
+              "evidence_id": "5c465e86d59f1638db3c2a69",
+              "title": "KM_feature_face_nart_halnn0.4-stpu-int8_b8_2.54.0.model",
+              "snippet": "target_name: 人脸\nalgorithm_type: 特征\nalgorithm_name: 人脸特征\napplication_scene: 方舟标品 V2.54.00\nowner: 马东宇\nmodel_name: KM_feature_face_nart_halnn0.4-stpu-int8_b8_2.54.0.model\nsupported_device: stpu\nrecommended_config: halnn0.4-stpu-int8\nlast_updated: 2023-12-07\nlast_updated_month: 2023-12",
+              "model_name": "KM_feature_face_nart_halnn0.4-stpu-int8_b8_2.54.0.model",
+              "algorithm_name": "人脸特征",
+              "algorithm_type": "特征",
+              "application_scene": "方舟标品 V2.54.00",
+              "section_type": "model_artifact",
+              "score": 0.98727
+            }
+          ]
+        }
+      ]
+    },
+    "llm_messages": [
+      {
+        "role": "system",
+        "content": "你是视觉模型迁移顾问。请基于检索证据生成结构化迁移评估报告。必须区分证据支持和合理推断；证据不足时明确写证据不足，不要编造精度、周期或成本。若可估计成本/周期，只能给区间和依赖前提。只输出 JSON。"
+      },
+      {
+        "role": "user",
+        "content": "{\n  \"user_query\": \"客户要识别“头盔是否有花纹”，推荐什么模型\",\n  \"retrieval_plan\": {\n    \"abstract_requirement\": {\n      \"object\": \"头盔\",\n      \"attribute\": \"花纹\",\n      \"task_type\": \"检测/识别\",\n      \"scene\": \"安防/监控\",\n      \"constraints\": [\n        \"轻量化\",\n        \"边缘设备\",\n        \"实时性\"\n      ]\n    },\n    \"retrieve_fields\": [\n      {\n        \"field\": \"existing_models\",\n        \"queries\": [\n          \"头盔花纹检测 分类模型\",\n          \"头盔识别 人脸误检\",\n          \"头盔分类 安防算法 纹理识别\"\n        ]\n      },\n      {\n        \"field\": \"similar_capabilities\",\n        \"queries\": [\n          \"头盔纹理识别 迁移学习\",\n          \"工装检测 安全帽识别 特征纹理\",\n          \"头部佩戴物检测 纹理图案分类\"\n        ]\n      },\n      {\n        \"field\": \"performance_baseline\",\n        \"queries\": [\n          \"头盔检测 精度 召回率 指标\",\n          \"纹理识别 F1-Score AUC\",\n          \"复杂场景 小目标检测 精度\"\n        ]\n      },\n      {\n        \"field\": \"data_requirements\",\n        \"queries\": [\n          \"头盔花纹 标注数据集 样本\",\n          \"安全帽纹理 正负样本 类别\",\n          \"场景类 头盔佩戴 训练数据\"\n        ]\n      }\n    ]\n  },\n  \"field_results\": [\n    {\n      \"field\": \"existing_models\",\n      \"queries\": [\n        \"头盔花纹检测 分类模型\",\n        \"头盔识别 人脸误检\",\n        \"头盔分类 安防算法 纹理识别\"\n      ],\n      \"coverage\": \"strong\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"f586a56a911c80497fa3679c\",\n          \"title\": \"PDFs/Classify_3.4.0.pdf p1\",\n          \"snippet\": \"Classify_3.4.0                                                                 \\n                                                                                    \\n                                                                                    \\n                                                                                    \\n     Highlight...\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.880009\n        },\n        {\n          \"evidence_id\": \"574e8a69ac4e1edd855a3cbe\",\n          \"title\": \"KM_classifier_Ped_ClothBanner_nart_acl-ascend710-fp16_b8_0.0.1.model\",\n          \"snippet\": \"target_name: 人体\\nalgorithm_type: 属性\\nalgorithm_name: 人体状衣二分类\\napplication_scene: pk定制化，未集成入横幅app，召回衣物上有肉眼可辨醒目大字的人体的二分类模型；V0.0.1\\nowner: 冯江燕\\nmodel_name: KM_classifier_Ped_ClothBanner_nart_acl-ascend710-fp16_b8_0.0.1.model\\nsupported_device: ascend710\\nrecommended_config: acl-ascend710-fp16\\nlast_updated: 2025-06-16\\nlast_updated_month: 2025-06\",\n          \"model_name\": \"KM_classifier_Ped_ClothBanner_nart_acl-ascend710-fp16_b8_0.0.1.model\",\n          \"algorithm_name\": \"人体状衣二分类\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"pk定制化，未集成入横幅app，召回衣物上有肉眼可辨醒目大字的人体的二分类模型；V0.0.1\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.593953\n        },\n        {\n          \"evidence_id\": \"efa609ebb25bfa704c3dd749\",\n          \"title\": \"nonmotor\",\n          \"snippet\": \"did: 106936\\nrid: 38074\\nmodel_name: nonmotor\\nplatform: acl-ascend310-int8\",\n          \"model_name\": \"nonmotor\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.956993\n        },\n        {\n          \"evidence_id\": \"864d157ed16434b83193f000\",\n          \"title\": \"PDFs/Classify_3.4.0.pdf p1 table 1\",\n          \"snippet\": \"PDF表格: PDFs/Classify_3.4.0.pdf 第1页 表1\\n\\n| Classify_3.4.0 Highlight • 优化st_helmet_style（头盔）分支下“安全帽”类型图片的召回率（识别成未戴口罩），ma_安全帽 = 84.07%(+12.01%) • 优化 st_respirator(口罩位置) 分支下 “红黄口罩” 类型图片的准确率（识别成未戴口罩，由于口罩位置 有多个类别，且测试集很少且各类别很不平衡，mA不能很好反映效果，使用准确率（所有类别预测错 误数量/样本总数），也是因此，st_respirator的mA计算时并未加入红黄口罩测试集），acc_红黄口罩 = 92.59%(+3.7%)。 • 各属性分支有对应的推荐阈值，经过推荐阈值过滤后的精度详见“推荐阈值表”，阈值表已打包进模型中 • 未经属性阈值过滤的精度见“精度评测”表格 • 由于网络模型和...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.861907\n        },\n        {\n          \"evidence_id\": \"415cfacb726c399a33e408c3\",\n          \"title\": \"KM_classifier_Ped_ClothBanner_nart_cuda11.0-trt7.1-fp16-T4_b1_0.0.1.model\",\n          \"snippet\": \"target_name: 人体\\nalgorithm_type: 属性\\nalgorithm_name: 人体状衣二分类\\napplication_scene: pk定制化，未集成入横幅app，召回衣物上有肉眼可辨醒目大字的人体的二分类模型V0.0.1\\nowner: 冯江燕\\nmodel_name: KM_classifier_Ped_ClothBanner_nart_cuda11.0-trt7.1-fp16-T4_b1_0.0.1.model\\nsupported_device: T4\\nrecommended_config: cuda11.0-trt7.1-fp16-T4\\nlast_updated: 2025-06-16\\nlast_updated_month: 2025-06\",\n          \"model_name\": \"KM_classifier_Ped_ClothBanner_nart_cuda11.0-trt7.1-fp16-T4_b1_0.0.1.model\",\n          \"algorithm_name\": \"人体状衣二分类\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"pk定制化，未集成入横幅app，召回衣物上有肉眼可辨醒目大字的人体的二分类模型V0.0.1\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.582221\n        },\n        {\n          \"evidence_id\": \"84b5f7030263cc15d9cb36ab\",\n          \"title\": \"wearing\",\n          \"snippet\": \"did: 127584\\nrid: 47901\\nmodel_name: wearing\\nplatform: acl-ascend710-fp16\",\n          \"model_name\": \"wearing\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.956993\n        },\n        {\n          \"evidence_id\": \"4d7ea99f16cc85d11b5c12eb\",\n          \"title\": \"PDFs/Classify_3.4.0.pdf p1\",\n          \"snippet\": \"• 优化 st_respirator(口罩位置) 分支下 “红黄口罩” 类型图片的准确率（识别成未戴口罩，由于口罩位置                   \\n        有多个类别，且测试集很少且各类别很不平衡，mA不能很好反映效果，使用准确率（所有类别预测错                               \\n        误数量/样本总数），也是因此，st_respirator的mA计算时并未加入红黄口罩测试集），acc_红黄口罩                     \\n                                                                                    \\n        = 92.59%(+3.7%)。...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.832188\n        },\n        {\n          \"evidence_id\": \"e1ce9c64a50a803497e733aa\",\n          \"title\": \"人体状衣二分类\",\n          \"snippet\": \"目标名称: 人体\\n算法类型: 属性\\n算法名称: 人体状衣二分类\\nones发版链接: https://ones.ainewera.com/wiki/#/team/JNwe8qUX/space/GebSt74Y/page/RQZB1pjU\\n应用场景: pk定制化，未集成入横幅app，召回衣物上有肉眼可辨醒目大字的人体的二分类模型；V0.0.1\\n负责人(人员): 冯江燕\\n模型名称: KM_classifier_Ped_ClothBanner_nart_acl-ascend710-fp16_b8_0.0.1.model\\nOID: 997960340789eee7b96235ef8c1f349a300401a7776956e0b6d2db3a07d12691\\n支持设备: ascend710\\n推荐配置: acl-ascend710-fp16\\n最近更新时间: 2025/6/16\\n最近更新时间-提取年月:...\",\n          \"model_name\": \"KM_classifier_Ped_ClothBanner_nart_acl-ascend710-fp16_b8_0.0.1.model\",\n          \"algorithm_name\": \"人体状衣二分类\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"pk定制化，未集成入横幅app，召回衣物上有肉眼可辨醒目大字的人体的二分类模型；V0.0.1\",\n          \"section_type\": \"accuracy_metric\",\n          \"score\": 0.610191\n        }\n      ]\n    },\n    {\n      \"field\": \"similar_capabilities\",\n      \"queries\": [\n        \"头盔纹理识别 迁移学习\",\n        \"工装检测 安全帽识别 特征纹理\",\n        \"头部佩戴物检测 纹理图案分类\"\n      ],\n      \"coverage\": \"strong\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"80320e59c6d48ecbd7bdd9ff\",\n          \"title\": \"PDFs/服饰属性模型.pdf p1 table 1\",\n          \"snippet\": \"PDF表格: PDFs/服饰属性模型.pdf 第1页 表1\\n\\n| 服饰属性模型 HL数据处理 • 第一批次 ◦ 小图总量：312251 ◦ 路径：s3://struct-data2/SDJY/ ◦ 模型训练使用全量，按 8:2 比例切分训练集、测试集。各类别具体数量如下表 ◦ 数据同步 ▪ 251223：已同步采样小图1w张，含训练集8000张（三类各6000/1500/500），测试集2000张 （三类各1000/800/200） ▪ 251224：已同步采样小图10w张，含训练集8w、测试集2w；附带数据采样脚本，采样并直接转 成spiral的数据格式； 0-prisoner 1-police 2-others train 230312 16499 2989 test 57578 4125 748 总计 287890 20624 3737 • 第二批次（HL视频抽帧采样） ◦ 小图总量...\",\n          \"section_type\": \"algorithm_boundary\",\n          \"score\": 0.588865\n        },\n        {\n          \"evidence_id\": \"9affabb19036f5d9f85a65bf\",\n          \"title\": \"KM_textrecognition_CarPlate_nart_acl-ascend310-int8_b8_3.0.1\",\n          \"snippet\": \"target_name: 车牌\\nalgorithm_type: 识别\\nalgorithm_name: 车牌文字识别small\\napplication_scene: 大陆及港澳车牌文字识别小模型，标品，单行\\nowner: 冯江燕\\nmodel_name: KM_textrecognition_CarPlate_nart_acl-ascend310-int8_b8_3.0.1\\nsupported_device: ascend310\\nrecommended_config: acl-ascend310-int8\\nlast_updated: 2023-05-30\\nlast_updated_month: 2023-05\",\n          \"model_name\": \"KM_textrecognition_CarPlate_nart_acl-ascend310-int8_b8_3.0.1\",\n          \"algorithm_name\": \"车牌文字识别small\",\n          \"algorithm_type\": \"识别\",\n          \"application_scene\": \"大陆及港澳车牌文字识别小模型，标品，单行\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"de5a61c30493c3a03c167b6d\",\n          \"title\": \"struct\",\n          \"snippet\": \"model_name: struct\\nname: struct\\nlabel_list: pedestrian|cycer|car|cyc\\nlabels: pedestrian cycer car cyc\\ntype: essos\\nplatform: acl-ascend310-fp16\\nstatus: SUCCESS\\ndid: 129099\\nrid: 48870\\nversion: 3.0.1\\nversion_train_date: 20250716\\nsource_file: data/struct-acl-ascend310-fp16_48870_129099.json\",\n          \"model_name\": \"struct\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.761354\n        },\n        {\n          \"evidence_id\": \"f586a56a911c80497fa3679c\",\n          \"title\": \"PDFs/Classify_3.4.0.pdf p1\",\n          \"snippet\": \"Classify_3.4.0                                                                 \\n                                                                                    \\n                                                                                    \\n                                                                                    \\n     Highlight...\",\n          \"section_type\": \"release_note\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"0f8955a74a2e982b85e53443\",\n          \"title\": \"车牌文字识别small\",\n          \"snippet\": \"目标名称: 车牌\\n算法类型: 识别\\n算法名称: 车牌文字识别small\\nones发版链接: https://ones.ainewera.com/wiki/#/team/JNwe8qUX/space/GebSt74Y/page/Mw5XKZm7\\n应用场景: 大陆及港澳车牌文字识别小模型，标品，单行\\n负责人(人员): 冯江燕\\n模型名称: KM_textrecognition_CarPlate_nart_acl-ascend310-int8_b8_3.0.1\\nOID: efe7dfc7652293353d5e180ecc63bab6f937fbf86b616b38d9822f1ae75c9d46\\n支持设备: ascend310\\n推荐配置: acl-ascend310-int8\\n最近更新时间: 2023/5/30\\n最近更新时间-提取年月: 2023年05月\\n计数: 0\",\n          \"model_name\": \"KM_textrecognition_CarPlate_nart_acl-ascend310-int8_b8_3.0.1\",\n          \"algorithm_name\": \"车牌文字识别small\",\n          \"algorithm_type\": \"识别\",\n          \"application_scene\": \"大陆及港澳车牌文字识别小模型，标品，单行\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.973315\n        },\n        {\n          \"evidence_id\": \"3e187867d0dc03b7fc02c241\",\n          \"title\": \"SmallFace_Gray_800x1333\",\n          \"snippet\": \"model_name: SmallFace_Gray_800x1333\\nname: SmallFace_Gray_800x1333\\ntype: hunter\\nplatform: acl-ascend310-fp16\\nstatus: SUCCESS\\ndid: 123917\\nrid: 46717\\nversion: 4.15.3\\nversion_train_date: 20250224\\nsource_file: data/SmallFace_Gray_800x1333-acl-ascend310-fp16_46717_123917.json\",\n          \"model_name\": \"SmallFace_Gray_800x1333\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.766216\n        },\n        {\n          \"evidence_id\": \"5ff9aa433792455f49e555b3\",\n          \"title\": \"PDFs/服饰属性模型.pdf p3\",\n          \"snippet\": \"p                    \\n                  \\\"st_jurong_others\\\"]                                               \\n                  [\\\"st_jurong_others\\\",                                              \\n                                                               sdjy_cloth_standard_v1224.s\\n      v1224 HL全量  \\\"st_jurong_police\\\", [224, 224]     0.9751...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.569402\n        },\n        {\n          \"evidence_id\": \"215c5727ee5975b5dfcbf1ab\",\n          \"title\": \"车牌文字识别small\",\n          \"snippet\": \"目标名称: 车牌\\n算法类型: 识别\\n算法名称: 车牌文字识别small\\nones发版链接: https://ones.ainewera.com/wiki/#/team/JNwe8qUX/space/GebSt74Y/page/Mw5XKZm7\\n应用场景: 大陆及港澳车牌文字识别小模型，标品，单行\\n负责人(人员): 冯江燕\\n模型名称: KM_textrecognition_CarPlate_nart_acl-ascend710-int8_b8_3.0.1\\nOID: d7c41a1fd13cacec3b0f53f4f54407375ee3e967148e9f4b5f74cccc1ccbb7d3\\n支持设备: ascend710\\n推荐配置: acl-ascend710-int8\\n最近更新时间: 2023/5/30\\n最近更新时间-提取年月: 2023年05月\\n计数: 0\",\n          \"model_name\": \"KM_textrecognition_CarPlate_nart_acl-ascend710-int8_b8_3.0.1\",\n          \"algorithm_name\": \"车牌文字识别small\",\n          \"algorithm_type\": \"识别\",\n          \"application_scene\": \"大陆及港澳车牌文字识别小模型，标品，单行\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.973315\n        }\n      ]\n    },\n    {\n      \"field\": \"performance_baseline\",\n      \"queries\": [\n        \"头盔检测 精度 召回率 指标\",\n        \"纹理识别 F1-Score AUC\",\n        \"复杂场景 小目标检测 精度\"\n      ],\n      \"coverage\": \"strong\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"845c80ff5ab8496401ac78c0\",\n          \"title\": \"PDFs/安防方向--车牌检测.pdf p6\",\n          \"snippet\": \"recall@fppi0.01 (IoU=0.5,    mAP(IoU=0.5,         \\n       指标                                                                           \\n                                      metric_level=0)          metric_level=0)      \\n       平台                     1.4.0     3.0.0     3.1.2     3.0.0     3.1.2         \\n       cuda11.0-trt7.1-int8-T4 0.9865   0.9878    0.9866    0.9866    0.9907...\",\n          \"section_type\": \"accuracy_metric\",\n          \"score\": 0.393934\n        },\n        {\n          \"evidence_id\": \"034b9e86e3a4cfeb9efd33ab\",\n          \"title\": \"PDFs/安防场景-城市结构化检测模型3.0.1.pdf p1\",\n          \"snippet\": \"◦ 损失函数：优化损失函数，忽略多          GT 重叠场景下将相关类别（人体/非机动车）视为骑手的\\\"负样                   \\n                                                                                    \\n          本\\\"强力惩罚，提高多      GT 重叠场景下召回率。                                              \\n        ◦ 精度：监控场景下与3.0.0精度相当，大幅提升占画面大比例的人体召回、室内躺卧人体召回和带棚...\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.62663\n        },\n        {\n          \"evidence_id\": \"c7711b84757a14915a38a72a\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2 table 1\",\n          \"snippet\": \"PDF表格: PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf 第2页 表1\\n\\n表格结构化行:\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-fp16-T4_b8_0.2.0.model\\nOID: beeb6944bdca2dafd0213251951cc47f829efad2981d7f847010b13f486181c5\\n平台: cuda11.0-trt7.1-fp16-T4\\n\\n模型族: 三、模型列表\\n模型名称: KM_classifier_PAR_waistcoat_safetybelt_nart_cuda11.0-trt7.1-int8-T4_b8_0.2.0.model\\nOID: fcd2d67fbbaab4fc2064f08ccaf5e6...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.807289\n        },\n        {\n          \"evidence_id\": \"c3df8f567b44bcd3cf139136\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2\",\n          \"snippet\": \"58                  \\n                 without_safetybelt 0.9269   0.9702   0.9481                        \\n     评测平台：cuda11.0-trt7.1-fp16-T4                                                   \\n                                                                                    \\n                                                                                    \\n     模型性能\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.802051\n        },\n        {\n          \"evidence_id\": \"1d4107dd8be5f74f932bdc50\",\n          \"title\": \"PDFs/PAR_waistcoat_safetybelt v0.2.0.pdf p2\",\n          \"snippet\": \"ge/project/3/releaseManage?       \\n     rid=34577&id=3&model_type=classifier&tabName=deployment                        \\n     四、精度性能                                                                         \\n                                                                                    \\n     模型精度...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.800952\n        },\n        {\n          \"evidence_id\": \"0ea79d23060c393c49f8c0e0\",\n          \"title\": \"PDFs/安防方向-人脸误检分类模型发版记录.pdf p1\",\n          \"snippet\": \"KM_classifier_Face_None_Security_3.0.1 模型保持一致                             \\n        ◦ 数据: 清洗原数据集,    并增加58w训练数据,    包含监控场景的大角度/被遮挡人脸、后脑、全遮挡数据                   \\n                                                                                    \\n        ◦ 精度: 大幅提升监控场景大角度/被遮挡人脸正样本、全遮挡负样本的召回,                 其中common测试集人脸         \\n          召回+26%、误报召回+43%...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.480241\n        },\n        {\n          \"evidence_id\": \"c57b2097434e5945a04a0bd9\",\n          \"title\": \"PDFs/安防方向-人脸误检分类模型发版记录.pdf p1 table 1\",\n          \"snippet\": \"PDF表格: PDFs/安防方向-人脸误检分类模型发版记录.pdf 第1页 表1\\n\\n| 安防方向-人脸误检分类模型发版记录 KM_classifier_Face_None_Security_3.0.2 release note: • release date: 2025.02.17 • owner: fengjiangyan@sensetime.com • highlights ◦ 输出字段与原KM_classifier_FaceNoFace_cls_sz_1.0.2, KM_classifier_Face_None_Security_3.0.1 模型保持一致 ◦ 数据: 清洗原数据集, 并增加58w训练数据, 包含监控场景的大角度/被遮挡人脸、后脑、全遮挡数据 ◦ 精度: 大幅提升监控场景大角度/被遮挡人脸正样本、全遮挡负样本的召回, 其中common测试集人脸 召回+26%、误报召回+...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.480066\n        },\n        {\n          \"evidence_id\": \"b5c1032332b3503421a8294e\",\n          \"title\": \"PDFs/safety_rope v0.2.1.pdf p1 table 1\",\n          \"snippet\": \"PDF表格: PDFs/safety_rope v0.2.1.pdf 第1页 表1\\n\\n| safety_rope v0.2.1 Release Note: • 发布时间: 2024.01.29 • Owner: zhushuai@sensetime.com • Highlight: ◦ 追加了长客场景回流误报的工人图片，以提升该场景下的精度，目前对应数据点位 top1 acc从原先 0.55提升到0.97。 ◦ 在通用测试集上无掉点，各项精度指标有略微提升0.1%-0.5% 标签解释: ▪ \\\"safety_rope\\\": • \\\"safety_rope_connected\\\" （安全绳已连接） • \\\"safety_rope_unconnected\\\" （安全绳未连接） • \\\"safety_rope_without\\\" （无安全绳） • \\\"safety_rope_agnostic\\\" （无法判断） |...\",\n          \"section_type\": \"release_note\",\n          \"score\": 0.472662\n        }\n      ]\n    },\n    {\n      \"field\": \"data_requirements\",\n      \"queries\": [\n        \"头盔花纹 标注数据集 样本\",\n        \"安全帽纹理 正负样本 类别\",\n        \"场景类 头盔佩戴 训练数据\"\n      ],\n      \"coverage\": \"strong\",\n      \"evidence\": [\n        {\n          \"evidence_id\": \"5ff9aa433792455f49e555b3\",\n          \"title\": \"PDFs/服饰属性模型.pdf p3\",\n          \"snippet\": \"p                    \\n                  \\\"st_jurong_others\\\"]                                               \\n                  [\\\"st_jurong_others\\\",                                              \\n                                                               sdjy_cloth_standard_v1224.s\\n      v1224 HL全量  \\\"st_jurong_police\\\", [224, 224]     0.9751...\",\n          \"section_type\": \"accuracy_eval\",\n          \"score\": 0.595268\n        },\n        {\n          \"evidence_id\": \"bab21bf76719bfe7491f7027\",\n          \"title\": \"KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\",\n          \"snippet\": \"target_name: 红马甲/安全带\\nalgorithm_type: 属性\\nalgorithm_name: 中车工厂-属性模型1\\napplication_scene: 中车工厂项目\\nowner: 朱帅\\nmodel_name: KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\\nsupported_device: cpu\\nrecommended_config: cpu-ppl2-fp32\\nlast_updated: 2023-11-15\\nlast_updated_month: 2023-11\",\n          \"model_name\": \"KM_classifier_PAR_waistcoat_safetybelt_nart_cpu-ppl2-fp32_b8_0.2.0.model\",\n          \"algorithm_name\": \"中车工厂-属性模型1\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"中车工厂项目\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.988526\n        },\n        {\n          \"evidence_id\": \"1c0d75be51b8f026f0287984\",\n          \"title\": \"head_det\",\n          \"snippet\": \"did: 105478\\nrid: 37572\\nmodel_name: head_det\\nplatform: acl-ascend710-fp16\",\n          \"model_name\": \"head_det\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.969083\n        },\n        {\n          \"evidence_id\": \"3b516e739c46f412291d37bb\",\n          \"title\": \"PDFs/安防方向-人脸误检分类模型发版记录.pdf p6\",\n          \"snippet\": \"• highlights                                                                  \\n                                                                                    \\n        ◦ 基于原KM_classifier_FaceNoFace_cls_sz_1.0.2 模型，修正后脑勺，头盔，全遮挡为人脸误检负            \\n          样本...\",\n          \"section_type\": \"release_note\",\n          \"score\": 1.0\n        },\n        {\n          \"evidence_id\": \"7571ba32218935d0e761dbff\",\n          \"title\": \"KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model\",\n          \"snippet\": \"target_name: 车牌\\nalgorithm_type: 属性\\nalgorithm_name: 车牌颜色类型属性\\napplication_scene: V3.0.0，标品\\nowner: 冯江燕\\nmodel_name: KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model\\nsupported_device: cpu\\nrecommended_config: cpu-ppl2-fp32\\nlast_updated: 2023-05-30\\nlast_updated_month: 2023-05\",\n          \"model_name\": \"KM_classifier_Carplate_TypeColor_nart_cpu-ppl2-fp32_b8_3.0.0.model\",\n          \"algorithm_name\": \"车牌颜色类型属性\",\n          \"algorithm_type\": \"属性\",\n          \"application_scene\": \"V3.0.0，标品\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.989156\n        },\n        {\n          \"evidence_id\": \"84b5f7030263cc15d9cb36ab\",\n          \"title\": \"wearing\",\n          \"snippet\": \"did: 127584\\nrid: 47901\\nmodel_name: wearing\\nplatform: acl-ascend710-fp16\",\n          \"model_name\": \"wearing\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.971488\n        },\n        {\n          \"evidence_id\": \"6244f8d3e4a4cfe0ba6d96a7\",\n          \"title\": \"PDFs/安防方向--车牌文字识别-small.pdf p6\",\n          \"snippet\": \"adela模型清单：http://adela.sensetime.com/#/recommend/listInfo/listInfoMain?        \\n     lid=257&parent_lid=0&creator_id=1394\",\n          \"section_type\": \"deployment\",\n          \"score\": 0.564196\n        },\n        {\n          \"evidence_id\": \"5c465e86d59f1638db3c2a69\",\n          \"title\": \"KM_feature_face_nart_halnn0.4-stpu-int8_b8_2.54.0.model\",\n          \"snippet\": \"target_name: 人脸\\nalgorithm_type: 特征\\nalgorithm_name: 人脸特征\\napplication_scene: 方舟标品 V2.54.00\\nowner: 马东宇\\nmodel_name: KM_feature_face_nart_halnn0.4-stpu-int8_b8_2.54.0.model\\nsupported_device: stpu\\nrecommended_config: halnn0.4-stpu-int8\\nlast_updated: 2023-12-07\\nlast_updated_month: 2023-12\",\n          \"model_name\": \"KM_feature_face_nart_halnn0.4-stpu-int8_b8_2.54.0.model\",\n          \"algorithm_name\": \"人脸特征\",\n          \"algorithm_type\": \"特征\",\n          \"application_scene\": \"方舟标品 V2.54.00\",\n          \"section_type\": \"model_artifact\",\n          \"score\": 0.98727\n        }\n      ]\n    }\n  ]\n}"
+      }
+    ]
+  }
+}

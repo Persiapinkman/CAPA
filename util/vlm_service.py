@@ -3,6 +3,7 @@ from __future__ import annotations
 import base64
 import io
 import os
+import time
 
 from openai import OpenAI
 from PIL import Image, ImageFile
@@ -14,6 +15,7 @@ class VLMService:
     def __init__(self, api_key: str | None = None, base_url: str | None = None):
         timeout = float(os.environ.get("DEMO_OPENAI_TIMEOUT_SECONDS", "120"))
         self.client = OpenAI(api_key=api_key, base_url=base_url, timeout=timeout)
+        self.last_response_metadata: dict = {}
 
     def generate_text(
         self,
@@ -67,12 +69,32 @@ class VLMService:
             extra_body["do_sample"] = do_sample
             kwargs["extra_body"] = extra_body
 
-        response = self.client.chat.completions.create(
-            model=model,
-            messages=request_messages,
-            response_format=response_format,
-            **kwargs,
-        )
+        start = time.perf_counter()
+        try:
+            response = self.client.chat.completions.create(
+                model=model,
+                messages=request_messages,
+                response_format=response_format,
+                **kwargs,
+            )
+        except Exception as exc:
+            self.last_response_metadata = {
+                "api_call_ms": round((time.perf_counter() - start) * 1000, 3),
+                "error_type": type(exc).__name__,
+                "error": str(exc),
+            }
+            raise
+        api_call_ms = round((time.perf_counter() - start) * 1000, 3)
+        usage = getattr(response, "usage", None)
+        choice = response.choices[0] if getattr(response, "choices", None) else None
+        self.last_response_metadata = {
+            "api_call_ms": api_call_ms,
+            "input_tokens": getattr(usage, "prompt_tokens", None),
+            "output_tokens": getattr(usage, "completion_tokens", None),
+            "total_tokens": getattr(usage, "total_tokens", None),
+            "finish_reason": getattr(choice, "finish_reason", None) if choice is not None else None,
+            "model": getattr(response, "model", None),
+        }
         return response.choices[0].message.content
 
     def image_to_base64(self, image_path: str, threshold=1024) -> tuple[str, str]:

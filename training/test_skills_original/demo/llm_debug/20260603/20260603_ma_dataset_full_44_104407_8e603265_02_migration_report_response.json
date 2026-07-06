@@ -1,0 +1,166 @@
+{
+  "session_id": "ma_dataset_full_44",
+  "run_stamp": "20260603_104407_8e603265",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-06-03T10:46:00+08:00",
+  "payload": {
+    "model": "Qwen3.5-35B-A3B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"用户需求：判断电动车后载物情况，具体包括三类：1. 密封性载物箱；2. 其他携带物品；3. 无法判断。核心是检测电动车后座载物的类型/状态。\",\n  \"direct_match\": {\n    \"exists\": false,\n    \"summary\": \"检索到的模型中，无直接匹配‘电动车后载物类型（密封性载物箱/其他/无法判断）’的模型。现有模型主要关注非机动车检测、车身横幅、车牌等，未涉及载物箱密封性或后座载物分类。\"\n  ,\n  \"evidence\": [\n    \"evidence_id: None\"\n  ]\n  }\n,\n  \"similar_assets\": [\n    {\n      \"model_or_solution\": \"KM_essos_struct_nart_acl-ascend710-fp16_b8_3.0.1.model (结构化检测)\",\n      \"label_schema\": \"目标类别：人体、机动车、非机动车、骑手。未定义载物箱/后座载物分类。\",\n      \"training_data\": \"证据不足。仅知目标为非机动车相关检测，未明确训练集细节。\",\n      \"reported_metrics\": \"证据不足。仅知为 V3.0.1 版本结构化检测模型。\",\n      \"covered_capability\": \"非机动车检测（基础）。与需求场景（电动车）对象一致，但任务（载物分类）不匹配。\",\n      \"gap\": \"缺少后座载物类型定义（密封性/非密封性/无载物），缺少属性分类（载物箱 vs 其他物品）。\",\n      \"evidence\": [\n        \"evidence_id: e64331e9486befac16c0f912\"\n      ]\n    }\n  ,\n    {\n      \"model_or_solution\": \"KM_essos_monolith_small_ebike_2_nart_acl-ascend710-fp16_b1_1.0.1.model (电瓶车进电梯检测)\",\n      \"label_schema\": \"目标类别：非机动车。算法名称：电瓶车进电梯检测。无载物分类标签。\",\n      \"training_data\": \"证据不足。对象为电瓶车，但未提及后座载物相关标注。\",\n      \"reported_metrics\": \"证据不足。应用场景：呈贡 CV 长尾业务。\",\n      \"covered_capability\": \"非机动车（电瓶车）检测。对象与需求一致，但任务形态（进电梯 vs 载物分类）不同。\",\n      \"gap\": \"未支持载物箱密封性、其他物品、无法判断三类分类。\",\n      \"evidence\": [\n        \"evidence_id: befa7bd6e5262731195604e2\"\n      ]\n    }\n  ,\n    {\n      \"model_or_solution\": \"KM_essos_struct_nart_cuda11.0-trt7.1-fp16-T4_b8_3.0.1.model (结构化检测)\",\n      \"label_schema\": \"目标类别：人体、机动车、非机动车、骑手。\",\n      \"training_data\": \"证据不足。\",\n      \"reported_metrics\": \"证据不足。\",\n      \"covered_capability\": \"非机动车检测。\",\n      \"gap\": \"缺少后座载物属性。\",\n      \"evidence\": [\n        \"evidence_id: ce4a876cdc35fda2001e08ee\"\n      ]\n    }\n  ,\n    {\n      \"model_or_solution\": \"KM_essos_struct_nart_acl-ascend310-int8_b8_3.0.1.model (结构化检测)\",\n      \"label_schema\": \"目标类别：人体、机动车、非机动车、骑手。\",\n      \"training_data\": \"证据不足。\",\n      \"reported_metrics\": \"证据不足。\",\n      \"covered_capability\": \"非机动车检测。\",\n      \"gap\": \"缺少后座载物属性。\",\n      \"evidence\": [\n        \"evidence_id: e64331e9486befac16c0f912\"\n      ]\n    }\n  ,\n    {\n      \"model_or_solution\": \"KM_essos_struct_nart_cpu-ppl2-fp32_b1_3.0.1.model (结构化检测)\",\n      \"label_schema\": \"目标类别：人体、机动车、非机动车、骑手。\",\n      \"training_data\": \"证据不足。\",\n      \"reported_metrics\": \"证据不足。\",\n      \"covered_capability\": \"非机动车检测。\",\n      \"gap\": \"缺少后座载物属性。\",\n      \"evidence\": [\n        \"evidence_id: 4ee024cc9812f6bcc1437325\"\n      ]\n    }\n  ,\n    {\n      \"model_or_solution\": \"KM_essos_struct_nart_acl-ascend310-fp16_b8_3.0.1.model (结构化检测)\",\n      \"label_schema\": \"目标类别：人体、机动车、非机动车、骑手。\",\n      \"training_data\": \"证据不足。\",\n      \"reported_metrics\": \"证据不足。\",\n      \"covered_capability\": \"非机动车检测。\",\n      \"gap\": \"缺少后座载物属性。\",\n      \"evidence\": [\n        \"evidence_id: 38ac92e10b1a47b07fbd277a\"\n      ]\n    }\n  ,\n    {\n      \"model_or_solution\": \"KM_essos_struct_nart_acl-ascend710-int8_b8_3.0.1.model (结构化检测)\",\n      \"label_schema\": \"目标类别：人体、机动车、非机动车、骑手。\",\n      \"training_data\": \"证据不足。\",\n      \"reported_metrics\": \"证据不足。\",\n      \"covered_capability\": \"非机动车检测。\",\n      \"gap\": \"缺少后座载物属性。\",\n      \"evidence\": [\n        \"evidence_id: 4a84911efb28ee7bd0ad6b71\"\n      ]\n    }\n  ,\n    {\n      \"model_or_solution\": \"KM_essos_monolith_small_ebike_2_nart_cuda11.0-trt7.1-int8-T4_b8_1.0.1.model (电瓶车进电梯检测)\",\n      \"label_schema\": \"目标类别：非机动车。\",\n      \"training_data\": \"证据不足。\",\n      \"reported_metrics\": \"证据不足。\",\n      \"covered_capability\": \"电瓶车检测。\",\n      \"gap\": \"缺少载物分类。\",\n      \"evidence\": [\n        \"evidence_id: 775e9cd68119c02d1a93663d\"\n      ]\n    }\n  ,\n    {\n      \"model_or_solution\": \"EBikeSafety (电动车安全检测)\",\n      \"label_schema\": \"模型类型：classifier。未明确标签定义，但名称指向电动车安全。\",\n      \"training_data\": \"证据不足。\",\n      \"reported_metrics\": \"证据不足。\",\n      \"covered_capability\": \"电动车相关安全检测。\",\n      \"gap\": \"未明确是否包含载物箱、载物类型分类。\",\n      \"evidence\": [\n        \"evidence_id: 3b0e848f1815319194875869\"\n      ]\n    }\n  ,\n    {\n      \"model_or_solution\": \"KM_essos_struct_nart_acl-ascend710-fp16_b8_3.0.1.model (结构化检测)\",\n      \"label_schema\": \"目标类别：人体、机动车、非机动车、骑手。\",\n      \"training_data\": \"证据不足。\",\n      \"reported_metrics\": \"证据不足。\",\n      \"covered_capability\": \"非机动车检测。\",\n      \"gap\": \"缺少后座载物属性。\",\n      \"evidence\": [\n        \"evidence_id: c53fcc8320f38615d59c6ce1\"\n      ]\n    }\n  ]\n,\n  \"migration_plan\": {\n    \"feasibility\": \"medium\",\n    \"approach\": \"现有模型可复用非机动车检测能力，需新增‘后座载物’检测头与标签体系（密封箱/其他/无）。建议基于非机动车检测模型（如 KM_essos_struct_nart 系列）进行微调，增加载物区域检测与属性分类任务。\",\n    \"data_requirements\": \"需补充电动车后座载物场景图片，标注密封性载物箱、其他物品、无载物三类，且需覆盖夜间、小目标、遮挡等挑战场景。\",\n    \"compute_requirements\": \"建议使用 Ascend710 或 T4 平台，batch size 8 左右，参考 KM_essos_struct_nart_b8 配置。\",\n    \"engineering_work\": \"1. 设计载物区域标注规范；2. 扩展模型输出头；3. 重新训练与评估；4. 部署测试。\",\n    \"estimated_timeline\": \"证据不足（需评估数据规模与标注难度，预估 4-8 周）。\"\n  ,\n  \"estimated_cost\": \"证据不足（依赖数据标注成本与 GPU 资源用量）。\"\n  ,\n  \"dependencies\": [\n    \"非机动车检测基础模型（如 KM_essos_struct_nart 系列）\",\n    \"后座载物场景标注数据（至少 1000+ 样本/类别）\",\n    \"昇腾 T4 或 P4 等推理加速卡\"\n  ]\n  ,\n  \"risks\": [\n    \"载物箱类型定义与标注一致性风险\",\n    \"小目标/遮挡场景下精度可能下降\",\n    \"无法保证达到工业级商用精度（需验证）\"\n  ]\n  }\n,\n  \"expected_performance\": {\n    \"baseline\": \"非机动车检测精度参考 KM_essos_struct_nart 系列（证据不足）。\",\n    \"target\": \"载物分类精度需结合具体数据评估（预计 mAP 80%+ 为可行目标，但需验证）。\"\n  ,\n  \"uncertainty\": \"高精度依赖数据质量与场景覆盖度，当前无直接精度证据。\"\n  }\n,\n  \"recommendation\": \"建议先基于非机动车检测模型进行迁移开发，重点构建后座载物标注数据集。可参考 EBikeSafety 模型的安全检测思路，但需明确分类体系。若时间紧迫，可考虑分阶段实施：先实现基础载物检测，再优化分类精度。\"\n}",
+    "structured_output": {
+      "requirement_summary": "用户需求：判断电动车后载物情况，具体包括三类：1. 密封性载物箱；2. 其他携带物品；3. 无法判断。核心是检测电动车后座载物的类型/状态。",
+      "direct_match": {
+        "exists": false,
+        "summary": "检索到的模型中，无直接匹配‘电动车后载物类型（密封性载物箱/其他/无法判断）’的模型。现有模型主要关注非机动车检测、车身横幅、车牌等，未涉及载物箱密封性或后座载物分类。",
+        "evidence": [
+          "evidence_id: None"
+        ]
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "KM_essos_struct_nart_acl-ascend710-fp16_b8_3.0.1.model (结构化检测)",
+          "label_schema": "目标类别：人体、机动车、非机动车、骑手。未定义载物箱/后座载物分类。",
+          "training_data": "证据不足。仅知目标为非机动车相关检测，未明确训练集细节。",
+          "reported_metrics": "证据不足。仅知为 V3.0.1 版本结构化检测模型。",
+          "covered_capability": "非机动车检测（基础）。与需求场景（电动车）对象一致，但任务（载物分类）不匹配。",
+          "gap": "缺少后座载物类型定义（密封性/非密封性/无载物），缺少属性分类（载物箱 vs 其他物品）。",
+          "evidence": [
+            "evidence_id: e64331e9486befac16c0f912"
+          ]
+        },
+        {
+          "model_or_solution": "KM_essos_monolith_small_ebike_2_nart_acl-ascend710-fp16_b1_1.0.1.model (电瓶车进电梯检测)",
+          "label_schema": "目标类别：非机动车。算法名称：电瓶车进电梯检测。无载物分类标签。",
+          "training_data": "证据不足。对象为电瓶车，但未提及后座载物相关标注。",
+          "reported_metrics": "证据不足。应用场景：呈贡 CV 长尾业务。",
+          "covered_capability": "非机动车（电瓶车）检测。对象与需求一致，但任务形态（进电梯 vs 载物分类）不同。",
+          "gap": "未支持载物箱密封性、其他物品、无法判断三类分类。",
+          "evidence": [
+            "evidence_id: befa7bd6e5262731195604e2"
+          ]
+        },
+        {
+          "model_or_solution": "KM_essos_struct_nart_cuda11.0-trt7.1-fp16-T4_b8_3.0.1.model (结构化检测)",
+          "label_schema": "目标类别：人体、机动车、非机动车、骑手。",
+          "training_data": "证据不足。",
+          "reported_metrics": "证据不足。",
+          "covered_capability": "非机动车检测。",
+          "gap": "缺少后座载物属性。",
+          "evidence": [
+            "evidence_id: ce4a876cdc35fda2001e08ee"
+          ]
+        },
+        {
+          "model_or_solution": "KM_essos_struct_nart_acl-ascend310-int8_b8_3.0.1.model (结构化检测)",
+          "label_schema": "目标类别：人体、机动车、非机动车、骑手。",
+          "training_data": "证据不足。",
+          "reported_metrics": "证据不足。",
+          "covered_capability": "非机动车检测。",
+          "gap": "缺少后座载物属性。",
+          "evidence": [
+            "evidence_id: e64331e9486befac16c0f912"
+          ]
+        },
+        {
+          "model_or_solution": "KM_essos_struct_nart_cpu-ppl2-fp32_b1_3.0.1.model (结构化检测)",
+          "label_schema": "目标类别：人体、机动车、非机动车、骑手。",
+          "training_data": "证据不足。",
+          "reported_metrics": "证据不足。",
+          "covered_capability": "非机动车检测。",
+          "gap": "缺少后座载物属性。",
+          "evidence": [
+            "evidence_id: 4ee024cc9812f6bcc1437325"
+          ]
+        },
+        {
+          "model_or_solution": "KM_essos_struct_nart_acl-ascend310-fp16_b8_3.0.1.model (结构化检测)",
+          "label_schema": "目标类别：人体、机动车、非机动车、骑手。",
+          "training_data": "证据不足。",
+          "reported_metrics": "证据不足。",
+          "covered_capability": "非机动车检测。",
+          "gap": "缺少后座载物属性。",
+          "evidence": [
+            "evidence_id: 38ac92e10b1a47b07fbd277a"
+          ]
+        },
+        {
+          "model_or_solution": "KM_essos_struct_nart_acl-ascend710-int8_b8_3.0.1.model (结构化检测)",
+          "label_schema": "目标类别：人体、机动车、非机动车、骑手。",
+          "training_data": "证据不足。",
+          "reported_metrics": "证据不足。",
+          "covered_capability": "非机动车检测。",
+          "gap": "缺少后座载物属性。",
+          "evidence": [
+            "evidence_id: 4a84911efb28ee7bd0ad6b71"
+          ]
+        },
+        {
+          "model_or_solution": "KM_essos_monolith_small_ebike_2_nart_cuda11.0-trt7.1-int8-T4_b8_1.0.1.model (电瓶车进电梯检测)",
+          "label_schema": "目标类别：非机动车。",
+          "training_data": "证据不足。",
+          "reported_metrics": "证据不足。",
+          "covered_capability": "电瓶车检测。",
+          "gap": "缺少载物分类。",
+          "evidence": [
+            "evidence_id: 775e9cd68119c02d1a93663d"
+          ]
+        },
+        {
+          "model_or_solution": "EBikeSafety (电动车安全检测)",
+          "label_schema": "模型类型：classifier。未明确标签定义，但名称指向电动车安全。",
+          "training_data": "证据不足。",
+          "reported_metrics": "证据不足。",
+          "covered_capability": "电动车相关安全检测。",
+          "gap": "未明确是否包含载物箱、载物类型分类。",
+          "evidence": [
+            "evidence_id: 3b0e848f1815319194875869"
+          ]
+        },
+        {
+          "model_or_solution": "KM_essos_struct_nart_acl-ascend710-fp16_b8_3.0.1.model (结构化检测)",
+          "label_schema": "目标类别：人体、机动车、非机动车、骑手。",
+          "training_data": "证据不足。",
+          "reported_metrics": "证据不足。",
+          "covered_capability": "非机动车检测。",
+          "gap": "缺少后座载物属性。",
+          "evidence": [
+            "evidence_id: c53fcc8320f38615d59c6ce1"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "medium",
+        "approach": "现有模型可复用非机动车检测能力，需新增‘后座载物’检测头与标签体系（密封箱/其他/无）。建议基于非机动车检测模型（如 KM_essos_struct_nart 系列）进行微调，增加载物区域检测与属性分类任务。",
+        "data_requirements": "需补充电动车后座载物场景图片，标注密封性载物箱、其他物品、无载物三类，且需覆盖夜间、小目标、遮挡等挑战场景。",
+        "compute_requirements": "建议使用 Ascend710 或 T4 平台，batch size 8 左右，参考 KM_essos_struct_nart_b8 配置。",
+        "engineering_work": "1. 设计载物区域标注规范；2. 扩展模型输出头；3. 重新训练与评估；4. 部署测试。",
+        "estimated_timeline": "证据不足（需评估数据规模与标注难度，预估 4-8 周）。",
+        "estimated_cost": "证据不足（依赖数据标注成本与 GPU 资源用量）。",
+        "dependencies": [
+          "非机动车检测基础模型（如 KM_essos_struct_nart 系列）",
+          "后座载物场景标注数据（至少 1000+ 样本/类别）",
+          "昇腾 T4 或 P4 等推理加速卡"
+        ],
+        "risks": [
+          "载物箱类型定义与标注一致性风险",
+          "小目标/遮挡场景下精度可能下降",
+          "无法保证达到工业级商用精度（需验证）"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "非机动车检测精度参考 KM_essos_struct_nart 系列（证据不足）。",
+        "target": "载物分类精度需结合具体数据评估（预计 mAP 80%+ 为可行目标，但需验证）。",
+        "uncertainty": "高精度依赖数据质量与场景覆盖度，当前无直接精度证据。"
+      },
+      "recommendation": "建议先基于非机动车检测模型进行迁移开发，重点构建后座载物标注数据集。可参考 EBikeSafety 模型的安全检测思路，但需明确分类体系。若时间紧迫，可考虑分阶段实施：先实现基础载物检测，再优化分类精度。"
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "session_id": "b4760617-a29b-45f8-a743-d9fe2a6cb068",
+  "run_stamp": "20260519_154018_784f523f",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-05-19T15:41:07+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "output": "{\n  \"requirement_summary\": \"基于检索证据生成结构化迁移评估报告\",\n  \"direct_match\": {\n    \"exists\": false,\n    \"summary\": \"无直接证据表明存在针对“电子元器异常检测”的模型。\",\n    \"evidence\": []\n  },\n  \"similar_assets\": [\n    {\n      \"model_or_solution\": \"是根据缺陷检测/异常检测领域的通用技术进行迁移的候选对象\",\n      \"covered_capability\": \"物体检测/属性识别/细粒度分类\",\n      \"gap\": \"无直接证据支持电子元器异常检测的精度、周期或成本。\",\n      \"evidence\": [\n        \"evidence_id 78f7359cea24cf27b06e1710 (crack_detect)\",\n        \"evidence_id b9a70d35168f4c862e2fcb2e (电瓶车进电梯检测)\"\n      ]\n    }\n  ],\n  \"migration_plan\": {\n    \"feasibility\": \"medium\",\n    \"approach\": \"迁移通用缺陷检测模型的方法ology，引用 crack_detect 作为替代参考\",\n    \"data_requirements\": \"需新数据集（电子元器），标注难度取决于缺陷类型定义。\",\n    \"compute_requirements\": \"无具体硬件要求证据，仅视通用模型需求。\"\n  ,\n  \"engineering_work\": \"需要微调通用模型模板以适配电子元器特征。\"\n  ,\n  \"estimated_timeline\": \"无证据支持，建议 2-6 个月（取决于数据获取和迭代）\",\n  \"estimated_cost\": \"无证据支持，建议 50k-500k 人天（取决于数据规模和团队配置）\",\n  \"dependencies\": [\n    \"电子元器缺陷图像数据集获取\",\n    \"现有缺陷检测模型性能转移验证\",\n    \"电子元器生产环境光照/背景条件\",\n    \"缺陷类别定义明确\"\n  ,\n  \"confidence_level_low\",\n  \"labels don't include user's specific request context\",\n  \"evidence shows surface-level documents\"\n]\n  ,\n  \"risks\": [\n    \"数据稀缺性与标注成本\",\n    \"模型泛化能力可能不足\",\n    \"误检/漏检替代性问题\",\n    \"电子元器差异导致性能波动\"\n  ]\n}\n,\n\"expected_performance\": {\n  \"baseline\": \"无具体证据\",\n  \"target\": \"可设为行业基准线，但无直接参照\"\n ,\n  \"uncertainty\": \"高\"\n},\n\"recommendation\": \"需要更多针对“电子元器”的专项数据或案例研究来完善评估。当前证据仅支持缺陷检测类方法学迁移，不支持具体指标。\"\n}",
+    "report": {
+      "requirement_summary": "基于检索证据生成结构化迁移评估报告",
+      "direct_match": {
+        "exists": false,
+        "summary": "无直接证据表明存在针对“电子元器异常检测”的模型。",
+        "evidence": []
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "是根据缺陷检测/异常检测领域的通用技术进行迁移的候选对象",
+          "covered_capability": "物体检测/属性识别/细粒度分类",
+          "gap": "无直接证据支持电子元器异常检测的精度、周期或成本。",
+          "evidence": [
+            "evidence_id 78f7359cea24cf27b06e1710 (crack_detect)",
+            "evidence_id b9a70d35168f4c862e2fcb2e (电瓶车进电梯检测)"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "medium",
+        "approach": "迁移通用缺陷检测模型的方法ology，引用 crack_detect 作为替代参考",
+        "data_requirements": "需新数据集（电子元器），标注难度取决于缺陷类型定义。",
+        "compute_requirements": "无具体硬件要求证据，仅视通用模型需求。",
+        "engineering_work": "需要微调通用模型模板以适配电子元器特征。",
+        "estimated_timeline": "无证据支持，建议 2-6 个月（取决于数据获取和迭代）",
+        "estimated_cost": "无证据支持，建议 50k-500k 人天（取决于数据规模和团队配置）",
+        "dependencies": [
+          "电子元器缺陷图像数据集获取",
+          "现有缺陷检测模型性能转移验证",
+          "电子元器生产环境光照/背景条件",
+          "缺陷类别定义明确",
+          "confidence_level_low",
+          "labels don't include user's specific request context",
+          "evidence shows surface-level documents"
+        ],
+        "risks": [
+          "数据稀缺性与标注成本",
+          "模型泛化能力可能不足",
+          "误检/漏检替代性问题",
+          "电子元器差异导致性能波动"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "无具体证据",
+        "target": "可设为行业基准线，但无直接参照",
+        "uncertainty": "高"
+      },
+      "recommendation": "需要更多针对“电子元器”的专项数据或案例研究来完善评估。当前证据仅支持缺陷检测类方法学迁移，不支持具体指标。"
+    }
+  }
+}

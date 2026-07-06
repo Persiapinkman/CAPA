@@ -1,0 +1,65 @@
+{
+  "session_id": "51a74b2d-2534-4b49-84b4-6bd043b5194a",
+  "run_stamp": "20260522_143043_5eec3055",
+  "stage": "migration_report_response",
+  "step_index": 2,
+  "created_at": "2026-05-22T14:32:32+08:00",
+  "payload": {
+    "model": "Qwen3.5-4B",
+    "output_schema": {
+      "requirement_summary": "需求摘要",
+      "direct_match": "exists, summary, evidence[]",
+      "similar_assets": "model_or_solution, label_schema, training_data, reported_metrics, covered_capability, gap, evidence[]",
+      "migration_plan": "feasibility, approach, data/compute/engineering, timeline, cost, dependencies[], risks[]",
+      "expected_performance": "baseline, target, uncertainty",
+      "recommendation": "最终建议"
+    },
+    "output_raw": "{\n  \"requirement_summary\": \"识别头盔是否有花纹\",\n  \"direct_match\": {\n    \"exists\": false,\n    \"summary\": \"现有证据中无直接针对头盔花纹识别的模型或方案。\"\n  ,\n  \"evidence\": [\n    \"现有证据聚焦于：头盔（mis-detection as face）\"\n ,\n    \"安全绳、腰防、非机动车特征、人体、人脸、火灾（fight_model）等\"\n]\n},\n  \"similar_assets\": [\n    {\n      \"model_or_solution\": \"KM_classifier_safety_rope_nart_cpu-ppl2-fp32_b16_0.2.1.model\",\n      \"label_schema\": \"未匹配\",\n      \"training_data\": \"未匹配\",\n      \"reported_metrics\": \"未匹配\"\n    ,\n    \"covered_capability\": \"安全绳（已连接/未连接/无）\",\n    \"gap\": \"用户仅查询头盔花纹识别**。\"\n    ,\n    \"evidence\": [\n      \"KM_classifier_safety_rope_nart_cpu-ppl2-fp32_b16_0.2.1.model\"\n    ]\n    }\n  ],\n  \"migration_plan\": {\n    \"feasibility\": \"low\",\n    \"approach\": \"基于但仍需数据重构\",\n    \"data_requirements\": \"需针对性采集头盔花纹图像标注数据\",\n    \"compute_requirements\": \"无依赖信息。\"\n  ,\n  \"engineering_work\": \"需新训练或迁移模型\",\n  \"estimated_timeline\": \"需新训练或迁移模型\",\n  \"estimated_cost\": \"需采购或定制，无法从证据推断\"\n  ,\n  \"dependencies\": [\n    \"有头盔类别图像\",\n    \"有花纹/无花纹标签\"\n  ]\n  ,\n  \"risks\": [\n    \"无同类模型迁移路径\"\n  ]\n},\n  \"expected_performance\": {\n    \"baseline\": \"未知\",\n    \"target\": \"未知\"\n  ,\n  \"uncertainty\": \"证据不足\"\n},\n  \"recommendation\": \"建议与客户确认：头盔花纹是检测属性，还是需结合场景判断\"\n}",
+    "structured_output": {
+      "requirement_summary": "识别头盔是否有花纹",
+      "direct_match": {
+        "exists": false,
+        "summary": "现有证据中无直接针对头盔花纹识别的模型或方案。",
+        "evidence": [
+          "现有证据聚焦于：头盔（mis-detection as face）",
+          "安全绳、腰防、非机动车特征、人体、人脸、火灾（fight_model）等"
+        ]
+      },
+      "similar_assets": [
+        {
+          "model_or_solution": "KM_classifier_safety_rope_nart_cpu-ppl2-fp32_b16_0.2.1.model",
+          "label_schema": "未匹配",
+          "training_data": "未匹配",
+          "reported_metrics": "未匹配",
+          "covered_capability": "安全绳（已连接/未连接/无）",
+          "gap": "用户仅查询头盔花纹识别**。",
+          "evidence": [
+            "KM_classifier_safety_rope_nart_cpu-ppl2-fp32_b16_0.2.1.model"
+          ]
+        }
+      ],
+      "migration_plan": {
+        "feasibility": "low",
+        "approach": "基于但仍需数据重构",
+        "data_requirements": "需针对性采集头盔花纹图像标注数据",
+        "compute_requirements": "无依赖信息。",
+        "engineering_work": "需新训练或迁移模型",
+        "estimated_timeline": "需新训练或迁移模型",
+        "estimated_cost": "需采购或定制，无法从证据推断",
+        "dependencies": [
+          "有头盔类别图像",
+          "有花纹/无花纹标签"
+        ],
+        "risks": [
+          "无同类模型迁移路径"
+        ]
+      },
+      "expected_performance": {
+        "baseline": "未知",
+        "target": "未知",
+        "uncertainty": "证据不足"
+      },
+      "recommendation": "建议与客户确认：头盔花纹是检测属性，还是需结合场景判断"
+    }
+  }
+}
