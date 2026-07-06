@@ -1,0 +1,17 @@
+[
+  {
+    "image": "orig.jpg",
+    "source": "original",
+    "image_idx": 0,
+    "models": [
+      {
+        "model": "qwen3-vl-8b",
+        "pred_bboxes": [[12, 33, 99, 180]]
+      },
+      {
+        "model": "rex-omni",
+        "pred_bboxes": [[15, 28, 105, 188]]
+      }
+    ]
+  }
+]

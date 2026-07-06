@@ -1,0 +1,103 @@
+{
+  "run_id": "2026-06-24_base_local_t0",
+  "date": "2026-06-24",
+  "name": "Qwen3.5-4B local baseline temp=0",
+  "kind": "baseline_eval",
+  "model": "qwen3.5-4b",
+  "base_model_path": "/mnt/zkq/models/Qwen3.5-4B",
+  "adapter_path": null,
+  "output_dir": null,
+  "service": {
+    "port": 8000,
+    "api_base": "http://127.0.0.1:8000/v1"
+  },
+  "data": {
+    "cases": "training/planner_dpo_train_seed_v1/eval/planner_routing_eval_90cases.json",
+    "dpo_train": "training/planner_dpo_train_seed_v1/training_data/planner_dpo_text_train.jsonl",
+    "dpo_val": "training/planner_dpo_train_seed_v1/training_data/planner_dpo_text_val.jsonl"
+  },
+  "eval": {
+    "report": "results/planner_routing_eval/planner_routing_report_qwen35_4b_base_zip90_local.json",
+    "log": "logs/qwen35_4b_base_zip90_eval.log",
+    "temperature": 0,
+    "timeout_seconds": 180,
+    "metrics": {
+      "total": 90,
+      "evaluated": 90,
+      "passed": 62,
+      "failed": 28,
+      "accuracy": 0.6889,
+      "by_category": {
+        "historical_asset_qa": {
+          "total": 25,
+          "evaluated": 25,
+          "passed": 23
+        },
+        "adela_platform_eval": {
+          "total": 5,
+          "evaluated": 5,
+          "passed": 4
+        },
+        "general_answer": {
+          "total": 25,
+          "evaluated": 25,
+          "passed": 4
+        },
+        "executable_vision_probe": {
+          "total": 25,
+          "evaluated": 25,
+          "passed": 21
+        },
+        "full_visual_probe": {
+          "total": 5,
+          "evaluated": 5,
+          "passed": 5
+        },
+        "migration_boundary": {
+          "total": 5,
+          "evaluated": 5,
+          "passed": 5
+        }
+      },
+      "actual_actions": {
+        "rag_answer": 43,
+        "adela_cli_eval": 5,
+        "answerer": 3,
+        "final_answer": 1,
+        "qwen_detection": 12,
+        "rexomni_detection": 2,
+        "flux-image-generation": 7,
+        "pipeline_eval": 8,
+        "migration_advisor": 9
+      },
+      "dpo_candidates": 28,
+      "timing": {
+        "source": "historical_import_no_eval_timing",
+        "elapsed_ms": null,
+        "case_elapsed_ms_total": null,
+        "case_elapsed_ms_avg": null,
+        "case_elapsed_ms_min": null,
+        "case_elapsed_ms_max": null,
+        "case_elapsed_ms_count": 0
+      }
+    },
+    "efficiency": {
+      "source": "historical_import_no_eval_timing",
+      "elapsed_ms": null,
+      "case_elapsed_ms_total": null,
+      "case_elapsed_ms_avg": null,
+      "case_elapsed_ms_min": null,
+      "case_elapsed_ms_max": null,
+      "case_elapsed_ms_count": 0
+    }
+  },
+  "train": {
+    "log": null,
+    "efficiency": null
+  },
+  "environment": {
+    "note": "Historical local experiment import. Eval reports before schema 1.1 may not contain per-case elapsed_ms.",
+    "cuda_visible_devices": null,
+    "no_proxy": "127.0.0.1,localhost"
+  }
+}

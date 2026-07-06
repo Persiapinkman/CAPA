@@ -1,0 +1,155 @@
+{
+  "model": "Qwen3.5-35B-A3B",
+  "report": "/media/nvme1n1p1/zengkeqin/projects/test-skills/results/planner_routing_eval/planner_routing_report_Qwen3.5-35B-A3B_90cases_baseline.json",
+  "summary": {
+    "total": 90,
+    "evaluated": 90,
+    "passed": 82,
+    "failed": 8,
+    "accuracy": 0.9111,
+    "by_category": {
+      "historical_asset_qa": {
+        "total": 25,
+        "evaluated": 25,
+        "passed": 24
+      },
+      "adela_platform_eval": {
+        "total": 5,
+        "evaluated": 5,
+        "passed": 5
+      },
+      "general_answer": {
+        "total": 25,
+        "evaluated": 25,
+        "passed": 18
+      },
+      "executable_vision_probe": {
+        "total": 25,
+        "evaluated": 25,
+        "passed": 25
+      },
+      "full_visual_probe": {
+        "total": 5,
+        "evaluated": 5,
+        "passed": 5
+      },
+      "migration_boundary": {
+        "total": 5,
+        "evaluated": 5,
+        "passed": 5
+      }
+    },
+    "actual_actions": {
+      "rag_answer": 31,
+      "adela_cli_eval": 5,
+      "answerer": 18,
+      "qwen_detection": 17,
+      "rexomni_detection": 1,
+      "flux-image-generation": 7,
+      "pipeline_eval": 5,
+      "migration_advisor": 6
+    },
+    "dpo_candidates": 8
+  },
+  "failure_families": {
+    "rag>migration_target": 1,
+    "answerer>rag_answer_target": 7
+  },
+  "failures_by_category": {
+    "historical_asset_qa": 1,
+    "general_answer": 7
+  },
+  "failures_by_action_pair": {
+    "rag_answer->migration_advisor": 1,
+    "answerer->rag_answer": 7
+  },
+  "failure_cases": [
+    {
+      "case_id": "ROUTE-HARD-RAG-011",
+      "category": "historical_asset_qa",
+      "expected": "rag_answer",
+      "actual": "migration_advisor",
+      "failures": [
+        "action: expected one of ['rag_answer'], got 'migration_advisor'",
+        "forbidden action used: migration_advisor"
+      ]
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-002",
+      "category": "general_answer",
+      "expected": "answerer",
+      "actual": "rag_answer",
+      "failures": [
+        "action: expected one of ['answerer'], got 'rag_answer'",
+        "forbidden action used: rag_answer",
+        "mode: expected 'direct', got None"
+      ]
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-003",
+      "category": "general_answer",
+      "expected": "answerer",
+      "actual": "rag_answer",
+      "failures": [
+        "action: expected one of ['answerer'], got 'rag_answer'",
+        "forbidden action used: rag_answer",
+        "mode: expected 'direct', got None"
+      ]
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-005",
+      "category": "general_answer",
+      "expected": "answerer",
+      "actual": "rag_answer",
+      "failures": [
+        "action: expected one of ['answerer'], got 'rag_answer'",
+        "forbidden action used: rag_answer",
+        "mode: expected 'direct', got None"
+      ]
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-008",
+      "category": "general_answer",
+      "expected": "answerer",
+      "actual": "rag_answer",
+      "failures": [
+        "action: expected one of ['answerer'], got 'rag_answer'",
+        "forbidden action used: rag_answer",
+        "mode: expected 'direct', got None"
+      ]
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-010",
+      "category": "general_answer",
+      "expected": "answerer",
+      "actual": "rag_answer",
+      "failures": [
+        "action: expected one of ['answerer'], got 'rag_answer'",
+        "forbidden action used: rag_answer",
+        "mode: expected 'direct', got None"
+      ]
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-014",
+      "category": "general_answer",
+      "expected": "answerer",
+      "actual": "rag_answer",
+      "failures": [
+        "action: expected one of ['answerer'], got 'rag_answer'",
+        "forbidden action used: rag_answer",
+        "mode: expected 'direct', got None"
+      ]
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-020",
+      "category": "general_answer",
+      "expected": "answerer",
+      "actual": "rag_answer",
+      "failures": [
+        "action: expected one of ['answerer'], got 'rag_answer'",
+        "forbidden action used: rag_answer",
+        "mode: expected 'direct', got None"
+      ]
+    }
+  ]
+}

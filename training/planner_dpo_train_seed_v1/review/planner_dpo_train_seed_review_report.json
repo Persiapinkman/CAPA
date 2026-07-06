@@ -1,0 +1,59 @@
+{
+  "reviewed_at": "2026-06-24T00:00:00+08:00",
+  "total": 120,
+  "status": {
+    "approve": 113,
+    "reject": 7
+  },
+  "by_error_status": {
+    "general_answer_over_rag::approve": 33,
+    "general_answer_over_rag::reject": 7,
+    "single_image_detection_over_pipeline::approve": 40,
+    "asset_inventory_over_migration::approve": 40
+  },
+  "rejected_cases": [
+    {
+      "case_id": "DPO-ANS-005",
+      "error_type": "general_answer_over_rag",
+      "user_query": "检测模型上线时置信度阈值通常怎么选？",
+      "note": "人工审核：上线置信度阈值可能依赖企业内部上线规范/验收标准，rag_answer 并非明显更差，不适合作为 answerer > rag_answer 的 DPO 样本。"
+    },
+    {
+      "case_id": "DPO-ANS-023",
+      "error_type": "general_answer_over_rag",
+      "user_query": "检测模型上线后，人工抽样复核一般怎么设计？",
+      "note": "批量审核：该问题可能依赖企业内部规范、上线流程、质检或业务验收标准，rag_answer 并非明显更差。"
+    },
+    {
+      "case_id": "DPO-ANS-027",
+      "error_type": "general_answer_over_rag",
+      "user_query": "检测模型的置信度不校准会造成什么影响？",
+      "note": "批量审核：该问题可能依赖企业内部规范、上线流程、质检或业务验收标准，rag_answer 并非明显更差。"
+    },
+    {
+      "case_id": "DPO-ANS-029",
+      "error_type": "general_answer_over_rag",
+      "user_query": "不同类别是否可以设置不同置信度阈值？",
+      "note": "批量审核：该问题可能依赖企业内部规范、上线流程、质检或业务验收标准，rag_answer 并非明显更差。"
+    },
+    {
+      "case_id": "DPO-ANS-030",
+      "error_type": "general_answer_over_rag",
+      "user_query": "数据标注质检常用哪些指标？",
+      "note": "批量审核：该问题可能依赖企业内部规范、上线流程、质检或业务验收标准，rag_answer 并非明显更差。"
+    },
+    {
+      "case_id": "DPO-ANS-034",
+      "error_type": "general_answer_over_rag",
+      "user_query": "为什么有时 mAP 高但业务体验仍然不好？",
+      "note": "批量审核：该问题可能依赖企业内部规范、上线流程、质检或业务验收标准，rag_answer 并非明显更差。"
+    },
+    {
+      "case_id": "DPO-ANS-035",
+      "error_type": "general_answer_over_rag",
+      "user_query": "检测模型上线后应该监控哪些质量指标？",
+      "note": "批量审核：该问题可能依赖企业内部规范、上线流程、质检或业务验收标准，rag_answer 并非明显更差。"
+    }
+  ],
+  "approved_jsonl": "/media/nvme1n1p1/zengkeqin/projects/test-skills/results/planner_routing_eval/dpo_train_seed_v1/planner_dpo_train_seed_pairs.approved.jsonl"
+}

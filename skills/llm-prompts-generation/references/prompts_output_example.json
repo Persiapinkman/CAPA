@@ -1,0 +1,12 @@
+{
+  "expand_descriptions": [
+    {
+      "scene": "Riverbank with reeds and stone steps under cloudy light.",
+      "target": "One fisherman wearing dark jacket, holding long rod near water edge.",
+      "camera": "High-angle fixed surveillance view, about 4m installation height."
+    }
+  ],
+  "polished_prompts": [
+    "High-angle fixed surveillance view, about 4m installation height. Riverbank with reeds and stone steps under cloudy light. One fisherman wearing dark jacket, holding long rod near water edge."
+  ]
+}
