@@ -103,57 +103,63 @@ python3 training/planner_grpo_seed_v1/scripts/reward_planner_grpo.py \
 
 ## Current Dataset Size
 
-The expanded training file currently contains 280 cases:
+The expanded training file currently contains 313 cases:
 
 - `single_image_probe`: 74
 - `probe_then_migration`: 61
 - `migration_feasibility_with_image`: 51
 - `migration_feasibility`: 38
+- `probe_then_migration_strict`: 30
+- `probe_only_contrastive`: 30
 - Boundary/support categories: 21
-- `probe_then_migration_strict`: 18
 - `clarify_intent_ambiguity`: 8
-- `param_missing_no_clarify`: 6
-- `memory_hit_no_redundant`: 3
 
 This distribution is intentionally skewed toward the categories where the
 baseline 4B Planner showed weak routing behavior.
 
-## Process-Reward Scenarios
+## High-Value GRPO Scenarios
 
-The last four categories above target agent-level decisions that are *not*
-single-step tool selection, i.e. "when to transition / when to stop / whether
-to ask / whether it is redundant". They rely on two extra reward dimensions in
-`reward_planner_grpo.py`, both defaulting to weight `0` so the original 245
-cases are scored identically:
+GRPO is only worthwhile where a decision is (a) not expressible as a stable
+engineering rule and (b) has no runtime fallback if the model gets it wrong.
+Only two families qualify, and the dataset concentrates on them.
+
+1. **`probe → migration` multi-step soft transition** (highest value). The hard
+   part is not picking `qwen_detection`, but reading the *ambiguous* probe
+   observation plus the *implicit* follow-up intent to decide whether to
+   transition and how to set `finish_after_tool`. Trained via an A/B contrastive
+   design over shared detection targets:
+   - `probe_then_migration_strict` (A): query implies "probe, and if uncertain,
+     judge migration" → `[detection finish=false, migration finish=true]`. Uses
+     the `no_premature_stop` reward to punish stopping right after the probe.
+   - `probe_only_contrastive` (B): near-identical detection phrasing that
+     mentions business/migration keywords but explicitly ends after
+     confirmation → single-step `detection finish=true`; `migration_advisor` is
+     a `forbidden_action`. Forces reading the intent tail, not the surface
+     pattern.
+
+2. **`clarify_intent_ambiguity`** (secondary). Genuinely ambiguous intent with
+   multiple high-probability tool paths must emit `decision_type="clarify"`;
+   every direct tool is a `forbidden_action`. Rule engines cannot enumerate
+   which queries are ambiguous, and there is no runtime fallback if the model
+   guesses instead of asking.
+
+### Process-reward dimension
+
+`reward_planner_grpo.py` adds one extra dimension, defaulting to weight `0` so
+the original 245 cases score identically:
 
 - `no_premature_stop`: penalizes ending or falling back to `answerer`/
-  `final_answer` before finishing the expected substantive tool steps. Used by
-  `probe_then_migration_strict` to directly punish the residual failure mode
-  "probe -> stop" (the transition `single-image detection probe ->
-  migration_advisor` called out in the top-level README).
-- `no_redundant_action`: a case declares `redundant_actions` (tools already
-  completed in `setup.query_trajectories`); re-issuing any of them is penalized.
-  Used by `memory_hit_no_redundant` to punish re-running expensive tools like
-  `pipeline_eval` when the answer is already in memory.
+  `final_answer` before finishing the expected substantive tool steps. Only
+  `probe_then_migration_strict` enables it (weight `0.30`).
 
-Two additional categories exercise the clarify boundary purely through the
-existing dimensions:
+### Explicitly out of scope (engineering, not GRPO)
 
-- `clarify_intent_ambiguity`: genuinely ambiguous intent with multiple
-  high-probability tool paths must emit `decision_type="clarify"`; every direct
-  tool is a `forbidden_action` (should-ask-and-did-not is punished).
-- `param_missing_no_clarify`: intent is clear but a slot is missing, so the
-  Planner must emit `decision_type="tool"` with empty slots and let the runtime
-  ask. Here `clarify` itself is a `forbidden_action` (should-not-ask-but-did is
-  punished).
-
-New optional case fields consumed by the pipeline:
-
-- `redundant_actions`: list of tool names that must not be re-issued.
-- `reward_spec`: may include `no_premature_stop` / `no_redundant_action`
-  weights on top of the six default dimensions.
-- `setup.query_trajectories`: prior completed steps injected into the Planner
-  context during offline rollout.
+- **Parameter-missing tool calls**: the runtime already asks via
+  `build_tool_precondition_clarification`; a prompt/SFT compliance concern.
+- **Redundant re-calls of completed tools**: better handled by an orchestrator
+  de-dup interceptor over `QueryTrajectoryStore`.
+- **Cross-turn topic backtracking / intent switching**: decided by the separate
+  thread router (`CONTINUE`/`NEW`) *before* the Planner.
 
 ## What This Trains
 
