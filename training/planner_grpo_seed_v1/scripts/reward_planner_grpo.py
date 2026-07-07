@@ -197,6 +197,37 @@ def score_expected_step(
     return score, {"detail": detail, "failures": failures}
 
 
+STOP_ACTIONS = {"answerer", "final_answer"}
+
+
+def detect_premature_stop(
+    expected_list: list[dict[str, Any]],
+    decisions: list[dict[str, Any]],
+) -> bool:
+    """判定是否过早收口。
+
+    对 expected 中的每个"实质性工具步"（decision_type=tool 且非 answerer/final_answer），
+    检查实际决策是否在到达该步之前就 end 或跳到 answerer/final_answer。
+    这精确惩罚 probe -> migration 这类残余失败中"探针后立即收口"的偏置。
+    """
+    for index, expected in enumerate(expected_list):
+        expected_type = str(expected.get("decision_type") or "tool").strip()
+        expected_action = normalize_action(str(expected.get("action") or ""))
+        if expected_type != "tool" or expected_action in STOP_ACTIONS:
+            continue
+        actual = decisions[index] if index < len(decisions) else None
+        if not isinstance(actual, dict):
+            # 期望的实质工具步没有对应决策，说明前面已提前终止。
+            return True
+        actual_type = str(actual.get("decision_type") or "").strip()
+        actual_action = normalize_action(str(actual.get("action") or ""))
+        if actual_type == "end":
+            return True
+        if actual_action in STOP_ACTIONS:
+            return True
+    return False
+
+
 def score_case(
     case: dict[str, Any],
     prediction: dict[str, Any] | None = None,
@@ -267,9 +298,19 @@ def score_case(
         else:
             used_actions.append(normalize_action(str(decision.get("action") or "")))
     forbidden_hit = sorted(action for action in used_actions if action in forbidden)
-    forbidden_score = 0.0 if forbidden_hit else float(reward_spec.get("no_forbidden_action", 0.0))
-    total_possible = max_step_score + float(reward_spec.get("no_forbidden_action", 0.0))
-    total_score = (raw_score + forbidden_score) / total_possible if total_possible > 0 else 0.0
+    forbidden_weight = float(reward_spec.get("no_forbidden_action", 0.0))
+    forbidden_score = 0.0 if forbidden_hit else forbidden_weight
+
+    # 过程奖励：过早收口惩罚。默认权重 0，仅当 case 显式声明 no_premature_stop 时生效。
+    premature_weight = float(reward_spec.get("no_premature_stop", 0.0))
+    premature_stop_hit = (
+        detect_premature_stop(expected_list, decisions) if premature_weight > 0 else False
+    )
+    premature_score = 0.0 if premature_stop_hit else premature_weight
+
+    total_possible = max_step_score + forbidden_weight + premature_weight
+    numerator = raw_score + forbidden_score + premature_score
+    total_score = numerator / total_possible if total_possible > 0 else 0.0
     if not parse_ok:
         total_score = 0.0
 
@@ -279,9 +320,10 @@ def score_case(
         "category": case.get("category"),
         "score": round(total_score, 6),
         "passed": passed,
-        "raw_score": round(raw_score + forbidden_score, 6),
+        "raw_score": round(numerator, 6),
         "max_score": round(total_possible, 6),
         "forbidden_hit": forbidden_hit,
+        "premature_stop_hit": premature_stop_hit,
         "used_actions": used_actions,
         "step_scores": step_scores,
         "parse_ok": parse_ok,
@@ -356,6 +398,7 @@ def main() -> None:
         "used_action_counts": dict(
             Counter(action for result in results for action in result.get("used_actions", []))
         ),
+        "premature_stop_cases": sum(1 for result in results if result.get("premature_stop_hit")),
     }
     report = {"summary": summary, "results": results}
     if args.out:

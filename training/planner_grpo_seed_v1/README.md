@@ -103,16 +103,57 @@ python3 training/planner_grpo_seed_v1/scripts/reward_planner_grpo.py \
 
 ## Current Dataset Size
 
-The expanded training file currently contains 245 cases:
+The expanded training file currently contains 280 cases:
 
 - `single_image_probe`: 74
 - `probe_then_migration`: 61
 - `migration_feasibility_with_image`: 51
 - `migration_feasibility`: 38
 - Boundary/support categories: 21
+- `probe_then_migration_strict`: 18
+- `clarify_intent_ambiguity`: 8
+- `param_missing_no_clarify`: 6
+- `memory_hit_no_redundant`: 3
 
 This distribution is intentionally skewed toward the categories where the
 baseline 4B Planner showed weak routing behavior.
+
+## Process-Reward Scenarios
+
+The last four categories above target agent-level decisions that are *not*
+single-step tool selection, i.e. "when to transition / when to stop / whether
+to ask / whether it is redundant". They rely on two extra reward dimensions in
+`reward_planner_grpo.py`, both defaulting to weight `0` so the original 245
+cases are scored identically:
+
+- `no_premature_stop`: penalizes ending or falling back to `answerer`/
+  `final_answer` before finishing the expected substantive tool steps. Used by
+  `probe_then_migration_strict` to directly punish the residual failure mode
+  "probe -> stop" (the transition `single-image detection probe ->
+  migration_advisor` called out in the top-level README).
+- `no_redundant_action`: a case declares `redundant_actions` (tools already
+  completed in `setup.query_trajectories`); re-issuing any of them is penalized.
+  Used by `memory_hit_no_redundant` to punish re-running expensive tools like
+  `pipeline_eval` when the answer is already in memory.
+
+Two additional categories exercise the clarify boundary purely through the
+existing dimensions:
+
+- `clarify_intent_ambiguity`: genuinely ambiguous intent with multiple
+  high-probability tool paths must emit `decision_type="clarify"`; every direct
+  tool is a `forbidden_action` (should-ask-and-did-not is punished).
+- `param_missing_no_clarify`: intent is clear but a slot is missing, so the
+  Planner must emit `decision_type="tool"` with empty slots and let the runtime
+  ask. Here `clarify` itself is a `forbidden_action` (should-not-ask-but-did is
+  punished).
+
+New optional case fields consumed by the pipeline:
+
+- `redundant_actions`: list of tool names that must not be re-issued.
+- `reward_spec`: may include `no_premature_stop` / `no_redundant_action`
+  weights on top of the six default dimensions.
+- `setup.query_trajectories`: prior completed steps injected into the Planner
+  context during offline rollout.
 
 ## What This Trains
 

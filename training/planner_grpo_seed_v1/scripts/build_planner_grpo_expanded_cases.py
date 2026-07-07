@@ -68,6 +68,8 @@ def base_case(
     expected_decisions: list[dict[str, Any]],
     forbidden_actions: list[str],
     mock_observations: list[dict[str, Any]] | None = None,
+    reward_spec: dict[str, float] | None = None,
+    query_trajectories: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     row: dict[str, Any] = {
         "case_id": case_id,
@@ -76,11 +78,11 @@ def base_case(
         "setup": {
             "has_image": has_image,
             "image_fixture": image_fixture,
-            "query_trajectories": [],
+            "query_trajectories": query_trajectories or [],
         },
         "expected_decisions": expected_decisions,
         "forbidden_actions": forbidden_actions,
-        "reward_spec": dict(DEFAULT_REWARD_SPEC),
+        "reward_spec": dict(reward_spec) if reward_spec else dict(DEFAULT_REWARD_SPEC),
     }
     if mock_observations:
         row["mock_observations"] = mock_observations
@@ -411,6 +413,159 @@ def build_boundary_cases(start_index: int, count: int) -> list[dict[str, Any]]:
     return rows
 
 
+# high-value GRPO reward specs. 只保留“工程/SFT/few-shot 都难压稳、又没有工程兜底”的两类：
+# 1) Planner 单话题内的 probe->migration 多步软转移（核心）；2) 语义歧义 clarify（次优）。
+CLARIFY_REWARD_SPEC = {
+    # clarify 正例聚焦“该问就问”，主要考核 decision_type 与 clarify 动作，不强约束澄清问题文本。
+    "json_valid": 0.10,
+    "decision_type_valid": 0.30,
+    "action_match": 0.50,
+    "argument_match": 0.00,
+    "finish_after_tool": 0.00,
+    "no_forbidden_action": 0.10,
+}
+
+PROBE_MIGRATION_STRICT_REWARD_SPEC = {
+    # 探针->迁移 转移：默认 6 维 + 过早收口过程奖励，直接惩罚“探针后立即收口”的残余失败偏置。
+    **DEFAULT_REWARD_SPEC,
+    "no_premature_stop": 0.30,
+}
+
+
+def build_clarify_cases(start_index: int, count: int) -> list[dict[str, Any]]:
+    """语义歧义正例：意图存在多种高概率解释且导向不同工具路径，必须先 clarify。"""
+    # (query, has_image, fixture_key)：query 本身多义，任何直接动作都是过早猜测。
+    ambiguous = [
+        ("黑夜检测黑猫，帮我弄一下。", False, ""),
+        ("安全帽这个东西帮我做一下。", False, ""),
+        ("河道漂浮物能不能整一个？", False, ""),
+        ("这张图，烟雾，处理一下。", True, "smoke"),
+        ("横幅，你看着办。", True, "banner"),
+        ("钓鱼这个搞一下。", True, "fisherman"),
+        ("垃圾车弄个方案出来。", False, ""),
+        ("反光条这块儿你处理下。", True, "person_with_bag"),
+    ]
+    forbidden = [
+        "qwen_detection",
+        "rexomni_detection",
+        "flux-image-generation",
+        "pipeline_eval",
+        "migration_advisor",
+        "rag_answer",
+        "answerer",
+    ]
+    rows: list[dict[str, Any]] = []
+    for i in range(count):
+        query, has_image, fixture_key = ambiguous[i % len(ambiguous)]
+        rows.append(
+            base_case(
+                case_id=f"GRPO-EXP-CLARIFY-{start_index + i:03d}",
+                category="clarify_intent_ambiguity",
+                user_query=query,
+                has_image=has_image,
+                image_fixture=IMAGE_FIXTURES[fixture_key] if fixture_key else "",
+                expected_decisions=[
+                    {"step": 1, "decision_type": "clarify", "action": "clarify", "arg_contains": {}}
+                ],
+                forbidden_actions=forbidden,
+                reward_spec=CLARIFY_REWARD_SPEC,
+            )
+        )
+    return rows
+
+
+def build_probe_only_contrastive_cases(start_index: int, count: int) -> list[dict[str, Any]]:
+    """探针->迁移 的 B 对照组：句式提到业务/迁移词看似要转移，但意图明确“确认完就结束”，
+    应单步 detection 且 finish_after_tool=true，禁止转 migration。与 build_probe_migration_strict_cases
+    共享检测目标，构成 A(转移)/B(不转移) 对照对，逼模型学 finish_after_tool 的语境敏感性。"""
+    tasks = [
+        ("钓鱼的人", ["钓鱼", "人"], "钓鱼人员检测", "fisherman"),
+        ("厨师帽", ["厨师帽"], "后厨帽子佩戴检测", "person_with_bag"),
+        ("反光条", ["反光条"], "工服反光条检测", "person_with_bag"),
+        ("烟雾", ["烟雾"], "烟雾异常检测", "smoke"),
+        ("横幅", ["横幅"], "横幅违规悬挂检测", "banner"),
+        ("垃圾车", ["垃圾车"], "垃圾车识别", "trash_truck"),
+    ]
+    phrasings = [
+        "先确认这张图里有没有{label}就行，{business}的迁移可行性我自己判断，你不用分析。",
+        "只要快速看下有没有{label}，看完就结束，别再做{business}的迁移评估。",
+        "这张图我只需要{label}的探针结果，{business}后续方案先不用你给。",
+        "帮我单纯检测下{label}，确认完直接收口，不要接着分析{business}能不能迁移。",
+        "就跑一次{label}检测告诉我有没有，{business}的事这轮不涉及。",
+    ]
+    rows: list[dict[str, Any]] = []
+    for i in range(count):
+        label, label_tokens, business, fixture_key = tasks[i % len(tasks)]
+        template = phrasings[(i // len(tasks)) % len(phrasings)]
+        rows.append(
+            base_case(
+                case_id=f"GRPO-EXP-PROBE-ONLY-{start_index + i:03d}",
+                category="probe_only_contrastive",
+                user_query=template.format(label=label, business=business),
+                has_image=True,
+                image_fixture=IMAGE_FIXTURES[fixture_key],
+                expected_decisions=[
+                    tool_step(
+                        action="qwen_detection",
+                        finish_after_tool=True,
+                        arg_contains={"label": label_tokens},
+                    )
+                ],
+                forbidden_actions=["migration_advisor", "pipeline_eval", "answerer"],
+            )
+        )
+    return rows
+
+
+def build_probe_migration_strict_cases(start_index: int, count: int) -> list[dict[str, Any]]:
+    """探针->迁移 强化：query 明确隐含“探针不确定后再判断迁移”，
+    step1 detection 必须 finish_after_tool=false，探针后不得过早收口（no_premature_stop 生效）。"""
+    tasks = [
+        ("钓鱼的人", ["钓鱼", "人"], "钓鱼人员检测", ["钓鱼", "低成本验证"], "fisherman"),
+        ("厨师帽", ["厨师帽"], "后厨帽子佩戴检测", ["后厨", "帽子", "低成本验证"], "person_with_bag"),
+        ("反光条", ["反光条"], "工服反光条检测", ["反光条", "迁移", "低成本验证"], "person_with_bag"),
+        ("烟雾", ["烟雾"], "烟雾异常检测", ["烟雾", "可行性", "低成本"], "smoke"),
+        ("横幅", ["横幅"], "横幅违规悬挂检测", ["横幅", "迁移", "验证方案"], "banner"),
+        ("垃圾车", ["垃圾车"], "垃圾车识别", ["垃圾车", "已有能力", "验证"], "trash_truck"),
+    ]
+    phrasings = [
+        "先用已有模型探一下这张图有没有{label}；探针不确定的话，再给{business}的低成本迁移验证方案。",
+        "第一步只做轻量探针看{label}，如果结果不稳，第二步再判断{business}能否迁移并给验证路径。",
+        "先别收口：先检测{label}，探针信心不足时接着输出{business}的迁移可行性与风险建议。",
+        "先跑单图检测看有没有{label}；要是模型没把握，再评估{business}的资产复用和补数据量。",
+        "这张图先探{label}，探针结果模糊就继续分析{business}能不能从现有能力迁移。",
+    ]
+    rows: list[dict[str, Any]] = []
+    for i in range(count):
+        label, label_tokens, business, mig_tokens, fixture_key = tasks[i % len(tasks)]
+        template = phrasings[(i // len(tasks)) % len(phrasings)]
+        rows.append(
+            base_case(
+                case_id=f"GRPO-EXP-PROBE-MIG-STRICT-{start_index + i:03d}",
+                category="probe_then_migration_strict",
+                user_query=template.format(label=label, business=business),
+                has_image=True,
+                image_fixture=IMAGE_FIXTURES[fixture_key],
+                expected_decisions=two_step_probe_then_migration(
+                    label_tokens=label_tokens,
+                    migration_tokens=mig_tokens,
+                ),
+                mock_observations=[
+                    {
+                        "after_step": 1,
+                        "observation": {
+                            "success": True,
+                            "summary": "开放集探针结果不稳定/置信度不足，建议结合已有资产做低成本可行性判断。",
+                        },
+                    }
+                ],
+                forbidden_actions=["pipeline_eval", "answerer"],
+                reward_spec=PROBE_MIGRATION_STRICT_REWARD_SPEC,
+            )
+        )
+    return rows
+
+
 def build_expanded_cases() -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     rows.extend(build_single_image_probe_cases(1, 70))
@@ -418,6 +573,10 @@ def build_expanded_cases() -> list[dict[str, Any]]:
     rows.extend(build_migration_with_image_cases(1, 50))
     rows.extend(build_migration_text_cases(1, 35))
     rows.extend(build_boundary_cases(1, 30))
+    # 高价值 GRPO 强化：集中在 Planner 单话题内 probe->migration 多步软转移（A/B 对照）与语义歧义 clarify。
+    rows.extend(build_clarify_cases(1, 16))
+    rows.extend(build_probe_migration_strict_cases(1, 30))  # A：探针后转 migration + no_premature_stop
+    rows.extend(build_probe_only_contrastive_cases(1, 30))  # B：迷惑句式纯探针，finish=true 且禁 migration
     return rows
 
 
