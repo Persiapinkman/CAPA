@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "eval": "planner_routing_zip90_stateprompt_3x_model_compare",
+  "cases": "training/planner_dpo_train_seed_v1/eval/planner_routing_eval_90cases.json",
+  "generation_config": {
+    "temperature": 0,
+    "top_p": 1,
+    "seed": 42,
+    "do_sample": false
+  },
+  "models": [
+    {
+      "label": "4B",
+      "run_id": "2026-07-07_4b_stateprompt_zip90_3x",
+      "model": "Qwen3.5-4B",
+      "aggregate_path": "results/planner_routing_eval/qwen35_4b_stateprompt_zip90_3x_aggregate.json",
+      "accuracy_mean": 0.9074,
+      "accuracy_stdev": 0.0064,
+      "passed_mean": 81.6667,
+      "case_elapsed_ms_avg_mean": 4397.8243,
+      "api_call_ms_avg_mean": 2395.8863,
+      "errors_total": {
+        "api_error": 3
+      },
+      "case_audit": {
+        "case_audit_csv": "results/planner_routing_eval/qwen35_4b_stateprompt_zip90_3x_case_audit.csv",
+        "failed_cases_csv": "results/planner_routing_eval/qwen35_4b_stateprompt_zip90_3x_failed_cases.csv"
+      }
+    },
+    {
+      "label": "9B",
+      "run_id": "2026-07-07_9b_stateprompt_zip90_3x",
+      "model": "Qwen3.5-9B",
+      "aggregate_path": "results/planner_routing_eval/qwen35_9b_stateprompt_zip90_3x_aggregate.json",
+      "accuracy_mean": 0.9519,
+      "accuracy_stdev": 0.0065,
+      "passed_mean": 85.6667,
+      "case_elapsed_ms_avg_mean": 12227.2273,
+      "api_call_ms_avg_mean": 12198.7787,
+      "errors_total": {},
+      "case_audit": {
+        "case_audit_csv": "results/planner_routing_eval/qwen35_9b_stateprompt_zip90_3x_case_audit.csv",
+        "failed_cases_csv": "results/planner_routing_eval/qwen35_9b_stateprompt_zip90_3x_failed_cases.csv"
+      }
+    },
+    {
+      "label": "35B-A3B",
+      "run_id": "2026-07-07_35b_a3b_stateprompt_zip90_3x",
+      "model": "Qwen3.5-35B-A3B",
+      "aggregate_path": "results/planner_routing_eval/qwen35_35b_a3b_stateprompt_zip90_3x_aggregate.json",
+      "accuracy_mean": 0.9444,
+      "accuracy_stdev": 0.0,
+      "passed_mean": 85.0,
+      "case_elapsed_ms_avg_mean": 1145.4713,
+      "api_call_ms_avg_mean": 1117.4933,
+      "errors_total": {},
+      "case_audit": {
+        "case_audit_csv": "results/planner_routing_eval/qwen35_35b_a3b_stateprompt_zip90_3x_case_audit.csv",
+        "failed_cases_csv": "results/planner_routing_eval/qwen35_35b_a3b_stateprompt_zip90_3x_failed_cases.csv"
+      }
+    }
+  ]
+}

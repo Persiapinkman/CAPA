@@ -1,0 +1,219 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-07-06T05:05:24.971683+00:00",
+  "cases_path": "/media/nvme1n1p1/zengkeqin/projects/CAPA/training/planner_dpo_train_seed_v1/eval/planner_routing_eval_90cases.json",
+  "model": "Qwen3.5-9B",
+  "api_base": "http://10.111.32.253:8000/v1",
+  "report_prefix": "qwen35_9b_repro_zip90",
+  "runs": 3,
+  "generation_config": {
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "seed": 42,
+    "do_sample": "false"
+  },
+  "aggregate": {
+    "accuracy_mean": 0.8444,
+    "accuracy_stdev": 0.0,
+    "passed_mean": 76.0,
+    "passed_stdev": 0.0,
+    "failed_mean": 14.0,
+    "failed_stdev": 0.0
+  },
+  "timing": {
+    "source": "measured",
+    "elapsed_ms": 2159612.228,
+    "run_elapsed_ms_mean": 719195.8883,
+    "run_elapsed_ms_stdev": 711.1056,
+    "case_elapsed_ms_avg_mean": 7988.4377,
+    "case_elapsed_ms_avg_stdev": 7.8725
+  },
+  "reports": [
+    {
+      "path": "/media/nvme1n1p1/zengkeqin/projects/CAPA/results/planner_routing_eval/qwen35_9b_repro_zip90_run1.json",
+      "summary": {
+        "total": 90,
+        "evaluated": 90,
+        "passed": 76,
+        "failed": 14,
+        "accuracy": 0.8444,
+        "by_category": {
+          "historical_asset_qa": {
+            "total": 25,
+            "evaluated": 25,
+            "passed": 23
+          },
+          "adela_platform_eval": {
+            "total": 5,
+            "evaluated": 5,
+            "passed": 4
+          },
+          "general_answer": {
+            "total": 25,
+            "evaluated": 25,
+            "passed": 21
+          },
+          "executable_vision_probe": {
+            "total": 25,
+            "evaluated": 25,
+            "passed": 18
+          },
+          "full_visual_probe": {
+            "total": 5,
+            "evaluated": 5,
+            "passed": 5
+          },
+          "migration_boundary": {
+            "total": 5,
+            "evaluated": 5,
+            "passed": 5
+          }
+        },
+        "actual_actions": {
+          "rag_answer": 26,
+          "adela_cli_eval": 4,
+          "answerer": 24,
+          "qwen_detection": 10,
+          "rexomni_detection": 1,
+          "flux-image-generation": 7,
+          "pipeline_eval": 10,
+          "migration_advisor": 8
+        },
+        "dpo_candidates": 14,
+        "timing": {
+          "source": "measured",
+          "elapsed_ms": 719822.462,
+          "case_elapsed_ms_total": 719589.837,
+          "case_elapsed_ms_count": 90,
+          "case_elapsed_ms_avg": 7995.443,
+          "case_elapsed_ms_min": 1364.172,
+          "case_elapsed_ms_max": 180000.325
+        }
+      }
+    },
+    {
+      "path": "/media/nvme1n1p1/zengkeqin/projects/CAPA/results/planner_routing_eval/qwen35_9b_repro_zip90_run2.json",
+      "summary": {
+        "total": 90,
+        "evaluated": 90,
+        "passed": 76,
+        "failed": 14,
+        "accuracy": 0.8444,
+        "by_category": {
+          "historical_asset_qa": {
+            "total": 25,
+            "evaluated": 25,
+            "passed": 23
+          },
+          "adela_platform_eval": {
+            "total": 5,
+            "evaluated": 5,
+            "passed": 4
+          },
+          "general_answer": {
+            "total": 25,
+            "evaluated": 25,
+            "passed": 21
+          },
+          "executable_vision_probe": {
+            "total": 25,
+            "evaluated": 25,
+            "passed": 18
+          },
+          "full_visual_probe": {
+            "total": 5,
+            "evaluated": 5,
+            "passed": 5
+          },
+          "migration_boundary": {
+            "total": 5,
+            "evaluated": 5,
+            "passed": 5
+          }
+        },
+        "actual_actions": {
+          "rag_answer": 26,
+          "adela_cli_eval": 4,
+          "answerer": 24,
+          "qwen_detection": 10,
+          "rexomni_detection": 1,
+          "flux-image-generation": 7,
+          "pipeline_eval": 10,
+          "migration_advisor": 8
+        },
+        "dpo_candidates": 14,
+        "timing": {
+          "source": "measured",
+          "elapsed_ms": 718423.009,
+          "case_elapsed_ms_total": 718192.66,
+          "case_elapsed_ms_count": 90,
+          "case_elapsed_ms_avg": 7979.918,
+          "case_elapsed_ms_min": 1361.98,
+          "case_elapsed_ms_max": 180000.328
+        }
+      }
+    },
+    {
+      "path": "/media/nvme1n1p1/zengkeqin/projects/CAPA/results/planner_routing_eval/qwen35_9b_repro_zip90_run3.json",
+      "summary": {
+        "total": 90,
+        "evaluated": 90,
+        "passed": 76,
+        "failed": 14,
+        "accuracy": 0.8444,
+        "by_category": {
+          "historical_asset_qa": {
+            "total": 25,
+            "evaluated": 25,
+            "passed": 23
+          },
+          "adela_platform_eval": {
+            "total": 5,
+            "evaluated": 5,
+            "passed": 4
+          },
+          "general_answer": {
+            "total": 25,
+            "evaluated": 25,
+            "passed": 21
+          },
+          "executable_vision_probe": {
+            "total": 25,
+            "evaluated": 25,
+            "passed": 18
+          },
+          "full_visual_probe": {
+            "total": 5,
+            "evaluated": 5,
+            "passed": 5
+          },
+          "migration_boundary": {
+            "total": 5,
+            "evaluated": 5,
+            "passed": 5
+          }
+        },
+        "actual_actions": {
+          "rag_answer": 26,
+          "adela_cli_eval": 4,
+          "answerer": 24,
+          "qwen_detection": 10,
+          "rexomni_detection": 1,
+          "flux-image-generation": 7,
+          "pipeline_eval": 10,
+          "migration_advisor": 8
+        },
+        "dpo_candidates": 14,
+        "timing": {
+          "source": "measured",
+          "elapsed_ms": 719342.194,
+          "case_elapsed_ms_total": 719095.69,
+          "case_elapsed_ms_count": 90,
+          "case_elapsed_ms_avg": 7989.952,
+          "case_elapsed_ms_min": 1347.732,
+          "case_elapsed_ms_max": 180000.441
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "schema_version": "1.1",
+  "generated_at": "2026-07-06T09:35:58.256762+00:00",
+  "cases_path": "/media/nvme1n1p1/zengkeqin/projects/CAPA/training/planner_dpo_train_seed_v1/eval/planner_routing_eval_90cases.json",
+  "model": "Qwen3.5-4B",
+  "api_base": "http://10.111.32.253:8000/v1",
+  "generation_config": {
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "seed": 42,
+    "do_sample": "false"
+  },
+  "no_llm": false,
+  "partial": false,
+  "summary": {
+    "total": 1,
+    "evaluated": 1,
+    "passed": 1,
+    "failed": 0,
+    "accuracy": 1.0,
+    "by_category": {
+      "historical_asset_qa": {
+        "total": 1,
+        "evaluated": 1,
+        "passed": 1
+      }
+    },
+    "actual_actions": {
+      "rag_answer": 1
+    },
+    "dpo_candidates": 0,
+    "timing": {
+      "source": "measured",
+      "elapsed_ms": 1641.767,
+      "case_elapsed_ms_total": 1641.161,
+      "case_elapsed_ms_count": 1,
+      "case_elapsed_ms_avg": 1641.161,
+      "case_elapsed_ms_min": 1641.161,
+      "case_elapsed_ms_max": 1641.161,
+      "api_call_ms_avg": 1612.884,
+      "api_call_ms_min": 1612.884,
+      "api_call_ms_max": 1612.884,
+      "timeout_count": 0
+    },
+    "usage": {
+      "input_tokens_avg": 3653.0,
+      "output_tokens_avg": 155.0,
+      "input_tokens_total": 3653,
+      "output_tokens_total": 155
+    },
+    "retry": {
+      "retry_count_total": 0,
+      "retry_case_count": 0
+    }
+  },
+  "results": [
+    {
+      "case_id": "ROUTE-RAG-001",
+      "title": "查询现有安全绳模型能力",
+      "category": "historical_asset_qa",
+      "user_query": "目前安全绳检测有哪些模型和版本？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "started_at": "2026-07-06T09:35:56.615002+00:00",
+      "finished_at": "2026-07-06T09:35:58.256203+00:00",
+      "elapsed_ms": 1641.161,
+      "timing": {
+        "end_to_end_ms": 1641.161,
+        "prompt_build_ms": 0.365,
+        "api_call_ms": 1612.884,
+        "first_api_call_ms": 1612.884,
+        "retry_api_call_ms": null,
+        "parse_ms": 0.409,
+        "retry_parse_ms": null,
+        "planner_total_ms": 1641.111
+      },
+      "usage": {
+        "input_tokens": 3653,
+        "output_tokens": 155,
+        "total_tokens": 3808,
+        "first_input_tokens": 3653,
+        "first_output_tokens": 155,
+        "retry_input_tokens": null,
+        "retry_output_tokens": null,
+        "finish_reason": "stop",
+        "retry_finish_reason": ""
+      },
+      "retry": {
+        "retry_count": 0,
+        "retry_reason": ""
+      },
+      "error": {
+        "error_type": "",
+        "message": ""
+      },
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "用户询问安全绳检测的模型和版本，这是一个关于企业规范、业务文档、标准指标等具体事实的问题，属于知识检索范畴。根据决策原则1，应首选 rag_answer 工具。当前 query 没有指代词，query_trajectories 为空，无需 re_question。用户意图明确，无需 clarify。该问题属于可检索的静态知识，直接调用 rag_answer 即可获取答案，且结果可直接结束本轮请求。",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "目前安全绳检测有哪些模型和版本？",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": "",
+        "_planner_metrics": {
+          "prompt_build_ms": 0.365,
+          "retry_count": 0,
+          "retry_reason": "",
+          "first_api_call_ms": 1612.884,
+          "api_call_ms": 1612.884,
+          "input_tokens": 3653,
+          "first_input_tokens": 3653,
+          "output_tokens": 155,
+          "first_output_tokens": 155,
+          "total_tokens": 3808,
+          "first_total_tokens": 3808,
+          "first_finish_reason": "stop",
+          "parse_ms": 0.409,
+          "planner_total_ms": 1641.111
+        }
+      },
+      "failures": [],
+      "dpo_candidate": false
+    }
+  ]
+}

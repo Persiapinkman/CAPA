@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.1",
+  "generated_at": "2026-07-06T04:29:05.623676+00:00",
+  "cases_path": "/media/nvme1n1p1/zengkeqin/projects/CAPA/training/planner_dpo_train_seed_v1/eval/planner_routing_eval_90cases.json",
+  "model": "Qwen3.5-9B",
+  "api_base": "http://10.111.32.253:8000/v1",
+  "generation_config": {
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "seed": 42,
+    "do_sample": "false"
+  },
+  "no_llm": false,
+  "partial": false,
+  "summary": {
+    "total": 1,
+    "evaluated": 1,
+    "passed": 1,
+    "failed": 0,
+    "accuracy": 1.0,
+    "by_category": {
+      "historical_asset_qa": {
+        "total": 1,
+        "evaluated": 1,
+        "passed": 1
+      }
+    },
+    "actual_actions": {
+      "rag_answer": 1
+    },
+    "dpo_candidates": 0,
+    "timing": {
+      "source": "measured",
+      "elapsed_ms": 1703.02,
+      "case_elapsed_ms_total": 1702.509,
+      "case_elapsed_ms_count": 1,
+      "case_elapsed_ms_avg": 1702.509,
+      "case_elapsed_ms_min": 1702.509,
+      "case_elapsed_ms_max": 1702.509
+    }
+  },
+  "results": [
+    {
+      "case_id": "ROUTE-RAG-001",
+      "title": "查询现有安全绳模型能力",
+      "category": "historical_asset_qa",
+      "user_query": "目前安全绳检测有哪些模型和版本？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "started_at": "2026-07-06T04:29:03.920666+00:00",
+      "finished_at": "2026-07-06T04:29:05.623204+00:00",
+      "elapsed_ms": 1702.509,
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "用户询问安全绳检测的模型和版本，属于企业内部私有业务知识，应优先使用 rag_answer 工具进行检索。",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "目前安全绳检测有哪些模型和版本？",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false
+    }
+  ]
+}

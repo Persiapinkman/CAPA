@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-07-06T09:35:58.342811+00:00",
+  "cases_path": "/media/nvme1n1p1/zengkeqin/projects/CAPA/training/planner_dpo_train_seed_v1/eval/planner_routing_eval_90cases.json",
+  "model": "Qwen3.5-4B",
+  "api_base": "http://10.111.32.253:8000/v1",
+  "report_prefix": "qwen35_4b_timing_v2_smoke",
+  "runs": 1,
+  "generation_config": {
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "seed": 42,
+    "do_sample": "false"
+  },
+  "aggregate": {
+    "accuracy_mean": 1.0,
+    "accuracy_stdev": 0.0,
+    "passed_mean": 1.0,
+    "passed_stdev": 0.0,
+    "failed_mean": 0.0,
+    "failed_stdev": 0.0
+  },
+  "timing": {
+    "source": "measured",
+    "elapsed_ms": 2324.242,
+    "run_elapsed_ms_mean": 1641.767,
+    "run_elapsed_ms_stdev": 0.0,
+    "case_elapsed_ms_avg_mean": 1641.161,
+    "case_elapsed_ms_avg_stdev": 0.0,
+    "api_call_ms_avg_mean": 1612.884,
+    "api_call_ms_avg_stdev": 0.0,
+    "timeout_count_mean": 0.0,
+    "timeout_count_stdev": 0.0
+  },
+  "usage": {
+    "input_tokens_avg_mean": 3653.0,
+    "input_tokens_avg_stdev": 0.0,
+    "output_tokens_avg_mean": 155.0,
+    "output_tokens_avg_stdev": 0.0
+  },
+  "retry": {
+    "retry_count_total_mean": 0.0,
+    "retry_count_total_stdev": 0.0,
+    "retry_case_count_mean": 0.0,
+    "retry_case_count_stdev": 0.0
+  },
+  "reports": [
+    {
+      "path": "/media/nvme1n1p1/zengkeqin/projects/CAPA/results/planner_routing_eval/qwen35_4b_timing_v2_smoke_run1.json",
+      "summary": {
+        "total": 1,
+        "evaluated": 1,
+        "passed": 1,
+        "failed": 0,
+        "accuracy": 1.0,
+        "by_category": {
+          "historical_asset_qa": {
+            "total": 1,
+            "evaluated": 1,
+            "passed": 1
+          }
+        },
+        "actual_actions": {
+          "rag_answer": 1
+        },
+        "dpo_candidates": 0,
+        "timing": {
+          "source": "measured",
+          "elapsed_ms": 1641.767,
+          "case_elapsed_ms_total": 1641.161,
+          "case_elapsed_ms_count": 1,
+          "case_elapsed_ms_avg": 1641.161,
+          "case_elapsed_ms_min": 1641.161,
+          "case_elapsed_ms_max": 1641.161,
+          "api_call_ms_avg": 1612.884,
+          "api_call_ms_min": 1612.884,
+          "api_call_ms_max": 1612.884,
+          "timeout_count": 0
+        },
+        "usage": {
+          "input_tokens_avg": 3653.0,
+          "output_tokens_avg": 155.0,
+          "input_tokens_total": 3653,
+          "output_tokens_total": 155
+        },
+        "retry": {
+          "retry_count_total": 0,
+          "retry_case_count": 0
+        }
+      }
+    }
+  ]
+}

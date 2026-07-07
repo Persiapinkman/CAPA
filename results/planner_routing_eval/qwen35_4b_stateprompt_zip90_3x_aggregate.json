@@ -1,0 +1,306 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-07-07T01:24:52.088508+00:00",
+  "cases_path": "/media/nvme1n1p1/zengkeqin/projects/CAPA/training/planner_dpo_train_seed_v1/eval/planner_routing_eval_90cases.json",
+  "model": "Qwen3.5-4B",
+  "api_base": "http://10.111.32.253:8000/v1",
+  "report_prefix": "qwen35_4b_stateprompt_zip90_3x",
+  "runs": 3,
+  "generation_config": {
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "seed": 42,
+    "do_sample": "false"
+  },
+  "aggregate": {
+    "accuracy_mean": 0.9074,
+    "accuracy_stdev": 0.0064,
+    "passed_mean": 81.6667,
+    "passed_stdev": 0.5774,
+    "failed_mean": 8.3333,
+    "failed_stdev": 0.5774
+  },
+  "timing": {
+    "source": "measured",
+    "elapsed_ms": 1191130.863,
+    "run_elapsed_ms_mean": 396356.3643,
+    "run_elapsed_ms_stdev": 60337.1875,
+    "case_elapsed_ms_avg_mean": 4397.8243,
+    "case_elapsed_ms_avg_stdev": 670.366,
+    "api_call_ms_avg_mean": 2395.8863,
+    "api_call_ms_avg_stdev": 677.718,
+    "slow_case_count_mean": 1.3333,
+    "slow_case_count_stdev": 0.5774,
+    "timeout_count_mean": 0.0,
+    "timeout_count_stdev": 0.0
+  },
+  "usage": {
+    "input_tokens_avg_mean": 4512.876,
+    "input_tokens_avg_stdev": 0.0,
+    "output_tokens_avg_mean": 158.21,
+    "output_tokens_avg_stdev": 4.1563
+  },
+  "retry": {
+    "retry_count_total_mean": 0.0,
+    "retry_count_total_stdev": 0.0,
+    "retry_case_count_mean": 0.0,
+    "retry_case_count_stdev": 0.0
+  },
+  "errors": {
+    "by_error_type_total": {
+      "api_error": 3
+    }
+  },
+  "reports": [
+    {
+      "path": "/media/nvme1n1p1/zengkeqin/projects/CAPA/results/planner_routing_eval/qwen35_4b_stateprompt_zip90_3x_run1.json",
+      "summary": {
+        "total": 90,
+        "evaluated": 90,
+        "passed": 82,
+        "failed": 8,
+        "accuracy": 0.9111,
+        "by_category": {
+          "historical_asset_qa": {
+            "total": 25,
+            "evaluated": 25,
+            "passed": 23
+          },
+          "adela_platform_eval": {
+            "total": 5,
+            "evaluated": 5,
+            "passed": 5
+          },
+          "general_answer": {
+            "total": 25,
+            "evaluated": 25,
+            "passed": 21
+          },
+          "executable_vision_probe": {
+            "total": 25,
+            "evaluated": 25,
+            "passed": 24
+          },
+          "full_visual_probe": {
+            "total": 5,
+            "evaluated": 5,
+            "passed": 4
+          },
+          "migration_boundary": {
+            "total": 5,
+            "evaluated": 5,
+            "passed": 5
+          }
+        },
+        "actual_actions": {
+          "rag_answer": 26,
+          "adela_cli_eval": 5,
+          "answerer": 22,
+          "qwen_detection": 18,
+          "rexomni_detection": 1,
+          "flux-image-generation": 6,
+          "pipeline_eval": 3,
+          "migration_advisor": 9
+        },
+        "dpo_candidates": 8,
+        "timing": {
+          "source": "measured",
+          "elapsed_ms": 394110.8,
+          "case_elapsed_ms_total": 393554.865,
+          "case_elapsed_ms_count": 90,
+          "case_elapsed_ms_avg": 4372.832,
+          "case_elapsed_ms_min": 996.931,
+          "case_elapsed_ms_max": 180000.544,
+          "api_call_ms_avg": 2370.472,
+          "api_call_ms_min": 988.378,
+          "api_call_ms_max": 63087.934,
+          "slow_case_count": 1,
+          "timeout_count": 0
+        },
+        "usage": {
+          "input_tokens_avg": 4512.876,
+          "output_tokens_avg": 154.809,
+          "input_tokens_total": 401646,
+          "output_tokens_total": 13778
+        },
+        "retry": {
+          "retry_count_total": 0,
+          "retry_case_count": 0
+        },
+        "errors": {
+          "by_error_type": {
+            "api_error": 1
+          }
+        }
+      }
+    },
+    {
+      "path": "/media/nvme1n1p1/zengkeqin/projects/CAPA/results/planner_routing_eval/qwen35_4b_stateprompt_zip90_3x_run2.json",
+      "summary": {
+        "total": 90,
+        "evaluated": 90,
+        "passed": 82,
+        "failed": 8,
+        "accuracy": 0.9111,
+        "by_category": {
+          "historical_asset_qa": {
+            "total": 25,
+            "evaluated": 25,
+            "passed": 23
+          },
+          "adela_platform_eval": {
+            "total": 5,
+            "evaluated": 5,
+            "passed": 5
+          },
+          "general_answer": {
+            "total": 25,
+            "evaluated": 25,
+            "passed": 21
+          },
+          "executable_vision_probe": {
+            "total": 25,
+            "evaluated": 25,
+            "passed": 24
+          },
+          "full_visual_probe": {
+            "total": 5,
+            "evaluated": 5,
+            "passed": 4
+          },
+          "migration_boundary": {
+            "total": 5,
+            "evaluated": 5,
+            "passed": 5
+          }
+        },
+        "actual_actions": {
+          "rag_answer": 26,
+          "adela_cli_eval": 5,
+          "answerer": 22,
+          "qwen_detection": 18,
+          "rexomni_detection": 1,
+          "flux-image-generation": 6,
+          "pipeline_eval": 3,
+          "migration_advisor": 9
+        },
+        "dpo_candidates": 8,
+        "timing": {
+          "source": "measured",
+          "elapsed_ms": 337173.307,
+          "case_elapsed_ms_total": 336627.382,
+          "case_elapsed_ms_count": 90,
+          "case_elapsed_ms_avg": 3740.304,
+          "case_elapsed_ms_min": 994.407,
+          "case_elapsed_ms_max": 180000.321,
+          "api_call_ms_avg": 1731.233,
+          "api_call_ms_min": 985.204,
+          "api_call_ms_max": 5520.044,
+          "slow_case_count": 1,
+          "timeout_count": 0
+        },
+        "usage": {
+          "input_tokens_avg": 4512.876,
+          "output_tokens_avg": 156.978,
+          "input_tokens_total": 401646,
+          "output_tokens_total": 13971
+        },
+        "retry": {
+          "retry_count_total": 0,
+          "retry_case_count": 0
+        },
+        "errors": {
+          "by_error_type": {
+            "api_error": 1
+          }
+        }
+      }
+    },
+    {
+      "path": "/media/nvme1n1p1/zengkeqin/projects/CAPA/results/planner_routing_eval/qwen35_4b_stateprompt_zip90_3x_run3.json",
+      "summary": {
+        "total": 90,
+        "evaluated": 90,
+        "passed": 81,
+        "failed": 9,
+        "accuracy": 0.9,
+        "by_category": {
+          "historical_asset_qa": {
+            "total": 25,
+            "evaluated": 25,
+            "passed": 23
+          },
+          "adela_platform_eval": {
+            "total": 5,
+            "evaluated": 5,
+            "passed": 4
+          },
+          "general_answer": {
+            "total": 25,
+            "evaluated": 25,
+            "passed": 21
+          },
+          "executable_vision_probe": {
+            "total": 25,
+            "evaluated": 25,
+            "passed": 24
+          },
+          "full_visual_probe": {
+            "total": 5,
+            "evaluated": 5,
+            "passed": 4
+          },
+          "migration_boundary": {
+            "total": 5,
+            "evaluated": 5,
+            "passed": 5
+          }
+        },
+        "actual_actions": {
+          "rag_answer": 26,
+          "adela_cli_eval": 5,
+          "answerer": 22,
+          "qwen_detection": 18,
+          "rexomni_detection": 1,
+          "flux-image-generation": 6,
+          "pipeline_eval": 3,
+          "migration_advisor": 9
+        },
+        "dpo_candidates": 9,
+        "timing": {
+          "source": "measured",
+          "elapsed_ms": 457784.986,
+          "case_elapsed_ms_total": 457230.289,
+          "case_elapsed_ms_count": 90,
+          "case_elapsed_ms_avg": 5080.337,
+          "case_elapsed_ms_min": 1032.881,
+          "case_elapsed_ms_max": 180000.337,
+          "api_call_ms_avg": 3085.954,
+          "api_call_ms_min": 1024.326,
+          "api_call_ms_max": 123172.776,
+          "slow_case_count": 2,
+          "timeout_count": 0
+        },
+        "usage": {
+          "input_tokens_avg": 4512.876,
+          "output_tokens_avg": 162.843,
+          "input_tokens_total": 401646,
+          "output_tokens_total": 14493
+        },
+        "retry": {
+          "retry_count_total": 0,
+          "retry_case_count": 0
+        },
+        "errors": {
+          "by_error_type": {
+            "api_error": 1
+          }
+        }
+      }
+    }
+  ],
+  "case_audit": {
+    "case_audit_csv": "results/planner_routing_eval/qwen35_4b_stateprompt_zip90_3x_case_audit.csv",
+    "failed_cases_csv": "results/planner_routing_eval/qwen35_4b_stateprompt_zip90_3x_failed_cases.csv"
+  }
+}

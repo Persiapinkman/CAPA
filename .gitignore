@@ -3,7 +3,10 @@ __pycache__
 data
 dist
 *.log
-results
+results/*
+!results/README.md
+!results/planner_routing_eval/
+!results/planner_routing_eval/**
 api_key.txt
 .cursor
 demo/runs
