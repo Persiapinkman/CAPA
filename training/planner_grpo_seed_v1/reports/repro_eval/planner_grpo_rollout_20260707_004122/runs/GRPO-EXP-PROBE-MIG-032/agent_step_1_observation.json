@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "厨师帽",
+    "finish_after_tool": false
+  },
+  "_thought": "用户要求先用图片验证厨师帽能否被现有模型看到，这是一个单图目标检测的轻量探针需求。根据决策原则，当用户只要求“看图里有没有某目标/快速试一下/轻量探针”时，应选择 qwen_detection 或 rexomni_detection 工具。这里选择 qwen_detection 进行初步验证。由于用户后续还要求“若不稳定，再给后厨帽子佩戴检测的轻量验证路径”，这意味着第一步检测的结果可能不足以直接结束任务，需要结合后续步骤（如迁移顾问）来给出验证路径，因此 finish_after_tool 应设为 false。"
+}

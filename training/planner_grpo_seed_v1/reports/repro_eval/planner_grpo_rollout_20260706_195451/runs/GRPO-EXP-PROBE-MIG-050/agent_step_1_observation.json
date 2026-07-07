@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "厨师帽",
+    "finish_after_tool": false
+  },
+  "_thought": "用户请求包含两个步骤：1. 对当前图片执行目标检测（检测厨师帽）；2. 根据检测结果判断是否需要提供‘后厨帽子佩戴检测’的低成本方案。第一步是明确的视觉检测任务，第二步是业务可行性评估。根据决策原则，第一步应使用目标检测工具（qwen_detection 或 rexomni_detection），但第二步涉及‘方案可行性/成本/数据要求’，属于迁移顾问（migration_advisor）的范畴。由于用户明确要求‘先跑检测，再判断方案’，这是一个分步任务，不能直接结束。因此，第一步应调用目标检测工具获取中间结果，设置 finish_after_tool=false，以便后续根据检测结果再调用 migration_advisor。当前图片中未明显看到厨师帽，但需先执行检测确认。"
+}

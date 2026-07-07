@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "钓鱼的人",
+    "finish_after_tool": false
+  },
+  "_thought": "用户要求先对图片中的钓鱼人做快速探针，这符合 qwen_detection 或 rexomni_detection 的使用场景（单图快速检测/轻量探针）。根据规则，当用户只要求“看图里有没有某目标/快速试一下/轻量探针”时，选择 detection 工具。这里用户明确提到“钓鱼的人”，所以 label 设为“钓鱼的人”。探针结果可能用于后续判断可行性，所以 finish_after_tool 设为 false。"
+}

@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "钓鱼的人",
+    "finish_after_tool": false
+  },
+  "_thought": "用户明确要求先进行轻量级检测（看图里有没有钓鱼的人），而不是直接做完整评测。根据决策原则3和6，单图快速检测应使用 qwen_detection 或 rexomni_detection，且 finish_after_tool 应设为 false，因为后续还需要根据检测结果决定是否进行迁移可行性验证。"
+}

@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "migration_advisor",
+  "_action_input": {
+    "user_query": "先用这张图验证钓鱼的人能不能被现有模型看到；若不稳定，再给钓鱼人员检测的轻量验证路径。",
+    "use_image": true,
+    "use_visual_probe": true,
+    "finish_after_tool": false
+  },
+  "_thought": "用户要求先用图片验证钓鱼的人能否被现有模型检测到，若不稳定再给轻量验证路径。这是一个典型的迁移可行性验证场景，需要判断现有模型对新目标（钓鱼人员）的检测能力。根据规则，当用户询问“能不能被现有模型看到”、“能否迁移”、“能力边界”时，应优先选择 migration_advisor 工具，而不是先做 detection 再判断。因为用户明确提到“若不稳定，再给...路径”，说明后续需要迁移评估报告，而非仅依赖 detection 结果。因此，第一步应直接调用 migration_advisor 进行能力边界评估，并在 action_input 中设置 use_image=true 和 use_visual_probe=true，以便工具内部结合图片做轻量探针。finish_after_tool 设为 false，因为后续可能还需要输出验证路径建议。"
+}

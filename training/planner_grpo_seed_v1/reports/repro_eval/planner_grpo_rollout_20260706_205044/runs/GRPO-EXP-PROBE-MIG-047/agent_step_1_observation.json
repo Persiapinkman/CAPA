@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "横幅",
+    "finish_after_tool": false
+  },
+  "_thought": "用户要求先检查横幅，这属于目标检测任务。根据上下文，用户希望先进行目标检测，如果检测没把握再转迁移评估。当前有图片可用，应该先调用目标检测工具。由于用户提到“检查横幅”，我选择使用 qwen_detection 或 rexomni_detection 来检测横幅。考虑到用户说“如果检测没把握”，说明这是一个初步检测步骤，后续可能需要迁移评估。因此 finish_after_tool 应该设为 false，以便根据检测结果决定下一步。"
+}

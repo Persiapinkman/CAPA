@@ -1,26 +1,26 @@
 # Experiment Log
 
-人工可读台账；每次实验一行摘要。机器可读元数据见 `manifest.jsonl`。
+人工可读台账，只保留当前需要跟进的最新结果：
 
-正式评测协议见 `EVALUATION_POLICY.md`：vLLM serving，`temperature=0`，`top_p=1`，`do_sample=false`，`seed=42`，每次评测 3 repeats 后取 aggregate。
+- 单步路由：`planner_routing_eval_90cases` 的最新 state-prompt formal 复现评测。
+- 多步路由：`planner_grpo_train_cases` 的最新 compound Planner 复现评测。
 
-| Date | Run ID | Type | Model | Adapter | Eval | Accuracy | Key Notes |
+机器可读 active 元数据见 `manifest.jsonl`。历史结果已归档到 `archive/PRE_REPRO_PROTOCOL_EXPERIMENT_LOG.md` 与 `archive/pre_repro_protocol_manifest.jsonl`。
+
+正式评测协议见 `EVALUATION_POLICY.md`：vLLM serving，`temperature=0`，`top_p=1`，`do_sample=false`，`seed=42`，每次评测 3 repeats 后取 aggregate，并产出逐 case 审查 CSV。
+
+## Active Results
+
+| Date | Run ID | Scope | Model | Adapter | Eval | Metric | Key Notes |
 |---|---|---|---|---|---|---:|---|
-| 2026-06-24 | `2026-06-24_base_local_t0` | baseline_eval | `qwen3.5-4b` | `none` | `results/planner_routing_eval/planner_routing_report_qwen35_4b_base_zip90_local.json` | 62/90 (0.6889) | 本地 transformers serve baseline，关闭 thinking，修复 content-list 与 V100 cuDNN 后重跑。 |
-| 2026-06-25 | `2026-06-25_base_local_temp1` | baseline_eval_sampling | `qwen3.5-4b` | `none` | `results/planner_routing_eval/planner_routing_report_qwen35_4b_base_zip90_temp1.json` | 64/90 (0.7111) | 采样温度调到 1；总分与 DPO 持平，但通过集合不同，稳定性较差。 |
-| 2026-06-24 | `2026-06-24_dpo_newarch` | dpo_train_eval | `qwen35-4b-newarch-dpo` | `outputs/planner-dpo-qwen35-4b-newarch-lora` | `results/planner_routing_eval/planner_routing_report_qwen35_4b_newarch_dpo_zip90.json` | 64/90 (0.7111) | 使用 DPO train seed v1 的 preference pairs 训练 LoRA。相对 base 净增 2 条，主要改善 historical 与少量 vision。 |
-| 2026-07-03 | `2026-07-03_sft_chosen` | sft_train_eval | `qwen35-4b-sft-chosen` | `outputs/planner-sft-qwen35-4b-chosen-lora` | `results/planner_routing_eval/planner_routing_report_qwen35_4b_sft_chosen_zip90.json` | 62/90 (0.6889) | 只用 DPO chosen response 做 completion-only LoRA SFT；DDP 使用 gloo 后端绕过 NCCL driver/runtime 问题。 |
-| 2026-07-06 | `2026-07-06_9b_vllm_repro` | repro_eval_vllm | `Qwen3.5-9B` | `none` | `results/planner_routing_eval/qwen35_9b_repro_zip90_aggregate.json` | 76/90 (0.8444) | 使用 CAPA 复现评测脚本，temperature=0/top_p=1/seed=42/do_sample=false，3 repeats；mean case elapsed 7988.44 ms，timeout case 拉高耗时。 |
-| 2026-07-06 | `2026-07-06_35b_a3b_vllm_repro` | repro_eval_vllm | `Qwen3.5-35B-A3B` | `none` | `results/planner_routing_eval/qwen35_35b_a3b_repro_zip90_aggregate.json` | 80/90 (0.8889) | 使用 CAPA 复现评测脚本，temperature=0/top_p=1/seed=42/do_sample=false，3 repeats；mean case elapsed 1097.51 ms。 |
-| 2026-07-06 | `2026-07-06_4b_timing_v2_repro` | repro_eval_vllm_timing_v2 | `Qwen3.5-4B` | `none` | `results/planner_routing_eval/qwen35_4b_timing_v2_zip90_aggregate.json` | 75/90 (0.8333) | 新增 case timing/usage/retry/error 字段；3 repeats，mean case 5458.97 ms，mean API 1463.70 ms，slow cases 2/run，api_error=6。 |
-| 2026-07-06 | `2026-07-06_9b_timing_v2_repro` | repro_eval_vllm_timing_v2 | `Qwen3.5-9B` | `none` | `results/planner_routing_eval/qwen35_9b_timing_v2_zip90_aggregate.json` | 76/90 mean (0.8445) | 新增 case timing/usage/retry/error 字段；3 repeats，accuracy stdev 0.0193，mean case 8460.39 ms，mean API 2512.39 ms，slow cases 3.33/run，api_error=9。 |
-| 2026-07-06 | `2026-07-06_35b_a3b_timing_v2_repro` | repro_eval_vllm_timing_v2 | `Qwen3.5-35B-A3B` | `none` | `results/planner_routing_eval/qwen35_35b_a3b_timing_v2_zip90_aggregate.json` | 80/90 (0.8889) | 新增 case timing/usage/retry/error 字段；3 repeats，mean case 1096.91 ms，mean API 1068.44 ms，无 slow/API error。 |
-| 2026-06-24 | `packaged_4b` | packaged_reference_baseline | `packaged_4b` | `none` | `training/planner_dpo_train_seed_v1/eval/planner_routing_report_Qwen3.5-4B_90cases_baseline_summary.json` | 68/90 (0.7556) | Packaged reference summary from training bundle; no per-case elapsed timing available. |
-| 2026-06-24 | `packaged_9b` | packaged_reference_baseline | `packaged_9b` | `none` | `training/planner_dpo_train_seed_v1/eval/planner_routing_report_Qwen3.5-9B_90cases_arch_rescored.json` | 76/90 (0.8444) | Packaged reference summary from training bundle; no per-case elapsed timing available. |
-| 2026-06-24 | `packaged_35b_a3b` | packaged_reference_baseline | `packaged_35b_a3b` | `none` | `training/planner_dpo_train_seed_v1/eval/planner_routing_report_Qwen3.5-35B-A3B_90cases_baseline_summary.json` | 82/90 (0.9111) | Packaged reference summary from training bundle; no per-case elapsed timing available. |
+| 2026-07-07 | `2026-07-07_4b_stateprompt_zip90_3x` | single-step routing | `Qwen3.5-4B` | `none` | `results/planner_routing_eval/qwen35_4b_stateprompt_zip90_3x_aggregate.json` | 81.67/90 mean (0.9074) | 当前新 prompt/tool description 下的单步路由 formal eval；3 repeats，accuracy stdev 0.0064，mean case 4397.82 ms，mean API 2395.89 ms，api_error=3。 |
+| 2026-07-07 | `2026-07-07_9b_stateprompt_zip90_3x` | single-step routing | `Qwen3.5-9B` | `none` | `results/planner_routing_eval/qwen35_9b_stateprompt_zip90_3x_aggregate.json` | 85.67/90 mean (0.9519) | 当前新 prompt/tool description 下的单步路由 formal eval；3 repeats，accuracy stdev 0.0065，mean case 12227.23 ms，mean API 12198.78 ms，无 API error。 |
+| 2026-07-07 | `2026-07-07_35b_a3b_stateprompt_zip90_3x` | single-step routing | `Qwen3.5-35B-A3B` | `none` | `results/planner_routing_eval/qwen35_35b_a3b_stateprompt_zip90_3x_aggregate.json` | 85/90 (0.9444) | 当前新 prompt/tool description 下的单步路由 formal eval；3 repeats 完全稳定，mean case 1145.47 ms，mean API 1117.49 ms，无 API error。 |
+| 2026-07-07 | `2026-07-07_grpo_compound245_35b_stateprompt_3x` | multi-step routing | `Qwen3.5-35B-A3B` | `none` | `training/planner_grpo_seed_v1/reports/repro_eval/qwen35_35b_a3b_grpo_compound245_stateprompt_t60_3x_aggregate.json` | pass-all 235/245 (0.9592) | 最新多步路由 compound eval；清理 qwen/rexomni 等价、`migration_advisor.user_query` reward、Planner 状态转移 prompt；overall pass_rate_mean=0.9646，残余失败集中在 `probe_then_migration`。 |
 
-## Timing Policy
+## Current Takeaways
 
-- `run_planner_routing_eval.py` schema `1.1` 起，每个 case 写入 `started_at`、`finished_at`、`elapsed_ms`。
-- `summary.timing` 记录评测总耗时、case 总耗时、平均/最小/最大 case 耗时。
-- 旧报告作为 `historical_import` 保留，因当时未记录逐 case 耗时，台账中 `eval_efficiency.source=historical_import_no_eval_timing`。
+- 单步路由最新 formal 基线：9B 最高，`85.67/90 = 0.9519`；35B-A3B 为 `85/90 = 0.9444`，4B 为 `81.67/90 = 0.9074`。
+- 单步路由每次 repeated eval 必须同步保留逐 case CSV：`<REPORT_PREFIX>_case_audit.csv` 展示全部 90 case 的 query、groundtruth、每轮动作/参数/失败原因；`<REPORT_PREFIX>_failed_cases.csv` 只展示任一 repeat 失败的 case。
+- 多步路由评测集经过 reward 与 prompt/tool-description 清洗后，35B-A3B 达到 overall pass^3 目标：`pass_all_runs_rate=0.9592`。
+- 后续 GRPO 候选方向不应继续泛化单步工具路由，而应集中在 compound state transition，尤其是 `detection probe -> migration_advisor`。

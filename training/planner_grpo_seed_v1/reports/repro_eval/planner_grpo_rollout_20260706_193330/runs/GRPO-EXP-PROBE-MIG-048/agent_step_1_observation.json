@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "垃圾车",
+    "finish_after_tool": false
+  },
+  "_thought": "用户意图非常明确：第一步是执行垃圾车检测（qwen_detection 或 rexomni_detection），第二步是如果检测没把握，再调用 migration_advisor 做迁移评估。当前有图片，且用户明确说“先检查垃圾车”，所以第一步应该直接调用检测工具。由于用户说“如果检测没把握，再转成...”，说明检测结果是中间状态，需要后续根据结果决定下一步，因此 finish_after_tool 应设为 false。根据原则 6，pipeline_eval 仅用于用户明确要求“生成样本 + 目标检测评测/模型效果对比/精度评估报告”的可执行视觉评测，而这里用户说的是“检查垃圾车”，更偏向于单目标检测，所以选择 qwen_detection 或 rexomni_detection。考虑到用户后续提到“迁移评估”，可能希望用更通用的检测工具，这里选择 qwen_detection 作为第一步。"
+}

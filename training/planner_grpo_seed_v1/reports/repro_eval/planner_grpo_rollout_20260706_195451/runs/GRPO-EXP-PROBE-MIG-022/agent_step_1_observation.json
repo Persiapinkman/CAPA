@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "migration_advisor",
+  "_action_input": {
+    "user_query": "先别直接做完整评测，先看这张图有没有烟雾，再决定烟雾异常检测是否值得低成本验证。",
+    "use_image": true,
+    "use_visual_probe": true,
+    "finish_after_tool": false
+  },
+  "_thought": "用户希望先对当前图片进行视觉探针，确认是否存在烟雾，再决定是否进行低成本验证。这属于迁移/能力边界评估的前置步骤，需要调用迁移顾问工具进行轻量视觉探针，以判断现有能力是否支持该场景。"
+}

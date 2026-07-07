@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "厨师帽",
+    "finish_after_tool": false
+  },
+  "_thought": "用户明确要求先进行单图检测（看厨师帽），再根据结果判断是否需要低成本方案。当前 query_trajectories 为空，说明尚未执行任何工具。根据决策原则，单图快速检测应使用 qwen_detection 或 rexomni_detection。这里选择 qwen_detection 进行轻量探针。由于后续还需要根据检测结果判断迁移可行性，finish_after_tool 应设为 false。"
+}

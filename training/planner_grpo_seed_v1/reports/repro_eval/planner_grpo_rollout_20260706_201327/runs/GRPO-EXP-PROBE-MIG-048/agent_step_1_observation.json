@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "垃圾车",
+    "finish_after_tool": false
+  },
+  "_thought": "用户明确要求先进行垃圾车检测，如果检测效果不自信再转为迁移评估。当前有图片，应优先执行检测任务。根据工具库，qwen_detection 或 rexomni_detection 均可用于目标检测，但用户未指定具体模型，且后续可能涉及迁移评估，因此选择 pipeline_eval 更合适，因为它能完成生成样本、多模型标注和评估的完整流程，符合用户'先检测再评估'的隐含需求。但用户明确说'先检查垃圾车'，更偏向于单次检测，因此选择 qwen_detection 或 rexomni_detection。考虑到用户后续可能涉及迁移评估，选择 pipeline_eval 可以一次性完成检测与评估，但用户说'如果检测没把握，再转成迁移评估'，说明检测是独立步骤。因此，先执行 qwen_detection 或 rexomni_detection。由于用户未指定模型，选择 qwen_detection 作为默认检测工具。finish_after_tool 设为 false，因为后续可能需要根据检测结果决定是否进行迁移评估。"
+}

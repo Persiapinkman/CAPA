@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "厨师帽",
+    "finish_after_tool": false
+  },
+  "_thought": "用户希望先用当前图片验证“厨师帽”是否能被现有模型检测到。这是一个轻量级的视觉探针需求，符合 qwen_detection 或 rexomni_detection 的使用场景。用户提到“若不稳定，再给...路径”，说明第一步是检测，如果结果不理想或需要进一步分析，再考虑迁移顾问。因此，第一步选择 qwen_detection 进行单图目标检测，label 为“厨师帽”，finish_after_tool 设为 false，因为后续可能需要根据检测结果决定是否调用 migration_advisor。"
+}

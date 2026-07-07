@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "横幅",
+    "finish_after_tool": false
+  },
+  "_thought": "用户要求先检测图片中是否有横幅，这是一个单图快速检测/轻量探针的需求。根据决策原则3，当用户只要求“看图里有没有某目标/快速试一下/轻量探针”时，应选择 qwen_detection 或 rexomni_detection 工具。这里选择 qwen_detection。由于用户后续还要求“如果不确定，再给客户一个横幅违规悬挂检测的低成本验证方案”，这意味着检测只是第一步，后续可能需要迁移顾问（migration_advisor）来提供方案，因此 finish_after_tool 应设为 false。"
+}

@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "烟雾",
+    "finish_after_tool": false
+  },
+  "_thought": "用户明确要求先对提供的图片（smoke.jpg）进行单图烟雾检测，以便后续评估是否需要提供烟雾异常检测的低成本方案。根据工具库，qwen_detection 和 rexomni_detection 都适用于目标检测任务。考虑到用户后续需要评估“低成本方案”，这涉及到能力迁移和可行性评估，但第一步是执行检测。根据决策原则，当用户明确要求“检测”时，应使用检测工具。这里选择 qwen_detection 进行初步检测。由于用户后续还需要根据结果判断方案，因此 finish_after_tool 应设为 false，以便根据检测结果规划下一步（如调用 migration_advisor）。"
+}

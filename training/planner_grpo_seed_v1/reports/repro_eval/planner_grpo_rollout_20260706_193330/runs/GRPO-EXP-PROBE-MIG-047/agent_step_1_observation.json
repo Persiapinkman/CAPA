@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "rexomni_detection",
+  "_action_input": {
+    "label": "横幅",
+    "finish_after_tool": false
+  },
+  "_thought": "用户指令明确：先检查横幅（目标检测），若检测没把握再转迁移评估。当前有图片，且用户已明确第一步是检测，因此应直接调用目标检测工具。根据原则6，pipeline_eval 用于“生成样本 + 目标检测评测/模型效果对比/精度评估报告”，而用户当前仅要求“检查横幅”，属于轻量检测，优先使用 qwen_detection 或 rexomni_detection。但用户后续提到“如果检测没把握，再转成横幅违规悬挂检测迁移评估”，说明当前检测是中间步骤，finish_after_tool 应设为 false。同时，用户提到“横幅违规悬挂检测迁移评估”，属于迁移顾问场景，但当前步骤是检测，因此先执行检测。"
+}

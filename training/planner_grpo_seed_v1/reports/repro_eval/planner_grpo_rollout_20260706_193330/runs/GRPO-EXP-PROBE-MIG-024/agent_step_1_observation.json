@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "垃圾车",
+    "finish_after_tool": false
+  },
+  "_thought": "用户希望先对当前图片进行垃圾车检测，以评估垃圾车识别任务是否值得低成本验证。这是一个明确的视觉检测需求，需要调用目标检测工具。根据决策原则，当用户明确要求对图片中的特定目标进行检测时，应优先使用 qwen_detection 或 rexomni_detection。这里用户关注的是“垃圾车”，因此选择 qwen_detection 工具，设置 label 为“垃圾车”，并设置 finish_after_tool 为 false，因为检测结果只是中间信息，后续还需要根据检测结果决定是否进行低成本验证。"
+}

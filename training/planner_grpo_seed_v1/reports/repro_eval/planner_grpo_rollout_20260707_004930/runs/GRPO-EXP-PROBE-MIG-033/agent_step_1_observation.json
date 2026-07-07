@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "反光条",
+    "finish_after_tool": false
+  },
+  "_thought": "用户要求先用图片验证反光条能否被现有模型看到，这是一个轻量探针/快速检测的需求。根据决策原则，当用户只要求“看图里有没有某目标/快速试一下/轻量探针”时，应选择 detection 工具（qwen_detection 或 rexomni_detection）。由于用户后续还提到“若不稳定，再给...验证路径”，这意味着第一步检测的结果是中间状态，需要用于后续判断，因此 finish_after_tool 应设为 false。这里选择 qwen_detection 进行单图目标检测。"
+}

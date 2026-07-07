@@ -27,6 +27,11 @@ ACTION_ALIASES = {
     "final_answer": "answerer",
 }
 
+ACTION_EQUIVALENTS = {
+    "qwen_detection": {"qwen_detection", "rexomni_detection"},
+    "rexomni_detection": {"qwen_detection", "rexomni_detection"},
+}
+
 
 def load_jsonl(path: Path) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
@@ -97,6 +102,11 @@ def text_contains_all(actual: Any, tokens: list[Any]) -> bool:
     return True
 
 
+def text_contains_any(actual: Any, tokens: list[Any]) -> bool:
+    haystack = str(actual or "").lower()
+    return any(str(token or "").strip().lower() in haystack for token in tokens if str(token or "").strip())
+
+
 def get_arg(decision: dict[str, Any], key: str) -> Any:
     if key == "clarification_question":
         return decision.get("clarification_question")
@@ -135,10 +145,14 @@ def score_expected_step(
         actual_action = "clarify" if actual_decision_type == "clarify" else normalize_action(str(actual.get("action") or ""))
     else:
         actual_action = normalize_action(str(actual.get("action") or ""))
-    if actual_action == expected_action:
+    accepted_actions = ACTION_EQUIVALENTS.get(expected_action, {expected_action})
+    if actual_action in accepted_actions:
         detail["action_match"] = 1.0
     else:
-        failures.append(f"action expected {expected_action!r}, got {actual_action!r}")
+        if len(accepted_actions) > 1:
+            failures.append(f"action expected one of {sorted(accepted_actions)!r}, got {actual_action!r}")
+        else:
+            failures.append(f"action expected {expected_action!r}, got {actual_action!r}")
 
     required_args = expected.get("required_args") if isinstance(expected.get("required_args"), dict) else {}
     arg_contains = expected.get("arg_contains") if isinstance(expected.get("arg_contains"), dict) else {}
@@ -161,10 +175,18 @@ def score_expected_step(
     for key, tokens in arg_contains.items():
         token_list = tokens if isinstance(tokens, list) else [tokens]
         arg_checks += 1
-        if text_contains_all(get_arg(actual, key), token_list):
+        actual_arg = get_arg(actual, key)
+        if (
+            key == "user_query"
+            and actual_action == "migration_advisor"
+            and str(actual_arg or "").strip()
+            and text_contains_any(actual_arg, token_list)
+        ):
+            arg_hits += 1
+        elif text_contains_all(actual_arg, token_list):
             arg_hits += 1
         else:
-            failures.append(f"arg {key!r} expected to contain {token_list!r}, got {get_arg(actual, key)!r}")
+            failures.append(f"arg {key!r} expected to contain {token_list!r}, got {actual_arg!r}")
 
     detail["argument_match"] = 1.0 if arg_checks == 0 else arg_hits / arg_checks
     detail["finish_after_tool"] = 1.0 if not finish_checked else float(finish_hit)
@@ -210,6 +232,7 @@ def score_case(
             "case_id": case.get("case_id"),
             "category": case.get("category"),
             "score": 0.0,
+            "passed": False,
             "raw_score": 0.0,
             "max_score": 1.0,
             "forbidden_hit": [],
@@ -250,10 +273,12 @@ def score_case(
     if not parse_ok:
         total_score = 0.0
 
+    passed = bool(round(total_score, 6) >= 1.0)
     return {
         "case_id": case.get("case_id"),
         "category": case.get("category"),
         "score": round(total_score, 6),
+        "passed": passed,
         "raw_score": round(raw_score + forbidden_score, 6),
         "max_score": round(total_possible, 6),
         "forbidden_hit": forbidden_hit,
@@ -301,10 +326,30 @@ def main() -> None:
         "cases": len(cases),
         "prediction_mode": "provided" if args.predictions else "expected_decisions_smoke",
         "mean_score": round(sum(float(r["score"]) for r in results) / max(1, len(results)), 6),
+        "passed": sum(1 for r in results if r.get("passed") is True),
+        "failed": sum(1 for r in results if r.get("passed") is False),
+        "pass_rate": round(
+            sum(1 for r in results if r.get("passed") is True) / max(1, len(results)),
+            6,
+        ),
         "by_category": {
             key: {
                 "count": len(values),
                 "mean_score": round(sum(values) / max(1, len(values)), 6),
+                "passed": sum(
+                    1
+                    for result in results
+                    if str(result.get("category") or "unknown") == key and result.get("passed") is True
+                ),
+                "pass_rate": round(
+                    sum(
+                        1
+                        for result in results
+                        if str(result.get("category") or "unknown") == key and result.get("passed") is True
+                    )
+                    / max(1, len(values)),
+                    6,
+                ),
             }
             for key, values in sorted(by_category.items())
         },

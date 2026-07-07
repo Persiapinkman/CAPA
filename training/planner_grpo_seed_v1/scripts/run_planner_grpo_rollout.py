@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import signal
 import sys
 from datetime import datetime
@@ -246,15 +247,45 @@ def run_case(
     }
 
 
+def configure_generation(args: argparse.Namespace) -> None:
+    if args.api_base:
+        os.environ["DEMO_ROUTE_API_BASE"] = str(args.api_base).rstrip("/")
+        agent.DEMO_ROUTE_API_BASE = str(args.api_base).rstrip("/")
+    if args.api_key:
+        os.environ["DEMO_ROUTE_API_KEY"] = str(args.api_key)
+        agent.DEMO_ROUTE_API_KEY = str(args.api_key)
+    if args.model:
+        os.environ["DEMO_ROUTE_MODEL"] = str(args.model)
+        agent.DEMO_ROUTE_MODEL = str(args.model)
+    if args.temperature is not None:
+        os.environ["DEMO_OPENAI_TEMPERATURE"] = str(args.temperature)
+    if args.top_p is not None:
+        os.environ["DEMO_OPENAI_TOP_P"] = str(args.top_p)
+    if args.seed is not None:
+        os.environ["DEMO_OPENAI_SEED"] = str(args.seed)
+    if args.do_sample is not None:
+        os.environ["DEMO_OPENAI_DO_SAMPLE"] = str(args.do_sample)
+    if args.openai_timeout_seconds is not None:
+        os.environ["DEMO_OPENAI_TIMEOUT_SECONDS"] = str(args.openai_timeout_seconds)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Run offline Planner rollouts for GRPO cases.")
     parser.add_argument("--cases", type=Path, required=True, help="GRPO case JSONL")
     parser.add_argument("--out", type=Path, required=True, help="Prediction JSONL output")
     parser.add_argument("--model", default="", help="Planner model name/endpoint identifier")
+    parser.add_argument("--api-base", default="", help="OpenAI-compatible Planner API base")
+    parser.add_argument("--api-key", default="token.sdc@2026", help="Planner API key")
     parser.add_argument("--limit", type=int, default=0, help="Optional case limit")
     parser.add_argument("--max-steps", type=int, default=3, help="Maximum Planner decisions per case")
     parser.add_argument("--timeout-seconds", type=int, default=45, help="Hard timeout for each Planner step")
+    parser.add_argument("--openai-timeout-seconds", type=int, default=120, help="HTTP client timeout")
+    parser.add_argument("--temperature", type=float, default=0.0)
+    parser.add_argument("--top-p", type=float, default=1.0)
+    parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--do-sample", default="false")
     args = parser.parse_args()
+    configure_generation(args)
 
     cases = load_jsonl(args.cases)
     if args.limit > 0:
@@ -278,6 +309,13 @@ def main() -> None:
         "out": str(args.out),
         "run_root": str(out_root),
         "model": args.model,
+        "api_base": args.api_base,
+        "generation_config": {
+            "temperature": args.temperature,
+            "top_p": args.top_p,
+            "seed": args.seed,
+            "do_sample": args.do_sample,
+        },
     }
     print(json.dumps(summary, ensure_ascii=False, indent=2))
 

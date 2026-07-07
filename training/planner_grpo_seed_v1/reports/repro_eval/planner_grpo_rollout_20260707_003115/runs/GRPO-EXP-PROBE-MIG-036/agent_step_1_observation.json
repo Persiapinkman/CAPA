@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "垃圾车",
+    "finish_after_tool": false
+  },
+  "_thought": "用户希望先用当前图片验证垃圾车能否被现有模型检测到。这是一个轻量级的视觉探针需求，符合 qwen_detection 或 rexomni_detection 的使用场景。根据规则，当用户只要求“看图里有没有某目标/快速试一下/轻量探针”时，选择 detection 工具即可，不要选择 pipeline_eval。这里选择 qwen_detection 进行单图目标检测。由于用户后续提到“若不稳定，再给垃圾车识别的轻量验证路径”，这意味着检测结果是中间信息，后续可能需要根据结果进行迁移评估或路径规划，因此 finish_after_tool 应设为 false。"
+}

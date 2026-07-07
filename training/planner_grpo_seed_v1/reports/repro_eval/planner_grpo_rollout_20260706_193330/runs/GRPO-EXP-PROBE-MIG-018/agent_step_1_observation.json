@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "migration_advisor",
+  "_action_input": {
+    "user_query": "请先对图里的垃圾车做快速探针，探针结果不确定的话，再给一个垃圾车识别的可行性方案。",
+    "use_image": true,
+    "use_visual_probe": true,
+    "finish_after_tool": true
+  },
+  "_thought": "用户请求包含两个明确步骤：1) 对图片中的垃圾车做快速探针（轻量视觉探针）；2) 若探针结果不确定，再给出垃圾车识别的可行性方案。这属于典型的“能力边界/可行性评估”场景，且用户明确提到“探针结果不确定”才进入下一步，说明这是一个分阶段决策流程。根据决策原则第6条，pipeline_eval 用于“生成样本 + 目标检测评测/模型效果对比/精度评估报告”，而 migration_advisor 用于“新需求能否做/如何迁移/能力边界/数据要求”的业务可行性报告。用户当前需求是“可行性方案”，而非直接要评测报告，因此应优先使用 migration_advisor 执行轻量视觉探针并输出可行性报告。同时，用户提供了图片，且问题涉及“垃圾车识别”的可行性，符合 migration_advisor 的 use_image=true 和 use_visual_probe=true 条件。finish_after_tool 应设为 true，因为迁移顾问会直接输出可行性报告，满足用户“可行性方案”的最终需求。无需调用 re_question 或 clarify，因为意图清晰。"
+}

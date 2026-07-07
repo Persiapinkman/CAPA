@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "migration_advisor",
+  "_action_input": {
+    "user_query": "先别直接做完整评测，先看这张图有没有垃圾车，再决定垃圾车识别是否值得低成本验证。",
+    "use_image": true,
+    "use_visual_probe": true,
+    "finish_after_tool": true
+  },
+  "_thought": "用户希望先对当前图片进行轻量级目标检测，确认是否存在垃圾车，以评估后续进行垃圾车识别能力迁移或验证的可行性。这符合迁移顾问（migration_advisor）的使用场景：用户询问新需求（垃圾车识别）能否由现有能力支持，需要先看样例图做轻量视觉探针。虽然用户提到“低成本验证”，但核心是“先看这张图有没有垃圾车”，属于能力边界/可行性评估的初步探针，而非要求生成样本并做完整评测（pipeline_eval）。因此应调用 migration_advisor，设置 use_image=true 和 use_visual_probe=true，finish_after_tool=true（因为探针结果将直接用于决策是否值得验证）。"
+}

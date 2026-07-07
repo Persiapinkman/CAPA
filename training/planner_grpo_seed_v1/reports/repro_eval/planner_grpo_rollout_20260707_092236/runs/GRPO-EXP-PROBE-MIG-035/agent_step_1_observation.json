@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "横幅",
+    "finish_after_tool": false
+  },
+  "_thought": "用户要求先用图片验证横幅能否被现有模型检测到，若不稳定再给轻量验证路径。当前是第一步，需要先用单图检测工具验证横幅是否存在。根据规则，单图快速检测应使用 qwen_detection 或 rexomni_detection，且 finish_after_tool 设为 false，因为后续还需要给轻量验证路径。横幅属于目标检测任务，label 应为“横幅”。"
+}

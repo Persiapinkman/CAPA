@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "烟雾",
+    "finish_after_tool": false
+  },
+  "_thought": "用户要求先对图片中的烟雾做快速探针，这符合单图开放集目标检测工具的使用场景（qwen_detection 或 rexomni_detection）。用户提到“探针结果不确定的话，再给一个烟雾异常检测的可行性方案”，这意味着第一步是检测，如果检测成功或结果明确，可能直接结束；如果结果不确定或需要进一步评估迁移可行性，则后续可能需要调用 migration_advisor。根据规则，单图快速检测、轻量探针属于 detection 工具，不属于 pipeline_eval。因此，第一步选择 qwen_detection 或 rexomni_detection 进行烟雾检测。这里选择 qwen_detection。由于用户后续可能还需要迁移方案，且当前只是探针，所以 finish_after_tool 设为 false，以便根据探针结果决定下一步。"
+}

@@ -27,20 +27,22 @@ def build_agent_system_prompt(*, max_steps: int, tools_json: str) -> str:
 【决策与路由原则】
 1. 知识检索 (rag_answer)：当问题涉及企业规范、业务文档、标准指标等具体事实，首选本工具。
 2. 通用问答 (answerer)：仅用于通用常识和闲聊，或无需检索即可直接解答的场景。
-3. 目标检测和评测工具（qwendetect/rexomnidetect/evalpipeline）：必须确保前置条件（如存在明确的目标描述及 image_path）：detect工具用于执行目标检测；eval工具用于端到端的图片数据生成扩增、目标检测和评估
+3. 目标检测和评测工具（qwen_detection/rexomni_detection/pipeline_eval）：必须确保前置条件（如存在明确的目标描述及 image_path）。qwen_detection 与 rexomni_detection 都是单图开放集目标检测工具；当用户只要求“看图里有没有某目标/快速试一下/轻量探针/直接检测/不用完整评测报告”时，选择其中一个 detection 工具即可，不要选择 pipeline_eval。
 4. 生图工具（flux image generation）：用于生成图片。
 5. 迁移顾问 (migration_advisor)：当用户询问新需求能否由现有模型/历史能力迁移、能力边界在哪里、需要补多少数据、工程成本/风险/方案如何，或“现有能力能否直接支持；不能怎么办”时，直接选择 migration_advisor。该工具内部会做分字段 RAG 检索、相似资产分析，并在有样例图时可执行轻量视觉探针后输出迁移评估报告。不要把这类需求拆成普通 rag_answer 或 pipeline_eval。
-6. pipeline_eval 仅用于用户明确要求“生成样本 + 目标检测评测/模型效果对比/精度评估报告”的可执行视觉评测；当用户说“低成本探针/可执行探针/给出检测评估报告/对比开放集模型效果”时，也应优先选择 pipeline_eval，而不是单独的 qwen_detection 或 rexomni_detection。migration_advisor 用于“新需求能否做/如何迁移/能力边界/数据要求”的业务可行性报告。
-7. 补充追问：若当前记忆（Memory）仅为摘要，缺少回答所需的具体细节，必须继续调用工具，切勿草率结束。
-8. 指代改写优先：若当前 query 出现“这个/该/其/上述/it/this”等指代，且 query_trajectories 中有可参考的历史问题，优先选择 re_question 做实体补全，再进入 rag_answer。
-9. 示例：历史 query = “安全绳检测用什么模型？”，当前 query = “这个模型的精度如何？”；应先调用 re_question，将 query 改写为“安全绳检测模型的精度如何”。
-10. 语义歧义优先澄清：若用户意图存在多种高概率解释，且不同解释会导致完全不同的工具路径，必须输出 decision_type="clarify" 向用户反问，而不是擅自猜测。
-11. 例如“黑夜检测黑猫”可能表示：
+6. pipeline_eval 仅用于用户明确要求“生成/扩增样本 + 多模型目标检测评测/模型效果对比/精度评估报告”的完整视觉评测。单图快速检测、轻量探针、先看图里有没有某目标，不属于 pipeline_eval；若后续还要基于探针结果判断迁移可行性，则第一步 detection 的 finish_after_tool=false，第二步再选择 migration_advisor。migration_advisor 用于“新需求能否做/如何迁移/能力边界/数据要求”的业务可行性报告。
+7. 多步状态转移：query_trajectories 中的 steps 表示当前 query 已经完成的工具调用及 observation。规划下一步时必须先检查这些已完成步骤，不要重复调用同一个已完成工具，除非 observation 明确要求重试或用户明确要求换模型复测。若已完成 detection 且 observation 表示“不稳定/不确定/需要结合已有资产判断”，而原始 query 还要求低成本验证、迁移可行性、能力边界或客户方案，下一步应选择 migration_advisor。
+8. 单图 detection 的 finish_after_tool：若用户只要求“图里有没有某目标/直接检测/快速判断”，设为 true；只有当原始 query 明确包含后续目标（如“不确定再给低成本验证方案/再判断能否迁移/再输出风险建议”）时，设为 false。
+9. 补充追问：若当前记忆（Memory）仅为摘要，缺少回答所需的具体细节，必须继续调用工具，切勿草率结束。
+10. 指代改写优先：若当前 query 出现“这个/该/其/上述/it/this”等指代，且 query_trajectories 中有可参考的历史问题，优先选择 re_question 做实体补全，再进入 rag_answer。
+11. 示例：历史 query = “安全绳检测用什么模型？”，当前 query = “这个模型的精度如何？”；应先调用 re_question，将 query 改写为“安全绳检测模型的精度如何”。
+12. 语义歧义优先澄清：若用户意图存在多种高概率解释，且不同解释会导致完全不同的工具路径，必须输出 decision_type="clarify" 向用户反问，而不是擅自猜测。
+13. 例如“黑夜检测黑猫”可能表示：
    - 对上传图片做目标检测；
    - 生成“黑夜里的黑猫”图片；
    - 查询黑猫夜间检测方案；
    这种情况下必须先澄清。
-12. 若你已确定要使用某个工具，但用户提供的参数不完整，不要输出 decision_type="clarify"，而是直接输出 decision_type="tool"，在 action_input 中填入已知参数，缺失的留空字符串。系统会自动检测缺失项并向用户追问。clarify 仅用于"用户意图不明确、无法判断该用哪个工具"的场景。
+14. 若你已确定要使用某个工具，但用户提供的参数不完整，不要输出 decision_type="clarify"，而是直接输出 decision_type="tool"，在 action_input 中填入已知参数，缺失的留空字符串。系统会自动检测缺失项并向用户追问。clarify 仅用于"用户意图不明确、无法判断该用哪个工具"的场景。
 
 【状态流转规则 (finish_after_tool)】
 当 decision_type = "tool" 时，你必须在 action_input 中设置 finish_after_tool（布尔值）：
@@ -90,6 +92,8 @@ def build_agent_user_prompt(
         "query": str(text or "").strip(),
         "image_available": bool(image_text),
         "image_filename": Path(image_text).name if image_text else "",
+        "current_step_index": int(step_index or 1),
+        "max_steps": int(max_steps or 1),
         "query_trajectories": (
             ctx.get("query_trajectories")
             if isinstance(ctx.get("query_trajectories"), list)

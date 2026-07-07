@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "钓鱼的人",
+    "finish_after_tool": false
+  },
+  "_thought": "用户希望先对图片进行钓鱼人员检测（小探针），如果结果模糊再分析复用空间。当前有图片可用，且明确提到“检测钓鱼的人”，符合目标检测工具的使用场景。根据决策原则，应优先使用检测工具执行探针。这里选择 qwen_detection 或 rexomni_detection 均可，考虑到通用性，先调用 qwen_detection 进行目标检测。检测完成后，根据结果决定是否调用 migration_advisor 分析复用空间，因此 finish_after_tool 设为 false。"
+}

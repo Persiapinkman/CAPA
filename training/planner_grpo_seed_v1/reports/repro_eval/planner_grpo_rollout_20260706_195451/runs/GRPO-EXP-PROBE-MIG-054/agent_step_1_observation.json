@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "垃圾车",
+    "finish_after_tool": false
+  },
+  "_thought": "用户请求包含两个步骤：1. 对图片进行垃圾车检测；2. 根据检测结果判断是否需要给客户推荐低成本方案。这是一个典型的‘先执行检测，再基于结果做业务决策’的场景。根据决策原则，第一步应调用目标检测工具（qwen_detection 或 rexomni_detection）执行垃圾车检测；第二步若检测成功，则进入迁移评估（migration_advisor）判断是否可低成本迁移。由于当前是第一步，且用户明确要求‘先跑单图检测’，因此应直接调用检测工具，并设置 finish_after_tool=false，因为检测结果只是中间状态，后续还需迁移评估。同时，用户提供了图片，use_image=true，use_visual_probe=true 以支持迁移顾问内部探针。"
+}

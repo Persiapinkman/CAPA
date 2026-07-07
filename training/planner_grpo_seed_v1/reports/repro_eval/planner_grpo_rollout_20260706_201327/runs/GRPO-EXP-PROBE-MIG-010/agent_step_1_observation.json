@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "pipeline_eval",
+  "_action_input": {
+    "task_text": "检测图片中的烟雾",
+    "finish_after_tool": false
+  },
+  "_thought": "用户明确给出了样例图，要求先检测烟雾，再评估迁移可行性。当前查询意图清晰，无需澄清。第一步应执行目标检测，使用 pipeline_eval 工具完成从图片生成到检测评估的完整流程，因为用户后续还要求评估迁移，pipeline_eval 能直接输出检测效果，为迁移评估提供依据。设置 finish_after_tool 为 false，因为检测后还需进行迁移评估。"
+}

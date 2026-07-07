@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "rexomni_detection",
+  "_action_input": {
+    "label": "反光条",
+    "finish_after_tool": false
+  },
+  "_thought": "用户要求先用开放集能力检测反光条，若不确定再给风险和建议。当前有图片，且用户明确提到“先用现有开放集能力试反光条”，这属于目标检测任务。根据工具库，qwen_detection 和 rexomni_detection 适用于检测目标。由于用户提到“开放集能力”，Rex-Omni 通常具备更强的开放集检测能力，因此优先选择 rexomni_detection。用户后续提到“若样例不确定，再给工服反光条检测的风险和验证建议”，这意味着如果检测成功，可能不需要迁移顾问；但如果检测失败或不确定，则需要 migration_advisor。因此，第一步先执行检测，finish_after_tool 设为 false，以便根据结果决定下一步。"
+}

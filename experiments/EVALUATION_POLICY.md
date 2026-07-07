@@ -75,6 +75,15 @@ results/planner_routing_eval/<REPORT_PREFIX>_run2.json
 results/planner_routing_eval/<REPORT_PREFIX>_run3.json
 ```
 
+Single-step repeated evals must also write per-case CSV audit artifacts:
+
+```text
+results/planner_routing_eval/<REPORT_PREFIX>_case_audit.csv
+results/planner_routing_eval/<REPORT_PREFIX>_failed_cases.csv
+```
+
+`case_audit.csv` is one row per case, including query, expected routing constraints, per-repeat action/action_input, failure reason, timing, and token usage. `failed_cases.csv` is the filtered view for cases where at least one repeat failed.
+
 ## Timing
 
 `run_planner_routing_eval.py` schema `1.1` records:

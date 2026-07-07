@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "垃圾车",
+    "finish_after_tool": false
+  },
+  "_thought": "用户明确要求先用开放集模型检测图片中的垃圾车，这是一个轻量探针任务。根据决策原则，当用户要求“看图里有没有某目标/快速试一下/轻量探针”时，应优先选择 qwen_detection 或 rexomni_detection。用户后续提到“如果信心不足，再输出迁移建议”，这意味着第一步检测的 finish_after_tool 应设为 false，以便根据检测结果决定是否进行下一步迁移评估。"
+}

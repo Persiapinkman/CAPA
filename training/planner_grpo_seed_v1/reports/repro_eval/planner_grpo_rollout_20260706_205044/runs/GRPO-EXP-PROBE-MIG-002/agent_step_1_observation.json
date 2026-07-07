@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "厨师帽",
+    "finish_after_tool": false
+  },
+  "_thought": "用户要求检测图片中是否有厨师帽，并提到先用已有模型试一下。这属于目标检测任务。根据工具库，qwen_detection 和 rexomni_detection 都适用于检测目标。用户没有指定具体模型，但要求“先用已有模型试一下”，这暗示了使用现有的检测能力。考虑到后续可能需要评估或迁移方案，直接进行目标检测是第一步。我将选择 qwen_detection 作为首选检测工具，因为它适用于检测目标的任务。用户提供了图片，所以这是一个视觉检测任务。"
+}

@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "migration_advisor",
+  "_action_input": {
+    "user_query": "我想先做一个小探针：检测横幅。如果结果模糊，再分析横幅违规悬挂检测的复用空间。",
+    "use_image": true,
+    "use_visual_probe": true,
+    "finish_after_tool": true
+  },
+  "_thought": "用户希望先做一个小探针来检测横幅，如果结果模糊再分析复用空间。这是一个典型的迁移/能力边界评估场景，用户明确提出了‘小探针’和‘复用空间分析’的需求，属于迁移顾问（migration_advisor）的适用范畴。迁移顾问工具内部会执行轻量视觉探针，并输出迁移评估报告，符合用户‘先做小探针’的意图。因此，应直接调用 migration_advisor 工具，设置 use_image=true 以利用当前图片作为样例证据，use_visual_probe=true 以允许内部执行视觉探针。finish_after_tool 设为 true，因为迁移顾问的输出即为最终评估报告，无需后续加工。"
+}

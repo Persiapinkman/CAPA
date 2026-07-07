@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import math
 import subprocess
@@ -27,6 +28,14 @@ def write_json(path: Path, data: dict[str, Any]) -> None:
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
+def write_csv(path: Path, rows: list[dict[str, Any]], fieldnames: list[str]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
+
+
 def mean(values: list[float]) -> float | None:
     return sum(values) / len(values) if values else None
 
@@ -40,6 +49,145 @@ def stdev(values: list[float]) -> float | None:
 
 def rounded(value: float | None) -> float | None:
     return round(value, 4) if value is not None else None
+
+
+def _json_compact(value: Any) -> str:
+    if value in (None, "", [], {}):
+        return ""
+    return json.dumps(value, ensure_ascii=False, sort_keys=True)
+
+
+def _load_cases_by_id(path: Path) -> dict[str, dict[str, Any]]:
+    data = load_json(path)
+    cases = data.get("cases") if isinstance(data.get("cases"), list) else []
+    return {
+        str(case.get("case_id") or ""): case
+        for case in cases
+        if isinstance(case, dict) and str(case.get("case_id") or "")
+    }
+
+
+def _result_by_id(report: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    rows = report.get("results") if isinstance(report.get("results"), list) else []
+    return {
+        str(row.get("case_id") or ""): row
+        for row in rows
+        if isinstance(row, dict) and str(row.get("case_id") or "")
+    }
+
+
+def _action_input(row: dict[str, Any] | None) -> dict[str, Any]:
+    if not isinstance(row, dict):
+        return {}
+    step = row.get("actual_step") if isinstance(row.get("actual_step"), dict) else {}
+    return step.get("action_input") if isinstance(step.get("action_input"), dict) else {}
+
+
+def build_case_audit_rows(*, reports: list[Path], cases_path: Path) -> list[dict[str, Any]]:
+    loaded_reports = [load_json(path) for path in reports]
+    report_rows = [_result_by_id(report) for report in loaded_reports]
+    cases_by_id = _load_cases_by_id(cases_path)
+    case_ids: list[str] = []
+    seen: set[str] = set()
+    for report in loaded_reports:
+        for row in report.get("results") if isinstance(report.get("results"), list) else []:
+            cid = str(row.get("case_id") or "")
+            if cid and cid not in seen:
+                seen.add(cid)
+                case_ids.append(cid)
+
+    rows: list[dict[str, Any]] = []
+    for cid in case_ids:
+        case = cases_by_id.get(cid, {})
+        expected = case.get("expected") if isinstance(case.get("expected"), dict) else {}
+        setup = case.get("setup") if isinstance(case.get("setup"), dict) else {}
+        pass_values: list[bool] = []
+        out: dict[str, Any] = {
+            "case_id": cid,
+            "title": str(case.get("title") or ""),
+            "category": str(case.get("category") or ""),
+            "query": str(case.get("user_query") or ""),
+            "has_image": bool(setup.get("has_image")),
+            "image_fixture": str(setup.get("image_fixture") or ""),
+            "expected_action": str(expected.get("primary_action") or ""),
+            "acceptable_actions": _json_compact(expected.get("acceptable_actions")),
+            "forbidden_actions": _json_compact(expected.get("forbidden_actions")),
+            "required_slots": _json_compact(expected.get("required_slots")),
+            "reason": str(case.get("reason") or ""),
+        }
+        for index, rows_by_id in enumerate(report_rows, start=1):
+            row = rows_by_id.get(cid, {})
+            passed = row.get("passed")
+            pass_values.append(bool(passed is True))
+            error = row.get("error") if isinstance(row.get("error"), dict) else {}
+            timing = row.get("timing") if isinstance(row.get("timing"), dict) else {}
+            usage = row.get("usage") if isinstance(row.get("usage"), dict) else {}
+            out.update(
+                {
+                    f"run{index}_passed": passed,
+                    f"run{index}_actual_action": str(row.get("actual_action") or ""),
+                    f"run{index}_action_input": _json_compact(_action_input(row)),
+                    f"run{index}_failures": " | ".join(str(x) for x in row.get("failures", []) if str(x)),
+                    f"run{index}_error_type": str(error.get("error_type") or ""),
+                    f"run{index}_error_message": str(error.get("message") or ""),
+                    f"run{index}_elapsed_ms": row.get("elapsed_ms", ""),
+                    f"run{index}_api_call_ms": timing.get("api_call_ms", ""),
+                    f"run{index}_input_tokens": usage.get("input_tokens", ""),
+                    f"run{index}_output_tokens": usage.get("output_tokens", ""),
+                }
+            )
+        out["pass_count"] = sum(1 for value in pass_values if value)
+        out["run_count"] = len(pass_values)
+        out["all_passed"] = bool(pass_values and all(pass_values))
+        out["any_failed"] = bool(pass_values and not all(pass_values))
+        rows.append(out)
+    return rows
+
+
+def case_audit_fieldnames(run_count: int) -> list[str]:
+    fields = [
+        "case_id",
+        "title",
+        "category",
+        "query",
+        "has_image",
+        "image_fixture",
+        "expected_action",
+        "acceptable_actions",
+        "forbidden_actions",
+        "required_slots",
+        "reason",
+    ]
+    for index in range(1, run_count + 1):
+        fields.extend(
+            [
+                f"run{index}_passed",
+                f"run{index}_actual_action",
+                f"run{index}_action_input",
+                f"run{index}_failures",
+                f"run{index}_error_type",
+                f"run{index}_error_message",
+                f"run{index}_elapsed_ms",
+                f"run{index}_api_call_ms",
+                f"run{index}_input_tokens",
+                f"run{index}_output_tokens",
+            ]
+        )
+    fields.extend(["pass_count", "run_count", "all_passed", "any_failed"])
+    return fields
+
+
+def write_case_audit_csvs(*, reports: list[Path], cases_path: Path, out_dir: Path, report_prefix: str) -> dict[str, str]:
+    rows = build_case_audit_rows(reports=reports, cases_path=cases_path)
+    fields = case_audit_fieldnames(len(reports))
+    audit_path = out_dir / f"{report_prefix}_case_audit.csv"
+    failed_path = out_dir / f"{report_prefix}_failed_cases.csv"
+    write_csv(audit_path, rows, fields)
+    write_csv(failed_path, [row for row in rows if row.get("any_failed") is True], fields)
+    return {
+        "case_audit_csv": str(audit_path),
+        "failed_cases_csv": str(failed_path),
+    }
 
 
 def aggregate_reports(*, reports: list[Path], args: argparse.Namespace, elapsed_ms: float) -> dict[str, Any]:
@@ -236,6 +384,13 @@ def main() -> None:
 
     elapsed_ms = (time.perf_counter() - start) * 1000
     aggregate = aggregate_reports(reports=reports, args=args, elapsed_ms=elapsed_ms)
+    audit_paths = write_case_audit_csvs(
+        reports=reports,
+        cases_path=cases_path,
+        out_dir=out_dir,
+        report_prefix=args.report_prefix,
+    )
+    aggregate["case_audit"] = audit_paths
     agg_path = out_dir / f"{args.report_prefix}_aggregate.json"
     write_json(agg_path, aggregate)
     agg = aggregate["aggregate"]
@@ -246,6 +401,8 @@ def main() -> None:
         f"accuracy_mean={agg.get('accuracy_mean')}",
         f"accuracy_stdev={agg.get('accuracy_stdev')}",
         f"case_avg_ms_mean={timing.get('case_elapsed_ms_avg_mean')}",
+        f"case_audit_csv={audit_paths.get('case_audit_csv')}",
+        f"failed_cases_csv={audit_paths.get('failed_cases_csv')}",
         f"out={agg_path}",
     )
 

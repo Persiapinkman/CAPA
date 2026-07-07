@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "migration_advisor",
+  "_action_input": {
+    "user_query": "请先用现有开放集能力试横幅，若样例不确定，再给横幅违规悬挂检测的风险和验证建议。",
+    "use_image": true,
+    "use_visual_probe": true,
+    "finish_after_tool": true
+  },
+  "_thought": "用户询问能否用现有开放集能力检测横幅，若不确定则给风险和验证建议。这属于新需求的能力边界评估，需要判断现有模型能否直接支持，不能则给出迁移方案。符合 migration_advisor 的使用场景。"
+}

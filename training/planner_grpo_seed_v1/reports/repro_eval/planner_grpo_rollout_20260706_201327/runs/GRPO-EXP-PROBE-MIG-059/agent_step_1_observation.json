@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "migration_advisor",
+  "_action_input": {
+    "user_query": "请先用现有开放集能力试横幅，若样例不确定，再给横幅违规悬挂检测的风险和验证建议。",
+    "use_image": true,
+    "use_visual_probe": true,
+    "finish_after_tool": true
+  },
+  "_thought": "用户希望先用现有开放集能力对横幅进行检测，若结果不确定再提供风险和验证建议。当前已上传图片，且问题明确指向检测任务，应优先调用迁移顾问（migration_advisor）评估现有能力是否支持横幅检测，并基于样例图进行轻量视觉探针验证。迁移顾问会输出能力边界和可行性报告，满足用户‘先试后建议’的需求。"
+}

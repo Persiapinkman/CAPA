@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "垃圾车",
+    "finish_after_tool": false
+  },
+  "_thought": "用户要求先用开放集模型检测图片中的垃圾车，如果结果不确定再输出迁移建议。根据规则，单图快速检测应使用 qwen_detection 或 rexomni_detection，且 finish_after_tool 应设为 false，因为后续还需要根据检测结果判断是否需要迁移建议。当前步骤索引为 1，尚未执行任何检测，因此第一步应执行检测。"
+}

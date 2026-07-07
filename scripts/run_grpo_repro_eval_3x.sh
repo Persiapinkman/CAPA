@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT_DIR"
+
+MODEL="${MODEL:?set MODEL, e.g. Qwen3.5-4B}"
+API_BASE="${API_BASE:?set API_BASE, e.g. http://127.0.0.1:8003/v1}"
+REPORT_PREFIX="${REPORT_PREFIX:?set REPORT_PREFIX, e.g. qwen35_4b_grpo_compound}"
+CASES="${CASES:-$ROOT_DIR/training/planner_grpo_seed_v1/cases/planner_grpo_train_cases.jsonl}"
+OUT_DIR="${OUT_DIR:-$ROOT_DIR/training/planner_grpo_seed_v1/reports/repro_eval}"
+RUNS="${RUNS:-3}"
+SEED="${SEED:-42}"
+TEMPERATURE="${TEMPERATURE:-0}"
+TOP_P="${TOP_P:-1}"
+DO_SAMPLE="${DO_SAMPLE:-false}"
+TIMEOUT_SECONDS="${TIMEOUT_SECONDS:-180}"
+OPENAI_TIMEOUT_SECONDS="${OPENAI_TIMEOUT_SECONDS:-180}"
+MAX_STEPS="${MAX_STEPS:-3}"
+
+export NO_PROXY="${NO_PROXY:-127.0.0.1,localhost}"
+export no_proxy="${no_proxy:-127.0.0.1,localhost}"
+unset HTTP_PROXY HTTPS_PROXY ALL_PROXY http_proxy https_proxy all_proxy
+
+PYTHON_BIN="${PYTHON_BIN:-$ROOT_DIR/.venv-train/bin/python}"
+if [[ ! -x "$PYTHON_BIN" ]]; then
+  PYTHON_BIN="$(command -v python3)"
+fi
+
+exec "$PYTHON_BIN" training/planner_grpo_seed_v1/scripts/run_repeated_planner_grpo_eval.py \
+  --cases "$CASES" \
+  --out-dir "$OUT_DIR" \
+  --report-prefix "$REPORT_PREFIX" \
+  --model "$MODEL" \
+  --api-base "$API_BASE" \
+  --runs "$RUNS" \
+  --timeout-seconds "$TIMEOUT_SECONDS" \
+  --openai-timeout-seconds "$OPENAI_TIMEOUT_SECONDS" \
+  --max-steps "$MAX_STEPS" \
+  --temperature "$TEMPERATURE" \
+  --top-p "$TOP_P" \
+  --seed "$SEED" \
+  --do-sample "$DO_SAMPLE"

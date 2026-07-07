@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "migration_advisor",
+  "_action_input": {
+    "user_query": "先用这张图验证烟雾能不能被现有模型看到；若不稳定，再给烟雾异常检测的轻量验证路径。",
+    "use_image": true,
+    "use_visual_probe": true,
+    "finish_after_tool": true
+  },
+  "_thought": "用户要求先用图片验证烟雾能否被现有模型看到，如果不稳定再给轻量验证路径。这涉及到目标检测（烟雾检测）和迁移评估（现有模型能力边界）。根据决策原则，当用户询问新需求能否由现有模型/历史能力迁移、能力边界在哪里时，应优先选择 migration_advisor。该工具内部会做分字段 RAG 检索、相似资产分析，并在有样例图时可执行轻量视觉探针后输出迁移评估报告。用户提供了图片（smoke.jpg），且问题明确提到“先用这张图验证”，符合 migration_advisor 的 use_image=true 和 use_visual_probe=true 场景。"
+}

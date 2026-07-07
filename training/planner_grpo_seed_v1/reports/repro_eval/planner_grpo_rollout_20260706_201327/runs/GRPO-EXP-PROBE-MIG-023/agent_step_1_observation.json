@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "pipeline_eval",
+  "_action_input": {
+    "task_text": "检测图片中是否存在横幅",
+    "finish_after_tool": false
+  },
+  "_thought": "用户明确要求先对图片进行目标检测（检测横幅），再根据检测结果决定是否进行后续的低成本验证。这属于可执行的视觉探针任务，应优先选择 pipeline_eval 工具，而不是单独的 qwen_detection 或 rexomni_detection。"
+}

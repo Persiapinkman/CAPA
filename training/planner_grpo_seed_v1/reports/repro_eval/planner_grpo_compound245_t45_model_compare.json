@@ -1,0 +1,94 @@
+{
+  "schema_version": "1.0",
+  "eval": "planner_grpo_compound245_t45_run1_model_compare",
+  "models": [
+    {
+      "model": "4B",
+      "mean_score": 0.732374,
+      "aggregate_path": "training/planner_grpo_seed_v1/reports/repro_eval/qwen35_4b_grpo_compound245_t45_run1_aggregate.json",
+      "adela_eval": 1.0,
+      "full_detection_eval": 1.0,
+      "general_answer": 0.883333,
+      "historical_asset_qa": 1.0,
+      "intent_ambiguity": 1.0,
+      "migration_feasibility": 0.925439,
+      "migration_feasibility_with_image": 0.926471,
+      "probe_then_migration": 0.433851,
+      "single_image_probe": 0.679054,
+      "empty_decisions_mean": 10.0,
+      "decision_count_mean": 286.0,
+      "actions_total": {
+        "pipeline_eval": 59,
+        "qwen_detection": 68,
+        "migration_advisor": 127,
+        "rag_answer": 8,
+        "answerer": 5,
+        "adela_cli_eval": 2,
+        "clarify": 1,
+        "rexomni_detection": 15,
+        "final_answer": 1
+      },
+      "errors_total": {
+        "planner rollout step timed out": 11
+      }
+    },
+    {
+      "model": "9B",
+      "mean_score": 0.754254,
+      "aggregate_path": "training/planner_grpo_seed_v1/reports/repro_eval/qwen35_9b_grpo_compound245_t45_run1_aggregate.json",
+      "adela_eval": 1.0,
+      "full_detection_eval": 1.0,
+      "general_answer": 0.766667,
+      "historical_asset_qa": 1.0,
+      "intent_ambiguity": 1.0,
+      "migration_feasibility": 0.947369,
+      "migration_feasibility_with_image": 0.926471,
+      "probe_then_migration": 0.431838,
+      "single_image_probe": 0.751351,
+      "empty_decisions_mean": 6.0,
+      "decision_count_mean": 295.0,
+      "actions_total": {
+        "qwen_detection": 58,
+        "pipeline_eval": 74,
+        "migration_advisor": 147,
+        "rag_answer": 9,
+        "answerer": 4,
+        "adela_cli_eval": 2,
+        "clarify": 1
+      },
+      "errors_total": {
+        "planner rollout step timed out": 6
+      }
+    },
+    {
+      "model": "35B-A3B",
+      "mean_score": 0.859599,
+      "aggregate_path": "training/planner_grpo_seed_v1/reports/repro_eval/qwen35_35b_a3b_grpo_compound245_t45_run1_aggregate.json",
+      "adela_eval": 1.0,
+      "full_detection_eval": 1.0,
+      "general_answer": 0.883333,
+      "historical_asset_qa": 1.0,
+      "intent_ambiguity": 1.0,
+      "migration_feasibility": 0.947369,
+      "migration_feasibility_with_image": 0.926471,
+      "probe_then_migration": 0.650848,
+      "single_image_probe": 0.910135,
+      "empty_decisions_mean": 1.0,
+      "decision_count_mean": 303.0,
+      "actions_total": {
+        "qwen_detection": 101,
+        "rexomni_detection": 16,
+        "pipeline_eval": 17,
+        "migration_advisor": 152,
+        "rag_answer": 8,
+        "answerer": 5,
+        "adela_cli_eval": 2,
+        "clarify": 1,
+        "final_answer": 1
+      },
+      "errors_total": {
+        "planner rollout step timed out": 2
+      }
+    }
+  ]
+}

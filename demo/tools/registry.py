@@ -79,7 +79,10 @@ TOOL_DECLARATIONS = [
         "flow": "direct_answer",
         "requires_image": False,
         "schema": {
-            "description": "无需查阅公司内部文档的问题，比如：苹果是当季水果吗",
+            "description": (
+                "无需查阅公司内部文档的问题。适用于通用常识、通用解释、通用模板、闲聊，"
+                "以及用户明确说不要查内部文档的场景。"
+            ),
             "parameters": {
                 **schema_defs.ANSWERER_PARAMETERS,
             },
@@ -105,7 +108,11 @@ TOOL_DECLARATIONS = [
         "flow": "qwen_detect",
         "requires_image": True,
         "schema": {
-            "description": "适用于检测目标的任务 Qwen。",
+            "description": (
+                "单图开放集目标检测工具 Qwen。适用于用户只想确认上传图片中是否存在某个目标、"
+                "快速试一下、轻量探针、直接检测、不需要生成样本或完整评测报告的场景。"
+                "若用户未指定模型，qwen_detection 与 rexomni_detection 都是可接受的检测工具。"
+            ),
             "parameters": {
                 **schema_defs.OPEN_SET_DETECTION_PARAMETERS,
             },
@@ -118,7 +125,11 @@ TOOL_DECLARATIONS = [
         "flow": "rexomni_detect",
         "requires_image": True,
         "schema": {
-            "description": "适用于检测目标的任务 Rex-Omni",
+            "description": (
+                "单图开放集目标检测工具 Rex-Omni。适用于用户只想确认上传图片中是否存在某个目标、"
+                "快速试一下、轻量探针、直接检测、不需要生成样本或完整评测报告的场景。"
+                "若用户未指定模型，rexomni_detection 与 qwen_detection 都是可接受的检测工具。"
+            ),
             "parameters": {
                 **schema_defs.OPEN_SET_DETECTION_PARAMETERS,
             },
@@ -131,7 +142,11 @@ TOOL_DECLARATIONS = [
         "flow": "pipeline",
         "requires_image": True,
         "schema": {
-            "description": "完整目标检测评测流水线：图片生成 - 分别使用 Qwen 和 Rex-Omni 进行标注 - 评估模型检测效果",
+            "description": (
+                "完整目标检测评测流水线：基于参考图生成/扩增样本，分别使用 Qwen 和 Rex-Omni 进行标注，"
+                "并输出模型检测效果对比或精度评估报告。仅当用户明确要生成样本、完整评测、模型效果对比、"
+                "精度/误检漏检评估报告时使用；不要用于单图快速检测或轻量探针。"
+            ),
             "parameters": {
                 **schema_defs.PIPELINE_EVAL_PARAMETERS,
             },

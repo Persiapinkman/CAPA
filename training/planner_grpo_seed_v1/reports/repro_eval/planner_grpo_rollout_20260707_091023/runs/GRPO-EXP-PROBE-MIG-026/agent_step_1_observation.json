@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "厨师帽",
+    "finish_after_tool": false
+  },
+  "_thought": "用户要求先用开放集模型检测图片中是否有厨师帽，如果检测信心不足，再输出迁移建议。当前步骤索引为1，且query_trajectories中steps为空，说明尚未执行任何检测。根据规则，单图快速检测应使用qwen_detection或rexomni_detection，且finish_after_tool应设为false，因为后续还需要根据检测结果判断是否需要迁移建议。用户明确提到“如果信心不足，再输出...迁移建议”，这属于后续步骤，因此第一步检测的finish_after_tool必须为false。"
+}

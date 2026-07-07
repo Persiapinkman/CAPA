@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "厨师帽",
+    "finish_after_tool": false
+  },
+  "_thought": "用户要求先对图片中的'厨师帽'进行快速探针检测。根据工具库描述，qwen_detection 或 rexomni_detection 适用于单图快速检测、轻量探针场景。用户明确提到'快速探针'，因此选择 qwen_detection 工具。由于探针结果可能不确定，后续可能需要迁移顾问方案，所以 finish_after_tool 设为 false。"
+}

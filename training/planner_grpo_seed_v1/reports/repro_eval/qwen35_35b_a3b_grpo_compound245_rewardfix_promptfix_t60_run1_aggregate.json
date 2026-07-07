@@ -1,0 +1,210 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-07-06T16:38:53.250673+00:00",
+  "cases_path": "/media/nvme1n1p1/zengkeqin/projects/CAPA/training/planner_grpo_seed_v1/cases/planner_grpo_train_cases.jsonl",
+  "model": "Qwen3.5-35B-A3B",
+  "api_base": "http://10.111.32.253:8000/v1",
+  "report_prefix": "qwen35_35b_a3b_grpo_compound245_rewardfix_promptfix_t60_run1",
+  "runs": 1,
+  "generation_config": {
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "seed": 42,
+    "do_sample": "false"
+  },
+  "aggregate": {
+    "mean_score_mean": 0.929875,
+    "mean_score_stdev": 0.0,
+    "pass_rate_mean": 0.783673,
+    "pass_rate_stdev": 0.0,
+    "pass_all_runs_rate": 0.783673,
+    "pass_any_run_rate": 0.783673
+  },
+  "by_category": {
+    "adela_eval": {
+      "mean_score_mean": 1.0,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 1.0,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 1.0,
+      "runs": 1
+    },
+    "full_detection_eval": {
+      "mean_score_mean": 1.0,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 1.0,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 1.0,
+      "runs": 1
+    },
+    "general_answer": {
+      "mean_score_mean": 0.766667,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 0.666667,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 0.666667,
+      "runs": 1
+    },
+    "historical_asset_qa": {
+      "mean_score_mean": 1.0,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 1.0,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 1.0,
+      "runs": 1
+    },
+    "intent_ambiguity": {
+      "mean_score_mean": 1.0,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 1.0,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 1.0,
+      "runs": 1
+    },
+    "migration_feasibility": {
+      "mean_score_mean": 1.0,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 1.0,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 1.0,
+      "runs": 1
+    },
+    "migration_feasibility_with_image": {
+      "mean_score_mean": 1.0,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 1.0,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 1.0,
+      "runs": 1
+    },
+    "probe_then_migration": {
+      "mean_score_mean": 0.757693,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 0.327869,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 0.327869,
+      "runs": 1
+    },
+    "single_image_probe": {
+      "mean_score_mean": 0.986486,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 0.864865,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 0.864865,
+      "runs": 1
+    }
+  },
+  "prediction_stats": {
+    "empty_decisions_mean": 0.0,
+    "empty_decisions_stdev": 0.0,
+    "decision_count_mean": 306.0,
+    "decision_count_stdev": 0.0,
+    "actions_total": {
+      "qwen_detection": 175,
+      "pipeline_eval": 5,
+      "migration_advisor": 110,
+      "rag_answer": 9,
+      "answerer": 4,
+      "adela_cli_eval": 2,
+      "clarify": 1
+    },
+    "errors_total": {}
+  },
+  "timing": {
+    "elapsed_ms": 458587.328
+  },
+  "reports": [
+    {
+      "reward_report": "/media/nvme1n1p1/zengkeqin/projects/CAPA/training/planner_grpo_seed_v1/reports/repro_eval/qwen35_35b_a3b_grpo_compound245_rewardfix_promptfix_t60_run1_run1_reward.json",
+      "prediction_file": "/media/nvme1n1p1/zengkeqin/projects/CAPA/training/planner_grpo_seed_v1/reports/repro_eval/qwen35_35b_a3b_grpo_compound245_rewardfix_promptfix_t60_run1_run1_predictions.jsonl",
+      "summary": {
+        "cases": 245,
+        "prediction_mode": "provided",
+        "mean_score": 0.929875,
+        "passed": 192,
+        "failed": 53,
+        "pass_rate": 0.783673,
+        "by_category": {
+          "adela_eval": {
+            "count": 2,
+            "mean_score": 1.0,
+            "passed": 2,
+            "pass_rate": 1.0
+          },
+          "full_detection_eval": {
+            "count": 5,
+            "mean_score": 1.0,
+            "passed": 5,
+            "pass_rate": 1.0
+          },
+          "general_answer": {
+            "count": 6,
+            "mean_score": 0.766667,
+            "passed": 4,
+            "pass_rate": 0.666667
+          },
+          "historical_asset_qa": {
+            "count": 7,
+            "mean_score": 1.0,
+            "passed": 7,
+            "pass_rate": 1.0
+          },
+          "intent_ambiguity": {
+            "count": 1,
+            "mean_score": 1.0,
+            "passed": 1,
+            "pass_rate": 1.0
+          },
+          "migration_feasibility": {
+            "count": 38,
+            "mean_score": 1.0,
+            "passed": 38,
+            "pass_rate": 1.0
+          },
+          "migration_feasibility_with_image": {
+            "count": 51,
+            "mean_score": 1.0,
+            "passed": 51,
+            "pass_rate": 1.0
+          },
+          "probe_then_migration": {
+            "count": 61,
+            "mean_score": 0.757693,
+            "passed": 20,
+            "pass_rate": 0.327869
+          },
+          "single_image_probe": {
+            "count": 74,
+            "mean_score": 0.986486,
+            "passed": 64,
+            "pass_rate": 0.864865
+          }
+        },
+        "used_action_counts": {
+          "qwen_detection": 175,
+          "pipeline_eval": 5,
+          "migration_advisor": 110,
+          "rag_answer": 9,
+          "answerer": 4,
+          "adela_cli_eval": 2,
+          "clarify": 1
+        }
+      },
+      "prediction_stats": {
+        "rows": 245,
+        "decision_count": 306,
+        "empty_decisions": 0,
+        "errors": {},
+        "actions": {
+          "qwen_detection": 175,
+          "pipeline_eval": 5,
+          "migration_advisor": 110,
+          "rag_answer": 9,
+          "answerer": 4,
+          "adela_cli_eval": 2,
+          "clarify": 1
+        }
+      }
+    }
+  ]
+}

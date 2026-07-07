@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "反光条",
+    "finish_after_tool": false
+  },
+  "_thought": "用户要求检测图片中的反光条，并提到先用已有模型试一下。这属于目标检测任务。根据工具库，qwen_detection 和 rexomni_detection 都适用于检测目标。由于用户没有指定具体模型，且这是一个初步的验证请求，我将选择 qwen_detection 作为首选工具进行尝试。如果结果不确定，后续再考虑迁移顾问方案。"
+}

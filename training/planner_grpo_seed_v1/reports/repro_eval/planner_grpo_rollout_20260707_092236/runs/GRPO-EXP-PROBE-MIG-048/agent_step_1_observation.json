@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "垃圾车",
+    "finish_after_tool": false
+  },
+  "_thought": "用户明确要求先进行垃圾车的目标检测（轻量探针），若检测结果不确定再转为迁移评估。当前步骤索引为1，且query_trajectories中steps为空，说明尚未执行任何检测。根据规则，单图快速检测应使用qwen_detection或rexomni_detection，且因用户后续可能要求迁移评估，finish_after_tool应设为false。"
+}

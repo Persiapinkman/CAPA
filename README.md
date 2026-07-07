@@ -1,78 +1,156 @@
-## 仓库简介
+# CAPA
 
-`test-skills` 仓库用于存放和迭代各类 **Skill**，把常用能力（如视频处理、文档处理等）沉淀成可复用的技能。[官方skill说明文档](https://github.com/anthropics/skills/blob/main/README.md)
+CAPA is a Planner-centric agent demo and evaluation workspace for visual AI capability routing.
 
-## 已有 Skill 概览
+The current focus is the Planner: given a user query, optional image, and conversation/tool state, it chooses the next high-level action as JSON. The repo contains the demo agent, tool registry, routing evaluation scripts, and seed datasets for SFT/DPO/GRPO-style Planner work.
 
-- `skills/skill-creator`：官方的 **Skill Creator** 指南，用于创建和设计新的 skill。
-- `skills/video-frame-extract`：基于 ffmpeg 的 **视频抽帧 skill**，支持单视频文件，视频目录，视频路径txt文件等多种输入形式。
+## Repository Layout
 
-## cursor 如何使用当前仓库skill
+- `demo/`: agent runtime, prompts, memory system, tool schemas/registry/executors, web demo, and routing eval code.
+- `skills/`: executable skills/tools used by the demo, including open-set detection, Flux image generation, RAG answer, target detection evaluation, and report generation.
+- `training/planner_dpo_train_seed_v1/`: single-step Planner routing data and historical SFT/DPO seed assets.
+- `training/planner_grpo_seed_v1/`: compound/multi-step Planner cases, reward verifier, offline rollout scripts, repeated eval scripts, and reports.
+- `scripts/`: reproducible serving/eval/train entrypoints.
+- `experiments/`: active experiment ledger plus archived historical results.
+- `examples/images/`: local image fixtures used by eval cases.
+
+## Current Evaluation Tracking
+
+Human-readable active results:
+
+```text
+experiments/EXPERIMENT_LOG.md
 ```
-# step1 clone 当前代码仓库
-git clone https://gitlab.sz.sensetime.com/xiaokun1/test-skills.git
 
-# step2 创建.cursor目录, 软连接当前的技能，cursor会自动加载对应的技能。
-mkdir -p .cursor && cd .cursor && ln -s ../skills skills && cd -
+Machine-readable active manifest:
+
+```text
+experiments/manifest.jsonl
 ```
-其它地方使用skill, 参考[cursor说明](https://cursor.com/cn/docs/context/skills)
 
-## 如何制作一个新的 Skill
+Older or superseded results are archived under:
 
-### 1. 规划 Skill
+```text
+experiments/archive/
+```
 
-- 明确 **单一职责**，避免「大而全」：
-  - 例：`pdf-text-extract`（只做 PDF 文本抽取）
-  - 例：`image-annotate`（只做图像标注）
-- 使用 **kebab-case** 命名（如 `video-frame-extract`）。
+The current active tracking has two lanes:
 
-### 2. 使用 Skill Creator 初始化骨架
+- single-step routing: `training/planner_dpo_train_seed_v1/eval/planner_routing_eval_90cases.json`
+- multi-step routing: `training/planner_grpo_seed_v1/cases/planner_grpo_train_cases.jsonl`
 
-在cursor聊天窗口个中，直接/skill-creator，然后告诉你的诉求，创建什么样的skill,输出放到skills目录下，即可：
+## Formal Eval Protocol
+
+Formal evals use vLLM/OpenAI-compatible serving with deterministic generation:
+
+- `temperature=0`
+- `top_p=1`
+- `do_sample=false`
+- `seed=42`
+- 3 repeats, then aggregate
+- per-case CSV audit artifacts for review
+
+See:
+
+```text
+experiments/EVALUATION_POLICY.md
+```
+
+## Single-Step Routing Eval
+
+Run the 90-case single-step Planner routing eval:
 
 ```bash
-/skill-crator 创建一个图片预览的skill技能，放置到本仓库skills目录下。 
+MODEL='Qwen3.5-35B-A3B' \
+API_BASE='http://10.111.32.253:8000/v1' \
+REPORT_PREFIX='qwen35_35b_a3b_timing_v2_zip90' \
+bash scripts/run_vllm_repro_eval_3x.sh
 ```
 
-会生成如下文件：
+Default cases:
 
-- `<skill-name>/SKILL.md`：带 frontmatter 的说明文档，尽量简单
-- `<skill-name>/scripts/`：放置可执行脚本代码
-- `<skill-name>/references/`：放置长文档、API 说明等
-- `<skill-name>/assets/`：放置模板、图片等资源
+```text
+training/planner_dpo_train_seed_v1/eval/planner_routing_eval_90cases.json
+```
 
-### 3. 迭代skill的功能
-如果初步生成的skill不满足，要求，可以通过cursor反复迭代和完善功能，代码需要具备扩展性、可读性、可靠性，注意日志规范等。
+Default output:
 
+```text
+results/planner_routing_eval/
+```
 
-## 如何打包 Skill（生成 .skill）
+Each repeated single-step eval writes:
 
-本仓库提供 `package_skill.py`，用于将某个 Skill 目录打成 `.skill` 包，便于分发和安装。
+```text
+results/planner_routing_eval/<REPORT_PREFIX>_aggregate.json
+results/planner_routing_eval/<REPORT_PREFIX>_case_audit.csv
+results/planner_routing_eval/<REPORT_PREFIX>_failed_cases.csv
+```
 
-### 基本用法
+The audit CSV is the required review surface: one row per case with query, expected action/slots, each repeat's actual action/input, failure reason, timing, and token usage. The failed-cases CSV is the same schema filtered to rows where any repeat failed.
 
-在仓库根目录运行,修改run_package.sh目录的参数，进行打包：
+## Multi-Step Compound Routing Eval
+
+Run the compound Planner eval used for GRPO diagnostics:
 
 ```bash
-bash run_package.sh
-
-参数含义：python3 util/package_skill.py -h
+MODEL='Qwen3.5-35B-A3B' \
+API_BASE='http://10.111.32.253:8000/v1' \
+REPORT_PREFIX='qwen35_35b_a3b_grpo_compound245_stateprompt_t60_3x' \
+RUNS=3 \
+TIMEOUT_SECONDS=60 \
+OPENAI_TIMEOUT_SECONDS=60 \
+bash scripts/run_grpo_repro_eval_3x.sh
 ```
 
+Default cases:
 
-## 如何分发和使用 Skill
+```text
+training/planner_grpo_seed_v1/cases/planner_grpo_train_cases.jsonl
+```
 
-### 分发
+Default output:
 
-将生成的 `.skill` 文件上传到团队可访问的位置，例如：
+```text
+training/planner_grpo_seed_v1/reports/repro_eval/
+```
 
-- GitLab 仓库（如 `dist/` 目录）
-- GitLab Release 附件
-- 内部制品库 / 对象存储 / 共享网盘等
+The multi-step eval is offline: it rolls out Planner decisions and injects mock tool observations instead of executing real tools.
 
-### 在 Cursor 中使用
+## Current GRPO Direction
 
-1. 从上述位置下载对应的 `.skill` 文件到本地。
-2. 在 Cursor 中通过「导入 / 安装」功能加载该 `.skill` 文件。
-3. 安装成功后，即可在对话中通过对应指令（如 `/video-frame-extract`）或相关自然语言描述触发该 Skill。
+The current GRPO work is treated as a diagnostic/regression suite first, training set second.
 
+After cleaning reward noise and prompt/tool-description ambiguity, 35B passes the compound eval overall. Residual failures concentrate in compound state transitions, especially:
+
+```text
+single-image detection probe -> migration_advisor
+```
+
+This is the main candidate direction for GRPO data construction. Generic single-step routing is not the priority unless a new eval shows fresh hard cases.
+
+## Demo
+
+Start the local demo server:
+
+```bash
+python3 demo/demo_server.py --port 18080
+```
+
+Then open:
+
+```text
+http://127.0.0.1:18080
+```
+
+More demo details are in:
+
+```text
+demo/README.md
+```
+
+## Notes
+
+- The Planner output is a structured JSON decision, not the final user-facing answer.
+- Some transitions are handled by engineering in `demo/agent.py`; do not train the model to duplicate those if the runtime already owns them.
+- Generated eval reports and rollout predictions are intentionally kept under `results/` or `training/*/reports/` so they can be audited and re-scored.

@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "migration_advisor",
+  "_action_input": {
+    "user_query": "先用这张图验证厨师帽能不能被现有模型看到；若不稳定，再给后厨帽子佩戴检测的轻量验证路径。",
+    "use_image": true,
+    "use_visual_probe": true,
+    "finish_after_tool": true
+  },
+  "_thought": "用户当前需求是验证厨师帽检测的可行性，并寻求轻量验证路径。这属于典型的迁移/能力边界评估场景，需要判断现有模型能否支持、能力边界、数据要求及工程方案。虽然用户提供了图片，但核心诉求是评估迁移可行性而非直接生成图片或执行评测。根据工具定义，migration_advisor 专门处理此类问题，内部会进行 RAG 检索、相似资产分析，并在有样例图时执行轻量视觉探针。因此应优先选择 migration_advisor，并设置 finish_after_tool=true，因为该工具会直接输出评估报告，无需后续加工。"
+}

@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "migration_advisor",
+  "_action_input": {
+    "user_query": "我想先做一个小探针：检测横幅。如果结果模糊，再分析横幅违规悬挂检测的复用空间。",
+    "use_image": true,
+    "use_visual_probe": true,
+    "finish_after_tool": true
+  },
+  "_thought": "用户明确提出了两个需求：1. 对图片中的横幅进行目标检测（小探针）；2. 如果检测效果模糊，再分析该任务在现有能力上的复用空间。这是一个典型的'先执行轻量级视觉探针，再评估迁移可行性'的场景。根据工具定义，migration_advisor 专门用于处理'新需求能否做/如何迁移/能力边界/数据要求'的业务可行性报告，且内部会执行轻量视觉探针。因此，应优先调用 migration_advisor 工具，将用户的原始需求作为 user_query 传入，并设置 use_image=true 和 use_visual_probe=true，以便工具内部对图片执行探针并输出评估报告。由于该工具会直接输出迁移评估报告，满足用户'如果结果模糊再分析'的完整闭环，因此设置 finish_after_tool=true。"
+}

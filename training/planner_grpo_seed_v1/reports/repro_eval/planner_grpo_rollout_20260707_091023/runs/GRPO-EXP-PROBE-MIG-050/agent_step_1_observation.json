@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "厨师帽",
+    "finish_after_tool": false
+  },
+  "_thought": "用户明确要求：1) 先跑单图检测看厨师帽；2) 再根据结果判断是否需要给客户后厨帽子佩戴检测的低成本方案。当前步骤索引为 1，steps 为空，说明这是第一步。根据规则 3 和 8，单图快速检测（用户只要求“看有没有某目标/直接检测/快速判断”）应使用 detection 工具，且 finish_after_tool 应设为 false，因为后续还需要根据检测结果判断迁移可行性（即第二步需要调用 migration_advisor）。因此，第一步应调用 qwen_detection 或 rexomni_detection 进行单图检测，label 为“厨师帽”，finish_after_tool 设为 false。"
+}

@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "钓鱼的人",
+    "finish_after_tool": false
+  },
+  "_thought": "用户要求先用开放集模型检测图片中的钓鱼人员，若信心不足再输出迁移建议。当前步骤索引为1，query_trajectories 为空，说明这是第一轮操作。根据规则，单图快速检测应使用 qwen_detection 或 rexomni_detection，且 finish_after_tool 应设为 false，因为后续可能还需要迁移建议。用户明确提到“如果信心不足，再输出钓鱼人员检测迁移建议”，这属于迁移评估场景，因此第一步 detection 的 finish_after_tool 必须为 false。"
+}

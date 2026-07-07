@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "migration_advisor",
+  "_action_input": {
+    "user_query": "请先对图里的烟雾做快速探针，探针结果不确定的话，再给一个烟雾异常检测的可行性方案。",
+    "use_image": true,
+    "use_visual_probe": true,
+    "finish_after_tool": true
+  },
+  "_thought": "用户请求包含两个明确步骤：1) 对图片中的烟雾做快速探针（轻量视觉探针）；2) 若探针结果不确定，再给出烟雾异常检测的可行性方案。这属于典型的“能力边界/可行性报告”场景，且用户明确要求“探针结果不确定”时再给方案，符合 migration_advisor 的触发条件。图片已提供，应作为样例证据传入 use_image=true，并允许内部执行视觉探针 use_visual_probe=true。migration_advisor 内部会先做探针，再根据结果输出可行性报告，因此 finish_after_tool 设为 true。无需澄清，因为意图清晰且路径唯一。"
+}

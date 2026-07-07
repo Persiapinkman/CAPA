@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "pipeline_eval",
+  "_action_input": {
+    "task_text": "垃圾车检测",
+    "finish_after_tool": false
+  },
+  "_thought": "用户意图非常明确：第一步是基于提供的图片进行垃圾车检测，第二步是基于检测结果评估迁移可行性。这是一个典型的‘先执行探针检测，再评估迁移’的闭环流程。根据决策原则，第一步应调用 pipeline_eval（因为它包含图片生成 - 标注 - 评估的完整流水线，且用户明确要求‘检测有没有垃圾车’），第二步再调用 migration_advisor 做迁移评估。由于第一步是中间状态，finish_after_tool 应设为 false。当前 query 中已包含图片路径（image_filename），无需澄清。"
+}

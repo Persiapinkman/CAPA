@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "migration_advisor",
+  "_action_input": {
+    "user_query": "请先对图里的横幅做快速探针，探针结果不确定的话，再给一个横幅违规悬挂检测的可行性方案。",
+    "use_image": true,
+    "use_visual_probe": true,
+    "finish_after_tool": true
+  },
+  "_thought": "用户要求对图片中的横幅做快速探针，并提到如果结果不确定，再给出横幅违规悬挂检测的可行性方案。这涉及到对图片内容的视觉分析和迁移可行性评估。根据工具库，migration_advisor 工具专门用于处理“新需求能否由现有模型/历史能力迁移、能力边界在哪里”的问题，并且内部会做分字段 RAG 检索、相似资产分析，并在有样例图时可执行轻量视觉探针后输出迁移评估报告。用户的请求完全符合 migration_advisor 的使用场景（有图片、询问可行性/探针）。因此，我应该调用 migration_advisor 工具，设置 use_image=true 和 use_visual_probe=true，以执行视觉探针并评估横幅违规悬挂检测的可行性。"
+}

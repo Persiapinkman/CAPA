@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "烟雾",
+    "finish_after_tool": false
+  },
+  "_thought": "用户要求先检测图片中是否有烟雾，若不确定再提供低成本验证方案。当前步骤索引为1，说明这是第一轮操作。根据规则，单图快速检测应使用 detection 工具（qwen_detection 或 rexomni_detection），且 finish_after_tool 应设为 false，因为用户明确要求“如果不确定，再给客户一个烟雾异常检测的低成本验证方案”，这意味着检测只是中间步骤，后续需要迁移顾问输出方案。因此，第一步选择 qwen_detection 进行快速检测，finish_after_tool=false。"
+}

@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "pipeline_eval",
+  "_action_input": {
+    "task_text": "这张图作为样例，先用开放集模型试厨师帽；如果信心不足，再输出后厨帽子佩戴检测迁移建议。",
+    "use_image": true,
+    "use_visual_probe": true,
+    "finish_after_tool": true
+  },
+  "_thought": "用户明确提出了一个分阶段的检测与迁移评估需求：先用开放集模型检测厨师帽，若效果不佳再输出迁移建议。这属于典型的'生成样本 + 目标检测评测/模型效果对比'的可执行视觉评测场景，应优先选择 pipeline_eval 工具。用户已提供图片作为样例，且明确提到'这张图作为样例'，因此 use_image 应设为 true。由于用户要求的是完整的检测与迁移建议流程，pipeline_eval 工具内部会执行图片生成（如有需要）、目标检测和评估，最终输出评估报告，因此 finish_after_tool 应设为 true。"
+}

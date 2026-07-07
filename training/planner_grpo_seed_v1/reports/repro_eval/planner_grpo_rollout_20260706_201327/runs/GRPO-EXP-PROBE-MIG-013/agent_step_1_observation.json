@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "migration_advisor",
+  "_action_input": {
+    "user_query": "请先对图里的钓鱼的人做快速探针，探针结果不确定的话，再给一个钓鱼人员检测的可行性方案。",
+    "use_image": true,
+    "use_visual_probe": true,
+    "finish_after_tool": true
+  },
+  "_thought": "用户明确要求对图片中的钓鱼人员进行快速探针，并在结果不确定时提供可行性方案。这属于迁移/能力边界评估场景，应使用 migration_advisor 工具。用户提供了图片，因此 use_image 和 use_visual_probe 应设为 true。该工具会输出完整的迁移评估报告，可直接结束本轮请求，finish_after_tool 设为 true。"
+}

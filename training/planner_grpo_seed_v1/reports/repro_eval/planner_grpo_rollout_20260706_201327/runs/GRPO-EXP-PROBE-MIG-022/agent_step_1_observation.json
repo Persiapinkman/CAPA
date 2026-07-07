@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "migration_advisor",
+  "_action_input": {
+    "user_query": "先别直接做完整评测，先看这张图有没有烟雾，再决定烟雾异常检测是否值得低成本验证。",
+    "use_image": true,
+    "use_visual_probe": true,
+    "finish_after_tool": true
+  },
+  "_thought": "用户明确要求先对图片进行轻量级视觉探针，判断是否存在烟雾，再决定是否进行后续的低成本验证。这属于迁移顾问（migration_advisor）的典型场景：评估新需求（烟雾异常检测）在当前图片上的可行性与能力边界。用户提供了图片（smoke.jpg），且明确提到“先看这张图有没有烟雾”，因此 use_image 和 use_visual_probe 应设为 true。finish_after_tool 设为 true，因为迁移顾问会直接输出评估报告，无需后续工具。"
+}

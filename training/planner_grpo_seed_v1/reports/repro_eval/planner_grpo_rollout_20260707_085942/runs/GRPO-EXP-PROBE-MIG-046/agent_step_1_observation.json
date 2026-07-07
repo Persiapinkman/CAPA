@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "烟雾",
+    "finish_after_tool": false
+  },
+  "_thought": "用户明确要求先进行单图目标检测（检查烟雾），若检测结果不确定再转为迁移评估。当前步骤索引为1，且 query_trajectories 中 steps 为空，说明尚未执行任何检测工具。根据规则，单图快速检测应使用 qwen_detection 或 rexomni_detection，且 finish_after_tool 应设为 false，因为用户后续要求“如果检测没把握，再转成迁移评估”，意味着检测只是中间步骤，需要后续根据结果决定下一步。因此，选择 qwen_detection 进行烟雾检测，并设置 finish_after_tool=false。"
+}

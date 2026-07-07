@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "反光条",
+    "finish_after_tool": false
+  },
+  "_thought": "用户首先要求检测图片中是否有反光条，这是一个单图快速检测/轻量探针的需求，符合 qwen_detection 或 rexomni_detection 的使用场景。用户提到“先用已有模型试一下”，说明第一步是检测。如果检测结果不确定或需要进一步方案，再考虑迁移顾问。因此，第一步调用 qwen_detection 进行快速检测，finish_after_tool 设为 false，因为后续可能还需要根据结果给出方案。"
+}

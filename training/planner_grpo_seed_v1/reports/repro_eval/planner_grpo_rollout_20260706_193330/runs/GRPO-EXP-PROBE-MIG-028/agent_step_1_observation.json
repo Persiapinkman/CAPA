@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "rexomni_detection",
+  "_action_input": {
+    "label": "烟雾",
+    "finish_after_tool": false
+  },
+  "_thought": "用户意图非常明确：1) 先用开放集模型（Rex-Omni）对这张烟雾图片进行检测；2) 若结果置信度低，再调用迁移顾问输出迁移建议。当前图片已提供，且问题包含“试烟雾”和“迁移建议”两个明确步骤。根据决策原则，第一步应执行目标检测（Rex-Omni），设置 finish_after_tool=false，因为后续可能还需要迁移建议。第二步若检测信心不足，再调用 migration_advisor。因此，当前决策为 tool 类型，调用 rexomni_detection。"
+}

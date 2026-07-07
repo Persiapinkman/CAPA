@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "pipeline_eval",
+  "_action_input": {
+    "task_text": "检测图片中是否有钓鱼的人",
+    "finish_after_tool": false
+  },
+  "_thought": "用户意图非常明确：第一步是基于图片做目标检测（检测钓鱼的人），第二步是基于检测结果判断该任务能否迁移。根据决策原则，第一步属于可执行的视觉评测，应优先选择 pipeline_eval（因为它包含图片生成 - 标注 - 评估的完整流程，且用户明确提到“检测有没有钓鱼的人”）。第二步“判断能否迁移”属于迁移评估，但用户要求“先检测...如果结果不稳，再判断...”，说明检测是前置条件，迁移评估是后续步骤。因此，当前决策应执行 pipeline_eval，设置 finish_after_tool=false，因为检测结果可能不稳定，需要后续调用 migration_advisor 做迁移评估。注意：用户提供了图片，pipeline_eval 不需要显式传 image_path，但内部会处理。另外，migration_advisor 用于“新需求能否做/如何迁移/能力边界/数据要求”的业务可行性报告，而这里用户是“先检测...再判断”，所以第一步必须是 pipeline_eval。"
+}
