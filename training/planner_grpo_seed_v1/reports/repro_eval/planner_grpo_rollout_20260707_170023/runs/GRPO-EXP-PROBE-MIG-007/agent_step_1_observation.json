@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "钓鱼的人",
+    "finish_after_tool": false
+  },
+  "_thought": "用户明确要求先进行单图检测（有没有钓鱼的人），且后续有‘如果结果不稳，再判断迁移’的明确条件。根据规则，第一步应使用单图检测工具（qwen_detection 或 rexomni_detection），finish_after_tool 设为 false，以便根据检测结果决定是否进入 migration_advisor。"
+}

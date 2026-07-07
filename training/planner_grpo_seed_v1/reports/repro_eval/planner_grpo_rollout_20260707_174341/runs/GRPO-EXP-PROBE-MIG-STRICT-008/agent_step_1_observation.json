@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集探针结果不稳定/置信度不足，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "厨师帽",
+    "finish_after_tool": true
+  },
+  "_thought": "用户明确要求第一步只做轻量探针检测厨师帽，且后续若结果不稳再进行迁移评估。当前是第一步，应优先调用单图检测工具完成轻量探针。根据规则，单图快速检测应设置 finish_after_tool=true，因为用户明确第一步只做探针，后续是否迁移取决于探针结果，但第一步本身只需完成检测。选择 qwen_detection 作为轻量探针工具，label 为厨师帽。"
+}

@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集探针结果不稳定/置信度不足，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "垃圾车",
+    "finish_after_tool": false
+  },
+  "_thought": "用户明确要求先用已有模型做轻量探针检测，若不确定再给迁移方案。当前是第一步，应优先调用单图检测工具（qwen_detection 或 rexomni_detection）进行探针。由于用户未指定具体模型，两个工具均可，选择 qwen_detection。finish_after_tool 设为 false，因为后续可能还需要根据探针结果调用 migration_advisor 输出迁移方案。"
+}

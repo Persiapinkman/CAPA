@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "钓鱼的人",
+    "finish_after_tool": false
+  },
+  "_thought": "用户明确要求先进行单图检测确认钓鱼人员是否存在，再根据检测结果判断是否需要提供低成本方案。第一步是单图检测，属于中间步骤，需要等待检测结果后再规划下一步（migration_advisor 或 answerer），因此 finish_after_tool 应设为 false。"
+}

@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "反光条",
+    "finish_after_tool": false
+  },
+  "_thought": "用户明确要求先进行单图检测（看反光条），再根据检测结果判断是否需要低成本方案。第一步是单图检测，属于轻量探针场景，应使用 qwen_detection 或 rexomni_detection。由于用户未指定模型，任选其一即可。检测完成后，observation 会告知是否有反光条，若存在或用户后续要求低成本方案，下一步需调用 migration_advisor 输出迁移评估报告。因此，第一步检测的 finish_after_tool 应设为 false，以便根据结果规划下一步。"
+}

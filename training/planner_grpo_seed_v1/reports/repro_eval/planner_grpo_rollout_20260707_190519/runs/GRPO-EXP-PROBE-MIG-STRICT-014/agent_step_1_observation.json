@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集探针结果不稳定/置信度不足，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "厨师帽",
+    "finish_after_tool": false
+  },
+  "_thought": "用户明确要求先进行单图目标检测（厨师帽），且指定了后续条件（探针信心不足时输出迁移可行性与风险建议）。根据决策原则，第一步应使用单图检测工具（qwen_detection 或 rexomni_detection）进行轻量探针，finish_after_tool 设为 false 以便根据检测结果规划下一步迁移评估。"
+}

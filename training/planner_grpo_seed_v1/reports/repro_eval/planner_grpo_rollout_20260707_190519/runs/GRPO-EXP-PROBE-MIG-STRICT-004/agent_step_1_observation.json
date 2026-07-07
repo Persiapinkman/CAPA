@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集探针结果不稳定/置信度不足，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "烟雾",
+    "finish_after_tool": false
+  },
+  "_thought": "用户明确要求先进行单图轻量探针检测（确认图中是否有烟雾），若探针不确定再提供迁移验证方案。根据规则，第一步应使用单图检测工具（qwen_detection 或 rexomni_detection）执行探针，finish_after_tool 设为 false，以便根据探针结果决定是否调用 migration_advisor。"
+}

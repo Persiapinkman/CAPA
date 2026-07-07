@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集探针结果不稳定/置信度不足，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "烟雾",
+    "finish_after_tool": false
+  },
+  "_thought": "用户明确要求先对图片进行烟雾检测（轻量探针），若结果模糊则继续分析迁移可行性。当前步骤为第1步，尚未执行任何工具调用，因此第一步应执行单图检测工具。由于用户未指定具体检测模型，qwen_detection 与 rexomni_detection 均可使用，选择 qwen_detection。根据用户意图，探针结果若模糊才需后续迁移分析，因此本次检测为中间步骤，finish_after_tool 应设为 false。"
+}

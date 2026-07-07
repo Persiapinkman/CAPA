@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import math
 import subprocess
@@ -36,6 +37,14 @@ def write_json(path: Path, data: dict[str, Any]) -> None:
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+def write_csv(path: Path, rows: list[dict[str, Any]], fieldnames: list[str]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
+
+
 def mean(values: list[float]) -> float | None:
     return sum(values) / len(values) if values else None
 
@@ -49,6 +58,12 @@ def stdev(values: list[float]) -> float | None:
 
 def rounded(value: float | None) -> float | None:
     return round(value, 6) if value is not None else None
+
+
+def _json_compact(value: Any) -> str:
+    if value in (None, "", [], {}):
+        return ""
+    return json.dumps(value, ensure_ascii=False, sort_keys=True)
 
 
 def prediction_stats(path: Path) -> dict[str, Any]:
@@ -75,6 +90,195 @@ def prediction_stats(path: Path) -> dict[str, Any]:
         "empty_decisions": empty_decisions,
         "errors": dict(error_counts),
         "actions": dict(action_counts),
+    }
+
+
+def _load_cases_by_id(path: Path) -> dict[str, dict[str, Any]]:
+    rows = load_jsonl(path)
+    return {
+        str(row.get("case_id") or ""): row
+        for row in rows
+        if isinstance(row, dict) and str(row.get("case_id") or "")
+    }
+
+
+def _results_by_id(report: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    rows = report.get("results") if isinstance(report.get("results"), list) else []
+    return {
+        str(row.get("case_id") or ""): row
+        for row in rows
+        if isinstance(row, dict) and str(row.get("case_id") or "")
+    }
+
+
+def _predictions_by_id(path: Path) -> dict[str, dict[str, Any]]:
+    rows = load_jsonl(path)
+    return {
+        str(row.get("case_id") or ""): row
+        for row in rows
+        if isinstance(row, dict) and str(row.get("case_id") or "")
+    }
+
+
+def _flatten_failures(result: dict[str, Any]) -> str:
+    failures: list[str] = []
+    for step in result.get("step_scores") if isinstance(result.get("step_scores"), list) else []:
+        if not isinstance(step, dict):
+            continue
+        step_index = step.get("step")
+        step_failures = step.get("failures") if isinstance(step.get("failures"), list) else []
+        for failure in step_failures:
+            text = str(failure or "").strip()
+            if not text:
+                continue
+            if step_index not in (None, ""):
+                failures.append(f"step{step_index}:{text}")
+            else:
+                failures.append(text)
+    forbidden = result.get("forbidden_hit") if isinstance(result.get("forbidden_hit"), list) else []
+    for action in forbidden:
+        text = str(action or "").strip()
+        if text:
+            failures.append(f"forbidden:{text}")
+    return " | ".join(failures)
+
+
+def _prediction_metrics(prediction: dict[str, Any] | None) -> tuple[str, str, float | str, float | str, int | str, int | str]:
+    if not isinstance(prediction, dict):
+        return "", "", "", "", "", ""
+    decisions = prediction.get("decisions") if isinstance(prediction.get("decisions"), list) else []
+    first = decisions[0] if decisions and isinstance(decisions[0], dict) else {}
+    used_actions = []
+    for item in decisions:
+        if not isinstance(item, dict):
+            continue
+        action = str(item.get("action") or "").strip()
+        if action:
+            used_actions.append(action)
+    metrics = first.get("_planner_metrics") if isinstance(first.get("_planner_metrics"), dict) else {}
+    return (
+        str(first.get("action") or ""),
+        _json_compact(used_actions),
+        metrics.get("planner_total_ms", ""),
+        metrics.get("api_call_ms", ""),
+        metrics.get("input_tokens", ""),
+        metrics.get("output_tokens", ""),
+    )
+
+
+def build_case_audit_rows(*, reward_reports: list[Path], prediction_files: list[Path], cases_path: Path) -> list[dict[str, Any]]:
+    loaded_reports = [load_json(path) for path in reward_reports]
+    report_rows = [_results_by_id(report) for report in loaded_reports]
+    prediction_rows = [_predictions_by_id(path) for path in prediction_files]
+    cases_by_id = _load_cases_by_id(cases_path)
+    case_ids: list[str] = []
+    seen: set[str] = set()
+    for cid in cases_by_id:
+        if cid not in seen:
+            seen.add(cid)
+            case_ids.append(cid)
+    for report in loaded_reports:
+        for row in report.get("results") if isinstance(report.get("results"), list) else []:
+            cid = str(row.get("case_id") or "")
+            if cid and cid not in seen:
+                seen.add(cid)
+                case_ids.append(cid)
+
+    rows: list[dict[str, Any]] = []
+    for cid in case_ids:
+        case = cases_by_id.get(cid, {})
+        setup = case.get("setup") if isinstance(case.get("setup"), dict) else {}
+        expected = case.get("expected_decisions") if isinstance(case.get("expected_decisions"), list) else []
+        pass_values: list[bool] = []
+        out: dict[str, Any] = {
+            "case_id": cid,
+            "category": str(case.get("category") or ""),
+            "query": str(case.get("user_query") or ""),
+            "has_image": bool(setup.get("has_image")),
+            "image_fixture": str(setup.get("image_fixture") or ""),
+            "expected_decisions": _json_compact(expected),
+            "forbidden_actions": _json_compact(case.get("forbidden_actions")),
+            "reward_spec": _json_compact(case.get("reward_spec")),
+        }
+        for index, (rows_by_id, preds_by_id) in enumerate(zip(report_rows, prediction_rows), start=1):
+            row = rows_by_id.get(cid, {})
+            pred = preds_by_id.get(cid, {})
+            passed = row.get("passed")
+            pass_values.append(bool(passed is True))
+            actual_action, used_actions, elapsed_ms, api_call_ms, input_tokens, output_tokens = _prediction_metrics(pred)
+            out.update(
+                {
+                    f"run{index}_passed": passed,
+                    f"run{index}_score": row.get("score", ""),
+                    f"run{index}_used_actions": used_actions,
+                    f"run{index}_actual_first_action": actual_action,
+                    f"run{index}_decisions": _json_compact(pred.get("decisions")),
+                    f"run{index}_failures": _flatten_failures(row) or " | ".join(str(x) for x in pred.get("errors", []) if str(x)),
+                    f"run{index}_elapsed_ms": elapsed_ms,
+                    f"run{index}_api_call_ms": api_call_ms,
+                    f"run{index}_input_tokens": input_tokens,
+                    f"run{index}_output_tokens": output_tokens,
+                }
+            )
+        out["pass_count"] = sum(1 for value in pass_values if value)
+        out["run_count"] = len(pass_values)
+        out["all_passed"] = bool(pass_values and all(pass_values))
+        out["any_failed"] = bool(pass_values and not all(pass_values))
+        rows.append(out)
+    return rows
+
+
+def case_audit_fieldnames(run_count: int) -> list[str]:
+    fields = [
+        "case_id",
+        "category",
+        "query",
+        "has_image",
+        "image_fixture",
+        "expected_decisions",
+        "forbidden_actions",
+        "reward_spec",
+    ]
+    for index in range(1, run_count + 1):
+        fields.extend(
+            [
+                f"run{index}_passed",
+                f"run{index}_score",
+                f"run{index}_used_actions",
+                f"run{index}_actual_first_action",
+                f"run{index}_decisions",
+                f"run{index}_failures",
+                f"run{index}_elapsed_ms",
+                f"run{index}_api_call_ms",
+                f"run{index}_input_tokens",
+                f"run{index}_output_tokens",
+            ]
+        )
+    fields.extend(["pass_count", "run_count", "all_passed", "any_failed"])
+    return fields
+
+
+def write_case_audit_csvs(
+    *,
+    reward_reports: list[Path],
+    prediction_files: list[Path],
+    cases_path: Path,
+    out_dir: Path,
+    report_prefix: str,
+) -> dict[str, str]:
+    rows = build_case_audit_rows(
+        reward_reports=reward_reports,
+        prediction_files=prediction_files,
+        cases_path=cases_path,
+    )
+    fields = case_audit_fieldnames(len(reward_reports))
+    audit_path = out_dir / f"{report_prefix}_case_audit.csv"
+    failed_path = out_dir / f"{report_prefix}_failed_cases.csv"
+    write_csv(audit_path, rows, fields)
+    write_csv(failed_path, [row for row in rows if row.get("any_failed") is True], fields)
+    return {
+        "case_audit_csv": str(audit_path),
+        "failed_cases_csv": str(failed_path),
     }
 
 
@@ -213,6 +417,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--do-sample", default="false")
     parser.add_argument("--limit", type=int, default=0)
+    parser.add_argument("--resume-existing", action="store_true")
     return parser.parse_args()
 
 
@@ -233,6 +438,11 @@ def main() -> None:
     for run_idx in range(1, max(1, int(args.runs)) + 1):
         pred_path = out_dir / f"{args.report_prefix}_run{run_idx}_predictions.jsonl"
         reward_path = out_dir / f"{args.report_prefix}_run{run_idx}_reward.json"
+        if args.resume_existing and pred_path.is_file() and reward_path.is_file():
+            print(f"[resume {run_idx}/{args.runs}] reuse existing files", flush=True)
+            prediction_files.append(pred_path)
+            reward_reports.append(reward_path)
+            continue
         rollout_cmd = [
             sys.executable,
             str(rollout_script),
@@ -287,13 +497,23 @@ def main() -> None:
         args=args,
         elapsed_ms=elapsed_ms,
     )
+    audit_paths = write_case_audit_csvs(
+        reward_reports=reward_reports,
+        prediction_files=prediction_files,
+        cases_path=cases_path,
+        out_dir=out_dir,
+        report_prefix=args.report_prefix,
+    )
     agg_path = out_dir / f"{args.report_prefix}_aggregate.json"
+    aggregate["artifacts"] = audit_paths
     write_json(agg_path, aggregate)
     print(
         "Repeated planner GRPO eval:",
         f"runs={len(reward_reports)}",
         f"mean_score_mean={aggregate['aggregate'].get('mean_score_mean')}",
         f"mean_score_stdev={aggregate['aggregate'].get('mean_score_stdev')}",
+        f"case_audit_csv={audit_paths.get('case_audit_csv')}",
+        f"failed_cases_csv={audit_paths.get('failed_cases_csv')}",
         f"out={agg_path}",
     )
 

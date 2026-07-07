@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集探针结果不稳定/置信度不足，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "垃圾车",
+    "finish_after_tool": true
+  },
+  "_thought": "用户明确要求第一步只做轻量探针检测垃圾车，第二步再判断迁移可行性。当前是第一步，且用户未指定具体检测工具，qwen_detection 与 rexomni_detection 都是可接受的单图轻量探针工具。根据决策原则，单图快速检测应设置 finish_after_tool=true，因为用户明确说“第一步只做轻量探针”，探针结果本身即第一步的交付物，后续迁移判断是第二步的任务。因此，第一步应调用 qwen_detection 进行垃圾车检测，finish_after_tool=true。"
+}

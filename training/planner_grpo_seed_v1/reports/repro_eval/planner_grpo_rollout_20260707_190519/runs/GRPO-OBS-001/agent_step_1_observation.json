@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测返回疑似钓鱼人员，但置信度较低，建议结合业务资产评估可行性。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "钓鱼的人",
+    "finish_after_tool": false
+  },
+  "_thought": "用户明确要求先进行单图检测（'先用已有模型试一下'），且后续若不确定才需要低成本验证方案。根据规则，第一步应使用 detection 工具（qwen_detection 或 rexomni_detection）进行快速检测，finish_after_tool 设为 false，因为用户明确提到'如果结果不确定，再给客户一个低成本验证方案'，这意味着检测结果是中间状态，后续可能需要 migration_advisor 来提供验证方案。"
+}

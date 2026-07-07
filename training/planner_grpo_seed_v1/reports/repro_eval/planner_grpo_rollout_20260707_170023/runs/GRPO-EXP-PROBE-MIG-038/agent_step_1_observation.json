@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "厨师帽",
+    "finish_after_tool": false
+  },
+  "_thought": "用户当前需求分为两步：第一步是单图快速检测（探针），第二步是基于探针结果分析迁移复用空间。根据规则，第一步应使用单图检测工具（qwen_detection 或 rexomni_detection），且因后续还有分析步骤，finish_after_tool 应设为 false。第二步再调用 migration_advisor。当前步骤为 1，尚未执行任何工具，因此直接执行第一步检测。"
+}

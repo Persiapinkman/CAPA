@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-06T17:13:04.310474+00:00",
+  "generated_at": "2026-07-07T09:00:22.587589+00:00",
   "cases_path": "/media/nvme1n1p1/zengkeqin/projects/CAPA/training/planner_grpo_seed_v1/cases/planner_grpo_train_cases.jsonl",
   "model": "Qwen3.5-35B-A3B",
   "api_base": "http://10.111.32.253:8000/v1",
@@ -111,7 +111,7 @@
     "errors_total": {}
   },
   "timing": {
-    "elapsed_ms": 1413948.331
+    "elapsed_ms": 0.127
   },
   "reports": [
     {
@@ -390,5 +390,9 @@
         }
       }
     }
-  ]
+  ],
+  "artifacts": {
+    "case_audit_csv": "/media/nvme1n1p1/zengkeqin/projects/CAPA/training/planner_grpo_seed_v1/reports/repro_eval/qwen35_35b_a3b_grpo_compound245_stateprompt_t60_3x_case_audit.csv",
+    "failed_cases_csv": "/media/nvme1n1p1/zengkeqin/projects/CAPA/training/planner_grpo_seed_v1/reports/repro_eval/qwen35_35b_a3b_grpo_compound245_stateprompt_t60_3x_failed_cases.csv"
+  }
 }

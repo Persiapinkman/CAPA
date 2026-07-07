@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "反光条",
+    "finish_after_tool": false
+  },
+  "_thought": "用户明确要求先进行单图检测（检查反光条），若检测结果不确定再转为迁移评估。当前步骤为第1步，query_trajectories 为空，说明尚未执行任何工具。根据规则，单图快速检测应使用 detection 工具，且 finish_after_tool 设为 false，因为后续可能需要进行迁移评估。由于用户未指定具体检测模型，qwen_detection 与 rexomni_detection 均可接受，选择 qwen_detection 作为第一步。"
+}

@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集检测结果不稳定，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "烟雾",
+    "finish_after_tool": false
+  },
+  "_thought": "用户明确要求先进行单图烟雾检测，若检测结果不确定再转为迁移评估。当前步骤为第1步，query_trajectories 为空，尚未执行任何工具。根据决策原则，单图快速检测应使用 detection 工具，且因后续可能需迁移评估，finish_after_tool 应设为 false。"
+}
