@@ -1,0 +1,31 @@
+{
+  "run_id": "2026-07-08_4b_fullparam_grpo_long_fsdp",
+  "kind": "train_fullparam_grpo_fsdp_long",
+  "date": "2026-07-08",
+  "base_model": "/mnt/zkq/models/Qwen3.5-4B",
+  "base_model_backup": "/mnt/zkq/models/Qwen3.5-4B.backup-20260708",
+  "environment": ".venv-train-cu124",
+  "torch": "2.6.0+cu124",
+  "cases": "training/planner_grpo_seed_v1/cases/planner_grpo_focused_4b_cases.jsonl",
+  "output_dir": "outputs/planner-grpo-qwen35-4b-focused-full-fsdp-long-20260708",
+  "script": "scripts/run_qwen35_4b_grpo_fullparam_fsdp.sh",
+  "cuda_visible_devices": "4,5,6,7",
+  "num_processes": 4,
+  "parameter_mode": "full",
+  "adapter": null,
+  "training_args": {
+    "num_train_epochs": 1,
+    "max_steps": -1,
+    "per_device_train_batch_size": 1,
+    "gradient_accumulation_steps": 8,
+    "learning_rate": 1e-6,
+    "num_generations": 4,
+    "max_prompt_length": 3072,
+    "max_completion_length": 384,
+    "temperature": 0.7,
+    "top_p": 0.95,
+    "save_steps": 100000,
+    "save_total_limit": 1,
+    "report_to": "none"
+  }
+}

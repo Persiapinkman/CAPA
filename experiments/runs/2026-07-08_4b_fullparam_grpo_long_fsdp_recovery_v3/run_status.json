@@ -1,0 +1,41 @@
+{
+  "run_id": "2026-07-08_4b_fullparam_grpo_long_fsdp_recovery_v3",
+  "status": "failed_oom_after_checkpoint",
+  "created_at_utc": "2026-07-08T05:32:00Z",
+  "started_at_utc": "2026-07-08T05:34:00Z",
+  "launcher_pid": 1849894,
+  "accelerate_pid": 1849901,
+  "worker_pids": [1849953, 1849954, 1849955, 1849956],
+  "latest_observed_step": 2,
+  "latest_metrics": {
+    "loss": 0.08452,
+    "reward_mean": 0.5653,
+    "reward_std": 0.4851,
+    "completion_mean_length": 162.4,
+    "completion_max_length": 192,
+    "completion_clipped_ratio": 0.6094,
+    "step_time_seconds": 343.0
+  },
+  "checkpoint_available": true,
+  "latest_checkpoint": "outputs/planner-grpo-qwen35-4b-focused-full-fsdp-long-20260708-recovery-v3/checkpoint-2",
+  "latest_checkpoint_size": "37G",
+  "checkpoint_files_observed": [
+    "model.safetensors",
+    "pytorch_model_fsdp.bin",
+    "training_args.bin",
+    "tokenizer.json",
+    "config.json"
+  ],
+  "failed_at_utc": "2026-07-08T05:59:05Z",
+  "failure": {
+    "completed_optimizer_steps": 2,
+    "stage": "trl_grpo_generate_linear_attention",
+    "exception": "torch.OutOfMemoryError",
+    "allocation_mib": 554,
+    "reported_local_ranks": [0, 2],
+    "note": "CUDA log GPU ids are local ids after CUDA_VISIBLE_DEVICES remapping, not physical GPU ids. The physical launch set was CUDA_VISIBLE_DEVICES=4,5,6,7."
+  },
+  "superseded_by": "2026-07-08_4b_fullparam_grpo_long_fsdp_recovery_v4",
+  "log": "experiments/runs/2026-07-08_4b_fullparam_grpo_long_fsdp_recovery_v3/logs/grpo_fullparam_fsdp.log",
+  "output_dir": "outputs/planner-grpo-qwen35-4b-focused-full-fsdp-long-20260708-recovery-v3"
+}

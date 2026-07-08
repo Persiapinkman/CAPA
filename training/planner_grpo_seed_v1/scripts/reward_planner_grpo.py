@@ -19,6 +19,13 @@ DEFAULT_REWARD_SPEC = {
     "no_forbidden_action": 0.10,
 }
 
+PROCESS_REWARD_KEYS = (
+    "no_premature_stop",
+    "no_repeated_tool",
+    "no_skip_required_probe",
+    "final_tool_finish",
+)
+
 
 ACTION_ALIASES = {
     "qwen-vlm-open-set-delection": "qwen_detection",
@@ -198,6 +205,7 @@ def score_expected_step(
 
 
 STOP_ACTIONS = {"answerer", "final_answer"}
+DETECTION_ACTIONS = {"qwen_detection", "rexomni_detection"}
 
 
 def detect_premature_stop(
@@ -226,6 +234,88 @@ def detect_premature_stop(
         if actual_action in STOP_ACTIONS:
             return True
     return False
+
+
+def _decision_action(decision: dict[str, Any] | None) -> str:
+    if not isinstance(decision, dict):
+        return ""
+    if str(decision.get("decision_type") or "").strip() == "clarify":
+        return "clarify"
+    if str(decision.get("decision_type") or "").strip() == "end":
+        return "final_answer"
+    return normalize_action(str(decision.get("action") or ""))
+
+
+def _expected_action(expected: dict[str, Any] | None) -> str:
+    if not isinstance(expected, dict):
+        return ""
+    if str(expected.get("decision_type") or "tool").strip() == "clarify":
+        return "clarify"
+    return normalize_action(str(expected.get("action") or ""))
+
+
+def _accepted_actions(expected_action: str) -> set[str]:
+    return set(ACTION_EQUIVALENTS.get(expected_action, {expected_action}))
+
+
+def detect_repeated_tool(
+    expected_list: list[dict[str, Any]],
+    decisions: list[dict[str, Any]],
+) -> bool:
+    """Penalize repeated same-tool loops when the expected sequence changes tools."""
+    if len(expected_list) < 2 or len(decisions) < 2:
+        return False
+    expected_actions = [_expected_action(item) for item in expected_list]
+    repeated_allowed = any(
+        a and b and _accepted_actions(a).intersection(_accepted_actions(b))
+        for a, b in zip(expected_actions, expected_actions[1:])
+    )
+    if repeated_allowed:
+        return False
+    for prev, curr in zip(decisions, decisions[1:]):
+        prev_action = _decision_action(prev)
+        curr_action = _decision_action(curr)
+        if not prev_action or not curr_action:
+            continue
+        if prev_action in STOP_ACTIONS or curr_action in STOP_ACTIONS:
+            continue
+        if _accepted_actions(prev_action).intersection(_accepted_actions(curr_action)):
+            return True
+    return False
+
+
+def detect_skip_required_probe(
+    expected_list: list[dict[str, Any]],
+    decisions: list[dict[str, Any]],
+) -> bool:
+    """Penalize jumping straight to migration/pipeline when step 1 must be detection."""
+    if len(expected_list) < 2 or not decisions:
+        return False
+    first_expected = _expected_action(expected_list[0])
+    second_expected = _expected_action(expected_list[1])
+    if first_expected not in DETECTION_ACTIONS or second_expected != "migration_advisor":
+        return False
+    first_actual = _decision_action(decisions[0])
+    return first_actual not in DETECTION_ACTIONS
+
+
+def detect_final_tool_not_finished(
+    expected_list: list[dict[str, Any]],
+    decisions: list[dict[str, Any]],
+) -> bool:
+    """Penalize a correct final substantive tool that still sets finish_after_tool=false."""
+    if not expected_list or not decisions:
+        return False
+    final_expected = expected_list[-1]
+    final_actual = decisions[len(expected_list) - 1] if len(decisions) >= len(expected_list) else None
+    if not isinstance(final_actual, dict):
+        return False
+    if _decision_action(final_actual) not in _accepted_actions(_expected_action(final_expected)):
+        return False
+    required_args = final_expected.get("required_args") if isinstance(final_expected.get("required_args"), dict) else {}
+    if required_args.get("finish_after_tool") is not True:
+        return False
+    return value_matches(get_arg(final_actual, "finish_after_tool"), True) is False
 
 
 def score_case(
@@ -301,15 +391,41 @@ def score_case(
     forbidden_weight = float(reward_spec.get("no_forbidden_action", 0.0))
     forbidden_score = 0.0 if forbidden_hit else forbidden_weight
 
-    # 过程奖励：过早收口惩罚。默认权重 0，仅当 case 显式声明 no_premature_stop 时生效。
+    # 过程奖励：默认权重 0，仅当 case 显式声明时生效。
     premature_weight = float(reward_spec.get("no_premature_stop", 0.0))
     premature_stop_hit = (
         detect_premature_stop(expected_list, decisions) if premature_weight > 0 else False
     )
     premature_score = 0.0 if premature_stop_hit else premature_weight
 
-    total_possible = max_step_score + forbidden_weight + premature_weight
-    numerator = raw_score + forbidden_score + premature_score
+    repeated_weight = float(reward_spec.get("no_repeated_tool", 0.0))
+    repeated_tool_hit = (
+        detect_repeated_tool(expected_list, decisions) if repeated_weight > 0 else False
+    )
+    repeated_score = 0.0 if repeated_tool_hit else repeated_weight
+
+    skip_probe_weight = float(reward_spec.get("no_skip_required_probe", 0.0))
+    skip_required_probe_hit = (
+        detect_skip_required_probe(expected_list, decisions) if skip_probe_weight > 0 else False
+    )
+    skip_probe_score = 0.0 if skip_required_probe_hit else skip_probe_weight
+
+    final_finish_weight = float(reward_spec.get("final_tool_finish", 0.0))
+    final_tool_not_finished_hit = (
+        detect_final_tool_not_finished(expected_list, decisions) if final_finish_weight > 0 else False
+    )
+    final_finish_score = 0.0 if final_tool_not_finished_hit else final_finish_weight
+
+    process_weight = sum(float(reward_spec.get(key, 0.0)) for key in PROCESS_REWARD_KEYS)
+    total_possible = max_step_score + forbidden_weight + process_weight
+    numerator = (
+        raw_score
+        + forbidden_score
+        + premature_score
+        + repeated_score
+        + skip_probe_score
+        + final_finish_score
+    )
     total_score = numerator / total_possible if total_possible > 0 else 0.0
     if not parse_ok:
         total_score = 0.0
@@ -324,6 +440,9 @@ def score_case(
         "max_score": round(total_possible, 6),
         "forbidden_hit": forbidden_hit,
         "premature_stop_hit": premature_stop_hit,
+        "repeated_tool_hit": repeated_tool_hit,
+        "skip_required_probe_hit": skip_required_probe_hit,
+        "final_tool_not_finished_hit": final_tool_not_finished_hit,
         "used_actions": used_actions,
         "step_scores": step_scores,
         "parse_ok": parse_ok,

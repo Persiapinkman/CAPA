@@ -1,0 +1,15 @@
+{
+  "generated_at": "2026-06-23T10:10:37.731637+00:00",
+  "pair_count": 120,
+  "by_error_type": {
+    "general_answer_over_rag": 40,
+    "single_image_detection_over_pipeline": 40,
+    "asset_inventory_over_migration": 40
+  },
+  "out_dir": "/media/nvme1n1p1/zengkeqin/projects/test-skills/results/planner_routing_eval/dpo_train_seed_v1",
+  "notes": [
+    "Synthetic train seed for Planner single-step routing DPO.",
+    "Excludes Adela clarification/state-machine and multi-step workflow cases.",
+    "Human review is required before training."
+  ]
+}

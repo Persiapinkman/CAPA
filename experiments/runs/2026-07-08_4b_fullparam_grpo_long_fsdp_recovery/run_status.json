@@ -1,0 +1,35 @@
+{
+  "run_id": "2026-07-08_4b_fullparam_grpo_long_fsdp_recovery",
+  "status": "failed_oom",
+  "started_at_utc": "2026-07-08T05:16:00Z",
+  "failed_at_utc": "2026-07-08T05:24:39Z",
+  "completed_optimizer_steps": 2,
+  "checkpoint_available": false,
+  "failure": {
+    "rank": 2,
+    "stage": "trl_grpo_generate_prefill",
+    "exception": "torch.OutOfMemoryError",
+    "allocation_gib": 2.32,
+    "free_gib": 1.28,
+    "gpu_reported_total_gib": 31.73,
+    "gpu_reported_process_gib": 30.44
+  },
+  "attempted_fix": {
+    "num_generations": 4,
+    "max_prompt_length": 3072,
+    "observed_prompt_max_tokens": 390,
+    "max_completion_length": 256,
+    "gradient_accumulation_steps": 8,
+    "save_steps": 5,
+    "fsdp_state_dict_type": "SHARDED_STATE_DICT"
+  },
+  "next_fix": {
+    "num_generations": 2,
+    "max_completion_length": 192,
+    "gradient_accumulation_steps": 16,
+    "save_steps": 2,
+    "rationale": "Cut per-rank online generation batch peak while preserving approximately the same completions per optimizer update; checkpoint before a possible later long-tail OOM."
+  },
+  "log": "experiments/runs/2026-07-08_4b_fullparam_grpo_long_fsdp_recovery/logs/grpo_fullparam_fsdp.log",
+  "output_dir": "outputs/planner-grpo-qwen35-4b-focused-full-fsdp-long-20260708-recovery"
+}

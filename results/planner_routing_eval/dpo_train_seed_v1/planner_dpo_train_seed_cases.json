@@ -1,0 +1,1205 @@
+{
+  "schema_version": "1.0",
+  "cases": [
+    {
+      "case_id": "DPO-ANS-001",
+      "title": "标注框质量建议",
+      "category": "general_answer",
+      "user_query": "做目标检测数据集时，标注框质量一般要注意哪些问题？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-002",
+      "title": "IoU 概念解释",
+      "category": "general_answer",
+      "user_query": "IoU 是什么，目标检测里为什么常用它？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-003",
+      "title": "PR 曲线解释",
+      "category": "general_answer",
+      "user_query": "PR 曲线对目标检测评估有什么帮助？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-004",
+      "title": "召回优先指标",
+      "category": "general_answer",
+      "user_query": "如果业务更怕漏检，评估指标应该怎么侧重？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-005",
+      "title": "置信度阈值选择",
+      "category": "general_answer",
+      "user_query": "检测模型上线时置信度阈值通常怎么选？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-006",
+      "title": "误报漏报归因",
+      "category": "general_answer",
+      "user_query": "分析检测误报和漏报时，一般从哪些方面排查？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-007",
+      "title": "训练集划分",
+      "category": "general_answer",
+      "user_query": "目标检测训练集、验证集、测试集一般怎么划分？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-008",
+      "title": "长尾类别处理",
+      "category": "general_answer",
+      "user_query": "检测类别长尾严重时有哪些常见处理办法？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-009",
+      "title": "负样本作用",
+      "category": "general_answer",
+      "user_query": "目标检测任务里为什么需要收集负样本？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-010",
+      "title": "数据增强风险",
+      "category": "general_answer",
+      "user_query": "用数据增强提升检测效果时有什么常见风险？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-011",
+      "title": "开放词表检测",
+      "category": "general_answer",
+      "user_query": "open-vocabulary detection 和普通检测有什么区别？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-012",
+      "title": "标注一致性",
+      "category": "general_answer",
+      "user_query": "多人标注同一批图片时，怎么检查标注一致性？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-013",
+      "title": "小目标优化",
+      "category": "general_answer",
+      "user_query": "小目标检测效果差，常见优化方向有哪些？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-014",
+      "title": "边缘部署权衡",
+      "category": "general_answer",
+      "user_query": "检测模型部署到边缘设备时，速度和精度怎么权衡？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-015",
+      "title": "混淆矩阵",
+      "category": "general_answer",
+      "user_query": "多类别检测结果可以用混淆矩阵分析吗？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-016",
+      "title": "mAP 解释",
+      "category": "general_answer",
+      "user_query": "mAP、precision、recall 分别是什么意思？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-017",
+      "title": "主动学习",
+      "category": "general_answer",
+      "user_query": "检测任务样本不够时，主动学习可以怎么做？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-018",
+      "title": "OOV 解释",
+      "category": "general_answer",
+      "user_query": "视觉模型里的 OOV 问题通常指什么？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-019",
+      "title": "测试集泄漏",
+      "category": "general_answer",
+      "user_query": "目标检测评估里测试集泄漏会带来什么问题？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-020",
+      "title": "类别不均衡",
+      "category": "general_answer",
+      "user_query": "检测数据类别不均衡时，训练和评估要注意什么？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-021",
+      "title": "NMS 解释",
+      "category": "general_answer",
+      "user_query": "NMS 在目标检测后处理里起什么作用？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-022",
+      "title": "过拟合判断",
+      "category": "general_answer",
+      "user_query": "怎么判断一个检测模型是不是过拟合了？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-023",
+      "title": "人工复核抽样",
+      "category": "general_answer",
+      "user_query": "检测模型上线后，人工抽样复核一般怎么设计？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-024",
+      "title": "模型漂移",
+      "category": "general_answer",
+      "user_query": "线上检测模型效果漂移通常有哪些原因？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-025",
+      "title": "标注边界",
+      "category": "general_answer",
+      "user_query": "目标被遮挡时，标注框应该标可见区域还是完整区域？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-026",
+      "title": "难例挖掘",
+      "category": "general_answer",
+      "user_query": "目标检测里的 hard negative mining 是什么？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-027",
+      "title": "校准问题",
+      "category": "general_answer",
+      "user_query": "检测模型的置信度不校准会造成什么影响？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-028",
+      "title": "评估粒度",
+      "category": "general_answer",
+      "user_query": "为什么检测模型要按场景和类别分别看指标？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-029",
+      "title": "阈值分层",
+      "category": "general_answer",
+      "user_query": "不同类别是否可以设置不同置信度阈值？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-030",
+      "title": "质检指标",
+      "category": "general_answer",
+      "user_query": "数据标注质检常用哪些指标？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-031",
+      "title": "召回精度取舍",
+      "category": "general_answer",
+      "user_query": "precision 和 recall 冲突时一般怎么取舍？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-032",
+      "title": "小样本风险",
+      "category": "general_answer",
+      "user_query": "只用很少样本评估检测模型有什么风险？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-033",
+      "title": "跨域泛化",
+      "category": "general_answer",
+      "user_query": "目标检测跨域泛化差通常怎么分析？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-034",
+      "title": "置信度排序",
+      "category": "general_answer",
+      "user_query": "为什么有时 mAP 高但业务体验仍然不好？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-035",
+      "title": "在线监控",
+      "category": "general_answer",
+      "user_query": "检测模型上线后应该监控哪些质量指标？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-036",
+      "title": "分辨率影响",
+      "category": "general_answer",
+      "user_query": "输入分辨率变化会怎样影响检测效果？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-037",
+      "title": "重叠目标",
+      "category": "general_answer",
+      "user_query": "密集重叠目标会给检测评估带来什么问题？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-038",
+      "title": "类别定义",
+      "category": "general_answer",
+      "user_query": "检测任务前为什么要先定义清楚类别边界？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-039",
+      "title": "抽样偏差",
+      "category": "general_answer",
+      "user_query": "测试集抽样偏差会如何影响模型评估？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-ANS-040",
+      "title": "错误分析报告",
+      "category": "general_answer",
+      "user_query": "一份目标检测错误分析报告通常包含哪些部分？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "general_answer_over_rag"
+    },
+    {
+      "case_id": "DPO-VIS-001",
+      "title": "单图垃圾车检测",
+      "category": "executable_vision_probe",
+      "user_query": "帮我看这张图里有没有垃圾车。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-002",
+      "title": "单图垃圾车检测",
+      "category": "executable_vision_probe",
+      "user_query": "检测一下当前图片中的垃圾车。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-003",
+      "title": "单图垃圾车检测",
+      "category": "executable_vision_probe",
+      "user_query": "这张图里是否出现了垃圾车？直接检测一下。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-004",
+      "title": "单图垃圾车检测",
+      "category": "executable_vision_probe",
+      "user_query": "帮我框出图片里的垃圾车。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-005",
+      "title": "单图垃圾车检测",
+      "category": "executable_vision_probe",
+      "user_query": "判断这张图片里有没有垃圾车目标。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-006",
+      "title": "单图垃圾车检测",
+      "category": "executable_vision_probe",
+      "user_query": "只需要检测这张图中的垃圾车，不用出完整报告。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-007",
+      "title": "单图垃圾车检测",
+      "category": "executable_vision_probe",
+      "user_query": "请看一下上传图里是否有垃圾车。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-008",
+      "title": "单图垃圾车检测",
+      "category": "executable_vision_probe",
+      "user_query": "对这张图跑一下垃圾车检测。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-009",
+      "title": "单图背包检测",
+      "category": "executable_vision_probe",
+      "user_query": "帮我看这张图里有没有背包。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-010",
+      "title": "单图背包检测",
+      "category": "executable_vision_probe",
+      "user_query": "检测一下当前图片中的背包。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-011",
+      "title": "单图背包检测",
+      "category": "executable_vision_probe",
+      "user_query": "这张图里是否出现了背包？直接检测一下。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-012",
+      "title": "单图背包检测",
+      "category": "executable_vision_probe",
+      "user_query": "帮我框出图片里的背包。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-013",
+      "title": "单图背包检测",
+      "category": "executable_vision_probe",
+      "user_query": "判断这张图片里有没有背包目标。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-014",
+      "title": "单图背包检测",
+      "category": "executable_vision_probe",
+      "user_query": "只需要检测这张图中的背包，不用出完整报告。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-015",
+      "title": "单图背包检测",
+      "category": "executable_vision_probe",
+      "user_query": "请看一下上传图里是否有背包。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-016",
+      "title": "单图背包检测",
+      "category": "executable_vision_probe",
+      "user_query": "对这张图跑一下背包检测。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-017",
+      "title": "单图烟雾检测",
+      "category": "executable_vision_probe",
+      "user_query": "帮我看这张图里有没有烟雾。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-018",
+      "title": "单图烟雾检测",
+      "category": "executable_vision_probe",
+      "user_query": "检测一下当前图片中的烟雾。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-019",
+      "title": "单图烟雾检测",
+      "category": "executable_vision_probe",
+      "user_query": "这张图里是否出现了烟雾？直接检测一下。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-020",
+      "title": "单图烟雾检测",
+      "category": "executable_vision_probe",
+      "user_query": "帮我框出图片里的烟雾。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-021",
+      "title": "单图烟雾检测",
+      "category": "executable_vision_probe",
+      "user_query": "判断这张图片里有没有烟雾目标。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-022",
+      "title": "单图烟雾检测",
+      "category": "executable_vision_probe",
+      "user_query": "只需要检测这张图中的烟雾，不用出完整报告。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-023",
+      "title": "单图烟雾检测",
+      "category": "executable_vision_probe",
+      "user_query": "请看一下上传图里是否有烟雾。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-024",
+      "title": "单图烟雾检测",
+      "category": "executable_vision_probe",
+      "user_query": "对这张图跑一下烟雾检测。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-025",
+      "title": "单图垂钓人员检测",
+      "category": "executable_vision_probe",
+      "user_query": "帮我看这张图里有没有垂钓人员。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-026",
+      "title": "单图垂钓人员检测",
+      "category": "executable_vision_probe",
+      "user_query": "检测一下当前图片中的垂钓人员。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-027",
+      "title": "单图垂钓人员检测",
+      "category": "executable_vision_probe",
+      "user_query": "这张图里是否出现了垂钓人员？直接检测一下。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-028",
+      "title": "单图垂钓人员检测",
+      "category": "executable_vision_probe",
+      "user_query": "帮我框出图片里的垂钓人员。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-029",
+      "title": "单图垂钓人员检测",
+      "category": "executable_vision_probe",
+      "user_query": "判断这张图片里有没有垂钓人员目标。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-030",
+      "title": "单图垂钓人员检测",
+      "category": "executable_vision_probe",
+      "user_query": "只需要检测这张图中的垂钓人员，不用出完整报告。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-031",
+      "title": "单图垂钓人员检测",
+      "category": "executable_vision_probe",
+      "user_query": "请看一下上传图里是否有垂钓人员。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-032",
+      "title": "单图垂钓人员检测",
+      "category": "executable_vision_probe",
+      "user_query": "对这张图跑一下垂钓人员检测。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-033",
+      "title": "单图横幅检测",
+      "category": "executable_vision_probe",
+      "user_query": "帮我看这张图里有没有横幅。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-034",
+      "title": "单图横幅检测",
+      "category": "executable_vision_probe",
+      "user_query": "检测一下当前图片中的横幅。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-035",
+      "title": "单图横幅检测",
+      "category": "executable_vision_probe",
+      "user_query": "这张图里是否出现了横幅？直接检测一下。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-036",
+      "title": "单图横幅检测",
+      "category": "executable_vision_probe",
+      "user_query": "帮我框出图片里的横幅。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-037",
+      "title": "单图横幅检测",
+      "category": "executable_vision_probe",
+      "user_query": "判断这张图片里有没有横幅目标。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-038",
+      "title": "单图横幅检测",
+      "category": "executable_vision_probe",
+      "user_query": "只需要检测这张图中的横幅，不用出完整报告。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-039",
+      "title": "单图横幅检测",
+      "category": "executable_vision_probe",
+      "user_query": "请看一下上传图里是否有横幅。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-VIS-040",
+      "title": "单图横幅检测",
+      "category": "executable_vision_probe",
+      "user_query": "对这张图跑一下横幅检测。",
+      "setup": {
+        "has_image": true
+      },
+      "error_type": "single_image_detection_over_pipeline"
+    },
+    {
+      "case_id": "DPO-RAG-001",
+      "title": "工程车资产盘点",
+      "category": "historical_asset_qa",
+      "user_query": "我们现在沉淀过工程车或挖掘机检测能力吗？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-002",
+      "title": "犬只识别资产",
+      "category": "historical_asset_qa",
+      "user_query": "我们有没有犬只识别或宠物入园检测的历史能力？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-003",
+      "title": "安全帽资产",
+      "category": "historical_asset_qa",
+      "user_query": "目前有没有安全帽佩戴状态识别模型？支持哪些标签？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-004",
+      "title": "反光衣资产",
+      "category": "historical_asset_qa",
+      "user_query": "历史资产里有没有反光衣识别能力？对应模型是什么？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-005",
+      "title": "烟火资产",
+      "category": "historical_asset_qa",
+      "user_query": "现有烟火检测模型支持 smoke 和 fire 标签吗？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-006",
+      "title": "垃圾车资产",
+      "category": "historical_asset_qa",
+      "user_query": "项目库里有没有垃圾车检测能力？历史交付用哪个模型？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-007",
+      "title": "跌倒资产",
+      "category": "historical_asset_qa",
+      "user_query": "目前有没有人员跌倒检测相关能力？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-008",
+      "title": "渔船资产",
+      "category": "historical_asset_qa",
+      "user_query": "渔船检测之前交付过哪些版本？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-009",
+      "title": "裸土覆盖资产",
+      "category": "historical_asset_qa",
+      "user_query": "已有裸土覆盖识别能力吗？历史报告里模型效果如何？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-010",
+      "title": "安全绳资产",
+      "category": "historical_asset_qa",
+      "user_query": "安全绳模型现在支持哪些标签和版本？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-011",
+      "title": "口罩资产",
+      "category": "historical_asset_qa",
+      "user_query": "历史资产里有没有口罩佩戴识别模型？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-012",
+      "title": "占道经营资产",
+      "category": "historical_asset_qa",
+      "user_query": "以前有没有做过占道经营识别？项目名称是什么？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-013",
+      "title": "电动车进楼资产",
+      "category": "historical_asset_qa",
+      "user_query": "电动车进楼检测有没有已有模型可以查？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-014",
+      "title": "积水识别资产",
+      "category": "historical_asset_qa",
+      "user_query": "历史交付里有没有道路积水识别能力？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-015",
+      "title": "工服识别资产",
+      "category": "historical_asset_qa",
+      "user_query": "工服穿戴检测现在有哪些历史能力？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-016",
+      "title": "烟雾火焰维护",
+      "category": "historical_asset_qa",
+      "user_query": "当前烟雾火焰检测能力最近版本是什么？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-017",
+      "title": "施工围挡资产",
+      "category": "historical_asset_qa",
+      "user_query": "施工围挡破损识别有没有历史方案？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-018",
+      "title": "水尺读数资产",
+      "category": "historical_asset_qa",
+      "user_query": "水尺读数识别现有能力做到什么程度？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-019",
+      "title": "叉车检测资产",
+      "category": "historical_asset_qa",
+      "user_query": "仓库叉车检测是否已有资产？模型名是什么？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-020",
+      "title": "厨师帽资产",
+      "category": "historical_asset_qa",
+      "user_query": "餐饮后厨厨师帽检测以前做过吗？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-021",
+      "title": "救生衣资产",
+      "category": "historical_asset_qa",
+      "user_query": "有没有救生衣穿戴检测的历史模型？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-022",
+      "title": "灭火器资产",
+      "category": "historical_asset_qa",
+      "user_query": "历史项目里有没有灭火器缺失检测能力？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-023",
+      "title": "井盖资产",
+      "category": "historical_asset_qa",
+      "user_query": "井盖缺失或破损检测有没有已有模型？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-024",
+      "title": "安全带资产",
+      "category": "historical_asset_qa",
+      "user_query": "车内安全带识别以前是否交付过？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-025",
+      "title": "车牌遮挡资产",
+      "category": "historical_asset_qa",
+      "user_query": "有没有车牌遮挡检测相关历史能力？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-026",
+      "title": "蓝牌货车资产",
+      "category": "historical_asset_qa",
+      "user_query": "蓝牌货车识别有历史模型或标签记录吗？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-027",
+      "title": "道路抛洒物资产",
+      "category": "historical_asset_qa",
+      "user_query": "道路抛洒物检测以前做过哪些项目？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-028",
+      "title": "垃圾桶满溢资产",
+      "category": "historical_asset_qa",
+      "user_query": "垃圾桶满溢检测有没有已有方案？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-029",
+      "title": "河道漂浮物资产",
+      "category": "historical_asset_qa",
+      "user_query": "河道漂浮物识别是否有历史能力？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-030",
+      "title": "烟头识别资产",
+      "category": "historical_asset_qa",
+      "user_query": "烟头识别或垃圾小目标检测有没有资产？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-031",
+      "title": "工地裸土资产",
+      "category": "historical_asset_qa",
+      "user_query": "工地裸土覆盖检测的历史模型版本有哪些？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-032",
+      "title": "门店客流资产",
+      "category": "historical_asset_qa",
+      "user_query": "门店客流统计有没有历史算法资产？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-033",
+      "title": "电梯逆行资产",
+      "category": "historical_asset_qa",
+      "user_query": "扶梯逆行检测以前有没有做过？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-034",
+      "title": "未戴手套资产",
+      "category": "historical_asset_qa",
+      "user_query": "未戴手套检测有没有历史标签和模型？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-035",
+      "title": "车辆违停资产",
+      "category": "historical_asset_qa",
+      "user_query": "车辆违停检测有哪些已有模型版本？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-036",
+      "title": "雨棚破损资产",
+      "category": "historical_asset_qa",
+      "user_query": "雨棚破损识别有没有历史方案？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-037",
+      "title": "垃圾分类资产",
+      "category": "historical_asset_qa",
+      "user_query": "垃圾分类检测有没有沉淀过模型和标签？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-038",
+      "title": "人员聚集资产",
+      "category": "historical_asset_qa",
+      "user_query": "人员聚集检测以前有哪些项目交付？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-039",
+      "title": "摊贩识别资产",
+      "category": "historical_asset_qa",
+      "user_query": "流动摊贩识别有没有历史能力？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    },
+    {
+      "case_id": "DPO-RAG-040",
+      "title": "安全门资产",
+      "category": "historical_asset_qa",
+      "user_query": "安全门未关闭检测有没有已有模型？",
+      "setup": {
+        "has_image": false
+      },
+      "error_type": "asset_inventory_over_migration"
+    }
+  ]
+}

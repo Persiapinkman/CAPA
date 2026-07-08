@@ -1,0 +1,44 @@
+{
+  "run_id": "2026-07-07_4b_lora_grpo_focused",
+  "date": "2026-07-07",
+  "model": "/mnt/zkq/models/Qwen3.5-4B",
+  "parameter_mode": "lora",
+  "method": "GRPO",
+  "distributed": {
+    "strategy": "single_gpu",
+    "cuda_visible_devices": "3"
+  },
+  "training": {
+    "cases": "training/planner_grpo_seed_v1/cases/planner_grpo_focused_4b_cases.jsonl",
+    "output_dir": "outputs/planner-grpo-qwen35-4b-focused-lora",
+    "num_train_epochs": 1,
+    "planned_optimizer_steps": 122,
+    "per_device_train_batch_size": 1,
+    "gradient_accumulation_steps": 8,
+    "learning_rate": 5e-6,
+    "num_generations": 4,
+    "max_prompt_length": 3072,
+    "max_completion_length": 512,
+    "temperature": 0.7,
+    "top_p": 0.95,
+    "save_steps": 25,
+    "save_total_limit": 2,
+    "precision": "fp16",
+    "use_lora": true,
+    "lora_r": 16,
+    "lora_alpha": 32,
+    "lora_dropout": 0.05,
+    "lora_target_modules": "q_proj,k_proj,v_proj,o_proj"
+  },
+  "resume_attempt": {
+    "date": "2026-07-08",
+    "resume_from_checkpoint": "outputs/planner-grpo-qwen35-4b-focused-lora/checkpoint-50",
+    "max_completion_length": 384
+  },
+  "environment": {
+    "venv": ".venv-train",
+    "torch": "2.8.0+cu128",
+    "flash_attn": false
+  },
+  "script": "scripts/run_qwen35_4b_grpo_focused.sh"
+}

@@ -1,0 +1,30 @@
+{
+  "run_id": "2026-07-08_4b_fullparam_grpo_long_fsdp_recovery_v5",
+  "status": "running",
+  "created_at_utc": "2026-07-08T06:16:00Z",
+  "started_at_utc": "2026-07-08T06:17:00Z",
+  "launcher_pid": 1884607,
+  "accelerate_pid": 1884614,
+  "worker_pids": [1884664, 1884665, 1884666, 1884667],
+  "physical_cuda_visible_devices": "3,4,5,6",
+  "model_weights_from": "outputs/planner-grpo-qwen35-4b-focused-full-fsdp-long-20260708-recovery-v3/checkpoint-2",
+  "optimizer_state": "reinitialized",
+  "prior_completed_optimizer_steps": 2,
+  "target_additional_steps": 28,
+  "latest_metrics": {
+    "loss": 0.03687,
+    "reward_mean": 0.4619,
+    "reward_std": 0.4877,
+    "completion_mean_length": 143.2,
+    "completion_max_length": 160,
+    "completion_clipped_ratio": 0.6875,
+    "step_time_seconds": 424.8
+  },
+  "latest_observed_additional_step": 2,
+  "checkpoint_available": true,
+  "latest_checkpoint": "outputs/planner-grpo-qwen35-4b-focused-full-fsdp-long-20260708-recovery-v5/checkpoint-2",
+  "latest_checkpoint_size": "37G",
+  "checkpoint_note": "Model/tokenizer checkpoint only; optimizer state intentionally not used for future recovery because FSDP optimizer restore failed in v4.",
+  "log": "experiments/runs/2026-07-08_4b_fullparam_grpo_long_fsdp_recovery_v5/logs/grpo_fullparam_fsdp.log",
+  "output_dir": "outputs/planner-grpo-qwen35-4b-focused-full-fsdp-long-20260708-recovery-v5"
+}

@@ -1,0 +1,2914 @@
+{
+  "schema_version": "1.1",
+  "generated_at": "2026-06-24T16:39:39.236978+00:00",
+  "cases_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/training/planner_dpo_train_seed_v1/eval/planner_routing_eval_90cases.json",
+  "model": "qwen3.5-4b",
+  "no_llm": false,
+  "partial": false,
+  "summary": {
+    "total": 90,
+    "evaluated": 90,
+    "passed": 62,
+    "failed": 28,
+    "accuracy": 0.6889,
+    "by_category": {
+      "historical_asset_qa": {
+        "total": 25,
+        "evaluated": 25,
+        "passed": 23
+      },
+      "adela_platform_eval": {
+        "total": 5,
+        "evaluated": 5,
+        "passed": 4
+      },
+      "general_answer": {
+        "total": 25,
+        "evaluated": 25,
+        "passed": 4
+      },
+      "executable_vision_probe": {
+        "total": 25,
+        "evaluated": 25,
+        "passed": 21
+      },
+      "full_visual_probe": {
+        "total": 5,
+        "evaluated": 5,
+        "passed": 5
+      },
+      "migration_boundary": {
+        "total": 5,
+        "evaluated": 5,
+        "passed": 5
+      }
+    },
+    "actual_actions": {
+      "rag_answer": 43,
+      "adela_cli_eval": 5,
+      "answerer": 3,
+      "final_answer": 1,
+      "qwen_detection": 12,
+      "rexomni_detection": 2,
+      "flux-image-generation": 7,
+      "pipeline_eval": 8,
+      "migration_advisor": 9
+    },
+    "dpo_candidates": 28,
+    "timing": {
+      "source": "historical_import_no_eval_timing",
+      "elapsed_ms": null,
+      "case_elapsed_ms_total": null,
+      "case_elapsed_ms_avg": null,
+      "case_elapsed_ms_min": null,
+      "case_elapsed_ms_max": null,
+      "case_elapsed_ms_count": 0
+    }
+  },
+  "results": [
+    {
+      "case_id": "ROUTE-RAG-001",
+      "title": "查询现有安全绳模型能力",
+      "category": "historical_asset_qa",
+      "user_query": "目前安全绳检测有哪些模型和版本？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "目前安全绳检测有哪些模型和版本？",
+          "finish_after_tool": false
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-RAG-002",
+      "title": "查询模型标签含义",
+      "category": "historical_asset_qa",
+      "user_query": "safety_rope v0.2.1 里面的 safety_rope_connected 和 unconnected 分别表示什么？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "safety_rope v0.2.1 里面的 safety_rope_connected 和 unconnected 分别表示什么？",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-RAG-003",
+      "title": "查询已有头盔能力",
+      "category": "historical_asset_qa",
+      "user_query": "我们现在有没有能识别安全帽佩戴状态的模型？支持哪些标签？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "用户询问是否存在识别安全帽佩戴状态的模型及其支持的标签。这是一个关于现有模型能力和业务文档的事实性问题，不涉及图片分析、迁移评估或通用闲聊。根据决策原则，应优先使用 rag_answer 工具检索企业内部知识库或业务文档中关于安全帽检测模型的信息。",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "我们现在有没有能识别安全帽佩戴状态的模型？支持哪些标签？",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-RAG-004",
+      "title": "查询模型推荐阈值",
+      "category": "historical_asset_qa",
+      "user_query": "电动车检测模型的推荐阈值和适用场景是什么？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "电动车检测模型的推荐阈值和适用场景是什么？",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-RAG-005",
+      "title": "查询历史方案文档",
+      "category": "historical_asset_qa",
+      "user_query": "之前有没有做过河道垂钓检测相关方案？用的是什么模型？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "用户询问历史方案及模型信息，属于企业内部业务文档或项目历史查询，应优先使用 rag_answer 工具检索知识库。",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "之前有没有做过河道垂钓检测相关方案？用的是什么模型？",
+          "finish_after_tool": false
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-ADELA-001",
+      "title": "指定平台查询性能",
+      "category": "adela_platform_eval",
+      "user_query": "safety_rope 在 cuda11.0-trt7.1-int8-T4 上性能怎么样？",
+      "image_path": "",
+      "expected_action": "adela_cli_eval",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "adela_cli_eval",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "adela_cli_eval",
+        "action_input": {
+          "model_name": "safety_rope",
+          "platform": "cuda11.0-trt7.1-int8-T4",
+          "eval_type": 1,
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-ADELA-002",
+      "title": "指定平台查询精度",
+      "category": "adela_platform_eval",
+      "user_query": "safety_rope 在 cuda11.0-trt7.1-fp16-T4 的精度是多少？",
+      "image_path": "",
+      "expected_action": "adela_cli_eval",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "adela_cli_eval",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "adela_cli_eval",
+        "action_input": {
+          "model_name": "safety_rope",
+          "platform": "cuda11.0-trt7.1-fp16-T4",
+          "eval_type": 0,
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-ADELA-003",
+      "title": "rawmodel_id 查询性能",
+      "category": "adela_platform_eval",
+      "user_query": "rawmodel_id 51476 在 cuda11.0-trt7.1-int8-T4 上跑 normal performance。",
+      "image_path": "",
+      "expected_action": "adela_cli_eval",
+      "passed": false,
+      "action_match": true,
+      "slot_match": false,
+      "forbidden_violation": false,
+      "actual_action": "adela_cli_eval",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "adela_cli_eval",
+        "action_input": {
+          "model_name": "51476",
+          "platform": "cuda11.0-trt7.1-int8-T4",
+          "eval_type": 1,
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [
+        "rawmodel_id: expected 51476, got None"
+      ],
+      "dpo_candidate": true,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-ADELA-004",
+      "title": "部署平台缩写查询精度",
+      "category": "adela_platform_eval",
+      "user_query": "帮我看下 safety_rope 在 T4 int8 上的 accuracy。",
+      "image_path": "",
+      "expected_action": "adela_cli_eval",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "adela_cli_eval",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "adela_cli_eval",
+        "action_input": {
+          "model_name": "safety_rope",
+          "platform": "T4 int8",
+          "eval_type": 0,
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-ADELA-005",
+      "title": "同时问精度和性能",
+      "category": "adela_platform_eval",
+      "user_query": "safety_rope 在 cuda11.0-trt7.1-int8-P4 上精度和速度都怎么样？",
+      "image_path": "",
+      "expected_action": "adela_cli_eval",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "adela_cli_eval",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "adela_cli_eval",
+        "action_input": {
+          "model_name": "safety_rope",
+          "platform": "cuda11.0-trt7.1-int8-P4",
+          "eval_type": 0,
+          "finish_after_tool": false
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-ANS-001",
+      "title": "通用常识问答",
+      "category": "general_answer",
+      "user_query": "苹果是当季水果吗？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {
+          "mode": "direct",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-ANS-002",
+      "title": "解释算法概念",
+      "category": "general_answer",
+      "user_query": "用通俗语言解释一下 precision 和 recall 的区别。",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {
+          "mode": "direct",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-ANS-003",
+      "title": "非业务闲聊",
+      "category": "general_answer",
+      "user_query": "你能简单介绍一下自己能做什么吗？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "final_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "end",
+        "action": "final_answer",
+        "action_input": {},
+        "end_reason": "memory_hit",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-ANS-004",
+      "title": "通用方法建议",
+      "category": "general_answer",
+      "user_query": "如果我要评估一个目标检测模型，通常应该看哪些指标？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "如果我要评估一个目标检测模型，通常应该看哪些指标？",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [
+        "action: expected one of ['answerer'], got 'rag_answer'"
+      ],
+      "dpo_candidate": true,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-ANS-005",
+      "title": "英文通用问题",
+      "category": "general_answer",
+      "user_query": "What is open-vocabulary object detection?",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": true,
+      "forbidden_violation": true,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "What is open-vocabulary object detection?",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [
+        "action: expected one of ['answerer'], got 'rag_answer'",
+        "forbidden action used: rag_answer"
+      ],
+      "dpo_candidate": true,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-VIS-001",
+      "title": "Qwen 单图标注",
+      "category": "executable_vision_probe",
+      "user_query": "用 qwen 帮我标注这张图里的钓鱼的人。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/fisherman.jpg",
+      "expected_action": "qwen_detection",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "qwen_detection",
+      "actual_step": {
+        "thought": "用户明确要求使用 Qwen 模型对图片中的特定目标（钓鱼的人）进行标注。根据决策原则，这属于目标检测任务，且指定了模型（qwen），应优先选择 qwen_detection 工具。图片已提供，但 qwen_detection 工具参数中未包含 image_path 字段，因此直接调用该工具，缺失的图像信息将由系统自动处理或后续追问。finish_after_tool 设为 true，因为标注结果直接回答了用户的请求。",
+        "decision_type": "tool",
+        "action": "qwen_detection",
+        "action_input": {
+          "label": "钓鱼的人",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-VIS-002",
+      "title": "RexOmni 单图检测",
+      "category": "executable_vision_probe",
+      "user_query": "用 RexOmni 检测图片里的安全帽。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/person_with_bag.png",
+      "expected_action": "rexomni_detection",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "rexomni_detection",
+      "actual_step": {
+        "thought": "用户明确要求使用 RexOmni 模型对图片中的安全帽进行检测。根据决策原则，当用户指定了检测工具（RexOmni）和目标（安全帽）且图片可用时，应直接调用 rexomni_detection 工具。图片已提供，无需澄清。该工具执行后直接返回检测结果，可设置 finish_after_tool 为 true。",
+        "decision_type": "tool",
+        "action": "rexomni_detection",
+        "action_input": {
+          "label": "安全帽",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-VIS-003",
+      "title": "纯图片生成",
+      "category": "executable_vision_probe",
+      "user_query": "生成 3 张河边有人钓鱼的图片。",
+      "image_path": "",
+      "expected_action": "flux-image-generation",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "flux-image-generation",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "flux-image-generation",
+        "action_input": {
+          "task_text": "生成 3 张河边有人钓鱼的图片",
+          "source_image_required": false,
+          "num_images": 3,
+          "finish_after_tool": false
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-VIS-004",
+      "title": "参考图生成变体",
+      "category": "executable_vision_probe",
+      "user_query": "参考这张图，生成几张不同天气下的巡检场景图片。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/banner.jpg",
+      "expected_action": "flux-image-generation",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "flux-image-generation",
+      "actual_step": {
+        "thought": "用户明确要求基于提供的图片生成不同天气下的巡检场景图片，属于图像生成任务。根据工具库定义，应使用 flux-image-generation 工具。用户提供了参考图（banner.jpg），因此 source_image_required 设为 true。任务描述为“生成几张不同天气下的巡检场景图片”，num_images 设为 3 以覆盖“几张”的需求。由于生图是最终交付物，finish_after_tool 设为 true。",
+        "decision_type": "tool",
+        "action": "flux-image-generation",
+        "action_input": {
+          "task_text": "生成几张不同天气下的巡检场景图片",
+          "source_image_required": true,
+          "num_images": 3,
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-VIS-005",
+      "title": "未指定模型的单图检测",
+      "category": "executable_vision_probe",
+      "user_query": "帮我检测这张图里有没有垃圾车。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/trash_truck.jpg",
+      "expected_action": "qwen_detection",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "qwen_detection",
+      "actual_step": {
+        "thought": "用户明确要求检测图片中是否存在“垃圾车”，这是一个典型的目标检测任务。根据决策原则，当存在明确目标描述且图片可用时，应优先使用目标检测工具。此处目标为“垃圾车”，图片已提供（trash_truck.jpg），无需澄清或改写。根据工具库，qwen_detection 和 rexomni_detection 均可用于目标检测，但通常首选通用性较强或系统推荐的模型（如 qwen_detection）。由于用户未指定具体模型，选择 qwen_detection 执行检测。该工具输出检测结果后，若直接回答用户问题，应设置 finish_after_tool=true。",
+        "decision_type": "tool",
+        "action": "qwen_detection",
+        "action_input": {
+          "label": "垃圾车",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-PIPE-001",
+      "title": "完整可行性探针",
+      "category": "full_visual_probe",
+      "user_query": "基于这张图生成一些样本，并评估检测钓鱼的人是否可交付。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/fisherman.jpg",
+      "expected_action": "pipeline_eval",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "pipeline_eval",
+      "actual_step": {
+        "thought": "用户明确要求“生成样本 + 评估检测效果”，属于可执行视觉评测场景。根据决策原则第6条，此类需求应优先选择 pipeline_eval 工具，而非单独的 qwen_detection 或 migration_advisor。用户提供了图片（fisherman.jpg），任务文本为“生成一些样本，并评估检测钓鱼的人是否可交付”，符合 pipeline_eval 的 task_text 参数要求。由于该工具会端到端完成生成、标注、评估，结果可直接作为最终答复，故设置 finish_after_tool=true。",
+        "decision_type": "tool",
+        "action": "pipeline_eval",
+        "action_input": {
+          "task_text": "生成一些样本，并评估检测钓鱼的人是否可交付",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-PIPE-002",
+      "title": "生成精度评估报告",
+      "category": "full_visual_probe",
+      "user_query": "钓鱼的人，生成一个精度评估报告。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/fisherman.jpg",
+      "expected_action": "pipeline_eval",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "pipeline_eval",
+      "actual_step": {
+        "thought": "用户请求基于提供的图片（fisherman.jpg）生成“钓鱼的人”的目标检测精度评估报告。这属于典型的“生成样本 + 目标检测评测/模型效果对比/精度评估报告”场景，符合 pipeline_eval 工具的适用定义（图片生成 - 分别使用 Qwen 和 Rex-Omni 进行标注 - 评估模型检测效果）。虽然用户未指定具体模型，但 pipeline_eval 工具内部会处理此类流程。根据决策原则 6，此类需求应优先选择 pipeline_eval，而非单独的检测工具或迁移顾问。图片已提供，无需澄清。该工具执行后应直接输出评估报告，故 finish_after_tool 设为 true。",
+        "decision_type": "tool",
+        "action": "pipeline_eval",
+        "action_input": {
+          "task_text": "钓鱼的人",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-PIPE-003",
+      "title": "对比两个开放集检测模型",
+      "category": "full_visual_probe",
+      "user_query": "用这张图扩增几张样本，然后对比 qwen 和 rex-omni 检测横幅的效果。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/banner.jpg",
+      "expected_action": "pipeline_eval",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "pipeline_eval",
+      "actual_step": {
+        "thought": "用户明确要求“扩增样本”并“对比 qwen 和 rex-omni 检测横幅的效果”，这属于完整的视觉评测流水线（生成样本 -> 目标检测 -> 效果评估），符合 pipeline_eval 的适用场景。图片已提供，任务描述清晰，无需澄清或改写。",
+        "decision_type": "tool",
+        "action": "pipeline_eval",
+        "action_input": {
+          "task_text": "用这张图扩增几张样本，然后对比 qwen 和 rex-omni 检测横幅的效果。",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-PIPE-004",
+      "title": "烟雾检测交付风险探测",
+      "category": "full_visual_probe",
+      "user_query": "基于这张烟雾图片做一次低成本探针，看开放集模型能不能检测出来并给出报告。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/smoke.jpg",
+      "expected_action": "pipeline_eval",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "pipeline_eval",
+      "actual_step": {
+        "thought": "用户明确要求对上传的烟雾图片进行‘低成本探针’，并评估开放集模型在该图上的检测效果，最终需要一份报告。根据决策原则第 6 条，当用户说‘低成本探针/可执行探针/给出检测评估报告/对比开放集模型效果’时，应优先选择 pipeline_eval 工具，而非单独的 qwen_detection 或 rexomni_detection。该工具会执行图片生成（若需要）、目标检测及评估报告生成，符合用户‘生成样本 + 评测 + 报告’的完整需求。因此，选择 pipeline_eval，设置 finish_after_tool=true，因为该工具输出即为最终报告。",
+        "decision_type": "tool",
+        "action": "pipeline_eval",
+        "action_input": {
+          "task_text": "基于这张烟雾图片做一次低成本探针，看开放集模型能不能检测出来并给出报告。",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-PIPE-005",
+      "title": "小样本交付验证",
+      "category": "full_visual_probe",
+      "user_query": "这类背包人员检测能不能做？请用上传图跑一下生成、检测和评估链路。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/person_with_bag.png",
+      "expected_action": "pipeline_eval",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "migration_advisor",
+      "actual_step": {
+        "thought": "用户询问“这类背包人员检测能不能做”，并明确要求“用上传图跑一下生成、检测和评估链路”。这属于典型的“新需求能否做/如何迁移/能力边界/数据要求”的业务可行性报告场景，而非单纯的通用问答或单次检测。根据决策原则第5条和第6条，此类需求应优先选择 migration_advisor 工具，该工具内部会做分字段 RAG 检索、相似资产分析，并在有样例图时可执行轻量视觉探针后输出迁移评估报告。用户明确要求“跑一下生成、检测和评估链路”，这符合 pipeline_eval 的触发条件，但前提是先确认“能不能做”（即迁移可行性）。因此，第一步应调用 migration_advisor 进行可行性评估。由于用户提供了图片且问题涉及“这张图/样例图”，use_image 应设为 true；用户要求“跑一下...链路”，意味着需要执行完整的评估流程，use_visual_probe 也应设为 true 以辅助判断。finish_after_tool 设为 true，因为迁移评估报告本身就是用户想要的最终结果（可行性结论及方案）。",
+        "decision_type": "tool",
+        "action": "migration_advisor",
+        "action_input": {
+          "user_query": "这类背包人员检测能不能做？请用上传图跑一下生成、检测和评估链路。",
+          "use_image": true,
+          "use_visual_probe": true,
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-MIG-001",
+      "title": "新目标能力边界判断",
+      "category": "migration_boundary",
+      "user_query": "现有模型能不能迁移到识别工地反光衣颜色？",
+      "image_path": "",
+      "expected_action": "migration_advisor",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "migration_advisor",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "migration_advisor",
+        "action_input": {
+          "user_query": "现有模型能不能迁移到识别工地反光衣颜色？",
+          "use_image": false,
+          "use_visual_probe": false,
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-MIG-002",
+      "title": "无直接同款项目迁移评估",
+      "category": "migration_boundary",
+      "user_query": "客户要检测商场扶梯上逆行的人，我们有没有类似能力，不能直接支持的话给迁移建议。",
+      "image_path": "",
+      "expected_action": "migration_advisor",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "migration_advisor",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "migration_advisor",
+        "action_input": {
+          "user_query": "客户要检测商场扶梯上逆行的人，我们有没有类似能力，不能直接支持的话给迁移建议。",
+          "use_image": false,
+          "use_visual_probe": false,
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-MIG-003",
+      "title": "新业务标签迁移",
+      "category": "migration_boundary",
+      "user_query": "要识别港口工人有没有穿救生衣，现有 PPE 类模型可以迁移吗？",
+      "image_path": "",
+      "expected_action": "migration_advisor",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "migration_advisor",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "migration_advisor",
+        "action_input": {
+          "user_query": "要识别港口工人有没有穿救生衣，现有 PPE 类模型可以迁移吗？",
+          "use_image": false,
+          "use_visual_probe": false,
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-MIG-004",
+      "title": "新场景小目标能力边界",
+      "category": "migration_boundary",
+      "user_query": "夜间远距离识别违规垂钓的小目标，现有能力边界在哪里？需要补多少数据？",
+      "image_path": "",
+      "expected_action": "migration_advisor",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "migration_advisor",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "migration_advisor",
+        "action_input": {
+          "user_query": "夜间远距离识别违规垂钓的小目标，现有能力边界在哪里？需要补多少数据？",
+          "use_image": false,
+          "use_visual_probe": false,
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-MIG-005",
+      "title": "带样例图的迁移顾问",
+      "category": "migration_boundary",
+      "user_query": "这张图里的异常堆料检测，现有模型能否迁移？请给一个迁移评估报告。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/trash_truck.jpg",
+      "expected_action": "migration_advisor",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "migration_advisor",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "migration_advisor",
+        "action_input": {
+          "user_query": "这张图里的异常堆料检测，现有模型能否迁移？请给一个迁移评估报告。",
+          "use_image": true,
+          "use_visual_probe": true,
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-001",
+      "title": "安全帽版本资产查询",
+      "category": "historical_asset_qa",
+      "user_query": "安全帽佩戴检测现在有哪些线上模型版本？每个版本支持哪些标签？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "安全帽佩戴检测现在有哪些线上模型版本？每个版本支持哪些标签？",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-002",
+      "title": "反光衣历史能力查询",
+      "category": "historical_asset_qa",
+      "user_query": "我们以前做过反光衣识别吗？对应模型名和适用场景是什么？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "我们以前做过反光衣识别吗？对应模型名和适用场景是什么？",
+          "finish_after_tool": false
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-003",
+      "title": "烟火模型标签盘点",
+      "category": "historical_asset_qa",
+      "user_query": "现有烟火检测模型里 smoke 和 fire 标签分别在哪些版本出现过？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "现有烟火检测模型里 smoke 和 fire 标签分别在哪些版本出现过？",
+          "finish_after_tool": false
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-004",
+      "title": "垃圾车资产查询",
+      "category": "historical_asset_qa",
+      "user_query": "项目库里有没有垃圾车检测能力？历史交付用的是哪个模型？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "项目库里有没有垃圾车检测能力？历史交付用的是哪个模型？",
+          "finish_after_tool": false
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-005",
+      "title": "人员跌倒资产查询",
+      "category": "historical_asset_qa",
+      "user_query": "目前有没有人员跌倒检测相关能力，支持室内还是室外？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "目前有没有人员跌倒检测相关能力，支持室内还是室外？",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-006",
+      "title": "渔船检测版本查询",
+      "category": "historical_asset_qa",
+      "user_query": "渔船检测之前交付过哪些版本？标签体系怎么定义的？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "用户询问渔船检测的交付版本历史及标签体系定义，这属于企业内部业务规范、交付文档或标准指标的事实性问题，符合知识检索（rag_answer）的适用场景。无需指代改写或澄清，直接检索知识库获取答案。",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "渔船检测之前交付过哪些版本？标签体系怎么定义的？",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-007",
+      "title": "裸土覆盖资产查询",
+      "category": "historical_asset_qa",
+      "user_query": "已有裸土覆盖识别能力吗？能查一下历史报告里的模型效果吗？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "已有裸土覆盖识别能力吗？能查一下历史报告里的模型效果吗？",
+          "finish_after_tool": false
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-008",
+      "title": "安全绳标签查询",
+      "category": "historical_asset_qa",
+      "user_query": "安全绳模型目前支持 connected、unconnected 之外的标签吗？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "安全绳模型目前支持 connected、unconnected 之外的标签吗？",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-009",
+      "title": "工程车能力盘点",
+      "category": "historical_asset_qa",
+      "user_query": "我们现在沉淀过工程车/挖掘机检测能力吗？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "用户询问是否已沉淀工程车/挖掘机检测能力，这属于企业现有业务能力和资产盘点问题，涉及具体事实核查，应优先使用知识库检索。",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "我们现在沉淀过工程车/挖掘机检测能力吗？",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-010",
+      "title": "口罩佩戴资产查询",
+      "category": "historical_asset_qa",
+      "user_query": "历史资产里有没有口罩佩戴识别模型？标签是 mask 还是 no_mask？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "历史资产里有没有口罩佩戴识别模型？标签是 mask 还是 no_mask？",
+          "finish_after_tool": false
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-011",
+      "title": "占道经营历史能力",
+      "category": "historical_asset_qa",
+      "user_query": "有没有做过占道经营识别？项目名称和能力边界是什么？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": true,
+      "forbidden_violation": true,
+      "actual_action": "migration_advisor",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "migration_advisor",
+        "action_input": {
+          "user_query": "有没有做过占道经营识别？项目名称和能力边界是什么？",
+          "use_image": false,
+          "use_visual_probe": false,
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [
+        "action: expected one of ['rag_answer'], got 'migration_advisor'",
+        "forbidden action used: migration_advisor"
+      ],
+      "dpo_candidate": true,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-012",
+      "title": "电动车进楼资产查询",
+      "category": "historical_asset_qa",
+      "user_query": "电动车进楼检测有没有已有模型可以查？版本和标签给我看一下。",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "电动车进楼检测有没有已有模型可以查？版本和标签给我看一下。",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-013",
+      "title": "积水识别历史交付",
+      "category": "historical_asset_qa",
+      "user_query": "历史交付里有没有道路积水识别？用过哪些数据集或模型？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "历史交付里有没有道路积水识别？用过哪些数据集或模型？",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-014",
+      "title": "工服识别资产查询",
+      "category": "historical_asset_qa",
+      "user_query": "工服穿戴检测现在有哪些能力，能识别哪几类工服？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "工服穿戴检测现在有哪些能力，能识别哪几类工服？",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-015",
+      "title": "烟雾火焰资产状态",
+      "category": "historical_asset_qa",
+      "user_query": "当前烟雾火焰检测能力是否还在维护？最近版本是什么？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "当前烟雾火焰检测能力是否还在维护？最近版本是什么？",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-016",
+      "title": "犬只识别资产查询",
+      "category": "historical_asset_qa",
+      "user_query": "我们有没有犬只识别或宠物入园检测的历史能力？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "我们有没有犬只识别或宠物入园检测的历史能力？",
+          "finish_after_tool": false
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-017",
+      "title": "餐饮后厨帽子资产",
+      "category": "historical_asset_qa",
+      "user_query": "餐饮后厨厨师帽检测以前做过吗？对应标签和模型在哪里？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": true,
+      "forbidden_violation": true,
+      "actual_action": "migration_advisor",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "migration_advisor",
+        "action_input": {
+          "user_query": "餐饮后厨厨师帽检测以前做过吗？对应标签和模型在哪里？",
+          "use_image": false,
+          "use_visual_probe": false,
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [
+        "action: expected one of ['rag_answer'], got 'migration_advisor'",
+        "forbidden action used: migration_advisor"
+      ],
+      "dpo_candidate": true,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-018",
+      "title": "施工围挡资产查询",
+      "category": "historical_asset_qa",
+      "user_query": "施工围挡破损识别有没有历史方案？支持哪些缺陷类型？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "施工围挡破损识别有没有历史方案？支持哪些缺陷类型？",
+          "finish_after_tool": false
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-019",
+      "title": "水尺读数能力盘点",
+      "category": "historical_asset_qa",
+      "user_query": "水尺读数识别现有能力做到什么程度？有哪些版本记录？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "水尺读数识别现有能力做到什么程度？有哪些版本记录？",
+          "finish_after_tool": false
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-020",
+      "title": "叉车检测历史能力",
+      "category": "historical_asset_qa",
+      "user_query": "仓库叉车检测是否已有资产？模型名和标签定义是什么？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "仓库叉车检测是否已有资产？模型名和标签定义是什么？",
+          "finish_after_tool": false
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-001",
+      "title": "检测指标解释",
+      "category": "general_answer",
+      "user_query": "目标检测里 mAP、precision、recall 分别是什么意思？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "目标检测里 mAP、precision、recall 分别是什么意思？",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [
+        "action: expected one of ['answerer'], got 'rag_answer'",
+        "forbidden action used: rag_answer",
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-002",
+      "title": "阈值选择建议",
+      "category": "general_answer",
+      "user_query": "做缺陷检测时置信度阈值一般怎么选？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "做缺陷检测时置信度阈值一般怎么选？",
+          "finish_after_tool": false
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [
+        "action: expected one of ['answerer'], got 'rag_answer'",
+        "forbidden action used: rag_answer",
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-003",
+      "title": "小目标优化方法",
+      "category": "general_answer",
+      "user_query": "小目标检测效果差，常见的模型和数据改进方向有哪些？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "小目标检测效果差，常见的模型和数据改进方向有哪些？",
+          "finish_after_tool": false
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [
+        "action: expected one of ['answerer'], got 'rag_answer'",
+        "forbidden action used: rag_answer",
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-004",
+      "title": "误报漏报分析方法",
+      "category": "general_answer",
+      "user_query": "分析目标检测误报和漏报时通常怎么归因？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "分析目标检测误报和漏报时通常怎么归因？",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [
+        "action: expected one of ['answerer'], got 'rag_answer'",
+        "forbidden action used: rag_answer",
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-005",
+      "title": "标注规范建议",
+      "category": "general_answer",
+      "user_query": "如果我要做一个检测数据集，标注框质量通常要注意什么？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "如果我要做一个检测数据集，标注框质量通常要注意什么？",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [
+        "action: expected one of ['answerer'], got 'rag_answer'",
+        "forbidden action used: rag_answer",
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-006",
+      "title": "训练集划分建议",
+      "category": "general_answer",
+      "user_query": "目标检测训练集、验证集、测试集一般怎么划分比较合理？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "目标检测训练集、验证集、测试集一般怎么划分比较合理？",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [
+        "action: expected one of ['answerer'], got 'rag_answer'",
+        "forbidden action used: rag_answer",
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-007",
+      "title": "OOV概念解释",
+      "category": "general_answer",
+      "user_query": "视觉模型里的 OOV 问题通常指什么？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "视觉模型里的 OOV 问题通常指什么？",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [
+        "action: expected one of ['answerer'], got 'rag_answer'",
+        "forbidden action used: rag_answer",
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-008",
+      "title": "主动学习建议",
+      "category": "general_answer",
+      "user_query": "检测任务数据量不够时，主动学习可以怎么做？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "migration_advisor",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "migration_advisor",
+        "action_input": {
+          "user_query": "检测任务数据量不够时，主动学习可以怎么做？",
+          "use_image": false,
+          "use_visual_probe": false,
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [
+        "action: expected one of ['answerer'], got 'migration_advisor'",
+        "forbidden action used: migration_advisor",
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-009",
+      "title": "合成数据风险",
+      "category": "general_answer",
+      "user_query": "用生成图片补检测数据有什么常见风险？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "用生成图片补检测数据有什么常见风险？",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [
+        "action: expected one of ['answerer'], got 'rag_answer'",
+        "forbidden action used: rag_answer",
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-010",
+      "title": "模型评估流程建议",
+      "category": "general_answer",
+      "user_query": "上线前评估一个目标检测模型，通常有哪些步骤？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "上线前评估一个目标检测模型，通常有哪些步骤？",
+          "finish_after_tool": false
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [
+        "action: expected one of ['answerer'], got 'rag_answer'",
+        "forbidden action used: rag_answer",
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-011",
+      "title": "IoU解释",
+      "category": "general_answer",
+      "user_query": "IoU 在检测评估里是怎么计算的？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "IoU 在检测评估里是怎么计算的？",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [
+        "action: expected one of ['answerer'], got 'rag_answer'",
+        "forbidden action used: rag_answer",
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-012",
+      "title": "混淆矩阵解释",
+      "category": "general_answer",
+      "user_query": "多类别检测结果能不能用混淆矩阵分析？怎么理解？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "多类别检测结果能不能用混淆矩阵分析？怎么理解？",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [
+        "action: expected one of ['answerer'], got 'rag_answer'",
+        "forbidden action used: rag_answer",
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-013",
+      "title": "长尾类别处理",
+      "category": "general_answer",
+      "user_query": "检测数据长尾严重时，一般有哪些处理办法？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "检测数据长尾严重时，一般有哪些处理办法？",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [
+        "action: expected one of ['answerer'], got 'rag_answer'",
+        "forbidden action used: rag_answer",
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-014",
+      "title": "标注一致性方法",
+      "category": "general_answer",
+      "user_query": "多人标注同一批图片时，如何检查标注一致性？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "多人标注同一批图片时，如何检查标注一致性？",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [
+        "action: expected one of ['answerer'], got 'rag_answer'",
+        "forbidden action used: rag_answer",
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-015",
+      "title": "数据增强建议",
+      "category": "general_answer",
+      "user_query": "目标检测常用的数据增强有哪些，什么时候不该用？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "目标检测常用的数据增强有哪些，什么时候不该用？",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [
+        "action: expected one of ['answerer'], got 'rag_answer'",
+        "forbidden action used: rag_answer",
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-016",
+      "title": "开放词表检测解释",
+      "category": "general_answer",
+      "user_query": "open-vocabulary detection 和普通检测模型有什么区别？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "open-vocabulary detection 和普通检测模型有什么区别？",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [
+        "action: expected one of ['answerer'], got 'rag_answer'",
+        "forbidden action used: rag_answer",
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-017",
+      "title": "召回优先场景",
+      "category": "general_answer",
+      "user_query": "如果业务更怕漏检，评估指标应该怎么侧重？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "如果业务更怕漏检，评估指标应该怎么侧重？",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [
+        "action: expected one of ['answerer'], got 'rag_answer'",
+        "forbidden action used: rag_answer",
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-018",
+      "title": "边缘部署取舍",
+      "category": "general_answer",
+      "user_query": "检测模型要部署到边缘设备，通常怎么权衡速度和精度？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "检测模型要部署到边缘设备，通常怎么权衡速度和精度？",
+          "finish_after_tool": false
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [
+        "action: expected one of ['answerer'], got 'rag_answer'",
+        "forbidden action used: rag_answer",
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-019",
+      "title": "PR曲线解释",
+      "category": "general_answer",
+      "user_query": "PR 曲线对目标检测有什么帮助？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "用户询问 PR 曲线（Precision-Recall Curve）对目标检测的帮助，这是一个关于目标检测评估指标的专业概念问题。该问题不涉及具体图片分析、模型迁移或特定平台部署，属于通用技术知识问答。根据决策原则，此类无需检索内部私有文档即可解答的通用技术概念问题，应使用 answerer 工具直接回答。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {
+          "mode": "direct",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-020",
+      "title": "负样本重要性",
+      "category": "general_answer",
+      "user_query": "检测任务里为什么要收集负样本？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "检测任务里为什么要收集负样本？",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [
+        "action: expected one of ['answerer'], got 'rag_answer'",
+        "forbidden action used: rag_answer",
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-001",
+      "title": "单图垃圾车检测",
+      "category": "executable_vision_probe",
+      "user_query": "帮我看这张图里有没有垃圾车。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/trash_truck.jpg",
+      "expected_action": "qwen_detection",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "qwen_detection",
+      "actual_step": {
+        "thought": "用户询问图片中是否存在垃圾车，这是一个明确的目标检测任务。根据决策原则，当用户要求检测图片中的特定目标时，应优先使用目标检测工具。由于用户未指定具体模型，且问题直接指向检测结果，选择 qwen_detection 工具执行检测。finish_after_tool 设为 true，因为检测结果将直接回答用户问题。",
+        "decision_type": "tool",
+        "action": "qwen_detection",
+        "action_input": {
+          "label": "垃圾车",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-002",
+      "title": "单图背包检测",
+      "category": "executable_vision_probe",
+      "user_query": "检测一下这张图中有没有背包。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/person_with_bag.png",
+      "expected_action": "qwen_detection",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "qwen_detection",
+      "actual_step": {
+        "thought": "用户明确要求对提供的图片进行目标检测，检测目标为“背包”。根据决策原则，当用户意图明确且存在图片时，应优先选择目标检测工具。此处无需澄清，直接执行检测任务。",
+        "decision_type": "tool",
+        "action": "qwen_detection",
+        "action_input": {
+          "label": "背包",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-003",
+      "title": "单图烟雾检测",
+      "category": "executable_vision_probe",
+      "user_query": "这张图里有没有烟雾？直接检测一下。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/smoke.jpg",
+      "expected_action": "qwen_detection",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "pipeline_eval",
+      "actual_step": {
+        "thought": "用户明确要求对提供的图片进行目标检测，判断是否存在烟雾。根据决策原则，当用户明确要求“生成样本 + 目标检测评测/模型效果对比/精度评估报告”或“给出检测评估报告”时，应优先选择 pipeline_eval 工具，因为它能完整执行图片生成（如有需要）、目标检测及评估流程。虽然用户只说了“直接检测一下”，但结合上下文和工具定义，pipeline_eval 是最符合“给出检测评估报告”意图的工具。",
+        "decision_type": "tool",
+        "action": "pipeline_eval",
+        "action_input": {
+          "task_text": "这张图里有没有烟雾？直接检测一下。",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [
+        "action: expected one of ['qwen_detection', 'rexomni_detection'], got 'pipeline_eval'",
+        "forbidden action used: pipeline_eval",
+        "label_contains: expected tokens ['烟雾'], got None"
+      ],
+      "dpo_candidate": true,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-004",
+      "title": "单图垂钓人员检测",
+      "category": "executable_vision_probe",
+      "user_query": "帮我检测当前图片里是否有垂钓人员。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/fisherman.jpg",
+      "expected_action": "qwen_detection",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "qwen_detection",
+      "actual_step": {
+        "thought": "用户明确要求检测图片中是否存在“垂钓人员”，这是一个典型的目标检测任务。根据决策原则，应优先使用目标检测工具。由于用户未指定具体模型，且需求明确为“检测”，选择通用的 qwen_detection 工具执行检测任务。该工具输出检测结果后，可直接回答用户问题，故设置 finish_after_tool 为 true。",
+        "decision_type": "tool",
+        "action": "qwen_detection",
+        "action_input": {
+          "label": "垂钓人员",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-005",
+      "title": "单图横幅检测",
+      "category": "executable_vision_probe",
+      "user_query": "看一下这张图里有没有横幅。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/banner.jpg",
+      "expected_action": "qwen_detection",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "pipeline_eval",
+      "actual_step": {
+        "thought": "用户询问图片中是否存在横幅，这是一个具体的视觉目标检测任务。根据决策原则，当用户明确要求对图片进行目标检测时，应优先选择 pipeline_eval 工具，因为它能执行图片生成（如有需要）、目标检测及评估，符合“给出检测评估报告”或“可执行探针”的隐含需求。虽然用户只问“有没有”，但 pipeline_eval 能提供更完整的检测过程和结果，且符合工具库中关于视觉评测的优先原则。",
+        "decision_type": "tool",
+        "action": "pipeline_eval",
+        "action_input": {
+          "task_text": "检测图片中是否存在横幅",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [
+        "action: expected one of ['qwen_detection', 'rexomni_detection'], got 'pipeline_eval'",
+        "forbidden action used: pipeline_eval",
+        "label_contains: expected tokens ['横幅'], got None"
+      ],
+      "dpo_candidate": true,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-006",
+      "title": "单图车辆检测",
+      "category": "executable_vision_probe",
+      "user_query": "只检测这张图里的车辆，不用出完整报告。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/trash_truck.jpg",
+      "expected_action": "qwen_detection",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "qwen_detection",
+      "actual_step": {
+        "thought": "用户明确要求仅对图片中的车辆进行检测，且不需要完整报告。根据决策原则，当用户意图明确（目标检测）且存在图片时，应优先选择目标检测工具。用户未指定具体检测模型，但提供了图片，因此选择 qwen_detection 或 rexomni_detection 均可。考虑到通用性，选择 qwen_detection。由于用户明确“不用出完整报告”，该工具执行后直接满足用户需求，故 finish_after_tool 设为 true。",
+        "decision_type": "tool",
+        "action": "qwen_detection",
+        "action_input": {
+          "label": "车辆",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-007",
+      "title": "单图人员检测",
+      "category": "executable_vision_probe",
+      "user_query": "识别这张图片里有没有人。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/person_with_bag.png",
+      "expected_action": "qwen_detection",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "qwen_detection",
+      "actual_step": {
+        "thought": "用户询问图片中是否有人，这是一个明确的目标检测任务。根据决策原则，当用户要求对图片进行目标检测时，应使用检测工具。由于图片已提供且目标明确（人），无需澄清。根据工具库，qwen_detection 或 rexomni_detection 均可用于目标检测。考虑到通用性和准确性，选择 qwen_detection 进行目标检测。该工具执行后能直接给出检测结果，因此 finish_after_tool 设为 true。",
+        "decision_type": "tool",
+        "action": "qwen_detection",
+        "action_input": {
+          "label": "人",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-008",
+      "title": "单图火焰检测",
+      "category": "executable_vision_probe",
+      "user_query": "帮我判断图片里有没有火焰目标。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/smoke.jpg",
+      "expected_action": "qwen_detection",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "pipeline_eval",
+      "actual_step": {
+        "thought": "用户询问图片中是否存在火焰目标，且已提供图片。根据决策原则，当用户明确要求对图片进行目标检测时，应优先使用 pipeline_eval 工具（包含图片生成、目标检测标注及效果评估），而非单独的检测工具。该工具能直接输出检测评估报告，满足用户“判断有没有”的需求。",
+        "decision_type": "tool",
+        "action": "pipeline_eval",
+        "action_input": {
+          "task_text": "帮我判断图片里有没有火焰目标。",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [
+        "action: expected one of ['qwen_detection', 'rexomni_detection'], got 'pipeline_eval'",
+        "forbidden action used: pipeline_eval",
+        "label_contains: expected tokens ['火焰'], got None"
+      ],
+      "dpo_candidate": true,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-009",
+      "title": "单图鱼竿检测",
+      "category": "executable_vision_probe",
+      "user_query": "检测一下图片中是否出现鱼竿。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/fisherman.jpg",
+      "expected_action": "qwen_detection",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "qwen_detection",
+      "actual_step": {
+        "thought": "用户明确要求检测图片中是否存在“鱼竿”，这是一个典型的目标检测任务。根据决策原则，当存在明确目标描述且图片可用时，应优先使用目标检测工具。由于用户未指定具体模型，且目标是检测物体存在性，选择通用的 qwen_detection 工具执行检测。该工具输出检测结果后，可直接回答用户问题，因此设置 finish_after_tool 为 true。",
+        "decision_type": "tool",
+        "action": "qwen_detection",
+        "action_input": {
+          "label": "鱼竿",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-010",
+      "title": "单图标识牌检测",
+      "category": "executable_vision_probe",
+      "user_query": "这张图里有没有标识牌，直接跑检测。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/banner.jpg",
+      "expected_action": "qwen_detection",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "rexomni_detection",
+      "actual_step": {
+        "thought": "用户明确要求对当前图片进行目标检测，目标是“标识牌”。根据决策原则，当用户明确要求“直接跑检测”且存在明确目标描述及图片时，应优先选择检测工具。由于用户指定了具体目标“标识牌”，且图片已提供，直接调用 qwen_detection 或 rexomni_detection 均可。考虑到 rexomni_detection 通常在通用目标检测任务中表现更优，且用户未指定特定模型，选择 rexomni_detection 执行检测。该工具输出即为检测结果，可直接结束任务，故 finish_after_tool 设为 true。",
+        "decision_type": "tool",
+        "action": "rexomni_detection",
+        "action_input": {
+          "label": "标识牌",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-011",
+      "title": "单图工程车辆检测",
+      "category": "executable_vision_probe",
+      "user_query": "请检测当前图片中是否有工程车辆。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/trash_truck.jpg",
+      "expected_action": "qwen_detection",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "qwen_detection",
+      "actual_step": {
+        "thought": "用户明确要求检测图片中的特定目标（工程车辆），且已提供图片。根据决策原则，应优先使用目标检测工具。由于用户未指定具体检测模型，且目标是通用场景下的工程车辆，选择通用的 qwen_detection 工具执行检测任务。该工具输出将直接回答用户问题，故设置 finish_after_tool 为 true。",
+        "decision_type": "tool",
+        "action": "qwen_detection",
+        "action_input": {
+          "label": "工程车辆",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-012",
+      "title": "单图包裹检测",
+      "category": "executable_vision_probe",
+      "user_query": "帮我框出图片里的包裹或背包。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/person_with_bag.png",
+      "expected_action": "qwen_detection",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "qwen_detection",
+      "actual_step": {
+        "thought": "用户明确要求对图片中的特定目标（包裹或背包）进行框选，属于目标检测任务。根据决策原则，当存在明确目标描述且图片可用时，应优先使用目标检测工具。由于用户未指定具体模型，且目标是‘包裹或背包’这一类，选择通用的 qwen_detection 工具执行检测。该工具输出检测结果即为最终答案，因此设置 finish_after_tool 为 true。",
+        "decision_type": "tool",
+        "action": "qwen_detection",
+        "action_input": {
+          "label": "包裹或背包",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-013",
+      "title": "单图烟尘检测",
+      "category": "executable_vision_probe",
+      "user_query": "检测这张图片里有没有烟尘。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/smoke.jpg",
+      "expected_action": "qwen_detection",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "qwen_detection",
+      "actual_step": {
+        "thought": "用户询问图片中是否存在“烟尘”，这是一个明确的目标检测任务。根据决策原则，当用户要求检测图片中的特定目标（如“烟尘”）时，应优先使用目标检测工具。由于用户未指定具体模型，且“烟尘”属于通用检测任务，选择 qwen_detection 工具执行检测。该工具输出检测结果可直接回答用户问题，因此设置 finish_after_tool 为 true。",
+        "decision_type": "tool",
+        "action": "qwen_detection",
+        "action_input": {
+          "label": "烟尘",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-014",
+      "title": "单图岸边人员检测",
+      "category": "executable_vision_probe",
+      "user_query": "这张图里有没有岸边人员？帮我检测。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/fisherman.jpg",
+      "expected_action": "qwen_detection",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "qwen_detection",
+      "actual_step": {
+        "thought": "用户明确要求对图片中的特定目标（岸边人员）进行检测，且提供了图片文件。根据决策原则，这属于目标检测任务，应使用 qwen_detection 或 rexomni_detection 工具。由于用户未指定具体模型，优先选择通用的 qwen_detection 工具。该工具执行后能直接给出检测结果，故设置 finish_after_tool 为 true。",
+        "decision_type": "tool",
+        "action": "qwen_detection",
+        "action_input": {
+          "label": "岸边人员",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-015",
+      "title": "单图文字牌检测",
+      "category": "executable_vision_probe",
+      "user_query": "检测图中的文字牌或公告牌。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/banner.jpg",
+      "expected_action": "qwen_detection",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "pipeline_eval",
+      "actual_step": {
+        "thought": "用户明确要求检测图片中的文字牌或公告牌，属于目标检测任务。根据决策原则，当用户明确要求“生成样本 + 目标检测评测/模型效果对比/精度评估报告”或“给出检测评估报告”时，应优先选择 pipeline_eval 工具，因为它能完整执行图片生成（如有需要）、目标检测（Qwen/Rex-Omni）及评估流程，比单独调用 qwen_detection 或 rexomni_detection 更符合“检测评估报告”的隐含需求。虽然用户未明确说“报告”，但“检测...牌”在工程语境下通常隐含对检测结果（如位置、置信度、类别）的展示与验证，pipeline_eval 能一站式完成。且 image_available 为 true，满足前置条件。",
+        "decision_type": "tool",
+        "action": "pipeline_eval",
+        "action_input": {
+          "task_text": "检测图中的文字牌或公告牌",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [
+        "action: expected one of ['qwen_detection', 'rexomni_detection'], got 'pipeline_eval'",
+        "forbidden action used: pipeline_eval",
+        "label_contains: expected tokens ['公告牌'], got None"
+      ],
+      "dpo_candidate": true,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-016",
+      "title": "参考垃圾车生成雨天图",
+      "category": "executable_vision_probe",
+      "user_query": "参考这张图生成 2 张雨天垃圾车巡检图片。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/trash_truck.jpg",
+      "expected_action": "flux-image-generation",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "flux-image-generation",
+      "actual_step": {
+        "thought": "用户明确要求基于提供的参考图片（trash_truck.jpg）生成 2 张特定主题（雨天垃圾车巡检）的图片。这属于图像生成任务，且提供了源图，符合 flux-image-generation 工具的适用场景。无需澄清意图，直接执行生图。",
+        "decision_type": "tool",
+        "action": "flux-image-generation",
+        "action_input": {
+          "task_text": "参考这张图生成 2 张雨天垃圾车巡检图片。",
+          "source_image_required": true,
+          "num_images": 2,
+          "finish_after_tool": false
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-017",
+      "title": "参考人员生成夜间图",
+      "category": "executable_vision_probe",
+      "user_query": "基于这张人员图片，生成 2 张夜间园区巡检场景。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/person_with_bag.png",
+      "expected_action": "flux-image-generation",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "flux-image-generation",
+      "actual_step": {
+        "thought": "用户明确要求基于提供的图片生成两张夜间园区巡检场景的图片。这是一个典型的图像生成任务，且提供了源图片（person_with_bag.png）。根据决策原则，应使用生图工具（flux image generation）。任务文本需明确描述生成目标（夜间园区巡检场景），源图片需指定，数量设为2。由于生图是最终交付物，设置 finish_after_tool 为 true。",
+        "decision_type": "tool",
+        "action": "flux-image-generation",
+        "action_input": {
+          "task_text": "生成夜间园区巡检场景",
+          "source_image_required": true,
+          "num_images": 2,
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-018",
+      "title": "烟雾场景变体生成",
+      "category": "executable_vision_probe",
+      "user_query": "参考当前烟雾图，生成 3 张不同光照下的烟雾告警样例。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/smoke.jpg",
+      "expected_action": "flux-image-generation",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "flux-image-generation",
+      "actual_step": {
+        "thought": "用户明确要求基于提供的烟雾图片生成 3 张不同光照下的样例图。这属于图像生成任务，且提供了源图片作为参考。根据决策原则，应使用 flux-image-generation 工具。参数中 task_text 需描述生成任务，source_image_required 设为 true 以利用提供的图片，num_images 设为 3。由于生图是最终交付物，finish_after_tool 设为 true。",
+        "decision_type": "tool",
+        "action": "flux-image-generation",
+        "action_input": {
+          "task_text": "生成 3 张不同光照下的烟雾告警样例图，基于参考图进行变化生成。",
+          "source_image_required": true,
+          "num_images": 3,
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-019",
+      "title": "垂钓场景天气变体",
+      "category": "executable_vision_probe",
+      "user_query": "按这张垂钓图片，生成 2 张雾天和雨天的类似场景。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/fisherman.jpg",
+      "expected_action": "flux-image-generation",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "flux-image-generation",
+      "actual_step": {
+        "thought": "用户明确要求基于提供的垂钓图片生成两张特定天气（雾天、雨天）的类似场景图片。这属于图像生成任务，且提供了源图片作为参考。根据决策原则，应使用生图工具（flux-image-generation）。参数需包含任务描述（生成雾天和雨天场景）、源图片要求（true，因为基于现有图片生成）、图片数量（2）。finish_after_tool 设为 true，因为生成图片后通常直接展示结果，无需进一步规划。",
+        "decision_type": "tool",
+        "action": "flux-image-generation",
+        "action_input": {
+          "task_text": "基于这张垂钓图片，生成 2 张雾天和雨天的类似场景。",
+          "source_image_required": true,
+          "num_images": 2,
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-020",
+      "title": "无参考生成安防样例",
+      "category": "executable_vision_probe",
+      "user_query": "生成 2 张工业园区安全帽佩戴检测的样例图片。",
+      "image_path": "",
+      "expected_action": "flux-image-generation",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "flux-image-generation",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "flux-image-generation",
+        "action_input": {
+          "task_text": "生成 2 张工业园区安全帽佩戴检测的样例图片",
+          "source_image_required": false,
+          "num_images": 2,
+          "finish_after_tool": false
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false,
+      "elapsed_ms": null,
+      "started_at": null,
+      "finished_at": null
+    }
+  ]
+}

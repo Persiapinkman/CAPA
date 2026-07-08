@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-06-24T16:25:23.104268+00:00",
+  "cases_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/training/planner_dpo_train_seed_v1/eval/planner_routing_eval_90cases.json",
+  "model": "qwen3.5-4b",
+  "no_llm": false,
+  "partial": false,
+  "summary": {
+    "total": 1,
+    "evaluated": 1,
+    "passed": 1,
+    "failed": 0,
+    "accuracy": 1.0,
+    "by_category": {
+      "full_visual_probe": {
+        "total": 1,
+        "evaluated": 1,
+        "passed": 1
+      }
+    },
+    "actual_actions": {
+      "pipeline_eval": 1
+    },
+    "dpo_candidates": 0
+  },
+  "results": [
+    {
+      "case_id": "ROUTE-PIPE-001",
+      "title": "完整可行性探针",
+      "category": "full_visual_probe",
+      "user_query": "基于这张图生成一些样本，并评估检测钓鱼的人是否可交付。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/fisherman.jpg",
+      "expected_action": "pipeline_eval",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "pipeline_eval",
+      "actual_step": {
+        "thought": "用户明确要求“生成样本 + 评估检测效果”，属于可执行的视觉评测任务。根据决策原则第 6 条，此类需求应优先选择 pipeline_eval 工具，而非单独的检测或迁移顾问工具。图片已提供，可作为生成样本的参考。",
+        "decision_type": "tool",
+        "action": "pipeline_eval",
+        "action_input": {
+          "task_text": "基于这张图生成一些样本，并评估检测钓鱼的人是否可交付。",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false
+    }
+  ]
+}

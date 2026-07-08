@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-06-24T16:43:08.618444+00:00",
+  "cases_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/training/planner_dpo_train_seed_v1/eval/planner_routing_eval_90cases.json",
+  "model": "qwen35-4b-newarch-dpo",
+  "no_llm": false,
+  "partial": false,
+  "summary": {
+    "total": 1,
+    "evaluated": 1,
+    "passed": 1,
+    "failed": 0,
+    "accuracy": 1.0,
+    "by_category": {
+      "historical_asset_qa": {
+        "total": 1,
+        "evaluated": 1,
+        "passed": 1
+      }
+    },
+    "actual_actions": {
+      "rag_answer": 1
+    },
+    "dpo_candidates": 0
+  },
+  "results": [
+    {
+      "case_id": "ROUTE-RAG-001",
+      "title": "查询现有安全绳模型能力",
+      "category": "historical_asset_qa",
+      "user_query": "目前安全绳检测有哪些模型和版本？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "目前安全绳检测有哪些模型和版本？",
+          "finish_after_tool": false
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false
+    }
+  ]
+}

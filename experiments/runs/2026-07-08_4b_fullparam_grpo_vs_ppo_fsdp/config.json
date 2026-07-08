@@ -1,0 +1,37 @@
+{
+  "run_id": "2026-07-08_4b_fullparam_grpo_vs_ppo_fsdp",
+  "goal": "Compare full-parameter Qwen3.5-4B GRPO and PPO training for CAPA Planner routing.",
+  "base_model": "/mnt/zkq/models/Qwen3.5-4B",
+  "base_model_backup": "/mnt/zkq/models/Qwen3.5-4B.backup-20260708",
+  "dataset": "training/planner_grpo_seed_v1/cases/planner_grpo_focused_4b_cases.jsonl",
+  "resource_snapshot": "experiments/resource_snapshot_2026-07-08.json",
+  "stopped_service": {
+    "model": "qwen3-32b",
+    "command_match": "/mnt/zkq/models/Qwen3-32B-vllm",
+    "port": 8011,
+    "freed_gpus": [4, 5, 6, 7]
+  },
+  "training": {
+    "model_size": "4B",
+    "parameter_mode": "full",
+    "adapter": null,
+    "distributed": "accelerate FSDP full_shard",
+    "default_cuda_visible_devices": "4,5,6,7",
+    "num_processes": 4,
+    "precision": "fp16",
+    "python_env": ".venv-train-cu124",
+    "torch": "2.6.0+cu124",
+    "gradient_checkpointing": false,
+    "fsdp_activation_checkpointing": true,
+    "transformer_layer_cls_to_wrap": "Qwen3_5DecoderLayer"
+  },
+  "outputs": {
+    "grpo": "outputs/planner-grpo-qwen35-4b-focused-full-fsdp",
+    "ppo": "outputs/planner-ppo-qwen35-4b-focused-full-fsdp",
+    "logs": "experiments/runs/2026-07-08_4b_fullparam_grpo_vs_ppo_fsdp/logs"
+  },
+  "scripts": {
+    "grpo": "scripts/run_qwen35_4b_grpo_fullparam_fsdp.sh",
+    "ppo": "scripts/run_qwen35_4b_ppo_fullparam_fsdp.sh"
+  }
+}

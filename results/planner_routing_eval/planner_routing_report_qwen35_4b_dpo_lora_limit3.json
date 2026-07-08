@@ -1,0 +1,109 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-06-24T09:56:52.235378+00:00",
+  "cases_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/dataset/planner_routing_eval.json",
+  "model": "qwen35-4b-dpo",
+  "no_llm": false,
+  "partial": false,
+  "summary": {
+    "total": 3,
+    "evaluated": 3,
+    "passed": 3,
+    "failed": 0,
+    "accuracy": 1.0,
+    "by_category": {
+      "historical_asset_qa": {
+        "total": 3,
+        "evaluated": 3,
+        "passed": 3
+      }
+    },
+    "actual_actions": {
+      "rag_answer": 3
+    },
+    "dpo_candidates": 0
+  },
+  "results": [
+    {
+      "case_id": "ROUTE-RAG-001",
+      "title": "查询现有安全绳模型能力",
+      "category": "historical_asset_qa",
+      "user_query": "目前安全绳检测有哪些模型和版本？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "目前安全绳检测有哪些模型和版本？",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false
+    },
+    {
+      "case_id": "ROUTE-RAG-002",
+      "title": "查询模型标签含义",
+      "category": "historical_asset_qa",
+      "user_query": "safety_rope v0.2.1 里面的 safety_rope_connected 和 unconnected 分别表示什么？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "safety_rope v0.2.1 里面的 safety_rope_connected 和 unconnected 分别表示什么？",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false
+    },
+    {
+      "case_id": "ROUTE-RAG-003",
+      "title": "查询已有头盔能力",
+      "category": "historical_asset_qa",
+      "user_query": "我们现在有没有能识别安全帽佩戴状态的模型？支持哪些标签？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "rag_answer",
+      "actual_step": {
+        "thought": "",
+        "decision_type": "tool",
+        "action": "rag_answer",
+        "action_input": {
+          "query": "我们现在有没有能识别安全帽佩戴状态的模型？支持哪些标签？",
+          "finish_after_tool": true
+        },
+        "end_reason": "",
+        "final_answer": "",
+        "clarification_question": ""
+      },
+      "failures": [],
+      "dpo_candidate": false
+    }
+  ]
+}

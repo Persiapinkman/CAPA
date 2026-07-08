@@ -1,0 +1,40 @@
+{
+  "run_id": "2026-07-08_4b_fullparam_grpo_long_fsdp_recovery_v4",
+  "date": "2026-07-08",
+  "model": "/mnt/zkq/models/Qwen3.5-4B",
+  "resume_from_checkpoint": "outputs/planner-grpo-qwen35-4b-focused-full-fsdp-long-20260708-recovery-v3/checkpoint-2",
+  "base_model_backup": "/mnt/zkq/models/Qwen3.5-4B.backup-20260708",
+  "parameter_mode": "full",
+  "method": "GRPO",
+  "resource_snapshot": "experiments/resource_snapshot_2026-07-08_after_oom.json",
+  "distributed": {
+    "strategy": "FSDP FULL_SHARD",
+    "num_processes": 4,
+    "physical_cuda_visible_devices": "3,4,5,6",
+    "state_dict_type": "SHARDED_STATE_DICT",
+    "use_orig_params": true,
+    "activation_checkpointing": true
+  },
+  "training": {
+    "cases": "training/planner_grpo_seed_v1/cases/planner_grpo_focused_4b_cases.jsonl",
+    "output_dir": "outputs/planner-grpo-qwen35-4b-focused-full-fsdp-long-20260708-recovery-v4",
+    "max_steps": 30,
+    "per_device_train_batch_size": 1,
+    "gradient_accumulation_steps": 16,
+    "learning_rate": 1e-6,
+    "num_generations": 2,
+    "max_prompt_length": 3072,
+    "max_completion_length": 160,
+    "temperature": 0.7,
+    "top_p": 0.95,
+    "save_steps": 2,
+    "save_total_limit": 4,
+    "optim": "adamw_torch",
+    "precision": "fp16",
+    "use_lora": false
+  },
+  "environment": {
+    "venv": ".venv-train-cu124",
+    "torch": "2.6.0+cu124"
+  }
+}

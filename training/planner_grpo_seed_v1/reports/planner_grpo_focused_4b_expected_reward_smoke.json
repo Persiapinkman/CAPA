@@ -1,0 +1,6028 @@
+{
+  "summary": {
+    "cases": 154,
+    "prediction_mode": "expected_decisions_smoke",
+    "mean_score": 1.0,
+    "passed": 154,
+    "failed": 0,
+    "pass_rate": 1.0,
+    "by_category": {
+      "clarify_intent_ambiguity": {
+        "count": 8,
+        "mean_score": 1.0,
+        "passed": 8,
+        "pass_rate": 1.0
+      },
+      "full_detection_eval": {
+        "count": 5,
+        "mean_score": 1.0,
+        "passed": 5,
+        "pass_rate": 1.0
+      },
+      "general_answer": {
+        "count": 4,
+        "mean_score": 1.0,
+        "passed": 4,
+        "pass_rate": 1.0
+      },
+      "historical_asset_qa": {
+        "count": 4,
+        "mean_score": 1.0,
+        "passed": 4,
+        "pass_rate": 1.0
+      },
+      "probe_only_contrastive": {
+        "count": 30,
+        "mean_score": 1.0,
+        "passed": 30,
+        "pass_rate": 1.0
+      },
+      "probe_then_migration": {
+        "count": 61,
+        "mean_score": 1.0,
+        "passed": 61,
+        "pass_rate": 1.0
+      },
+      "probe_then_migration_strict": {
+        "count": 30,
+        "mean_score": 1.0,
+        "passed": 30,
+        "pass_rate": 1.0
+      },
+      "single_image_probe": {
+        "count": 12,
+        "mean_score": 1.0,
+        "passed": 12,
+        "pass_rate": 1.0
+      }
+    },
+    "used_action_counts": {
+      "qwen_detection": 133,
+      "pipeline_eval": 5,
+      "rag_answer": 4,
+      "answerer": 4,
+      "migration_advisor": 91,
+      "clarify": 8
+    },
+    "premature_stop_cases": 0
+  },
+  "results": [
+    {
+      "case_id": "GRPO-VIS-PROBE-001",
+      "category": "single_image_probe",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-VIS-PROBE-002",
+      "category": "single_image_probe",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-VIS-PROBE-003",
+      "category": "single_image_probe",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-VIS-PROBE-004",
+      "category": "single_image_probe",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-PIPELINE-001",
+      "category": "full_detection_eval",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "pipeline_eval"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-PIPELINE-002",
+      "category": "full_detection_eval",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "pipeline_eval"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-PIPELINE-003",
+      "category": "full_detection_eval",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "pipeline_eval"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-RAG-001",
+      "category": "historical_asset_qa",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "rag_answer"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-RAG-002",
+      "category": "historical_asset_qa",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "rag_answer"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-RAG-003",
+      "category": "historical_asset_qa",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "rag_answer"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-ANS-001",
+      "category": "general_answer",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "answerer"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-ANS-002",
+      "category": "general_answer",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "answerer"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-OBS-001",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-VIS-PROBE-001",
+      "category": "single_image_probe",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-VIS-PROBE-002",
+      "category": "single_image_probe",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-VIS-PROBE-003",
+      "category": "single_image_probe",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-VIS-PROBE-004",
+      "category": "single_image_probe",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-VIS-PROBE-005",
+      "category": "single_image_probe",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-VIS-PROBE-006",
+      "category": "single_image_probe",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-VIS-PROBE-007",
+      "category": "single_image_probe",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-VIS-PROBE-008",
+      "category": "single_image_probe",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-001",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-002",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-003",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-004",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-005",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-006",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-007",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-008",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-009",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-010",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-011",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-012",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-013",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-014",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-015",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-016",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-017",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-018",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-019",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-020",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-021",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-022",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-023",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-024",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-025",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-026",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-027",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-028",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-029",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-030",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-031",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-032",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-033",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-034",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-035",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-036",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-037",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-038",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-039",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-040",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-041",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-042",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-043",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-044",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-045",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-046",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-047",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-048",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-049",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-050",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-051",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-052",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-053",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-054",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-055",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-056",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-057",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-058",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-059",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-060",
+      "category": "probe_then_migration",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-BOUNDARY-001",
+      "category": "historical_asset_qa",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "rag_answer"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-BOUNDARY-003",
+      "category": "general_answer",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "answerer"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-BOUNDARY-004",
+      "category": "general_answer",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "answerer"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-BOUNDARY-005",
+      "category": "full_detection_eval",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "pipeline_eval"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-BOUNDARY-006",
+      "category": "full_detection_eval",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "pipeline_eval"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-CLARIFY-001",
+      "category": "clarify_intent_ambiguity",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "clarify"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-CLARIFY-002",
+      "category": "clarify_intent_ambiguity",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "clarify"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-CLARIFY-003",
+      "category": "clarify_intent_ambiguity",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "clarify"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-CLARIFY-004",
+      "category": "clarify_intent_ambiguity",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "clarify"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-CLARIFY-005",
+      "category": "clarify_intent_ambiguity",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "clarify"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-CLARIFY-006",
+      "category": "clarify_intent_ambiguity",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "clarify"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-CLARIFY-007",
+      "category": "clarify_intent_ambiguity",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "clarify"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-CLARIFY-008",
+      "category": "clarify_intent_ambiguity",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.0,
+      "max_score": 1.0,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "clarify"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-001",
+      "category": "probe_then_migration_strict",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-002",
+      "category": "probe_then_migration_strict",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-003",
+      "category": "probe_then_migration_strict",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-004",
+      "category": "probe_then_migration_strict",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-005",
+      "category": "probe_then_migration_strict",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-006",
+      "category": "probe_then_migration_strict",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-007",
+      "category": "probe_then_migration_strict",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-008",
+      "category": "probe_then_migration_strict",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-009",
+      "category": "probe_then_migration_strict",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-010",
+      "category": "probe_then_migration_strict",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-011",
+      "category": "probe_then_migration_strict",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-012",
+      "category": "probe_then_migration_strict",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-013",
+      "category": "probe_then_migration_strict",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-014",
+      "category": "probe_then_migration_strict",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-015",
+      "category": "probe_then_migration_strict",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-016",
+      "category": "probe_then_migration_strict",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-017",
+      "category": "probe_then_migration_strict",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-018",
+      "category": "probe_then_migration_strict",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-019",
+      "category": "probe_then_migration_strict",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-020",
+      "category": "probe_then_migration_strict",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-021",
+      "category": "probe_then_migration_strict",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-022",
+      "category": "probe_then_migration_strict",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-023",
+      "category": "probe_then_migration_strict",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-024",
+      "category": "probe_then_migration_strict",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-025",
+      "category": "probe_then_migration_strict",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-026",
+      "category": "probe_then_migration_strict",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-027",
+      "category": "probe_then_migration_strict",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-028",
+      "category": "probe_then_migration_strict",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-029",
+      "category": "probe_then_migration_strict",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-030",
+      "category": "probe_then_migration_strict",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.75,
+      "max_score": 2.75,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-ONLY-001",
+      "category": "probe_only_contrastive",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.2,
+      "max_score": 1.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-ONLY-002",
+      "category": "probe_only_contrastive",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.2,
+      "max_score": 1.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-ONLY-003",
+      "category": "probe_only_contrastive",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.2,
+      "max_score": 1.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-ONLY-004",
+      "category": "probe_only_contrastive",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.2,
+      "max_score": 1.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-ONLY-005",
+      "category": "probe_only_contrastive",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.2,
+      "max_score": 1.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-ONLY-006",
+      "category": "probe_only_contrastive",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.2,
+      "max_score": 1.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-ONLY-007",
+      "category": "probe_only_contrastive",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.2,
+      "max_score": 1.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-ONLY-008",
+      "category": "probe_only_contrastive",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.2,
+      "max_score": 1.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-ONLY-009",
+      "category": "probe_only_contrastive",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.2,
+      "max_score": 1.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-ONLY-010",
+      "category": "probe_only_contrastive",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.2,
+      "max_score": 1.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-ONLY-011",
+      "category": "probe_only_contrastive",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.2,
+      "max_score": 1.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-ONLY-012",
+      "category": "probe_only_contrastive",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.2,
+      "max_score": 1.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-ONLY-013",
+      "category": "probe_only_contrastive",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.2,
+      "max_score": 1.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-ONLY-014",
+      "category": "probe_only_contrastive",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.2,
+      "max_score": 1.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-ONLY-015",
+      "category": "probe_only_contrastive",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.2,
+      "max_score": 1.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-ONLY-016",
+      "category": "probe_only_contrastive",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.2,
+      "max_score": 1.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-ONLY-017",
+      "category": "probe_only_contrastive",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.2,
+      "max_score": 1.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-ONLY-018",
+      "category": "probe_only_contrastive",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.2,
+      "max_score": 1.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-ONLY-019",
+      "category": "probe_only_contrastive",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.2,
+      "max_score": 1.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-ONLY-020",
+      "category": "probe_only_contrastive",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.2,
+      "max_score": 1.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-ONLY-021",
+      "category": "probe_only_contrastive",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.2,
+      "max_score": 1.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-ONLY-022",
+      "category": "probe_only_contrastive",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.2,
+      "max_score": 1.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-ONLY-023",
+      "category": "probe_only_contrastive",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.2,
+      "max_score": 1.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-ONLY-024",
+      "category": "probe_only_contrastive",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.2,
+      "max_score": 1.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-ONLY-025",
+      "category": "probe_only_contrastive",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.2,
+      "max_score": 1.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-ONLY-026",
+      "category": "probe_only_contrastive",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.2,
+      "max_score": 1.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-ONLY-027",
+      "category": "probe_only_contrastive",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.2,
+      "max_score": 1.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-ONLY-028",
+      "category": "probe_only_contrastive",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.2,
+      "max_score": 1.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-ONLY-029",
+      "category": "probe_only_contrastive",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.2,
+      "max_score": 1.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-ONLY-030",
+      "category": "probe_only_contrastive",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 1.2,
+      "max_score": 1.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    }
+  ]
+}

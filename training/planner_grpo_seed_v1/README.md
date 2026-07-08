@@ -175,3 +175,67 @@ the original 245 cases score identically:
 
 The dataset intentionally does not reward hand-writing engineered transitions
 that are already handled by the orchestrator.
+
+## Focused 4B GRPO Mix
+
+The full 313-case file should be treated as a regression/eval suite first. For
+the first 4B GRPO run, use the narrower file:
+
+```text
+cases/planner_grpo_focused_4b_cases.jsonl
+```
+
+Build it from the current train cases:
+
+```bash
+python3 training/planner_grpo_seed_v1/scripts/build_planner_grpo_focused_cases.py
+```
+
+Current focused mix:
+
+- total cases: 154
+- step-level GRPO samples: 245
+- `probe_then_migration`: 61
+- `probe_then_migration_strict`: 30
+- `probe_only_contrastive`: 30
+- `clarify_intent_ambiguity`: 8
+- guardrails: 25 (`single_image_probe`, `full_detection_eval`, `rag_answer`, `answerer`)
+
+This mix intentionally excludes most generic `migration_feasibility` rows from
+the first GRPO training pass. The 4B failures there are dominated by exact
+argument/boolean disagreements such as `use_visual_probe` and
+`finish_after_tool`, which are noisy GRPO targets compared with the cleaner
+probe -> migration state transition.
+
+Focused process rewards are enabled only where explicitly declared in the case
+`reward_spec`, so the historical 245-case regression scores remain comparable.
+Additional process dimensions:
+
+- `no_repeated_tool`: penalizes repeated detection when the expected sequence
+  has moved on to `migration_advisor`.
+- `no_skip_required_probe`: penalizes jumping straight to migration/pipeline
+  when the first step must be a visual probe.
+- `final_tool_finish`: penalizes a correct final tool that leaves
+  `finish_after_tool=false`.
+- `no_premature_stop`: penalizes stopping before required substantive steps.
+
+Smoke-check the focused set:
+
+```bash
+python3 training/planner_grpo_seed_v1/scripts/reward_planner_grpo.py \
+  --cases training/planner_grpo_seed_v1/cases/planner_grpo_focused_4b_cases.jsonl \
+  --out training/planner_grpo_seed_v1/reports/planner_grpo_focused_4b_expected_reward_smoke.json
+```
+
+Run focused 4B GRPO:
+
+```bash
+CUDA_VISIBLE_DEVICES=3 \
+REPORT_TO=tensorboard \
+bash scripts/run_qwen35_4b_grpo_focused.sh
+```
+
+The training script converts each multi-step case into step-level Planner
+prompts. For step 2, the prompt includes the step-1 mock observation in
+`query_trajectories`, so the model trains on the actual state transition
+condition rather than on a flattened answer string.

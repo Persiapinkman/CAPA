@@ -1,0 +1,24 @@
+{
+  "run_id": "2026-07-08_4b_fullparam_grpo_long_fsdp_recovery_v4",
+  "status": "failed_resume_optimizer_state",
+  "created_at_utc": "2026-07-08T06:10:00Z",
+  "started_at_utc": "2026-07-08T06:11:00Z",
+  "launcher_pid": 1880549,
+  "accelerate_pid": 1880556,
+  "worker_pids": [1880600, 1880601, 1880602, 1880603],
+  "failed_at_utc": "2026-07-08T06:15:07Z",
+  "failure": {
+    "stage": "fsdp_optimizer_state_restore",
+    "exception": "AssertionError",
+    "message": "Attempted step but _scale is None",
+    "note": "This was not an OOM. The run used physical GPUs 3,4,5,6 and exited while loading optimizer/scaler state from checkpoint-2."
+  },
+  "superseded_by": "2026-07-08_4b_fullparam_grpo_long_fsdp_recovery_v5",
+  "physical_cuda_visible_devices": "3,4,5,6",
+  "resume_from_checkpoint": "outputs/planner-grpo-qwen35-4b-focused-full-fsdp-long-20260708-recovery-v3/checkpoint-2",
+  "latest_observed_step": 2,
+  "checkpoint_available": true,
+  "latest_checkpoint": "outputs/planner-grpo-qwen35-4b-focused-full-fsdp-long-20260708-recovery-v3/checkpoint-2",
+  "log": "experiments/runs/2026-07-08_4b_fullparam_grpo_long_fsdp_recovery_v4/logs/grpo_fullparam_fsdp.log",
+  "output_dir": "outputs/planner-grpo-qwen35-4b-focused-full-fsdp-long-20260708-recovery-v4"
+}

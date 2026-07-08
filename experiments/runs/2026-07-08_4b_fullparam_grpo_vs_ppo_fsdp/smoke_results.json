@@ -1,0 +1,80 @@
+{
+  "date": "2026-07-08",
+  "resource_actions": {
+    "stopped_32b_service": true,
+    "freed_gpus": [4, 5, 6, 7],
+    "base_model_backup": "/mnt/zkq/models/Qwen3.5-4B.backup-20260708",
+    "base_model_backup_size": "8.8G"
+  },
+  "environment": {
+    "failed_env": {
+      "path": ".venv-train",
+      "torch": "2.8.0+cu128",
+      "cuda_runtime": "12.8",
+      "failure": "NCCL all-gather failed with driver 550.163.01 / CUDA 12.4 capability"
+    },
+    "working_env": {
+      "path": ".venv-train-cu124",
+      "torch": "2.6.0+cu124",
+      "cuda_runtime": "12.4",
+      "nccl": "2.21.5"
+    }
+  },
+  "grpo_smoke": {
+    "status": "completed_step_checkpoint_written_exit_hung_after_save",
+    "script": "scripts/run_qwen35_4b_grpo_fullparam_fsdp.sh",
+    "output_dir": "outputs/planner-grpo-qwen35-4b-focused-full-fsdp",
+    "checkpoint": "outputs/planner-grpo-qwen35-4b-focused-full-fsdp/checkpoint-1",
+    "checkpoint_size": "68G",
+    "parameter_mode": "full",
+    "adapter": null,
+    "max_steps": 1,
+    "gradient_accumulation_steps": 8,
+    "max_completion_length": 384,
+    "metrics": {
+      "loss": 0.1494,
+      "reward_mean": 0.4062,
+      "reward_std": 0.499,
+      "entropy": 0.2704,
+      "step_time_seconds": 230.3,
+      "completion_mean_length": 308.8,
+      "grad_norm": "nan"
+    },
+    "notes": [
+      "FSDP full-parameter training ran on GPUs 4-7 without OOM.",
+      "Final distributed save/exit hung after writing checkpoint-1 and was terminated manually.",
+      "Checkpoint includes both model.safetensors and pytorch_model_fsdp.bin, causing high disk use."
+    ]
+  },
+  "ppo_smoke": {
+    "status": "completed_update_metrics_written_no_weight_checkpoint",
+    "script": "scripts/run_qwen35_4b_ppo_fullparam_fsdp.sh",
+    "output_dir": "outputs/planner-ppo-qwen35-4b-focused-full-fsdp",
+    "parameter_mode": "full",
+    "adapter": null,
+    "max_updates": 1,
+    "rollout_source": "expected",
+    "gradient_accumulation_steps": 1,
+    "max_completion_length": 64,
+    "metrics": {
+      "loss": -0.5,
+      "reward_mean": 1.0,
+      "approx_kl": 0.0,
+      "clipfrac": 0.0,
+      "cuda_max_memory_mb": 14708.07
+    },
+    "notes": [
+      "Online model.generate through the custom FSDP-wrapped PPO model failed because sharded embedding weight was not 2-D.",
+      "The smoke therefore used fixed expected Planner JSON rollouts with the same verifier reward.",
+      "The update completed and metrics were written, but final full-model checkpoint was not emitted by the custom save path."
+    ]
+  },
+  "recommendation": {
+    "best_current_training_choice": "TRL GRPO with FSDP full_shard on .venv-train-cu124",
+    "ppo_next_step": "Use a separate rollout worker such as vLLM or precomputed rollout batches, then train PPO on those batches; fix FSDP checkpoint save for the custom PPO script before long runs.",
+    "avoid": [
+      ".venv-train for multi-GPU training because it is cu128 on a CUDA 12.4 driver",
+      "LoRA adapters for this comparison"
+    ]
+  }
+}

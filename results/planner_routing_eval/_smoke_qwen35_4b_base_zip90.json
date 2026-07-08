@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-06-24T16:20:39.433076+00:00",
+  "cases_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/training/planner_dpo_train_seed_v1/eval/planner_routing_eval_90cases.json",
+  "model": "qwen3.5-4b",
+  "no_llm": false,
+  "partial": false,
+  "summary": {
+    "total": 1,
+    "evaluated": 1,
+    "passed": 0,
+    "failed": 1,
+    "accuracy": 0.0,
+    "by_category": {
+      "historical_asset_qa": {
+        "total": 1,
+        "evaluated": 1,
+        "passed": 0
+      }
+    },
+    "actual_actions": {
+      "answerer": 1
+    },
+    "dpo_candidates": 1
+  },
+  "results": [
+    {
+      "case_id": "ROUTE-RAG-001",
+      "title": "查询现有安全绳模型能力",
+      "category": "historical_asset_qa",
+      "user_query": "目前安全绳检测有哪些模型和版本？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Internal Server Error。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['rag_answer'], got 'answerer'"
+      ],
+      "dpo_candidate": true
+    }
+  ]
+}

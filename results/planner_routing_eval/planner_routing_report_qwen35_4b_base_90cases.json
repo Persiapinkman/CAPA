@@ -1,0 +1,2306 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-06-24T11:49:39.010057+00:00",
+  "cases_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/dataset/planner_routing_eval.json",
+  "model": "qwen35-4b",
+  "no_llm": false,
+  "partial": false,
+  "summary": {
+    "total": 90,
+    "evaluated": 90,
+    "passed": 5,
+    "failed": 85,
+    "accuracy": 0.0556,
+    "by_category": {
+      "historical_asset_qa": {
+        "total": 25,
+        "evaluated": 25,
+        "passed": 0
+      },
+      "adela_platform_eval": {
+        "total": 5,
+        "evaluated": 5,
+        "passed": 0
+      },
+      "general_answer": {
+        "total": 25,
+        "evaluated": 25,
+        "passed": 5
+      },
+      "executable_vision_probe": {
+        "total": 25,
+        "evaluated": 25,
+        "passed": 0
+      },
+      "full_visual_probe": {
+        "total": 5,
+        "evaluated": 5,
+        "passed": 0
+      },
+      "migration_boundary": {
+        "total": 5,
+        "evaluated": 5,
+        "passed": 0
+      }
+    },
+    "actual_actions": {
+      "answerer": 90
+    },
+    "dpo_candidates": 85
+  },
+  "results": [
+    {
+      "case_id": "ROUTE-RAG-001",
+      "title": "查询现有安全绳模型能力",
+      "category": "historical_asset_qa",
+      "user_query": "目前安全绳检测有哪些模型和版本？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['rag_answer'], got 'answerer'"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-RAG-002",
+      "title": "查询模型标签含义",
+      "category": "historical_asset_qa",
+      "user_query": "safety_rope v0.2.1 里面的 safety_rope_connected 和 unconnected 分别表示什么？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": true,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['rag_answer'], got 'answerer'",
+        "forbidden action used: answerer"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-RAG-003",
+      "title": "查询已有头盔能力",
+      "category": "historical_asset_qa",
+      "user_query": "我们现在有没有能识别安全帽佩戴状态的模型？支持哪些标签？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['rag_answer'], got 'answerer'"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-RAG-004",
+      "title": "查询模型推荐阈值",
+      "category": "historical_asset_qa",
+      "user_query": "电动车检测模型的推荐阈值和适用场景是什么？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": true,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['rag_answer'], got 'answerer'",
+        "forbidden action used: answerer"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-RAG-005",
+      "title": "查询历史方案文档",
+      "category": "historical_asset_qa",
+      "user_query": "之前有没有做过河道垂钓检测相关方案？用的是什么模型？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['rag_answer'], got 'answerer'"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-ADELA-001",
+      "title": "指定平台查询性能",
+      "category": "adela_platform_eval",
+      "user_query": "safety_rope 在 cuda11.0-trt7.1-int8-T4 上性能怎么样？",
+      "image_path": "",
+      "expected_action": "adela_cli_eval",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['adela_cli_eval'], got 'answerer'",
+        "model_name: expected 'safety_rope', got None",
+        "platform: expected 'cuda11.0-trt7.1-int8-T4', got None",
+        "eval_type: expected 1, got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-ADELA-002",
+      "title": "指定平台查询精度",
+      "category": "adela_platform_eval",
+      "user_query": "safety_rope 在 cuda11.0-trt7.1-fp16-T4 的精度是多少？",
+      "image_path": "",
+      "expected_action": "adela_cli_eval",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['adela_cli_eval'], got 'answerer'",
+        "forbidden action used: answerer",
+        "model_name: expected 'safety_rope', got None",
+        "platform: expected 'cuda11.0-trt7.1-fp16-T4', got None",
+        "eval_type: expected 0, got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-ADELA-003",
+      "title": "rawmodel_id 查询性能",
+      "category": "adela_platform_eval",
+      "user_query": "rawmodel_id 51476 在 cuda11.0-trt7.1-int8-T4 上跑 normal performance。",
+      "image_path": "",
+      "expected_action": "adela_cli_eval",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['adela_cli_eval'], got 'answerer'",
+        "rawmodel_id: expected 51476, got None",
+        "platform: expected 'cuda11.0-trt7.1-int8-T4', got None",
+        "eval_type: expected 1, got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-ADELA-004",
+      "title": "部署平台缩写查询精度",
+      "category": "adela_platform_eval",
+      "user_query": "帮我看下 safety_rope 在 T4 int8 上的 accuracy。",
+      "image_path": "",
+      "expected_action": "adela_cli_eval",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['adela_cli_eval'], got 'answerer'",
+        "forbidden action used: answerer",
+        "model_name: expected 'safety_rope', got None",
+        "platform_contains: expected tokens ['T4', 'int8'], got None",
+        "eval_type: expected 0, got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-ADELA-005",
+      "title": "同时问精度和性能",
+      "category": "adela_platform_eval",
+      "user_query": "safety_rope 在 cuda11.0-trt7.1-int8-P4 上精度和速度都怎么样？",
+      "image_path": "",
+      "expected_action": "adela_cli_eval",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['adela_cli_eval'], got 'answerer'",
+        "model_name: expected 'safety_rope', got None",
+        "platform: expected 'cuda11.0-trt7.1-int8-P4', got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-ANS-001",
+      "title": "通用常识问答",
+      "category": "general_answer",
+      "user_query": "苹果是当季水果吗？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [],
+      "dpo_candidate": false
+    },
+    {
+      "case_id": "ROUTE-ANS-002",
+      "title": "解释算法概念",
+      "category": "general_answer",
+      "user_query": "用通俗语言解释一下 precision 和 recall 的区别。",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [],
+      "dpo_candidate": false
+    },
+    {
+      "case_id": "ROUTE-ANS-003",
+      "title": "非业务闲聊",
+      "category": "general_answer",
+      "user_query": "你能简单介绍一下自己能做什么吗？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [],
+      "dpo_candidate": false
+    },
+    {
+      "case_id": "ROUTE-ANS-004",
+      "title": "通用方法建议",
+      "category": "general_answer",
+      "user_query": "如果我要评估一个目标检测模型，通常应该看哪些指标？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [],
+      "dpo_candidate": false
+    },
+    {
+      "case_id": "ROUTE-ANS-005",
+      "title": "英文通用问题",
+      "category": "general_answer",
+      "user_query": "What is open-vocabulary object detection?",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": true,
+      "action_match": true,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [],
+      "dpo_candidate": false
+    },
+    {
+      "case_id": "ROUTE-VIS-001",
+      "title": "Qwen 单图标注",
+      "category": "executable_vision_probe",
+      "user_query": "用 qwen 帮我标注这张图里的钓鱼的人。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/fisherman.jpg",
+      "expected_action": "qwen_detection",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['qwen_detection'], got 'answerer'",
+        "label_contains: expected tokens ['钓鱼', '人'], got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-VIS-002",
+      "title": "RexOmni 单图检测",
+      "category": "executable_vision_probe",
+      "user_query": "用 RexOmni 检测图片里的安全帽。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/person_with_bag.png",
+      "expected_action": "rexomni_detection",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['rexomni_detection'], got 'answerer'",
+        "label_contains: expected tokens ['安全帽'], got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-VIS-003",
+      "title": "纯图片生成",
+      "category": "executable_vision_probe",
+      "user_query": "生成 3 张河边有人钓鱼的图片。",
+      "image_path": "",
+      "expected_action": "flux-image-generation",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['flux-image-generation'], got 'answerer'",
+        "num_images: expected 3, got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-VIS-004",
+      "title": "参考图生成变体",
+      "category": "executable_vision_probe",
+      "user_query": "参考这张图，生成几张不同天气下的巡检场景图片。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/banner.jpg",
+      "expected_action": "flux-image-generation",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['flux-image-generation'], got 'answerer'",
+        "source_image_required: expected True, got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-VIS-005",
+      "title": "未指定模型的单图检测",
+      "category": "executable_vision_probe",
+      "user_query": "帮我检测这张图里有没有垃圾车。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/trash_truck.jpg",
+      "expected_action": "qwen_detection",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['qwen_detection', 'rexomni_detection'], got 'answerer'",
+        "label_contains: expected tokens ['垃圾车'], got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-PIPE-001",
+      "title": "完整可行性探针",
+      "category": "full_visual_probe",
+      "user_query": "基于这张图生成一些样本，并评估检测钓鱼的人是否可交付。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/fisherman.jpg",
+      "expected_action": "pipeline_eval",
+      "passed": false,
+      "action_match": false,
+      "slot_match": true,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['pipeline_eval'], got 'answerer'",
+        "forbidden action used: answerer"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-PIPE-002",
+      "title": "生成精度评估报告",
+      "category": "full_visual_probe",
+      "user_query": "钓鱼的人，生成一个精度评估报告。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/fisherman.jpg",
+      "expected_action": "pipeline_eval",
+      "passed": false,
+      "action_match": false,
+      "slot_match": true,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['pipeline_eval'], got 'answerer'"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-PIPE-003",
+      "title": "对比两个开放集检测模型",
+      "category": "full_visual_probe",
+      "user_query": "用这张图扩增几张样本，然后对比 qwen 和 rex-omni 检测横幅的效果。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/banner.jpg",
+      "expected_action": "pipeline_eval",
+      "passed": false,
+      "action_match": false,
+      "slot_match": true,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['pipeline_eval'], got 'answerer'",
+        "forbidden action used: answerer"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-PIPE-004",
+      "title": "烟雾检测交付风险探测",
+      "category": "full_visual_probe",
+      "user_query": "基于这张烟雾图片做一次低成本探针，看开放集模型能不能检测出来并给出报告。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/smoke.jpg",
+      "expected_action": "pipeline_eval",
+      "passed": false,
+      "action_match": false,
+      "slot_match": true,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['pipeline_eval'], got 'answerer'",
+        "forbidden action used: answerer"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-PIPE-005",
+      "title": "小样本交付验证",
+      "category": "full_visual_probe",
+      "user_query": "这类背包人员检测能不能做？请用上传图跑一下生成、检测和评估链路。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/person_with_bag.png",
+      "expected_action": "pipeline_eval",
+      "passed": false,
+      "action_match": false,
+      "slot_match": true,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['migration_advisor', 'pipeline_eval'], got 'answerer'",
+        "forbidden action used: answerer"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-MIG-001",
+      "title": "新目标能力边界判断",
+      "category": "migration_boundary",
+      "user_query": "现有模型能不能迁移到识别工地反光衣颜色？",
+      "image_path": "",
+      "expected_action": "migration_advisor",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['migration_advisor'], got 'answerer'",
+        "forbidden action used: answerer",
+        "use_image: expected False, got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-MIG-002",
+      "title": "无直接同款项目迁移评估",
+      "category": "migration_boundary",
+      "user_query": "客户要检测商场扶梯上逆行的人，我们有没有类似能力，不能直接支持的话给迁移建议。",
+      "image_path": "",
+      "expected_action": "migration_advisor",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['migration_advisor'], got 'answerer'",
+        "forbidden action used: answerer",
+        "use_image: expected False, got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-MIG-003",
+      "title": "新业务标签迁移",
+      "category": "migration_boundary",
+      "user_query": "要识别港口工人有没有穿救生衣，现有 PPE 类模型可以迁移吗？",
+      "image_path": "",
+      "expected_action": "migration_advisor",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['migration_advisor'], got 'answerer'",
+        "forbidden action used: answerer",
+        "use_image: expected False, got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-MIG-004",
+      "title": "新场景小目标能力边界",
+      "category": "migration_boundary",
+      "user_query": "夜间远距离识别违规垂钓的小目标，现有能力边界在哪里？需要补多少数据？",
+      "image_path": "",
+      "expected_action": "migration_advisor",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['migration_advisor'], got 'answerer'",
+        "forbidden action used: answerer",
+        "use_image: expected False, got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-MIG-005",
+      "title": "带样例图的迁移顾问",
+      "category": "migration_boundary",
+      "user_query": "这张图里的异常堆料检测，现有模型能否迁移？请给一个迁移评估报告。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/trash_truck.jpg",
+      "expected_action": "migration_advisor",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['migration_advisor'], got 'answerer'",
+        "forbidden action used: answerer",
+        "use_image: expected True, got None",
+        "use_visual_probe: expected True, got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-001",
+      "title": "安全帽版本资产查询",
+      "category": "historical_asset_qa",
+      "user_query": "安全帽佩戴检测现在有哪些线上模型版本？每个版本支持哪些标签？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": true,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['rag_answer'], got 'answerer'",
+        "forbidden action used: answerer"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-002",
+      "title": "反光衣历史能力查询",
+      "category": "historical_asset_qa",
+      "user_query": "我们以前做过反光衣识别吗？对应模型名和适用场景是什么？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": true,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['rag_answer'], got 'answerer'",
+        "forbidden action used: answerer"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-003",
+      "title": "烟火模型标签盘点",
+      "category": "historical_asset_qa",
+      "user_query": "现有烟火检测模型里 smoke 和 fire 标签分别在哪些版本出现过？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": true,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['rag_answer'], got 'answerer'",
+        "forbidden action used: answerer"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-004",
+      "title": "垃圾车资产查询",
+      "category": "historical_asset_qa",
+      "user_query": "项目库里有没有垃圾车检测能力？历史交付用的是哪个模型？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": true,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['rag_answer'], got 'answerer'",
+        "forbidden action used: answerer"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-005",
+      "title": "人员跌倒资产查询",
+      "category": "historical_asset_qa",
+      "user_query": "目前有没有人员跌倒检测相关能力，支持室内还是室外？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": true,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['rag_answer'], got 'answerer'",
+        "forbidden action used: answerer"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-006",
+      "title": "渔船检测版本查询",
+      "category": "historical_asset_qa",
+      "user_query": "渔船检测之前交付过哪些版本？标签体系怎么定义的？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": true,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['rag_answer'], got 'answerer'",
+        "forbidden action used: answerer"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-007",
+      "title": "裸土覆盖资产查询",
+      "category": "historical_asset_qa",
+      "user_query": "已有裸土覆盖识别能力吗？能查一下历史报告里的模型效果吗？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": true,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['rag_answer'], got 'answerer'",
+        "forbidden action used: answerer"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-008",
+      "title": "安全绳标签查询",
+      "category": "historical_asset_qa",
+      "user_query": "安全绳模型目前支持 connected、unconnected 之外的标签吗？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": true,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['rag_answer'], got 'answerer'",
+        "forbidden action used: answerer"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-009",
+      "title": "工程车能力盘点",
+      "category": "historical_asset_qa",
+      "user_query": "我们现在沉淀过工程车/挖掘机检测能力吗？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": true,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['rag_answer'], got 'answerer'",
+        "forbidden action used: answerer"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-010",
+      "title": "口罩佩戴资产查询",
+      "category": "historical_asset_qa",
+      "user_query": "历史资产里有没有口罩佩戴识别模型？标签是 mask 还是 no_mask？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": true,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['rag_answer'], got 'answerer'",
+        "forbidden action used: answerer"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-011",
+      "title": "占道经营历史能力",
+      "category": "historical_asset_qa",
+      "user_query": "有没有做过占道经营识别？项目名称和能力边界是什么？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": true,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['rag_answer'], got 'answerer'",
+        "forbidden action used: answerer"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-012",
+      "title": "电动车进楼资产查询",
+      "category": "historical_asset_qa",
+      "user_query": "电动车进楼检测有没有已有模型可以查？版本和标签给我看一下。",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": true,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['rag_answer'], got 'answerer'",
+        "forbidden action used: answerer"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-013",
+      "title": "积水识别历史交付",
+      "category": "historical_asset_qa",
+      "user_query": "历史交付里有没有道路积水识别？用过哪些数据集或模型？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": true,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['rag_answer'], got 'answerer'",
+        "forbidden action used: answerer"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-014",
+      "title": "工服识别资产查询",
+      "category": "historical_asset_qa",
+      "user_query": "工服穿戴检测现在有哪些能力，能识别哪几类工服？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": true,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['rag_answer'], got 'answerer'",
+        "forbidden action used: answerer"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-015",
+      "title": "烟雾火焰资产状态",
+      "category": "historical_asset_qa",
+      "user_query": "当前烟雾火焰检测能力是否还在维护？最近版本是什么？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": true,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['rag_answer'], got 'answerer'",
+        "forbidden action used: answerer"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-016",
+      "title": "犬只识别资产查询",
+      "category": "historical_asset_qa",
+      "user_query": "我们有没有犬只识别或宠物入园检测的历史能力？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": true,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['rag_answer'], got 'answerer'",
+        "forbidden action used: answerer"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-017",
+      "title": "餐饮后厨帽子资产",
+      "category": "historical_asset_qa",
+      "user_query": "餐饮后厨厨师帽检测以前做过吗？对应标签和模型在哪里？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": true,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['rag_answer'], got 'answerer'",
+        "forbidden action used: answerer"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-018",
+      "title": "施工围挡资产查询",
+      "category": "historical_asset_qa",
+      "user_query": "施工围挡破损识别有没有历史方案？支持哪些缺陷类型？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": true,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['rag_answer'], got 'answerer'",
+        "forbidden action used: answerer"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-019",
+      "title": "水尺读数能力盘点",
+      "category": "historical_asset_qa",
+      "user_query": "水尺读数识别现有能力做到什么程度？有哪些版本记录？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": true,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['rag_answer'], got 'answerer'",
+        "forbidden action used: answerer"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-RAG-020",
+      "title": "叉车检测历史能力",
+      "category": "historical_asset_qa",
+      "user_query": "仓库叉车检测是否已有资产？模型名和标签定义是什么？",
+      "image_path": "",
+      "expected_action": "rag_answer",
+      "passed": false,
+      "action_match": false,
+      "slot_match": true,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['rag_answer'], got 'answerer'",
+        "forbidden action used: answerer"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-001",
+      "title": "检测指标解释",
+      "category": "general_answer",
+      "user_query": "目标检测里 mAP、precision、recall 分别是什么意思？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": true,
+      "slot_match": false,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-002",
+      "title": "阈值选择建议",
+      "category": "general_answer",
+      "user_query": "做缺陷检测时置信度阈值一般怎么选？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": true,
+      "slot_match": false,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-003",
+      "title": "小目标优化方法",
+      "category": "general_answer",
+      "user_query": "小目标检测效果差，常见的模型和数据改进方向有哪些？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": true,
+      "slot_match": false,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-004",
+      "title": "误报漏报分析方法",
+      "category": "general_answer",
+      "user_query": "分析目标检测误报和漏报时通常怎么归因？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": true,
+      "slot_match": false,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-005",
+      "title": "标注规范建议",
+      "category": "general_answer",
+      "user_query": "如果我要做一个检测数据集，标注框质量通常要注意什么？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": true,
+      "slot_match": false,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-006",
+      "title": "训练集划分建议",
+      "category": "general_answer",
+      "user_query": "目标检测训练集、验证集、测试集一般怎么划分比较合理？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": true,
+      "slot_match": false,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-007",
+      "title": "OOV概念解释",
+      "category": "general_answer",
+      "user_query": "视觉模型里的 OOV 问题通常指什么？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": true,
+      "slot_match": false,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-008",
+      "title": "主动学习建议",
+      "category": "general_answer",
+      "user_query": "检测任务数据量不够时，主动学习可以怎么做？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": true,
+      "slot_match": false,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-009",
+      "title": "合成数据风险",
+      "category": "general_answer",
+      "user_query": "用生成图片补检测数据有什么常见风险？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": true,
+      "slot_match": false,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-010",
+      "title": "模型评估流程建议",
+      "category": "general_answer",
+      "user_query": "上线前评估一个目标检测模型，通常有哪些步骤？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": true,
+      "slot_match": false,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-011",
+      "title": "IoU解释",
+      "category": "general_answer",
+      "user_query": "IoU 在检测评估里是怎么计算的？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": true,
+      "slot_match": false,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-012",
+      "title": "混淆矩阵解释",
+      "category": "general_answer",
+      "user_query": "多类别检测结果能不能用混淆矩阵分析？怎么理解？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": true,
+      "slot_match": false,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-013",
+      "title": "长尾类别处理",
+      "category": "general_answer",
+      "user_query": "检测数据长尾严重时，一般有哪些处理办法？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": true,
+      "slot_match": false,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-014",
+      "title": "标注一致性方法",
+      "category": "general_answer",
+      "user_query": "多人标注同一批图片时，如何检查标注一致性？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": true,
+      "slot_match": false,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-015",
+      "title": "数据增强建议",
+      "category": "general_answer",
+      "user_query": "目标检测常用的数据增强有哪些，什么时候不该用？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": true,
+      "slot_match": false,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-016",
+      "title": "开放词表检测解释",
+      "category": "general_answer",
+      "user_query": "open-vocabulary detection 和普通检测模型有什么区别？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": true,
+      "slot_match": false,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-017",
+      "title": "召回优先场景",
+      "category": "general_answer",
+      "user_query": "如果业务更怕漏检，评估指标应该怎么侧重？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": true,
+      "slot_match": false,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-018",
+      "title": "边缘部署取舍",
+      "category": "general_answer",
+      "user_query": "检测模型要部署到边缘设备，通常怎么权衡速度和精度？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": true,
+      "slot_match": false,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-019",
+      "title": "PR曲线解释",
+      "category": "general_answer",
+      "user_query": "PR 曲线对目标检测有什么帮助？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": true,
+      "slot_match": false,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-ANS-020",
+      "title": "负样本重要性",
+      "category": "general_answer",
+      "user_query": "检测任务里为什么要收集负样本？",
+      "image_path": "",
+      "expected_action": "answerer",
+      "passed": false,
+      "action_match": true,
+      "slot_match": false,
+      "forbidden_violation": false,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "mode: expected 'direct', got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-001",
+      "title": "单图垃圾车检测",
+      "category": "executable_vision_probe",
+      "user_query": "帮我看这张图里有没有垃圾车。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/trash_truck.jpg",
+      "expected_action": "qwen_detection",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['qwen_detection', 'rexomni_detection'], got 'answerer'",
+        "forbidden action used: answerer",
+        "label_contains: expected tokens ['垃圾车'], got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-002",
+      "title": "单图背包检测",
+      "category": "executable_vision_probe",
+      "user_query": "检测一下这张图中有没有背包。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/person_with_bag.png",
+      "expected_action": "qwen_detection",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['qwen_detection', 'rexomni_detection'], got 'answerer'",
+        "forbidden action used: answerer",
+        "label_contains: expected tokens ['背包'], got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-003",
+      "title": "单图烟雾检测",
+      "category": "executable_vision_probe",
+      "user_query": "这张图里有没有烟雾？直接检测一下。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/smoke.jpg",
+      "expected_action": "qwen_detection",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['qwen_detection', 'rexomni_detection'], got 'answerer'",
+        "forbidden action used: answerer",
+        "label_contains: expected tokens ['烟雾'], got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-004",
+      "title": "单图垂钓人员检测",
+      "category": "executable_vision_probe",
+      "user_query": "帮我检测当前图片里是否有垂钓人员。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/fisherman.jpg",
+      "expected_action": "qwen_detection",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['qwen_detection', 'rexomni_detection'], got 'answerer'",
+        "forbidden action used: answerer",
+        "label_contains: expected tokens ['垂钓人员'], got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-005",
+      "title": "单图横幅检测",
+      "category": "executable_vision_probe",
+      "user_query": "看一下这张图里有没有横幅。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/banner.jpg",
+      "expected_action": "qwen_detection",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['qwen_detection', 'rexomni_detection'], got 'answerer'",
+        "forbidden action used: answerer",
+        "label_contains: expected tokens ['横幅'], got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-006",
+      "title": "单图车辆检测",
+      "category": "executable_vision_probe",
+      "user_query": "只检测这张图里的车辆，不用出完整报告。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/trash_truck.jpg",
+      "expected_action": "qwen_detection",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['qwen_detection', 'rexomni_detection'], got 'answerer'",
+        "forbidden action used: answerer",
+        "label_contains: expected tokens ['车辆'], got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-007",
+      "title": "单图人员检测",
+      "category": "executable_vision_probe",
+      "user_query": "识别这张图片里有没有人。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/person_with_bag.png",
+      "expected_action": "qwen_detection",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['qwen_detection', 'rexomni_detection'], got 'answerer'",
+        "forbidden action used: answerer",
+        "label_contains: expected tokens ['人'], got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-008",
+      "title": "单图火焰检测",
+      "category": "executable_vision_probe",
+      "user_query": "帮我判断图片里有没有火焰目标。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/smoke.jpg",
+      "expected_action": "qwen_detection",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['qwen_detection', 'rexomni_detection'], got 'answerer'",
+        "forbidden action used: answerer",
+        "label_contains: expected tokens ['火焰'], got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-009",
+      "title": "单图鱼竿检测",
+      "category": "executable_vision_probe",
+      "user_query": "检测一下图片中是否出现鱼竿。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/fisherman.jpg",
+      "expected_action": "qwen_detection",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['qwen_detection', 'rexomni_detection'], got 'answerer'",
+        "forbidden action used: answerer",
+        "label_contains: expected tokens ['鱼竿'], got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-010",
+      "title": "单图标识牌检测",
+      "category": "executable_vision_probe",
+      "user_query": "这张图里有没有标识牌，直接跑检测。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/banner.jpg",
+      "expected_action": "qwen_detection",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['qwen_detection', 'rexomni_detection'], got 'answerer'",
+        "forbidden action used: answerer",
+        "label_contains: expected tokens ['标识牌'], got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-011",
+      "title": "单图工程车辆检测",
+      "category": "executable_vision_probe",
+      "user_query": "请检测当前图片中是否有工程车辆。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/trash_truck.jpg",
+      "expected_action": "qwen_detection",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['qwen_detection', 'rexomni_detection'], got 'answerer'",
+        "forbidden action used: answerer",
+        "label_contains: expected tokens ['工程车辆'], got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-012",
+      "title": "单图包裹检测",
+      "category": "executable_vision_probe",
+      "user_query": "帮我框出图片里的包裹或背包。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/person_with_bag.png",
+      "expected_action": "qwen_detection",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['qwen_detection', 'rexomni_detection'], got 'answerer'",
+        "forbidden action used: answerer",
+        "label_contains: expected tokens ['背包'], got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-013",
+      "title": "单图烟尘检测",
+      "category": "executable_vision_probe",
+      "user_query": "检测这张图片里有没有烟尘。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/smoke.jpg",
+      "expected_action": "qwen_detection",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['qwen_detection', 'rexomni_detection'], got 'answerer'",
+        "forbidden action used: answerer",
+        "label_contains: expected tokens ['烟尘'], got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-014",
+      "title": "单图岸边人员检测",
+      "category": "executable_vision_probe",
+      "user_query": "这张图里有没有岸边人员？帮我检测。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/fisherman.jpg",
+      "expected_action": "qwen_detection",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['qwen_detection', 'rexomni_detection'], got 'answerer'",
+        "forbidden action used: answerer",
+        "label_contains: expected tokens ['岸边人员'], got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-015",
+      "title": "单图文字牌检测",
+      "category": "executable_vision_probe",
+      "user_query": "检测图中的文字牌或公告牌。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/banner.jpg",
+      "expected_action": "qwen_detection",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['qwen_detection', 'rexomni_detection'], got 'answerer'",
+        "forbidden action used: answerer",
+        "label_contains: expected tokens ['公告牌'], got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-016",
+      "title": "参考垃圾车生成雨天图",
+      "category": "executable_vision_probe",
+      "user_query": "参考这张图生成 2 张雨天垃圾车巡检图片。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/trash_truck.jpg",
+      "expected_action": "flux-image-generation",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['flux-image-generation'], got 'answerer'",
+        "forbidden action used: answerer",
+        "source_image_required: expected True, got None",
+        "num_images: expected 2, got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-017",
+      "title": "参考人员生成夜间图",
+      "category": "executable_vision_probe",
+      "user_query": "基于这张人员图片，生成 2 张夜间园区巡检场景。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/person_with_bag.png",
+      "expected_action": "flux-image-generation",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['flux-image-generation'], got 'answerer'",
+        "forbidden action used: answerer",
+        "source_image_required: expected True, got None",
+        "num_images: expected 2, got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-018",
+      "title": "烟雾场景变体生成",
+      "category": "executable_vision_probe",
+      "user_query": "参考当前烟雾图，生成 3 张不同光照下的烟雾告警样例。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/smoke.jpg",
+      "expected_action": "flux-image-generation",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['flux-image-generation'], got 'answerer'",
+        "forbidden action used: answerer",
+        "source_image_required: expected True, got None",
+        "num_images: expected 3, got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-019",
+      "title": "垂钓场景天气变体",
+      "category": "executable_vision_probe",
+      "user_query": "按这张垂钓图片，生成 2 张雾天和雨天的类似场景。",
+      "image_path": "/mnt/zkq/projects/test-skills-eval-planner-routing-dpo/examples/images/fisherman.jpg",
+      "expected_action": "flux-image-generation",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['flux-image-generation'], got 'answerer'",
+        "forbidden action used: answerer",
+        "source_image_required: expected True, got None",
+        "num_images: expected 2, got None"
+      ],
+      "dpo_candidate": true
+    },
+    {
+      "case_id": "ROUTE-HARD-VIS-020",
+      "title": "无参考生成安防样例",
+      "category": "executable_vision_probe",
+      "user_query": "生成 2 张工业园区安全帽佩戴检测的样例图片。",
+      "image_path": "",
+      "expected_action": "flux-image-generation",
+      "passed": false,
+      "action_match": false,
+      "slot_match": false,
+      "forbidden_violation": true,
+      "actual_action": "answerer",
+      "actual_step": {
+        "thought": "Agent 决策异常：Request timed out.。本轮停止工具调用，直接向用户说明。",
+        "decision_type": "tool",
+        "action": "answerer",
+        "action_input": {},
+        "final_answer": "当前决策失败，请重试一次；如果问题涉及图片，请重新附带图片发送。"
+      },
+      "failures": [
+        "action: expected one of ['flux-image-generation'], got 'answerer'",
+        "forbidden action used: answerer",
+        "source_image_required: expected False, got None",
+        "num_images: expected 2, got None"
+      ],
+      "dpo_candidate": true
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "run_id": "2026-07-07_4b_lora_grpo_focused",
+  "status": "failed_oom",
+  "created_at_utc": "2026-07-07T08:09:00Z",
+  "started_at_utc": "2026-07-07T08:09:00Z",
+  "physical_cuda_visible_devices": "3",
+  "completed_optimizer_steps": 66,
+  "planned_optimizer_steps": 122,
+  "latest_metrics": {
+    "loss": 0.1528,
+    "reward_mean": 0.75,
+    "reward_std": 0.4629,
+    "completion_mean_length": 311.8,
+    "completion_max_length": 512,
+    "completion_clipped_ratio": 0.375,
+    "step_time_seconds": 168.3
+  },
+  "checkpoint_available": true,
+  "latest_checkpoint": "outputs/planner-grpo-qwen35-4b-focused-lora/checkpoint-50",
+  "other_checkpoint": "outputs/planner-grpo-qwen35-4b-focused-lora/checkpoint-25",
+  "latest_checkpoint_size": "56M",
+  "failure": {
+    "completed_optimizer_steps_before_oom": 66,
+    "failed_optimizer_step": 67,
+    "stage": "trl_grpo_generate_sdpa_prefill",
+    "exception": "torch.OutOfMemoryError",
+    "allocation_gib": 2.11,
+    "note": "Initial run OOM at step 67 with max_completion_length=512; resume from checkpoint-50 with max_completion_length=384 OOM again at step 67. Same TRL online-generation peak as full-param FSDP, but LoRA reached 66/122 steps and kept a lightweight adapter checkpoint."
+  },
+  "resume_attempt": {
+    "date": "2026-07-08",
+    "resume_from_checkpoint": "outputs/planner-grpo-qwen35-4b-focused-lora/checkpoint-50",
+    "max_completion_length": 384,
+    "status": "failed_oom_at_same_step"
+  },
+  "eval_status": "no_formal_eval",
+  "logs": {
+    "initial": "experiments/runs/2026-07-07_4b_lora_grpo_focused/logs/grpo_lora_initial.log",
+    "resume50_mc384": "experiments/runs/2026-07-07_4b_lora_grpo_focused/logs/grpo_lora_resume50_mc384.log"
+  },
+  "output_dir": "outputs/planner-grpo-qwen35-4b-focused-lora"
+}
