@@ -4,7 +4,9 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 
-MODEL_DIR="${MODEL_DIR:-/mnt/zkq/models/Qwen3.5-4B}"
+source "$ROOT_DIR/scripts/path_utils.sh"
+
+MODEL_DIR="$(resolve_model_dir "${MODEL_DIR:-/raid/zkq/models/Qwen3.5-4B}")"
 TRAIN_FILE="${TRAIN_FILE:-$ROOT_DIR/training/planner_dpo_train_seed_v1/training_data/planner_dpo_text_train.jsonl}"
 VAL_FILE="${VAL_FILE:-$ROOT_DIR/training/planner_dpo_train_seed_v1/training_data/planner_dpo_text_val.jsonl}"
 OUTPUT_DIR="${OUTPUT_DIR:-$ROOT_DIR/outputs/planner-sft-qwen35-4b-chosen-lora}"

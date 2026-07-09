@@ -1,10 +1,24 @@
 {
-  "status": "running",
+  "run_id": "2026-07-08_4b_fullparam_grpo_long_fsdp",
+  "status": "failed_oom_no_checkpoint",
   "started_at": "2026-07-08T03:46:31Z",
+  "failed_at_utc": "2026-07-08T05:17:00Z",
   "launcher_pid": 1819747,
   "accelerate_pid": 1819753,
   "worker_pids": [1819811, 1819812, 1819813, 1819814],
-  "progress_at_start_check": "0/30 optimizer steps",
+  "completed_optimizer_steps": 16,
+  "failed_optimizer_step": 17,
+  "planned_optimizer_steps": 30,
+  "failure": {
+    "type": "cuda_oom",
+    "stage": "trl_grpo_generate_sdpa_prefill",
+    "rank": 2,
+    "allocation_gib": 2.11,
+    "free_gib": 2.0,
+    "root_cause": "Rank-local online GRPO generation activation/KV/linear-attention peak; FSDP shards model/optimizer state but does not shard this generation peak."
+  },
+  "checkpoint_available": false,
+  "checkpoint_note": "save_steps was intentionally high, so the run lost 16 completed optimizer steps after OOM.",
   "gpu_allocation": "CUDA_VISIBLE_DEVICES=4,5,6,7",
   "log": "experiments/runs/2026-07-08_4b_fullparam_grpo_long_fsdp/logs/grpo_fullparam_fsdp.log",
   "output_dir": "outputs/planner-grpo-qwen35-4b-focused-full-fsdp-long-20260708"

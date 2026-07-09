@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import inspect
+import sys
 from pathlib import Path
 
 import torch
@@ -17,6 +18,11 @@ torch.backends.cudnn.enabled = False
 
 
 ROOT = Path(__file__).resolve().parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from util.path_resolver import resolve_model_name_or_path  # noqa: E402
+
 DEFAULT_DATA_DIR = ROOT / "results" / "planner_routing_eval" / "dpo_train_seed_v1" / "training_data"
 
 
@@ -103,6 +109,7 @@ def normalize_dataset_columns(dataset):
 
 def main() -> None:
     args = parse_args()
+    args.model_name_or_path = resolve_model_name_or_path(args.model_name_or_path, ROOT)
     set_seed(args.seed)
 
     dtype = torch.float16 if args.fp16 else (torch.bfloat16 if args.bf16 else torch.float32)

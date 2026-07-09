@@ -1,0 +1,150 @@
+{
+  "run_id": "2026-07-08_9b_32b_compound_planner_eval",
+  "status": "blocked_9b_local_service_invalid",
+  "started_at_utc": "2026-07-08T17:40:00Z",
+  "purpose": "Run formal 3x multi-step compound Planner routing eval for local 9B and 32B services.",
+  "policy": {
+    "official_eval_outputs_dir": "results/compound_planner_eval",
+    "required_artifacts": [
+      "aggregate_json",
+      "case_audit_csv",
+      "failed_cases_csv"
+    ],
+    "notes": "Formal eval outputs go under results/. Training data stays under training/. Experiment process metadata stays under experiments/."
+  },
+  "cases": "training/planner_grpo_seed_v1/cases/planner_grpo_compound245_eval_cases.jsonl",
+  "generation": {
+    "runs": 3,
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "seed": 42,
+    "do_sample": false,
+    "max_steps": 3,
+    "timeout_seconds": 60,
+    "openai_timeout_seconds": 60
+  },
+  "services": {
+    "qwen3.5-9b": {
+      "model_dir": "/mnt/zkq/models/Qwen3.5-9B-vllm",
+      "physical_gpu": "3 originally; repair attempts used empty GPU 6 or GPUs 6,7",
+      "upstream_api_base": "http://127.0.0.1:8011/v1",
+      "gateway_api_base": "http://127.0.0.1:8021/v1",
+      "upstream_pid": null,
+      "gateway_pid": null,
+      "service_log": "logs/vllm/qwen35_9b_8011_20260709_fp32_cpuoffload40_len4096.log",
+      "gateway_log": "logs/vllm/qwen35_9b_gateway_8021_20260708.log",
+      "status": "stopped_invalid",
+      "gateway_status": "stopped_no_upstream"
+    },
+    "qwen3-32b": {
+      "model_dir": "/mnt/zkq/models/Qwen3-32B-vllm",
+      "physical_gpus": "4,5,6,7",
+      "upstream_api_base": "http://127.0.0.1:8012/v1",
+      "gateway_api_base": "http://127.0.0.1:8022/v1",
+      "upstream_pid": null,
+      "gateway_pid": null,
+      "service_log": "logs/vllm/qwen3_32b_8012_20260708.log",
+      "gateway_log": "logs/vllm/qwen3_32b_gateway_8022_20260708.log",
+      "status": "stopped_after_completed_eval",
+      "gateway_status": "stopped_no_upstream"
+    }
+  },
+  "eval_processes": {
+    "qwen3.5-9b": {
+      "runner_pid": null,
+      "rollout_pid": null,
+      "log": "experiments/runs/2026-07-08_9b_32b_compound_planner_eval/logs/qwen35_9b_compound245_eval_gateway_detached.log",
+      "report_prefix": "qwen35_9b_compound245_stateprompt_t60_3x_20260708",
+      "expected_outputs": {
+        "aggregate": "results/compound_planner_eval/qwen35_9b_compound245_stateprompt_t60_3x_20260708_aggregate.json",
+        "case_audit_csv": "results/compound_planner_eval/qwen35_9b_compound245_stateprompt_t60_3x_20260708_case_audit.csv",
+        "failed_cases_csv": "results/compound_planner_eval/qwen35_9b_compound245_stateprompt_t60_3x_20260708_failed_cases.csv"
+      },
+      "status": "stopped_invalid",
+      "actual_bad_outputs": {
+        "run1_predictions": "results/compound_planner_eval/qwen35_9b_compound245_stateprompt_t60_3x_20260708_run1_predictions.jsonl",
+        "run1_reward": "results/compound_planner_eval/qwen35_9b_compound245_stateprompt_t60_3x_20260708_run1_reward.json",
+        "run2_partial_predictions": "results/compound_planner_eval/qwen35_9b_compound245_stateprompt_t60_3x_20260708_run2_predictions.jsonl",
+        "invalid_case_audit_csv": "results/compound_planner_eval/qwen35_9b_compound245_stateprompt_t60_3x_20260708_invalid_run1_case_audit.csv",
+        "invalid_failed_cases_csv": "results/compound_planner_eval/qwen35_9b_compound245_stateprompt_t60_3x_20260708_invalid_run1_failed_cases.csv"
+      }
+    },
+    "qwen3-32b": {
+      "runner_pid": null,
+      "rollout_pid": null,
+      "log": "experiments/runs/2026-07-08_9b_32b_compound_planner_eval/logs/qwen3_32b_compound245_eval_gateway_detached.log",
+      "report_prefix": "qwen3_32b_compound245_stateprompt_t60_3x_20260708",
+      "expected_outputs": {
+        "aggregate": "results/compound_planner_eval/qwen3_32b_compound245_stateprompt_t60_3x_20260708_aggregate.json",
+        "case_audit_csv": "results/compound_planner_eval/qwen3_32b_compound245_stateprompt_t60_3x_20260708_case_audit.csv",
+        "failed_cases_csv": "results/compound_planner_eval/qwen3_32b_compound245_stateprompt_t60_3x_20260708_failed_cases.csv"
+      },
+      "status": "completed",
+      "actual_cases": 313,
+      "metric": {
+        "pass_all_runs_rate": 0.910543,
+        "pass_rate_mean": 0.913738
+      }
+    }
+  },
+  "invalid_attempts": [
+    {
+      "model": "qwen3.5-9b",
+      "reason": "Direct vLLM endpoint rejected image_url content because the model is text-only. The formal rerun uses ai_model_gateway to normalize image content into text placeholders.",
+      "artifact": "results/compound_planner_eval/qwen35_9b_compound245_stateprompt_t60_3x_20260708_invalid_direct_vllm_run1_predictions.jsonl"
+    },
+    {
+      "model": "qwen3.5-9b",
+      "reason": "Foreground gateway run was interrupted intentionally before switching to detached long run.",
+      "artifact": "results/compound_planner_eval/qwen35_9b_compound245_stateprompt_t60_3x_20260708_run1_predictions_interrupted_gateway_foreground.jsonl"
+    },
+    {
+      "model": "qwen3-32b",
+      "reason": "Foreground gateway run was interrupted intentionally before switching to detached long run.",
+      "artifact": "results/compound_planner_eval/qwen3_32b_compound245_stateprompt_t60_3x_20260708_run1_predictions_interrupted_gateway_foreground.jsonl"
+    }
+  ],
+  "updated_at_utc": "2026-07-09T01:31:53+00:00",
+  "notes": [
+    "2026-07-09: Explicit 245-case file created from the first 245 rows of planner_grpo_train_cases.jsonl; historical 9B compound245 run order matches it exactly."
+  ],
+  "diagnosis_2026_07_09": {
+    "qwen3.5-9b_status": "invalid_blocked",
+    "bad_eval_reason": "Local Qwen3.5-9B-vllm on V100 produced timeout/non-JSON/garbled output; run also used 313 cases while report prefix said compound245.",
+    "bad_run_summary": {
+      "cases": null,
+      "mean_score": null,
+      "passed": null,
+      "failed": null,
+      "pass_rate": null,
+      "premature_stop_cases": null
+    },
+    "prediction_stats": {
+      "rows": 313,
+      "empty_decisions": 302,
+      "actions": {
+        "answerer": 13
+      },
+      "errors": {
+        "planner rollout step timed out": 304
+      }
+    },
+    "remote_9b_endpoint": {
+      "api_base": "http://10.111.32.253:8000/v1",
+      "tcp_8000": "closed"
+    },
+    "repair_attempt_logs": [
+      "logs/vllm/qwen35_9b_8011_20260709_thinkingoff.log",
+      "logs/vllm/qwen35_9b_8011_20260709_fp32_tp2.log",
+      "logs/vllm/qwen35_9b_8011_20260709_fp32_tp2_ncclsafe.log",
+      "logs/vllm/qwen35_9b_8011_20260709_fp32_tp2_cu124.log",
+      "logs/vllm/qwen35_9b_8011_20260709_fp32_tp2_cu124_configpatch.log",
+      "logs/vllm/qwen35_9b_8011_20260709_fp32_cpuoffload.log",
+      "logs/vllm/qwen35_9b_8011_20260709_fp32_cpuoffload40_len4096.log"
+    ],
+    "diagnostic_artifact": "results/compound_planner_eval/qwen35_9b_compound245_stateprompt_t60_3x_20260708_invalid_diagnostic.json",
+    "invalid_case_audit_csv": "results/compound_planner_eval/qwen35_9b_compound245_stateprompt_t60_3x_20260708_invalid_run1_case_audit.csv",
+    "invalid_failed_cases_csv": "results/compound_planner_eval/qwen35_9b_compound245_stateprompt_t60_3x_20260708_invalid_run1_failed_cases.csv",
+    "recommended_resolution": "Run this 9B on BF16-capable GPUs or a validated remote endpoint; do not use the current local V100 FP16 service for formal 9B results."
+  }
+}

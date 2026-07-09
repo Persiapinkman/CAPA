@@ -35,6 +35,7 @@ from training.planner_grpo_seed_v1.scripts.train_planner_grpo import (  # noqa: 
     load_jsonl,
     score_step_completion,
 )
+from util.path_resolver import resolve_model_name_or_path  # noqa: E402
 
 torch.backends.cudnn.enabled = False
 
@@ -52,7 +53,7 @@ def parse_bool(value: str | bool) -> bool:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run clipped PPO for the CAPA Planner.")
-    parser.add_argument("--model-name-or-path", default="/mnt/zkq/models/Qwen3.5-4B")
+    parser.add_argument("--model-name-or-path", default="/raid/zkq/models/Qwen3.5-4B")
     parser.add_argument("--cases", type=Path, default=DEFAULT_CASES)
     parser.add_argument("--output-dir", default=str(ROOT / "outputs" / "planner-ppo-qwen35-4b-focused-full"))
     parser.add_argument("--max-prompt-length", type=int, default=3072)
@@ -200,6 +201,7 @@ def jsonable_args(args: argparse.Namespace) -> dict[str, Any]:
 
 def main() -> None:
     args = parse_args()
+    args.model_name_or_path = resolve_model_name_or_path(args.model_name_or_path, ROOT)
     set_seed(args.seed)
     accelerator = Accelerator(gradient_accumulation_steps=args.gradient_accumulation_steps)
 

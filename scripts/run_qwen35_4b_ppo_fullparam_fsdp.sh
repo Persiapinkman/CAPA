@@ -4,7 +4,9 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 
-MODEL_DIR="${MODEL_DIR:-/mnt/zkq/models/Qwen3.5-4B}"
+source "$ROOT_DIR/scripts/path_utils.sh"
+
+MODEL_DIR="$(resolve_model_dir "${MODEL_DIR:-/raid/zkq/models/Qwen3.5-4B}")"
 CASES="${CASES:-$ROOT_DIR/training/planner_grpo_seed_v1/cases/planner_grpo_focused_4b_cases.jsonl}"
 OUTPUT_DIR="${OUTPUT_DIR:-$ROOT_DIR/outputs/planner-ppo-qwen35-4b-focused-full-fsdp}"
 RUN_DIR="${RUN_DIR:-$ROOT_DIR/experiments/runs/2026-07-08_4b_fullparam_grpo_vs_ppo_fsdp}"

@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -17,6 +18,11 @@ torch.backends.cudnn.enabled = False
 
 
 ROOT = Path(__file__).resolve().parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from util.path_resolver import resolve_model_name_or_path  # noqa: E402
+
 DEFAULT_DATA_DIR = ROOT / "training" / "planner_dpo_train_seed_v1" / "training_data"
 
 
@@ -33,7 +39,7 @@ def parse_bool(value: str | bool) -> bool:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run Planner SFT on DPO chosen responses.")
-    parser.add_argument("--model-name-or-path", default="/mnt/zkq/models/Qwen3.5-4B")
+    parser.add_argument("--model-name-or-path", default="/raid/zkq/models/Qwen3.5-4B")
     parser.add_argument(
         "--train-file",
         default=str(DEFAULT_DATA_DIR / "planner_dpo_text_train.jsonl"),
@@ -133,6 +139,7 @@ class CompletionOnlyCollator:
 
 def main() -> None:
     args = parse_args()
+    args.model_name_or_path = resolve_model_name_or_path(args.model_name_or_path, ROOT)
     set_seed(args.seed)
 
     dtype = torch.float16 if args.fp16 else (torch.bfloat16 if args.bf16 else torch.float32)

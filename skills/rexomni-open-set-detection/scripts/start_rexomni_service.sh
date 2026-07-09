@@ -1,14 +1,17 @@
 #!/bin/bash
 # Check RexOmni service; if not running, start via Docker (cu118 or cu124 for 4090).
-# Model path: REXOMNI_MODEL_PATH or default /media/nvme1n1p1/zhuangzhenzhou/inferpipeline/model/models/RexOmni
+# Model path: REXOMNI_MODEL_PATH or default /raid/zkq/models/RexOmni
 # Port: REXOMNI_PORT (default 9011)
 
 set -e
+SKILL_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+ROOT_DIR="$(cd "$SKILL_DIR/../.." && pwd)"
+source "$ROOT_DIR/scripts/path_utils.sh"
+
 REXOMNI_PORT="${REXOMNI_PORT:-9011}"
 REXOMNI_BASE_URL="${REXOMNI_BASE_URL:-http://127.0.0.1:9011/v1}"
-REXOMNI_MODEL_PATH="${REXOMNI_MODEL_PATH:-/media/nvme1n1p1/zhuangzhenzhou/inferpipeline/model/models/RexOmni}"
+REXOMNI_MODEL_PATH="$(resolve_model_dir "${REXOMNI_MODEL_PATH:-RexOmni}")"
 # REXOMNI_CUDA_VISIBLE_DEVICES="${REXOMNI_CUDA_VISIBLE_DEVICES:-2}"
-SKILL_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 # GPU check and device selection: pick at least 2 idle GPUs (lowest memory.used) when VLM_DEVICES not set
 if [ -z "$VLM_DEVICES" ] && command -v nvidia-smi >/dev/null 2>&1; then
     # Get index,memory_used (strip " MiB"), sort by memory, take first 2 indices

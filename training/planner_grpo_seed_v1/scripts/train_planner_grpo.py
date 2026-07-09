@@ -32,6 +32,7 @@ from training.planner_grpo_seed_v1.scripts.run_planner_grpo_rollout import (  # 
     persist_mock_step,
     resolve_image_path,
 )
+from util.path_resolver import resolve_model_name_or_path  # noqa: E402
 
 torch.backends.cudnn.enabled = False
 
@@ -51,7 +52,7 @@ def parse_bool(value: str | bool) -> bool:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run step-level GRPO for the CAPA Planner.")
-    parser.add_argument("--model-name-or-path", default="/mnt/zkq/models/Qwen3.5-4B")
+    parser.add_argument("--model-name-or-path", default="/raid/zkq/models/Qwen3.5-4B")
     parser.add_argument("--cases", type=Path, default=DEFAULT_CASES)
     parser.add_argument("--output-dir", default=str(ROOT / "outputs" / "planner-grpo-qwen35-4b-focused-lora"))
     parser.add_argument("--max-prompt-length", type=int, default=3072)
@@ -369,6 +370,7 @@ def make_reward_func():
 
 def main() -> None:
     args = parse_args()
+    args.model_name_or_path = resolve_model_name_or_path(args.model_name_or_path, ROOT)
     set_seed(args.seed)
     GRPOConfig, GRPOTrainer = import_grpo()
 

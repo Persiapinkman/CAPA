@@ -1,0 +1,51 @@
+{
+  "updated_at_utc": "2026-07-08T07:05:00Z",
+  "status": "no_active_training_process",
+  "base_model": "/mnt/zkq/models/Qwen3.5-4B",
+  "base_model_backup": "/mnt/zkq/models/Qwen3.5-4B.backup-20260708",
+  "current_best_fullparam_checkpoint": "outputs/planner-grpo-qwen35-4b-focused-full-fsdp-long-20260708-recovery-v5/checkpoint-2",
+  "current_best_fullparam_checkpoint_note": "v5 wrote checkpoint-2 after two additional optimizer steps from v3 checkpoint-2 model weights, then failed OOM during the next GRPO generation pass. Future recovery should load model weights only and reinitialize optimizer state.",
+  "current_best_lora_checkpoint": "outputs/planner-grpo-qwen35-4b-focused-lora/checkpoint-50",
+  "latest_run": "experiments/runs/2026-07-08_4b_fullparam_grpo_long_fsdp_recovery_v5",
+  "active_symlinks": {
+    "experiments_best_fullparam_checkpoint": "experiments/active/best_fullparam_checkpoint",
+    "experiments_best_lora_checkpoint": "experiments/active/best_lora_checkpoint",
+    "experiments_latest_fullparam_run": "experiments/active/latest_fullparam_run",
+    "outputs_best_fullparam_checkpoint": "outputs/active/grpo_4b_fullparam_best",
+    "outputs_best_lora_checkpoint": "outputs/active/grpo_4b_lora_best"
+  },
+  "gpu_observation": {
+    "empty_physical_gpus_at_last_check": [3, 4, 5, 6, 7],
+    "occupied_or_service_physical_gpus_at_last_check": [0, 1, 2],
+    "note": "Always verify with physical nvidia-smi before restarting; traceback local GPU ids are remapped by CUDA_VISIBLE_DEVICES."
+  },
+  "failure_summary": [
+    {
+      "run_id": "2026-07-08_4b_fullparam_grpo_long_fsdp",
+      "status": "failed_oom_no_checkpoint",
+      "completed_steps": 16,
+      "failed_step": 17
+    },
+    {
+      "run_id": "2026-07-08_4b_fullparam_grpo_long_fsdp_recovery",
+      "status": "failed_oom_no_checkpoint",
+      "completed_steps": 2
+    },
+    {
+      "run_id": "2026-07-08_4b_fullparam_grpo_long_fsdp_recovery_v3",
+      "status": "failed_oom_after_checkpoint",
+      "checkpoint": "outputs/planner-grpo-qwen35-4b-focused-full-fsdp-long-20260708-recovery-v3/checkpoint-2"
+    },
+    {
+      "run_id": "2026-07-08_4b_fullparam_grpo_long_fsdp_recovery_v4",
+      "status": "failed_resume_optimizer_state",
+      "note": "Not an OOM; failed loading FSDP optimizer/scaler state."
+    },
+    {
+      "run_id": "2026-07-08_4b_fullparam_grpo_long_fsdp_recovery_v5",
+      "status": "failed_oom_after_checkpoint",
+      "checkpoint": "outputs/planner-grpo-qwen35-4b-focused-full-fsdp-long-20260708-recovery-v5/checkpoint-2"
+    }
+  ],
+  "next_recommendation": "Do not relaunch the same online TRL GRPO recipe unchanged. Best next path is to refactor rollout/generation away from FSDP training memory, or, for a short salvage run only, load v5 checkpoint model weights on verified empty GPUs with max_completion_length <= 128, num_generations = 2, save_steps = 1 or 2, and optimizer state reinitialized."
+}

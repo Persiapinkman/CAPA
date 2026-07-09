@@ -4,7 +4,9 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 
-MODEL_DIR="${MODEL_DIR:-/mnt/zkq/models/Qwen3.5-4B}"
+source "$ROOT_DIR/scripts/path_utils.sh"
+
+MODEL_DIR="$(resolve_model_dir "${MODEL_DIR:-/raid/zkq/models/Qwen3.5-4B}")"
 SERVED_MODEL_NAME="${SERVED_MODEL_NAME:-qwen3.5-4b}"
 CUDA_VISIBLE_DEVICES="${CUDA_VISIBLE_DEVICES:-1}"
 

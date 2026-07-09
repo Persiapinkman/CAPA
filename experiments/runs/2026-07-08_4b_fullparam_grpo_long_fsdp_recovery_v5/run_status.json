@@ -1,8 +1,9 @@
 {
   "run_id": "2026-07-08_4b_fullparam_grpo_long_fsdp_recovery_v5",
-  "status": "running",
+  "status": "failed_oom_after_checkpoint",
   "created_at_utc": "2026-07-08T06:16:00Z",
   "started_at_utc": "2026-07-08T06:17:00Z",
+  "failed_at_utc": "2026-07-08T06:46:34Z",
   "launcher_pid": 1884607,
   "accelerate_pid": 1884614,
   "worker_pids": [1884664, 1884665, 1884666, 1884667],
@@ -21,6 +22,15 @@
     "step_time_seconds": 424.8
   },
   "latest_observed_additional_step": 2,
+  "failure": {
+    "type": "cuda_oom",
+    "stage": "qwen3_5_linear_attention_chunk_gated_delta_rule_during_grpo_generation",
+    "rank": 2,
+    "local_rank": 2,
+    "allocation_mib": 554,
+    "free_mib": 554.44,
+    "note": "Traceback GPU ids are local ids after CUDA_VISIBLE_DEVICES=3,4,5,6; physical GPUs 0,1,2 were not used by this run."
+  },
   "checkpoint_available": true,
   "latest_checkpoint": "outputs/planner-grpo-qwen35-4b-focused-full-fsdp-long-20260708-recovery-v5/checkpoint-2",
   "latest_checkpoint_size": "37G",

@@ -4,8 +4,10 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 
+source "$ROOT_DIR/scripts/path_utils.sh"
+
 MODEL_ID="${MODEL_ID:-Qwen/Qwen3.5-4B}"
-MODEL_DIR="${MODEL_DIR:-/mnt/zkq/models/Qwen3.5-4B}"
+MODEL_DIR="$(resolve_model_dir "${MODEL_DIR:-/raid/zkq/models/Qwen3.5-4B}")"
 MODEL_SOURCE="${MODEL_SOURCE:-modelscope}"
 MAX_WORKERS="${MAX_WORKERS:-8}"
 HF_HOME="${HF_HOME:-$ROOT_DIR/.hf-cache}"

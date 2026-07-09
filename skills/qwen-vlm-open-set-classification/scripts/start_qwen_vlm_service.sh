@@ -1,14 +1,17 @@
 #!/bin/bash
 # Check Qwen VLM service; if not running, start via Docker (cu118 or cu124 for 4090).
-# Model path: VLM_MODEL_PATH or default /media/nvme1n1p1/models/Qwen2.5-VL-7B-Instruct
+# Model path: VLM_MODEL_PATH or default /raid/zkq/models/Qwen2.5-VL-7B-Instruct
 # Port: VLM_PORT (default 9012)
 
 set -e
+SKILL_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+ROOT_DIR="$(cd "$SKILL_DIR/../.." && pwd)"
+source "$ROOT_DIR/scripts/path_utils.sh"
+
 VLM_PORT="${VLM_PORT:-9012}"
 VLM_BASE_URL="${VLM_BASE_URL:-http://127.0.0.1:9012/v1}"
-VLM_MODEL_PATH="${VLM_MODEL_PATH:-/media/nvme1n1p1/models/Qwen2.5-VL-7B-Instruct}"
+VLM_MODEL_PATH="$(resolve_model_dir "${VLM_MODEL_PATH:-Qwen2.5-VL-7B-Instruct}")"
 # VLM_DEVICES="${VLM_DEVICES:-0,1}"
-SKILL_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 # GPU check and device selection: pick at least 2 idle GPUs (lowest memory.used) when VLM_DEVICES not set
 if [ -z "$VLM_DEVICES" ] && command -v nvidia-smi >/dev/null 2>&1; then
     # Get index,memory_used (strip " MiB"), sort by memory, take first 2 indices

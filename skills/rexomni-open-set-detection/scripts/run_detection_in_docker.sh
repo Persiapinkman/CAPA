@@ -6,8 +6,11 @@
 set -e
 SKILL_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 ROOT_PROJECT="$(cd "$SKILL_DIR/../.." && pwd)"
+ROOT_DIR="$ROOT_PROJECT"
+source "$ROOT_PROJECT/scripts/path_utils.sh"
 REXOMNI_BASE_URL="${REXOMNI_BASE_URL:-http://127.0.0.1:9011/v1}"
-REXOMNI_MODEL_PATH="${REXOMNI_MODEL_PATH:-/media/nvme1n1p1/zhuangzhenzhou/inferpipeline/model/models/RexOmni}"
+REXOMNI_MODEL_PATH="$(resolve_model_dir "${REXOMNI_MODEL_PATH:-RexOmni}")"
+export REXOMNI_MODEL_PATH
 
 START_SERVICE=""
 IMAGES=""
