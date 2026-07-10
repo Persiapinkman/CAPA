@@ -9,6 +9,7 @@ ACCELERATE_BIN="${ACCELERATE_BIN:-${ROOT_DIR}/.venv-trl-grpo-cu124/bin/accelerat
 MODEL_PATH="${MODEL_PATH:-/raid/zkq/models/Qwen2.5-7B-Instruct}"
 ADAPTER_PATH="${ADAPTER_PATH:-}"
 CASES="${CASES:-training/planner_grpo_seed_v1/cases/planner_grpo_focused_4b_cases.jsonl}"
+PROMPT_FORMAT="${PROMPT_FORMAT:-pseudo}"
 OUTPUT_DIR="${OUTPUT_DIR:-outputs/planner-grpo-qwen25-7b-trl-lora-v1}"
 CUDA_VISIBLE_DEVICES="${CUDA_VISIBLE_DEVICES:-0,1,2,3}"
 NUM_PROCESSES="${NUM_PROCESSES:-4}"
@@ -27,6 +28,11 @@ LORA_DROPOUT="${LORA_DROPOUT:-0.05}"
 TEMPERATURE="${TEMPERATURE:-0.4}"
 TOP_P="${TOP_P:-0.9}"
 SCORE_FIRST_JSON_ONLY="${SCORE_FIRST_JSON_ONLY:-true}"
+TASK_REWARD_WEIGHT="${TASK_REWARD_WEIGHT:-0.75}"
+FORMAT_REWARD_WEIGHT="${FORMAT_REWARD_WEIGHT:-0.25}"
+TAIL_PENALTY_TOKENS="${TAIL_PENALTY_TOKENS:-64}"
+PREFIX_PENALTY_TOKENS="${PREFIX_PENALTY_TOKENS:-16}"
+PENALIZE_TRUNCATED_COMPLETIONS="${PENALIZE_TRUNCATED_COMPLETIONS:-true}"
 
 if [[ ! -x "${PYTHON_BIN}" || ! -x "${ACCELERATE_BIN}" ]]; then
   echo "Missing TRL GRPO env. Expected ${PYTHON_BIN} and ${ACCELERATE_BIN}" >&2
@@ -50,6 +56,7 @@ fi
   --model-name-or-path "${MODEL_PATH}" \
   "${adapter_args[@]}" \
   --cases "${CASES}" \
+  --prompt-format "${PROMPT_FORMAT}" \
   --output-dir "${OUTPUT_DIR}" \
   --max-steps "${MAX_STEPS}" \
   --save-steps "${SAVE_STEPS}" \
@@ -68,6 +75,11 @@ fi
   --remove-invalid-values true \
   --renormalize-logits true \
   --score-first-json-only "${SCORE_FIRST_JSON_ONLY}" \
+  --task-reward-weight "${TASK_REWARD_WEIGHT}" \
+  --format-reward-weight "${FORMAT_REWARD_WEIGHT}" \
+  --tail-penalty-tokens "${TAIL_PENALTY_TOKENS}" \
+  --prefix-penalty-tokens "${PREFIX_PENALTY_TOKENS}" \
+  --penalize-truncated-completions "${PENALIZE_TRUNCATED_COMPLETIONS}" \
   --mask-truncated-completions false \
   --logging-steps 1 \
   --report-to none

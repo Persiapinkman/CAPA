@@ -35,6 +35,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--val-ratio", type=float, default=0.2)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--indent", type=int, default=2)
+    parser.add_argument("--prompt-format", choices=["pseudo", "qwen_chatml"], default="pseudo")
+    parser.add_argument("--append-im-end", action="store_true")
     return parser.parse_args()
 
 
@@ -58,7 +60,36 @@ def canonical_completion(expected_step: dict[str, Any], *, indent: int) -> str:
     return json.dumps(decision, ensure_ascii=False, indent=indent)
 
 
-def build_rows(cases: list[dict[str, Any]]) -> list[dict[str, Any]]:
+def pseudo_prompt_to_qwen_chatml(prompt: str) -> str:
+    prefix = "<|system|>\n"
+    user_sep = "\n<|user|>\n"
+    assistant_suffix = "\n<|assistant|>\n"
+    if not prompt.startswith(prefix) or user_sep not in prompt or not prompt.endswith(assistant_suffix):
+        raise ValueError("prompt does not match expected pseudo chat format")
+    body = prompt[len(prefix) : -len(assistant_suffix)]
+    system, user = body.split(user_sep, 1)
+    return (
+        f"<|im_start|>system\n{system}<|im_end|>\n"
+        f"<|im_start|>user\n{user}<|im_end|>\n"
+        "<|im_start|>assistant\n"
+    )
+
+
+def format_prompt(prompt: str, *, prompt_format: str) -> str:
+    if prompt_format == "pseudo":
+        return prompt
+    if prompt_format == "qwen_chatml":
+        return pseudo_prompt_to_qwen_chatml(prompt)
+    raise ValueError(f"unsupported prompt_format: {prompt_format}")
+
+
+def build_rows(
+    cases: list[dict[str, Any]],
+    *,
+    indent: int,
+    prompt_format: str,
+    append_im_end: bool,
+) -> list[dict[str, Any]]:
     run_root = ROOT / "training" / "planner_grpo_seed_v1" / "reports" / "sft_prompt_contexts"
     rows: list[dict[str, Any]] = []
     for case in cases:
@@ -73,8 +104,8 @@ def build_rows(cases: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 previous_action = str(expected[step_index - 2].get("action") or "").strip()
             rows.append(
                 {
-                    "prompt": build_prompt_for_step(case, step_index, run_root),
-                    "completion": canonical_completion(expected_step, indent=2),
+                    "prompt": format_prompt(build_prompt_for_step(case, step_index, run_root), prompt_format=prompt_format),
+                    "completion": canonical_completion(expected_step, indent=indent) + ("<|im_end|>" if append_im_end else ""),
                     "case_id": case_id,
                     "category": category,
                     "step_index": step_index,
@@ -137,7 +168,12 @@ def main() -> None:
     args = parse_args()
     cases_path = args.cases if args.cases.is_absolute() else ROOT / args.cases
     output_dir = args.output_dir if args.output_dir.is_absolute() else ROOT / args.output_dir
-    rows = build_rows(load_jsonl(cases_path))
+    rows = build_rows(
+        load_jsonl(cases_path),
+        indent=args.indent,
+        prompt_format=args.prompt_format,
+        append_im_end=args.append_im_end,
+    )
     train_ids, val_ids = grouped_split(rows, val_ratio=args.val_ratio, seed=args.seed)
     train_set = set(train_ids)
     val_set = set(val_ids)
@@ -162,6 +198,9 @@ def main() -> None:
             "prompt": "Planner prompt ending at assistant turn.",
             "completion": "One canonical planner JSON decision. TRL SFT adds EOS if missing.",
             "loss": "completion_only_loss=True in SFT training.",
+            "json_indent": args.indent,
+            "prompt_format": args.prompt_format,
+            "append_im_end": args.append_im_end,
         },
     }
     write_json(output_dir / "metadata.json", metadata)

@@ -27,6 +27,8 @@ for path in (ROOT, ROOT / "demo"):
 from training.planner_grpo_seed_v1.scripts.train_planner_grpo import (  # noqa: E402
     DEFAULT_CASES,
     build_step_dataset,
+    completion_text,
+    first_json_span_text,
     first_json_text,
     load_jsonl,
     score_step_completion,
@@ -51,6 +53,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--adapter-path", default="", help="Optional trainable PEFT adapter to continue from.")
     parser.add_argument("--cases", type=Path, default=DEFAULT_CASES)
     parser.add_argument("--output-dir", default=str(ROOT / "outputs" / "planner-grpo-qwen25-7b-trl-lora"))
+    parser.add_argument("--prompt-format", choices=["pseudo", "qwen_chatml"], default="pseudo")
     parser.add_argument("--max-prompt-tokens", type=int, default=6144)
     parser.add_argument("--max-completion-length", type=int, default=256)
     parser.add_argument("--num-generations", type=int, default=2)
@@ -88,6 +91,11 @@ def parse_args() -> argparse.Namespace:
         default=True,
         help="Score only the first complete JSON object in each generation.",
     )
+    parser.add_argument("--task-reward-weight", type=float, default=0.75)
+    parser.add_argument("--format-reward-weight", type=float, default=0.25)
+    parser.add_argument("--tail-penalty-tokens", type=int, default=64)
+    parser.add_argument("--prefix-penalty-tokens", type=int, default=16)
+    parser.add_argument("--penalize-truncated-completions", type=parse_bool, default=True)
     parser.add_argument("--ddp-find-unused-parameters", type=parse_bool, default=False)
     parser.add_argument("--report-to", default="none")
     parser.add_argument("--run-name", default="qwen25-7b-capa-planner-trl-grpo-lora")
@@ -96,7 +104,66 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def make_reward_func(*, score_first_json_only: bool = True):
+def bounded_decay_score(token_count: int, budget: int) -> float:
+    if token_count <= 0:
+        return 1.0
+    if budget <= 0:
+        return 0.0
+    return max(0.0, 1.0 - (float(token_count) / float(budget)))
+
+
+def make_format_reward(
+    *,
+    tokenizer,
+    max_completion_length: int,
+    tail_penalty_tokens: int,
+    prefix_penalty_tokens: int,
+    penalize_truncated_completions: bool,
+) -> Any:
+    def format_reward(completion: Any) -> float:
+        raw = completion_text(completion)
+        first_json, start, end = first_json_span_text(raw)
+        if not first_json:
+            return 0.0
+
+        prefix = raw[:start].strip() if start >= 0 else raw
+        tail = raw[end:].strip() if end >= 0 else raw
+        prefix_tokens = len(tokenizer(prefix, add_special_tokens=False)["input_ids"]) if prefix else 0
+        tail_tokens = len(tokenizer(tail, add_special_tokens=False)["input_ids"]) if tail else 0
+        raw_tokens = len(tokenizer(raw, add_special_tokens=False)["input_ids"]) if raw else 0
+
+        prefix_score = bounded_decay_score(prefix_tokens, prefix_penalty_tokens)
+        tail_score = bounded_decay_score(tail_tokens, tail_penalty_tokens)
+        if penalize_truncated_completions:
+            truncated_score = 0.0 if raw_tokens >= max_completion_length else 1.0
+        else:
+            truncated_score = 1.0
+
+        return max(0.0, min(1.0, 0.20 * prefix_score + 0.55 * tail_score + 0.25 * truncated_score))
+
+    return format_reward
+
+
+def make_reward_func(
+    *,
+    tokenizer,
+    score_first_json_only: bool = True,
+    max_completion_length: int,
+    task_reward_weight: float,
+    format_reward_weight: float,
+    tail_penalty_tokens: int,
+    prefix_penalty_tokens: int,
+    penalize_truncated_completions: bool,
+):
+    format_reward = make_format_reward(
+        tokenizer=tokenizer,
+        max_completion_length=max_completion_length,
+        tail_penalty_tokens=tail_penalty_tokens,
+        prefix_penalty_tokens=prefix_penalty_tokens,
+        penalize_truncated_completions=penalize_truncated_completions,
+    )
+    denominator = max(1e-8, task_reward_weight + format_reward_weight)
+
     def reward_func(completions, **kwargs) -> list[float]:
         scores: list[float] = []
         expected_steps = kwargs.get("expected_step", [])
@@ -107,21 +174,44 @@ def make_reward_func(*, score_first_json_only: bool = True):
         step_indexes = kwargs.get("step_index", [])
         for idx, completion in enumerate(completions):
             scored_completion = first_json_text(completion) if score_first_json_only else completion
-            scores.append(
-                score_step_completion(
-                    completion=scored_completion,
-                    expected_step=expected_steps[idx],
-                    forbidden_actions=forbidden_actions[idx],
-                    reward_spec=reward_specs[idx],
-                    previous_action=previous_actions[idx],
-                    full_expected_actions=full_expected_actions[idx],
-                    step_index=int(step_indexes[idx]),
-                    first_json_only=score_first_json_only,
-                )
+            task_score = score_step_completion(
+                completion=scored_completion,
+                expected_step=expected_steps[idx],
+                forbidden_actions=forbidden_actions[idx],
+                reward_spec=reward_specs[idx],
+                previous_action=previous_actions[idx],
+                full_expected_actions=full_expected_actions[idx],
+                step_index=int(step_indexes[idx]),
+                first_json_only=score_first_json_only,
             )
+            score = ((task_reward_weight * task_score) + (format_reward_weight * format_reward(completion))) / denominator
+            scores.append(max(0.0, min(1.0, score)))
         return scores
 
     return reward_func
+
+
+def pseudo_prompt_to_qwen_chatml(prompt: str) -> str:
+    prefix = "<|system|>\n"
+    user_sep = "\n<|user|>\n"
+    assistant_suffix = "\n<|assistant|>\n"
+    if not prompt.startswith(prefix) or user_sep not in prompt or not prompt.endswith(assistant_suffix):
+        raise ValueError("prompt does not match expected pseudo chat format")
+    body = prompt[len(prefix) : -len(assistant_suffix)]
+    system, user = body.split(user_sep, 1)
+    return (
+        f"<|im_start|>system\n{system}<|im_end|>\n"
+        f"<|im_start|>user\n{user}<|im_end|>\n"
+        "<|im_start|>assistant\n"
+    )
+
+
+def apply_prompt_format(dataset, prompt_format: str):
+    if prompt_format == "pseudo":
+        return dataset
+    if prompt_format == "qwen_chatml":
+        return dataset.map(lambda row: {"prompt": pseudo_prompt_to_qwen_chatml(row["prompt"])})
+    raise ValueError(f"unsupported prompt_format: {prompt_format}")
 
 
 def filter_by_prompt_length(dataset, tokenizer, max_prompt_tokens: int):
@@ -170,9 +260,19 @@ def main() -> None:
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
 
-    dataset = build_step_dataset(load_jsonl(cases_path))
+    dataset = apply_prompt_format(build_step_dataset(load_jsonl(cases_path)), args.prompt_format)
     dataset, length_stats = filter_by_prompt_length(dataset, tokenizer, args.max_prompt_tokens)
-    reward_smoke = make_reward_func(score_first_json_only=args.score_first_json_only)(
+    reward_func = make_reward_func(
+        tokenizer=tokenizer,
+        score_first_json_only=args.score_first_json_only,
+        max_completion_length=args.max_completion_length,
+        task_reward_weight=args.task_reward_weight,
+        format_reward_weight=args.format_reward_weight,
+        tail_penalty_tokens=args.tail_penalty_tokens,
+        prefix_penalty_tokens=args.prefix_penalty_tokens,
+        penalize_truncated_completions=args.penalize_truncated_completions,
+    )
+    reward_smoke = reward_func(
         ['{"decision_type":"tool","action":"qwen_detection","action_input":{"finish_after_tool":true}}'],
         expected_step=[dataset[0]["expected_step"]],
         forbidden_actions=[dataset[0]["forbidden_actions"]],
@@ -188,6 +288,7 @@ def main() -> None:
         "adapter_path": args.adapter_path,
         "cases": str(cases_path),
         "output_dir": str(output_dir),
+        "prompt_format": args.prompt_format,
         "length_stats": length_stats,
         "reward_smoke": reward_smoke,
         "num_generations": args.num_generations,
@@ -197,6 +298,13 @@ def main() -> None:
         "renormalize_logits": args.renormalize_logits,
         "mask_truncated_completions": args.mask_truncated_completions,
         "score_first_json_only": args.score_first_json_only,
+        "reward_weights": {
+            "task": args.task_reward_weight,
+            "format": args.format_reward_weight,
+            "tail_penalty_tokens": args.tail_penalty_tokens,
+            "prefix_penalty_tokens": args.prefix_penalty_tokens,
+            "penalize_truncated_completions": args.penalize_truncated_completions,
+        },
         "lora": {
             "enabled": args.use_lora,
             "r": args.lora_r,
@@ -290,7 +398,7 @@ def main() -> None:
 
     trainer = GRPOTrainer(
         model=model,
-        reward_funcs=make_reward_func(score_first_json_only=args.score_first_json_only),
+        reward_funcs=reward_func,
         args=training_args,
         train_dataset=dataset,
         processing_class=tokenizer,

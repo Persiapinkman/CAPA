@@ -263,9 +263,14 @@ def completion_text(value: Any) -> str:
 
 
 def first_json_text(value: Any) -> str:
+    text, _, _ = first_json_span_text(value)
+    return text
+
+
+def first_json_span_text(value: Any) -> tuple[str, int, int]:
     text = completion_text(value)
     if not text:
-        return ""
+        return "", -1, -1
     decoder = json.JSONDecoder()
     for start, char in enumerate(text):
         if char != "{":
@@ -275,8 +280,8 @@ def first_json_text(value: Any) -> str:
         except json.JSONDecodeError:
             continue
         if isinstance(parsed, dict):
-            return text[start : start + end]
-    return ""
+            return text[start : start + end], start, start + end
+    return "", -1, -1
 
 
 def parse_completion(value: Any, *, first_json_only: bool = True) -> dict[str, Any] | None:

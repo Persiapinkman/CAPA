@@ -84,6 +84,9 @@ def first_json_span(text: str) -> tuple[dict[str, Any] | None, int, int]:
 def completion_stats(text: str) -> dict[str, Any]:
     parsed, start, end = first_json_span(text)
     extra = text[end:].strip() if end >= 0 else text.strip()
+    for stop_text in ("<|im_end|>", "<|endoftext|>"):
+        while extra.startswith(stop_text):
+            extra = extra[len(stop_text) :].strip()
     return {
         "json_valid": parsed is not None,
         "first_json_start": start,
