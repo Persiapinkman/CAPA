@@ -27,6 +27,7 @@ for path in (ROOT, ROOT / "demo"):
 from training.planner_grpo_seed_v1.scripts.train_planner_grpo import (  # noqa: E402
     DEFAULT_CASES,
     build_step_dataset,
+    first_json_text,
     load_jsonl,
     score_step_completion,
 )
@@ -81,6 +82,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--loss-type", default="dr_grpo")
     parser.add_argument("--beta", type=float, default=0.0)
     parser.add_argument("--mask-truncated-completions", type=parse_bool, default=False)
+    parser.add_argument(
+        "--score-first-json-only",
+        type=parse_bool,
+        default=True,
+        help="Score only the first complete JSON object in each generation.",
+    )
     parser.add_argument("--ddp-find-unused-parameters", type=parse_bool, default=False)
     parser.add_argument("--report-to", default="none")
     parser.add_argument("--run-name", default="qwen25-7b-capa-planner-trl-grpo-lora")
@@ -89,7 +96,7 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def make_reward_func():
+def make_reward_func(*, score_first_json_only: bool = True):
     def reward_func(completions, **kwargs) -> list[float]:
         scores: list[float] = []
         expected_steps = kwargs.get("expected_step", [])
@@ -99,15 +106,17 @@ def make_reward_func():
         full_expected_actions = kwargs.get("full_expected_actions", [])
         step_indexes = kwargs.get("step_index", [])
         for idx, completion in enumerate(completions):
+            scored_completion = first_json_text(completion) if score_first_json_only else completion
             scores.append(
                 score_step_completion(
-                    completion=completion,
+                    completion=scored_completion,
                     expected_step=expected_steps[idx],
                     forbidden_actions=forbidden_actions[idx],
                     reward_spec=reward_specs[idx],
                     previous_action=previous_actions[idx],
                     full_expected_actions=full_expected_actions[idx],
                     step_index=int(step_indexes[idx]),
+                    first_json_only=score_first_json_only,
                 )
             )
         return scores
@@ -163,7 +172,7 @@ def main() -> None:
 
     dataset = build_step_dataset(load_jsonl(cases_path))
     dataset, length_stats = filter_by_prompt_length(dataset, tokenizer, args.max_prompt_tokens)
-    reward_smoke = make_reward_func()(
+    reward_smoke = make_reward_func(score_first_json_only=args.score_first_json_only)(
         ['{"decision_type":"tool","action":"qwen_detection","action_input":{"finish_after_tool":true}}'],
         expected_step=[dataset[0]["expected_step"]],
         forbidden_actions=[dataset[0]["forbidden_actions"]],
@@ -187,6 +196,7 @@ def main() -> None:
         "remove_invalid_values": args.remove_invalid_values,
         "renormalize_logits": args.renormalize_logits,
         "mask_truncated_completions": args.mask_truncated_completions,
+        "score_first_json_only": args.score_first_json_only,
         "lora": {
             "enabled": args.use_lora,
             "r": args.lora_r,
@@ -280,7 +290,7 @@ def main() -> None:
 
     trainer = GRPOTrainer(
         model=model,
-        reward_funcs=make_reward_func(),
+        reward_funcs=make_reward_func(score_first_json_only=args.score_first_json_only),
         args=training_args,
         train_dataset=dataset,
         processing_class=tokenizer,

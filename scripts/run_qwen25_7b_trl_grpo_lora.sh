@@ -26,6 +26,7 @@ LORA_ALPHA="${LORA_ALPHA:-32}"
 LORA_DROPOUT="${LORA_DROPOUT:-0.05}"
 TEMPERATURE="${TEMPERATURE:-0.4}"
 TOP_P="${TOP_P:-0.9}"
+SCORE_FIRST_JSON_ONLY="${SCORE_FIRST_JSON_ONLY:-true}"
 
 if [[ ! -x "${PYTHON_BIN}" || ! -x "${ACCELERATE_BIN}" ]]; then
   echo "Missing TRL GRPO env. Expected ${PYTHON_BIN} and ${ACCELERATE_BIN}" >&2
@@ -66,6 +67,7 @@ fi
   --attn-implementation sdpa \
   --remove-invalid-values true \
   --renormalize-logits true \
+  --score-first-json-only "${SCORE_FIRST_JSON_ONLY}" \
   --mask-truncated-completions false \
   --logging-steps 1 \
   --report-to none

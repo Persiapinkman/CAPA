@@ -1,0 +1,49 @@
+{
+  "date": "2026-07-10",
+  "eval_file": "training/planner_grpo_seed_v1/sft_data/val.jsonl",
+  "score_first_json_only": true,
+  "items": [
+    {
+      "label": "baseline",
+      "run_id": "qwen25_baseline_sft_val_firstjson_eval",
+      "mean_score": 0.8454358097918971,
+      "json_valid_rate": 1.0,
+      "raw_extra_text_after_json_rate": 1.0,
+      "raw_mean_extra_text_chars": 160.9591836734694,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0,
+      "delta_mean_score_vs_baseline": 0.0
+    },
+    {
+      "label": "sft_v1",
+      "run_id": "qwen25_sft_v1_sft_val_firstjson_eval",
+      "mean_score": 0.8580191682584365,
+      "json_valid_rate": 1.0,
+      "raw_extra_text_after_json_rate": 1.0,
+      "raw_mean_extra_text_chars": 157.14285714285714,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0,
+      "delta_mean_score_vs_baseline": 0.012583358466539352
+    },
+    {
+      "label": "sft_v2",
+      "run_id": "qwen25_sft_v2_sft_val_firstjson_eval",
+      "mean_score": 0.8494655004859089,
+      "json_valid_rate": 1.0,
+      "raw_extra_text_after_json_rate": 1.0,
+      "raw_mean_extra_text_chars": 131.46938775510205,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0,
+      "delta_mean_score_vs_baseline": 0.004029690694011712
+    }
+  ],
+  "best_by_mean_score": "sft_v1",
+  "notes": [
+    "Scoring first complete JSON removes execution-time tail pollution: effective extra text rate is 0.0.",
+    "Raw generations still continue after first JSON for all three models: raw extra text rate is 1.0.",
+    "SFT v1 is slightly best by first-JSON score; SFT v2 has shorter raw trailing text."
+  ]
+}

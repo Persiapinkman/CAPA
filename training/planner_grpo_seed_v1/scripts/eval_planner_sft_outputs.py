@@ -20,7 +20,7 @@ for path in (ROOT, ROOT / "demo"):
     if str(path) not in sys.path:
         sys.path.insert(0, str(path))
 
-from training.planner_grpo_seed_v1.scripts.train_planner_grpo import score_step_completion  # noqa: E402
+from training.planner_grpo_seed_v1.scripts.train_planner_grpo import first_json_text, score_step_completion  # noqa: E402
 from util.path_resolver import resolve_model_name_or_path  # noqa: E402
 
 
@@ -39,6 +39,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--temperature", type=float, default=0.0)
     parser.add_argument("--top-p", type=float, default=0.9)
     parser.add_argument("--attn-implementation", default="sdpa")
+    parser.add_argument(
+        "--score-first-json-only",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="Score the first complete JSON object while preserving raw completion stats.",
+    )
     parser.add_argument("--seed", type=int, default=42)
     return parser.parse_args()
 
@@ -100,6 +106,9 @@ def summarize(predictions: list[dict[str, Any]]) -> dict[str, Any]:
             "json_valid_rate": sum(bool(row["json_valid"]) for row in rows) / n if n else 0.0,
             "extra_text_after_json_rate": sum(bool(row["extra_text_after_json"]) for row in rows) / n if n else 0.0,
             "mean_extra_text_chars": sum(int(row["extra_text_chars"]) for row in rows) / n if n else 0.0,
+            "effective_json_valid_rate": sum(bool(row["effective_json_valid"]) for row in rows) / n if n else 0.0,
+            "effective_extra_text_after_json_rate": sum(bool(row["effective_extra_text_after_json"]) for row in rows) / n if n else 0.0,
+            "effective_mean_extra_text_chars": sum(int(row["effective_extra_text_chars"]) for row in rows) / n if n else 0.0,
         }
 
     return {
@@ -152,15 +161,18 @@ def main() -> None:
             output = model.generate(**inputs, **generation_kwargs)
         completion = tokenizer.decode(output[0, inputs.input_ids.shape[1] :], skip_special_tokens=False)
         stats = completion_stats(completion)
+        scored_completion = first_json_text(completion) if args.score_first_json_only else completion
+        effective_stats = completion_stats(scored_completion)
         expected_step = row["expected_step"]
         score = score_step_completion(
-            completion=completion,
+            completion=scored_completion,
             expected_step=expected_step,
             forbidden_actions=row.get("forbidden_actions", "[]"),
             reward_spec=row.get("reward_spec", "{}"),
             previous_action=row.get("previous_action", ""),
             full_expected_actions=row.get("full_expected_actions", "[]"),
             step_index=int(row["step_index"]),
+            first_json_only=args.score_first_json_only,
         )
         predictions.append(
             {
@@ -169,6 +181,10 @@ def main() -> None:
                 "step_index": int(row["step_index"]),
                 "score": score,
                 **stats,
+                "effective_json_valid": effective_stats["json_valid"],
+                "effective_extra_text_after_json": effective_stats["extra_text_after_json"],
+                "effective_extra_text_chars": effective_stats["extra_text_chars"],
+                "scored_completion": scored_completion,
                 "completion": completion,
             }
         )
@@ -178,6 +194,7 @@ def main() -> None:
         "adapter_path": args.adapter_path,
         "eval_file": str(eval_path),
         "limit": args.limit,
+        "score_first_json_only": args.score_first_json_only,
         **summarize(predictions),
     }
     out_path = args.out if args.out.is_absolute() else ROOT / args.out

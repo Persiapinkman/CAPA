@@ -1,0 +1,108 @@
+{
+  "model_name_or_path": "/raid/zkq/models/Qwen2.5-7B-Instruct",
+  "adapter_path": "outputs/planner-sft-qwen25-7b-trl-lora-warmup-v1",
+  "eval_file": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/sft_data/val.jsonl",
+  "limit": 0,
+  "score_first_json_only": true,
+  "overall": {
+    "count": 49,
+    "mean_score": 0.8580191682584365,
+    "json_valid_rate": 1.0,
+    "extra_text_after_json_rate": 1.0,
+    "mean_extra_text_chars": 157.14285714285714,
+    "effective_json_valid_rate": 1.0,
+    "effective_extra_text_after_json_rate": 0.0,
+    "effective_mean_extra_text_chars": 0.0
+  },
+  "categories": {
+    "clarify_intent_ambiguity": {
+      "count": 2,
+      "mean_score": 0.1,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 1.0,
+      "mean_extra_text_chars": 202.5,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0
+    },
+    "full_detection_eval": {
+      "count": 1,
+      "mean_score": 1.0,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 1.0,
+      "mean_extra_text_chars": 162.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0
+    },
+    "general_answer": {
+      "count": 1,
+      "mean_score": 0.9,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 1.0,
+      "mean_extra_text_chars": 257.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0
+    },
+    "historical_asset_qa": {
+      "count": 1,
+      "mean_score": 1.0,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 1.0,
+      "mean_extra_text_chars": 216.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0
+    },
+    "probe_only_contrastive": {
+      "count": 6,
+      "mean_score": 1.0,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 1.0,
+      "mean_extra_text_chars": 203.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0
+    },
+    "probe_then_migration": {
+      "count": 24,
+      "mean_score": 0.8671661193212921,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 1.0,
+      "mean_extra_text_chars": 135.25,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0
+    },
+    "probe_then_migration_strict": {
+      "count": 12,
+      "mean_score": 0.844246031746032,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 1.0,
+      "mean_extra_text_chars": 146.25,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0
+    },
+    "single_image_probe": {
+      "count": 2,
+      "mean_score": 1.0,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 1.0,
+      "mean_extra_text_chars": 220.5,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0
+    }
+  },
+  "score_distribution": {
+    "0.1": 2,
+    "0.321": 2,
+    "0.762": 13,
+    "0.821": 3,
+    "0.9": 1,
+    "0.931": 1,
+    "1.0": 27
+  }
+}

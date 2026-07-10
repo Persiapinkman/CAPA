@@ -251,7 +251,7 @@ def import_grpo():
     return GRPOConfig, GRPOTrainer
 
 
-def parse_completion(value: Any) -> dict[str, Any] | None:
+def completion_text(value: Any) -> str:
     if isinstance(value, list):
         if value and isinstance(value[0], dict):
             content = value[0].get("content")
@@ -259,13 +259,35 @@ def parse_completion(value: Any) -> dict[str, Any] | None:
             content = "".join(str(item) for item in value)
     else:
         content = value
-    text = str(content or "").strip()
+    return str(content or "").strip()
+
+
+def first_json_text(value: Any) -> str:
+    text = completion_text(value)
+    if not text:
+        return ""
+    decoder = json.JSONDecoder()
+    for start, char in enumerate(text):
+        if char != "{":
+            continue
+        try:
+            parsed, end = decoder.raw_decode(text[start:])
+        except json.JSONDecodeError:
+            continue
+        if isinstance(parsed, dict):
+            return text[start : start + end]
+    return ""
+
+
+def parse_completion(value: Any, *, first_json_only: bool = True) -> dict[str, Any] | None:
+    text = first_json_text(value) if first_json_only else completion_text(value)
     if not text:
         return None
-    start = text.find("{")
-    end = text.rfind("}")
-    if start >= 0 and end > start:
-        text = text[start : end + 1]
+    if not first_json_only:
+        start = text.find("{")
+        end = text.rfind("}")
+        if start >= 0 and end > start:
+            text = text[start : end + 1]
     try:
         parsed = json.loads(text)
     except Exception:
@@ -282,8 +304,9 @@ def score_step_completion(
     previous_action: str,
     full_expected_actions: str,
     step_index: int,
+    first_json_only: bool = True,
 ) -> float:
-    actual = parse_completion(completion)
+    actual = parse_completion(completion, first_json_only=first_json_only)
     try:
         expected = json.loads(expected_step)
         forbidden = json.loads(forbidden_actions)
