@@ -157,7 +157,7 @@ def build_report(*, source: Path, out: Path, rows: list[dict[str, Any]]) -> dict
         "by_expected_action_signature": dict(by_signature),
         "process_reward_case_counts": dict(process_weights),
         "intended_use": (
-            "Focused GRPO training set for Qwen3.5-4B Planner. "
+            "Focused GRPO training set for Qwen2.5-7B Planner. "
             "Use full planner_grpo_train_cases.jsonl as regression eval, not as the first GRPO train mix."
         ),
     }

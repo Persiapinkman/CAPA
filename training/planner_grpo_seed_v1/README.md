@@ -81,6 +81,82 @@ python3 training/planner_grpo_seed_v1/scripts/reward_planner_grpo.py \
 If `--predictions` is omitted, the script scores the expected decisions as a
 smoke test.
 
+## verl GRPO Setup
+
+The repo now includes a verl-based training path alongside the existing TRL
+prototype. verl is the better long-term fit for on-policy GRPO because it
+separates FSDP actor training, rollout generation, reference log-probs, and
+custom verifiable reward through Ray workers.
+
+Local environment status:
+
+- `.venv-train-cu124` uses Python 3.10 with torch 2.6/cu124, vLLM, Ray, and datasets.
+- `scripts/setup_verl_env.sh` installs `verl==0.4.1` plus the compatibility
+  dependencies needed on this V100 host.
+- The default CAPA verl route uses Qwen2.5-7B-Instruct with HF rollout.
+  vLLM remains available as an override, but vLLM V0 on this V100 host hits a
+  Triton prefix-prefill kernel failure during generation.
+- The machine is V100, so the default CAPA verl script uses `float16` instead of
+  verl's common `bfloat16` examples.
+- `training/verl_flash_attn_shim` provides the small `flash_attn.bert_padding`
+  helper API imported by verl 0.4.1.
+- `scripts/patch_verl041_v100_compat.py` reapplies generic verl 0.4.1 V100
+  fixes after environment setup: fp16 HF rollout, stable fp16 sampling, and the
+  FSDP wrapping needed for 7B HF rollout memory.
+
+Download the base model:
+
+```bash
+bash scripts/download_qwen25_7b_instruct.sh
+```
+
+Prepare verl parquet data:
+
+```bash
+.venv-train-cu124/bin/python training/planner_grpo_seed_v1/scripts/prepare_verl_grpo_data.py
+```
+
+Default output:
+
+```text
+training/planner_grpo_seed_v1/verl_data/train.parquet
+training/planner_grpo_seed_v1/verl_data/val.parquet
+training/planner_grpo_seed_v1/verl_data/metadata.json
+```
+
+The current focused file expands to 245 step-level samples. The default split is
+221 train / 24 validation with seed 42.
+
+Run the default verl GRPO entrypoint:
+
+```bash
+PYTHON_BIN=.venv-train-cu124/bin/python \
+bash scripts/run_qwen25_7b_verl_grpo.sh
+```
+
+Useful overrides:
+
+```bash
+CUDA_VISIBLE_DEVICES=0,1,2,3 \
+NGPUS_PER_NODE=4 \
+PYTHON_BIN=.venv-train-cu124/bin/python \
+MODEL_PATH=/raid/zkq/models/Qwen2.5-7B-Instruct \
+TOTAL_EPOCHS=1 \
+bash scripts/run_qwen25_7b_verl_grpo.sh
+```
+
+The entrypoint uses verl's `verl.trainer.main_ppo` with GRPO-specific overrides:
+
+- `algorithm.adv_estimator=grpo`
+- `actor_rollout_ref.actor.use_kl_loss=True`
+- `actor_rollout_ref.rollout.name=hf`
+- `actor_rollout_ref.rollout.n=2`
+- `custom_reward_function.path=training/planner_grpo_seed_v1/scripts/verl_reward_planner_grpo.py`
+
+Most values are left at verl defaults where possible. CAPA-specific defaults are
+limited to the local model path, focused case file, prompt/response lengths,
+`float16` for V100 compatibility, and a conservative `rollout.n=2` for 7B memory.
+
 Build or refresh the expanded dataset:
 
 ```bash
@@ -93,7 +169,7 @@ To generate Planner predictions first:
 python3 training/planner_grpo_seed_v1/scripts/run_planner_grpo_rollout.py \
   --cases training/planner_grpo_seed_v1/cases/planner_grpo_train_cases.jsonl \
   --out training/planner_grpo_seed_v1/reports/planner_grpo_predictions.jsonl \
-  --model Qwen3.5-4B
+  --model Qwen2.5-7B-Instruct
 
 python3 training/planner_grpo_seed_v1/scripts/reward_planner_grpo.py \
   --cases training/planner_grpo_seed_v1/cases/planner_grpo_train_cases.jsonl \
@@ -176,10 +252,10 @@ the original 245 cases score identically:
 The dataset intentionally does not reward hand-writing engineered transitions
 that are already handled by the orchestrator.
 
-## Focused 4B GRPO Mix
+## Focused GRPO Mix
 
 The full 313-case file should be treated as a regression/eval suite first. For
-the first 4B GRPO run, use the narrower file:
+the first Qwen2.5-7B GRPO run, use the narrower file:
 
 ```text
 cases/planner_grpo_focused_4b_cases.jsonl
@@ -227,12 +303,13 @@ python3 training/planner_grpo_seed_v1/scripts/reward_planner_grpo.py \
   --out training/planner_grpo_seed_v1/reports/planner_grpo_focused_4b_expected_reward_smoke.json
 ```
 
-Run focused 4B GRPO:
+Run focused GRPO with verl:
 
 ```bash
-CUDA_VISIBLE_DEVICES=3 \
-REPORT_TO=tensorboard \
-bash scripts/run_qwen35_4b_grpo_focused.sh
+PYTHON_BIN=.venv-train-cu124/bin/python \
+CUDA_VISIBLE_DEVICES=4,5,6,7 \
+NGPUS_PER_NODE=4 \
+bash scripts/run_qwen25_7b_verl_grpo.sh
 ```
 
 The training script converts each multi-step case into step-level Planner

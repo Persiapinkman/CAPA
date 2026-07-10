@@ -1,0 +1,80 @@
+{
+  "model_name_or_path": "/raid/zkq/models/Qwen2.5-7B-Instruct",
+  "adapter_path": "outputs/planner-sft-qwen25-7b-trl-lora-warmup-v2",
+  "eval_file": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/sft_data/val.jsonl",
+  "limit": 0,
+  "overall": {
+    "count": 49,
+    "mean_score": 0.6931000971817302,
+    "json_valid_rate": 1.0,
+    "extra_text_after_json_rate": 1.0,
+    "mean_extra_text_chars": 131.46938775510205
+  },
+  "categories": {
+    "clarify_intent_ambiguity": {
+      "count": 2,
+      "mean_score": 0.1,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 1.0,
+      "mean_extra_text_chars": 134.5
+    },
+    "full_detection_eval": {
+      "count": 1,
+      "mean_score": 1.0,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 1.0,
+      "mean_extra_text_chars": 162.0
+    },
+    "general_answer": {
+      "count": 1,
+      "mean_score": 0.0,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 1.0,
+      "mean_extra_text_chars": 230.0
+    },
+    "historical_asset_qa": {
+      "count": 1,
+      "mean_score": 1.0,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 1.0,
+      "mean_extra_text_chars": 152.0
+    },
+    "probe_only_contrastive": {
+      "count": 6,
+      "mean_score": 0.3333333333333333,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 1.0,
+      "mean_extra_text_chars": 156.16666666666666
+    },
+    "probe_then_migration": {
+      "count": 24,
+      "mean_score": 0.7891865079365082,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 1.0,
+      "mean_extra_text_chars": 117.20833333333333
+    },
+    "probe_then_migration_strict": {
+      "count": 12,
+      "mean_score": 0.7351190476190478,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 1.0,
+      "mean_extra_text_chars": 135.41666666666666
+    },
+    "single_image_probe": {
+      "count": 2,
+      "mean_score": 1.0,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 1.0,
+      "mean_extra_text_chars": 127.0
+    }
+  },
+  "score_distribution": {
+    "0.0": 8,
+    "0.1": 2,
+    "0.214": 1,
+    "0.321": 2,
+    "0.762": 10,
+    "0.821": 4,
+    "1.0": 22
+  }
+}

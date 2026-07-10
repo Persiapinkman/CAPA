@@ -1,0 +1,41 @@
+{
+  "model_name_or_path": "/raid/zkq/models/Qwen2.5-7B-Instruct",
+  "adapter_path": "outputs/planner-sft-qwen25-7b-trl-lora-warmup-v1",
+  "eval_file": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/sft_data/val.jsonl",
+  "limit": 8,
+  "overall": {
+    "count": 8,
+    "mean_score": 0.31547619047619047,
+    "json_valid_rate": 1.0,
+    "extra_text_after_json_rate": 1.0,
+    "mean_extra_text_chars": 188.75
+  },
+  "categories": {
+    "general_answer": {
+      "count": 1,
+      "mean_score": 0.0,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 1.0,
+      "mean_extra_text_chars": 257.0
+    },
+    "probe_then_migration": {
+      "count": 5,
+      "mean_score": 0.5047619047619047,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 1.0,
+      "mean_extra_text_chars": 162.4
+    },
+    "single_image_probe": {
+      "count": 2,
+      "mean_score": 0.0,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 1.0,
+      "mean_extra_text_chars": 220.5
+    }
+  },
+  "score_distribution": {
+    "0.0": 5,
+    "0.762": 2,
+    "1.0": 1
+  }
+}

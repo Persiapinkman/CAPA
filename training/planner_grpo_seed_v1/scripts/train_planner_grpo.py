@@ -52,9 +52,9 @@ def parse_bool(value: str | bool) -> bool:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run step-level GRPO for the CAPA Planner.")
-    parser.add_argument("--model-name-or-path", default="/raid/zkq/models/Qwen3.5-4B")
+    parser.add_argument("--model-name-or-path", default="/raid/zkq/models/Qwen2.5-7B-Instruct")
     parser.add_argument("--cases", type=Path, default=DEFAULT_CASES)
-    parser.add_argument("--output-dir", default=str(ROOT / "outputs" / "planner-grpo-qwen35-4b-focused-lora"))
+    parser.add_argument("--output-dir", default=str(ROOT / "outputs" / "planner-grpo-qwen25-7b-focused-lora"))
     parser.add_argument("--max-prompt-length", type=int, default=3072)
     parser.add_argument("--max-completion-length", type=int, default=512)
     parser.add_argument("--num-generations", type=int, default=4)

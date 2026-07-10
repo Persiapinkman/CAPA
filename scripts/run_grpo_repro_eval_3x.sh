@@ -4,9 +4,9 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 
-MODEL="${MODEL:?set MODEL, e.g. Qwen3.5-4B}"
+MODEL="${MODEL:?set MODEL, e.g. Qwen2.5-7B-Instruct}"
 API_BASE="${API_BASE:?set API_BASE, e.g. http://127.0.0.1:8003/v1}"
-REPORT_PREFIX="${REPORT_PREFIX:?set REPORT_PREFIX, e.g. qwen35_4b_grpo_compound}"
+REPORT_PREFIX="${REPORT_PREFIX:?set REPORT_PREFIX, e.g. qwen25_7b_grpo_compound}"
 CASES="${CASES:-$ROOT_DIR/training/planner_grpo_seed_v1/cases/planner_grpo_train_cases.jsonl}"
 OUT_DIR="${OUT_DIR:-$ROOT_DIR/training/planner_grpo_seed_v1/reports/repro_eval}"
 RUNS="${RUNS:-3}"

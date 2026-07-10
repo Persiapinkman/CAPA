@@ -1,0 +1,215 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-07-10T00:58:28.957376+00:00",
+  "cases_path": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/cases/planner_grpo_compound245_eval_cases.jsonl",
+  "model": "Qwen2.5-7B-Instruct",
+  "api_base": "http://127.0.0.1:8004/v1",
+  "report_prefix": "qwen25_7b_instruct_compound245_t0_run1",
+  "runs": 1,
+  "generation_config": {
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "seed": 42,
+    "do_sample": "false"
+  },
+  "aggregate": {
+    "mean_score_mean": 0.903151,
+    "mean_score_stdev": 0.0,
+    "pass_rate_mean": 0.457143,
+    "pass_rate_stdev": 0.0,
+    "pass_all_runs_rate": 0.457143,
+    "pass_any_run_rate": 0.457143
+  },
+  "by_category": {
+    "adela_eval": {
+      "mean_score_mean": 0.95,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 0.5,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 0.5,
+      "runs": 1
+    },
+    "full_detection_eval": {
+      "mean_score_mean": 0.89,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 0.2,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 0.2,
+      "runs": 1
+    },
+    "general_answer": {
+      "mean_score_mean": 0.8,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 0.0,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 0.0,
+      "runs": 1
+    },
+    "historical_asset_qa": {
+      "mean_score_mean": 1.0,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 1.0,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 1.0,
+      "runs": 1
+    },
+    "intent_ambiguity": {
+      "mean_score_mean": 1.0,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 1.0,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 1.0,
+      "runs": 1
+    },
+    "migration_feasibility": {
+      "mean_score_mean": 0.973684,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 0.736842,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 0.736842,
+      "runs": 1
+    },
+    "migration_feasibility_with_image": {
+      "mean_score_mean": 0.768301,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 0.0,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 0.0,
+      "runs": 1
+    },
+    "probe_then_migration": {
+      "mean_score_mean": 0.851452,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 0.0,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 0.0,
+      "runs": 1
+    },
+    "single_image_probe": {
+      "mean_score_mean": 1.0,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 1.0,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 1.0,
+      "runs": 1
+    }
+  },
+  "prediction_stats": {
+    "empty_decisions_mean": 0.0,
+    "empty_decisions_stdev": 0.0,
+    "decision_count_mean": 306.0,
+    "decision_count_stdev": 0.0,
+    "actions_total": {
+      "qwen_detection": 153,
+      "pipeline_eval": 5,
+      "migration_advisor": 131,
+      "rag_answer": 8,
+      "answerer": 5,
+      "adela_cli_eval": 2,
+      "clarify": 2
+    },
+    "errors_total": {}
+  },
+  "timing": {
+    "elapsed_ms": 1131122.7
+  },
+  "reports": [
+    {
+      "reward_report": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/reports/repro_eval/qwen25_7b_instruct_compound245_t0_run1_run1_reward.json",
+      "prediction_file": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/reports/repro_eval/qwen25_7b_instruct_compound245_t0_run1_run1_predictions.jsonl",
+      "summary": {
+        "cases": 245,
+        "prediction_mode": "provided",
+        "mean_score": 0.903151,
+        "passed": 112,
+        "failed": 133,
+        "pass_rate": 0.457143,
+        "by_category": {
+          "adela_eval": {
+            "count": 2,
+            "mean_score": 0.95,
+            "passed": 1,
+            "pass_rate": 0.5
+          },
+          "full_detection_eval": {
+            "count": 5,
+            "mean_score": 0.89,
+            "passed": 1,
+            "pass_rate": 0.2
+          },
+          "general_answer": {
+            "count": 6,
+            "mean_score": 0.8,
+            "passed": 0,
+            "pass_rate": 0.0
+          },
+          "historical_asset_qa": {
+            "count": 7,
+            "mean_score": 1.0,
+            "passed": 7,
+            "pass_rate": 1.0
+          },
+          "intent_ambiguity": {
+            "count": 1,
+            "mean_score": 1.0,
+            "passed": 1,
+            "pass_rate": 1.0
+          },
+          "migration_feasibility": {
+            "count": 38,
+            "mean_score": 0.973684,
+            "passed": 28,
+            "pass_rate": 0.736842
+          },
+          "migration_feasibility_with_image": {
+            "count": 51,
+            "mean_score": 0.768301,
+            "passed": 0,
+            "pass_rate": 0.0
+          },
+          "probe_then_migration": {
+            "count": 61,
+            "mean_score": 0.851452,
+            "passed": 0,
+            "pass_rate": 0.0
+          },
+          "single_image_probe": {
+            "count": 74,
+            "mean_score": 1.0,
+            "passed": 74,
+            "pass_rate": 1.0
+          }
+        },
+        "used_action_counts": {
+          "qwen_detection": 153,
+          "pipeline_eval": 5,
+          "migration_advisor": 131,
+          "rag_answer": 8,
+          "answerer": 5,
+          "adela_cli_eval": 2,
+          "clarify": 2
+        },
+        "premature_stop_cases": 0
+      },
+      "prediction_stats": {
+        "rows": 245,
+        "decision_count": 306,
+        "empty_decisions": 0,
+        "errors": {},
+        "actions": {
+          "qwen_detection": 153,
+          "pipeline_eval": 5,
+          "migration_advisor": 131,
+          "rag_answer": 8,
+          "answerer": 5,
+          "adela_cli_eval": 2,
+          "clarify": 2
+        }
+      }
+    }
+  ],
+  "artifacts": {
+    "case_audit_csv": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/reports/repro_eval/qwen25_7b_instruct_compound245_t0_run1_case_audit.csv",
+    "failed_cases_csv": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/reports/repro_eval/qwen25_7b_instruct_compound245_t0_run1_failed_cases.csv"
+  }
+}

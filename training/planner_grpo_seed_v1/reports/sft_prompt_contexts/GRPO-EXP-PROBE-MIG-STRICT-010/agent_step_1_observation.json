@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "summary": "开放集探针结果不稳定/置信度不足，建议结合已有资产做低成本可行性判断。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "finish_after_tool": false,
+    "label": "烟雾"
+  },
+  "_thought": "按训练样本期望执行该工具。"
+}
