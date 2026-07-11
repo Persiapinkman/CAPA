@@ -41,6 +41,7 @@ Current V100-safe defaults:
 | 2026-07-10 | `qwen25_trl_grpo_lora_v2_firstjson_attempt` | GRPO LoRA diagnostic | `outputs/planner-grpo-qwen25-7b-trl-lora-v2-firstjson` | stopped | Manually stopped at 4/60 steps because all completions were clipped at 128 tokens; first-JSON reward alone does not teach stopping. |
 | 2026-07-10 | `qwen25_trl_sft_lora_warmup_v3_chatml` | SFT LoRA warmup | `outputs/planner-sft-qwen25-7b-trl-lora-warmup-v3-chatml` | completed | ChatML prompt, compact JSON, explicit `<|im_end|>` completion target; fixes raw extra text. |
 | 2026-07-10 | `qwen25_trl_grpo_lora_v4_chatml_format_smoke` | GRPO LoRA smoke | `outputs/planner-grpo-qwen25-7b-trl-lora-v4-chatml-format-smoke` | completed | Merged SFTv3 init + ChatML rollout + task/format reward; clipped_ratio 0.0 for most observed steps. |
+| 2026-07-11 | `qwen25_trl_grpo_lora_v4_chatml_format_formal_v1` | GRPO LoRA train | `outputs/planner-grpo-qwen25-7b-trl-lora-v4-chatml-format-formal-v1` | completed | 60 GRPO steps on train-case split only; clipped_ratio stayed 0.0 through the final step. |
 
 ## Evaluation Status
 
@@ -55,12 +56,14 @@ Current V100-safe defaults:
 | 2026-07-10 | `qwen25_sft_v2_sft_val_firstjson_eval` | SFT v2 | `sft_data/val.jsonl` 49 | first-JSON mean verifier score | 0.8495 | Slightly below SFT v1 by first-JSON score; shortest raw tail at 131.47 chars. |
 | 2026-07-10 | `qwen25_sft_v3_chatml_sft_val_firstjson_eval` | SFT v3 ChatML | `sft_data_v3_chatml/val.jsonl` 49 | first-JSON mean verifier score | 0.8564 | JSON valid 1.0; raw extra text rate 0.0; stopping fixed at SFT stage. |
 | 2026-07-10 | `qwen25_grpo_v4_chatml_format_smoke_sft_val_firstjson_eval` | GRPO v4 smoke | `sft_data_v3_chatml/val.jsonl` 49 | first-JSON mean verifier score | 0.8578 | JSON valid 1.0; raw extra text rate 0.0; no stopping regression after GRPO smoke. |
+| 2026-07-11 | `qwen25_grpo_v4_chatml_format_formal_v1_sft_val_firstjson_eval` | GRPO v4 formal-v1 | `sft_data_v3_chatml/val.jsonl` 49 | first-JSON mean verifier score | 0.8597 | JSON valid 1.0; raw extra text rate 0.0; +0.0033 over SFTv3 on held-out val split. |
 
 Three-way comparison:
 
 - `training/planner_grpo_seed_v1/reports/qwen25_baseline_vs_sft_v1_vs_sft_v2_sft_val_compare.md`
 - `training/planner_grpo_seed_v1/reports/qwen25_baseline_vs_sft_v1_vs_sft_v2_firstjson_compare.md`
 - `training/planner_grpo_seed_v1/reports/qwen25_sft_v3_vs_grpo_v4_chatml_compare.md`
+- `training/planner_grpo_seed_v1/reports/qwen25_sft_v3_vs_grpo_v4_formal_v1_chatml_compare.md`
 
 ## Current Caveats
 
