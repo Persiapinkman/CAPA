@@ -1,0 +1,59 @@
+{
+  "source_train_cases": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/cases/planner_grpo_focused_train_v5_augmented_cases.jsonl",
+  "source_base_train_file": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/sft_data_v3_chatml/train.jsonl",
+  "source_eval_file": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/sft_data_v3_chatml/val.jsonl",
+  "leakage_guard": "hard train rows are built only from the train-case file; base train rows come from SFTv3 train; eval rows are copied from held-out SFTv3 val.",
+  "format": {
+    "prompt_format": "qwen_chatml",
+    "append_im_end": true,
+    "json_indent": -1
+  },
+  "repeat": {
+    "base_sft_v3_train": 1,
+    "clarify_intent_ambiguity": 10,
+    "full_detection_eval": 6,
+    "migration_step2": 1
+  },
+  "train": {
+    "rows": 629,
+    "base_rows": 196,
+    "hard_rows": 433,
+    "cases": 153,
+    "categories": {
+      "clarify_intent_ambiguity": 306,
+      "full_detection_eval": 64,
+      "general_answer": 3,
+      "historical_asset_qa": 3,
+      "probe_only_contrastive": 24,
+      "probe_then_migration": 147,
+      "probe_then_migration_strict": 72,
+      "single_image_probe": 10
+    },
+    "step_categories": {
+      "clarify_intent_ambiguity#step1": 306,
+      "full_detection_eval#step1": 64,
+      "general_answer#step1": 3,
+      "historical_asset_qa#step1": 3,
+      "probe_only_contrastive#step1": 24,
+      "probe_then_migration#step1": 49,
+      "probe_then_migration#step2": 98,
+      "probe_then_migration_strict#step1": 24,
+      "probe_then_migration_strict#step2": 48,
+      "single_image_probe#step1": 10
+    }
+  },
+  "eval": {
+    "rows": 49,
+    "cases": 31,
+    "categories": {
+      "clarify_intent_ambiguity": 2,
+      "full_detection_eval": 1,
+      "general_answer": 1,
+      "historical_asset_qa": 1,
+      "probe_only_contrastive": 6,
+      "probe_then_migration": 24,
+      "probe_then_migration_strict": 12,
+      "single_image_probe": 2
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "source_train_cases": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/cases/planner_grpo_focused_train_v3_cases.jsonl",
+  "source_eval_file": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/sft_data_v3_chatml/val.jsonl",
+  "leakage_guard": "train rows are built only from planner_grpo_focused_train_v3_cases.jsonl; eval rows are copied from held-out SFTv3 val.",
+  "format": {
+    "prompt_format": "qwen_chatml",
+    "append_im_end": true,
+    "json_indent": -1
+  },
+  "repeat": {
+    "clarify_intent_ambiguity": 12,
+    "full_detection_eval": 8,
+    "migration_step2": 2
+  },
+  "train": {
+    "rows": 250,
+    "cases": 83,
+    "categories": {
+      "clarify_intent_ambiguity": 72,
+      "full_detection_eval": 32,
+      "probe_then_migration": 98,
+      "probe_then_migration_strict": 48
+    },
+    "step_categories": {
+      "clarify_intent_ambiguity#step1": 72,
+      "full_detection_eval#step1": 32,
+      "probe_then_migration#step2": 98,
+      "probe_then_migration_strict#step2": 48
+    }
+  },
+  "eval": {
+    "rows": 49,
+    "cases": 31,
+    "categories": {
+      "clarify_intent_ambiguity": 2,
+      "full_detection_eval": 1,
+      "general_answer": 1,
+      "historical_asset_qa": 1,
+      "probe_only_contrastive": 6,
+      "probe_then_migration": 24,
+      "probe_then_migration_strict": 12,
+      "single_image_probe": 2
+    }
+  }
+}

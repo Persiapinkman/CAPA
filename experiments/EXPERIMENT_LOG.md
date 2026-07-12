@@ -42,6 +42,8 @@ Current V100-safe defaults:
 | 2026-07-10 | `qwen25_trl_sft_lora_warmup_v3_chatml` | SFT LoRA warmup | `outputs/planner-sft-qwen25-7b-trl-lora-warmup-v3-chatml` | completed | ChatML prompt, compact JSON, explicit `<|im_end|>` completion target; fixes raw extra text. |
 | 2026-07-10 | `qwen25_trl_grpo_lora_v4_chatml_format_smoke` | GRPO LoRA smoke | `outputs/planner-grpo-qwen25-7b-trl-lora-v4-chatml-format-smoke` | completed | Merged SFTv3 init + ChatML rollout + task/format reward; clipped_ratio 0.0 for most observed steps. |
 | 2026-07-11 | `qwen25_trl_grpo_lora_v4_chatml_format_formal_v1` | GRPO LoRA train | `outputs/planner-grpo-qwen25-7b-trl-lora-v4-chatml-format-formal-v1` | completed | 60 GRPO steps on train-case split only; clipped_ratio stayed 0.0 through the final step. |
+| 2026-07-12 | `qwen25_trl_sft_lora_v4_hard_chatml` | SFT LoRA diagnostic | `outputs/planner-sft-qwen25-7b-trl-lora-v4-hard-chatml` | rejected | Hard-only refresh from merged SFTv3; did not fix clarify and regressed held-out score/stopping. |
+| 2026-07-12 | `qwen25_trl_sft_lora_v5_mixed_hard_chatml` | SFT LoRA diagnostic | `outputs/planner-sft-qwen25-7b-trl-lora-v5-mixed-hard-chatml` | rejected | Mixed SFTv3 train + train-only hard augmentation; still did not fix clarify, so not used as GRPO initializer. |
 
 ## Evaluation Status
 
@@ -57,6 +59,8 @@ Current V100-safe defaults:
 | 2026-07-10 | `qwen25_sft_v3_chatml_sft_val_firstjson_eval` | SFT v3 ChatML | `sft_data_v3_chatml/val.jsonl` 49 | first-JSON mean verifier score | 0.8564 | JSON valid 1.0; raw extra text rate 0.0; stopping fixed at SFT stage. |
 | 2026-07-10 | `qwen25_grpo_v4_chatml_format_smoke_sft_val_firstjson_eval` | GRPO v4 smoke | `sft_data_v3_chatml/val.jsonl` 49 | first-JSON mean verifier score | 0.8578 | JSON valid 1.0; raw extra text rate 0.0; no stopping regression after GRPO smoke. |
 | 2026-07-11 | `qwen25_grpo_v4_chatml_format_formal_v1_sft_val_firstjson_eval` | GRPO v4 formal-v1 | `sft_data_v3_chatml/val.jsonl` 49 | first-JSON mean verifier score | 0.8597 | JSON valid 1.0; raw extra text rate 0.0; +0.0033 over SFTv3 on held-out val split. |
+| 2026-07-12 | `qwen25_sft_v4_hard_chatml_sft_val_firstjson_eval` | SFT v4 hard diagnostic | `sft_data_v3_chatml/val.jsonl` 49 | first-JSON mean verifier score | 0.8407 | Rejected: clarify stayed 0.1, full_detection_eval 0.75, raw extra text rate regressed to 0.1224. |
+| 2026-07-12 | `qwen25_sft_v5_mixed_hard_chatml_sft_val_firstjson_eval` | SFT v5 mixed hard diagnostic | `sft_data_v3_chatml/val.jsonl` 49 | first-JSON mean verifier score | 0.8457 | Rejected: clarify stayed 0.1, full_detection_eval 0.75, raw extra text rate regressed to 0.1020. |
 
 Three-way comparison:
 
@@ -84,3 +88,14 @@ Three-way comparison:
   GRPO uses ChatML prompts and a combined task/format reward. The format reward
   penalizes prefix text, tail text, and max-length clipping while task reward
   scores the first complete JSON decision.
+- GRPOv4 formal-v1 remains the current best held-out checkpoint. Error audit
+  shows the unresolved slice is not a simple "more steps" problem:
+  `clarify_intent_ambiguity` remains at 0.1 because generated samples collapse
+  to `flux-image-generation`, leaving GRPO with little/no positive within-group
+  advantage signal. Hard-only and mixed hard SFT attempts on 2026-07-12 did not
+  repair this and also reintroduced raw tail text.
+- Do not start GRPO from SFTv4-hard or SFTv5-mixed-hard. The next reasonable
+  GRPO iteration should either change the ambiguity task definition/prompt
+  boundary or use a preference dataset that guarantees contrastive positive and
+  negative completions for clarify, rather than hoping online sampling discovers
+  rare `decision_type="clarify"` outputs.

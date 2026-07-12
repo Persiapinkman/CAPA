@@ -1,0 +1,12 @@
+{
+  "source": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/cases/planner_grpo_focused_train_v3_cases.jsonl",
+  "output": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/cases/planner_grpo_focused_train_v5_augmented_cases.jsonl",
+  "original_cases": 123,
+  "augmented_cases": 30,
+  "total_cases": 153,
+  "augmented_categories": {
+    "clarify_intent_ambiguity": 24,
+    "full_detection_eval": 6
+  },
+  "leakage_guard": "Augmented rows are train-only and do not copy held-out val case IDs or exact held-out user queries."
+}

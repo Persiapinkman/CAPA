@@ -1,0 +1,110 @@
+{
+  "model_name_or_path": "/raid/zkq/projects/CAPA/outputs/merged-qwen25-7b-sft-v3-chatml",
+  "adapter_path": "outputs/planner-sft-qwen25-7b-trl-lora-v4-hard-chatml",
+  "eval_file": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/sft_data_v3_chatml/val.jsonl",
+  "limit": 0,
+  "score_first_json_only": true,
+  "overall": {
+    "count": 49,
+    "mean_score": 0.8406856338594552,
+    "json_valid_rate": 1.0,
+    "extra_text_after_json_rate": 0.12244897959183673,
+    "mean_extra_text_chars": 1.5918367346938775,
+    "effective_json_valid_rate": 1.0,
+    "effective_extra_text_after_json_rate": 0.0,
+    "effective_mean_extra_text_chars": 0.0
+  },
+  "categories": {
+    "clarify_intent_ambiguity": {
+      "count": 2,
+      "mean_score": 0.1,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.0,
+      "mean_extra_text_chars": 0.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0
+    },
+    "full_detection_eval": {
+      "count": 1,
+      "mean_score": 0.75,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.0,
+      "mean_extra_text_chars": 0.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0
+    },
+    "general_answer": {
+      "count": 1,
+      "mean_score": 0.9,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.0,
+      "mean_extra_text_chars": 0.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0
+    },
+    "historical_asset_qa": {
+      "count": 1,
+      "mean_score": 1.0,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.0,
+      "mean_extra_text_chars": 0.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0
+    },
+    "probe_only_contrastive": {
+      "count": 6,
+      "mean_score": 1.0,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.0,
+      "mean_extra_text_chars": 0.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0
+    },
+    "probe_then_migration": {
+      "count": 24,
+      "mean_score": 0.84794061302682,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.125,
+      "mean_extra_text_chars": 1.625,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0
+    },
+    "probe_then_migration_strict": {
+      "count": 12,
+      "mean_score": 0.8327517788724687,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.25,
+      "mean_extra_text_chars": 3.25,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0
+    },
+    "single_image_probe": {
+      "count": 2,
+      "mean_score": 1.0,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.0,
+      "mean_extra_text_chars": 0.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0
+    }
+  },
+  "score_distribution": {
+    "0.1": 2,
+    "0.321": 1,
+    "0.393": 1,
+    "0.75": 1,
+    "0.762": 15,
+    "0.821": 1,
+    "0.9": 1,
+    "0.931": 9,
+    "1.0": 18
+  }
+}

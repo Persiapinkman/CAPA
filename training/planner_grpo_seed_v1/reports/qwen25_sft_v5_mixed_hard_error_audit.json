@@ -1,0 +1,1337 @@
+{
+  "baseline_name": "qwen25_sft_v3_chatml",
+  "candidate_name": "qwen25_sft_v5_mixed_hard_chatml",
+  "inputs": {
+    "cases": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/cases/planner_grpo_focused_val_v3_cases.jsonl",
+    "baseline_predictions": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/reports/qwen25_sft_v3_chatml_sft_val_firstjson_predictions.jsonl",
+    "candidate_predictions": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/reports/qwen25_sft_v5_mixed_hard_chatml_sft_val_firstjson_predictions.jsonl"
+  },
+  "summary": {
+    "rows_compared": 49,
+    "baseline_mean": 0.8563771321336419,
+    "candidate_mean": 0.8457374082637983,
+    "delta_mean": -0.010639723869843576,
+    "regression_count": 4,
+    "improvement_count": 3,
+    "candidate_low_score_count_lt_0_8": 19
+  },
+  "baseline_summary": {
+    "overall": {
+      "count": 49,
+      "mean_score": 0.8563771321336419
+    },
+    "categories": {
+      "clarify_intent_ambiguity": {
+        "count": 2,
+        "mean_score": 0.1,
+        "low_score_count_lt_0_8": 2
+      },
+      "full_detection_eval": {
+        "count": 1,
+        "mean_score": 1.0,
+        "low_score_count_lt_0_8": 0
+      },
+      "general_answer": {
+        "count": 1,
+        "mean_score": 0.9,
+        "low_score_count_lt_0_8": 0
+      },
+      "historical_asset_qa": {
+        "count": 1,
+        "mean_score": 1.0,
+        "low_score_count_lt_0_8": 0
+      },
+      "probe_only_contrastive": {
+        "count": 6,
+        "mean_score": 1.0,
+        "low_score_count_lt_0_8": 0
+      },
+      "probe_then_migration": {
+        "count": 24,
+        "mean_score": 0.8483340175150521,
+        "low_score_count_lt_0_8": 12
+      },
+      "probe_then_migration_strict": {
+        "count": 12,
+        "mean_score": 0.8752052545155995,
+        "low_score_count_lt_0_8": 6
+      },
+      "single_image_probe": {
+        "count": 2,
+        "mean_score": 1.0,
+        "low_score_count_lt_0_8": 0
+      }
+    }
+  },
+  "candidate_summary": {
+    "overall": {
+      "count": 49,
+      "mean_score": 0.8457374082637983
+    },
+    "categories": {
+      "clarify_intent_ambiguity": {
+        "count": 2,
+        "mean_score": 0.1,
+        "low_score_count_lt_0_8": 2
+      },
+      "full_detection_eval": {
+        "count": 1,
+        "mean_score": 0.75,
+        "low_score_count_lt_0_8": 1
+      },
+      "general_answer": {
+        "count": 1,
+        "mean_score": 0.9,
+        "low_score_count_lt_0_8": 0
+      },
+      "historical_asset_qa": {
+        "count": 1,
+        "mean_score": 1.0,
+        "low_score_count_lt_0_8": 0
+      },
+      "probe_only_contrastive": {
+        "count": 6,
+        "mean_score": 1.0,
+        "low_score_count_lt_0_8": 0
+      },
+      "probe_then_migration": {
+        "count": 24,
+        "mean_score": 0.8582546524356869,
+        "low_score_count_lt_0_8": 10
+      },
+      "probe_then_migration_strict": {
+        "count": 12,
+        "mean_score": 0.8327517788724687,
+        "low_score_count_lt_0_8": 6
+      },
+      "single_image_probe": {
+        "count": 2,
+        "mean_score": 1.0,
+        "low_score_count_lt_0_8": 0
+      }
+    }
+  },
+  "category_delta": [
+    {
+      "category": "clarify_intent_ambiguity",
+      "count": 2,
+      "baseline_mean": 0.1,
+      "candidate_mean": 0.1,
+      "delta": 0.0,
+      "candidate_low_lt_0_8": 2
+    },
+    {
+      "category": "full_detection_eval",
+      "count": 1,
+      "baseline_mean": 1.0,
+      "candidate_mean": 0.75,
+      "delta": -0.25,
+      "candidate_low_lt_0_8": 1
+    },
+    {
+      "category": "general_answer",
+      "count": 1,
+      "baseline_mean": 0.9,
+      "candidate_mean": 0.9,
+      "delta": 0.0,
+      "candidate_low_lt_0_8": 0
+    },
+    {
+      "category": "historical_asset_qa",
+      "count": 1,
+      "baseline_mean": 1.0,
+      "candidate_mean": 1.0,
+      "delta": 0.0,
+      "candidate_low_lt_0_8": 0
+    },
+    {
+      "category": "probe_only_contrastive",
+      "count": 6,
+      "baseline_mean": 1.0,
+      "candidate_mean": 1.0,
+      "delta": 0.0,
+      "candidate_low_lt_0_8": 0
+    },
+    {
+      "category": "probe_then_migration",
+      "count": 24,
+      "baseline_mean": 0.8483340175150521,
+      "candidate_mean": 0.8582546524356869,
+      "delta": 0.009920634920634908,
+      "candidate_low_lt_0_8": 10
+    },
+    {
+      "category": "probe_then_migration_strict",
+      "count": 12,
+      "baseline_mean": 0.8752052545155995,
+      "candidate_mean": 0.8327517788724687,
+      "delta": -0.042453475643130824,
+      "candidate_low_lt_0_8": 6
+    },
+    {
+      "category": "single_image_probe",
+      "count": 2,
+      "baseline_mean": 1.0,
+      "candidate_mean": 1.0,
+      "delta": 0.0,
+      "candidate_low_lt_0_8": 0
+    }
+  ],
+  "regressions": [
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-007",
+      "category": "probe_then_migration_strict",
+      "step_index": 2,
+      "baseline": {
+        "score": 0.761904761904762,
+        "expected_action": "migration_advisor",
+        "actual_action": "migration_advisor",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 0.6666666666666666,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "arg 'use_visual_probe' expected True, got False",
+          "finish_after_tool expected True, got False"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"action\": \"migration_advisor\",\n  \"action_input\": {\n    \"user_query\": \"第二步再判断钓鱼人员检测能否迁移并给验证路径。\",\n    \"use_image\": true,\n    \"use_visual_probe\": false,\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "candidate": {
+        "score": 0.32142857142857145,
+        "expected_action": "migration_advisor",
+        "actual_action": "clarify",
+        "actual_decision_type": "clarify",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 0.0,
+          "action_match": 0.0,
+          "argument_match": 0.0,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "decision_type expected 'tool', got 'clarify'",
+          "action expected 'migration_advisor', got ''",
+          "arg 'use_image' expected True, got None",
+          "arg 'use_visual_probe' expected True, got None",
+          "finish_after_tool expected True, got None",
+          "arg 'user_query' expected to contain ['钓鱼', '低成本验证'], got None"
+        ],
+        "completion": "{\n  \"decision_type\": \"clarify\",\n  \"thought\": \"需要进一步澄清用户意图，以确定下一步操作。\",\n  \"clarification_question\": \"您希望我先执行一次轻量探针检测图片中的钓鱼人员，还是直接判断钓鱼人员检测任务能否迁移并给出验证路径？\"\n}"
+      },
+      "delta": -0.4404761904761905
+    },
+    {
+      "case_id": "GRPO-EXP-BOUNDARY-005",
+      "category": "full_detection_eval",
+      "step_index": 1,
+      "baseline": {
+        "score": 1.0,
+        "expected_action": "pipeline_eval",
+        "actual_action": "pipeline_eval",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 1.0,
+          "finish_after_tool": 1.0
+        },
+        "failures": [],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"action\": \"pipeline_eval\",\n  \"action_input\": {\n    \"task_text\": \"用这张图扩增样本并做开放集检测效果对比，输出评估报告。\",\n    \"finish_after_tool\": true\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "candidate": {
+        "score": 0.75,
+        "expected_action": "pipeline_eval",
+        "actual_action": "pipeline_eval",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 0.0,
+          "finish_after_tool": 1.0
+        },
+        "failures": [
+          "arg 'task_text' expected to contain ['检测'], got 'person_with_bag.png'"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"action\": \"pipeline_eval\",\n  \"action_input\": {\n    \"task_text\": \"person_with_bag.png\",\n    \"finish_after_tool\": true\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "delta": -0.25
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-007",
+      "category": "probe_then_migration_strict",
+      "step_index": 1,
+      "baseline": {
+        "score": 1.0,
+        "expected_action": "qwen_detection",
+        "actual_action": "qwen_detection",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 1.0,
+          "finish_after_tool": 1.0
+        },
+        "failures": [],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"action\": \"qwen_detection\",\n  \"action_input\": {\n    \"label\": \"钓鱼的人\",\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "candidate": {
+        "score": 0.9310344827586207,
+        "expected_action": "qwen_detection",
+        "actual_action": "qwen_detection",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 1.0,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "finish_after_tool expected False, got True"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"thought\": \"当前需要执行轻量探针检测钓鱼的人。\",\n  \"action\": \"qwen_detection\",\n  \"action_input\": {\n    \"label\": \"钓鱼的人\",\n    \"finish_after_tool\": true\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "delta": -0.06896551724137934
+    },
+    {
+      "case_id": "GRPO-OBS-001",
+      "category": "probe_then_migration",
+      "step_index": 1,
+      "baseline": {
+        "score": 1.0,
+        "expected_action": "qwen_detection",
+        "actual_action": "qwen_detection",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 1.0,
+          "finish_after_tool": 1.0
+        },
+        "failures": [],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"action\": \"qwen_detection\",\n  \"action_input\": {\n    \"label\": \"钓鱼的人\",\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "candidate": {
+        "score": 0.9310344827586207,
+        "expected_action": "qwen_detection",
+        "actual_action": "qwen_detection",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 1.0,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "finish_after_tool expected False, got 'false'"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"thought\": \"需要先尝试使用已有模型检测图片中是否有钓鱼的人。\",\n  \"action\": \"qwen_detection\",\n  \"action_input\": {\n    \"label\": \"钓鱼的人\",\n    \"finish_after_tool\": \"false\"\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "delta": -0.06896551724137934
+    }
+  ],
+  "improvements": [
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-030",
+      "category": "probe_then_migration",
+      "step_index": 2,
+      "baseline": {
+        "score": 0.761904761904762,
+        "expected_action": "migration_advisor",
+        "actual_action": "migration_advisor",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 0.6666666666666666,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "arg 'use_visual_probe' expected True, got False",
+          "finish_after_tool expected True, got False"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"action\": \"migration_advisor\",\n  \"action_input\": {\n    \"user_query\": \"这张图作为样例，先用开放集模型试垃圾车；如果信心不足，再输出垃圾车识别迁移建议。\",\n    \"use_image\": true,\n    \"use_visual_probe\": false,\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "candidate": {
+        "score": 0.9404761904761904,
+        "expected_action": "migration_advisor",
+        "actual_action": "migration_advisor",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 0.6666666666666666,
+          "finish_after_tool": 1.0
+        },
+        "failures": [
+          "arg 'use_visual_probe' expected True, got False"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"thought\": \"根据观察结果，开放集检测结果不稳定，需要结合已有资产做低成本可行性判断。\",\n  \"action\": \"migration_advisor\",\n  \"action_input\": {\n    \"user_query\": \"这张图作为样例，先用开放集模型试垃圾车；如果信心不足，再输出垃圾车识别迁移建议。\",\n    \"use_image\": true,\n    \"use_visual_probe\": false,\n    \"finish_after_tool\": true\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "delta": 0.17857142857142838
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-009",
+      "category": "probe_then_migration",
+      "step_index": 1,
+      "baseline": {
+        "score": 0.9310344827586207,
+        "expected_action": "qwen_detection",
+        "actual_action": "qwen_detection",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 1.0,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "finish_after_tool expected False, got 'false'"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"action\": \"qwen_detection\",\n  \"action_input\": {\n    \"label\": \"反光条\",\n    \"finish_after_tool\": \"false\"\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "candidate": {
+        "score": 1.0,
+        "expected_action": "qwen_detection",
+        "actual_action": "qwen_detection",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 1.0,
+          "finish_after_tool": 1.0
+        },
+        "failures": [],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"thought\": \"当前需要检测图片中是否有反光条，因为用户提到结果不稳定，所以选择 qwen_detection 进行初步检测。\",\n  \"action\": \"qwen_detection\",\n  \"action_input\": {\n    \"label\": \"反光条\",\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "delta": 0.06896551724137934
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-009",
+      "category": "probe_then_migration",
+      "step_index": 2,
+      "baseline": {
+        "score": 0.761904761904762,
+        "expected_action": "migration_advisor",
+        "actual_action": "migration_advisor",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 0.6666666666666666,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "arg 'use_visual_probe' expected True, got False",
+          "finish_after_tool expected True, got False"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"thought\": \"根据上一步的观察，开放集检测结果不稳定，需要结合已有资产做低成本可行性判断。\",\n  \"action\": \"migration_advisor\",\n  \"action_input\": {\n    \"user_query\": \"客户给了这张样例图，先检测有没有反光条；如果结果不稳，再判断工服反光条检测能不能迁移。\",\n    \"use_image\": true,\n    \"use_visual_probe\": false,\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "candidate": {
+        "score": 0.8214285714285714,
+        "expected_action": "migration_advisor",
+        "actual_action": "migration_advisor",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 1.0,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "finish_after_tool expected True, got False"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"thought\": \"根据上一步的观察结果，需要进一步判断工服反光条检测的能力边界。\",\n  \"action\": \"migration_advisor\",\n  \"action_input\": {\n    \"user_query\": \"工服反光条检测能不能迁移。\",\n    \"use_image\": true,\n    \"use_visual_probe\": true,\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "delta": 0.05952380952380942
+    }
+  ],
+  "persistent_low_scores": [
+    {
+      "case_id": "GRPO-EXP-CLARIFY-004",
+      "category": "clarify_intent_ambiguity",
+      "step_index": 1,
+      "baseline": {
+        "score": 0.1,
+        "expected_action": "clarify",
+        "actual_action": "flux-image-generation",
+        "actual_decision_type": "tool",
+        "forbidden_hit": true,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 0.0,
+          "action_match": 0.0,
+          "argument_match": 1.0,
+          "finish_after_tool": 1.0
+        },
+        "failures": [
+          "decision_type expected 'clarify', got 'tool'",
+          "action expected 'clarify', got 'flux-image-generation'"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"action\": \"flux-image-generation\",\n  \"action_input\": {\n    \"task_text\": \"处理烟雾的图片\",\n    \"source_image_required\": true,\n    \"num_images\": 1,\n    \"finish_after_tool\": false\n  },\n  \"thought\": \"需要生成一张处理了烟雾的图片，因此选择 flux-image-generation 工具。\",\n  \"final_answer\": \"\"\n}"
+      },
+      "candidate": {
+        "score": 0.1,
+        "expected_action": "clarify",
+        "actual_action": "flux-image-generation",
+        "actual_decision_type": "tool",
+        "forbidden_hit": true,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 0.0,
+          "action_match": 0.0,
+          "argument_match": 1.0,
+          "finish_after_tool": 1.0
+        },
+        "failures": [
+          "decision_type expected 'clarify', got 'tool'",
+          "action expected 'clarify', got 'flux-image-generation'"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"action\": \"flux-image-generation\",\n  \"action_input\": {\n    \"task_text\": \"处理烟雾的图片\",\n    \"source_image_required\": true,\n    \"num_images\": 1,\n    \"finish_after_tool\": false\n  },\n  \"thought\": \"需要生成一张处理了烟雾的图片。\",\n  \"final_answer\": \"\"\n}"
+      },
+      "delta": 0.0
+    },
+    {
+      "case_id": "GRPO-EXP-CLARIFY-005",
+      "category": "clarify_intent_ambiguity",
+      "step_index": 1,
+      "baseline": {
+        "score": 0.1,
+        "expected_action": "clarify",
+        "actual_action": "flux-image-generation",
+        "actual_decision_type": "tool",
+        "forbidden_hit": true,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 0.0,
+          "action_match": 0.0,
+          "argument_match": 1.0,
+          "finish_after_tool": 1.0
+        },
+        "failures": [
+          "decision_type expected 'clarify', got 'tool'",
+          "action expected 'clarify', got 'flux-image-generation'"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"action\": \"flux-image-generation\",\n  \"action_input\": {\n    \"task_text\": \"生成一张类似于 banner.jpg 的横幅图片\",\n    \"source_image_required\": false,\n    \"num_images\": 1,\n    \"finish_after_tool\": true\n  },\n  \"thought\": \"根据用户指令“横幅，你看着办”，需要生成一张类似上传图片的横幅图片。\"\n}"
+      },
+      "candidate": {
+        "score": 0.1,
+        "expected_action": "clarify",
+        "actual_action": "flux-image-generation",
+        "actual_decision_type": "tool",
+        "forbidden_hit": true,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 0.0,
+          "action_match": 0.0,
+          "argument_match": 1.0,
+          "finish_after_tool": 1.0
+        },
+        "failures": [
+          "decision_type expected 'clarify', got 'tool'",
+          "action expected 'clarify', got 'flux-image-generation'"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"action\": \"flux-image-generation\",\n  \"action_input\": {\n    \"task_text\": \"生成一张类似于 banner.jpg 的横幅图片\",\n    \"source_image_required\": false,\n    \"num_images\": 1,\n    \"finish_after_tool\": true\n  },\n  \"thought\": \"根据用户指令“横幅，你看着办”，需要生成一张类似上传图片的横幅图片。\",\n  \"final_answer\": \"\"\n}"
+      },
+      "delta": 0.0
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-007",
+      "category": "probe_then_migration_strict",
+      "step_index": 2,
+      "baseline": {
+        "score": 0.761904761904762,
+        "expected_action": "migration_advisor",
+        "actual_action": "migration_advisor",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 0.6666666666666666,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "arg 'use_visual_probe' expected True, got False",
+          "finish_after_tool expected True, got False"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"action\": \"migration_advisor\",\n  \"action_input\": {\n    \"user_query\": \"第二步再判断钓鱼人员检测能否迁移并给验证路径。\",\n    \"use_image\": true,\n    \"use_visual_probe\": false,\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "candidate": {
+        "score": 0.32142857142857145,
+        "expected_action": "migration_advisor",
+        "actual_action": "clarify",
+        "actual_decision_type": "clarify",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 0.0,
+          "action_match": 0.0,
+          "argument_match": 0.0,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "decision_type expected 'tool', got 'clarify'",
+          "action expected 'migration_advisor', got ''",
+          "arg 'use_image' expected True, got None",
+          "arg 'use_visual_probe' expected True, got None",
+          "finish_after_tool expected True, got None",
+          "arg 'user_query' expected to contain ['钓鱼', '低成本验证'], got None"
+        ],
+        "completion": "{\n  \"decision_type\": \"clarify\",\n  \"thought\": \"需要进一步澄清用户意图，以确定下一步操作。\",\n  \"clarification_question\": \"您希望我先执行一次轻量探针检测图片中的钓鱼人员，还是直接判断钓鱼人员检测任务能否迁移并给出验证路径？\"\n}"
+      },
+      "delta": -0.4404761904761905
+    },
+    {
+      "case_id": "GRPO-OBS-001",
+      "category": "probe_then_migration",
+      "step_index": 2,
+      "baseline": {
+        "score": 0.3928571428571429,
+        "expected_action": "migration_advisor",
+        "actual_action": "re_question",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 0.0,
+          "argument_match": 0.0,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "action expected 'migration_advisor', got 're_question'",
+          "arg 'use_image' expected True, got None",
+          "arg 'use_visual_probe' expected True, got None",
+          "finish_after_tool expected True, got False",
+          "arg 'user_query' expected to contain ['钓鱼', '低成本验证'], got None"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"thought\": \"当前检测结果置信度较低，需要进一步验证。\",\n  \"action\": \"re_question\",\n  \"action_input\": {\n    \"query\": \"这张图里有没有钓鱼的人？先用已有模型试一下。如果结果不确定，再给客户一个低成本验证方案。\",\n    \"rewrite_reason\": \"coref_resolve\",\n    \"retrieval_round\": 1,\n    \"context_hint\": \"这张图里有没有钓鱼的人？\",\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "candidate": {
+        "score": 0.3928571428571429,
+        "expected_action": "migration_advisor",
+        "actual_action": "re_question",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 0.0,
+          "argument_match": 0.0,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "action expected 'migration_advisor', got 're_question'",
+          "arg 'use_image' expected True, got None",
+          "arg 'use_visual_probe' expected True, got None",
+          "finish_after_tool expected True, got False",
+          "arg 'user_query' expected to contain ['钓鱼', '低成本验证'], got None"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"thought\": \"当前检测结果置信度较低，需要进一步验证。\",\n  \"action\": \"re_question\",\n  \"action_input\": {\n    \"query\": \"这张图里有没有钓鱼的人？先用已有模型试一下。如果结果不确定，再给客户一个低成本验证方案。\",\n    \"rewrite_reason\": \"coref_resolve\",\n    \"retrieval_round\": 1,\n    \"context_hint\": \"这张图里有没有钓鱼的人？\",\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "delta": 0.0
+    },
+    {
+      "case_id": "GRPO-EXP-BOUNDARY-005",
+      "category": "full_detection_eval",
+      "step_index": 1,
+      "baseline": {
+        "score": 1.0,
+        "expected_action": "pipeline_eval",
+        "actual_action": "pipeline_eval",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 1.0,
+          "finish_after_tool": 1.0
+        },
+        "failures": [],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"action\": \"pipeline_eval\",\n  \"action_input\": {\n    \"task_text\": \"用这张图扩增样本并做开放集检测效果对比，输出评估报告。\",\n    \"finish_after_tool\": true\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "candidate": {
+        "score": 0.75,
+        "expected_action": "pipeline_eval",
+        "actual_action": "pipeline_eval",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 0.0,
+          "finish_after_tool": 1.0
+        },
+        "failures": [
+          "arg 'task_text' expected to contain ['检测'], got 'person_with_bag.png'"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"action\": \"pipeline_eval\",\n  \"action_input\": {\n    \"task_text\": \"person_with_bag.png\",\n    \"finish_after_tool\": true\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "delta": -0.25
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-001",
+      "category": "probe_then_migration",
+      "step_index": 2,
+      "baseline": {
+        "score": 0.761904761904762,
+        "expected_action": "migration_advisor",
+        "actual_action": "migration_advisor",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 0.6666666666666666,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "arg 'use_visual_probe' expected True, got False",
+          "finish_after_tool expected True, got False"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"action\": \"migration_advisor\",\n  \"action_input\": {\n    \"user_query\": \"这张图里有没有钓鱼的人？先用已有模型试一下。如果不确定，再给客户一个钓鱼人员检测的低成本验证方案。\",\n    \"use_image\": true,\n    \"use_visual_probe\": false,\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "candidate": {
+        "score": 0.761904761904762,
+        "expected_action": "migration_advisor",
+        "actual_action": "migration_advisor",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 0.6666666666666666,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "arg 'use_visual_probe' expected True, got False",
+          "finish_after_tool expected True, got False"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"thought\": \"根据上一步的观察，开放集检测结果不稳定，需要结合已有资产做低成本可行性判断。\",\n  \"action\": \"migration_advisor\",\n  \"action_input\": {\n    \"user_query\": \"这张图里有没有钓鱼的人？先用已有模型试一下。如果不确定，再给客户一个钓鱼人员检测的低成本验证方案。\",\n    \"use_image\": true,\n    \"use_visual_probe\": false,\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "delta": 0.0
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-003",
+      "category": "probe_then_migration",
+      "step_index": 2,
+      "baseline": {
+        "score": 0.761904761904762,
+        "expected_action": "migration_advisor",
+        "actual_action": "migration_advisor",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 0.6666666666666666,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "arg 'use_visual_probe' expected True, got False",
+          "finish_after_tool expected True, got False"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"action\": \"migration_advisor\",\n  \"action_input\": {\n    \"user_query\": \"这张图里有没有反光条？先用已有模型试一下。如果不确定，再给客户一个工服反光条检测的低成本验证方案。\",\n    \"use_image\": true,\n    \"use_visual_probe\": false,\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "candidate": {
+        "score": 0.761904761904762,
+        "expected_action": "migration_advisor",
+        "actual_action": "migration_advisor",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 0.6666666666666666,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "arg 'use_visual_probe' expected True, got False",
+          "finish_after_tool expected True, got False"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"thought\": \"根据上一步的观察，开放集检测结果不稳定，需要结合已有资产做低成本可行性判断。\",\n  \"action\": \"migration_advisor\",\n  \"action_input\": {\n    \"user_query\": \"这张图里有没有反光条？先用已有模型试一下。如果不确定，再给客户一个工服反光条检测的低成本验证方案。\",\n    \"use_image\": true,\n    \"use_visual_probe\": false,\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "delta": 0.0
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-011",
+      "category": "probe_then_migration",
+      "step_index": 2,
+      "baseline": {
+        "score": 0.761904761904762,
+        "expected_action": "migration_advisor",
+        "actual_action": "migration_advisor",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 0.6666666666666666,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "arg 'use_visual_probe' expected True, got False",
+          "finish_after_tool expected True, got False"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"thought\": \"根据上一步的观察，开放集检测结果不稳定，需要结合已有资产做低成本可行性判断。\",\n  \"action\": \"migration_advisor\",\n  \"action_input\": {\n    \"user_query\": \"客户给了这张样例图，先检测有没有横幅；如果结果不稳，再判断横幅违规悬挂检测能不能迁移。\",\n    \"use_image\": true,\n    \"use_visual_probe\": false,\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "candidate": {
+        "score": 0.761904761904762,
+        "expected_action": "migration_advisor",
+        "actual_action": "migration_advisor",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 0.6666666666666666,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "arg 'use_visual_probe' expected True, got False",
+          "finish_after_tool expected True, got False"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"thought\": \"根据上一步的观察，开放集检测结果不稳定，需要结合已有资产做低成本可行性判断。\",\n  \"action\": \"migration_advisor\",\n  \"action_input\": {\n    \"user_query\": \"客户给了这张样例图，先检测有没有横幅；如果结果不稳，再判断横幅违规悬挂检测能不能迁移。\",\n    \"use_image\": true,\n    \"use_visual_probe\": false,\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "delta": 0.0
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-015",
+      "category": "probe_then_migration",
+      "step_index": 2,
+      "baseline": {
+        "score": 0.761904761904762,
+        "expected_action": "migration_advisor",
+        "actual_action": "migration_advisor",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 0.6666666666666666,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "arg 'use_visual_probe' expected True, got False",
+          "finish_after_tool expected True, got False"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"thought\": \"根据上一步的观察结果，需要结合已有资产做低成本可行性判断，因此选择迁移顾问工具。\",\n  \"action\": \"migration_advisor\",\n  \"action_input\": {\n    \"user_query\": \"请先对图里的反光条做快速探针，探针结果不确定的话，再给一个工服反光条检测的可行性方案。\",\n    \"use_image\": true,\n    \"use_visual_probe\": false,\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "candidate": {
+        "score": 0.761904761904762,
+        "expected_action": "migration_advisor",
+        "actual_action": "migration_advisor",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 0.6666666666666666,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "arg 'use_visual_probe' expected True, got False",
+          "finish_after_tool expected True, got False"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"thought\": \"根据当前 query，需要评估反光条检测的可行性。\",\n  \"action\": \"migration_advisor\",\n  \"action_input\": {\n    \"user_query\": \"请先对图里的反光条做快速探针，探针结果不确定的话，再给一个工服反光条检测的可行性方案。\",\n    \"use_image\": true,\n    \"use_visual_probe\": false,\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "delta": 0.0
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-016",
+      "category": "probe_then_migration",
+      "step_index": 2,
+      "baseline": {
+        "score": 0.761904761904762,
+        "expected_action": "migration_advisor",
+        "actual_action": "migration_advisor",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 0.6666666666666666,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "arg 'use_visual_probe' expected True, got False",
+          "finish_after_tool expected True, got False"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"thought\": \"当前步骤已经完成了烟雾的快速探针，但结果不稳定，需要进一步判断可行性。\",\n  \"action\": \"migration_advisor\",\n  \"action_input\": {\n    \"user_query\": \"请先对图里的烟雾做快速探针，探针结果不确定的话，再给一个烟雾异常检测的可行性方案。\",\n    \"use_image\": true,\n    \"use_visual_probe\": false,\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "candidate": {
+        "score": 0.761904761904762,
+        "expected_action": "migration_advisor",
+        "actual_action": "migration_advisor",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 0.6666666666666666,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "arg 'use_visual_probe' expected True, got False",
+          "finish_after_tool expected True, got False"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"thought\": \"当前步骤已经完成了烟雾的快速探针，但结果不稳定，需要进一步判断可行性。\",\n  \"action\": \"migration_advisor\",\n  \"action_input\": {\n    \"user_query\": \"请先对图里的烟雾做快速探针，探针结果不确定的话，再给一个烟雾异常检测的可行性方案。\",\n    \"use_image\": true,\n    \"use_visual_probe\": false,\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "delta": 0.0
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-026",
+      "category": "probe_then_migration",
+      "step_index": 2,
+      "baseline": {
+        "score": 0.761904761904762,
+        "expected_action": "migration_advisor",
+        "actual_action": "migration_advisor",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 0.6666666666666666,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "arg 'use_visual_probe' expected True, got False",
+          "finish_after_tool expected True, got False"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"action\": \"migration_advisor\",\n  \"action_input\": {\n    \"user_query\": \"这张图作为样例，先用开放集模型试厨师帽；如果信心不足，再输出后厨帽子佩戴检测迁移建议。\",\n    \"use_image\": true,\n    \"use_visual_probe\": false,\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "candidate": {
+        "score": 0.761904761904762,
+        "expected_action": "migration_advisor",
+        "actual_action": "migration_advisor",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 0.6666666666666666,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "arg 'use_visual_probe' expected True, got False",
+          "finish_after_tool expected True, got False"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"thought\": \"根据当前步骤的观察结果，开放集检测结果不稳定，需要结合已有资产做低成本可行性判断。\",\n  \"action\": \"migration_advisor\",\n  \"action_input\": {\n    \"user_query\": \"这张图作为样例，先用开放集模型试厨师帽；如果信心不足，再输出后厨帽子佩戴检测迁移建议。\",\n    \"use_image\": true,\n    \"use_visual_probe\": false,\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "delta": 0.0
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-047",
+      "category": "probe_then_migration",
+      "step_index": 2,
+      "baseline": {
+        "score": 0.761904761904762,
+        "expected_action": "migration_advisor",
+        "actual_action": "migration_advisor",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 0.6666666666666666,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "arg 'use_visual_probe' expected True, got False",
+          "finish_after_tool expected True, got False"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"thought\": \"根据当前步骤的观察结果，需要进一步结合已有资产进行低成本可行性判断。\",\n  \"action\": \"migration_advisor\",\n  \"action_input\": {\n    \"user_query\": \"这不是完整评测，先检查横幅；如果检测没把握，再转成横幅违规悬挂检测迁移评估。\",\n    \"use_image\": true,\n    \"use_visual_probe\": false,\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "candidate": {
+        "score": 0.761904761904762,
+        "expected_action": "migration_advisor",
+        "actual_action": "migration_advisor",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 0.6666666666666666,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "arg 'use_visual_probe' expected True, got False",
+          "finish_after_tool expected True, got False"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"thought\": \"根据当前步骤的观察结果，需要进一步结合已有资产进行低成本可行性判断。\",\n  \"action\": \"migration_advisor\",\n  \"action_input\": {\n    \"user_query\": \"这不是完整评测，先检查横幅；如果检测没把握，再转成横幅违规悬挂检测迁移评估。\",\n    \"use_image\": true,\n    \"use_visual_probe\": false,\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "delta": 0.0
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-052",
+      "category": "probe_then_migration",
+      "step_index": 2,
+      "baseline": {
+        "score": 0.761904761904762,
+        "expected_action": "migration_advisor",
+        "actual_action": "migration_advisor",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 0.6666666666666666,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "arg 'use_visual_probe' expected True, got False",
+          "finish_after_tool expected True, got False"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"thought\": \"根据上一步 open-set 检测结果不稳定，需要结合已有资产做低成本可行性判断。\",\n  \"action\": \"migration_advisor\",\n  \"action_input\": {\n    \"user_query\": \"先跑单图检测看烟雾，再根据结果判断是否需要给客户烟雾异常检测的低成本方案。\",\n    \"use_image\": true,\n    \"use_visual_probe\": false,\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "candidate": {
+        "score": 0.761904761904762,
+        "expected_action": "migration_advisor",
+        "actual_action": "migration_advisor",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 0.6666666666666666,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "arg 'use_visual_probe' expected True, got False",
+          "finish_after_tool expected True, got False"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"thought\": \"根据上一步 open-set 检测结果不稳定，需要结合已有资产做低成本可行性判断。\",\n  \"action\": \"migration_advisor\",\n  \"action_input\": {\n    \"user_query\": \"先跑单图检测看烟雾，再根据结果判断是否需要给客户烟雾异常检测的低成本方案。\",\n    \"use_image\": true,\n    \"use_visual_probe\": false,\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "delta": 0.0
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-054",
+      "category": "probe_then_migration",
+      "step_index": 2,
+      "baseline": {
+        "score": 0.761904761904762,
+        "expected_action": "migration_advisor",
+        "actual_action": "migration_advisor",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 0.6666666666666666,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "arg 'use_visual_probe' expected True, got False",
+          "finish_after_tool expected True, got False"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"thought\": \"根据上一步 open-set 检测结果不稳定，需要结合已有资产做低成本可行性判断。\",\n  \"action\": \"migration_advisor\",\n  \"action_input\": {\n    \"user_query\": \"先跑单图检测看垃圾车，再根据结果判断是否需要给客户垃圾车识别的低成本方案。\",\n    \"use_image\": true,\n    \"use_visual_probe\": false,\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "candidate": {
+        "score": 0.761904761904762,
+        "expected_action": "migration_advisor",
+        "actual_action": "migration_advisor",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 0.6666666666666666,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "arg 'use_visual_probe' expected True, got False",
+          "finish_after_tool expected True, got False"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"thought\": \"根据上一步 open-set 检测结果不稳定，需要结合已有资产做低成本可行性判断。\",\n  \"action\": \"migration_advisor\",\n  \"action_input\": {\n    \"user_query\": \"先跑单图检测看垃圾车，再根据结果判断是否需要给客户垃圾车识别的低成本方案。\",\n    \"use_image\": true,\n    \"use_visual_probe\": false,\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "delta": 0.0
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-010",
+      "category": "probe_then_migration_strict",
+      "step_index": 2,
+      "baseline": {
+        "score": 0.761904761904762,
+        "expected_action": "migration_advisor",
+        "actual_action": "migration_advisor",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 0.6666666666666666,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "arg 'use_visual_probe' expected True, got False",
+          "finish_after_tool expected True, got False"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"thought\": \"根据当前步骤的观察结果，需要进一步判断烟雾异常检测的能力边界和迁移可行性。\",\n  \"action\": \"migration_advisor\",\n  \"action_input\": {\n    \"user_query\": \"第二步再判断烟雾异常检测能否迁移并给验证路径。\",\n    \"use_image\": true,\n    \"use_visual_probe\": false,\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "candidate": {
+        "score": 0.761904761904762,
+        "expected_action": "migration_advisor",
+        "actual_action": "migration_advisor",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 0.6666666666666666,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "arg 'use_visual_probe' expected True, got False",
+          "finish_after_tool expected True, got False"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"thought\": \"根据当前步骤的观察结果，需要进一步判断烟雾异常检测的能力边界和迁移可行性。\",\n  \"action\": \"migration_advisor\",\n  \"action_input\": {\n    \"user_query\": \"第一步只做轻量探针看烟雾，如果结果不稳，第二步再判断烟雾异常检测能否迁移并给验证路径。\",\n    \"use_image\": true,\n    \"use_visual_probe\": false,\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "delta": 0.0
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-016",
+      "category": "probe_then_migration_strict",
+      "step_index": 2,
+      "baseline": {
+        "score": 0.761904761904762,
+        "expected_action": "migration_advisor",
+        "actual_action": "migration_advisor",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 0.6666666666666666,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "arg 'use_visual_probe' expected True, got False",
+          "finish_after_tool expected True, got False"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"action\": \"migration_advisor\",\n  \"action_input\": {\n    \"user_query\": \"烟雾异常检测的迁移可行性与风险建议。\",\n    \"use_image\": true,\n    \"use_visual_probe\": false,\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "candidate": {
+        "score": 0.761904761904762,
+        "expected_action": "migration_advisor",
+        "actual_action": "migration_advisor",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 0.6666666666666666,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "arg 'use_visual_probe' expected True, got False",
+          "finish_after_tool expected True, got False"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"thought\": \"当前检测结果不稳定，需结合已有资产进行低成本可行性判断。\",\n  \"action\": \"migration_advisor\",\n  \"action_input\": {\n    \"user_query\": \"烟雾异常检测的迁移可行性与风险建议。\",\n    \"use_image\": true,\n    \"use_visual_probe\": false,\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "delta": 0.0
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-017",
+      "category": "probe_then_migration_strict",
+      "step_index": 2,
+      "baseline": {
+        "score": 0.761904761904762,
+        "expected_action": "migration_advisor",
+        "actual_action": "migration_advisor",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 0.6666666666666666,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "arg 'use_visual_probe' expected True, got False",
+          "finish_after_tool expected True, got False"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"action\": \"migration_advisor\",\n  \"action_input\": {\n    \"user_query\": \"先别收口：先检测横幅，探针信心不足时接着输出横幅违规悬挂检测的迁移可行性与风险建议。\",\n    \"use_image\": true,\n    \"use_visual_probe\": false,\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "candidate": {
+        "score": 0.761904761904762,
+        "expected_action": "migration_advisor",
+        "actual_action": "migration_advisor",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 0.6666666666666666,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "arg 'use_visual_probe' expected True, got False",
+          "finish_after_tool expected True, got False"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"thought\": \"根据上一步的观察结果，开放集探针结果不稳定/置信度不足，需要进一步判断迁移可行性。\",\n  \"action\": \"migration_advisor\",\n  \"action_input\": {\n    \"user_query\": \"横幅违规悬挂检测的迁移可行性与风险建议。\",\n    \"use_image\": true,\n    \"use_visual_probe\": false,\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "delta": 0.0
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-024",
+      "category": "probe_then_migration_strict",
+      "step_index": 2,
+      "baseline": {
+        "score": 0.761904761904762,
+        "expected_action": "migration_advisor",
+        "actual_action": "migration_advisor",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 0.6666666666666666,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "arg 'use_visual_probe' expected True, got False",
+          "finish_after_tool expected True, got False"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"thought\": \"根据当前步骤的观察结果，模型对垃圾车的检测不够稳定，需要进一步评估现有资产和数据量。\",\n  \"action\": \"migration_advisor\",\n  \"action_input\": {\n    \"user_query\": \"先跑单图检测看有没有垃圾车；要是模型没把握，再评估垃圾车识别的资产复用和补数据量。\",\n    \"use_image\": true,\n    \"use_visual_probe\": false,\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "candidate": {
+        "score": 0.761904761904762,
+        "expected_action": "migration_advisor",
+        "actual_action": "migration_advisor",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 0.6666666666666666,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "arg 'use_visual_probe' expected True, got False",
+          "finish_after_tool expected True, got False"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"thought\": \"根据当前步骤的观察结果，模型对垃圾车的检测不够稳定，需要进一步评估现有资产和数据量。\",\n  \"action\": \"migration_advisor\",\n  \"action_input\": {\n    \"user_query\": \"先跑单图检测看有没有垃圾车；要是模型没把握，再评估垃圾车识别的资产复用和补数据量。\",\n    \"use_image\": true,\n    \"use_visual_probe\": false,\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "delta": 0.0
+    },
+    {
+      "case_id": "GRPO-EXP-PROBE-MIG-STRICT-027",
+      "category": "probe_then_migration_strict",
+      "step_index": 2,
+      "baseline": {
+        "score": 0.761904761904762,
+        "expected_action": "migration_advisor",
+        "actual_action": "migration_advisor",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 0.6666666666666666,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "arg 'use_visual_probe' expected True, got False",
+          "finish_after_tool expected True, got False"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"action\": \"migration_advisor\",\n  \"action_input\": {\n    \"user_query\": \"工服反光条检测能不能从现有能力迁移。\",\n    \"use_image\": true,\n    \"use_visual_probe\": false,\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "candidate": {
+        "score": 0.761904761904762,
+        "expected_action": "migration_advisor",
+        "actual_action": "migration_advisor",
+        "actual_decision_type": "tool",
+        "forbidden_hit": false,
+        "detail": {
+          "json_valid": 1.0,
+          "decision_type_valid": 1.0,
+          "action_match": 1.0,
+          "argument_match": 0.6666666666666666,
+          "finish_after_tool": 0.0
+        },
+        "failures": [
+          "arg 'use_visual_probe' expected True, got False",
+          "finish_after_tool expected True, got False"
+        ],
+        "completion": "{\n  \"decision_type\": \"tool\",\n  \"thought\": \"根据当前步骤的观察结果，需要进一步分析工服反光条检测的能力迁移可能性。\",\n  \"action\": \"migration_advisor\",\n  \"action_input\": {\n    \"user_query\": \"工服反光条检测能不能从现有能力迁移。\",\n    \"use_image\": true,\n    \"use_visual_probe\": false,\n    \"finish_after_tool\": false\n  },\n  \"final_answer\": \"\"\n}"
+      },
+      "delta": 0.0
+    }
+  ],
+  "candidate_action_confusions": {
+    "answerer -> answerer": 1,
+    "clarify -> flux-image-generation": 2,
+    "migration_advisor -> clarify": 1,
+    "migration_advisor -> migration_advisor": 16,
+    "migration_advisor -> re_question": 1,
+    "pipeline_eval -> pipeline_eval": 1,
+    "qwen_detection -> qwen_detection": 26,
+    "rag_answer -> rag_answer": 1
+  },
+  "recommendations": [
+    "Do not extend GRPO v4 blindly: clarify samples show no action-level improvement, so equal wrong rewards can yield no GRPO advantage.",
+    "Create a hard-case refresh path that first raises clarify/pipeline parameter behavior with SFT or high-exploration GRPO, then run GRPO on a balanced hard subset.",
+    "Track parameter regressions separately from action regressions; full_detection_eval kept pipeline_eval but degraded task_text quality."
+  ]
+}
