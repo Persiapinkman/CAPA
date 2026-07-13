@@ -1,0 +1,57 @@
+# Python caches
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local virtual environments
+.venv/
+venv/
+env/
+
+# Local IDE settings
+.vscode/
+
+# Runtime outputs
+data/
+logs/
+run/
+sample_code/full_documents_output/
+visualization/output/
+
+# Corpus and generated business data
+data_source/*
+!data_source/README.md
+!data_source/tables/
+data_source/tables/*
+!data_source/tables/README.md
+
+# Model directories / symlinks and weights
+bge-m3
+EvoQwen2.5-VL-Retriever-3B-v1
+*.bin
+*.safetensors
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.gguf
+*.model
+
+# Local databases and tabular corpora
+*.sqlite
+*.sqlite3
+*.db
+*.parquet
+*.jsonl
+*.xlsx
+*.xls
+*.csv
+
+# Temporary files
+*.log
+*.tmp
+*.swp
+*.swo

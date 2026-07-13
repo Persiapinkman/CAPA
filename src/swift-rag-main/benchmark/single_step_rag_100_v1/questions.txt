@@ -1,0 +1,100 @@
+请做交叉核对：BannerSlogan_960x960 在模型发版表里的负责人是谁？在 adela 里的 did 和部署平台分别是什么？
+请做交叉核对：Classifier_PAR 在模型发版表里的负责人是谁？在 adela 里的 did 和部署平台分别是什么？
+请做交叉核对：Idcard 在模型发版表里的负责人是谁？在 adela 里的 did 和部署平台分别是什么？
+请做交叉核对：KM_falcon_fight_UMT_base 在模型发版表里的负责人是谁？在 adela 里的 did 和部署平台分别是什么？
+请做交叉核对：KM_falcon_fight_UMT_large 在模型发版表里的负责人是谁？在 adela 里的 did 和部署平台分别是什么？
+请做交叉核对：LargeFace_224x224 在模型发版表里的负责人是谁？在 adela 里的 did 和部署平台分别是什么？
+请做交叉核对：Nonmotor 在模型发版表里的负责人是谁？在 adela 里的 did 和部署平台分别是什么？
+车辆属性识别在当前版本下，模型输入应该怎么给？
+请做交叉核对：PAR_merged_model 在模型发版表里的负责人是谁？在 adela 里的 did 和部署平台分别是什么？
+请做交叉核对：SmallFace 在模型发版表里的负责人是谁？在 adela 里的 did 和部署平台分别是什么？
+请做交叉核对：SmallFace_Gray_736x1280 在模型发版表里的负责人是谁？在 adela 里的 did 和部署平台分别是什么？
+请确认城市结构化目标检测（3.0.1）的默认推荐阈值。
+请做交叉核对：SmallFace_Gray_800x1333 在模型发版表里的负责人是谁？在 adela 里的 did 和部署平台分别是什么？
+请做交叉核对：SmallFace_gray_448x800 在模型发版表里的负责人是谁？在 adela 里的 did 和部署平台分别是什么？
+请做交叉核对：Vehicle_FullAttr 在模型发版表里的负责人是谁？在 adela 里的 did 和部署平台分别是什么？
+请做交叉核对：banshou 在模型发版表里的负责人是谁？在 adela 里的 did 和部署平台分别是什么？
+请做交叉核对：det_small 在模型发版表里的负责人是谁？在 adela 里的 did 和部署平台分别是什么？
+请做交叉核对：fisher_det_small 在模型发版表里的负责人是谁？在 adela 里的 did 和部署平台分别是什么？
+车牌属性识别如果切到当前版本，输入要求是什么？
+请做交叉核对：full_struct 在模型发版表里的负责人是谁？在 adela 里的 did 和部署平台分别是什么？
+请做交叉核对：model 在模型发版表里的负责人是谁？在 adela 里的 did 和部署平台分别是什么？
+full_struct_480x768 这条部署记录对应的 rid 是多少？
+package_tossing 在这条 adela 记录中的部署平台是什么？
+KM_textrecognition_CarPlate_nart_cuda11.4-trt8.2.0-fp16-A2_b16_3.0.1.model 最近一次更新时间是什么时候？
+Vehicle_FullAttr 在这条 adela 记录中的部署版本号是多少？
+SmallFace_448x800 在这条 adela 记录中的部署版本号是多少？
+KM_hunter_CommonFace_Gray_nart_cuda11.0-trt7.1-int8-T4_b48_0.1.0.model 最近一次更新时间是什么时候？
+车辆属性识别这版（当前版本）会产出什么结果？
+struct_544x960 这条部署记录对应的 rid 是多少？
+KM_classifier_Vehicle_FullAttr_nart_cuda11.0-trt7.1-fp16-T4_b16_6.0.2.model 这个模型当前负责人是谁？
+struct_736x1280 在这条 adela 记录中的部署版本号是多少？
+KM_classifier_classifier_vehicleStructure_expand1.1_nart_cuda11.0-trt7.1-int8-P4_b16_1.0.0.model 这个模型当前负责人是谁？
+KM_falcon_fight_large_dev8 在这条 adela 记录中的部署版本号是多少？
+SmallFace_Gray_736x1280 这条部署记录对应的 did 是多少？
+struct 这条部署记录对应的 rid 是多少？
+KM_falcon_KM_falcon_fight_UMT_base_nart_acl-ascend310-fp16_b8_2.0.5.model 支持部署在哪些设备上（按记录回答）？
+KM_Classifier_PAR 这条部署记录对应的 rid 是多少？
+KM_textdetection_HoriTextDetection_Plate_nart_acl-ascend710-int8_b16_3.2.0.model 这个模型当前负责人是谁？
+LargeFace_288x288 这条部署记录对应的 rid 是多少？
+KM_hunter_SmallFace_Gray_800x1333_nart_cuda10.0-trt5.0-int8-P4_b24_4.15.3.model 支持部署在哪些设备上（按记录回答）？
+Ped_17keypoint_xmnet 在这条 adela 记录中的部署版本号是多少？
+KM_essos_struct_nart_cuda11.4-trt8.2.0-fp16-A2_b8_3.0.1.model 推荐配置是什么？
+crowdmax_csrquarter_s8_s16_only_loc_with_offset_720p_fangzhou 这条部署记录对应的 did 是多少？
+LargeFace_320x320 在这条 adela 记录中的部署平台是什么？
+water_detect 这条部署记录对应的 rid 是多少？
+KM_essos_carplateHK_detect_nart_acl-ascend710-fp16_b8_3.1.4.model 支持部署在哪些设备上（按记录回答）？
+KM_essos_struct_nart_cpu-ppl2-fp32_b1_3.0.1.model 支持部署在哪些设备上（按记录回答）？
+fight_tada50_1.0.0 在这条 adela 记录中的部署平台是什么？
+package_tossing 在这条 adela 记录中的部署平台是什么？
+KM_classifier_Ped_Quality_Security_nart_acl-ascend710-int8_b64_3.0.1.model 这个模型当前负责人是谁？
+我准备联调台标检测，当前版本需要喂什么，返回什么？
+full_struct 在这条 adela 记录中的部署版本号是多少？
+KM_senu_Vehicle_ReID_nart_halnn0.4-stpu-int8_b8_1.12.0.model 最近一次更新时间是什么时候？
+想确认工地安全绳识别：v0.2.1的输出规范是什么？
+KM_senu_shikra-embedding-cn-base-image_nart_cuda11.0-trt7.1-fp32-P4_b1_3.1.0.model KM_text_encoder_shikra-embedding-cn-base-text_nart_cuda11.0-trt7.1-fp32-P4_b1_3.1.0.model 最近一次更新时间是什么时候？
+KM_hunter_CommonFace_Gray_nart_acl-ascend710-fp16_b32_0.1.0.model 这个模型当前负责人是谁？
+full_struct 这条部署记录对应的 did 是多少？
+KM_essos_LargeFace_224x224_nart_acl-ascend710-int8_b32_8.0.1.model 支持部署在哪些设备上（按记录回答）？
+KM_falcon_fight_UniformerV1 这条部署记录对应的 did 是多少？
+LargeFace_288x288 在这条 adela 记录中的部署平台是什么？
+KM_feature_ir7002024_nart_cuda11.4-trt8.2.0-fp16-T4_b8_2.55.2.model 这个模型当前负责人是谁？
+struct 这条部署记录对应的 rid 是多少？
+KM_hunter_CommonFace_Gray_nart_acl-ascend710-fp16_b8_0.1.0.model 推荐配置是什么？
+yolov10 在这条 adela 记录中的部署平台是什么？
+KM_hunter_CommonFace_Gray_nart_cuda11.0-trt7.1-int8-T4_b8_0.1.0.model 这个模型当前负责人是谁？
+KM_feature_face-ir700-2024-fp_nart_acl-ascend710-fp16_b8_2.55.1.model 最近一次更新时间是什么时候？
+KM_raven_Carplate_nart_cuda11.0-trt7.1-int8-P4_b8_2.0.0.model 推荐配置是什么？
+人体着装二分类在当前版本下的输入、输出各是什么？
+KM_classifier_Vehicle_Quality_Security_nart_cuda11.0-trt7.1-int8-T4_b64_3.0.0.model 最近一次更新时间是什么时候？
+full_struct 在这条 adela 记录中的部署平台是什么？
+Vehicle_FullAttr 在这条 adela 记录中的部署版本号是多少？
+PAR_merged_model 这条部署记录对应的 did 是多少？
+KM_essos_carplateHK_detect_nart_cuda11.0-trt7.1-int8-T4_b16_3.1.4.model 这个模型当前负责人是谁？
+KM_falcon_KM_falcon_fight_UMT_base_nart_acl-ascend710-fp16_b8_2.0.5.model 推荐配置是什么？
+Idcard_Font 在这条 adela 记录中的部署版本号是多少？
+full_struct 在这条 adela 记录中的部署版本号是多少？
+full_struct 这条部署记录对应的 did 是多少？
+PAR_merged_model 这条部署记录对应的 did 是多少？
+full_struct 在这条 adela 记录中的部署版本号是多少？
+SmallFace_Gray_736x1280 在这条 adela 记录中的部署平台是什么？
+SmallFace_544x960 这条部署记录对应的 rid 是多少？
+KM_essos_full_struct_nart_cuda11.0-trt7.1-fp16-T4_b1_3.5.7.model 最近一次更新时间是什么时候？
+KM_classifier_Ped_ClothBanner_nart_cuda11.0-trt7.1-fp16-T4_b1_0.0.1.model 支持部署在哪些设备上（按记录回答）？
+KM_classifier_Vehicle_FullAttr_nart_acl-ascend710-fp16_b16_6.0.2.model 支持部署在哪些设备上（按记录回答）？
+KM_essos_tvlogo_det_nart_cuda11.0-trt7.1-fp16-T4_b16_3.0.2.model 推荐配置是什么？
+KM_falcon_fight_UMT_base 这条部署记录对应的 did 是多少？
+cls_small 这条部署记录对应的 did 是多少？
+KM_textrecognition_CarPlate_nart_acl-ascend710-int8_b8_3.0.1 推荐配置是什么？
+SmallFace_Gray_800x1333 这条部署记录对应的 rid 是多少？
+kitchen_uniform 这条部署记录对应的 rid 是多少？
+struct 这条部署记录对应的 did 是多少？
+LargeFace_288x288 这条部署记录对应的 did 是多少？
+LargeFace_256x256 这条部署记录对应的 rid 是多少？
+LargeFace_224x224 在这条 adela 记录中的部署平台是什么？
+KM_falcon_KM_falcon_fight_UMT_large_nart_acl-ascend310-fp16_b8_2.0.5.model 最近一次更新时间是什么时候？
+KM_classifier_zc_uniform_v4_nart_cuda11.0-trt7.1-int8-P4_b16_2.21.7.model 这个模型当前负责人是谁？
+KM_essos_jubao_IDcard_Det_v2_nart_acl-ascend310-fp16_b16_1.0.0.model 推荐配置是什么？
+KM_hermes_highway_nart_cuda11.0-trt7.1-fp16-T4_b128_3.1.1.model 最近一次更新时间是什么时候？
+KM_feature_face-pro512d_nart_cuda11.0-trt7.1-fp16-T4_b8_2.56.0.model 这个模型当前负责人是谁？
+请确认小人脸检测（3.0.1、448x800）的默认推荐阈值。

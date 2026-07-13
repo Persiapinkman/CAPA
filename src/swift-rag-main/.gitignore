@@ -1,0 +1,90 @@
+# Python caches
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local environments and caches
+.conda/
+.cache/
+.venv/
+venv/
+env/
+.codex
+.vscode/
+
+# Node artifacts from local tooling
+node_modules/
+package.json
+package-lock.json
+
+# Model directories / weights
+bge-m3/
+EvoQwen2.5-VL-Retriever-3B-v1/
+EvoQwen2.5-VL-Retriever-7B-v1/
+*.bin
+*.safetensors
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.gguf
+*.model
+
+# Corpus, embedding stores, generated indices
+data_source/*
+!data_source/README.md
+!data_source/tables/
+data_source/tables/*
+!data_source/tables/README.md
+!data_source/embedding_artifacts/
+data_source/embedding_artifacts/*
+!data_source/embedding_artifacts/README.md
+data/
+*.sqlite
+*.sqlite3
+*.db
+*.parquet
+
+# Runtime outputs and generated artifacts
+logs/
+run/
+results/
+output/
+tmp/
+tmp_pdf_text_extract/
+tmp_pdf_text_extract_all/
+parse_txt/
+multi_files/
+offline-file/
+react_frontend/
+failed.txt
+*.log
+*.out
+*.tmp
+
+# Data and notebook artifacts
+*.csv
+*.jsonl
+*.xlsx
+*.xls
+*.pdf
+*.docx
+*.png
+*.ipynb
+*.ipynb_checkpoints
+notebooks/
+
+# Historical local corpus folders
+pdf_files/
+documents_120/
+documents_v0.1/
+documents_v0.2/
+documents_v0.3/
+auto-pdf-v0.4.0/
+experiments/
+
+# Evaluation data files
+eval_tools/data/

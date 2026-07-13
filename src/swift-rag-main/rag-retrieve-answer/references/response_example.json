@@ -1,0 +1,25 @@
+{
+  "query": "safety_rope v0.2.1 追加了什么数据，标签有哪些？",
+  "retrieved_chunks": [
+    {
+      "id": "node_id_1",
+      "text": "文本块内容示例：v0.2.1 在长客场景追加了回流误报的工人图片，用于安全绳检测模型迭代。",
+      "index_id": "parent_node_id",
+      "index_text": "父节点文本内容概述……",
+      "metadata": {
+        "header": "版本说明"
+      },
+      "doc_id": "document_unique_id",
+      "doc_name": "PDFs/safety_rope v0.2.1.pdf",
+      "score": 0.95
+    }
+  ],
+  "reference": [
+    {
+      "doc_name": "safety_rope v0.2.1.pdf",
+      "url": "https://ones.ainewera.com/wiki/#/team/JNwe8qUX/space/GebSt74Y/page/XtP4mJTo"
+    }
+  ],
+  "answer": "追加了长客场景回流误报的工人图片。标签包括 safety_rope_connected、safety_rope_unconnected、safety_rope_without、safety_rope_agnostic。",
+  "success": true
+}

@@ -1,0 +1,68 @@
+# Python cache/build artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+build/
+dist/
+*.egg-info/
+
+# Local editor and runtime state
+.vscode/
+.idea/
+.codex/
+
+# Keep project env/config files uploadable by request.
+!.env
+!.env.example
+.env.local
+.env.*.local
+
+# Local Python environments and package caches
+.venv/
+venv/
+env/
+.conda/
+.cache/
+
+# Model artifacts and checkpoints
+models/
+model/
+checkpoints/
+weights/
+*.bin
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.onnx
+*.gguf
+
+# Runtime data, generated indexes, and corpora
+data/
+data_source/*
+!data_source/README.md
+*.sqlite
+*.sqlite3
+*.sqlite3-*
+*.db
+*.db-*
+*.jsonl
+*.csv
+*.xlsx
+*.xls
+*.pdf
+*.doc
+*.docx
+
+# Logs, reports, and run outputs
+logs/
+run/
+reports/
+outputs/
+results/
+tmp/
+temp/
+*.log
+*.pid
