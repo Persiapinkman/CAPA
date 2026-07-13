@@ -1,13 +1,17 @@
 # Active Experiment Pointers
 
-This directory is the lightweight entry point for the current CAPA training state. It contains metadata and symlinks only; no large checkpoint files are stored here.
+This directory contains lightweight pointers only. The authoritative run history is `experiments/registry.jsonl`; the current human-readable status is generated at `reports/CURRENT.md`.
 
-Current truth:
+## Current Qwen2.5 Line
 
-- No full-parameter GRPO/FSDP training process is active.
-- Best full-parameter GRPO checkpoint: `best_fullparam_checkpoint` -> `outputs/planner-grpo-qwen35-4b-focused-full-fsdp-long-20260708-recovery-v5/checkpoint-2`.
-- Best LoRA GRPO checkpoint: `best_lora_checkpoint` -> `outputs/planner-grpo-qwen35-4b-focused-lora/checkpoint-50`.
-- Latest full-parameter run metadata: `latest_fullparam_run`.
-- Machine-readable summary: `current_grpo_status.json`.
+- `best_candidate`: Qwen2.5-7B base model used with native ChatML, the minimal configuration supported by the completed development study.
+- `best_lora_checkpoint`: GRPOv4 diagnostic adapter; its incremental routing benefit is inconclusive.
+- `sft_initializer`: SFTv3 ChatML initializer and direct comparison baseline.
+- `current_grpo_status.json`: machine-readable current state and next decision.
 
-Use `experiments/runs/2026-07-08_4b_fullparam_grpo_fsdp_RECOVERY_CHAIN.md` for the v0-v5 failure/recovery timeline.
+## Legacy Qwen3.5 Pointers
+
+- `legacy_qwen35_missing_artifact.json`: audit record for the historical full-parameter pointer whose checkpoint is no longer present.
+- `legacy_qwen35_latest_fullparam_run`
+
+Legacy pointers are retained for auditability but are not the active research candidate.

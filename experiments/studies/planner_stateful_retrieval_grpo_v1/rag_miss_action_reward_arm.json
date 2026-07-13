@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_stateful_retrieval_grpo_v1",
+  "arm_id": "rag_miss_action_reward_v1",
+  "status": "completed_development_gate_failed_no_policy_shift",
+  "rationale": "The dense-reward state-machine arm increased sampled verifier reward from 0.8325 to 0.8400 while strict sampled actions decreased from 147/192 to 146/192 and greedy output was unchanged. This arm changes the optimization target rather than adding more steps to a misaligned reward.",
+  "initializer": "fixed_sft_v3_chatml",
+  "training_view": {
+    "dataset_id": "planner_rag_miss_action_reward_v1",
+    "source_dataset_id": "planner_stateful_retrieval_v1",
+    "rows": 240,
+    "selection_weights_inherited_from": "planner_rag_miss_state_machine_v1"
+  },
+  "reward": {
+    "task_components": {
+      "json_valid": 0.02,
+      "decision_type_valid": 0.03,
+      "action_match": 0.75,
+      "argument_match": 0.10,
+      "finish_after_tool": 0.05,
+      "no_forbidden_action": 0.05
+    },
+    "wrong_action_task_cap": 0.20,
+    "outer_task_weight": 0.95,
+    "outer_format_weight": 0.05,
+    "maximum_total_reward_for_wrong_action": 0.24
+  },
+  "training": {
+    "screen_seed": 42,
+    "max_steps": 40,
+    "learning_rate": 2e-6,
+    "num_generations": 8,
+    "temperature": 0.7,
+    "global_effective_batch_size": 16,
+    "loss_type": "dr_grpo",
+    "beta": 0.0
+  },
+  "development_gate": {
+    "split": "dev",
+    "primary_category": "rag_miss_rewrite_then_rag",
+    "minimum_primary_category_delta": 0.03,
+    "minimum_primary_action_match_delta": 0.10,
+    "guardrail_categories": [
+      "direct_rag_guardrail",
+      "general_answer_guardrail",
+      "memory_hit_end"
+    ],
+    "maximum_guardrail_regression": 0.02,
+    "anti_shortcut_category": "coref_rewrite_then_rag",
+    "maximum_anti_shortcut_regression": 0.05
+  },
+  "confirmation": {
+    "trigger": "Run only if the seed-42 development gate passes.",
+    "additional_training_seeds": [43, 44],
+    "locked_max_steps": 40,
+    "test_status": "sealed_until_seed42_gate_and_seed43_seed44_training_complete",
+    "primary_test_endpoint": "rag_miss_rewrite_then_rag strict action match across all three steps",
+    "bootstrap_cluster": "entity_id",
+    "bootstrap_samples": 20000
+  },
+  "claim_boundary": "A passing result supports action-dominant GRPO for this mocked RAG-miss state machine only.",
+  "result": {
+    "training_run_id": "20260712_rag_miss_action_reward_v1_grpo40_seed42_train",
+    "development_run_id": "20260712_rag_miss_action_reward_v1_grpo40_seed42_dev",
+    "gate_passed": false,
+    "primary_category_delta": 0.0,
+    "primary_action_match_delta": 0.0,
+    "overall_case_macro_delta": 0.003260869565217392,
+    "overall_case_macro_ci95": [0.0, 0.009782608695652176],
+    "sampled_correct_actions": {
+      "sft_v3": "147/192",
+      "dense_reward_grpo40": "146/192",
+      "action_reward_grpo40": "147/192"
+    },
+    "diagnosis": "The corrected reward removed misalignment but the 40-step 2e-6 LoRA dose did not shift held-out action probabilities. Confirmation seeds were not run."
+  }
+}

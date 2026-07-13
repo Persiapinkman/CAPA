@@ -1,0 +1,12 @@
+{
+  "run_id": "20260712_qwen25_grpov4_chatml_dev3x",
+  "study_id": "planner_chatml_training_effect_v1",
+  "model_label": "grpo_v4_chatml",
+  "model_name_or_path": "/raid/zkq/artifacts/CAPA/outputs/merged-qwen25-7b-sft-v3-chatml",
+  "adapter_path": "/raid/zkq/projects/CAPA/outputs/planner-grpo-qwen25-7b-trl-lora-v4-chatml-format-formal-v1",
+  "prompt_format": "qwen_chatml",
+  "eval_file": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/sft_data_v3_chatml/val.jsonl",
+  "repeats": 3,
+  "seed": 42,
+  "limit": 0
+}

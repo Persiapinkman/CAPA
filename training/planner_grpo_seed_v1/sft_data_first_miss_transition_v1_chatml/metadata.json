@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "planner_first_miss_transition_v1",
+  "source_dataset_id": "planner_stateful_retrieval_v2",
+  "source": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/sft_data_stateful_retrieval_v2_chatml/train.jsonl",
+  "source_sha256": "38ff8fd6cc6326e28a50276589f6251663bf2700576ef56a762658cfa62e45a9",
+  "output": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/sft_data_first_miss_transition_v1_chatml/train.jsonl",
+  "output_sha256": "48ec6df60d3d402c266baf913fb0e8c2f7512ef6e843abfda65bb35e7dc65823",
+  "rows": 1584,
+  "unique_source_rows": 1080,
+  "entities": 72,
+  "default_weight": 1,
+  "selection_weights": {
+    "rag_double_miss_recovery#step1": 2,
+    "rag_double_miss_recovery#step2": 4,
+    "rag_single_miss_recovery#step2": 4
+  },
+  "weighted_category_steps": {
+    "coref_rewrite_then_rag#step1": 72,
+    "coref_rewrite_then_rag#step2": 72,
+    "direct_rag_guardrail#step1": 72,
+    "general_answer_guardrail#step1": 72,
+    "memory_hit_end_guardrail#step1": 72,
+    "rag_double_miss_recovery#step1": 144,
+    "rag_double_miss_recovery#step2": 288,
+    "rag_double_miss_recovery#step3": 72,
+    "rag_double_miss_recovery#step4": 72,
+    "rag_double_miss_recovery#step5": 72,
+    "rag_hit_then_synthesize#step1": 72,
+    "rag_hit_then_synthesize#step2": 72,
+    "rag_single_miss_recovery#step1": 72,
+    "rag_single_miss_recovery#step2": 288,
+    "rag_single_miss_recovery#step3": 72
+  }
+}

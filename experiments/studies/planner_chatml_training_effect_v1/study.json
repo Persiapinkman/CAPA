@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_chatml_training_effect_v1",
+  "title": "Qwen2.5 Planner ChatML, SFT, and GRPO effect decomposition",
+  "research_question": "Which part of the current Qwen2.5 pipeline causes the observed routing and stopping behavior: native ChatML formatting, SFT warmup, or GRPO?",
+  "hypotheses": {
+    "H1": "Changing the untrained base model from pseudo chat tags to native ChatML reduces tail generation and may change routing score.",
+    "H2": "SFTv3 improves case-level routing beyond an untrained base model evaluated with the same ChatML prompt.",
+    "H3": "GRPOv4 improves case-level routing beyond SFTv3 with the same ChatML prompt."
+  },
+  "dataset_id": "planner_focused_v3",
+  "split": "dev",
+  "experimental_unit": "case_id",
+  "arms": ["base_pseudo", "base_chatml", "sft_v3_chatml", "grpo_v4_chatml"],
+  "primary_metric": "case_macro_mean_verifier_score",
+  "secondary_metrics": [
+    "step_mean_verifier_score",
+    "category_macro_mean_verifier_score",
+    "exact_pass_rate",
+    "json_valid_rate",
+    "extra_text_after_json_rate"
+  ],
+  "analysis": {
+    "paired": true,
+    "bootstrap_cluster": "case_id",
+    "bootstrap_samples": 20000,
+    "confidence_level": 0.95
+  },
+  "claim_boundary": "Development-set causal diagnostic only; no final generalization claim."
+}

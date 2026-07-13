@@ -1,0 +1,490 @@
+{
+  "schema_version": "2.0",
+  "run_id": "20260712_complex_v2_sftv3_test_shard1",
+  "study_id": "planner_complex_retrieval_grpo_v2",
+  "date": "2026-07-12",
+  "kind": "eval_generation_repeated",
+  "status": "completed",
+  "purpose": "Evaluate one contiguous shard of the sealed test confirmation for sftv3.",
+  "hypothesis": "The preregistered three-seed mean policy will retain positive double-miss action and verifier effects on unseen test entities.",
+  "parent_run_id": "20260712_complex_v2_sftv3_dev",
+  "provenance": {
+    "git_commit": "c9e6ba7dc341fa3dbd9fee968ec494d9ec340728",
+    "git_dirty": true,
+    "command": "/raid/zkq/projects/CAPA/.venv-trl-grpo-cu124/bin/python pipelines/eval/run_generation_eval.py --run-id 20260712_complex_v2_sftv3_test_shard1 --study-id planner_complex_retrieval_grpo_v2 --purpose 'Evaluate one contiguous shard of the sealed test confirmation for sftv3.' --hypothesis 'The preregistered three-seed mean policy will retain positive double-miss action and verifier effects on unseen test entities.' --parent-run-id 20260712_complex_v2_sftv3_dev --model-label complex_v2_sftv3 --model-name-or-path outputs/merged-qwen25-7b-sft-v3-chatml --prompt-format qwen_chatml --dataset-id planner_stateful_retrieval_v2 --split test --eval-file training/planner_grpo_seed_v1/sft_data_stateful_retrieval_v2_chatml/test.jsonl --run-dir experiments/runs/20260712_complex_v2_sftv3_test_shard1 --artifact-dir /raid/zkq/artifacts/CAPA/evaluations/20260712_complex_v2_sftv3_test_shard1 --offset 240 --limit 240 --repeats 1 --batch-size 2 --max-new-tokens 128 --seed 42",
+    "seed": 42,
+    "started_at": "2026-07-12T23:29:52.452808+00:00",
+    "finished_at": "2026-07-12T23:43:57.692105+00:00",
+    "environment": {
+      "python": "3.10.12",
+      "torch": "2.6.0+cu124",
+      "transformers": "4.57.6",
+      "trl": "1.8.0",
+      "peft": "0.19.1",
+      "datasets": "5.0.0",
+      "accelerate": "1.14.0",
+      "cuda_visible_devices": "1",
+      "gpu": "Tesla V100-SXM2-32GB",
+      "dtype": "float16",
+      "attention": "sdpa"
+    }
+  },
+  "data": {
+    "dataset_id": "planner_stateful_retrieval_v2",
+    "split": "test",
+    "files": {
+      "eval": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/sft_data_stateful_retrieval_v2_chatml/test.jsonl"
+    },
+    "sha256": {
+      "eval": "8c52e0247eac75f4d6871f4b3a34f5e9760f62cb874e2b0c2ab25df9356f771d"
+    },
+    "rows": 240,
+    "offset": 240,
+    "total_source_rows": 480
+  },
+  "method": {
+    "model_label": "complex_v2_sftv3",
+    "model": "/raid/zkq/artifacts/CAPA/outputs/merged-qwen25-7b-sft-v3-chatml",
+    "adapter_path": "",
+    "prompt_format": "qwen_chatml",
+    "generation": {
+      "temperature": 0.0,
+      "top_p": 1.0,
+      "do_sample": false,
+      "max_new_tokens": 128,
+      "batch_size": 2,
+      "repeats": 1,
+      "score_first_json_only": true
+    }
+  },
+  "metrics": {
+    "primary": {
+      "name": "step_mean_verifier_score",
+      "value": 0.7492291666666658,
+      "higher_is_better": true
+    },
+    "aggregate": {
+      "repeat_count": 1,
+      "overall": {
+        "mean_score": {
+          "mean": 0.7492291666666658,
+          "stdev": 0.0,
+          "min": 0.7492291666666658,
+          "max": 0.7492291666666658
+        },
+        "action_match_rate": {
+          "mean": 0.7291666666666666,
+          "stdev": 0.0,
+          "min": 0.7291666666666666,
+          "max": 0.7291666666666666
+        },
+        "json_valid_rate": {
+          "mean": 0.9916666666666667,
+          "stdev": 0.0,
+          "min": 0.9916666666666667,
+          "max": 0.9916666666666667
+        },
+        "extra_text_after_json_rate": {
+          "mean": 0.0125,
+          "stdev": 0.0,
+          "min": 0.0125,
+          "max": 0.0125
+        },
+        "mean_extra_text_chars": {
+          "mean": 2.7666666666666666,
+          "stdev": 0.0,
+          "min": 2.7666666666666666,
+          "max": 2.7666666666666666
+        },
+        "effective_json_valid_rate": {
+          "mean": 0.9916666666666667,
+          "stdev": 0.0,
+          "min": 0.9916666666666667,
+          "max": 0.9916666666666667
+        },
+        "effective_extra_text_after_json_rate": {
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "effective_mean_extra_text_chars": {
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        }
+      },
+      "categories": {
+        "coref_rewrite_then_rag": {
+          "mean_score": {
+            "mean": 0.6109374999999998,
+            "stdev": 0.0,
+            "min": 0.6109374999999998,
+            "max": 0.6109374999999998
+          },
+          "action_match_rate": {
+            "mean": 0.59375,
+            "stdev": 0.0,
+            "min": 0.59375,
+            "max": 0.59375
+          },
+          "json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "effective_extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "direct_rag_guardrail": {
+          "mean_score": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "action_match_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "effective_extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "general_answer_guardrail": {
+          "mean_score": {
+            "mean": 0.365625,
+            "stdev": 0.0,
+            "min": 0.365625,
+            "max": 0.365625
+          },
+          "action_match_rate": {
+            "mean": 0.3125,
+            "stdev": 0.0,
+            "min": 0.3125,
+            "max": 0.3125
+          },
+          "json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "effective_extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "memory_hit_end_guardrail": {
+          "mean_score": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "action_match_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "effective_extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "rag_double_miss_recovery": {
+          "mean_score": {
+            "mean": 0.7191875000000002,
+            "stdev": 0.0,
+            "min": 0.7191875000000002,
+            "max": 0.7191875000000002
+          },
+          "action_match_rate": {
+            "mean": 0.675,
+            "stdev": 0.0,
+            "min": 0.675,
+            "max": 0.675
+          },
+          "json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "extra_text_after_json_rate": {
+            "mean": 0.0125,
+            "stdev": 0.0,
+            "min": 0.0125,
+            "max": 0.0125
+          },
+          "mean_extra_text_chars": {
+            "mean": 0.2375,
+            "stdev": 0.0,
+            "min": 0.2375,
+            "max": 0.2375
+          },
+          "effective_json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "effective_extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "rag_hit_then_synthesize": {
+          "mean_score": {
+            "mean": 0.9365624999999999,
+            "stdev": 0.0,
+            "min": 0.9365624999999999,
+            "max": 0.9365624999999999
+          },
+          "action_match_rate": {
+            "mean": 0.96875,
+            "stdev": 0.0,
+            "min": 0.96875,
+            "max": 0.96875
+          },
+          "json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "effective_extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "rag_single_miss_recovery": {
+          "mean_score": {
+            "mean": 0.7272916666666668,
+            "stdev": 0.0,
+            "min": 0.7272916666666668,
+            "max": 0.7272916666666668
+          },
+          "action_match_rate": {
+            "mean": 0.7083333333333334,
+            "stdev": 0.0,
+            "min": 0.7083333333333334,
+            "max": 0.7083333333333334
+          },
+          "json_valid_rate": {
+            "mean": 0.9583333333333334,
+            "stdev": 0.0,
+            "min": 0.9583333333333334,
+            "max": 0.9583333333333334
+          },
+          "extra_text_after_json_rate": {
+            "mean": 0.041666666666666664,
+            "stdev": 0.0,
+            "min": 0.041666666666666664,
+            "max": 0.041666666666666664
+          },
+          "mean_extra_text_chars": {
+            "mean": 13.4375,
+            "stdev": 0.0,
+            "min": 13.4375,
+            "max": 13.4375
+          },
+          "effective_json_valid_rate": {
+            "mean": 0.9583333333333334,
+            "stdev": 0.0,
+            "min": 0.9583333333333334,
+            "max": 0.9583333333333334
+          },
+          "effective_extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        }
+      },
+      "determinism": {
+        "rows_compared": 240,
+        "identical_score_and_completion_rows": 240,
+        "agreement_rate": 1.0
+      },
+      "runtime_seconds": 845.1469686189666,
+      "peak_gpu_memory_gb": 22.939324378967285
+    }
+  },
+  "artifacts": {
+    "run_dir": "/raid/zkq/projects/CAPA/experiments/runs/20260712_complex_v2_sftv3_test_shard1",
+    "metrics": "/raid/zkq/projects/CAPA/experiments/runs/20260712_complex_v2_sftv3_test_shard1/metrics.json",
+    "predictions": [
+      "/raid/zkq/artifacts/CAPA/evaluations/20260712_complex_v2_sftv3_test_shard1/predictions_run1.jsonl"
+    ]
+  },
+  "decision": {
+    "outcome": "pending_comparison",
+    "rationale": "Run completed; paired study comparison has not yet been applied."
+  }
+}

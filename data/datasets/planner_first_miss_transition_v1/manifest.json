@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "planner_first_miss_transition_v1",
+  "role": "weighted_grpo_training_view",
+  "source_dataset_id": "planner_stateful_retrieval_v2",
+  "experimental_unit": "source_case_id",
+  "bootstrap_cluster": "entity_id",
+  "stats": {
+    "weighted_rows": 1584,
+    "unique_source_rows": 1080,
+    "entity_groups": 72
+  },
+  "files": {
+    "source": "training/planner_grpo_seed_v1/sft_data_stateful_retrieval_v2_chatml/train.jsonl",
+    "train": "training/planner_grpo_seed_v1/sft_data_first_miss_transition_v1_chatml/train.jsonl",
+    "metadata": "training/planner_grpo_seed_v1/sft_data_first_miss_transition_v1_chatml/metadata.json",
+    "development_eval": "training/planner_grpo_seed_v1/sft_data_stateful_retrieval_v2_chatml/dev.jsonl",
+    "sealed_test_eval": "training/planner_grpo_seed_v1/sft_data_stateful_retrieval_v2_chatml/test.jsonl"
+  },
+  "sha256": {
+    "source": "38ff8fd6cc6326e28a50276589f6251663bf2700576ef56a762658cfa62e45a9",
+    "train": "48ec6df60d3d402c266baf913fb0e8c2f7512ef6e843abfda65bb35e7dc65823"
+  },
+  "selection_weights": {
+    "default": 1,
+    "rag_double_miss_recovery#step1": 2,
+    "rag_double_miss_recovery#step2": 4,
+    "rag_single_miss_recovery#step2": 4
+  },
+  "integrity": {
+    "status": "weighted_view_all_source_rows_preserved",
+    "sampling_replicas_are_not_independent_units": true,
+    "development_is_unweighted": true,
+    "test_status": "sealed"
+  }
+}

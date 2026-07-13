@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_stateful_retrieval_grpo_v1",
+  "arm_id": "rag_miss_state_machine_v1",
+  "comparison": "reports/planner_rag_miss_state_machine_v1_dev_seed42.json",
+  "baseline": "sft_v3",
+  "candidate": "ragmiss42",
+  "passed": false,
+  "primary": {
+    "category": "rag_miss_rewrite_then_rag",
+    "category_delta": 0.0,
+    "minimum_category_delta": 0.05,
+    "category_passed": false,
+    "action_scope": "category_all_steps",
+    "step": null,
+    "action_match_delta": 0.0,
+    "minimum_action_match_delta": 0.1,
+    "action_passed": false
+  },
+  "guardrails": {
+    "category_deltas": {
+      "direct_rag_guardrail": 0.0,
+      "general_answer_guardrail": 0.0,
+      "memory_hit_end": 0.0
+    },
+    "maximum_regression": 0.02,
+    "passed": true
+  },
+  "anti_shortcut": {
+    "category": "coref_rewrite_then_rag",
+    "delta": 0.0,
+    "maximum_regression": 0.05,
+    "passed": true
+  }
+}

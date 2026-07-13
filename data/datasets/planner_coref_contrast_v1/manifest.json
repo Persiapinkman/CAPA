@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "planner_coref_contrast_v1",
+  "role": "conditional_weighted_training_view",
+  "source_dataset_id": "planner_stateful_retrieval_v1",
+  "source_split": "train",
+  "experimental_unit": "source_case_id",
+  "bootstrap_cluster": "entity_id",
+  "stats": {
+    "cases": 120,
+    "steps": 192,
+    "entity_groups": 24
+  },
+  "files": {
+    "source": "training/planner_grpo_seed_v1/sft_data_stateful_retrieval_v1_chatml/train.jsonl",
+    "train": "training/planner_grpo_seed_v1/sft_data_coref_contrast_v1_chatml/train.jsonl",
+    "metadata": "training/planner_grpo_seed_v1/sft_data_coref_contrast_v1_chatml/metadata.json",
+    "development_eval": "training/planner_grpo_seed_v1/sft_data_stateful_retrieval_v1_chatml/dev.jsonl",
+    "sealed_test_eval": "training/planner_grpo_seed_v1/sft_data_stateful_retrieval_v1_chatml/test.jsonl"
+  },
+  "sha256": {
+    "source": "810d6914a42efbd5ec18a98a46d43202eeba1afad7429cb570fce52133f1c32a",
+    "train": "f2fff0f7f6f744d19e102e3de2a4b9adb7e41655ddf4be8e5e3758e186592679"
+  },
+  "counts": {
+    "weighted_rows": 192,
+    "unique_source_rows": 120,
+    "entity_groups": 24,
+    "coreference_target_rows": 96,
+    "contrast_rows": 96
+  },
+  "integrity": {
+    "status": "conditional_weighted_view_with_inherited_split_isolation",
+    "evaluation_split_inherited_from": "planner_stateful_retrieval_v1",
+    "test_status": "sealed_until_arm_and_training_seeds_are_locked",
+    "sampling_replicas_are_not_independent_units": true
+  }
+}

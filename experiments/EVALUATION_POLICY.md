@@ -1,94 +1,64 @@
-# Evaluation Policy
+# CAPA Planner Evaluation Policy
 
-This file defines the required protocol for Planner routing evals after 2026-07-06.
+## Evidence Tiers
 
-## Serving
+| Tier | Purpose | Allowed claim |
+|---|---|---|
+| smoke | Verify code, model loading, schema, and artifact writing | runnable only |
+| development | Compare prompts, rewards, checkpoints, and error slices | development evidence |
+| sealed test | Evaluate a frozen model once on an untouched, versioned test set | generalization evidence |
+| end-to-end | Execute real tools, observations, retries, and completion | system-level evidence |
 
-- Use vLLM OpenAI-compatible serving for all formal evals.
-- Put `AI Model Gateway 0.1.0` in front of vLLM when the client may send OpenAI multimodal content lists.
-- Do not report new formal results from the lightweight `demo/deploy_qwen_server.py` transformers server.
+The current `planner_focused_v3` dev split is development-only because it has already influenced model selection.
 
-Recommended serving entry:
+## Generation Protocol
 
-```bash
-MODEL_DIR=/mnt/zkq/models/Qwen3.5-4B-vllm \
-SERVED_MODEL_NAME=qwen3.5-4b \
-CUDA_VISIBLE_DEVICES=3 \
-GATEWAY_PORT=8003 \
-VLLM_PORT=8013 \
-DEFAULT_TEMPERATURE=0 \
-DEFAULT_TOP_P=1 \
-DEFAULT_SEED=42 \
-bash scripts/run_qwen35_4b_vllm_gateway.sh
-```
-
-LoRA adapter evals must also use vLLM LoRA serving, for example:
-
-```bash
-MODEL_DIR=/mnt/zkq/models/Qwen3.5-4B-vllm \
-SERVED_MODEL_NAME=qwen35-4b-newarch-dpo \
-LORA_MODULES=qwen35-4b-newarch-dpo=outputs/planner-dpo-qwen35-4b-newarch-lora \
-CUDA_VISIBLE_DEVICES=3 \
-GATEWAY_PORT=8003 \
-VLLM_PORT=8013 \
-DEFAULT_TEMPERATURE=0 \
-DEFAULT_TOP_P=1 \
-DEFAULT_SEED=42 \
-bash scripts/run_qwen35_4b_vllm_gateway.sh
-```
-
-## Generation
-
-Formal evals must use deterministic generation:
+Development and sealed deterministic evaluations must use:
 
 - `temperature=0`
 - `top_p=1`
 - `do_sample=false`
-- `seed=42`
+- seed recorded in the run provenance
+- three repeats with mean, standard deviation, and output agreement
+- raw completions preserved outside Git
 
-`do_sample` is not an OpenAI standard field. The local gateway accepts `do_sample=false`, enforces greedy decoding via `temperature=0`, then removes `do_sample` before forwarding to vLLM.
+Local Transformers evaluation is allowed for the V100 research line. Deployment qualification must use the actual serving stack, including vLLM or the configured gateway.
 
-## Repeats
+## Experimental Unit and Metrics
 
-Every formal eval must run 3 repeats and report the aggregate mean/stdev.
+The primary experimental unit is `case_id`, not step. Required outputs are:
 
-Recommended eval entry:
+- case-macro verifier score with a paired case-clustered confidence interval
+- category-macro score and per-category counts
+- step-weighted score as a secondary diagnostic
+- exact pass rate
+- action and parameter accuracy when available
+- JSON-valid and exact-stop/tail-text rates
+- multi-step pass-all rate
+- latency, token use, runtime, and peak memory where measurable
 
-```bash
-MODEL=qwen3.5-4b \
-API_BASE=http://127.0.0.1:8003/v1 \
-REPORT_PREFIX=qwen35_4b_vllm_base_zip90 \
-bash scripts/run_vllm_repro_eval_3x.sh
-```
+Training-method claims require at least three independent training seeds. Three deterministic inference repeats do not replace training-seed replication.
 
-The aggregate report is written to:
+## Required Artifacts
 
-```text
-results/planner_routing_eval/<REPORT_PREFIX>_aggregate.json
-```
+Every non-smoke run must write:
 
-Individual repeat reports are written to:
+- `config.json`
+- `run_record.json`
+- `metrics.json`
+- per-repeat summaries
+- full prediction URIs in the external artifact store
+- dataset ID, split, SHA256, git commit/dirty state, command, seed, and environment
+- a final `promote`, `reject`, `baseline`, or `inconclusive` decision with rationale
 
-```text
-results/planner_routing_eval/<REPORT_PREFIX>_run1.json
-results/planner_routing_eval/<REPORT_PREFIX>_run2.json
-results/planner_routing_eval/<REPORT_PREFIX>_run3.json
-```
+Runs are appended to `experiments/registry.jsonl`. `reports/CURRENT.md` and `reports/leaderboard.csv` are generated from the registry.
 
-Single-step repeated evals must also write per-case CSV audit artifacts:
+## Claim Gates
 
-```text
-results/planner_routing_eval/<REPORT_PREFIX>_case_audit.csv
-results/planner_routing_eval/<REPORT_PREFIX>_failed_cases.csv
-```
+Do not claim improvement from a single weighted mean. A method-level promotion requires all of the following:
 
-`case_audit.csv` is one row per case, including query, expected routing constraints, per-repeat action/action_input, failure reason, timing, and token usage. `failed_cases.csv` is the filtered view for cases where at least one repeat failed.
-
-## Timing
-
-`run_planner_routing_eval.py` schema `1.1` records:
-
-- per case: `started_at`, `finished_at`, `elapsed_ms`
-- summary: total elapsed time, case total/average/min/max elapsed time
-
-Older imported reports have `elapsed_ms=null` and `summary.timing.source=historical_import_no_eval_timing`.
+- case-macro 95% interval excludes zero in the favorable direction
+- no critical category regresses beyond its predefined tolerance
+- JSON and stopping behavior remain within acceptance thresholds
+- the result replicates across training seeds
+- the sealed test was not used for prompt, reward, checkpoint, or threshold selection

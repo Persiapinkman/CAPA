@@ -115,8 +115,8 @@ def text_contains_any(actual: Any, tokens: list[Any]) -> bool:
 
 
 def get_arg(decision: dict[str, Any], key: str) -> Any:
-    if key == "clarification_question":
-        return decision.get("clarification_question")
+    if key in {"clarification_question", "end_reason", "final_answer"}:
+        return decision.get(key)
     action_input = decision.get("action_input") if isinstance(decision.get("action_input"), dict) else {}
     return action_input.get(key)
 
@@ -147,9 +147,12 @@ def score_expected_step(
     else:
         failures.append(f"decision_type expected {expected_decision_type!r}, got {actual_decision_type!r}")
 
-    expected_action = normalize_action(str(expected.get("action") or ""))
-    if expected_decision_type == "clarify":
-        actual_action = "clarify" if actual_decision_type == "clarify" else normalize_action(str(actual.get("action") or ""))
+    if expected_decision_type in {"clarify", "end"}:
+        expected_action = expected_decision_type
+    else:
+        expected_action = normalize_action(str(expected.get("action") or ""))
+    if actual_decision_type in {"clarify", "end"}:
+        actual_action = actual_decision_type
     else:
         actual_action = normalize_action(str(actual.get("action") or ""))
     accepted_actions = ACTION_EQUIVALENTS.get(expected_action, {expected_action})
@@ -218,7 +221,7 @@ def detect_premature_stop(
     检查实际决策是否在到达该步之前就 end 或跳到 answerer/final_answer。
     这精确惩罚 probe -> migration 这类残余失败中"探针后立即收口"的偏置。
     """
-    for index, expected in enumerate(expected_list):
+    for index, expected in enumerate(expected_list[:-1]):
         expected_type = str(expected.get("decision_type") or "tool").strip()
         expected_action = normalize_action(str(expected.get("action") or ""))
         if expected_type != "tool" or expected_action in STOP_ACTIONS:
@@ -232,6 +235,8 @@ def detect_premature_stop(
         if actual_type == "end":
             return True
         if actual_action in STOP_ACTIONS:
+            return True
+        if value_matches(get_arg(actual, "finish_after_tool"), True):
             return True
     return False
 
@@ -249,8 +254,9 @@ def _decision_action(decision: dict[str, Any] | None) -> str:
 def _expected_action(expected: dict[str, Any] | None) -> str:
     if not isinstance(expected, dict):
         return ""
-    if str(expected.get("decision_type") or "tool").strip() == "clarify":
-        return "clarify"
+    decision_type = str(expected.get("decision_type") or "tool").strip()
+    if decision_type in {"clarify", "end"}:
+        return decision_type
     return normalize_action(str(expected.get("action") or ""))
 
 
@@ -341,6 +347,16 @@ def score_case(
                     }
                 )
                 continue
+            if decision_type == "end":
+                required_args = exp.get("required_args") if isinstance(exp.get("required_args"), dict) else {}
+                decisions.append(
+                    {
+                        "decision_type": "end",
+                        "end_reason": str(required_args.get("end_reason") or "memory_hit"),
+                        "final_answer": "",
+                    }
+                )
+                continue
             action_input = {}
             action_input.update(exp.get("required_args") if isinstance(exp.get("required_args"), dict) else {})
             for key, tokens in (exp.get("arg_contains") if isinstance(exp.get("arg_contains"), dict) else {}).items():
@@ -383,8 +399,9 @@ def score_case(
     forbidden = {normalize_action(str(x)) for x in case.get("forbidden_actions", []) if str(x).strip()}
     used_actions = []
     for decision in decisions:
-        if str(decision.get("decision_type") or "").strip() == "clarify":
-            used_actions.append("clarify")
+        decision_type = str(decision.get("decision_type") or "").strip()
+        if decision_type in {"clarify", "end"}:
+            used_actions.append(decision_type)
         else:
             used_actions.append(normalize_action(str(decision.get("action") or "")))
     forbidden_hit = sorted(action for action in used_actions if action in forbidden)

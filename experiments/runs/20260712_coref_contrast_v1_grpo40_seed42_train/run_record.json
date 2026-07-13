@@ -1,0 +1,138 @@
+{
+  "schema_version": "2.0",
+  "run_id": "20260712_coref_contrast_v1_grpo40_seed42_train",
+  "study_id": "planner_stateful_retrieval_grpo_v1",
+  "date": "2026-07-12",
+  "kind": "train_grpo_lora_checkpoint",
+  "status": "completed",
+  "purpose": "Screen the preregistered coreference-focused weighted GRPO arm after the mixed step-80 gate failed.",
+  "hypothesis": "Fourfold coreference-step exposure with anti-shortcut replay changes strict held-out coreference routing without guardrail regression.",
+  "parent_run_id": "20260712_stateful_v1_grpo80_seed42_dev",
+  "provenance": {
+    "git_commit": "c9e6ba7dc341fa3dbd9fee968ec494d9ec340728",
+    "command": "/raid/zkq/projects/CAPA/.venv-trl-grpo-cu124/bin/python training/planner_grpo_seed_v1/scripts/train_planner_grpo_trl.py --model-name-or-path outputs/merged-qwen25-7b-sft-v3-chatml --cases training/planner_grpo_seed_v1/cases/planner_stateful_retrieval_v1_train_cases.jsonl --step-data training/planner_grpo_seed_v1/sft_data_coref_contrast_v1_chatml/train.jsonl --output-dir outputs/planner-grpo-qwen25-7b-coref-contrast-v1-seed42 --prompt-format qwen_chatml --max-prompt-tokens 6144 --max-completion-length 128 --num-generations 8 --generation-batch-size 8 --temperature 0.7 --top-p 0.9 --learning-rate 2e-6 --max-steps 40 --per-device-train-batch-size 1 --gradient-accumulation-steps 2 --logging-steps 1 --save-steps 40 --save-total-limit 1 --seed 42 --fp16 true --bf16 false --gradient-checkpointing true --attn-implementation sdpa --use-lora true --lora-r 16 --lora-alpha 32 --lora-dropout 0.05 --lora-target-modules q_proj,k_proj,v_proj,o_proj --loss-type dr_grpo --beta 0.0 --score-first-json-only true --task-reward-weight 0.85 --format-reward-weight 0.15 --penalize-truncated-completions true --report-to none --run-name qwen25-coref-contrast-grpo-v1-seed42",
+    "seed": 42,
+    "environment": {
+      "python": "3.10.12",
+      "torch": "2.6.0+cu124",
+      "cuda": "12.4",
+      "gpu": "Tesla V100-SXM2-32GB",
+      "world_size": 8,
+      "precision": "fp16",
+      "attention": "sdpa"
+    },
+    "started_at": "2026-07-12T17:39:21.148686+00:00",
+    "finished_at": "2026-07-12T18:02:06.125155+00:00"
+  },
+  "data": {
+    "dataset_id": "planner_coref_contrast_v1",
+    "split": "train",
+    "files": {
+      "cases": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/cases/planner_stateful_retrieval_v1_train_cases.jsonl",
+      "steps": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/sft_data_coref_contrast_v1_chatml/train.jsonl"
+    },
+    "sha256": {
+      "cases": "ac552cd64790916ed22f57b9a276aecc3a632bfd7490c7d82bde597cf5ee7774",
+      "steps": "f2fff0f7f6f744d19e102e3de2a4b9adb7e41655ddf4be8e5e3758e186592679"
+    },
+    "rows": 192
+  },
+  "method": {
+    "model": "/raid/zkq/artifacts/CAPA/outputs/merged-qwen25-7b-sft-v3-chatml",
+    "adapter_path": "/raid/zkq/projects/CAPA/outputs/planner-grpo-qwen25-7b-coref-contrast-v1-seed42/checkpoint-40",
+    "training": {
+      "learning_rate": 2e-06,
+      "num_train_epochs": 1.0,
+      "max_steps": 40,
+      "per_device_train_batch_size": 1,
+      "gradient_accumulation_steps": 2,
+      "loss_type": "dr_grpo",
+      "beta": 0.0,
+      "precision": "fp16",
+      "attention_implementation": "sdpa"
+    },
+    "generation": {
+      "num_generations": 8,
+      "generation_batch_size": 8,
+      "max_completion_length": 128
+    },
+    "reward_weights": {
+      "task": 0.85,
+      "format": 0.15,
+      "tail_penalty_tokens": 64,
+      "prefix_penalty_tokens": 16,
+      "penalize_truncated_completions": true
+    },
+    "lora": {
+      "enabled": true,
+      "r": 16,
+      "alpha": 32,
+      "dropout": 0.05,
+      "target_modules": "q_proj,k_proj,v_proj,o_proj"
+    }
+  },
+  "metrics": {
+    "primary": {
+      "name": "train_reward_mean",
+      "value": 0.6639396008104086,
+      "higher_is_better": true
+    },
+    "train": {
+      "train_runtime": 1351.8437,
+      "train_samples_per_second": 0.473,
+      "train_steps_per_second": 0.03,
+      "total_flos": 0.0,
+      "train_loss": 0.006825410760939121,
+      "epoch": 0.4166666666666667
+    },
+    "log_summary": {
+      "logged_steps": 40,
+      "mean_reward": 0.6639396008104086,
+      "mean_reward_std": 0.05963139845989644,
+      "informative_reward_steps": 30,
+      "mean_frac_reward_zero_std": 0.5,
+      "mean_entropy": 0.09596706249285489,
+      "mean_completion_clipped_ratio": 0.0109375,
+      "max_completion_clipped_ratio": 0.25,
+      "clipped_generation_steps": 4,
+      "zero_gradient_steps": 10,
+      "final": {
+        "clip_ratio/high_max": 0.0,
+        "clip_ratio/high_mean": 0.0,
+        "clip_ratio/low_mean": 0.0,
+        "clip_ratio/low_min": 0.0,
+        "clip_ratio/region_mean": 0.0,
+        "completions/clipped_ratio": 0.0,
+        "completions/max_length": 82.5,
+        "completions/max_terminated_length": 82.5,
+        "completions/mean_length": 73.25,
+        "completions/mean_terminated_length": 73.25,
+        "completions/min_length": 60.5,
+        "completions/min_terminated_length": 60.5,
+        "entropy": 0.11560161039233208,
+        "epoch": 0.4166666666666667,
+        "frac_reward_zero_std": 0.5,
+        "grad_norm": 0.16863910853862762,
+        "learning_rate": 5e-08,
+        "loss": 0.0292,
+        "num_tokens": 2653904.0,
+        "reward": 0.935326099395752,
+        "reward_std": 0.06913932412862778,
+        "rewards/reward_func/mean": 0.935326099395752,
+        "rewards/reward_func/std": 0.06913932412862778,
+        "step": 40,
+        "step_time": 32.346566036809236
+      }
+    }
+  },
+  "artifacts": {
+    "output_dir": "/raid/zkq/projects/CAPA/outputs/planner-grpo-qwen25-7b-coref-contrast-v1-seed42",
+    "config": "/raid/zkq/projects/CAPA/outputs/planner-grpo-qwen25-7b-coref-contrast-v1-seed42/capa_trl_grpo_config.json",
+    "trainer_state": "/raid/zkq/projects/CAPA/outputs/planner-grpo-qwen25-7b-coref-contrast-v1-seed42/checkpoint-40/trainer_state.json",
+    "result": "/raid/zkq/projects/CAPA/outputs/planner-grpo-qwen25-7b-coref-contrast-v1-seed42/capa_trl_grpo_result.json"
+  },
+  "decision": {
+    "outcome": "pending_comparison",
+    "rationale": "Training completed; held-out development evaluation has not yet been applied."
+  }
+}

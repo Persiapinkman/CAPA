@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "planner_coref_contrast_v1",
+  "source": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/sft_data_stateful_retrieval_v1_chatml/train.jsonl",
+  "source_sha256": "810d6914a42efbd5ec18a98a46d43202eeba1afad7429cb570fce52133f1c32a",
+  "output": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/sft_data_coref_contrast_v1_chatml/train.jsonl",
+  "output_sha256": "f2fff0f7f6f744d19e102e3de2a4b9adb7e41655ddf4be8e5e3758e186592679",
+  "rows": 192,
+  "unique_source_rows": 120,
+  "entities": 24,
+  "selection_weights": {
+    "coref_rewrite_then_rag#step1": 4,
+    "rag_miss_rewrite_then_rag#step1": 1,
+    "direct_rag_guardrail#step1": 1,
+    "memory_hit_end#step1": 1,
+    "general_answer_guardrail#step1": 1
+  },
+  "weighted_categories": {
+    "coref_rewrite_then_rag": 96,
+    "direct_rag_guardrail": 24,
+    "general_answer_guardrail": 24,
+    "memory_hit_end": 24,
+    "rag_miss_rewrite_then_rag": 24
+  }
+}

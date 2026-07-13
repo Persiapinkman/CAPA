@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_stateful_retrieval_grpo_v1",
+  "arm_id": "rag_miss_state_machine_v1",
+  "status": "completed_development_gate_failed_reward_misaligned",
+  "rationale": "The mixed step-80 arm produced the only strict action improvement on rag_miss_rewrite_then_rag step 1 (2/8 to 3/8), while the coreference-focused arm had no strict target-action gain. This arm reinforces the complete retrieve-rewrite-retrieve state machine rather than a sparsely supported coreference action.",
+  "initializer": "fixed_sft_v3_chatml",
+  "result": {
+    "gate": "development_gate_rag_miss_state_machine_seed42.json",
+    "greedy_category_delta": 0.0,
+    "greedy_action_match_delta": 0.0,
+    "sampled_verifier_before": 0.8325457713319572,
+    "sampled_verifier_after": 0.8400174474811872,
+    "sampled_strict_actions_before": "147/192",
+    "sampled_strict_actions_after": "146/192",
+    "passed": false,
+    "confirmation_triggered": false
+  },
+  "training_view": {
+    "dataset_id": "planner_rag_miss_state_machine_v1",
+    "source_dataset_id": "planner_stateful_retrieval_v1",
+    "source_split": "train",
+    "rows": 240,
+    "selection_weights": {
+      "rag_miss_rewrite_then_rag#step1": 2,
+      "rag_miss_rewrite_then_rag#step2": 2,
+      "rag_miss_rewrite_then_rag#step3": 2,
+      "coref_rewrite_then_rag#step1": 1,
+      "direct_rag_guardrail#step1": 1,
+      "memory_hit_end#step1": 1,
+      "general_answer_guardrail#step1": 1
+    }
+  },
+  "training": {
+    "screen_seed": 42,
+    "max_steps": 40,
+    "learning_rate": 2e-6,
+    "num_generations": 8,
+    "temperature": 0.7,
+    "global_effective_batch_size": 16,
+    "loss_type": "dr_grpo",
+    "beta": 0.0
+  },
+  "development_gate": {
+    "split": "dev",
+    "primary_category": "rag_miss_rewrite_then_rag",
+    "minimum_primary_category_delta": 0.05,
+    "minimum_primary_action_match_delta": 0.10,
+    "guardrail_categories": [
+      "direct_rag_guardrail",
+      "general_answer_guardrail",
+      "memory_hit_end"
+    ],
+    "maximum_guardrail_regression": 0.02,
+    "anti_shortcut_category": "coref_rewrite_then_rag",
+    "maximum_anti_shortcut_regression": 0.05
+  },
+  "confirmation": {
+    "trigger": "Run only if the seed-42 development gate passes.",
+    "additional_training_seeds": [43, 44],
+    "locked_max_steps": 40,
+    "test_status": "sealed_until_seed42_gate_and_seed43_seed44_training_complete",
+    "primary_test_endpoint": "rag_miss_rewrite_then_rag strict action match across all three steps",
+    "bootstrap_cluster": "entity_id",
+    "bootstrap_samples": 20000
+  },
+  "claim_boundary": "A passing result supports GRPO growth for the mocked RAG-miss state machine only, not general Planner quality or end-to-end tool reliability."
+}

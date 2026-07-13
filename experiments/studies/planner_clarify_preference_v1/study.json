@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_clarify_preference_v1",
+  "status": "planned_waiting_for_new_data",
+  "research_question": "Can contrastive preference optimization improve ambiguous-intent clarification beyond a native-ChatML prompt-only baseline without regressing other routing categories?",
+  "prerequisites": [
+    "Create at least 200 human-reviewed preference cases with chosen clarify outputs and action-specific rejected outputs.",
+    "Group splits by ambiguity template family, entity, and image fixture.",
+    "Create a sealed test split that is not used for prompt or checkpoint selection.",
+    "Prohibit exact prompt/completion repetition as a substitute for data diversity."
+  ],
+  "planned_arms": [
+    "base_chatml_prompt_only",
+    "base_chatml_with_clarify_few_shot",
+    "clarify_dpo_lora"
+  ],
+  "training_seeds": [42, 43, 44],
+  "primary_metric": "clarify_case_accuracy",
+  "safety_metrics": [
+    "case_macro_routing_score",
+    "critical_category_regression",
+    "json_valid_rate",
+    "extra_text_after_json_rate"
+  ],
+  "promotion_gate": "Clarify accuracy improves with a case-clustered 95% interval above zero, and no critical category regresses by more than 0.02."
+}

@@ -1,0 +1,155 @@
+{
+  "runs": {
+    "base_pseudo": {
+      "steps": 49,
+      "cases": 31,
+      "step_mean": 0.845435809791897,
+      "case_macro_mean": 0.8471992690290799,
+      "category_macro_mean": 0.8357151409414341,
+      "exact_pass_rate": 0.5306122448979592,
+      "json_valid_rate": 1.0,
+      "extra_text_rate": 1.0,
+      "categories": {
+        "clarify_intent_ambiguity": 0.1,
+        "full_detection_eval": 1.0,
+        "general_answer": 0.9,
+        "historical_asset_qa": 1.0,
+        "probe_only_contrastive": 1.0,
+        "probe_then_migration": 0.8414750957854407,
+        "probe_then_migration_strict": 0.8442460317460317,
+        "single_image_probe": 1.0
+      }
+    },
+    "base_chatml": {
+      "steps": 49,
+      "cases": 31,
+      "step_mean": 0.8544753862135988,
+      "case_macro_mean": 0.8543434503946183,
+      "category_macro_mean": 0.8399570675971538,
+      "exact_pass_rate": 0.5102040816326531,
+      "json_valid_rate": 1.0,
+      "extra_text_rate": 0.0,
+      "categories": {
+        "clarify_intent_ambiguity": 0.1,
+        "full_detection_eval": 1.0,
+        "general_answer": 0.9,
+        "historical_asset_qa": 1.0,
+        "probe_only_contrastive": 1.0,
+        "probe_then_migration": 0.8444512862616311,
+        "probe_then_migration_strict": 0.8752052545155994,
+        "single_image_probe": 1.0
+      }
+    },
+    "sft_v3_chatml": {
+      "steps": 49,
+      "cases": 31,
+      "step_mean": 0.8563771321336416,
+      "case_macro_mean": 0.855846443137878,
+      "category_macro_mean": 0.8404424090038314,
+      "exact_pass_rate": 0.42857142857142855,
+      "json_valid_rate": 1.0,
+      "extra_text_rate": 0.0,
+      "categories": {
+        "clarify_intent_ambiguity": 0.1,
+        "full_detection_eval": 1.0,
+        "general_answer": 0.9,
+        "historical_asset_qa": 1.0,
+        "probe_only_contrastive": 1.0,
+        "probe_then_migration": 0.848334017515052,
+        "probe_then_migration_strict": 0.8752052545155994,
+        "single_image_probe": 1.0
+      }
+    },
+    "grpo_v4_chatml": {
+      "steps": 49,
+      "cases": 31,
+      "step_mean": 0.8597198485305453,
+      "case_macro_mean": 0.8544560093225276,
+      "category_macro_mean": 0.8117067768199234,
+      "exact_pass_rate": 0.5306122448979592,
+      "json_valid_rate": 1.0,
+      "extra_text_rate": 0.0,
+      "categories": {
+        "clarify_intent_ambiguity": 0.1,
+        "full_detection_eval": 0.75,
+        "general_answer": 0.9,
+        "historical_asset_qa": 1.0,
+        "probe_only_contrastive": 1.0,
+        "probe_then_migration": 0.862701833607006,
+        "probe_then_migration_strict": 0.8809523809523809,
+        "single_image_probe": 1.0
+      }
+    }
+  },
+  "comparisons": {
+    "base_pseudo_to_base_chatml": {
+      "steps": 49,
+      "cases": 31,
+      "step_weighted_delta": 0.009039576421701693,
+      "step_weighted_ci95": [
+        -0.018333333333333326,
+        0.03805570759593749
+      ],
+      "case_macro_delta": 0.007144181365538435,
+      "case_macro_ci95": [
+        -0.014745219556120553,
+        0.03026510938079348
+      ],
+      "improved_steps": 3,
+      "unchanged_steps": 41,
+      "regressed_steps": 5,
+      "conclusion": "inconclusive",
+      "bootstrap": {
+        "cluster": "case_id",
+        "samples": 20000,
+        "seed": 42
+      }
+    },
+    "base_chatml_to_sft_v3_chatml": {
+      "steps": 49,
+      "cases": 31,
+      "step_weighted_delta": 0.0019017459200428922,
+      "step_weighted_ci95": [
+        -0.007957559681697616,
+        0.016940339354132455
+      ],
+      "case_macro_delta": 0.0015029927432597052,
+      "case_macro_ci95": [
+        -0.006674082313681872,
+        0.013407754648021611
+      ],
+      "improved_steps": 1,
+      "unchanged_steps": 44,
+      "regressed_steps": 4,
+      "conclusion": "inconclusive",
+      "bootstrap": {
+        "cluster": "case_id",
+        "samples": 20000,
+        "seed": 42
+      }
+    },
+    "sft_v3_chatml_to_grpo_v4_chatml": {
+      "steps": 49,
+      "cases": 31,
+      "step_weighted_delta": 0.0033427163969035924,
+      "step_weighted_ci95": [
+        -0.010775862068965514,
+        0.012931034482758626
+      ],
+      "case_macro_delta": -0.0013904338153503868,
+      "case_macro_ci95": [
+        -0.02085650723025584,
+        0.010011123470522807
+      ],
+      "improved_steps": 6,
+      "unchanged_steps": 42,
+      "regressed_steps": 1,
+      "conclusion": "inconclusive",
+      "bootstrap": {
+        "cluster": "case_id",
+        "samples": 20000,
+        "seed": 42
+      }
+    }
+  }
+}

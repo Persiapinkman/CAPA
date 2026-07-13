@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "planner_rag_miss_state_machine_v1",
+  "source": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/sft_data_stateful_retrieval_v1_chatml/train.jsonl",
+  "source_sha256": "810d6914a42efbd5ec18a98a46d43202eeba1afad7429cb570fce52133f1c32a",
+  "output": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/sft_data_rag_miss_state_machine_v1_chatml/train.jsonl",
+  "output_sha256": "a935b74278a543566a4788115b5b3109e39cabd1aa65b4e6693b1b2d4c85ddd2",
+  "rows": 240,
+  "unique_source_rows": 168,
+  "entities": 24,
+  "selection_weights": {
+    "rag_miss_rewrite_then_rag#step1": 2,
+    "rag_miss_rewrite_then_rag#step2": 2,
+    "rag_miss_rewrite_then_rag#step3": 2,
+    "coref_rewrite_then_rag#step1": 1,
+    "direct_rag_guardrail#step1": 1,
+    "memory_hit_end#step1": 1,
+    "general_answer_guardrail#step1": 1
+  },
+  "weighted_category_steps": {
+    "coref_rewrite_then_rag#step1": 24,
+    "direct_rag_guardrail#step1": 24,
+    "general_answer_guardrail#step1": 24,
+    "memory_hit_end#step1": 24,
+    "rag_miss_rewrite_then_rag#step1": 48,
+    "rag_miss_rewrite_then_rag#step2": 48,
+    "rag_miss_rewrite_then_rag#step3": 48
+  }
+}

@@ -1,0 +1,139 @@
+{
+  "schema_version": "2.0",
+  "run_id": "20260712_complex_v2_grpo80_seed43_train",
+  "study_id": "planner_complex_retrieval_grpo_v2",
+  "date": "2026-07-12",
+  "kind": "train_grpo_lora_checkpoint",
+  "status": "completed",
+  "purpose": "Replicate the full-v2 measurable GRPO effect with independent training seed 43.",
+  "hypothesis": "The expanded state-transition curriculum produces a positive five-step double-miss action delta under an independent seed without guardrail regression.",
+  "parent_run_id": "20260712_complex_v2_grpo80_seed42_dev",
+  "provenance": {
+    "git_commit": "c9e6ba7dc341fa3dbd9fee968ec494d9ec340728",
+    "command": "/raid/zkq/projects/CAPA/.venv-trl-grpo-cu124/bin/python training/planner_grpo_seed_v1/scripts/train_planner_grpo_trl.py --model-name-or-path outputs/merged-qwen25-7b-sft-v3-chatml --cases training/planner_grpo_seed_v1/cases/planner_stateful_retrieval_v2_train_cases.jsonl --step-data training/planner_grpo_seed_v1/sft_data_stateful_retrieval_v2_chatml/train.jsonl --output-dir outputs/planner-grpo-qwen25-7b-complex-retrieval-v2-seed43 --prompt-format qwen_chatml --max-prompt-tokens 6144 --max-completion-length 128 --num-generations 8 --generation-batch-size 8 --temperature 0.7 --top-p 0.9 --learning-rate 1e-5 --max-steps 80 --per-device-train-batch-size 1 --gradient-accumulation-steps 4 --logging-steps 1 --save-steps 80 --save-total-limit 1 --seed 43 --fp16 true --bf16 false --gradient-checkpointing true --attn-implementation sdpa --use-lora true --lora-r 16 --lora-alpha 32 --lora-dropout 0.05 --lora-target-modules q_proj,k_proj,v_proj,o_proj --loss-type dr_grpo --beta 0.0 --score-first-json-only true --task-reward-weight 0.95 --format-reward-weight 0.05 --penalize-truncated-completions true --report-to none --run-name qwen25-complex-retrieval-grpo-v2-seed43",
+    "seed": 43,
+    "environment": {
+      "python": "3.10.12",
+      "torch": "2.6.0+cu124",
+      "cuda": "12.4",
+      "gpu": "Tesla V100-SXM2-32GB",
+      "world_size": 4,
+      "precision": "fp16",
+      "attention": "sdpa"
+    },
+    "started_at": "2026-07-12T22:07:40.939856+00:00",
+    "finished_at": "2026-07-12T23:20:33.177295+00:00"
+  },
+  "data": {
+    "dataset_id": "planner_stateful_retrieval_v2",
+    "split": "train",
+    "files": {
+      "cases": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/cases/planner_stateful_retrieval_v2_train_cases.jsonl",
+      "steps": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/sft_data_stateful_retrieval_v2_chatml/train.jsonl"
+    },
+    "sha256": {
+      "cases": "ae99b9ef3cc408549d4758dcc8d7bd200b9611b232c885eab7294639b23c051a",
+      "steps": "38ff8fd6cc6326e28a50276589f6251663bf2700576ef56a762658cfa62e45a9"
+    },
+    "rows": 1080
+  },
+  "method": {
+    "model": "/raid/zkq/artifacts/CAPA/outputs/merged-qwen25-7b-sft-v3-chatml",
+    "adapter_path": "/raid/zkq/projects/CAPA/outputs/planner-grpo-qwen25-7b-complex-retrieval-v2-seed43/checkpoint-80",
+    "training": {
+      "learning_rate": 1e-05,
+      "num_train_epochs": 1.0,
+      "max_steps": 80,
+      "per_device_train_batch_size": 1,
+      "gradient_accumulation_steps": 4,
+      "loss_type": "dr_grpo",
+      "beta": 0.0,
+      "precision": "fp16",
+      "attention_implementation": "sdpa"
+    },
+    "generation": {
+      "num_generations": 8,
+      "generation_batch_size": 8,
+      "max_completion_length": 128
+    },
+    "reward_weights": {
+      "task": 0.95,
+      "format": 0.05,
+      "tail_penalty_tokens": 64,
+      "prefix_penalty_tokens": 16,
+      "penalize_truncated_completions": true
+    },
+    "lora": {
+      "enabled": true,
+      "r": 16,
+      "alpha": 32,
+      "dropout": 0.05,
+      "target_modules": "q_proj,k_proj,v_proj,o_proj"
+    }
+  },
+  "metrics": {
+    "primary": {
+      "name": "train_reward_mean",
+      "value": 0.7911911822855473,
+      "higher_is_better": true
+    },
+    "train": {
+      "train_runtime": 4355.9816,
+      "train_samples_per_second": 0.294,
+      "train_steps_per_second": 0.018,
+      "total_flos": 0.0,
+      "train_loss": -0.002412473154254258,
+      "epoch": 0.14814814814814814
+    },
+    "log_summary": {
+      "logged_steps": 80,
+      "mean_reward": 0.7911911822855473,
+      "mean_reward_std": 0.0922623091551941,
+      "informative_reward_steps": 62,
+      "mean_frac_reward_zero_std": 0.46875,
+      "mean_entropy": 0.1333471402293071,
+      "mean_completion_clipped_ratio": 0.00859375,
+      "max_completion_clipped_ratio": 0.1875,
+      "clipped_generation_steps": 8,
+      "nonfinite_gradient_steps": 1,
+      "zero_gradient_steps": 18,
+      "final": {
+        "clip_ratio/high_max": 0.0,
+        "clip_ratio/high_mean": 0.0,
+        "clip_ratio/low_mean": 0.0,
+        "clip_ratio/low_min": 0.0,
+        "clip_ratio/region_mean": 0.0,
+        "completions/clipped_ratio": 0.0,
+        "completions/max_length": 90.0,
+        "completions/max_terminated_length": 90.0,
+        "completions/mean_length": 79.5,
+        "completions/mean_terminated_length": 79.5,
+        "completions/min_length": 73.0,
+        "completions/min_terminated_length": 73.0,
+        "entropy": 0.16004544869065285,
+        "epoch": 0.14814814814814814,
+        "frac_reward_zero_std": 0.5,
+        "grad_norm": 0.2007630318403244,
+        "learning_rate": 2.5000000000000004e-07,
+        "loss": 0.0153,
+        "num_tokens": 5567407.0,
+        "reward": 0.5814062505960464,
+        "reward_std": 0.008396893739700317,
+        "rewards/reward_func/mean": 0.5814062505960464,
+        "rewards/reward_func/std": 0.008396893739700317,
+        "step": 80,
+        "step_time": 49.584389637224376
+      }
+    }
+  },
+  "artifacts": {
+    "output_dir": "/raid/zkq/projects/CAPA/outputs/planner-grpo-qwen25-7b-complex-retrieval-v2-seed43",
+    "config": "/raid/zkq/projects/CAPA/outputs/planner-grpo-qwen25-7b-complex-retrieval-v2-seed43/capa_trl_grpo_config.json",
+    "trainer_state": "/raid/zkq/projects/CAPA/outputs/planner-grpo-qwen25-7b-complex-retrieval-v2-seed43/checkpoint-80/trainer_state.json",
+    "result": "/raid/zkq/projects/CAPA/outputs/planner-grpo-qwen25-7b-complex-retrieval-v2-seed43/capa_trl_grpo_result.json"
+  },
+  "decision": {
+    "outcome": "supports_adaptive_replication_confirmation",
+    "rationale": "The independent seed-43 checkpoint contributed a positive development action delta and a positive sealed-test action delta to the three-seed confirmation."
+  }
+}

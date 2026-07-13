@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "planner_rag_miss_action_reward_v1",
+  "role": "exploratory_action_aligned_weighted_training_view",
+  "source_dataset_id": "planner_stateful_retrieval_v1",
+  "experimental_unit": "source_case_id",
+  "bootstrap_cluster": "entity_id",
+  "stats": {
+    "cases": 120,
+    "steps": 240,
+    "unique_source_steps": 168,
+    "entity_groups": 24
+  },
+  "files": {
+    "source": "training/planner_grpo_seed_v1/sft_data_stateful_retrieval_v1_chatml/train.jsonl",
+    "train": "training/planner_grpo_seed_v1/sft_data_rag_miss_action_reward_v1_chatml/train.jsonl",
+    "metadata": "training/planner_grpo_seed_v1/sft_data_rag_miss_action_reward_v1_chatml/metadata.json",
+    "development_eval": "training/planner_grpo_seed_v1/sft_data_stateful_retrieval_v1_chatml/dev.jsonl",
+    "sealed_test_eval": "training/planner_grpo_seed_v1/sft_data_stateful_retrieval_v1_chatml/test.jsonl"
+  },
+  "sha256": {
+    "source": "810d6914a42efbd5ec18a98a46d43202eeba1afad7429cb570fce52133f1c32a",
+    "train": "3398cd6d02bd398655610d48cb13bff3823d87eaf4301c6b7f585cf43ba2febf"
+  },
+  "reward": {
+    "action_match_weight": 0.75,
+    "wrong_action_task_cap": 0.20,
+    "outer_task_weight": 0.95,
+    "outer_format_weight": 0.05,
+    "maximum_total_reward_for_wrong_action": 0.24
+  },
+  "integrity": {
+    "status": "weighted_view_with_action_separated_reward",
+    "test_status": "sealed_until_screen_and_confirmation_training_complete",
+    "sampling_replicas_are_not_independent_units": true
+  }
+}

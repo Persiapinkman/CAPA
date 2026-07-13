@@ -1,0 +1,77 @@
+{
+  "overall": {
+    "count": 64,
+    "mean_score": 0.7912364130434786,
+    "json_valid_rate": 1.0,
+    "extra_text_after_json_rate": 0.0,
+    "mean_extra_text_chars": 0.0,
+    "effective_json_valid_rate": 1.0,
+    "effective_extra_text_after_json_rate": 0.0,
+    "effective_mean_extra_text_chars": 0.0
+  },
+  "categories": {
+    "coref_rewrite_then_rag": {
+      "count": 16,
+      "mean_score": 0.5345108695652174,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.0,
+      "mean_extra_text_chars": 0.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0
+    },
+    "direct_rag_guardrail": {
+      "count": 8,
+      "mean_score": 1.0,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.0,
+      "mean_extra_text_chars": 0.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0
+    },
+    "general_answer_guardrail": {
+      "count": 8,
+      "mean_score": 0.8499999999999999,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.0,
+      "mean_extra_text_chars": 0.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0
+    },
+    "memory_hit_end": {
+      "count": 8,
+      "mean_score": 1.0,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.0,
+      "mean_extra_text_chars": 0.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0
+    },
+    "rag_miss_rewrite_then_rag": {
+      "count": 24,
+      "mean_score": 0.8036231884057972,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.0,
+      "mean_extra_text_chars": 0.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0
+    }
+  },
+  "score_distribution": {
+    "0.217": 4,
+    "0.24": 3,
+    "0.261": 1,
+    "0.272": 2,
+    "0.471": 1,
+    "0.478": 1,
+    "0.696": 3,
+    "0.8": 12,
+    "0.85": 8,
+    "0.952": 4,
+    "1.0": 25
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_stateful_retrieval_grpo_v1",
+  "comparison": "reports/planner_stateful_retrieval_grpo_v1_dev_step80.json",
+  "baseline": "sft_v3",
+  "candidate": "grpo80",
+  "passed": false,
+  "primary": {
+    "observed_delta": 0.005797101449275362,
+    "threshold": 0.02,
+    "passed": false
+  },
+  "guardrails": {
+    "maximum_regression": 0.02,
+    "category_deltas": {
+      "direct_rag_guardrail": 0.0,
+      "general_answer_guardrail": 0.0,
+      "memory_hit_end": 0.0
+    },
+    "passed": true
+  }
+}

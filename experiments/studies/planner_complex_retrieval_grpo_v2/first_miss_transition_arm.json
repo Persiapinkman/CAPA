@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_complex_retrieval_grpo_v2",
+  "arm_id": "first_miss_transition_v1",
+  "status": "completed_development_gate_failed",
+  "rationale": "The full v2 arm gained 7 double-miss step-1 actions, lost 1 step-3 action, and left step 2 unchanged at 5/16. Stochastic step-2 correct actions nevertheless increased from 26/64 to 29/64, supporting greater exposure rather than a new reward.",
+  "initializer": "outputs/merged-qwen25-7b-sft-v3-chatml",
+  "training_view": {
+    "dataset_id": "planner_first_miss_transition_v1",
+    "source_dataset_id": "planner_stateful_retrieval_v2",
+    "rows": 1584,
+    "unique_source_rows": 1080,
+    "weights": {
+      "default": 1,
+      "rag_double_miss_recovery#step1": 2,
+      "rag_double_miss_recovery#step2": 4,
+      "rag_single_miss_recovery#step2": 4
+    }
+  },
+  "training": {
+    "screen_seed": 42,
+    "max_steps": 80,
+    "learning_rate": 1e-5,
+    "num_generations": 8,
+    "temperature": 0.7,
+    "global_effective_batch_size": 16,
+    "loss_type": "dr_grpo",
+    "beta": 0.0,
+    "outer_task_weight": 0.95,
+    "outer_format_weight": 0.05
+  },
+  "development_gate": {
+    "split": "dev",
+    "primary_category": "rag_double_miss_recovery",
+    "primary_step": 2,
+    "minimum_primary_category_delta": 0.05,
+    "minimum_primary_action_match_delta": 0.25,
+    "minimum_primary_category_action_match_delta": 0.10,
+    "guardrail_categories": [
+      "rag_hit_then_synthesize",
+      "direct_rag_guardrail",
+      "general_answer_guardrail",
+      "memory_hit_end_guardrail"
+    ],
+    "maximum_guardrail_regression": 0.03,
+    "anti_shortcut_category": "coref_rewrite_then_rag",
+    "maximum_anti_shortcut_regression": 0.05
+  },
+  "confirmation": {
+    "trigger": "Only if seed 42 passes all category, category-action, step-2, guardrail, and anti-shortcut gates.",
+    "additional_training_seeds": [43, 44],
+    "locked_max_steps": 80,
+    "test_status": "sealed_until_seed42_gate_and_seed43_seed44_training_complete",
+    "primary_test_endpoint": "rag_double_miss_recovery strict action match across all five steps",
+    "mechanistic_test_endpoint": "rag_double_miss_recovery step-2 strict action match",
+    "bootstrap_cluster": "entity_id",
+    "bootstrap_samples": 20000,
+    "development_replication_rule": {
+      "minimum_three_seed_mean_primary_category_action_delta": 0.10,
+      "minimum_positive_seed_count": 2,
+      "maximum_mean_guardrail_regression": 0.03,
+      "test_open_trigger": "Seed 42 passes its gate, seeds 43/44 complete, all three dev evaluations are registered, and the replication rule passes."
+    }
+  },
+  "claim_boundary": "A passing arm supports first-miss transition-focused GRPO on the controlled v2 state machine only.",
+  "result": {
+    "training_run_id": "20260712_first_miss_transition_v1_grpo80_seed42_train",
+    "development_run_id": "20260712_first_miss_transition_v1_grpo80_seed42_dev",
+    "gate_passed": false,
+    "primary_step2_action_delta": 0.125,
+    "primary_category_action_delta": 0.0375,
+    "primary_category_score_delta": 0.0325,
+    "guardrails_passed": true,
+    "decision": "The curriculum moved two step-2 actions but lost the full-v2 arm's larger step-1 gain; no confirmation seeds are run for this arm."
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_complex_retrieval_grpo_v2",
+  "dataset_id": "planner_stateful_retrieval_v2",
+  "audit": "/raid/zkq/artifacts/CAPA/studies/planner_complex_retrieval_grpo_v2/support_sft_dev/summary.json",
+  "passed": true,
+  "thresholds": {
+    "minimum_nonzero_std_rate": 0.60,
+    "minimum_mean_distinct_actions": 1.40,
+    "maximum_fully_saturated_rate": 0.50,
+    "require_at_least_one_correct_action_per_step_index": true
+  },
+  "observed": {
+    "groups": 40,
+    "samples": 320,
+    "correct_actions": 245,
+    "nonzero_std_rate": 1.0,
+    "mean_distinct_actions": 1.5,
+    "fully_saturated_rate": 0.275,
+    "correct_actions_by_step": {
+      "1": "54/64",
+      "2": "26/64",
+      "3": "51/64",
+      "4": "51/64",
+      "5": "63/64"
+    },
+    "groups_with_correct_action_by_step": {
+      "1": "8/8",
+      "2": "5/8",
+      "3": "8/8",
+      "4": "8/8",
+      "5": "8/8"
+    }
+  },
+  "decision": "Sampling support permits the preregistered seed-42 GRPO screen after the greedy baseline completes."
+}

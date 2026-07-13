@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_stateful_retrieval_grpo_v1",
+  "model": "/raid/zkq/models/Qwen2.5-7B-Instruct",
+  "audit": "/raid/zkq/artifacts/CAPA/studies/planner_stateful_retrieval_grpo_v1/support_base_dev/summary.json",
+  "scope_categories": [
+    "coref_rewrite_then_rag",
+    "rag_miss_rewrite_then_rag"
+  ],
+  "passed": true,
+  "checks": {
+    "nonzero_reward_std_rate": {
+      "observed": 0.65,
+      "operator": ">=",
+      "threshold": 0.5,
+      "passed": true
+    },
+    "usable_support_rate": {
+      "observed": 0.425,
+      "operator": ">=",
+      "threshold": 0.3,
+      "passed": true
+    },
+    "near_exact_task_support_rate": {
+      "observed": 0.375,
+      "operator": ">=",
+      "threshold": 0.3,
+      "passed": true
+    },
+    "fully_saturated_rate": {
+      "observed": 0.175,
+      "operator": "<=",
+      "threshold": 0.25,
+      "passed": true
+    }
+  }
+}

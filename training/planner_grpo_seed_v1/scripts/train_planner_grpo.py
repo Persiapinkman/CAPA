@@ -133,6 +133,14 @@ def expected_decision_to_planner_step(expected: dict[str, Any]) -> dict[str, Any
             "decision_type": "clarify",
             "clarification_question": "请明确你是要检测图片、生成图片，还是查询/评估方案？",
         }
+    if decision_type == "end":
+        required_args = expected.get("required_args") if isinstance(expected.get("required_args"), dict) else {}
+        return {
+            "thought": "已有上下文结果足以回答当前问题，无需重复调用工具。",
+            "decision_type": "end",
+            "end_reason": str(required_args.get("end_reason") or "memory_hit"),
+            "final_answer": "",
+        }
     action_input: dict[str, Any] = {}
     action_input.update(expected.get("required_args") if isinstance(expected.get("required_args"), dict) else {})
     for key, tokens in (expected.get("arg_contains") if isinstance(expected.get("arg_contains"), dict) else {}).items():
@@ -147,6 +155,13 @@ def expected_decision_to_planner_step(expected: dict[str, Any]) -> dict[str, Any
         "action_input": action_input,
         "final_answer": "",
     }
+
+
+def expected_action_name(expected: dict[str, Any]) -> str:
+    decision_type = str(expected.get("decision_type") or "tool").strip()
+    if decision_type in {"clarify", "end"}:
+        return decision_type
+    return str(expected.get("action") or "").strip()
 
 
 def build_prompt_for_step(case: dict[str, Any], step_index: int, run_root: Path) -> str:
@@ -211,13 +226,13 @@ def build_step_dataset(cases: list[dict[str, Any]]) -> Dataset:
                     "forbidden_actions": json.dumps(case.get("forbidden_actions") or [], ensure_ascii=False),
                     "reward_spec": json.dumps(case.get("reward_spec") or {}, ensure_ascii=False),
                     "previous_action": prev_action,
+                    "entity_id": str(case.get("entity_id") or ""),
+                    "group_id": str(case.get("group_id") or case.get("entity_id") or case.get("case_id") or ""),
+                    "template_id": str(case.get("template_id") or ""),
+                    "scenario_id": str(case.get("scenario_id") or case.get("category") or ""),
                     "full_expected_actions": json.dumps(
                         [
-                            (
-                                "clarify"
-                                if str(step.get("decision_type") or "tool") == "clarify"
-                                else str(step.get("action") or "")
-                            )
+                            expected_action_name(step)
                             for step in expected
                             if isinstance(step, dict)
                         ],
@@ -335,8 +350,9 @@ def score_step_completion(
         for key in ("json_valid", "decision_type_valid", "action_match", "argument_match", "finish_after_tool")
     )
     action = rewardlib.normalize_action(str(actual.get("action") or ""))
-    if str(actual.get("decision_type") or "") == "clarify":
-        action = "clarify"
+    actual_decision_type = str(actual.get("decision_type") or "")
+    if actual_decision_type in {"clarify", "end"}:
+        action = actual_decision_type
     forbidden_set = {rewardlib.normalize_action(str(item)) for item in forbidden if str(item).strip()} if isinstance(forbidden, list) else set()
     forbidden_weight = float(reward_spec_data.get("no_forbidden_action", 0.0))
     forbidden_score = 0.0 if action in forbidden_set else forbidden_weight
@@ -344,30 +360,66 @@ def score_step_completion(
     numerator = base_score + forbidden_score
     denominator = expected_weight + forbidden_weight
 
-    if full_actions == ["qwen_detection", "migration_advisor"] or full_actions == ["rexomni_detection", "migration_advisor"]:
-        if int(step_index) == 1:
-            weight = float(reward_spec_data.get("no_skip_required_probe", 0.0))
-            if weight > 0:
-                numerator += weight if action in rewardlib.DETECTION_ACTIONS else 0.0
-                denominator += weight
-            weight = float(reward_spec_data.get("no_premature_stop", 0.0))
-            if weight > 0:
-                numerator += weight if action not in rewardlib.STOP_ACTIONS else 0.0
-                denominator += weight
-        if int(step_index) == 2:
-            weight = float(reward_spec_data.get("no_repeated_tool", 0.0))
-            if weight > 0:
-                prev = rewardlib.normalize_action(previous_action)
-                numerator += weight if not ({prev, action} <= rewardlib.DETECTION_ACTIONS) else 0.0
-                denominator += weight
-            weight = float(reward_spec_data.get("final_tool_finish", 0.0))
-            if weight > 0:
-                numerator += weight if rewardlib.value_matches(rewardlib.get_arg(actual, "finish_after_tool"), True) else 0.0
-                denominator += weight
+    current_step = int(step_index)
+    total_steps = len(full_actions) if isinstance(full_actions, list) else 0
+    if current_step < total_steps:
+        weight = float(reward_spec_data.get("no_premature_stop", 0.0))
+        if weight > 0:
+            continues = (
+                str(actual.get("decision_type") or "") == "tool"
+                and action not in rewardlib.STOP_ACTIONS
+                and rewardlib.value_matches(rewardlib.get_arg(actual, "finish_after_tool"), False)
+            )
+            numerator += weight if continues else 0.0
+            denominator += weight
 
-    if not info.get("failures") and denominator > 0:
-        return min(1.0, numerator / denominator)
-    return max(0.0, min(1.0, numerator / denominator if denominator > 0 else 0.0))
+    if current_step > 1:
+        weight = float(reward_spec_data.get("no_repeated_tool", 0.0))
+        if weight > 0:
+            prev = rewardlib.normalize_action(previous_action)
+            expected_current = rewardlib.normalize_action(str(full_actions[current_step - 1] or ""))
+            expected_previous = rewardlib.normalize_action(str(full_actions[current_step - 2] or ""))
+            repeated_expected = bool(
+                rewardlib._accepted_actions(expected_current).intersection(
+                    rewardlib._accepted_actions(expected_previous)
+                )
+            )
+            avoids_unexpected_repeat = repeated_expected or not bool(
+                rewardlib._accepted_actions(action).intersection(rewardlib._accepted_actions(prev))
+            )
+            numerator += weight if avoids_unexpected_repeat else 0.0
+            denominator += weight
+
+    if current_step == 1:
+        weight = float(reward_spec_data.get("no_skip_required_probe", 0.0))
+        requires_probe = (
+            total_steps >= 2
+            and rewardlib.normalize_action(str(full_actions[0] or "")) in rewardlib.DETECTION_ACTIONS
+            and rewardlib.normalize_action(str(full_actions[1] or "")) == "migration_advisor"
+        )
+        if weight > 0 and requires_probe:
+            numerator += weight if action in rewardlib.DETECTION_ACTIONS else 0.0
+            denominator += weight
+
+    if current_step == total_steps:
+        weight = float(reward_spec_data.get("final_tool_finish", 0.0))
+        if weight > 0:
+            expected_type = str(expected.get("decision_type") or "tool")
+            if expected_type == "tool":
+                finished = rewardlib.value_matches(
+                    rewardlib.get_arg(actual, "finish_after_tool"), True
+                )
+            else:
+                finished = str(actual.get("decision_type") or "") == expected_type
+            numerator += weight if finished else 0.0
+            denominator += weight
+
+    normalized = max(0.0, min(1.0, numerator / denominator if denominator > 0 else 0.0))
+    wrong_action_cap = reward_spec_data.get("wrong_action_cap")
+    action_matched = float(info.get("detail", {}).get("action_match") or 0.0) >= 1.0
+    if wrong_action_cap is not None and not action_matched:
+        normalized = min(normalized, max(0.0, min(1.0, float(wrong_action_cap))))
+    return normalized
 
 
 def make_reward_func():

@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "objective": "Find a reproducible strict-action GRPO improvement for CAPA Planner state transitions under V100 constraints, with entity-isolated train/dev/test evidence.",
+  "demo_default": "Qwen3.5-35B-A3B",
+  "research_candidate": "Qwen2.5-7B SFTv3 initializer plus the planner_stateful_retrieval_v2 action-dominant GRPO recipe",
+  "current_study": "planner_complex_retrieval_grpo_v2",
+  "study_arm_order": [
+    "full_v2_seed42_screen",
+    "first_miss_transition_seed42",
+    "replicated_full_v2_growth_seeds42_43_44",
+    "sealed_test_confirmation"
+  ],
+  "evidence_grade": "sealed_test_confirmed_controlled_state_machine",
+  "key_result": "On rag_double_miss_recovery, the three-seed mean policy improved sealed-test strict action match by 0.1292 with entity-clustered 95% CI [0.0750, 0.1896] and improved verifier score by 0.1096.",
+  "caveats": [
+    "The original seed-42 practical development gate of +0.10 strict action remained failed; the confirmed claim is the separately preregistered three-seed measurable-growth claim.",
+    "Observations are deterministic mocked retrieval transitions and do not establish real retriever or end-to-end answer quality.",
+    "The data are controlled synthetic templates despite entity and template isolation across splits.",
+    "Test was opened once only after the adaptive three-seed development replication gate passed; it must not be reused for further model selection.",
+    "The demo default and the confirmed research recipe remain different model lines."
+  ],
+  "next_decision": "Freeze the v2 test split and recipe. Build a new external evaluation with noisy retrieval replay, bounded tool budgets, contradictory evidence, and a small read-only deidentified real-trajectory slice; do not tune against the confirmed v2 test."
+}

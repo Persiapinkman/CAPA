@@ -1,0 +1,276 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "planner_focused_v3",
+  "role": "development_train_dev_and_regression",
+  "description": "Focused CAPA Planner routing cases and derived ChatML step data.",
+  "stats": {
+    "cases": 154,
+    "steps": 245,
+    "unique_case_ids": 154,
+    "unique_queries": 154,
+    "categories": {
+      "clarify_intent_ambiguity": 8,
+      "full_detection_eval": 5,
+      "general_answer": 4,
+      "historical_asset_qa": 4,
+      "probe_only_contrastive": 30,
+      "probe_then_migration": 61,
+      "probe_then_migration_strict": 30,
+      "single_image_probe": 12
+    },
+    "expected_actions": {
+      "answerer": 4,
+      "clarify": 8,
+      "migration_advisor": 91,
+      "pipeline_eval": 5,
+      "qwen_detection": 133,
+      "rag_answer": 4
+    }
+  },
+  "splits": {
+    "train_cases": {
+      "cases": 123,
+      "steps": 196,
+      "unique_case_ids": 123,
+      "unique_queries": 123,
+      "categories": {
+        "clarify_intent_ambiguity": 6,
+        "full_detection_eval": 4,
+        "general_answer": 3,
+        "historical_asset_qa": 3,
+        "probe_only_contrastive": 24,
+        "probe_then_migration": 49,
+        "probe_then_migration_strict": 24,
+        "single_image_probe": 10
+      },
+      "expected_actions": {
+        "answerer": 3,
+        "clarify": 6,
+        "migration_advisor": 73,
+        "pipeline_eval": 4,
+        "qwen_detection": 107,
+        "rag_answer": 3
+      }
+    },
+    "dev_cases": {
+      "cases": 31,
+      "steps": 49,
+      "unique_case_ids": 31,
+      "unique_queries": 31,
+      "categories": {
+        "clarify_intent_ambiguity": 2,
+        "full_detection_eval": 1,
+        "general_answer": 1,
+        "historical_asset_qa": 1,
+        "probe_only_contrastive": 6,
+        "probe_then_migration": 12,
+        "probe_then_migration_strict": 6,
+        "single_image_probe": 2
+      },
+      "expected_actions": {
+        "answerer": 1,
+        "clarify": 2,
+        "migration_advisor": 18,
+        "pipeline_eval": 1,
+        "qwen_detection": 26,
+        "rag_answer": 1
+      }
+    },
+    "regression_cases": {
+      "cases": 245,
+      "steps": 306,
+      "unique_case_ids": 245,
+      "unique_queries": 245,
+      "categories": {
+        "adela_eval": 2,
+        "full_detection_eval": 5,
+        "general_answer": 6,
+        "historical_asset_qa": 7,
+        "intent_ambiguity": 1,
+        "migration_feasibility": 38,
+        "migration_feasibility_with_image": 51,
+        "probe_then_migration": 61,
+        "single_image_probe": 74
+      },
+      "expected_actions": {
+        "adela_cli_eval": 2,
+        "answerer": 6,
+        "clarify": 1,
+        "migration_advisor": 150,
+        "pipeline_eval": 5,
+        "qwen_detection": 135,
+        "rag_answer": 7
+      }
+    },
+    "train_steps": {
+      "rows": 196,
+      "cases": 123,
+      "exact_prompt_completion_duplicates": 0,
+      "duplicate_rate": 0.0,
+      "max_rows_per_case": 2,
+      "categories": {
+        "clarify_intent_ambiguity": 6,
+        "full_detection_eval": 4,
+        "general_answer": 3,
+        "historical_asset_qa": 3,
+        "probe_only_contrastive": 24,
+        "probe_then_migration": 98,
+        "probe_then_migration_strict": 48,
+        "single_image_probe": 10
+      }
+    },
+    "dev_steps": {
+      "rows": 49,
+      "cases": 31,
+      "exact_prompt_completion_duplicates": 0,
+      "duplicate_rate": 0.0,
+      "max_rows_per_case": 2,
+      "categories": {
+        "clarify_intent_ambiguity": 2,
+        "full_detection_eval": 1,
+        "general_answer": 1,
+        "historical_asset_qa": 1,
+        "probe_only_contrastive": 6,
+        "probe_then_migration": 24,
+        "probe_then_migration_strict": 12,
+        "single_image_probe": 2
+      }
+    },
+    "hard_v4_steps": {
+      "rows": 250,
+      "cases": 83,
+      "exact_prompt_completion_duplicates": 167,
+      "duplicate_rate": 0.668,
+      "max_rows_per_case": 12,
+      "categories": {
+        "clarify_intent_ambiguity": 72,
+        "full_detection_eval": 32,
+        "probe_then_migration": 98,
+        "probe_then_migration_strict": 48
+      }
+    },
+    "hard_v5_steps": {
+      "rows": 629,
+      "cases": 153,
+      "exact_prompt_completion_duplicates": 330,
+      "duplicate_rate": 0.5246422893481717,
+      "max_rows_per_case": 11,
+      "categories": {
+        "clarify_intent_ambiguity": 306,
+        "full_detection_eval": 64,
+        "general_answer": 3,
+        "historical_asset_qa": 3,
+        "probe_only_contrastive": 24,
+        "probe_then_migration": 147,
+        "probe_then_migration_strict": 72,
+        "single_image_probe": 10
+      }
+    }
+  },
+  "files": {
+    "source_cases": "training/planner_grpo_seed_v1/cases/planner_grpo_focused_4b_cases.jsonl",
+    "train_cases": "training/planner_grpo_seed_v1/cases/planner_grpo_focused_train_v3_cases.jsonl",
+    "dev_cases": "training/planner_grpo_seed_v1/cases/planner_grpo_focused_val_v3_cases.jsonl",
+    "regression_cases": "training/planner_grpo_seed_v1/cases/planner_grpo_compound245_eval_cases.jsonl",
+    "train_steps": "training/planner_grpo_seed_v1/sft_data_v3_chatml/train.jsonl",
+    "dev_steps": "training/planner_grpo_seed_v1/sft_data_v3_chatml/val.jsonl",
+    "hard_v4_steps": "training/planner_grpo_seed_v1/sft_data_v4_hard_chatml/train.jsonl",
+    "hard_v5_steps": "training/planner_grpo_seed_v1/sft_data_v5_mixed_hard_chatml/train.jsonl"
+  },
+  "sha256": {
+    "source_cases": "17bbd9dfd63da760177cb1681228fa6fff6b51a93614a9bca88b5a53676c0d74",
+    "train_cases": "ad9a57bdd6482aa2c15eae7c9fea1c3a89bd499ffaa39e588b2d7ffd7f9271fa",
+    "dev_cases": "264a5e23c6240647a4b6f54f7b38f19b3f23992f02a5266c225da6a9359ab48c",
+    "regression_cases": "cd0f03acdb15f586386c50936b4f997b7b1226732b37eb1a3409076ca2e02388",
+    "train_steps": "185a4414549af3c6572e0a5d39d6e30175d4316bf8de1044e7f0f5afca7c7493",
+    "dev_steps": "ac4d0b96d5aafdc7d9034a2764686def0304f283f5614122f8421d3d9e81d5a9",
+    "hard_v4_steps": "332c296866b95827ff7601a60fb4bbbf31aa72aca4fe5f2e624dae71286920a9",
+    "hard_v5_steps": "fede66dee1024b74b6b1f8716b6990daf7170fc637d01a64cbf89484f2bf41c3"
+  },
+  "integrity": {
+    "status": "development_only_not_sealed",
+    "train_dev_overlap": {
+      "case_id_overlap": 0,
+      "exact_query_overlap": 0
+    },
+    "train_regression_overlap": {
+      "case_id_overlap": 69,
+      "exact_query_overlap": 69
+    },
+    "train_dev_similarity": {
+      "count": 31,
+      "mean": 0.7155329161196066,
+      "median": 0.7941176470588235,
+      "count_ge_0_8": 14,
+      "count_ge_0_9": 0,
+      "top_examples": [
+        {
+          "dev_case_id": "GRPO-EXP-VIS-PROBE-008",
+          "train_case_id": "GRPO-EXP-VIS-PROBE-002",
+          "category": "single_image_probe",
+          "similarity": 0.871795
+        },
+        {
+          "dev_case_id": "GRPO-EXP-PROBE-MIG-001",
+          "train_case_id": "GRPO-EXP-PROBE-MIG-004",
+          "category": "probe_then_migration",
+          "similarity": 0.840909
+        },
+        {
+          "dev_case_id": "GRPO-EXP-PROBE-MIG-003",
+          "train_case_id": "GRPO-EXP-PROBE-MIG-004",
+          "category": "probe_then_migration",
+          "similarity": 0.840909
+        },
+        {
+          "dev_case_id": "GRPO-EXP-PROBE-MIG-STRICT-010",
+          "train_case_id": "GRPO-EXP-PROBE-MIG-STRICT-009",
+          "category": "probe_then_migration_strict",
+          "similarity": 0.829268
+        },
+        {
+          "dev_case_id": "GRPO-EXP-PROBE-MIG-016",
+          "train_case_id": "GRPO-EXP-PROBE-MIG-013",
+          "category": "probe_then_migration",
+          "similarity": 0.820513
+        },
+        {
+          "dev_case_id": "GRPO-OBS-001",
+          "train_case_id": "GRPO-EXP-PROBE-MIG-004",
+          "category": "probe_then_migration",
+          "similarity": 0.819277
+        },
+        {
+          "dev_case_id": "GRPO-EXP-PROBE-MIG-009",
+          "train_case_id": "GRPO-EXP-PROBE-MIG-010",
+          "category": "probe_then_migration",
+          "similarity": 0.815789
+        },
+        {
+          "dev_case_id": "GRPO-EXP-PROBE-MIG-011",
+          "train_case_id": "GRPO-EXP-PROBE-MIG-010",
+          "category": "probe_then_migration",
+          "similarity": 0.815789
+        },
+        {
+          "dev_case_id": "GRPO-EXP-PROBE-MIG-STRICT-016",
+          "train_case_id": "GRPO-EXP-PROBE-MIG-STRICT-013",
+          "category": "probe_then_migration_strict",
+          "similarity": 0.815789
+        },
+        {
+          "dev_case_id": "GRPO-EXP-PROBE-MIG-STRICT-007",
+          "train_case_id": "GRPO-EXP-PROBE-MIG-STRICT-009",
+          "category": "probe_then_migration_strict",
+          "similarity": 0.809524
+        }
+      ],
+      "method": "difflib.SequenceMatcher on normalized query text; diagnostic only"
+    },
+    "issues": [
+      "The dev split has been reused for model selection and is not a sealed test set.",
+      "Case-level grouping prevents exact ID leakage, but template families span train and dev.",
+      "The regression set overlaps train by 69 case IDs."
+    ]
+  }
+}

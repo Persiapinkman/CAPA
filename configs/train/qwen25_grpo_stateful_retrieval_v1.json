@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "run_family": "qwen25_grpo_stateful_retrieval_v1",
+  "base_model": "outputs/merged-qwen25-7b-sft-v3-chatml",
+  "cases": "training/planner_grpo_seed_v1/cases/planner_stateful_retrieval_v1_train_cases.jsonl",
+  "step_data": "training/planner_grpo_seed_v1/sft_data_stateful_retrieval_v1_chatml/train.jsonl",
+  "prompt_format": "qwen_chatml",
+  "precision": "fp16",
+  "attention_implementation": "sdpa",
+  "lora": {
+    "r": 16,
+    "alpha": 32,
+    "dropout": 0.05,
+    "target_modules": ["q_proj", "k_proj", "v_proj", "o_proj"]
+  },
+  "grpo": {
+    "screen_steps": 80,
+    "development_checkpoints": [40, 80],
+    "confirmation_steps": 80,
+    "seeds": [42, 43, 44],
+    "learning_rate": 0.000002,
+    "num_generations": 8,
+    "generation_batch_size": 8,
+    "world_size": 8,
+    "gradient_accumulation_steps": 2,
+    "max_prompt_tokens": 6144,
+    "max_completion_length": 128,
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "task_reward_weight": 0.85,
+    "format_reward_weight": 0.15,
+    "loss_type": "dr_grpo",
+    "beta": 0.0
+  }
+}

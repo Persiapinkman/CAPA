@@ -103,7 +103,7 @@ def summarize(predictions: list[dict[str, Any]]) -> dict[str, Any]:
 
     def aggregate(rows: list[dict[str, Any]]) -> dict[str, Any]:
         n = len(rows)
-        return {
+        metrics = {
             "count": n,
             "mean_score": sum(float(row["score"]) for row in rows) / n if n else 0.0,
             "json_valid_rate": sum(bool(row["json_valid"]) for row in rows) / n if n else 0.0,
@@ -113,6 +113,9 @@ def summarize(predictions: list[dict[str, Any]]) -> dict[str, Any]:
             "effective_extra_text_after_json_rate": sum(bool(row["effective_extra_text_after_json"]) for row in rows) / n if n else 0.0,
             "effective_mean_extra_text_chars": sum(int(row["effective_extra_text_chars"]) for row in rows) / n if n else 0.0,
         }
+        if rows and all("action_match" in row for row in rows):
+            metrics["action_match_rate"] = sum(bool(row["action_match"]) for row in rows) / n
+        return metrics
 
     return {
         "overall": aggregate(predictions),

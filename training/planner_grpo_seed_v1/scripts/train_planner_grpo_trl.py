@@ -10,11 +10,17 @@ from __future__ import annotations
 import argparse
 import inspect
 import json
+import math
+import os
+import shlex
 import sys
+import time
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
 import torch
+from datasets import Dataset
 from peft import LoraConfig, PeftModel
 from transformers import AutoModelForCausalLM, AutoTokenizer, set_seed
 
@@ -52,6 +58,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--model-name-or-path", default="/raid/zkq/models/Qwen2.5-7B-Instruct")
     parser.add_argument("--adapter-path", default="", help="Optional trainable PEFT adapter to continue from.")
     parser.add_argument("--cases", type=Path, default=DEFAULT_CASES)
+    parser.add_argument(
+        "--step-data",
+        type=Path,
+        default=None,
+        help="Optional prebuilt step JSONL. This freezes prompts across ranks and runs.",
+    )
     parser.add_argument("--output-dir", default=str(ROOT / "outputs" / "planner-grpo-qwen25-7b-trl-lora"))
     parser.add_argument("--prompt-format", choices=["pseudo", "qwen_chatml"], default="pseudo")
     parser.add_argument("--max-prompt-tokens", type=int, default=6144)
@@ -244,11 +256,92 @@ def write_run_config(path: Path, payload: dict[str, Any]) -> None:
     )
 
 
+def utc_now() -> str:
+    return datetime.now(timezone.utc).isoformat()
+
+
+def install_peft_ddp_no_tp_resume_compat() -> bool:
+    """Avoid PEFT's TP-only import when a plain DDP LoRA checkpoint is loaded."""
+    import transformers.integrations.tensor_parallel as transformers_tp
+    from peft.utils import save_and_load as peft_save_and_load
+
+    if hasattr(transformers_tp, "EmbeddingParallel"):
+        return False
+
+    original = peft_save_and_load._maybe_shard_state_dict_for_tp
+    if getattr(original, "_capa_ddp_no_tp_compat", False):
+        return True
+
+    def shard_only_when_tensor_parallel(model, state_dict, adapter_name):
+        has_tensor_parallel_layer = False
+        for module in model.modules():
+            get_base_layer = getattr(module, "get_base_layer", None)
+            if get_base_layer is None:
+                continue
+            base_layer = get_base_layer()
+            if (
+                getattr(base_layer, "_hf_tp_plan", None) is not None
+                and getattr(base_layer, "_hf_device_mesh", None) is not None
+            ):
+                has_tensor_parallel_layer = True
+                break
+        if has_tensor_parallel_layer:
+            return original(model, state_dict, adapter_name)
+        return None
+
+    shard_only_when_tensor_parallel._capa_ddp_no_tp_compat = True
+    peft_save_and_load._maybe_shard_state_dict_for_tp = shard_only_when_tensor_parallel
+    return True
+
+
+def summarize_log_history(log_history: list[dict[str, Any]]) -> dict[str, Any]:
+    steps = [
+        row
+        for row in log_history
+        if row.get("step") is not None and row.get("reward") is not None
+    ]
+
+    def mean_of(key: str) -> float | None:
+        values = [float(row[key]) for row in steps if row.get(key) is not None]
+        return sum(values) / len(values) if values else None
+
+    def max_of(key: str) -> float | None:
+        values = [float(row[key]) for row in steps if row.get(key) is not None]
+        return max(values) if values else None
+
+    return {
+        "logged_steps": len(steps),
+        "mean_reward": mean_of("reward"),
+        "mean_reward_std": mean_of("reward_std"),
+        "informative_reward_steps": sum(float(row.get("reward_std") or 0.0) > 0.0 for row in steps),
+        "mean_frac_reward_zero_std": mean_of("frac_reward_zero_std"),
+        "mean_entropy": mean_of("entropy"),
+        "mean_completion_clipped_ratio": mean_of("completions/clipped_ratio"),
+        "max_completion_clipped_ratio": max_of("completions/clipped_ratio"),
+        "clipped_generation_steps": sum(
+            float(row.get("completions/clipped_ratio") or 0.0) > 0.0 for row in steps
+        ),
+        "nonfinite_gradient_steps": sum(
+            not math.isfinite(float(row["grad_norm"]))
+            for row in steps
+            if row.get("grad_norm") is not None
+        ),
+        "zero_gradient_steps": sum(float(row.get("grad_norm") or 0.0) == 0.0 for row in steps),
+        "final": steps[-1] if steps else {},
+    }
+
+
 def main() -> None:
     args = parse_args()
+    is_main_process = int(os.environ.get("RANK", "0")) == 0
+    started_at = utc_now()
+    started_perf = time.perf_counter()
     set_seed(args.seed)
     model_path = resolve_model_name_or_path(args.model_name_or_path, ROOT)
     cases_path = args.cases if args.cases.is_absolute() else ROOT / args.cases
+    step_data_path = None
+    if args.step_data is not None:
+        step_data_path = args.step_data if args.step_data.is_absolute() else ROOT / args.step_data
 
     tokenizer = AutoTokenizer.from_pretrained(
         model_path,
@@ -260,7 +353,17 @@ def main() -> None:
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
 
-    dataset = apply_prompt_format(build_step_dataset(load_jsonl(cases_path)), args.prompt_format)
+    if step_data_path is not None:
+        step_rows = load_jsonl(step_data_path)
+        for row in step_rows:
+            row.pop("completion", None)
+        dataset = Dataset.from_list(step_rows)
+        if args.prompt_format == "qwen_chatml" and any(
+            not str(row["prompt"]).startswith("<|im_start|>system\n") for row in step_rows
+        ):
+            raise ValueError("--step-data is not in the requested qwen_chatml format")
+    else:
+        dataset = apply_prompt_format(build_step_dataset(load_jsonl(cases_path)), args.prompt_format)
     dataset, length_stats = filter_by_prompt_length(dataset, tokenizer, args.max_prompt_tokens)
     reward_func = make_reward_func(
         tokenizer=tokenizer,
@@ -284,9 +387,13 @@ def main() -> None:
 
     output_dir = Path(args.output_dir)
     run_payload = {
+        "schema_version": "1.0",
+        "started_at": started_at,
+        "command": " ".join(shlex.quote(value) for value in [sys.executable, *sys.argv]),
         "model_name_or_path": model_path,
         "adapter_path": args.adapter_path,
         "cases": str(cases_path),
+        "step_data": str(step_data_path) if step_data_path is not None else "",
         "output_dir": str(output_dir),
         "prompt_format": args.prompt_format,
         "length_stats": length_stats,
@@ -298,6 +405,18 @@ def main() -> None:
         "renormalize_logits": args.renormalize_logits,
         "mask_truncated_completions": args.mask_truncated_completions,
         "score_first_json_only": args.score_first_json_only,
+        "seed": args.seed,
+        "training": {
+            "learning_rate": args.learning_rate,
+            "num_train_epochs": args.num_train_epochs,
+            "max_steps": args.max_steps,
+            "per_device_train_batch_size": args.per_device_train_batch_size,
+            "gradient_accumulation_steps": args.gradient_accumulation_steps,
+            "loss_type": args.loss_type,
+            "beta": args.beta,
+            "precision": "fp16" if args.fp16 else ("bf16" if args.bf16 else "fp32"),
+            "attention_implementation": args.attn_implementation,
+        },
         "reward_weights": {
             "task": args.task_reward_weight,
             "format": args.format_reward_weight,
@@ -313,8 +432,12 @@ def main() -> None:
             "target_modules": args.lora_target_modules,
         },
     }
-    write_run_config(output_dir, run_payload)
-    print(json.dumps({"status": "prepared", **run_payload}, ensure_ascii=False, indent=2), flush=True)
+    if is_main_process:
+        write_run_config(output_dir, run_payload)
+        print(
+            json.dumps({"status": "prepared", **run_payload}, ensure_ascii=False, indent=2),
+            flush=True,
+        )
     if args.dry_run:
         return
 
@@ -404,9 +527,27 @@ def main() -> None:
         processing_class=tokenizer,
         peft_config=peft_config,
     )
-    trainer.train(resume_from_checkpoint=args.resume_from_checkpoint)
+    if args.resume_from_checkpoint:
+        install_peft_ddp_no_tp_resume_compat()
+    train_result = trainer.train(resume_from_checkpoint=args.resume_from_checkpoint)
     trainer.save_model(str(output_dir))
-    tokenizer.save_pretrained(str(output_dir))
+    if is_main_process:
+        tokenizer.save_pretrained(str(output_dir))
+    result_payload = {
+        "schema_version": "1.0",
+        "status": "completed",
+        "started_at": started_at,
+        "finished_at": utc_now(),
+        "runtime_seconds": time.perf_counter() - started_perf,
+        "train_metrics": dict(train_result.metrics),
+        "log_summary": summarize_log_history(list(trainer.state.log_history)),
+        "output_dir": str(output_dir),
+    }
+    if is_main_process:
+        (output_dir / "capa_trl_grpo_result.json").write_text(
+            json.dumps(result_payload, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
 
 
 if __name__ == "__main__":

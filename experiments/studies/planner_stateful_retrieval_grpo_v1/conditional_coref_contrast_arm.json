@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_stateful_retrieval_grpo_v1",
+  "arm_id": "coref_contrast_v1",
+  "status": "completed_development_gate_failed",
+  "trigger": "Run only if the preregistered step-80 mixed-stateful checkpoint fails its development gate.",
+  "activation_evidence": {
+    "gate": "development_gate_step80.json",
+    "observed_case_macro_delta": 0.005797101449275362,
+    "required_case_macro_delta": 0.02,
+    "activated": true
+  },
+  "result": {
+    "gate": "development_gate_coref_contrast_seed42.json",
+    "primary_category_delta": 0.016304347826086918,
+    "primary_action_match_delta": 0.0,
+    "passed": false,
+    "confirmation_triggered": false
+  },
+  "rationale": "At step 40 the dense coreference verifier increased by 0.016304 while the strict coreference step-1 action match remained 0/8; the RAG-miss category decreased by 0.028986. This arm tests whether focused GRPO can change the actual state-conditioned action without letting the mixed objective dilute it.",
+  "initializer": "fixed_sft_v3_chatml",
+  "training_view": {
+    "dataset_id": "planner_coref_contrast_v1",
+    "source_dataset_id": "planner_stateful_retrieval_v1",
+    "source_split": "train",
+    "rows": 192,
+    "selection_weights": {
+      "coref_rewrite_then_rag#step1": 4,
+      "rag_miss_rewrite_then_rag#step1": 1,
+      "direct_rag_guardrail#step1": 1,
+      "memory_hit_end#step1": 1,
+      "general_answer_guardrail#step1": 1
+    }
+  },
+  "training": {
+    "screen_seed": 42,
+    "max_steps": 40,
+    "learning_rate": 2e-6,
+    "num_generations": 8,
+    "temperature": 0.7,
+    "global_effective_batch_size": 16,
+    "loss_type": "dr_grpo",
+    "beta": 0.0
+  },
+  "development_gate": {
+    "split": "dev",
+    "primary_category": "coref_rewrite_then_rag",
+    "minimum_primary_category_delta": 0.05,
+    "primary_step": 1,
+    "minimum_primary_action_match_delta": 0.25,
+    "guardrail_categories": [
+      "direct_rag_guardrail",
+      "general_answer_guardrail",
+      "memory_hit_end"
+    ],
+    "maximum_guardrail_regression": 0.02,
+    "anti_shortcut_category": "rag_miss_rewrite_then_rag",
+    "maximum_anti_shortcut_regression": 0.05
+  },
+  "confirmation": {
+    "trigger": "Run only if the seed-42 development gate passes.",
+    "additional_training_seeds": [43, 44],
+    "locked_max_steps": 40,
+    "locked_training_view": "planner_coref_contrast_v1",
+    "test_status": "sealed_until_seed42_gate_and_seed43_seed44_training_complete",
+    "primary_test_endpoint": "coref_rewrite_then_rag#step1 strict action match",
+    "bootstrap_cluster": "entity_id",
+    "bootstrap_samples": 20000,
+    "success_rule": "Across locked seeds, the mean paired test action-match delta is positive with an entity-clustered 95% interval excluding zero; direct RAG, general answer, and memory-end verifier regressions must each be no worse than 0.02."
+  },
+  "claim_boundary": "A passing screen is evidence for GRPO growth on resolvable coreference routing only. It does not establish improvement on the mixed stateful benchmark or production traffic."
+}

@@ -1,0 +1,341 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "planner_stateful_retrieval_v1",
+  "role": "train_dev_and_sealed_test",
+  "experimental_unit": "case_id",
+  "bootstrap_cluster": "entity_id",
+  "description": "Stateful retrieval and memory routing benchmark for GRPO learnability.",
+  "splits": {
+    "train": {
+      "cases": {
+        "cases": 120,
+        "steps": 192,
+        "unique_case_ids": 120,
+        "unique_queries": 82,
+        "categories": {
+          "coref_rewrite_then_rag": 24,
+          "direct_rag_guardrail": 24,
+          "general_answer_guardrail": 24,
+          "memory_hit_end": 24,
+          "rag_miss_rewrite_then_rag": 24
+        },
+        "expected_actions": {
+          "answerer": 24,
+          "end": 24,
+          "rag_answer": 96,
+          "re_question": 48
+        }
+      },
+      "steps": {
+        "rows": 192,
+        "cases": 120,
+        "exact_prompt_completion_duplicates": 0,
+        "duplicate_rate": 0.0,
+        "max_rows_per_case": 3,
+        "categories": {
+          "coref_rewrite_then_rag": 48,
+          "direct_rag_guardrail": 24,
+          "general_answer_guardrail": 24,
+          "memory_hit_end": 24,
+          "rag_miss_rewrite_then_rag": 72
+        }
+      },
+      "entity_groups": 24,
+      "template_ids": [
+        "coref_train_1",
+        "coref_train_2",
+        "coref_train_3",
+        "direct_train_1",
+        "direct_train_2",
+        "direct_train_3",
+        "general_train_1",
+        "general_train_2",
+        "general_train_3",
+        "memory_train_1",
+        "memory_train_2",
+        "memory_train_3",
+        "miss_train_1",
+        "miss_train_2",
+        "miss_train_3"
+      ]
+    },
+    "dev": {
+      "cases": {
+        "cases": 40,
+        "steps": 64,
+        "unique_case_ids": 40,
+        "unique_queries": 34,
+        "categories": {
+          "coref_rewrite_then_rag": 8,
+          "direct_rag_guardrail": 8,
+          "general_answer_guardrail": 8,
+          "memory_hit_end": 8,
+          "rag_miss_rewrite_then_rag": 8
+        },
+        "expected_actions": {
+          "answerer": 8,
+          "end": 8,
+          "rag_answer": 32,
+          "re_question": 16
+        }
+      },
+      "steps": {
+        "rows": 64,
+        "cases": 40,
+        "exact_prompt_completion_duplicates": 0,
+        "duplicate_rate": 0.0,
+        "max_rows_per_case": 3,
+        "categories": {
+          "coref_rewrite_then_rag": 16,
+          "direct_rag_guardrail": 8,
+          "general_answer_guardrail": 8,
+          "memory_hit_end": 8,
+          "rag_miss_rewrite_then_rag": 24
+        }
+      },
+      "entity_groups": 8,
+      "template_ids": [
+        "coref_dev_1",
+        "coref_dev_2",
+        "direct_dev_1",
+        "direct_dev_2",
+        "general_dev_1",
+        "general_dev_2",
+        "memory_dev_1",
+        "memory_dev_2",
+        "miss_dev_1",
+        "miss_dev_2"
+      ]
+    },
+    "test": {
+      "cases": {
+        "cases": 120,
+        "steps": 192,
+        "unique_case_ids": 120,
+        "unique_queries": 82,
+        "categories": {
+          "coref_rewrite_then_rag": 24,
+          "direct_rag_guardrail": 24,
+          "general_answer_guardrail": 24,
+          "memory_hit_end": 24,
+          "rag_miss_rewrite_then_rag": 24
+        },
+        "expected_actions": {
+          "answerer": 24,
+          "end": 24,
+          "rag_answer": 96,
+          "re_question": 48
+        }
+      },
+      "steps": {
+        "rows": 192,
+        "cases": 120,
+        "exact_prompt_completion_duplicates": 0,
+        "duplicate_rate": 0.0,
+        "max_rows_per_case": 3,
+        "categories": {
+          "coref_rewrite_then_rag": 48,
+          "direct_rag_guardrail": 24,
+          "general_answer_guardrail": 24,
+          "memory_hit_end": 24,
+          "rag_miss_rewrite_then_rag": 72
+        }
+      },
+      "entity_groups": 24,
+      "template_ids": [
+        "coref_test_1",
+        "coref_test_2",
+        "coref_test_3",
+        "direct_test_1",
+        "direct_test_2",
+        "direct_test_3",
+        "general_test_1",
+        "general_test_2",
+        "general_test_3",
+        "memory_test_1",
+        "memory_test_2",
+        "memory_test_3",
+        "miss_test_1",
+        "miss_test_2",
+        "miss_test_3"
+      ]
+    }
+  },
+  "files": {
+    "train_cases": "training/planner_grpo_seed_v1/cases/planner_stateful_retrieval_v1_train_cases.jsonl",
+    "train_steps": "training/planner_grpo_seed_v1/sft_data_stateful_retrieval_v1_chatml/train.jsonl",
+    "dev_cases": "training/planner_grpo_seed_v1/cases/planner_stateful_retrieval_v1_dev_cases.jsonl",
+    "dev_steps": "training/planner_grpo_seed_v1/sft_data_stateful_retrieval_v1_chatml/dev.jsonl",
+    "test_cases": "training/planner_grpo_seed_v1/cases/planner_stateful_retrieval_v1_test_cases.jsonl",
+    "test_steps": "training/planner_grpo_seed_v1/sft_data_stateful_retrieval_v1_chatml/test.jsonl"
+  },
+  "sha256": {
+    "train_cases": "ac552cd64790916ed22f57b9a276aecc3a632bfd7490c7d82bde597cf5ee7774",
+    "train_steps": "810d6914a42efbd5ec18a98a46d43202eeba1afad7429cb570fce52133f1c32a",
+    "dev_cases": "c6ebb3b86bb53438f646de479689011d7893ea8ae1a0928dfaed061b7cdbe528",
+    "dev_steps": "1a8fb053e6af52f60056a0896a0b9d9f6f478091dcd10b06efd148451cc8cfe0",
+    "test_cases": "9bf2f852ab678f884c5e8b0a0a51ec88df56ba5a22cd57196ac4852ce892d3b4",
+    "test_steps": "a355c541cc99b892f2a067222345ec3ab463a019d0a265b58b73c6d92194602c"
+  },
+  "integrity": {
+    "status": "sealed_test_created_unopened",
+    "train_dev": {
+      "case_id_overlap": 0,
+      "exact_query_overlap": 0,
+      "entity_overlap": 0,
+      "template_overlap": 0
+    },
+    "train_test": {
+      "case_id_overlap": 0,
+      "exact_query_overlap": 0,
+      "entity_overlap": 0,
+      "template_overlap": 0
+    },
+    "dev_test": {
+      "case_id_overlap": 0,
+      "exact_query_overlap": 0,
+      "entity_overlap": 0,
+      "template_overlap": 0
+    },
+    "dev_similarity_to_train": {
+      "count": 40,
+      "mean": 0.31158077678059637,
+      "median": 0.30782778864970645,
+      "count_ge_0_8": 0,
+      "count_ge_0_9": 0,
+      "top_examples": [
+        {
+          "dev_case_id": "SRV1-DEV-DIRECT-004",
+          "train_case_id": "SRV1-TRAIN-DIRECT-004",
+          "category": "direct_rag_guardrail",
+          "similarity": 0.530612
+        },
+        {
+          "dev_case_id": "SRV1-DEV-MISS-004",
+          "train_case_id": "SRV1-TRAIN-MISS-004",
+          "category": "rag_miss_rewrite_then_rag",
+          "similarity": 0.512821
+        },
+        {
+          "dev_case_id": "SRV1-DEV-COREF-004",
+          "train_case_id": "SRV1-TRAIN-COREF-004",
+          "category": "coref_rewrite_then_rag",
+          "similarity": 0.489796
+        },
+        {
+          "dev_case_id": "SRV1-DEV-MEMORY-004",
+          "train_case_id": "SRV1-TRAIN-MEMORY-004",
+          "category": "memory_hit_end",
+          "similarity": 0.489796
+        },
+        {
+          "dev_case_id": "SRV1-DEV-DIRECT-003",
+          "train_case_id": "SRV1-TRAIN-DIRECT-003",
+          "category": "direct_rag_guardrail",
+          "similarity": 0.47619
+        },
+        {
+          "dev_case_id": "SRV1-DEV-MISS-003",
+          "train_case_id": "SRV1-TRAIN-MISS-003",
+          "category": "rag_miss_rewrite_then_rag",
+          "similarity": 0.422535
+        },
+        {
+          "dev_case_id": "SRV1-DEV-DIRECT-001",
+          "train_case_id": "SRV1-TRAIN-DIRECT-001",
+          "category": "direct_rag_guardrail",
+          "similarity": 0.418605
+        },
+        {
+          "dev_case_id": "SRV1-DEV-MISS-006",
+          "train_case_id": "SRV1-TRAIN-MISS-012",
+          "category": "rag_miss_rewrite_then_rag",
+          "similarity": 0.410959
+        },
+        {
+          "dev_case_id": "SRV1-DEV-DIRECT-006",
+          "train_case_id": "SRV1-TRAIN-DIRECT-012",
+          "category": "direct_rag_guardrail",
+          "similarity": 0.390244
+        },
+        {
+          "dev_case_id": "SRV1-DEV-COREF-005",
+          "train_case_id": "SRV1-TRAIN-COREF-005",
+          "category": "coref_rewrite_then_rag",
+          "similarity": 0.378378
+        }
+      ],
+      "method": "difflib.SequenceMatcher on normalized query text; diagnostic only"
+    },
+    "test_similarity_to_train": {
+      "count": 120,
+      "mean": 0.3238792929886379,
+      "median": 0.32558139534883723,
+      "count_ge_0_8": 0,
+      "count_ge_0_9": 0,
+      "top_examples": [
+        {
+          "dev_case_id": "SRV1-TEST-COREF-004",
+          "train_case_id": "SRV1-TRAIN-COREF-004",
+          "category": "coref_rewrite_then_rag",
+          "similarity": 0.52
+        },
+        {
+          "dev_case_id": "SRV1-TEST-COREF-010",
+          "train_case_id": "SRV1-TRAIN-COREF-004",
+          "category": "coref_rewrite_then_rag",
+          "similarity": 0.52
+        },
+        {
+          "dev_case_id": "SRV1-TEST-COREF-016",
+          "train_case_id": "SRV1-TRAIN-COREF-004",
+          "category": "coref_rewrite_then_rag",
+          "similarity": 0.52
+        },
+        {
+          "dev_case_id": "SRV1-TEST-COREF-022",
+          "train_case_id": "SRV1-TRAIN-COREF-004",
+          "category": "coref_rewrite_then_rag",
+          "similarity": 0.52
+        },
+        {
+          "dev_case_id": "SRV1-TEST-DIRECT-022",
+          "train_case_id": "SRV1-TRAIN-DIRECT-022",
+          "category": "direct_rag_guardrail",
+          "similarity": 0.509804
+        },
+        {
+          "dev_case_id": "SRV1-TEST-MEMORY-004",
+          "train_case_id": "SRV1-TRAIN-MEMORY-004",
+          "category": "memory_hit_end",
+          "similarity": 0.5
+        },
+        {
+          "dev_case_id": "SRV1-TEST-MEMORY-010",
+          "train_case_id": "SRV1-TRAIN-MEMORY-004",
+          "category": "memory_hit_end",
+          "similarity": 0.5
+        },
+        {
+          "dev_case_id": "SRV1-TEST-MEMORY-016",
+          "train_case_id": "SRV1-TRAIN-MEMORY-004",
+          "category": "memory_hit_end",
+          "similarity": 0.5
+        },
+        {
+          "dev_case_id": "SRV1-TEST-DIRECT-016",
+          "train_case_id": "SRV1-TRAIN-DIRECT-022",
+          "category": "direct_rag_guardrail",
+          "similarity": 0.5
+        },
+        {
+          "dev_case_id": "SRV1-TEST-MEMORY-022",
+          "train_case_id": "SRV1-TRAIN-MEMORY-004",
+          "category": "memory_hit_end",
+          "similarity": 0.5
+        }
+      ],
+      "method": "difflib.SequenceMatcher on normalized query text; diagnostic only"
+    }
+  }
+}

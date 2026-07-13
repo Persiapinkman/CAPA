@@ -1,0 +1,13 @@
+{
+  "run_id": "20260712_complex_v2_grpo80_seed42_test_shard0",
+  "study_id": "planner_complex_retrieval_grpo_v2",
+  "model_label": "complex_v2_grpo80_seed42",
+  "model_name_or_path": "/raid/zkq/artifacts/CAPA/outputs/merged-qwen25-7b-sft-v3-chatml",
+  "adapter_path": "/raid/zkq/projects/CAPA/outputs/planner-grpo-qwen25-7b-complex-retrieval-v2-seed42/checkpoint-80",
+  "prompt_format": "qwen_chatml",
+  "eval_file": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/sft_data_stateful_retrieval_v2_chatml/test.jsonl",
+  "repeats": 1,
+  "seed": 42,
+  "offset": 0,
+  "limit": 240
+}

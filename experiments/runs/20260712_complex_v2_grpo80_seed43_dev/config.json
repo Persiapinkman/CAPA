@@ -1,0 +1,12 @@
+{
+  "run_id": "20260712_complex_v2_grpo80_seed43_dev",
+  "study_id": "planner_complex_retrieval_grpo_v2",
+  "shard_run_records": [
+    "/raid/zkq/projects/CAPA/experiments/runs/20260712_complex_v2_grpo80_seed43_dev_shard0/run_record.json",
+    "/raid/zkq/projects/CAPA/experiments/runs/20260712_complex_v2_grpo80_seed43_dev_shard1/run_record.json",
+    "/raid/zkq/projects/CAPA/experiments/runs/20260712_complex_v2_grpo80_seed43_dev_shard2/run_record.json",
+    "/raid/zkq/projects/CAPA/experiments/runs/20260712_complex_v2_grpo80_seed43_dev_shard3/run_record.json"
+  ],
+  "rows": 240,
+  "repeats": 1
+}

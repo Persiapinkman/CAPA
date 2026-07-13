@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_complex_retrieval_grpo_v2",
+  "arm_id": "first_miss_transition_v1",
+  "comparison": "reports/planner_complex_retrieval_grpo_v2_dev_seed42.json",
+  "baseline": "sft_v3",
+  "candidate": "grpo42",
+  "passed": false,
+  "primary": {
+    "category": "rag_double_miss_recovery",
+    "category_delta": 0.06000000000000005,
+    "minimum_category_delta": 0.05,
+    "category_passed": true,
+    "category_action_match_delta": 0.07500000000000007,
+    "minimum_category_action_match_delta": 0.1,
+    "category_action_match_passed": false,
+    "action_scope": "step_2",
+    "step": 2,
+    "action_match_delta": 0.0,
+    "minimum_action_match_delta": 0.25,
+    "action_passed": false
+  },
+  "guardrails": {
+    "category_deltas": {
+      "rag_hit_then_synthesize": 0.030625000000000013,
+      "direct_rag_guardrail": 0.0,
+      "general_answer_guardrail": 0.0,
+      "memory_hit_end_guardrail": 0.0
+    },
+    "maximum_regression": 0.03,
+    "passed": true
+  },
+  "anti_shortcut": {
+    "category": "coref_rewrite_then_rag",
+    "delta": 0.0015625000000000222,
+    "maximum_regression": 0.05,
+    "passed": true
+  }
+}

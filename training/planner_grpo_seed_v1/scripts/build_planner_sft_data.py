@@ -20,6 +20,7 @@ for path in (ROOT, ROOT / "demo"):
 from training.planner_grpo_seed_v1.scripts.train_planner_grpo import (  # noqa: E402
     DEFAULT_CASES,
     build_prompt_for_step,
+    expected_action_name,
     expected_decision_to_planner_step,
     load_jsonl,
 )
@@ -113,13 +114,13 @@ def build_rows(
                     "forbidden_actions": json.dumps(case.get("forbidden_actions") or [], ensure_ascii=False),
                     "reward_spec": json.dumps(case.get("reward_spec") or {}, ensure_ascii=False),
                     "previous_action": previous_action,
+                    "entity_id": str(case.get("entity_id") or ""),
+                    "group_id": str(case.get("group_id") or case.get("entity_id") or case_id),
+                    "template_id": str(case.get("template_id") or ""),
+                    "scenario_id": str(case.get("scenario_id") or category),
                     "full_expected_actions": json.dumps(
                         [
-                            (
-                                "clarify"
-                                if str(step.get("decision_type") or "tool") == "clarify"
-                                else str(step.get("action") or "")
-                            )
+                            expected_action_name(step)
                             for step in expected
                             if isinstance(step, dict)
                         ],

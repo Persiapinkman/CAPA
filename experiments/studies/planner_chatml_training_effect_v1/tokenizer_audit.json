@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "base_tokenizer": "/raid/zkq/models/Qwen2.5-7B-Instruct",
+  "merged_sft_tokenizer": "outputs/merged-qwen25-7b-sft-v3-chatml",
+  "tokenizer_json_sha256": {
+    "base": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+    "merged_sft": "9c5ae00e602b8860cbd784ba82a8aa14e8feecec692e7076590d014d7b7fdafa"
+  },
+  "chatml_dev_prompt_comparison": {
+    "rows": 49,
+    "different_token_id_rows": 0,
+    "different_token_id_rows_with_fix_mistral_regex": 0,
+    "vocabulary_size_base": 151665,
+    "vocabulary_size_merged_sft": 151665,
+    "eos_token_id_base": 151645,
+    "eos_token_id_merged_sft": 151645
+  },
+  "conclusion": "The serialized tokenizer files differ, but every study prompt maps to identical token IDs. Input tokenization is not a confound for this study."
+}

@@ -1,0 +1,92 @@
+{
+  "filters": {
+    "category": "coref_rewrite_then_rag",
+    "step": 1
+  },
+  "runs": {
+    "sft_v3": {
+      "steps": 8,
+      "cases": 8,
+      "step_mean": 0.3274456521739131,
+      "case_macro_mean": 0.3274456521739131,
+      "category_macro_mean": 0.3274456521739131,
+      "exact_pass_rate": 0.0,
+      "json_valid_rate": 1.0,
+      "extra_text_rate": 0.0,
+      "categories": {
+        "coref_rewrite_then_rag": 0.3274456521739131
+      },
+      "category_steps": {
+        "coref_rewrite_then_rag#step1": {
+          "count": 8,
+          "mean_score": 0.3274456521739131,
+          "action_match_rate": 0.0
+        }
+      },
+      "action_match_rate": 0.0,
+      "category_action_match": {
+        "coref_rewrite_then_rag": 0.0
+      }
+    },
+    "grpo80": {
+      "steps": 8,
+      "cases": 8,
+      "step_mean": 0.36005434782608703,
+      "case_macro_mean": 0.36005434782608703,
+      "category_macro_mean": 0.36005434782608703,
+      "exact_pass_rate": 0.0,
+      "json_valid_rate": 1.0,
+      "extra_text_rate": 0.0,
+      "categories": {
+        "coref_rewrite_then_rag": 0.36005434782608703
+      },
+      "category_steps": {
+        "coref_rewrite_then_rag#step1": {
+          "count": 8,
+          "mean_score": 0.36005434782608703,
+          "action_match_rate": 0.0
+        }
+      },
+      "action_match_rate": 0.0,
+      "category_action_match": {
+        "coref_rewrite_then_rag": 0.0
+      }
+    }
+  },
+  "comparisons": {
+    "sft_v3_to_grpo80": {
+      "steps": 8,
+      "cases": 8,
+      "clusters": 8,
+      "step_weighted_delta": 0.03260869565217392,
+      "step_weighted_ci95": [
+        0.0,
+        0.09782608695652176
+      ],
+      "case_macro_delta": 0.03260869565217392,
+      "case_macro_ci95": [
+        0.0,
+        0.09782608695652176
+      ],
+      "improved_steps": 1,
+      "unchanged_steps": 7,
+      "regressed_steps": 0,
+      "conclusion": "inconclusive",
+      "bootstrap": {
+        "cluster": "entity_id",
+        "samples": 20000,
+        "seed": 42
+      },
+      "action_match_delta": 0.0,
+      "action_match_ci95": [
+        0.0,
+        0.0
+      ],
+      "action_match_case_macro_delta": 0.0,
+      "action_match_case_macro_ci95": [
+        0.0,
+        0.0
+      ]
+    }
+  }
+}

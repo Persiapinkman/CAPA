@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_stateful_retrieval_grpo_v1",
+  "title": "GRPO learnability in state-conditioned retrieval planning",
+  "research_question": "Can GRPO improve held-out Planner state transitions when sampled rewards are informative rather than saturated?",
+  "dataset_id": "planner_stateful_retrieval_v1",
+  "experimental_unit": "case_id",
+  "bootstrap_cluster": "entity_id",
+  "scenarios": [
+    "coref_rewrite_then_rag",
+    "rag_miss_rewrite_then_rag",
+    "memory_hit_end",
+    "direct_rag_guardrail",
+    "general_answer_guardrail"
+  ],
+  "arms": [
+    "qwen25_base_chatml",
+    "fixed_sft_v3_chatml_initializer",
+    "stateful_retrieval_grpo"
+  ],
+  "primary_comparison": "fixed_sft_v3_chatml_initializer_to_stateful_retrieval_grpo",
+  "primary_metric": "case_macro_mean_verifier_score",
+  "secondary_metrics": [
+    "category_macro_mean_verifier_score",
+    "exact_pass_rate",
+    "json_valid_rate",
+    "extra_text_after_json_rate"
+  ],
+  "support_gate": {
+    "split": "dev",
+    "scope_categories": [
+      "coref_rewrite_then_rag",
+      "rag_miss_rewrite_then_rag"
+    ],
+    "guardrail_categories": [
+      "direct_rag_guardrail",
+      "general_answer_guardrail",
+      "memory_hit_end"
+    ],
+    "samples_per_prompt": 8,
+    "temperature": 0.7,
+    "minimum_nonzero_reward_std_rate": 0.5,
+    "minimum_usable_support_rate": 0.3,
+    "minimum_near_exact_task_support_rate": 0.3,
+    "maximum_fully_saturated_rate": 0.25
+  },
+  "development_gate": {
+    "checkpoint_steps": [40, 80],
+    "sequential_rule": "Evaluate step 40 first. Stop and lock it if all development gates pass; otherwise resume the same seed to step 80.",
+    "minimum_case_macro_delta": 0.02,
+    "maximum_category_regression": 0.02,
+    "note": "Used for hyperparameter screening only; no generalization claim."
+  },
+  "confirmation": {
+    "training_seeds": [42, 43, 44],
+    "test_status": "sealed_until_hyperparameters_are_locked",
+    "bootstrap_samples": 20000,
+    "success_rule": "Mean test case-macro delta across training seeds is positive and the entity-clustered 95% interval excludes zero, with no guardrail category regression larger than 0.02."
+  },
+  "claim_boundary": "A positive result establishes GRPO utility for this synthetic stateful retrieval task family, not for all CAPA routing or production traffic."
+}

@@ -1,0 +1,127 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_complex_retrieval_grpo_v2",
+  "arm_id": "complex_retrieval_dose_v2",
+  "status": "adaptive_full_v2_replication_and_test_confirmation_passed",
+  "objective": "Find a reproducible strict-action GRPO gain on a five-step, double-RAG-miss recovery state machine.",
+  "dataset": {
+    "dataset_id": "planner_stateful_retrieval_v2",
+    "train_rows": 1080,
+    "dev_rows": 240,
+    "test_rows": 480,
+    "primary_category": "rag_double_miss_recovery",
+    "test_status": "opened_once_after_development_replication_passed"
+  },
+  "initializer": "outputs/merged-qwen25-7b-sft-v3-chatml",
+  "support_gate": {
+    "data": "training/planner_grpo_seed_v1/sft_data_stateful_retrieval_v2_chatml/support_audit.jsonl",
+    "rows": 40,
+    "samples_per_prompt": 8,
+    "temperature": 0.7,
+    "minimum_nonzero_std_rate": 0.60,
+    "minimum_mean_distinct_actions": 1.40,
+    "maximum_fully_saturated_rate": 0.50,
+    "require_at_least_one_correct_action_per_step_index": true
+  },
+  "training": {
+    "screen_seed": 42,
+    "max_steps": 80,
+    "learning_rate": 1e-5,
+    "num_generations": 8,
+    "temperature": 0.7,
+    "global_effective_batch_size": 16,
+    "loss_type": "dr_grpo",
+    "beta": 0.0,
+    "lora_rank": 16,
+    "lora_alpha": 32,
+    "lora_targets": "q_proj,k_proj,v_proj,o_proj",
+    "outer_task_weight": 0.95,
+    "outer_format_weight": 0.05
+  },
+  "development_gate": {
+    "split": "dev",
+    "primary_category": "rag_double_miss_recovery",
+    "minimum_primary_category_delta": 0.05,
+    "minimum_primary_action_match_delta": 0.10,
+    "guardrail_categories": [
+      "rag_single_miss_recovery",
+      "rag_hit_then_synthesize",
+      "direct_rag_guardrail",
+      "general_answer_guardrail",
+      "memory_hit_end_guardrail"
+    ],
+    "maximum_guardrail_regression": 0.03,
+    "anti_shortcut_category": "coref_rewrite_then_rag",
+    "maximum_anti_shortcut_regression": 0.05
+  },
+  "confirmation": {
+    "trigger": "Only after the separately preregistered three-seed adaptive development replication gate passes.",
+    "additional_training_seeds": [43, 44],
+    "locked_max_steps": 80,
+    "test_status": "opened_once_and_confirmation_completed",
+    "primary_test_endpoint": "rag_double_miss_recovery strict action match across all five steps",
+    "bootstrap_cluster": "entity_id",
+    "bootstrap_samples": 20000
+  },
+  "claim_boundary": "Controlled mocked retrieval state transitions only; no claim about real retrieval quality.",
+  "support_result": {
+    "gate": "support_gate_seed42.json",
+    "passed": true,
+    "correct_actions": "245/320",
+    "nonzero_std_rate": 1.0,
+    "mean_distinct_actions": 1.5,
+    "fully_saturated_rate": 0.275
+  },
+  "baseline_result": {
+    "run_id": "20260712_complex_v2_sftv3_dev",
+    "overall_action_match": 0.7958333333333333,
+    "primary_category_score": 0.7956250000000005,
+    "primary_category_action_match": 0.7625,
+    "primary_action_by_step": {
+      "1": "9/16",
+      "2": "5/16",
+      "3": "15/16",
+      "4": "16/16",
+      "5": "16/16"
+    },
+    "decision": "Primary category has 19/80 strict-action errors and passes the headroom condition for the locked GRPO screen."
+  },
+  "full_v2_seed42_result": {
+    "training_run_id": "20260712_complex_v2_grpo80_seed42_train",
+    "development_run_id": "20260712_complex_v2_grpo80_seed42_dev",
+    "gate_passed": false,
+    "primary_score_delta": 0.06,
+    "primary_action_delta": 0.075,
+    "primary_action_ci95": [0.025, 0.125],
+    "primary_threshold": 0.10,
+    "changed_actions": "7 step-1 corrections minus 1 step-3 regression",
+    "next_arm": "first_miss_transition_v1"
+  },
+  "first_miss_seed42_result": {
+    "training_run_id": "20260712_first_miss_transition_v1_grpo80_seed42_train",
+    "development_run_id": "20260712_first_miss_transition_v1_grpo80_seed42_dev",
+    "gate_passed": false,
+    "step2_action_delta": 0.125,
+    "category_action_delta": 0.0375,
+    "category_score_delta": 0.0325,
+    "decision": "Do not replicate the focused curriculum; preregister full-v2 effect replication under a separate measurable-growth claim."
+  },
+  "adaptive_replication_result": {
+    "arm": "replicated_full_v2_growth_arm.json",
+    "development_gate_passed": true,
+    "development_mean_primary_action_delta": 0.075,
+    "development_primary_action_ci95": [0.03333333333333333, 0.12083333333333332],
+    "development_positive_seed_count": 3,
+    "test_gate_passed": true,
+    "test_baseline_primary_action_match": 0.65,
+    "test_seed_primary_action_match": {
+      "42": 0.75625,
+      "43": 0.775,
+      "44": 0.80625
+    },
+    "test_mean_primary_action_delta": 0.12916666666666665,
+    "test_primary_action_ci95": [0.075, 0.18958333333333333],
+    "test_mean_primary_score_delta": 0.10960416666666668,
+    "decision": "Confirm measurable, reproducible GRPO growth for the controlled five-step double-miss recovery scenario; retain the original seed-42 +0.10 practical gate as failed."
+  }
+}

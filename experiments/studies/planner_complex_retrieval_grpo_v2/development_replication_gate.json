@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_complex_retrieval_grpo_v2",
+  "arm_id": "replicated_full_v2_growth_v1",
+  "passed": true,
+  "primary": {
+    "category": "rag_double_miss_recovery",
+    "mean_action_delta": 0.075,
+    "minimum_mean_action_delta": 0.05,
+    "mean_action_passed": true,
+    "action_ci95": [
+      0.03333333333333333,
+      0.12083333333333332
+    ],
+    "action_ci_lower_above_zero_passed": true,
+    "seed_action_deltas": {
+      "seed42": 0.075,
+      "seed43": 0.0125,
+      "seed44": 0.1375
+    },
+    "positive_seed_count": 3,
+    "minimum_positive_seed_count": 2,
+    "positive_seed_count_passed": true,
+    "mean_score_delta": 0.06208333333333334,
+    "minimum_mean_score_delta": 0.03,
+    "mean_score_passed": true
+  },
+  "guardrails": {
+    "category_deltas": {
+      "rag_hit_then_synthesize": 0.032187500000000036,
+      "direct_rag_guardrail": 0.0,
+      "general_answer_guardrail": 0.0,
+      "memory_hit_end_guardrail": 0.0
+    },
+    "maximum_mean_regression": 0.03,
+    "passed": true
+  },
+  "anti_shortcut": {
+    "category": "coref_rewrite_then_rag",
+    "delta": 0.0049479166666666075,
+    "maximum_mean_regression": 0.05,
+    "passed": true
+  }
+}

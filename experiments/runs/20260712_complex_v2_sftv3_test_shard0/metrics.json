@@ -1,0 +1,412 @@
+{
+  "repeat_count": 1,
+  "overall": {
+    "mean_score": {
+      "mean": 0.7134999999999994,
+      "stdev": 0.0,
+      "min": 0.7134999999999994,
+      "max": 0.7134999999999994
+    },
+    "action_match_rate": {
+      "mean": 0.6875,
+      "stdev": 0.0,
+      "min": 0.6875,
+      "max": 0.6875
+    },
+    "json_valid_rate": {
+      "mean": 0.9833333333333333,
+      "stdev": 0.0,
+      "min": 0.9833333333333333,
+      "max": 0.9833333333333333
+    },
+    "extra_text_after_json_rate": {
+      "mean": 0.020833333333333332,
+      "stdev": 0.0,
+      "min": 0.020833333333333332,
+      "max": 0.020833333333333332
+    },
+    "mean_extra_text_chars": {
+      "mean": 5.5,
+      "stdev": 0.0,
+      "min": 5.5,
+      "max": 5.5
+    },
+    "effective_json_valid_rate": {
+      "mean": 0.9833333333333333,
+      "stdev": 0.0,
+      "min": 0.9833333333333333,
+      "max": 0.9833333333333333
+    },
+    "effective_extra_text_after_json_rate": {
+      "mean": 0.0,
+      "stdev": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "effective_mean_extra_text_chars": {
+      "mean": 0.0,
+      "stdev": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    }
+  },
+  "categories": {
+    "coref_rewrite_then_rag": {
+      "mean_score": {
+        "mean": 0.5599999999999998,
+        "stdev": 0.0,
+        "min": 0.5599999999999998,
+        "max": 0.5599999999999998
+      },
+      "action_match_rate": {
+        "mean": 0.53125,
+        "stdev": 0.0,
+        "min": 0.53125,
+        "max": 0.53125
+      },
+      "json_valid_rate": {
+        "mean": 0.96875,
+        "stdev": 0.0,
+        "min": 0.96875,
+        "max": 0.96875
+      },
+      "extra_text_after_json_rate": {
+        "mean": 0.0625,
+        "stdev": 0.0,
+        "min": 0.0625,
+        "max": 0.0625
+      },
+      "mean_extra_text_chars": {
+        "mean": 11.3125,
+        "stdev": 0.0,
+        "min": 11.3125,
+        "max": 11.3125
+      },
+      "effective_json_valid_rate": {
+        "mean": 0.96875,
+        "stdev": 0.0,
+        "min": 0.96875,
+        "max": 0.96875
+      },
+      "effective_extra_text_after_json_rate": {
+        "mean": 0.0,
+        "stdev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "effective_mean_extra_text_chars": {
+        "mean": 0.0,
+        "stdev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    },
+    "direct_rag_guardrail": {
+      "mean_score": {
+        "mean": 1.0,
+        "stdev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "action_match_rate": {
+        "mean": 1.0,
+        "stdev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "json_valid_rate": {
+        "mean": 1.0,
+        "stdev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "extra_text_after_json_rate": {
+        "mean": 0.0,
+        "stdev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "mean_extra_text_chars": {
+        "mean": 0.0,
+        "stdev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "effective_json_valid_rate": {
+        "mean": 1.0,
+        "stdev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "effective_extra_text_after_json_rate": {
+        "mean": 0.0,
+        "stdev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "effective_mean_extra_text_chars": {
+        "mean": 0.0,
+        "stdev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    },
+    "general_answer_guardrail": {
+      "mean_score": {
+        "mean": 0.41874999999999996,
+        "stdev": 0.0,
+        "min": 0.41874999999999996,
+        "max": 0.41874999999999996
+      },
+      "action_match_rate": {
+        "mean": 0.375,
+        "stdev": 0.0,
+        "min": 0.375,
+        "max": 0.375
+      },
+      "json_valid_rate": {
+        "mean": 1.0,
+        "stdev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "extra_text_after_json_rate": {
+        "mean": 0.0,
+        "stdev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "mean_extra_text_chars": {
+        "mean": 0.0,
+        "stdev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "effective_json_valid_rate": {
+        "mean": 1.0,
+        "stdev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "effective_extra_text_after_json_rate": {
+        "mean": 0.0,
+        "stdev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "effective_mean_extra_text_chars": {
+        "mean": 0.0,
+        "stdev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    },
+    "memory_hit_end_guardrail": {
+      "mean_score": {
+        "mean": 1.0,
+        "stdev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "action_match_rate": {
+        "mean": 1.0,
+        "stdev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "json_valid_rate": {
+        "mean": 1.0,
+        "stdev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "extra_text_after_json_rate": {
+        "mean": 0.0,
+        "stdev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "mean_extra_text_chars": {
+        "mean": 0.0,
+        "stdev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "effective_json_valid_rate": {
+        "mean": 1.0,
+        "stdev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "effective_extra_text_after_json_rate": {
+        "mean": 0.0,
+        "stdev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "effective_mean_extra_text_chars": {
+        "mean": 0.0,
+        "stdev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    },
+    "rag_double_miss_recovery": {
+      "mean_score": {
+        "mean": 0.6752500000000001,
+        "stdev": 0.0,
+        "min": 0.6752500000000001,
+        "max": 0.6752500000000001
+      },
+      "action_match_rate": {
+        "mean": 0.625,
+        "stdev": 0.0,
+        "min": 0.625,
+        "max": 0.625
+      },
+      "json_valid_rate": {
+        "mean": 1.0,
+        "stdev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "extra_text_after_json_rate": {
+        "mean": 0.0,
+        "stdev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "mean_extra_text_chars": {
+        "mean": 0.0,
+        "stdev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "effective_json_valid_rate": {
+        "mean": 1.0,
+        "stdev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "effective_extra_text_after_json_rate": {
+        "mean": 0.0,
+        "stdev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "effective_mean_extra_text_chars": {
+        "mean": 0.0,
+        "stdev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    },
+    "rag_hit_then_synthesize": {
+      "mean_score": {
+        "mean": 0.9131249999999999,
+        "stdev": 0.0,
+        "min": 0.9131249999999999,
+        "max": 0.9131249999999999
+      },
+      "action_match_rate": {
+        "mean": 0.9375,
+        "stdev": 0.0,
+        "min": 0.9375,
+        "max": 0.9375
+      },
+      "json_valid_rate": {
+        "mean": 1.0,
+        "stdev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "extra_text_after_json_rate": {
+        "mean": 0.0,
+        "stdev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "mean_extra_text_chars": {
+        "mean": 0.0,
+        "stdev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "effective_json_valid_rate": {
+        "mean": 1.0,
+        "stdev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "effective_extra_text_after_json_rate": {
+        "mean": 0.0,
+        "stdev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "effective_mean_extra_text_chars": {
+        "mean": 0.0,
+        "stdev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    },
+    "rag_single_miss_recovery": {
+      "mean_score": {
+        "mean": 0.6537499999999999,
+        "stdev": 0.0,
+        "min": 0.6537499999999999,
+        "max": 0.6537499999999999
+      },
+      "action_match_rate": {
+        "mean": 0.625,
+        "stdev": 0.0,
+        "min": 0.625,
+        "max": 0.625
+      },
+      "json_valid_rate": {
+        "mean": 0.9375,
+        "stdev": 0.0,
+        "min": 0.9375,
+        "max": 0.9375
+      },
+      "extra_text_after_json_rate": {
+        "mean": 0.0625,
+        "stdev": 0.0,
+        "min": 0.0625,
+        "max": 0.0625
+      },
+      "mean_extra_text_chars": {
+        "mean": 19.958333333333332,
+        "stdev": 0.0,
+        "min": 19.958333333333332,
+        "max": 19.958333333333332
+      },
+      "effective_json_valid_rate": {
+        "mean": 0.9375,
+        "stdev": 0.0,
+        "min": 0.9375,
+        "max": 0.9375
+      },
+      "effective_extra_text_after_json_rate": {
+        "mean": 0.0,
+        "stdev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "effective_mean_extra_text_chars": {
+        "mean": 0.0,
+        "stdev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    }
+  },
+  "determinism": {
+    "rows_compared": 240,
+    "identical_score_and_completion_rows": 240,
+    "agreement_rate": 1.0
+  },
+  "runtime_seconds": 836.8822384690866,
+  "peak_gpu_memory_gb": 22.947927951812744
+}

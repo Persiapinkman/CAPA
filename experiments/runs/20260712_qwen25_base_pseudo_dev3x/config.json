@@ -1,0 +1,12 @@
+{
+  "run_id": "20260712_qwen25_base_pseudo_dev3x",
+  "study_id": "planner_chatml_training_effect_v1",
+  "model_label": "base_pseudo",
+  "model_name_or_path": "/raid/zkq/models/Qwen2.5-7B-Instruct",
+  "adapter_path": "",
+  "prompt_format": "pseudo",
+  "eval_file": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/sft_data/val.jsonl",
+  "repeats": 3,
+  "seed": 42,
+  "limit": 0
+}

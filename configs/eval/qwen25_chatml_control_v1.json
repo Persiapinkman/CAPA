@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_chatml_training_effect_v1",
+  "dataset_id": "planner_focused_v3",
+  "split": "dev",
+  "eval_file_chatml": "training/planner_grpo_seed_v1/sft_data_v3_chatml/val.jsonl",
+  "eval_file_pseudo": "training/planner_grpo_seed_v1/sft_data/val.jsonl",
+  "protocol": {
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "do_sample": false,
+    "seed": 42,
+    "repeats": 3,
+    "max_new_tokens": 128,
+    "score_first_json_only": true,
+    "raw_completion_metrics_required": true
+  },
+  "arms": [
+    {
+      "label": "base_pseudo",
+      "model": "/raid/zkq/models/Qwen2.5-7B-Instruct",
+      "adapter": "",
+      "prompt_format": "pseudo"
+    },
+    {
+      "label": "base_chatml",
+      "model": "/raid/zkq/models/Qwen2.5-7B-Instruct",
+      "adapter": "",
+      "prompt_format": "qwen_chatml"
+    },
+    {
+      "label": "sft_v3_chatml",
+      "model": "/raid/zkq/models/Qwen2.5-7B-Instruct",
+      "adapter": "outputs/planner-sft-qwen25-7b-trl-lora-warmup-v3-chatml",
+      "prompt_format": "qwen_chatml"
+    },
+    {
+      "label": "grpo_v4_chatml",
+      "model": "outputs/merged-qwen25-7b-sft-v3-chatml",
+      "adapter": "outputs/planner-grpo-qwen25-7b-trl-lora-v4-chatml-format-formal-v1",
+      "prompt_format": "qwen_chatml"
+    }
+  ]
+}

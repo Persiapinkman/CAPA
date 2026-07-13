@@ -1,0 +1,106 @@
+{
+  "overall": {
+    "count": 480,
+    "mean_score": 0.791114583333333,
+    "json_valid_rate": 1.0,
+    "extra_text_after_json_rate": 0.0020833333333333333,
+    "mean_extra_text_chars": 0.07916666666666666,
+    "effective_json_valid_rate": 1.0,
+    "effective_extra_text_after_json_rate": 0.0,
+    "effective_mean_extra_text_chars": 0.0,
+    "action_match_rate": 0.7708333333333334
+  },
+  "categories": {
+    "coref_rewrite_then_rag": {
+      "count": 64,
+      "mean_score": 0.5570312500000001,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.0,
+      "mean_extra_text_chars": 0.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0,
+      "action_match_rate": 0.5
+    },
+    "direct_rag_guardrail": {
+      "count": 32,
+      "mean_score": 1.0,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.0,
+      "mean_extra_text_chars": 0.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0,
+      "action_match_rate": 1.0
+    },
+    "general_answer_guardrail": {
+      "count": 32,
+      "mean_score": 0.3921874999999998,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.0,
+      "mean_extra_text_chars": 0.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0,
+      "action_match_rate": 0.34375
+    },
+    "memory_hit_end_guardrail": {
+      "count": 32,
+      "mean_score": 1.0,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.0,
+      "mean_extra_text_chars": 0.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0,
+      "action_match_rate": 1.0
+    },
+    "rag_double_miss_recovery": {
+      "count": 160,
+      "mean_score": 0.8263437499999997,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.00625,
+      "mean_extra_text_chars": 0.2375,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0,
+      "action_match_rate": 0.80625
+    },
+    "rag_hit_then_synthesize": {
+      "count": 64,
+      "mean_score": 0.9612500000000006,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.0,
+      "mean_extra_text_chars": 0.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0,
+      "action_match_rate": 0.984375
+    },
+    "rag_single_miss_recovery": {
+      "count": 96,
+      "mean_score": 0.7687500000000002,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.0,
+      "mean_extra_text_chars": 0.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0,
+      "action_match_rate": 0.7395833333333334
+    }
+  },
+  "score_distribution": {
+    "0.07": 2,
+    "0.1": 31,
+    "0.12": 1,
+    "0.125": 23,
+    "0.15": 1,
+    "0.175": 36,
+    "0.2": 16,
+    "0.9": 1,
+    "0.925": 1,
+    "0.95": 97,
+    "0.975": 45,
+    "1.0": 226
+  }
+}

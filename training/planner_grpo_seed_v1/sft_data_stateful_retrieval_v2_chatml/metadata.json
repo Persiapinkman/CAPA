@@ -1,0 +1,74 @@
+{
+  "dataset_id": "planner_stateful_retrieval_v2",
+  "prompt_format": "qwen_chatml",
+  "append_im_end": true,
+  "splits": {
+    "train": {
+      "cases": 504,
+      "steps": 1080,
+      "entities": 72,
+      "categories": {
+        "coref_rewrite_then_rag": 144,
+        "direct_rag_guardrail": 72,
+        "general_answer_guardrail": 72,
+        "memory_hit_end_guardrail": 72,
+        "rag_double_miss_recovery": 360,
+        "rag_hit_then_synthesize": 144,
+        "rag_single_miss_recovery": 216
+      },
+      "max_steps_per_case": 5,
+      "source_cases": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/cases/planner_stateful_retrieval_v2_train_cases.jsonl",
+      "output": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/sft_data_stateful_retrieval_v2_chatml/train.jsonl"
+    },
+    "dev": {
+      "cases": 112,
+      "steps": 240,
+      "entities": 16,
+      "categories": {
+        "coref_rewrite_then_rag": 32,
+        "direct_rag_guardrail": 16,
+        "general_answer_guardrail": 16,
+        "memory_hit_end_guardrail": 16,
+        "rag_double_miss_recovery": 80,
+        "rag_hit_then_synthesize": 32,
+        "rag_single_miss_recovery": 48
+      },
+      "max_steps_per_case": 5,
+      "source_cases": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/cases/planner_stateful_retrieval_v2_dev_cases.jsonl",
+      "output": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/sft_data_stateful_retrieval_v2_chatml/dev.jsonl"
+    },
+    "test": {
+      "cases": 224,
+      "steps": 480,
+      "entities": 32,
+      "categories": {
+        "coref_rewrite_then_rag": 64,
+        "direct_rag_guardrail": 32,
+        "general_answer_guardrail": 32,
+        "memory_hit_end_guardrail": 32,
+        "rag_double_miss_recovery": 160,
+        "rag_hit_then_synthesize": 64,
+        "rag_single_miss_recovery": 96
+      },
+      "max_steps_per_case": 5,
+      "source_cases": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/cases/planner_stateful_retrieval_v2_test_cases.jsonl",
+      "output": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/sft_data_stateful_retrieval_v2_chatml/test.jsonl"
+    }
+  },
+  "support_audit": {
+    "cases": 8,
+    "steps": 40,
+    "entities": 8,
+    "categories": {
+      "rag_double_miss_recovery": 40
+    },
+    "max_steps_per_case": 5,
+    "output": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/sft_data_stateful_retrieval_v2_chatml/support_audit.jsonl",
+    "selection": "all five double-miss steps for the first eight sorted dev entity IDs"
+  },
+  "entity_overlaps": {
+    "train_dev": 0,
+    "train_test": 0,
+    "dev_test": 0
+  }
+}

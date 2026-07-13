@@ -1,35 +1,48 @@
 .cursor
-__pycache__
-data
-dist
+.codex
+AGENTS.md
+__pycache__/
+.pytest_cache/
+*.py[cod]
+dist/
 *.log
-results/*
-!results/README.md
-!results/planner_routing_eval/
-!results/planner_routing_eval/**
+
+# Local credentials. The existing in-code defaults are intentionally unchanged.
 api_key.txt
-.cursor
-demo/runs
-demo/sessions
+
+# Runtime state and compatibility links to the external artifact root.
+demo/runs/
+demo/sessions/
 demo/llm_debug
 .venv
-.venv-train
+.venv-*
 .hf-cache
 outputs
 logs
 .codegraph
-uv.lock
 
-.python-version
-IO_RECORD_SPEC.md
-main.py
-pyproject.toml
-.codex
-AGENTS.md
-ARCHITECTURE.md
+# Regenerated prompt contexts and raw historical rollouts live externally.
+training/planner_grpo_seed_v1/reports/grpo_train_prompt_contexts
+training/planner_grpo_seed_v1/reports/sft_prompt_contexts
+training/planner_grpo_seed_v1/reports/repro_eval
+training/planner_grpo_seed_v1/reports/planner_grpo_rollout_*
 
-# 评测
+# Keep only artifact-location metadata in git.
+artifacts/*
+!artifacts/README.md
+!artifacts/location.json
+!artifacts/MIGRATION_20260712.md
+
+# Evaluation outputs are allowlisted deliberately.
+results/*
+!results/README.md
+!results/planner_routing_eval/
+!results/planner_routing_eval/**
+
+# Legacy compatibility dataset. New versioned datasets live in data/datasets/.
+dataset
+
+# Demo eval scripts are source; generated files remain ignored.
 demo/eval/*
 !demo/eval/
 !demo/eval/*.py
-dataset

@@ -1,0 +1,7 @@
+{
+  "schema_version": "1.0",
+  "historical_path": "outputs/planner-grpo-qwen35-4b-focused-full-fsdp-long-20260708-recovery-v5/checkpoint-2",
+  "status": "artifact_missing",
+  "detected_at": "2026-07-12",
+  "note": "The pre-existing active symlink was broken during the repository audit. Historical run metadata remains archived; this path must not be treated as a usable checkpoint."
+}

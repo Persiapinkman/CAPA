@@ -1,0 +1,538 @@
+{
+  "schema_version": "2.0",
+  "run_id": "20260712_qwen25_base_chatml_dev3x",
+  "study_id": "planner_chatml_training_effect_v1",
+  "date": "2026-07-12",
+  "kind": "eval_generation_repeated",
+  "status": "completed",
+  "purpose": "Measure the untrained base Planner with the corrected native ChatML prompt.",
+  "hypothesis": "Native ChatML alone improves stopping and may change routing relative to pseudo tags.",
+  "parent_run_id": null,
+  "provenance": {
+    "git_commit": "c9e6ba7dc341fa3dbd9fee968ec494d9ec340728",
+    "git_dirty": true,
+    "command": "/raid/zkq/projects/CAPA/.venv-trl-grpo-cu124/bin/python pipelines/eval/run_generation_eval.py --study-id planner_chatml_training_effect_v1 --dataset-id planner_focused_v3 --split dev --repeats 3 --max-new-tokens 128 --seed 42 --run-id 20260712_qwen25_base_chatml_dev3x --purpose 'Measure the untrained base Planner with the corrected native ChatML prompt.' --hypothesis 'Native ChatML alone improves stopping and may change routing relative to pseudo tags.' --model-label base_chatml --model-name-or-path /raid/zkq/models/Qwen2.5-7B-Instruct --prompt-format qwen_chatml --eval-file training/planner_grpo_seed_v1/sft_data_v3_chatml/val.jsonl --run-dir experiments/runs/20260712_qwen25_base_chatml_dev3x --artifact-dir /raid/zkq/artifacts/CAPA/evaluations/20260712_qwen25_base_chatml_dev3x",
+    "seed": 42,
+    "started_at": "2026-07-12T11:21:51.124992+00:00",
+    "finished_at": "2026-07-12T11:35:27.038653+00:00",
+    "environment": {
+      "python": "3.10.12",
+      "torch": "2.6.0+cu124",
+      "transformers": "4.57.6",
+      "trl": "1.8.0",
+      "peft": "0.19.1",
+      "datasets": "5.0.0",
+      "accelerate": "1.14.0",
+      "cuda_visible_devices": "1",
+      "gpu": "Tesla V100-SXM2-32GB",
+      "dtype": "float16",
+      "attention": "sdpa"
+    }
+  },
+  "data": {
+    "dataset_id": "planner_focused_v3",
+    "split": "dev",
+    "files": {
+      "eval": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/sft_data_v3_chatml/val.jsonl"
+    },
+    "sha256": {
+      "eval": "ac4d0b96d5aafdc7d9034a2764686def0304f283f5614122f8421d3d9e81d5a9"
+    },
+    "rows": 49
+  },
+  "method": {
+    "model_label": "base_chatml",
+    "model": "/raid/zkq/models/Qwen2.5-7B-Instruct",
+    "adapter_path": "",
+    "prompt_format": "qwen_chatml",
+    "generation": {
+      "temperature": 0.0,
+      "top_p": 1.0,
+      "do_sample": false,
+      "max_new_tokens": 128,
+      "repeats": 3,
+      "score_first_json_only": true
+    }
+  },
+  "metrics": {
+    "primary": {
+      "name": "case_macro_mean_verifier_score",
+      "value": 0.8543434503946183,
+      "higher_is_better": true
+    },
+    "aggregate": {
+      "repeat_count": 3,
+      "overall": {
+        "mean_score": {
+          "mean": 0.8544753862135988,
+          "stdev": 0.0,
+          "min": 0.8544753862135988,
+          "max": 0.8544753862135988
+        },
+        "json_valid_rate": {
+          "mean": 1.0,
+          "stdev": 0.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "extra_text_after_json_rate": {
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "mean_extra_text_chars": {
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "effective_json_valid_rate": {
+          "mean": 1.0,
+          "stdev": 0.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "effective_extra_text_after_json_rate": {
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "effective_mean_extra_text_chars": {
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        }
+      },
+      "categories": {
+        "clarify_intent_ambiguity": {
+          "mean_score": {
+            "mean": 0.1,
+            "stdev": 0.0,
+            "min": 0.1,
+            "max": 0.1
+          },
+          "json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "effective_extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "full_detection_eval": {
+          "mean_score": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "effective_extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "general_answer": {
+          "mean_score": {
+            "mean": 0.9,
+            "stdev": 0.0,
+            "min": 0.9,
+            "max": 0.9
+          },
+          "json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "effective_extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "historical_asset_qa": {
+          "mean_score": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "effective_extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "probe_only_contrastive": {
+          "mean_score": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "effective_extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "probe_then_migration": {
+          "mean_score": {
+            "mean": 0.8444512862616315,
+            "stdev": 0.0,
+            "min": 0.8444512862616315,
+            "max": 0.8444512862616315
+          },
+          "json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "effective_extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "probe_then_migration_strict": {
+          "mean_score": {
+            "mean": 0.8752052545155995,
+            "stdev": 0.0,
+            "min": 0.8752052545155995,
+            "max": 0.8752052545155995
+          },
+          "json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "effective_extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "single_image_probe": {
+          "mean_score": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "effective_extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        }
+      },
+      "determinism": {
+        "rows_compared": 49,
+        "identical_score_and_completion_rows": 49,
+        "agreement_rate": 1.0
+      },
+      "runtime_seconds": 815.8125485740602,
+      "peak_gpu_memory_gb": 19.126347541809082
+    },
+    "study_summary": {
+      "steps": 49,
+      "cases": 31,
+      "step_mean": 0.8544753862135988,
+      "case_macro_mean": 0.8543434503946183,
+      "category_macro_mean": 0.8399570675971538,
+      "exact_pass_rate": 0.5102040816326531,
+      "json_valid_rate": 1.0,
+      "extra_text_rate": 0.0,
+      "categories": {
+        "clarify_intent_ambiguity": 0.1,
+        "full_detection_eval": 1.0,
+        "general_answer": 0.9,
+        "historical_asset_qa": 1.0,
+        "probe_only_contrastive": 1.0,
+        "probe_then_migration": 0.8444512862616311,
+        "probe_then_migration_strict": 0.8752052545155994,
+        "single_image_probe": 1.0
+      }
+    },
+    "paired_comparison": {
+      "reference_arm": "base_pseudo",
+      "steps": 49,
+      "cases": 31,
+      "step_weighted_delta": 0.009039576421701693,
+      "step_weighted_ci95": [
+        -0.018333333333333326,
+        0.03805570759593749
+      ],
+      "case_macro_delta": 0.007144181365538435,
+      "case_macro_ci95": [
+        -0.014745219556120553,
+        0.03026510938079348
+      ],
+      "improved_steps": 3,
+      "unchanged_steps": 41,
+      "regressed_steps": 5,
+      "conclusion": "inconclusive",
+      "bootstrap": {
+        "cluster": "case_id",
+        "samples": 20000,
+        "seed": 42
+      }
+    }
+  },
+  "artifacts": {
+    "run_dir": "/raid/zkq/projects/CAPA/experiments/runs/20260712_qwen25_base_chatml_dev3x",
+    "metrics": "/raid/zkq/projects/CAPA/experiments/runs/20260712_qwen25_base_chatml_dev3x/metrics.json",
+    "predictions": [
+      "/raid/zkq/artifacts/CAPA/evaluations/20260712_qwen25_base_chatml_dev3x/predictions_run1.jsonl",
+      "/raid/zkq/artifacts/CAPA/evaluations/20260712_qwen25_base_chatml_dev3x/predictions_run2.jsonl",
+      "/raid/zkq/artifacts/CAPA/evaluations/20260712_qwen25_base_chatml_dev3x/predictions_run3.jsonl"
+    ],
+    "study_comparison": {
+      "json": "reports/planner_chatml_training_effect_v1.json",
+      "markdown": "reports/planner_chatml_training_effect_v1.md"
+    },
+    "prediction_sha256": {
+      "/raid/zkq/artifacts/CAPA/evaluations/20260712_qwen25_base_chatml_dev3x/predictions_run1.jsonl": "013f03ae51ea6387a70849884d73a0481ee21f1970f8be2698fdea83a2b925b7",
+      "/raid/zkq/artifacts/CAPA/evaluations/20260712_qwen25_base_chatml_dev3x/predictions_run2.jsonl": "5de01a7899a6891946ddbaaead506cec3e944df76a18908b861aed248de0254f",
+      "/raid/zkq/artifacts/CAPA/evaluations/20260712_qwen25_base_chatml_dev3x/predictions_run3.jsonl": "4a8b7f3d3a6eb079a69d44973b5cc1ba02d3aa50ba85df68a97a662e8fced097"
+    }
+  },
+  "decision": {
+    "outcome": "promote_development",
+    "rationale": "Retain native ChatML for stopping correctness: paired raw tail-text failures changed from 49/49 under pseudo tags to 0/49 under ChatML in every repeat, with JSON validity preserved. Routing-score change remains inconclusive: case-macro delta=+0.007144, 95% CI=[-0.014745, +0.030265]."
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "overall": {
+    "count": 64,
+    "mean_score": 0.7675284803511708,
+    "json_valid_rate": 1.0,
+    "extra_text_after_json_rate": 0.03125,
+    "mean_extra_text_chars": 0.359375,
+    "effective_json_valid_rate": 1.0,
+    "effective_extra_text_after_json_rate": 0.0,
+    "effective_mean_extra_text_chars": 0.0,
+    "action_match_rate": 0.703125
+  },
+  "categories": {
+    "coref_rewrite_then_rag": {
+      "count": 16,
+      "mean_score": 0.5800271739130436,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.0,
+      "mean_extra_text_chars": 0.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0,
+      "action_match_rate": 0.5
+    },
+    "direct_rag_guardrail": {
+      "count": 8,
+      "mean_score": 1.0,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.0,
+      "mean_extra_text_chars": 0.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0,
+      "action_match_rate": 1.0
+    },
+    "general_answer_guardrail": {
+      "count": 8,
+      "mean_score": 0.8499999999999999,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.0,
+      "mean_extra_text_chars": 0.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0,
+      "action_match_rate": 1.0
+    },
+    "memory_hit_end": {
+      "count": 8,
+      "mean_score": 1.0,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.0,
+      "mean_extra_text_chars": 0.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0,
+      "action_match_rate": 1.0
+    },
+    "rag_miss_rewrite_then_rag": {
+      "count": 24,
+      "mean_score": 0.7100578316610924,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.08333333333333333,
+      "mean_extra_text_chars": 0.9583333333333334,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0,
+      "action_match_rate": 0.5416666666666666
+    }
+  },
+  "score_distribution": {
+    "0.217": 3,
+    "0.24": 3,
+    "0.261": 3,
+    "0.4": 3,
+    "0.478": 3,
+    "0.533": 1,
+    "0.696": 3,
+    "0.8": 9,
+    "0.85": 8,
+    "0.904": 1,
+    "0.952": 4,
+    "1.0": 23
+  }
+}

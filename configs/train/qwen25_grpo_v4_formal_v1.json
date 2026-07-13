@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "run_id": "qwen25_trl_grpo_lora_v4_chatml_format_formal_v1",
+  "base_model": "outputs/merged-qwen25-7b-sft-v3-chatml",
+  "cases": "training/planner_grpo_seed_v1/cases/planner_grpo_focused_train_v3_cases.jsonl",
+  "prompt_format": "qwen_chatml",
+  "precision": "fp16",
+  "attention_implementation": "sdpa",
+  "lora": {
+    "r": 16,
+    "alpha": 32,
+    "dropout": 0.05,
+    "target_modules": ["q_proj", "k_proj", "v_proj", "o_proj"]
+  },
+  "grpo": {
+    "steps": 60,
+    "seed": 42,
+    "learning_rate": 0.000002,
+    "num_generations": 4,
+    "generation_batch_size": 8,
+    "max_completion_length": 128,
+    "temperature": 0.4,
+    "top_p": 0.9,
+    "task_reward_weight": 0.65,
+    "format_reward_weight": 0.35
+  }
+}

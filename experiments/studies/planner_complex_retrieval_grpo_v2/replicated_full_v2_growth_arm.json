@@ -1,0 +1,89 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_complex_retrieval_grpo_v2",
+  "arm_id": "replicated_full_v2_growth_v1",
+  "status": "test_confirmation_passed",
+  "rationale": "The original practical-effect gate of +0.10 remains failed. However, the full-v2 seed-42 strict-action delta was +0.075 with entity-clustered 95% CI [0.025, 0.125] and no guardrail regression. This adaptive arm asks whether a smaller but measurable effect replicates; it does not relabel the original gate.",
+  "existing_anchor": {
+    "seed": 42,
+    "training_run_id": "20260712_complex_v2_grpo80_seed42_train",
+    "development_run_id": "20260712_complex_v2_grpo80_seed42_dev",
+    "primary_action_delta": 0.075,
+    "primary_action_ci95": [0.025, 0.125]
+  },
+  "locked_recipe": {
+    "initializer": "outputs/merged-qwen25-7b-sft-v3-chatml",
+    "dataset_id": "planner_stateful_retrieval_v2",
+    "step_data": "training/planner_grpo_seed_v1/sft_data_stateful_retrieval_v2_chatml/train.jsonl",
+    "training_seeds": [43, 44],
+    "max_steps": 80,
+    "learning_rate": 1e-5,
+    "num_generations": 8,
+    "temperature": 0.7,
+    "loss_type": "dr_grpo",
+    "beta": 0.0,
+    "lora_rank": 16,
+    "lora_alpha": 32,
+    "lora_targets": "q_proj,k_proj,v_proj,o_proj",
+    "outer_task_weight": 0.95,
+    "outer_format_weight": 0.05,
+    "distributed_execution": "two concurrent 4-GPU jobs with gradient_accumulation_steps=4 to preserve the locked effective batch"
+  },
+  "development_replication_gate": {
+    "split": "dev",
+    "primary_category": "rag_double_miss_recovery",
+    "minimum_three_seed_mean_action_delta": 0.05,
+    "minimum_positive_seed_count": 2,
+    "require_entity_clustered_action_ci_lower_above_zero": true,
+    "minimum_three_seed_mean_score_delta": 0.03,
+    "guardrail_categories": [
+      "rag_hit_then_synthesize",
+      "direct_rag_guardrail",
+      "general_answer_guardrail",
+      "memory_hit_end_guardrail"
+    ],
+    "maximum_mean_guardrail_regression": 0.03,
+    "anti_shortcut_category": "coref_rewrite_then_rag",
+    "maximum_mean_anti_shortcut_regression": 0.05
+  },
+  "test_gate": {
+    "status": "completed_after_development_replication_gate_passed",
+    "primary_category": "rag_double_miss_recovery",
+    "require_three_seed_mean_action_delta_positive": true,
+    "require_entity_clustered_action_ci_lower_above_zero": true,
+    "require_three_seed_mean_score_delta_positive": true,
+    "guardrail_categories": [
+      "rag_hit_then_synthesize",
+      "direct_rag_guardrail",
+      "general_answer_guardrail",
+      "memory_hit_end_guardrail"
+    ],
+    "maximum_mean_guardrail_regression": 0.03,
+    "anti_shortcut_category": "coref_rewrite_then_rag",
+    "maximum_mean_anti_shortcut_regression": 0.05,
+    "bootstrap_cluster": "entity_id",
+    "bootstrap_samples": 20000
+  },
+  "development_result": {
+    "passed": true,
+    "mean_primary_action_delta": 0.075,
+    "primary_action_ci95": [0.03333333333333333, 0.12083333333333332],
+    "positive_seed_count": 3,
+    "mean_primary_score_delta": 0.06208333333333334,
+    "gate_record": "development_replication_gate.json"
+  },
+  "test_result": {
+    "passed": true,
+    "baseline_primary_action_match": 0.65,
+    "seed_primary_action_match": {
+      "42": 0.75625,
+      "43": 0.775,
+      "44": 0.80625
+    },
+    "mean_primary_action_delta": 0.12916666666666665,
+    "primary_action_ci95": [0.075, 0.18958333333333333],
+    "mean_primary_score_delta": 0.10960416666666668,
+    "gate_record": "test_confirmation_gate.json"
+  },
+  "claim_boundary": "The pass supports reproducible measurable GRPO growth on controlled full-v2 retrieval state transitions, while the original +0.10 seed-42 practical promotion gate remains failed and no claim is made about real retrieval quality."
+}

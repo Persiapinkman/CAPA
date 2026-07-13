@@ -1,156 +1,82 @@
 # CAPA
 
-CAPA is a Planner-centric agent demo and evaluation workspace for visual AI capability routing.
+CAPA is a Planner-centric agent and evaluation workspace for visual AI capability routing. Given a user query, optional image, conversation trajectory, and tool state, the Planner emits one structured JSON decision for the next action.
 
-The current focus is the Planner: given a user query, optional image, and conversation/tool state, it chooses the next high-level action as JSON. The repo contains the demo agent, tool registry, routing evaluation scripts, and seed datasets for SFT/DPO/GRPO-style Planner work.
+## Current Research Question
+
+The demo defaults to Qwen3.5-35B-A3B, while the confirmed research recipe uses a Qwen2.5-7B SFTv3 initializer. The current study establishes that action-dominant GRPO produces reproducible strict-action growth on an entity-isolated five-step retrieval-recovery state machine; its sealed-test three-seed mean action gain is `+0.1292` with entity-clustered 95% CI `[+0.0750, +0.1896]`.
+
+Current status is generated at:
+
+```text
+reports/CURRENT.md
+```
+
+The authoritative machine-readable run history is:
+
+```text
+experiments/registry.jsonl
+```
 
 ## Repository Layout
 
-- `demo/`: agent runtime, prompts, memory system, tool schemas/registry/executors, web demo, and routing eval code.
-- `skills/`: executable skills/tools used by the demo, including open-set detection, Flux image generation, RAG answer, target detection evaluation, and report generation.
-- `training/planner_dpo_train_seed_v1/`: single-step Planner routing data and historical SFT/DPO seed assets.
-- `training/planner_grpo_seed_v1/`: compound/multi-step Planner cases, reward verifier, offline rollout scripts, repeated eval scripts, and reports.
-- `scripts/`: reproducible serving/eval/train entrypoints.
-- `experiments/`: active experiment ledger plus archived historical results.
-- `examples/images/`: local image fixtures used by eval cases.
+| Path | Responsibility |
+|---|---|
+| `src/capa/` | Planner, prompts, clarification, memory, tool contracts, registry, and evaluation helpers |
+| `demo/` | HTTP/UI application and compatibility imports for legacy entrypoints |
+| `pipelines/` | Reproducible dataset registration, evaluation, comparison, and registry commands |
+| `configs/` | Versioned model, training, evaluation, and environment configurations |
+| `data/datasets/` | Dataset cards, split statistics, integrity audits, and SHA256 manifests |
+| `training/` | Historical/package-specific data builders and training implementations |
+| `experiments/studies/` | Research questions, hypotheses, arms, metrics, and decision rules |
+| `experiments/runs/` | Immutable per-run config, metrics, notes, and provenance |
+| `reports/` | Generated current status, leaderboard, and compact study/error reports |
+| `artifacts/` | Metadata for the external artifact store |
 
-## Current Evaluation Tracking
+Large checkpoints, local environments, caches, logs, and traces live under `/raid/zkq/artifacts/CAPA`. Legacy paths such as `outputs/` remain compatibility symlinks.
 
-Human-readable active results:
+## Runtime Architecture
 
-```text
-experiments/EXPERIMENT_LOG.md
-```
-
-Machine-readable active manifest:
-
-```text
-experiments/manifest.jsonl
-```
-
-Older or superseded results are archived under:
+The request path is:
 
 ```text
-experiments/archive/
+demo/demo_server.py
+  -> src/capa/agent.py
+  -> src/capa/memory.py
+  -> src/capa/tools/executor.py
+  -> skills/*
 ```
 
-The current active tracking has two lanes:
+The Planner currently routes among RAG, query rewriting, direct answering, image generation, Qwen/Rex-Omni detection, full pipeline evaluation, migration advice, and Adela evaluation.
 
-- single-step routing: `training/planner_dpo_train_seed_v1/eval/planner_routing_eval_90cases.json`
-- multi-step routing: `training/planner_grpo_seed_v1/cases/planner_grpo_train_cases.jsonl`
+## Reproducible Commands
 
-## Formal Eval Protocol
-
-Formal evals use vLLM/OpenAI-compatible serving with deterministic generation:
-
-- `temperature=0`
-- `top_p=1`
-- `do_sample=false`
-- `seed=42`
-- 3 repeats, then aggregate
-- per-case CSV audit artifacts for review
-
-See:
-
-```text
-experiments/EVALUATION_POLICY.md
-```
-
-## Single-Step Routing Eval
-
-Run the 90-case single-step Planner routing eval:
+Validate data and experiment records:
 
 ```bash
-MODEL='Qwen3.5-35B-A3B' \
-API_BASE='http://10.111.32.253:8000/v1' \
-REPORT_PREFIX='qwen35_35b_a3b_timing_v2_zip90' \
-bash scripts/run_vllm_repro_eval_3x.sh
+python pipelines/data/register_planner_dataset.py
+python pipelines/experiments/registry_cli.py validate
+python pipelines/experiments/registry_cli.py render
 ```
 
-Default cases:
-
-```text
-training/planner_dpo_train_seed_v1/eval/planner_routing_eval_90cases.json
-```
-
-Default output:
-
-```text
-results/planner_routing_eval/
-```
-
-Each repeated single-step eval writes:
-
-```text
-results/planner_routing_eval/<REPORT_PREFIX>_aggregate.json
-results/planner_routing_eval/<REPORT_PREFIX>_case_audit.csv
-results/planner_routing_eval/<REPORT_PREFIX>_failed_cases.csv
-```
-
-The audit CSV is the required review surface: one row per case with query, expected action/slots, each repeat's actual action/input, failure reason, timing, and token usage. The failed-cases CSV is the same schema filtered to rows where any repeat failed.
-
-## Multi-Step Compound Routing Eval
-
-Run the compound Planner eval used for GRPO diagnostics:
+Run unit tests:
 
 ```bash
-MODEL='Qwen3.5-35B-A3B' \
-API_BASE='http://10.111.32.253:8000/v1' \
-REPORT_PREFIX='qwen35_35b_a3b_grpo_compound245_stateprompt_t60_3x' \
-RUNS=3 \
-TIMEOUT_SECONDS=60 \
-OPENAI_TIMEOUT_SECONDS=60 \
-bash scripts/run_grpo_repro_eval_3x.sh
+PYTHONPATH=src:. .venv-trl-grpo-cu124/bin/python -m unittest discover -s tests -v
 ```
 
-Default cases:
-
-```text
-training/planner_grpo_seed_v1/cases/planner_grpo_train_cases.jsonl
-```
-
-Default output:
-
-```text
-training/planner_grpo_seed_v1/reports/repro_eval/
-```
-
-The multi-step eval is offline: it rolls out Planner decisions and injects mock tool observations instead of executing real tools.
-
-## Current GRPO Direction
-
-The current GRPO work is treated as a diagnostic/regression suite first, training set second.
-
-After cleaning reward noise and prompt/tool-description ambiguity, 35B passes the compound eval overall. Residual failures concentrate in compound state transitions, especially:
-
-```text
-single-image detection probe -> migration_advisor
-```
-
-This is the main candidate direction for GRPO data construction. Generic single-step routing is not the priority unless a new eval shows fresh hard cases.
-
-## Demo
-
-Start the local demo server:
+Start the demo:
 
 ```bash
-python3 demo/demo_server.py --port 18080
+python demo/demo_server.py --port 18080
 ```
 
-Then open:
+## Evidence Rules
 
-```text
-http://127.0.0.1:18080
-```
+- `planner_focused_v3` is a reused development split, not a sealed test set.
+- The compound245 set is a regression suite with historical train overlap.
+- `planner_stateful_retrieval_v2` test was opened once after its preregistered development replication gate passed and is now frozen against further model selection.
+- Offline multi-step evaluation uses mock observations and does not establish end-to-end tool success.
+- A training-method promotion requires case-level confidence intervals and independent training seeds.
 
-More demo details are in:
-
-```text
-demo/README.md
-```
-
-## Notes
-
-- The Planner output is a structured JSON decision, not the final user-facing answer.
-- Some transitions are handled by engineering in `demo/agent.py`; do not train the model to duplicate those if the runtime already owns them.
-- Generated eval reports and rollout predictions are intentionally kept under `results/` or `training/*/reports/` so they can be audited and re-scored.
+See `experiments/EVALUATION_POLICY.md` and `experiments/TECHNICAL_DECISIONS.md` for the full protocol and current rationale.
