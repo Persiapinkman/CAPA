@@ -7,9 +7,11 @@ import pytest
 
 from training.planner_grpo_seed_v1.scripts.train_qwen35_4b_grpo import (
     NONTHINKING_SUFFIX,
+    flush_reward_extrema,
     load_step_data,
     metric_tail,
     parse_step_indices,
+    record_reward_extrema,
 )
 
 
@@ -51,6 +53,17 @@ def test_parse_step_indices_is_explicit_and_deduplicated():
 def test_metric_tail_supports_trl_deque_buffers():
     assert metric_tail([0.1, 0.2, 0.3], 1) == [0.2, 0.3]
     assert metric_tail(deque((0.1, 0.2, 0.3)), 2) == [0.3]
+
+
+def test_reward_extrema_span_all_generation_micro_batches():
+    store = {}
+    metrics = {"train": {}}
+    record_reward_extrema(store, "train", {"reward_min": 0.4, "reward_max": 0.8})
+    record_reward_extrema(store, "train", {"reward_min": 0.2, "reward_max": 0.7})
+    flush_reward_extrema(store, metrics, "train")
+    assert metrics["train"]["reward_min"] == [0.2]
+    assert metrics["train"]["reward_max"] == [0.8]
+    assert store["train"] == {"minimums": [], "maximums": []}
 
 
 def test_load_step_data_accepts_only_declared_steps(tmp_path):

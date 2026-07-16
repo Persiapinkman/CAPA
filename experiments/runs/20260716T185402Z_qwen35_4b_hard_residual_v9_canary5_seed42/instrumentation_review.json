@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "status": "training_path_pass_instrumentation_followup_required",
+  "git_commit": "53863231097b38df88df7fcf2d5b3c2f3f8efcf1",
+  "optimizer_steps_completed": 5,
+  "training_path_checks": {
+    "finite_gradient_checks": 20,
+    "missing_gradient_tensors": 0,
+    "nonfinite_gradient_tensors": 0,
+    "generation_groups": 40,
+    "diverse_generation_groups": 38,
+    "maximum_allocated_gib": 13.953498363494873,
+    "minimum_free_gib": 15.60784912109375,
+    "completion_clipped_ratio": 0.0,
+    "wandb_core_metrics_present": true
+  },
+  "instrumentation_issue": "reward_min/reward_max used only the first bounded deque window in each optimizer step; reward, reward_std, entropy, gradient norm, and advantage metrics were unaffected.",
+  "screen_authorized": false,
+  "next_action": "Verify optimizer-step reward extrema and Git provenance in a fresh canary from the unchanged SFT initializer before starting the 40-step screen."
+}

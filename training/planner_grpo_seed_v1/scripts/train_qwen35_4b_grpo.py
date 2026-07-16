@@ -9,6 +9,7 @@ import json
 import math
 import os
 import platform
+import subprocess
 import sys
 import time
 import traceback
@@ -405,6 +406,53 @@ def metric_tail(values: Any, offset: int) -> list[Any]:
     return list(values)[offset:]
 
 
+def record_reward_extrema(
+    store: dict[str, dict[str, list[float]]],
+    mode: str,
+    stats: dict[str, float],
+) -> None:
+    """Accumulate micro-batch extrema until the optimizer-step log flush."""
+
+    if not stats:
+        return
+    bucket = store.setdefault(mode, {"minimums": [], "maximums": []})
+    bucket["minimums"].append(float(stats["reward_min"]))
+    bucket["maximums"].append(float(stats["reward_max"]))
+
+
+def flush_reward_extrema(
+    store: dict[str, dict[str, list[float]]],
+    metrics: Any,
+    mode: str,
+) -> None:
+    """Expose exact optimizer-step extrema through TRL's metric buffer."""
+
+    bucket = store.get(mode, {"minimums": [], "maximums": []})
+    if bucket["minimums"]:
+        metrics[mode]["reward_min"] = [min(bucket["minimums"])]
+        metrics[mode]["reward_max"] = [max(bucket["maximums"])]
+    bucket["minimums"].clear()
+    bucket["maximums"].clear()
+
+
+def git_source_state(root: Path) -> dict[str, Any]:
+    """Return commit provenance without persisting repository contents."""
+
+    try:
+        commit = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], cwd=root, text=True, stderr=subprocess.DEVNULL
+        ).strip()
+        status = subprocess.check_output(
+            ["git", "status", "--porcelain", "--untracked-files=no"],
+            cwd=root,
+            text=True,
+            stderr=subprocess.DEVNULL,
+        )
+        return {"git_commit": commit, "tracked_worktree_dirty": bool(status.strip())}
+    except (OSError, subprocess.CalledProcessError):
+        return {"git_commit": "", "tracked_worktree_dirty": None}
+
+
 class V100GRPOTrainer(GRPOTrainer):
     """TRL GRPO with the audited V100 scaler and rollout-distribution evidence."""
 
@@ -454,9 +502,6 @@ class V100GRPOTrainer(GRPOTrainer):
 
     def _generate_and_score_completions(self, inputs: list[dict[str, Any]]) -> dict[str, Any]:
         rank = self.accelerator.process_index
-        reward_offsets = {
-            name: len(self._logs["rewards"][name]) for name in self.reward_func_names
-        }
         local_events = [
             {
                 "rank": rank,
@@ -494,10 +539,11 @@ class V100GRPOTrainer(GRPOTrainer):
 
         result = super()._generate_and_score_completions(inputs)
         mode = "train" if self.model.training else "eval"
-        # TRL 1.8 stores metric buffers as bounded deques.  Convert to a list
-        # before taking the increment added by the parent call.
+        # TRL 1.8 stores exactly one generation batch in bounded deques.  The
+        # parent call replaces that window, so the full post-call buffer is the
+        # current micro-batch even after the deque has reached maxlen.
         new_rewards = {
-            name: metric_tail(self._logs["rewards"][name], reward_offsets[name])
+            name: metric_tail(self._logs["rewards"][name], 0)
             for name in self.reward_func_names
         }
         weights = {
@@ -508,8 +554,15 @@ class V100GRPOTrainer(GRPOTrainer):
                 strict=True,
             )
         }
-        for name, value in weighted_reward_statistics(new_rewards, weights).items():
-            self._metrics[mode][name].append(value)
+        extrema_store = getattr(self, "_capa_reward_extrema", None)
+        if extrema_store is None:
+            extrema_store = {}
+            self._capa_reward_extrema = extrema_store
+        record_reward_extrema(
+            extrema_store,
+            mode,
+            weighted_reward_statistics(new_rewards, weights),
+        )
 
         gathered_advantages = self.accelerator.gather(
             result["advantages"].detach().float()
@@ -557,6 +610,9 @@ class V100GRPOTrainer(GRPOTrainer):
 
     def log(self, logs: dict[str, float], start_time: float | None = None) -> None:
         mode = "train" if self.model.training else "eval"
+        flush_reward_extrema(
+            getattr(self, "_capa_reward_extrema", {}), self._metrics, mode
+        )
         mirror_policy_entropy_metric(self._metrics[mode])
         super().log(logs, start_time)
 
@@ -809,6 +865,7 @@ def main() -> None:
         "started_at": started_at,
         "mode": args.mode,
         "optimizer_steps_authorized": bool(args.mode == "train" and args.confirm_train),
+        "source_control": git_source_state(ROOT),
         "model_name_or_path": str(model_path),
         "adapter_path": str(adapter_path) if adapter_path is not None else "",
         "adapter_sha256": (
@@ -1074,6 +1131,7 @@ def main() -> None:
             "model_audit": audit,
             "g4_no_update_fingerprint": before_fingerprint if args.mode == "g4" else None,
             "output_dir": str(output_dir),
+            "source_control": run_config["source_control"],
         }
         if is_main:
             write_json(output_dir / "capa_qwen35_grpo_result.json", result)
