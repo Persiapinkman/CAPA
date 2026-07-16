@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_retry_anti_forgetting_v10_qwen35_4b_v1",
+  "created_at": "2026-07-16T22:20:00Z",
+  "status": "frozen_inherited_sampling_temperature",
+  "selected_temperature": 0.9,
+  "top_p": 0.9,
+  "reason": "V10 retains the V9 model initializer, verifier, hard nuisance template family, and action space. V9's preregistered calibration selected the lower passing temperature 0.9; V10 reuses it and subjects all primary and control strata to a new support gate.",
+  "source": "experiments/studies/planner_retry_safe_end_hard_residual_v9_qwen35_4b_v1/temperature_calibration_decision.json",
+  "override_after_v10_support_sampling_begins": "forbidden"
+}

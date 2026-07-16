@@ -1,0 +1,146 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_retry_anti_forgetting_v10_qwen35_4b_v1",
+  "created_at": "2026-07-16T22:20:00Z",
+  "status": "preregistered_before_v10_data_generation",
+  "objective": "Retain V9's large primary GRPO gain while preventing stability-control forgetting, then make the frozen Qwen3.5-4B checkpoint exceed Qwen3.5-35B-A3B on a fresh entity-disjoint sealed benchmark.",
+  "comparison_contract": "experiments/studies/planner_retry_anti_forgetting_v10_qwen35_4b_v1/comparison_contract.json",
+  "temperature_decision": "experiments/studies/planner_retry_anti_forgetting_v10_qwen35_4b_v1/temperature_decision.json",
+  "evidence_before_v10": {
+    "sft_proof": {"base_action_accuracy": 0.7731, "selected_sft_action_accuracy": 0.9769, "absolute_gain": 0.2038},
+    "v9_screen": {"optimizer_steps": 40, "nonzero_gradient_steps": 7, "zero_gradient_steps_per_rank": 33, "health_status": "pass"},
+    "v9_selection": {
+      "status": "no_promotion",
+      "sft_primary_pass_rate": 0.2361111111111111,
+      "checkpoint_10_primary_pass_rate": 0.5694444444444444,
+      "checkpoint_20_primary_pass_rate": 0.75,
+      "checkpoint_40_primary_pass_rate": 0.7638888888888888,
+      "sft_control_pass_rate": 0.3888888888888889,
+      "checkpoint_10_control_pass_rate": 0.2361111111111111,
+      "checkpoint_20_control_pass_rate": 0.05555555555555555,
+      "checkpoint_40_control_pass_rate": 0.013888888888888888,
+      "diagnosis": "Primary-only GRPO learned the desired retry/safe-end behavior but catastrophically forgot six counterfactual stability controls."
+    }
+  },
+  "design": {
+    "seed": 2026071610,
+    "independent_unit": "entity_id",
+    "blocked_bundle": "entity × detector family",
+    "within_bundle_counterfactuals": 9,
+    "difficulty_template_family": "V7-anchored hard nuisance wording with balanced anti-forgetting control replay",
+    "primary_scenarios": ["current_success_step2", "fresh_retry_step2", "post_retry_success_step3"],
+    "stability_controls": ["post_retry_error_step3", "post_retry_metric_veto_step3", "conflicting_state_step2", "nonretryable_step2", "budget_exhausted_step2", "missing_required_state_step2"],
+    "splits": {
+      "grpo_train": {"entities": 24, "materialized_before_training": true, "role": "optimizer_only"},
+      "support_dev_a": {"entities": 12, "materialized_before_training": true, "role": "support_gate_block_a"},
+      "support_dev_b": {"entities": 12, "materialized_before_training": true, "role": "support_gate_block_b"},
+      "selection_dev": {"entities": 12, "materialized_before_training": true, "role": "checkpoint_selection_only"},
+      "sealed_test_a": {"entities": 12, "materialized_before_checkpoint_selection": false, "role": "sealed_confirmation_a"},
+      "sealed_test_b": {"entities": 12, "materialized_before_checkpoint_selection": false, "role": "sealed_confirmation_b"}
+    },
+    "factor_balance": {
+      "grpo_train": "full 4 query styles × 3 badge conditions × 2 fixtures",
+      "each_support_block": "full 4 query styles × 3 badge conditions with fixtures balanced 6/6; block B reverses block A fixture allocation",
+      "selection_and_each_test_cohort": "full 4 query styles × 3 badge conditions with fixtures balanced 6/6",
+      "detector_family": "every entity crossed with Qwen and Rex",
+      "scenario_replay_ratio": "3 primary : 6 controls = 1:2, exactly balanced at 48 rows per scenario in optimizer data"
+    }
+  },
+  "data_integrity_gates": {
+    "case_and_prompt_ids_unique": true,
+    "protected_value_overlap_across_splits": 0,
+    "protected_value_overlap_with_v6_v7_v8_v9": 0,
+    "formatted_prompt_hash_overlap_with_repository": 0,
+    "canonical_oracle_pass_rate": 1.0,
+    "max_prompt_tokens": 4608,
+    "sealed_test_commitment_before_optimizer": true
+  },
+  "support_audit": {
+    "splits": ["support_dev_a", "support_dev_b"],
+    "scope": "all three primary and all six stability-control scenarios",
+    "expected_prompt_groups": 432,
+    "samples_per_prompt": 4,
+    "expected_samples": 1728,
+    "temperature": 0.9,
+    "top_p": 0.9,
+    "max_new_tokens": 320,
+    "seed": 42,
+    "hard_gates": {
+      "complete_prompt_groups": 432,
+      "minimum_json_valid_rate": 0.99,
+      "maximum_clipped_rate": 0.01,
+      "minimum_primary_gold_action_support_rate": 0.7,
+      "minimum_primary_nonzero_reward_variance_rate": 0.2,
+      "minimum_control_gold_action_support_rate": 0.5,
+      "minimum_control_nonzero_reward_variance_rate": 0.2,
+      "minimum_gold_action_support_rate_per_scenario_detector": 0.35,
+      "minimum_nonzero_reward_variance_groups_per_scenario_detector": 3,
+      "minimum_gold_action_support_rate_per_support_block": 0.5,
+      "minimum_nonzero_reward_variance_rate_per_support_block": 0.15
+    },
+    "all_scenarios_and_both_blocks_must_pass": true,
+    "on_fail": "Run zero optimizer steps; preserve samples and open a new study version without relaxing or resampling this gate."
+  },
+  "optimizer_dataset": {
+    "source": "V10 grpo_train all nine scenarios",
+    "expected_rows": 432,
+    "scenario_distribution": {
+      "current_success_step2": 48,
+      "fresh_retry_step2": 48,
+      "post_retry_success_step3": 48,
+      "post_retry_error_step3": 48,
+      "post_retry_metric_veto_step3": 48,
+      "conflicting_state_step2": 48,
+      "nonretryable_step2": 48,
+      "budget_exhausted_step2": 48,
+      "missing_required_state_step2": 48
+    },
+    "selection_after_support": "all nine scenarios or none"
+  },
+  "training": {
+    "precision": "fp16",
+    "world_size": 4,
+    "num_generations": 4,
+    "temperature": 0.9,
+    "top_p": 0.9,
+    "generation_batch_size": 4,
+    "per_device_train_batch_size": 1,
+    "gradient_accumulation_steps": 8,
+    "global_completions_per_optimizer_step": 32,
+    "learning_rate": 0.000002,
+    "warmup_steps": 2,
+    "loss_type": "dr_grpo",
+    "beta": 0.0,
+    "reward_weights": {"task_reward": 0.95, "format_reward": 0.05},
+    "canary": {"max_steps": 2, "purpose": "runtime, gradient, memory, telemetry, and mixed-scenario health only"},
+    "screen": {"restart_from_same_sft_initializer": true, "max_steps": 10, "candidate_checkpoints": [2, 5, 10], "seed": 42},
+    "wandb": {
+      "entity": "1139090915-tsinghua-university",
+      "project": "capa-planner-post-training",
+      "group": "planner-retry-anti-forgetting-v10",
+      "required_metrics": ["Train Reward Statistics", "Policy Entropy", "Gradient Norm", "Mean Advantage Estimate"]
+    }
+  },
+  "selection_dev": {
+    "models": ["SFT initializer", "GRPO checkpoint-2", "GRPO checkpoint-5", "GRPO checkpoint-10"],
+    "generation": {"temperature": 0.0, "top_p": 1.0, "do_sample": false, "seed": 42, "max_new_tokens": 320, "image_pixels_sent_to_planner": false},
+    "promotion_gates": {
+      "minimum_primary_complete_trajectory_gain_over_sft": 0.05,
+      "maximum_control_complete_trajectory_regression": 0.02,
+      "maximum_added_wrong_side_effecting_actions": 0,
+      "minimum_json_valid_rate": 0.99,
+      "maximum_clipped_rate": 0.01
+    },
+    "larger_reference_visible_during_checkpoint_selection": false,
+    "on_fail": "Keep both V10 sealed cohorts unmaterialized and report that anti-forgetting GRPO did not promote."
+  },
+  "sealed_test": {
+    "cohorts": ["sealed_test_a", "sealed_test_b"],
+    "combined_entities": 24,
+    "combined_cases": 432,
+    "materialize_only_after_checkpoint_selection": true,
+    "models": ["SFT initializer", "selected GRPO checkpoint", "Qwen3.5-35B-A3B"],
+    "single_use": true,
+    "objective_rule_source": "comparison_contract.json"
+  }
+}

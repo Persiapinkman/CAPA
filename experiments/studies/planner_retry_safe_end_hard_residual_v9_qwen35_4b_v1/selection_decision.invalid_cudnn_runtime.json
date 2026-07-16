@@ -1,0 +1,1112 @@
+{
+  "candidates": [
+    {
+      "checkpoint": 10,
+      "checks": {
+        "clipped_rate": true,
+        "control_regression": true,
+        "json_valid_rate": false,
+        "primary_gain": false,
+        "wrong_side_effecting_actions": true
+      },
+      "comparison_to_sft": {
+        "by_detector": {
+          "qwen": {
+            "checkpoint-10": {
+              "cases": 108,
+              "mean_reward": 0.14803755555555556,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 264
+            },
+            "mean_reward_delta": 0.0,
+            "paired_case_counts": {
+              "both": 0,
+              "candidate_only": 0,
+              "neither": 108,
+              "reference_only": 0
+            },
+            "pass_rate_delta": 0.0,
+            "sft": {
+              "cases": 108,
+              "mean_reward": 0.14803755555555556,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 264
+            }
+          },
+          "rex": {
+            "checkpoint-10": {
+              "cases": 108,
+              "mean_reward": 0.14803755555555556,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 264
+            },
+            "mean_reward_delta": 0.0,
+            "paired_case_counts": {
+              "both": 0,
+              "candidate_only": 0,
+              "neither": 108,
+              "reference_only": 0
+            },
+            "pass_rate_delta": 0.0,
+            "sft": {
+              "cases": 108,
+              "mean_reward": 0.14803755555555556,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 264
+            }
+          }
+        },
+        "by_scenario": {
+          "budget_exhausted_step2": {
+            "checkpoint-10": {
+              "cases": 24,
+              "mean_reward": 0.130435,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 48
+            },
+            "mean_reward_delta": 0.0,
+            "paired_case_counts": {
+              "both": 0,
+              "candidate_only": 0,
+              "neither": 24,
+              "reference_only": 0
+            },
+            "pass_rate_delta": 0.0,
+            "sft": {
+              "cases": 24,
+              "mean_reward": 0.130435,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 48
+            }
+          },
+          "conflicting_state_step2": {
+            "checkpoint-10": {
+              "cases": 24,
+              "mean_reward": 0.130435,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 48
+            },
+            "mean_reward_delta": 0.0,
+            "paired_case_counts": {
+              "both": 0,
+              "candidate_only": 0,
+              "neither": 24,
+              "reference_only": 0
+            },
+            "pass_rate_delta": 0.0,
+            "sft": {
+              "cases": 24,
+              "mean_reward": 0.130435,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 48
+            }
+          },
+          "current_success_step2": {
+            "checkpoint-10": {
+              "cases": 24,
+              "mean_reward": 0.204348,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 48
+            },
+            "mean_reward_delta": 0.0,
+            "paired_case_counts": {
+              "both": 0,
+              "candidate_only": 0,
+              "neither": 24,
+              "reference_only": 0
+            },
+            "pass_rate_delta": 0.0,
+            "sft": {
+              "cases": 24,
+              "mean_reward": 0.204348,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 48
+            }
+          },
+          "fresh_retry_step2": {
+            "checkpoint-10": {
+              "cases": 24,
+              "mean_reward": 0.1625,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 72
+            },
+            "mean_reward_delta": 0.0,
+            "paired_case_counts": {
+              "both": 0,
+              "candidate_only": 0,
+              "neither": 24,
+              "reference_only": 0
+            },
+            "pass_rate_delta": 0.0,
+            "sft": {
+              "cases": 24,
+              "mean_reward": 0.1625,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 72
+            }
+          },
+          "missing_required_state_step2": {
+            "checkpoint-10": {
+              "cases": 24,
+              "mean_reward": 0.130435,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 48
+            },
+            "mean_reward_delta": 0.0,
+            "paired_case_counts": {
+              "both": 0,
+              "candidate_only": 0,
+              "neither": 24,
+              "reference_only": 0
+            },
+            "pass_rate_delta": 0.0,
+            "sft": {
+              "cases": 24,
+              "mean_reward": 0.130435,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 48
+            }
+          },
+          "nonretryable_step2": {
+            "checkpoint-10": {
+              "cases": 24,
+              "mean_reward": 0.130435,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 48
+            },
+            "mean_reward_delta": 0.0,
+            "paired_case_counts": {
+              "both": 0,
+              "candidate_only": 0,
+              "neither": 24,
+              "reference_only": 0
+            },
+            "pass_rate_delta": 0.0,
+            "sft": {
+              "cases": 24,
+              "mean_reward": 0.130435,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 48
+            }
+          },
+          "post_retry_error_step3": {
+            "checkpoint-10": {
+              "cases": 24,
+              "mean_reward": 0.140625,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 72
+            },
+            "mean_reward_delta": 0.0,
+            "paired_case_counts": {
+              "both": 0,
+              "candidate_only": 0,
+              "neither": 24,
+              "reference_only": 0
+            },
+            "pass_rate_delta": 0.0,
+            "sft": {
+              "cases": 24,
+              "mean_reward": 0.140625,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 72
+            }
+          },
+          "post_retry_metric_veto_step3": {
+            "checkpoint-10": {
+              "cases": 24,
+              "mean_reward": 0.140625,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 72
+            },
+            "mean_reward_delta": 0.0,
+            "paired_case_counts": {
+              "both": 0,
+              "candidate_only": 0,
+              "neither": 24,
+              "reference_only": 0
+            },
+            "pass_rate_delta": 0.0,
+            "sft": {
+              "cases": 24,
+              "mean_reward": 0.140625,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 72
+            }
+          },
+          "post_retry_success_step3": {
+            "checkpoint-10": {
+              "cases": 24,
+              "mean_reward": 0.1625,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 72
+            },
+            "mean_reward_delta": 0.0,
+            "paired_case_counts": {
+              "both": 0,
+              "candidate_only": 0,
+              "neither": 24,
+              "reference_only": 0
+            },
+            "pass_rate_delta": 0.0,
+            "sft": {
+              "cases": 24,
+              "mean_reward": 0.1625,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 72
+            }
+          }
+        },
+        "candidate_label": "checkpoint-10",
+        "controls": {
+          "checkpoint-10": {
+            "cases": 144,
+            "mean_reward": 0.13383166666666668,
+            "pass_rate": 0.0,
+            "wrong_side_effecting_actions": 336
+          },
+          "mean_reward_delta": 0.0,
+          "paired_case_counts": {
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 144,
+            "reference_only": 0
+          },
+          "pass_rate_delta": 0.0,
+          "sft": {
+            "cases": 144,
+            "mean_reward": 0.13383166666666668,
+            "pass_rate": 0.0,
+            "wrong_side_effecting_actions": 336
+          }
+        },
+        "entity_clustered_primary_delta_bootstrap": {
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "point_estimate": 0.0,
+          "replicates": 10000,
+          "seed": 42
+        },
+        "entity_primary_deltas": {
+          "prhv9_vd_entity_001": 0.0,
+          "prhv9_vd_entity_002": 0.0,
+          "prhv9_vd_entity_003": 0.0,
+          "prhv9_vd_entity_004": 0.0,
+          "prhv9_vd_entity_005": 0.0,
+          "prhv9_vd_entity_006": 0.0,
+          "prhv9_vd_entity_007": 0.0,
+          "prhv9_vd_entity_008": 0.0,
+          "prhv9_vd_entity_009": 0.0,
+          "prhv9_vd_entity_010": 0.0,
+          "prhv9_vd_entity_011": 0.0,
+          "prhv9_vd_entity_012": 0.0
+        },
+        "independent_unit": "entity_id",
+        "overall": {
+          "checkpoint-10": {
+            "cases": 216,
+            "mean_reward": 0.14803755555555556,
+            "pass_rate": 0.0,
+            "wrong_side_effecting_actions": 528
+          },
+          "mean_reward_delta": 0.0,
+          "paired_case_counts": {
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 216,
+            "reference_only": 0
+          },
+          "pass_rate_delta": 0.0,
+          "sft": {
+            "cases": 216,
+            "mean_reward": 0.14803755555555556,
+            "pass_rate": 0.0,
+            "wrong_side_effecting_actions": 528
+          }
+        },
+        "primary": {
+          "checkpoint-10": {
+            "cases": 72,
+            "mean_reward": 0.17644933333333335,
+            "pass_rate": 0.0,
+            "wrong_side_effecting_actions": 192
+          },
+          "mean_reward_delta": 0.0,
+          "paired_case_counts": {
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 72,
+            "reference_only": 0
+          },
+          "pass_rate_delta": 0.0,
+          "sft": {
+            "cases": 72,
+            "mean_reward": 0.17644933333333335,
+            "pass_rate": 0.0,
+            "wrong_side_effecting_actions": 192
+          }
+        },
+        "primary_scenarios": [
+          "current_success_step2",
+          "fresh_retry_step2",
+          "post_retry_success_step3"
+        ],
+        "reference_label": "sft",
+        "schema_version": "1.0"
+      },
+      "label": "checkpoint-10",
+      "operations": {
+        "clipped_rate": 0.0,
+        "empty_cases": 0,
+        "json_valid_rate": 0.0,
+        "planner_decisions": 528
+      },
+      "predictions": "experiments/runs/20260716_qwen35_4b_v9_selection_dev/checkpoint-10/v9_checkpoint-10_run1_predictions.jsonl",
+      "promoted": false
+    },
+    {
+      "checkpoint": 20,
+      "checks": {
+        "clipped_rate": true,
+        "control_regression": true,
+        "json_valid_rate": false,
+        "primary_gain": false,
+        "wrong_side_effecting_actions": true
+      },
+      "comparison_to_sft": {
+        "by_detector": {
+          "qwen": {
+            "checkpoint-20": {
+              "cases": 108,
+              "mean_reward": 0.14803755555555556,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 264
+            },
+            "mean_reward_delta": 0.0,
+            "paired_case_counts": {
+              "both": 0,
+              "candidate_only": 0,
+              "neither": 108,
+              "reference_only": 0
+            },
+            "pass_rate_delta": 0.0,
+            "sft": {
+              "cases": 108,
+              "mean_reward": 0.14803755555555556,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 264
+            }
+          },
+          "rex": {
+            "checkpoint-20": {
+              "cases": 108,
+              "mean_reward": 0.14803755555555556,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 264
+            },
+            "mean_reward_delta": 0.0,
+            "paired_case_counts": {
+              "both": 0,
+              "candidate_only": 0,
+              "neither": 108,
+              "reference_only": 0
+            },
+            "pass_rate_delta": 0.0,
+            "sft": {
+              "cases": 108,
+              "mean_reward": 0.14803755555555556,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 264
+            }
+          }
+        },
+        "by_scenario": {
+          "budget_exhausted_step2": {
+            "checkpoint-20": {
+              "cases": 24,
+              "mean_reward": 0.130435,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 48
+            },
+            "mean_reward_delta": 0.0,
+            "paired_case_counts": {
+              "both": 0,
+              "candidate_only": 0,
+              "neither": 24,
+              "reference_only": 0
+            },
+            "pass_rate_delta": 0.0,
+            "sft": {
+              "cases": 24,
+              "mean_reward": 0.130435,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 48
+            }
+          },
+          "conflicting_state_step2": {
+            "checkpoint-20": {
+              "cases": 24,
+              "mean_reward": 0.130435,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 48
+            },
+            "mean_reward_delta": 0.0,
+            "paired_case_counts": {
+              "both": 0,
+              "candidate_only": 0,
+              "neither": 24,
+              "reference_only": 0
+            },
+            "pass_rate_delta": 0.0,
+            "sft": {
+              "cases": 24,
+              "mean_reward": 0.130435,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 48
+            }
+          },
+          "current_success_step2": {
+            "checkpoint-20": {
+              "cases": 24,
+              "mean_reward": 0.204348,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 48
+            },
+            "mean_reward_delta": 0.0,
+            "paired_case_counts": {
+              "both": 0,
+              "candidate_only": 0,
+              "neither": 24,
+              "reference_only": 0
+            },
+            "pass_rate_delta": 0.0,
+            "sft": {
+              "cases": 24,
+              "mean_reward": 0.204348,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 48
+            }
+          },
+          "fresh_retry_step2": {
+            "checkpoint-20": {
+              "cases": 24,
+              "mean_reward": 0.1625,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 72
+            },
+            "mean_reward_delta": 0.0,
+            "paired_case_counts": {
+              "both": 0,
+              "candidate_only": 0,
+              "neither": 24,
+              "reference_only": 0
+            },
+            "pass_rate_delta": 0.0,
+            "sft": {
+              "cases": 24,
+              "mean_reward": 0.1625,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 72
+            }
+          },
+          "missing_required_state_step2": {
+            "checkpoint-20": {
+              "cases": 24,
+              "mean_reward": 0.130435,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 48
+            },
+            "mean_reward_delta": 0.0,
+            "paired_case_counts": {
+              "both": 0,
+              "candidate_only": 0,
+              "neither": 24,
+              "reference_only": 0
+            },
+            "pass_rate_delta": 0.0,
+            "sft": {
+              "cases": 24,
+              "mean_reward": 0.130435,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 48
+            }
+          },
+          "nonretryable_step2": {
+            "checkpoint-20": {
+              "cases": 24,
+              "mean_reward": 0.130435,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 48
+            },
+            "mean_reward_delta": 0.0,
+            "paired_case_counts": {
+              "both": 0,
+              "candidate_only": 0,
+              "neither": 24,
+              "reference_only": 0
+            },
+            "pass_rate_delta": 0.0,
+            "sft": {
+              "cases": 24,
+              "mean_reward": 0.130435,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 48
+            }
+          },
+          "post_retry_error_step3": {
+            "checkpoint-20": {
+              "cases": 24,
+              "mean_reward": 0.140625,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 72
+            },
+            "mean_reward_delta": 0.0,
+            "paired_case_counts": {
+              "both": 0,
+              "candidate_only": 0,
+              "neither": 24,
+              "reference_only": 0
+            },
+            "pass_rate_delta": 0.0,
+            "sft": {
+              "cases": 24,
+              "mean_reward": 0.140625,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 72
+            }
+          },
+          "post_retry_metric_veto_step3": {
+            "checkpoint-20": {
+              "cases": 24,
+              "mean_reward": 0.140625,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 72
+            },
+            "mean_reward_delta": 0.0,
+            "paired_case_counts": {
+              "both": 0,
+              "candidate_only": 0,
+              "neither": 24,
+              "reference_only": 0
+            },
+            "pass_rate_delta": 0.0,
+            "sft": {
+              "cases": 24,
+              "mean_reward": 0.140625,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 72
+            }
+          },
+          "post_retry_success_step3": {
+            "checkpoint-20": {
+              "cases": 24,
+              "mean_reward": 0.1625,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 72
+            },
+            "mean_reward_delta": 0.0,
+            "paired_case_counts": {
+              "both": 0,
+              "candidate_only": 0,
+              "neither": 24,
+              "reference_only": 0
+            },
+            "pass_rate_delta": 0.0,
+            "sft": {
+              "cases": 24,
+              "mean_reward": 0.1625,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 72
+            }
+          }
+        },
+        "candidate_label": "checkpoint-20",
+        "controls": {
+          "checkpoint-20": {
+            "cases": 144,
+            "mean_reward": 0.13383166666666668,
+            "pass_rate": 0.0,
+            "wrong_side_effecting_actions": 336
+          },
+          "mean_reward_delta": 0.0,
+          "paired_case_counts": {
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 144,
+            "reference_only": 0
+          },
+          "pass_rate_delta": 0.0,
+          "sft": {
+            "cases": 144,
+            "mean_reward": 0.13383166666666668,
+            "pass_rate": 0.0,
+            "wrong_side_effecting_actions": 336
+          }
+        },
+        "entity_clustered_primary_delta_bootstrap": {
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "point_estimate": 0.0,
+          "replicates": 10000,
+          "seed": 42
+        },
+        "entity_primary_deltas": {
+          "prhv9_vd_entity_001": 0.0,
+          "prhv9_vd_entity_002": 0.0,
+          "prhv9_vd_entity_003": 0.0,
+          "prhv9_vd_entity_004": 0.0,
+          "prhv9_vd_entity_005": 0.0,
+          "prhv9_vd_entity_006": 0.0,
+          "prhv9_vd_entity_007": 0.0,
+          "prhv9_vd_entity_008": 0.0,
+          "prhv9_vd_entity_009": 0.0,
+          "prhv9_vd_entity_010": 0.0,
+          "prhv9_vd_entity_011": 0.0,
+          "prhv9_vd_entity_012": 0.0
+        },
+        "independent_unit": "entity_id",
+        "overall": {
+          "checkpoint-20": {
+            "cases": 216,
+            "mean_reward": 0.14803755555555556,
+            "pass_rate": 0.0,
+            "wrong_side_effecting_actions": 528
+          },
+          "mean_reward_delta": 0.0,
+          "paired_case_counts": {
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 216,
+            "reference_only": 0
+          },
+          "pass_rate_delta": 0.0,
+          "sft": {
+            "cases": 216,
+            "mean_reward": 0.14803755555555556,
+            "pass_rate": 0.0,
+            "wrong_side_effecting_actions": 528
+          }
+        },
+        "primary": {
+          "checkpoint-20": {
+            "cases": 72,
+            "mean_reward": 0.17644933333333335,
+            "pass_rate": 0.0,
+            "wrong_side_effecting_actions": 192
+          },
+          "mean_reward_delta": 0.0,
+          "paired_case_counts": {
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 72,
+            "reference_only": 0
+          },
+          "pass_rate_delta": 0.0,
+          "sft": {
+            "cases": 72,
+            "mean_reward": 0.17644933333333335,
+            "pass_rate": 0.0,
+            "wrong_side_effecting_actions": 192
+          }
+        },
+        "primary_scenarios": [
+          "current_success_step2",
+          "fresh_retry_step2",
+          "post_retry_success_step3"
+        ],
+        "reference_label": "sft",
+        "schema_version": "1.0"
+      },
+      "label": "checkpoint-20",
+      "operations": {
+        "clipped_rate": 0.0,
+        "empty_cases": 0,
+        "json_valid_rate": 0.0,
+        "planner_decisions": 528
+      },
+      "predictions": "experiments/runs/20260716_qwen35_4b_v9_selection_dev/checkpoint-20/v9_checkpoint-20_run1_predictions.jsonl",
+      "promoted": false
+    },
+    {
+      "checkpoint": 40,
+      "checks": {
+        "clipped_rate": true,
+        "control_regression": true,
+        "json_valid_rate": false,
+        "primary_gain": false,
+        "wrong_side_effecting_actions": true
+      },
+      "comparison_to_sft": {
+        "by_detector": {
+          "qwen": {
+            "checkpoint-40": {
+              "cases": 108,
+              "mean_reward": 0.14803755555555556,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 264
+            },
+            "mean_reward_delta": 0.0,
+            "paired_case_counts": {
+              "both": 0,
+              "candidate_only": 0,
+              "neither": 108,
+              "reference_only": 0
+            },
+            "pass_rate_delta": 0.0,
+            "sft": {
+              "cases": 108,
+              "mean_reward": 0.14803755555555556,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 264
+            }
+          },
+          "rex": {
+            "checkpoint-40": {
+              "cases": 108,
+              "mean_reward": 0.14803755555555556,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 264
+            },
+            "mean_reward_delta": 0.0,
+            "paired_case_counts": {
+              "both": 0,
+              "candidate_only": 0,
+              "neither": 108,
+              "reference_only": 0
+            },
+            "pass_rate_delta": 0.0,
+            "sft": {
+              "cases": 108,
+              "mean_reward": 0.14803755555555556,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 264
+            }
+          }
+        },
+        "by_scenario": {
+          "budget_exhausted_step2": {
+            "checkpoint-40": {
+              "cases": 24,
+              "mean_reward": 0.130435,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 48
+            },
+            "mean_reward_delta": 0.0,
+            "paired_case_counts": {
+              "both": 0,
+              "candidate_only": 0,
+              "neither": 24,
+              "reference_only": 0
+            },
+            "pass_rate_delta": 0.0,
+            "sft": {
+              "cases": 24,
+              "mean_reward": 0.130435,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 48
+            }
+          },
+          "conflicting_state_step2": {
+            "checkpoint-40": {
+              "cases": 24,
+              "mean_reward": 0.130435,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 48
+            },
+            "mean_reward_delta": 0.0,
+            "paired_case_counts": {
+              "both": 0,
+              "candidate_only": 0,
+              "neither": 24,
+              "reference_only": 0
+            },
+            "pass_rate_delta": 0.0,
+            "sft": {
+              "cases": 24,
+              "mean_reward": 0.130435,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 48
+            }
+          },
+          "current_success_step2": {
+            "checkpoint-40": {
+              "cases": 24,
+              "mean_reward": 0.204348,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 48
+            },
+            "mean_reward_delta": 0.0,
+            "paired_case_counts": {
+              "both": 0,
+              "candidate_only": 0,
+              "neither": 24,
+              "reference_only": 0
+            },
+            "pass_rate_delta": 0.0,
+            "sft": {
+              "cases": 24,
+              "mean_reward": 0.204348,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 48
+            }
+          },
+          "fresh_retry_step2": {
+            "checkpoint-40": {
+              "cases": 24,
+              "mean_reward": 0.1625,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 72
+            },
+            "mean_reward_delta": 0.0,
+            "paired_case_counts": {
+              "both": 0,
+              "candidate_only": 0,
+              "neither": 24,
+              "reference_only": 0
+            },
+            "pass_rate_delta": 0.0,
+            "sft": {
+              "cases": 24,
+              "mean_reward": 0.1625,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 72
+            }
+          },
+          "missing_required_state_step2": {
+            "checkpoint-40": {
+              "cases": 24,
+              "mean_reward": 0.130435,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 48
+            },
+            "mean_reward_delta": 0.0,
+            "paired_case_counts": {
+              "both": 0,
+              "candidate_only": 0,
+              "neither": 24,
+              "reference_only": 0
+            },
+            "pass_rate_delta": 0.0,
+            "sft": {
+              "cases": 24,
+              "mean_reward": 0.130435,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 48
+            }
+          },
+          "nonretryable_step2": {
+            "checkpoint-40": {
+              "cases": 24,
+              "mean_reward": 0.130435,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 48
+            },
+            "mean_reward_delta": 0.0,
+            "paired_case_counts": {
+              "both": 0,
+              "candidate_only": 0,
+              "neither": 24,
+              "reference_only": 0
+            },
+            "pass_rate_delta": 0.0,
+            "sft": {
+              "cases": 24,
+              "mean_reward": 0.130435,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 48
+            }
+          },
+          "post_retry_error_step3": {
+            "checkpoint-40": {
+              "cases": 24,
+              "mean_reward": 0.140625,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 72
+            },
+            "mean_reward_delta": 0.0,
+            "paired_case_counts": {
+              "both": 0,
+              "candidate_only": 0,
+              "neither": 24,
+              "reference_only": 0
+            },
+            "pass_rate_delta": 0.0,
+            "sft": {
+              "cases": 24,
+              "mean_reward": 0.140625,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 72
+            }
+          },
+          "post_retry_metric_veto_step3": {
+            "checkpoint-40": {
+              "cases": 24,
+              "mean_reward": 0.140625,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 72
+            },
+            "mean_reward_delta": 0.0,
+            "paired_case_counts": {
+              "both": 0,
+              "candidate_only": 0,
+              "neither": 24,
+              "reference_only": 0
+            },
+            "pass_rate_delta": 0.0,
+            "sft": {
+              "cases": 24,
+              "mean_reward": 0.140625,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 72
+            }
+          },
+          "post_retry_success_step3": {
+            "checkpoint-40": {
+              "cases": 24,
+              "mean_reward": 0.1625,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 72
+            },
+            "mean_reward_delta": 0.0,
+            "paired_case_counts": {
+              "both": 0,
+              "candidate_only": 0,
+              "neither": 24,
+              "reference_only": 0
+            },
+            "pass_rate_delta": 0.0,
+            "sft": {
+              "cases": 24,
+              "mean_reward": 0.1625,
+              "pass_rate": 0.0,
+              "wrong_side_effecting_actions": 72
+            }
+          }
+        },
+        "candidate_label": "checkpoint-40",
+        "controls": {
+          "checkpoint-40": {
+            "cases": 144,
+            "mean_reward": 0.13383166666666668,
+            "pass_rate": 0.0,
+            "wrong_side_effecting_actions": 336
+          },
+          "mean_reward_delta": 0.0,
+          "paired_case_counts": {
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 144,
+            "reference_only": 0
+          },
+          "pass_rate_delta": 0.0,
+          "sft": {
+            "cases": 144,
+            "mean_reward": 0.13383166666666668,
+            "pass_rate": 0.0,
+            "wrong_side_effecting_actions": 336
+          }
+        },
+        "entity_clustered_primary_delta_bootstrap": {
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "point_estimate": 0.0,
+          "replicates": 10000,
+          "seed": 42
+        },
+        "entity_primary_deltas": {
+          "prhv9_vd_entity_001": 0.0,
+          "prhv9_vd_entity_002": 0.0,
+          "prhv9_vd_entity_003": 0.0,
+          "prhv9_vd_entity_004": 0.0,
+          "prhv9_vd_entity_005": 0.0,
+          "prhv9_vd_entity_006": 0.0,
+          "prhv9_vd_entity_007": 0.0,
+          "prhv9_vd_entity_008": 0.0,
+          "prhv9_vd_entity_009": 0.0,
+          "prhv9_vd_entity_010": 0.0,
+          "prhv9_vd_entity_011": 0.0,
+          "prhv9_vd_entity_012": 0.0
+        },
+        "independent_unit": "entity_id",
+        "overall": {
+          "checkpoint-40": {
+            "cases": 216,
+            "mean_reward": 0.14803755555555556,
+            "pass_rate": 0.0,
+            "wrong_side_effecting_actions": 528
+          },
+          "mean_reward_delta": 0.0,
+          "paired_case_counts": {
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 216,
+            "reference_only": 0
+          },
+          "pass_rate_delta": 0.0,
+          "sft": {
+            "cases": 216,
+            "mean_reward": 0.14803755555555556,
+            "pass_rate": 0.0,
+            "wrong_side_effecting_actions": 528
+          }
+        },
+        "primary": {
+          "checkpoint-40": {
+            "cases": 72,
+            "mean_reward": 0.17644933333333335,
+            "pass_rate": 0.0,
+            "wrong_side_effecting_actions": 192
+          },
+          "mean_reward_delta": 0.0,
+          "paired_case_counts": {
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 72,
+            "reference_only": 0
+          },
+          "pass_rate_delta": 0.0,
+          "sft": {
+            "cases": 72,
+            "mean_reward": 0.17644933333333335,
+            "pass_rate": 0.0,
+            "wrong_side_effecting_actions": 192
+          }
+        },
+        "primary_scenarios": [
+          "current_success_step2",
+          "fresh_retry_step2",
+          "post_retry_success_step3"
+        ],
+        "reference_label": "sft",
+        "schema_version": "1.0"
+      },
+      "label": "checkpoint-40",
+      "operations": {
+        "clipped_rate": 0.0,
+        "empty_cases": 0,
+        "json_valid_rate": 0.0,
+        "planner_decisions": 528
+      },
+      "predictions": "experiments/runs/20260716_qwen35_4b_v9_selection_dev/checkpoint-40/v9_checkpoint-40_run1_predictions.jsonl",
+      "promoted": false
+    }
+  ],
+  "larger_reference_used_for_selection": false,
+  "on_fail": "Keep both sealed cohorts unmaterialized and report that GRPO did not promote.",
+  "schema_version": "1.0",
+  "sealed_test_authorized": false,
+  "selected": null,
+  "sft_operations": {
+    "clipped_rate": 0.0,
+    "empty_cases": 0,
+    "json_valid_rate": 0.0,
+    "planner_decisions": 528
+  },
+  "status": "no_promotion",
+  "study_id": "planner_retry_safe_end_hard_residual_v9_qwen35_4b_v1"
+}

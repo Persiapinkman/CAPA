@@ -49,6 +49,16 @@ CONTROL_SCENARIOS = (
     "missing_required_state_step2",
 )
 ALL_SCENARIOS = PRIMARY_SCENARIOS + CONTROL_SCENARIOS
+OPTIMIZER_SCENARIOS = PRIMARY_SCENARIOS
+SUPPORT_SCENARIOS = PRIMARY_SCENARIOS
+VERSION_LABEL = "V9"
+CASE_ID_PREFIX = "PRHV9"
+TEMPLATE_ID_PREFIX = "prhv9"
+ENTITY_ID_PREFIX = "prhv9"
+DIFFICULTY_FAMILY = "v7_anchored_hard_nuisance"
+PROVENANCE_CLASS = "independent_synthetic_hard_residual_factorial_v9"
+TEST_CONFIRMATION = "OPEN_V9_TEST"
+BUILDER_PATH = Path(__file__).resolve()
 MATERIALIZED_CASE_SPLITS = (
     "grpo_train",
     "support_dev_a",
@@ -240,7 +250,7 @@ FIXTURES: dict[str, tuple[dict[str, Any], ...]] = {
 
 
 def v9_entity_id(split: str, entity_index: int) -> str:
-    return f"prhv9_{SPLIT_SPECS[split]['code'].lower()}_entity_{entity_index + 1:03d}"
+    return f"{ENTITY_ID_PREFIX}_{SPLIT_SPECS[split]['code'].lower()}_entity_{entity_index + 1:03d}"
 
 
 def factor_layout(split: str) -> list[dict[str, int]]:
@@ -296,18 +306,23 @@ def configured_v7() -> Iterator[None]:
 
         def base_case_v9(**kwargs: Any) -> dict[str, Any]:
             row = original_base_case(**kwargs)
-            row["case_id"] = str(row["case_id"]).replace("PRRV7-", "PRHV9-", 1)
-            row["template_id"] = str(row["template_id"]).replace("prrv7_", "prhv9_", 1)
-            row["grpo_eligible"] = (
-                row["split"] == "grpo_train" and row["scenario_id"] in PRIMARY_SCENARIOS
+            row["case_id"] = str(row["case_id"]).replace(
+                "PRRV7-", f"{CASE_ID_PREFIX}-", 1
             )
-            row["difficulty_family"] = "v7_anchored_hard_nuisance"
+            row["template_id"] = str(row["template_id"]).replace(
+                "prrv7_", f"{TEMPLATE_ID_PREFIX}_", 1
+            )
+            row["grpo_eligible"] = (
+                row["split"] == "grpo_train"
+                and row["scenario_id"] in OPTIMIZER_SCENARIOS
+            )
+            row["difficulty_family"] = DIFFICULTY_FAMILY
             row["support_block"] = (
                 "A" if row["split"] == "support_dev_a"
                 else "B" if row["split"] == "support_dev_b"
                 else ""
             )
-            row["provenance_class"] = "independent_synthetic_hard_residual_factorial_v9"
+            row["provenance_class"] = PROVENANCE_CLASS
             return row
 
         v7.base_case = base_case_v9
@@ -366,8 +381,11 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
-    if args.materialize_test and args.confirm_materialize_test != "OPEN_V9_TEST":
-        raise PermissionError("test materialization requires --confirm-materialize-test OPEN_V9_TEST")
+    if args.materialize_test and args.confirm_materialize_test != TEST_CONFIRMATION:
+        raise PermissionError(
+            "test materialization requires --confirm-materialize-test "
+            f"{TEST_CONFIRMATION}"
+        )
     model_path = args.model_name_or_path.resolve()
     with configured_v7():
         fixture_paths = v7.write_fixture_images()
@@ -375,10 +393,15 @@ def main() -> None:
         validation = v7.validate_cases(cases_by_split)
         overlap = historical_overlap(cases_by_split)
         if any(overlap.values()):
-            validation["errors"].append(f"V9 protected values overlap prior retry datasets: {overlap}")
+            validation["errors"].append(
+                f"{VERSION_LABEL} protected values overlap prior retry datasets: {overlap}"
+            )
             validation["status"] = "fail"
         if validation["status"] != "pass":
-            raise ValueError("V9 case validation failed:\n" + "\n".join(validation["errors"][:100]))
+            raise ValueError(
+                f"{VERSION_LABEL} case validation failed:\n"
+                + "\n".join(validation["errors"][:100])
+            )
 
         case_paths: dict[str, Path] = {}
         for split in MATERIALIZED_CASE_SPLITS:
@@ -398,7 +421,9 @@ def main() -> None:
             v7.write_jsonl(combined, sealed_rows)
             sealed_paths["combined"] = combined
             if v7.sha256_file(combined) != test_commitment:
-                raise ValueError("materialized V9 test does not match the frozen commitment")
+                raise ValueError(
+                    f"materialized {VERSION_LABEL} test does not match the frozen commitment"
+                )
 
         tokenizer = v7.load_tokenizer(model_path)
         output_sources = {
@@ -410,8 +435,14 @@ def main() -> None:
         step_paths: dict[str, Path] = {}
         for output_name, source_splits in output_sources.items():
             source = [row for split in source_splits for row in cases_by_split[split]]
-            if output_name in {"grpo_train", "support_dev"}:
-                source = [row for row in source if row["scenario_id"] in PRIMARY_SCENARIOS]
+            if output_name == "grpo_train":
+                source = [
+                    row for row in source if row["scenario_id"] in OPTIMIZER_SCENARIOS
+                ]
+            elif output_name == "support_dev":
+                source = [
+                    row for row in source if row["scenario_id"] in SUPPORT_SCENARIOS
+                ]
             case_lookup = {str(row["case_id"]): row for row in source}
             rows = v7.build_step_rows(source, tokenizer)
             for row in rows:
@@ -428,12 +459,14 @@ def main() -> None:
 
         all_steps = [row for rows in step_rows.values() for row in rows]
         if len({row["prompt_sha256"] for row in all_steps}) != len(all_steps):
-            raise ValueError("V9 formatted train/dev prompts are not unique")
+            raise ValueError(f"{VERSION_LABEL} formatted train/dev prompts are not unique")
         prompt_overlap = v7.prompt_repository_overlap(
             all_steps, {path.resolve() for path in step_paths.values()}
         )
         if prompt_overlap["overlap"]:
-            raise ValueError(f"V9 prompts overlap repository history: {prompt_overlap}")
+            raise ValueError(
+                f"{VERSION_LABEL} prompts overlap repository history: {prompt_overlap}"
+            )
 
         DATASET_DIR.mkdir(parents=True, exist_ok=True)
         audit_path = DATASET_DIR / "audit_report.json"
@@ -492,7 +525,7 @@ def main() -> None:
 
         manifest_path = DATASET_DIR / "manifest.json"
         files = {
-            "builder": str(Path(__file__).resolve().relative_to(ROOT)),
+            "builder": str(BUILDER_PATH.relative_to(ROOT)),
             "preregistration": str((STUDY_DIR / "preregistration.json").relative_to(ROOT)),
             "comparison_contract": str((STUDY_DIR / "comparison_contract.json").relative_to(ROOT)),
             "temperature_decision": str((STUDY_DIR / "temperature_calibration_decision.json").relative_to(ROOT)),
@@ -511,7 +544,7 @@ def main() -> None:
             "seed": SEED,
             "independent_unit": "entity_id",
             "blocked_bundle": "entity × detector family",
-            "difficulty_family": "v7_anchored_hard_nuisance",
+            "difficulty_family": DIFFICULTY_FAMILY,
             "primary_scenarios": list(PRIMARY_SCENARIOS),
             "stability_controls": list(CONTROL_SCENARIOS),
             "case_rows": {split: len(rows) for split, rows in cases_by_split.items()},

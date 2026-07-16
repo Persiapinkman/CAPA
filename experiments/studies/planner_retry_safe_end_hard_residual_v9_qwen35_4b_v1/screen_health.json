@@ -1,0 +1,39 @@
+{
+  "checks": {
+    "candidate_checkpoints_present": true,
+    "generation_event_count": true,
+    "gradient_event_count": true,
+    "logged_steps": true,
+    "memory_free": true,
+    "memory_peak": true,
+    "metrics_finite": true,
+    "no_completion_clipping": true,
+    "no_missing_gradients": true,
+    "no_nonfinite_gradients": true,
+    "optimizer_event_count": true,
+    "optimizer_steps": true,
+    "required_metrics_complete": true,
+    "result_completed": true,
+    "source_commit_clean": true,
+    "wandb_enabled": true
+  },
+  "observed": {
+    "checkpoints": {
+      "10": true,
+      "20": true,
+      "40": true
+    },
+    "diverse_generation_groups": 1216,
+    "generation_events": 1280,
+    "gradient_events": 160,
+    "logged_steps": 40,
+    "maximum_allocated_gib": 13.977251052856445,
+    "minimum_free_gib": 15.59027099609375,
+    "missing_metric_values": [],
+    "nonfinite_metric_values": [],
+    "optimizer_events": 160,
+    "zero_gradient_steps_per_rank": 33
+  },
+  "schema_version": "1.0",
+  "status": "pass"
+}
