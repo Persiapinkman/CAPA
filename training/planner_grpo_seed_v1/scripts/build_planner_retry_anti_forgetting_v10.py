@@ -129,6 +129,12 @@ def _settings() -> dict[str, object]:
         "DATASET_DIR": ROOT / "data/datasets" / DATASET_ID,
         "FIXTURE_DIR": ROOT / "examples/images" / DATASET_ID,
         "STUDY_DIR": ROOT / "experiments/studies" / STUDY_ID,
+        "TEMPERATURE_DECISION_PATH": (
+            ROOT
+            / "experiments/studies"
+            / STUDY_ID
+            / "temperature_decision.json"
+        ),
         "OPTIMIZER_SCENARIOS": base.ALL_SCENARIOS,
         "SUPPORT_SCENARIOS": base.ALL_SCENARIOS,
         "VERSION_LABEL": "V10",

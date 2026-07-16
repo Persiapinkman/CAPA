@@ -33,6 +33,7 @@ STEP_DIR = ROOT / "training/planner_grpo_seed_v1/step_data"
 DATASET_DIR = ROOT / "data/datasets" / DATASET_ID
 FIXTURE_DIR = ROOT / "examples/images" / DATASET_ID
 STUDY_DIR = ROOT / "experiments/studies" / STUDY_ID
+TEMPERATURE_DECISION_PATH = STUDY_DIR / "temperature_calibration_decision.json"
 DEFAULT_MODEL = Path("/raid/zkq/models/Qwen3.5-4B")
 
 PRIMARY_SCENARIOS = (
@@ -528,7 +529,7 @@ def main() -> None:
             "builder": str(BUILDER_PATH.relative_to(ROOT)),
             "preregistration": str((STUDY_DIR / "preregistration.json").relative_to(ROOT)),
             "comparison_contract": str((STUDY_DIR / "comparison_contract.json").relative_to(ROOT)),
-            "temperature_decision": str((STUDY_DIR / "temperature_calibration_decision.json").relative_to(ROOT)),
+            "temperature_decision": str(TEMPERATURE_DECISION_PATH.relative_to(ROOT)),
             "audit_report": str(audit_path.relative_to(ROOT)),
             **{f"cases_{split}": str(path.relative_to(ROOT)) for split, path in case_paths.items()},
             **{f"step_data_{name}": str(path.relative_to(ROOT)) for name, path in step_paths.items()},
