@@ -243,6 +243,7 @@ checkpoint 冻结后才物化 sealed test，并对 4B-SFT、选中的 4B-GRPO �
 | V9 数据与 sealed commitment | 完成 | `data/datasets/planner_retry_safe_end_hard_residual_v9/manifest.json` |
 | V9 support | 完成，全部门禁通过 | `experiments/studies/planner_retry_safe_end_hard_residual_v9_qwen35_4b_v1/SUPPORT_GATE_RESULT.md` |
 | GRPO optimizer data | 已授权并冻结 144 条 | `training/planner_grpo_seed_v1/step_data/planner_retry_safe_end_hard_residual_v9_optimizer_qwen35_4b_nothinking_mixed_steps.manifest.json` |
-| GRPO canary/screen | 待运行 | 先 5 steps 健康检查，再从同一 SFT initializer 启动 40-step screen |
+| GRPO canary | 完成，5/5 steps 健康 | `experiments/studies/planner_retry_safe_end_hard_residual_v9_qwen35_4b_v1/canary_decision.json` |
+| GRPO screen | 已授权，待运行 | 从同一 SFT initializer 重新启动 40 steps；候选 checkpoint 固定为 10/20/40 |
 
 后续每次实验都应更新这张表，并把命令、数据 SHA-256、门禁结论和 Git commit 一起保存。这样你学到的不只是一次训练，而是一套能审计、能复现、也能知道何时不该训练的流程。
