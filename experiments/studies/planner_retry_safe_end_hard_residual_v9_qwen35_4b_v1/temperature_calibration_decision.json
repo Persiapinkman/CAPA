@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_retry_safe_end_hard_residual_v9_qwen35_4b_v1",
+  "created_at": "2026-07-16T18:23:21Z",
+  "status": "frozen_temperature_selection",
+  "role": "exploratory_sampling_calibration_only",
+  "preregistered_rule_applied_without_override": true,
+  "candidates": {
+    "0.9": {
+      "gold_action_support_rate": 0.8333333333333334,
+      "nonzero_reward_variance_rate": 0.25,
+      "json_valid_rate": 1.0,
+      "clipped_rate": 0.0,
+      "passes": true
+    },
+    "1.0": {
+      "gold_action_support_rate": 0.8333333333333334,
+      "nonzero_reward_variance_rate": 0.3333333333333333,
+      "json_valid_rate": 1.0,
+      "clipped_rate": 0.0,
+      "passes": true
+    }
+  },
+  "selected_temperature": 0.9,
+  "selection_reason": "Both candidates met the preregistered gold and variance floors; the rule selects the lower temperature.",
+  "files": {
+    "preregistration": "experiments/studies/planner_retry_safe_end_hard_residual_v9_qwen35_4b_v1/temperature_calibration_preregistration.json",
+    "temperature_0.9_samples": "experiments/runs/20260716_qwen35_4b_v9_temperature_calibration/t09/samples.jsonl",
+    "temperature_0.9_summary": "experiments/runs/20260716_qwen35_4b_v9_temperature_calibration/t09/summary.json",
+    "temperature_1.0_samples": "experiments/runs/20260716_qwen35_4b_v9_temperature_calibration/t10/samples.jsonl",
+    "temperature_1.0_summary": "experiments/runs/20260716_qwen35_4b_v9_temperature_calibration/t10/summary.json"
+  },
+  "sha256": {
+    "preregistration": "4b9f3a602a42e540b86bff44bb68d296506989b2e23809a5bd836207d4a9d2ef",
+    "temperature_0.9_samples": "cd36a63e4ef583bc086cd820bea8387afd10c0525630e6eaff3b32c467c29778",
+    "temperature_0.9_summary": "173734c16d0d7c6f6f01dbc576f9784de1d309cee8517f16214a22d173990a75",
+    "temperature_1.0_samples": "8053dfda8a30dc3183d6b4caf13575eda2e84cbd9a70d1c4c4986d8412e40c68",
+    "temperature_1.0_summary": "0a3b00879866396810a8cbe0938a6f9d0878afbef4797503502f0fa40a22dd68"
+  }
+}

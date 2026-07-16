@@ -1,0 +1,11 @@
+{
+  "status": "completed",
+  "success": true,
+  "summary": "当前结构化状态：candidate_count=2；min_confidence=0.93；cross_prompt_iou=0.81；domain_shift=low；gateway_error=none；retryable=false；retry_count=0；overall_badge=amber。说明：展示字段不覆盖结构化值。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "碧蓝三辐调节轮",
+    "finish_after_tool": false
+  },
+  "_thought": "当前query_trajectories中steps为空，说明尚未执行任何工具调用。根据query要求，第一步应使用Qwen检测附件中的'碧蓝三辐调节轮'，检测结果仅作为中间状态，因此finish_after_tool设为false。有图片可用（azure_three_spoke_adjuster.png），符合检测工具调用条件。"
+}

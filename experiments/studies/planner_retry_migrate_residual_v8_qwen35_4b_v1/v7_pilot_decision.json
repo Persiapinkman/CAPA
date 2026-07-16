@@ -1,0 +1,79 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_retry_migrate_residual_v8_qwen35_4b_v1",
+  "created_at": "2026-07-16T17:56:05Z",
+  "status": "scenario_selection_frozen",
+  "pilot_dataset": "planner_retry_migrate_residual_v7",
+  "pilot_split": "grpo_dev",
+  "pilot_role": "exploratory_only",
+  "models": {
+    "target_initializer": "Qwen3.5-4B plus planner V6 SFT checkpoint-100",
+    "larger_reference": "Qwen3.5-35B-A3B"
+  },
+  "selected_primary_scenarios": [
+    "current_success_step2",
+    "fresh_retry_step2",
+    "post_retry_success_step3"
+  ],
+  "selection_evidence": {
+    "current_success_step2": {
+      "target_full_trajectory_pass_rate": 0.5416666666666666,
+      "reference_full_trajectory_pass_rate": 0.041666666666666664,
+      "target_minus_reference": 0.5,
+      "target_step_gold_support_rate": 0.6666666666666666,
+      "target_step_nonzero_variance_rate": 0.3333333333333333,
+      "rationale": "Large target headroom, strong stochastic reward variance, and a fixed larger reference that is not saturated."
+    },
+    "fresh_retry_step2": {
+      "target_full_trajectory_pass_rate": 0.041666666666666664,
+      "reference_full_trajectory_pass_rate": 0.0,
+      "target_minus_reference": 0.041666666666666664,
+      "target_step_gold_support_rate": 0.7916666666666666,
+      "target_step_nonzero_variance_rate": 0.25,
+      "rationale": "Central retry action has support and variance, while complete trajectories remain almost entirely unsolved by both models."
+    },
+    "post_retry_success_step3": {
+      "target_full_trajectory_pass_rate": 0.08333333333333333,
+      "reference_full_trajectory_pass_rate": 0.0,
+      "target_minus_reference": 0.08333333333333333,
+      "target_step_gold_support_rate": 0.7916666666666666,
+      "target_step_nonzero_variance_rate": 0.20833333333333334,
+      "rationale": "Needed to complete fresh-retry trajectories after a successful retry; admission is conditional on new Rex support."
+    }
+  },
+  "stability_control_scenarios": [
+    "post_retry_error_step3",
+    "post_retry_metric_veto_step3",
+    "conflicting_state_step2",
+    "nonretryable_step2",
+    "budget_exhausted_step2",
+    "missing_required_state_step2"
+  ],
+  "control_rationale": "These scenarios detect regression toward ending or retrying when the correct policy is migration, and prevent a core-only win from masking state-machine damage.",
+  "pilot_overall": {
+    "target_pass_rate": 0.36574074074074076,
+    "reference_pass_rate": 0.6435185185185185,
+    "target_minus_reference": -0.27777777777777773
+  },
+  "excluded_from_primary": {
+    "post_retry_error_step3": "Reference is 95.83% while target is 4.17%; use as a migration guardrail, not a short-horizon superiority target.",
+    "post_retry_metric_veto_step3": "Reference is 95.83% while target is 8.33%, and V7 target-step variance was below 10%.",
+    "conflicting_state_step2": "Both models are 87.50%; little larger-model separation remains.",
+    "nonretryable_step2": "Reference is saturated at 100%; retain as a safety control.",
+    "budget_exhausted_step2": "Reference is saturated at 100%; retain as a safety control.",
+    "missing_required_state_step2": "Reference is 95.83%; retain as a missing-state safety control."
+  },
+  "artifacts": {
+    "model_comparison": "experiments/studies/planner_retry_migrate_residual_v8_qwen35_4b_v1/v7_pilot_model_comparison.json",
+    "target_predictions": "experiments/runs/20260716_qwen35_4b_sft100_residual_v7_dev_pilot4x/predictions.jsonl",
+    "reference_predictions": "experiments/runs/20260716_qwen35_35b_residual_v7_dev_pilot4x/predictions.jsonl",
+    "v7_support_decision": "experiments/studies/planner_retry_migrate_residual_v7_qwen35_4b_v1/support_decision.json"
+  },
+  "artifact_sha256": {
+    "model_comparison": "489854150467ee55721063f08bc88b8709125c69b836b6d13188b14e2946c8fe",
+    "target_predictions": "f938dc2af5d71e6659e743c4a5af34ff5a71c7339391f82a77b5031c73743898",
+    "reference_predictions": "595cc19dc98586cd5854d24b439515b0cf08e74983f866dd5803b2a865277768",
+    "v7_support_decision": "6e507cd83e78009e1c079bb9f0c2d1ccf08f70e3d90222f2796e9a9f7ac12001"
+  },
+  "anti_overfitting_rule": "All V8 entities, project names, targets, fixtures, error aliases, and formatted prompt hashes must be new. V7 pilot rows cannot enter V8 training, development, or test."
+}

@@ -269,6 +269,25 @@ def configure_generation(args: argparse.Namespace) -> None:
         os.environ["DEMO_OPENAI_MAX_TOKENS"] = str(args.max_tokens)
 
 
+def configure_local_backend(args: argparse.Namespace) -> Any | None:
+    if args.local_adapter_path is not None and args.local_model_path is None:
+        raise ValueError("--local-adapter-path requires --local-model-path")
+    if args.local_model_path is None:
+        return None
+    from training.planner_grpo_seed_v1.scripts.local_hf_planner_backend import (
+        LocalHFPlannerBackend,
+    )
+
+    backend = LocalHFPlannerBackend(
+        model_path=args.local_model_path,
+        adapter_path=args.local_adapter_path,
+        device=args.local_device,
+        attn_implementation=args.local_attn_implementation,
+    )
+    agent.VLMService = backend.service_factory
+    return backend
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Run offline Planner rollouts for GRPO cases.")
     parser.add_argument("--cases", type=Path, required=True, help="GRPO case JSONL")
@@ -289,8 +308,13 @@ def main() -> None:
     parser.add_argument("--top-p", type=float, default=1.0)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--do-sample", default="false")
+    parser.add_argument("--local-model-path", type=Path, default=None)
+    parser.add_argument("--local-adapter-path", type=Path, default=None)
+    parser.add_argument("--local-device", default="cuda")
+    parser.add_argument("--local-attn-implementation", default="sdpa")
     args = parser.parse_args()
     configure_generation(args)
+    local_backend = configure_local_backend(args)
 
     cases = load_jsonl(args.cases)
     if args.limit > 0:
@@ -315,6 +339,9 @@ def main() -> None:
         "run_root": str(out_root),
         "model": args.model,
         "api_base": args.api_base,
+        "inference_backend": "local_transformers" if local_backend is not None else "openai_compatible",
+        "local_model_path": str(args.local_model_path.resolve()) if args.local_model_path else "",
+        "local_adapter_path": str(args.local_adapter_path.resolve()) if args.local_adapter_path else "",
         "generation_config": {
             "temperature": args.temperature,
             "top_p": args.top_p,

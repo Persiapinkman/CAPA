@@ -1,0 +1,2830 @@
+{
+  "summary": {
+    "cases": 54,
+    "prediction_mode": "provided",
+    "mean_score": 0.930918,
+    "passed": 42,
+    "failed": 12,
+    "pass_rate": 0.777778,
+    "by_category": {
+      "budget_exhausted_step2": {
+        "count": 5,
+        "mean_score": 1.0,
+        "passed": 5,
+        "pass_rate": 1.0
+      },
+      "conflicting_state_step2": {
+        "count": 5,
+        "mean_score": 1.0,
+        "passed": 5,
+        "pass_rate": 1.0
+      },
+      "current_success_step2": {
+        "count": 5,
+        "mean_score": 0.693913,
+        "passed": 1,
+        "pass_rate": 0.2
+      },
+      "missing_required_state_step2": {
+        "count": 4,
+        "mean_score": 1.0,
+        "passed": 4,
+        "pass_rate": 1.0
+      },
+      "nonretryable_step2": {
+        "count": 11,
+        "mean_score": 1.0,
+        "passed": 11,
+        "pass_rate": 1.0
+      },
+      "post_retry_error_step3": {
+        "count": 11,
+        "mean_score": 1.0,
+        "passed": 11,
+        "pass_rate": 1.0
+      },
+      "post_retry_metric_veto_step3": {
+        "count": 5,
+        "mean_score": 1.0,
+        "passed": 5,
+        "pass_rate": 1.0
+      },
+      "post_retry_success_step3": {
+        "count": 8,
+        "mean_score": 0.725,
+        "passed": 0,
+        "pass_rate": 0.0
+      }
+    },
+    "used_action_counts": {
+      "rexomni_detection": 35,
+      "migration_advisor": 52,
+      "qwen_detection": 43,
+      "answerer": 1,
+      "end": 1
+    },
+    "premature_stop_cases": 0
+  },
+  "results": [
+    {
+      "case_id": "PRRV7-GD-006-REX-PE3",
+      "category": "post_retry_error_step3",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 3.2,
+      "max_score": 3.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "rexomni_detection",
+        "rexomni_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 3,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-007-QWEN-NR2",
+      "category": "nonretryable_step2",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.3,
+      "max_score": 2.3,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-010-QWEN-PV3",
+      "category": "post_retry_metric_veto_step3",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 3.2,
+      "max_score": 3.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 3,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-002-REX-PE3",
+      "category": "post_retry_error_step3",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 3.2,
+      "max_score": 3.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "rexomni_detection",
+        "rexomni_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 3,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-002-QWEN-PE3",
+      "category": "post_retry_error_step3",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 3.2,
+      "max_score": 3.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 3,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-007-REX-BE2",
+      "category": "budget_exhausted_step2",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.3,
+      "max_score": 2.3,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "rexomni_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-012-QWEN-PV3",
+      "category": "post_retry_metric_veto_step3",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 3.2,
+      "max_score": 3.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 3,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-001-QWEN-PE3",
+      "category": "post_retry_error_step3",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 3.2,
+      "max_score": 3.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 3,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-005-QWEN-PS3",
+      "category": "post_retry_success_step3",
+      "score": 0.725,
+      "passed": false,
+      "raw_score": 2.32,
+      "max_score": 3.2,
+      "forbidden_hit": [
+        "migration_advisor"
+      ],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 3,
+          "score_without_forbidden": 0.12000000000000001,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 0.0,
+            "action_match": 0.0,
+            "argument_match": 0.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": [
+            "decision_type expected 'end', got 'tool'",
+            "action expected 'end', got 'migration_advisor'",
+            "arg 'end_reason' expected 'memory_hit', got ''"
+          ]
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-009-QWEN-CF2",
+      "category": "conflicting_state_step2",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.3,
+      "max_score": 2.3,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-004-QWEN-PS3",
+      "category": "post_retry_success_step3",
+      "score": 0.725,
+      "passed": false,
+      "raw_score": 2.32,
+      "max_score": 3.2,
+      "forbidden_hit": [
+        "migration_advisor"
+      ],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 3,
+          "score_without_forbidden": 0.12000000000000001,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 0.0,
+            "action_match": 0.0,
+            "argument_match": 0.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": [
+            "decision_type expected 'end', got 'tool'",
+            "action expected 'end', got 'migration_advisor'",
+            "arg 'end_reason' expected 'memory_hit', got ''"
+          ]
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-004-QWEN-PV3",
+      "category": "post_retry_metric_veto_step3",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 3.2,
+      "max_score": 3.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 3,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-012-QWEN-NR2",
+      "category": "nonretryable_step2",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.3,
+      "max_score": 2.3,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-009-REX-CS2",
+      "category": "current_success_step2",
+      "score": 0.617391,
+      "passed": false,
+      "raw_score": 1.42,
+      "max_score": 2.3,
+      "forbidden_hit": [
+        "migration_advisor"
+      ],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "rexomni_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.12000000000000001,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 0.0,
+            "action_match": 0.0,
+            "argument_match": 0.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": [
+            "decision_type expected 'end', got 'tool'",
+            "action expected 'end', got 'migration_advisor'",
+            "arg 'end_reason' expected 'memory_hit', got ''"
+          ]
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-010-QWEN-CF2",
+      "category": "conflicting_state_step2",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.3,
+      "max_score": 2.3,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-004-REX-NR2",
+      "category": "nonretryable_step2",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.3,
+      "max_score": 2.3,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "rexomni_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-010-REX-MS2",
+      "category": "missing_required_state_step2",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.3,
+      "max_score": 2.3,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "rexomni_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-008-REX-NR2",
+      "category": "nonretryable_step2",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.3,
+      "max_score": 2.3,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "rexomni_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-004-REX-PS3",
+      "category": "post_retry_success_step3",
+      "score": 0.725,
+      "passed": false,
+      "raw_score": 2.32,
+      "max_score": 3.2,
+      "forbidden_hit": [
+        "migration_advisor"
+      ],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "rexomni_detection",
+        "rexomni_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 3,
+          "score_without_forbidden": 0.12000000000000001,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 0.0,
+            "action_match": 0.0,
+            "argument_match": 0.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": [
+            "decision_type expected 'end', got 'tool'",
+            "action expected 'end', got 'migration_advisor'",
+            "arg 'end_reason' expected 'memory_hit', got ''"
+          ]
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-006-QWEN-BE2",
+      "category": "budget_exhausted_step2",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.3,
+      "max_score": 2.3,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-002-QWEN-NR2",
+      "category": "nonretryable_step2",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.3,
+      "max_score": 2.3,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-009-REX-PE3",
+      "category": "post_retry_error_step3",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 3.2,
+      "max_score": 3.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "rexomni_detection",
+        "rexomni_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 3,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-003-REX-PS3",
+      "category": "post_retry_success_step3",
+      "score": 0.725,
+      "passed": false,
+      "raw_score": 2.32,
+      "max_score": 3.2,
+      "forbidden_hit": [
+        "migration_advisor"
+      ],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "rexomni_detection",
+        "rexomni_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 3,
+          "score_without_forbidden": 0.12000000000000001,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 0.0,
+            "action_match": 0.0,
+            "argument_match": 0.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": [
+            "decision_type expected 'end', got 'tool'",
+            "action expected 'end', got 'migration_advisor'",
+            "arg 'end_reason' expected 'memory_hit', got ''"
+          ]
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-011-QWEN-CF2",
+      "category": "conflicting_state_step2",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.3,
+      "max_score": 2.3,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-008-QWEN-NR2",
+      "category": "nonretryable_step2",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.3,
+      "max_score": 2.3,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-002-REX-NR2",
+      "category": "nonretryable_step2",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.3,
+      "max_score": 2.3,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "rexomni_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-009-REX-PS3",
+      "category": "post_retry_success_step3",
+      "score": 0.725,
+      "passed": false,
+      "raw_score": 2.32,
+      "max_score": 3.2,
+      "forbidden_hit": [
+        "migration_advisor"
+      ],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "rexomni_detection",
+        "rexomni_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 3,
+          "score_without_forbidden": 0.12000000000000001,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 0.0,
+            "action_match": 0.0,
+            "argument_match": 0.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": [
+            "decision_type expected 'end', got 'tool'",
+            "action expected 'end', got 'migration_advisor'",
+            "arg 'end_reason' expected 'memory_hit', got ''"
+          ]
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-008-QWEN-CS2",
+      "category": "current_success_step2",
+      "score": 0.617391,
+      "passed": false,
+      "raw_score": 1.42,
+      "max_score": 2.3,
+      "forbidden_hit": [
+        "answerer"
+      ],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "answerer"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.12000000000000001,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 0.0,
+            "action_match": 0.0,
+            "argument_match": 0.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": [
+            "decision_type expected 'end', got 'tool'",
+            "action expected 'end', got 'answerer'",
+            "arg 'end_reason' expected 'memory_hit', got None"
+          ]
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-009-QWEN-BE2",
+      "category": "budget_exhausted_step2",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.3,
+      "max_score": 2.3,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-011-QWEN-PV3",
+      "category": "post_retry_metric_veto_step3",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 3.2,
+      "max_score": 3.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 3,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-002-QWEN-CF2",
+      "category": "conflicting_state_step2",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.3,
+      "max_score": 2.3,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-003-REX-PE3",
+      "category": "post_retry_error_step3",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 3.2,
+      "max_score": 3.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "rexomni_detection",
+        "rexomni_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 3,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-005-QWEN-NR2",
+      "category": "nonretryable_step2",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.3,
+      "max_score": 2.3,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-005-REX-PV3",
+      "category": "post_retry_metric_veto_step3",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 3.2,
+      "max_score": 3.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "rexomni_detection",
+        "rexomni_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 3,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-006-QWEN-MS2",
+      "category": "missing_required_state_step2",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.3,
+      "max_score": 2.3,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-003-REX-NR2",
+      "category": "nonretryable_step2",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.3,
+      "max_score": 2.3,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "rexomni_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-012-QWEN-PS3",
+      "category": "post_retry_success_step3",
+      "score": 0.725,
+      "passed": false,
+      "raw_score": 2.32,
+      "max_score": 3.2,
+      "forbidden_hit": [
+        "migration_advisor"
+      ],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 3,
+          "score_without_forbidden": 0.12000000000000001,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 0.0,
+            "action_match": 0.0,
+            "argument_match": 0.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": [
+            "decision_type expected 'end', got 'tool'",
+            "action expected 'end', got 'migration_advisor'",
+            "arg 'end_reason' expected 'memory_hit', got ''"
+          ]
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-009-QWEN-MS2",
+      "category": "missing_required_state_step2",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.3,
+      "max_score": 2.3,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-006-REX-BE2",
+      "category": "budget_exhausted_step2",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.3,
+      "max_score": 2.3,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "rexomni_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-004-QWEN-MS2",
+      "category": "missing_required_state_step2",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.3,
+      "max_score": 2.3,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-011-REX-CS2",
+      "category": "current_success_step2",
+      "score": 0.617391,
+      "passed": false,
+      "raw_score": 1.42,
+      "max_score": 2.3,
+      "forbidden_hit": [
+        "migration_advisor"
+      ],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "rexomni_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.12000000000000001,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 0.0,
+            "action_match": 0.0,
+            "argument_match": 0.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": [
+            "decision_type expected 'end', got 'tool'",
+            "action expected 'end', got 'migration_advisor'",
+            "arg 'end_reason' expected 'memory_hit', got ''"
+          ]
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-012-QWEN-CS2",
+      "category": "current_success_step2",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.3,
+      "max_score": 2.3,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "end"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-002-QWEN-CS2",
+      "category": "current_success_step2",
+      "score": 0.617391,
+      "passed": false,
+      "raw_score": 1.42,
+      "max_score": 2.3,
+      "forbidden_hit": [
+        "migration_advisor"
+      ],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.12000000000000001,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 0.0,
+            "action_match": 0.0,
+            "argument_match": 0.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": [
+            "decision_type expected 'end', got 'tool'",
+            "action expected 'end', got 'migration_advisor'",
+            "arg 'end_reason' expected 'memory_hit', got ''"
+          ]
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-012-REX-PE3",
+      "category": "post_retry_error_step3",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 3.2,
+      "max_score": 3.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "rexomni_detection",
+        "rexomni_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 3,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-004-QWEN-PE3",
+      "category": "post_retry_error_step3",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 3.2,
+      "max_score": 3.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 3,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-008-REX-CF2",
+      "category": "conflicting_state_step2",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.3,
+      "max_score": 2.3,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "rexomni_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-005-REX-NR2",
+      "category": "nonretryable_step2",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.3,
+      "max_score": 2.3,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "rexomni_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-010-QWEN-PS3",
+      "category": "post_retry_success_step3",
+      "score": 0.725,
+      "passed": false,
+      "raw_score": 2.32,
+      "max_score": 3.2,
+      "forbidden_hit": [
+        "migration_advisor"
+      ],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 3,
+          "score_without_forbidden": 0.12000000000000001,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 0.0,
+            "action_match": 0.0,
+            "argument_match": 0.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": [
+            "decision_type expected 'end', got 'tool'",
+            "action expected 'end', got 'migration_advisor'",
+            "arg 'end_reason' expected 'memory_hit', got ''"
+          ]
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-011-QWEN-BE2",
+      "category": "budget_exhausted_step2",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.3,
+      "max_score": 2.3,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-005-REX-PS3",
+      "category": "post_retry_success_step3",
+      "score": 0.725,
+      "passed": false,
+      "raw_score": 2.32,
+      "max_score": 3.2,
+      "forbidden_hit": [
+        "migration_advisor"
+      ],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "rexomni_detection",
+        "rexomni_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 3,
+          "score_without_forbidden": 0.12000000000000001,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 0.0,
+            "action_match": 0.0,
+            "argument_match": 0.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": [
+            "decision_type expected 'end', got 'tool'",
+            "action expected 'end', got 'migration_advisor'",
+            "arg 'end_reason' expected 'memory_hit', got ''"
+          ]
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-007-REX-PE3",
+      "category": "post_retry_error_step3",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 3.2,
+      "max_score": 3.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "rexomni_detection",
+        "rexomni_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 3,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-012-QWEN-PE3",
+      "category": "post_retry_error_step3",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 3.2,
+      "max_score": 3.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 3,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-010-QWEN-NR2",
+      "category": "nonretryable_step2",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 2.3,
+      "max_score": 2.3,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    },
+    {
+      "case_id": "PRRV7-GD-008-REX-PE3",
+      "category": "post_retry_error_step3",
+      "score": 1.0,
+      "passed": true,
+      "raw_score": 3.2,
+      "max_score": 3.2,
+      "forbidden_hit": [],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "rexomni_detection",
+        "rexomni_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 3,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        }
+      ],
+      "parse_ok": true
+    }
+  ]
+}

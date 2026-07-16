@@ -1,0 +1,186 @@
+{
+  "blocked_bundle": "entity × detector family",
+  "case_rows": {
+    "grpo_train": 432,
+    "sealed_test_a": 216,
+    "sealed_test_b": 216,
+    "selection_dev": 216,
+    "support_dev": 216
+  },
+  "created_at": "2026-07-16T18:05:00Z",
+  "dataset_id": "planner_retry_safe_end_residual_v8",
+  "files": {
+    "audit_report": "data/datasets/planner_retry_safe_end_residual_v8/audit_report.json",
+    "builder": "training/planner_grpo_seed_v1/scripts/build_planner_retry_safe_end_residual_v8.py",
+    "cases_grpo_train": "training/planner_grpo_seed_v1/cases/planner_retry_safe_end_residual_v8_grpo_train_cases.jsonl",
+    "cases_selection_dev": "training/planner_grpo_seed_v1/cases/planner_retry_safe_end_residual_v8_selection_dev_cases.jsonl",
+    "cases_support_dev": "training/planner_grpo_seed_v1/cases/planner_retry_safe_end_residual_v8_support_dev_cases.jsonl",
+    "comparison_contract": "experiments/studies/planner_retry_migrate_residual_v8_qwen35_4b_v1/comparison_contract.json",
+    "fixture_01": "examples/images/planner_retry_safe_end_residual_v8/emerald_double_aperture_ring.png",
+    "fixture_02": "examples/images/planner_retry_safe_end_residual_v8/indigo_five_star_check_tab.png",
+    "fixture_03": "examples/images/planner_retry_safe_end_residual_v8/amber_cross_lock_block.png",
+    "fixture_04": "examples/images/planner_retry_safe_end_residual_v8/violet_three_spoke_wheel.png",
+    "fixture_05": "examples/images/planner_retry_safe_end_residual_v8/bronze_arch_isolator.png",
+    "fixture_06": "examples/images/planner_retry_safe_end_residual_v8/lake_blue_hex_tab.png",
+    "fixture_07": "examples/images/planner_retry_safe_end_residual_v8/silver_double_ring_coupler.png",
+    "fixture_08": "examples/images/planner_retry_safe_end_residual_v8/magenta_star_service_tag.png",
+    "fixture_09": "examples/images/planner_retry_safe_end_residual_v8/pine_cross_locator.png",
+    "fixture_10": "examples/images/planner_retry_safe_end_residual_v8/coral_three_spoke_adjuster.png",
+    "pilot_decision": "experiments/studies/planner_retry_migrate_residual_v8_qwen35_4b_v1/v7_pilot_decision.json",
+    "preregistration": "experiments/studies/planner_retry_migrate_residual_v8_qwen35_4b_v1/preregistration.json",
+    "step_data_grpo_train": "training/planner_grpo_seed_v1/step_data/planner_retry_safe_end_residual_v8_grpo_train_qwen35_4b_nothinking_mixed_steps.jsonl",
+    "step_data_selection_dev": "training/planner_grpo_seed_v1/step_data/planner_retry_safe_end_residual_v8_selection_dev_qwen35_4b_nothinking_mixed_steps.jsonl",
+    "step_data_support_dev": "training/planner_grpo_seed_v1/step_data/planner_retry_safe_end_residual_v8_support_dev_qwen35_4b_nothinking_mixed_steps.jsonl",
+    "step_manifest_grpo_train": "training/planner_grpo_seed_v1/step_data/planner_retry_safe_end_residual_v8_grpo_train_qwen35_4b_nothinking_mixed_steps.manifest.json",
+    "step_manifest_selection_dev": "training/planner_grpo_seed_v1/step_data/planner_retry_safe_end_residual_v8_selection_dev_qwen35_4b_nothinking_mixed_steps.manifest.json",
+    "step_manifest_support_dev": "training/planner_grpo_seed_v1/step_data/planner_retry_safe_end_residual_v8_support_dev_qwen35_4b_nothinking_mixed_steps.manifest.json"
+  },
+  "independent_unit": "entity_id",
+  "integrity": {
+    "case_validation": "pass",
+    "historical_protected_value_overlap": {
+      "bundle_error_alias": 0,
+      "case_id": 0,
+      "entity_id": 0,
+      "image_fixture_family": 0,
+      "project_entity": 0,
+      "target_entity": 0
+    },
+    "independent_human_review": "pending",
+    "repository_prompt_overlap": 0
+  },
+  "primary_scenarios": [
+    "current_success_step2",
+    "fresh_retry_step2",
+    "post_retry_success_step3"
+  ],
+  "schema_version": "1.0",
+  "sealed_test_commitment": {
+    "cohorts": [
+      "sealed_test_a",
+      "sealed_test_b"
+    ],
+    "entities": 24,
+    "materialized": false,
+    "rows": 432,
+    "sha256": "f2fd0d2db1ec5bd36870ba0cdb8f7e018a76c7ec00668de4f21e5bc896f6a0b4"
+  },
+  "seed": 2026071608,
+  "sha256": {
+    "audit_report": "ab0a8f6ffc4de115b03cdb247012cda503e7ee130114c4bdec72ac256ec9e393",
+    "builder": "8f63dc4ffdd178f71763f1cd6f581d2bc91328206c3c7338101afa7d90253982",
+    "cases_grpo_train": "b3a1a535914229e655f20ed2724e2fe54945ff07c1c421699c5189637aa38d8a",
+    "cases_selection_dev": "55bd12efcb6f9bfb22c57f2d7bd956a97ff286feb3436ab1778baed04e138727",
+    "cases_support_dev": "c7b6af524d2511c6c03d3da810880f7e99f83de31a61ea6fd3d3b481a007a67f",
+    "comparison_contract": "d7eb638da2adc55a4f5000f408cc785e18167d3b9bb84dcfbc8948ab8b399f04",
+    "fixture_01": "088990a48c19ba77622a6f1c5592bf2192049ab18d003d5fd1759610d363370e",
+    "fixture_02": "7818267348976d24bdb7868004de7c13b39fcc643edefc6c11039a72738fa76c",
+    "fixture_03": "1e622dcb1b9995aa001be593c1ee38c59342cf5ef7c54386196531be4f34f020",
+    "fixture_04": "923c7691508ac94eb2fdbc098473b221e789f67469bc0dafc4f1fc0fd1ac0246",
+    "fixture_05": "1dc95dde55433fdffd20eeb4d8b15427e1e14306d6d0b1d3cdf828945c4c1b98",
+    "fixture_06": "dfa599a4f4983830ae8a34b4dcc710b4faa1f013f02561928507f4489facfdc6",
+    "fixture_07": "5668299c41adb00f3245049623ba7cb3bb5a3886dcc8b37b8e626d245cbfa391",
+    "fixture_08": "c722050ba98a77d48728f6de262be2f26cadd71b4ea97b1dc69e5c09e12e4585",
+    "fixture_09": "2111147f0eda7e1053bb4663f9f3aaa8474653d95c3e1dadd540f65c783993ec",
+    "fixture_10": "6e7a90a10f88af2fccfaab1fe823950b4ef6dfa359b1c3c0f0a2ba4302e4ddba",
+    "pilot_decision": "39a05fccbad7e500bcc989a5cf8cb86d6da83bd8cfe60e6905af0a99327ec921",
+    "preregistration": "21ac3506bc33d130046043fb741d3399d1ba495bfe9e926ae9ae128741bf4a97",
+    "step_data_grpo_train": "a23c2f51b1d4f28400737f38e78149a73479edac7d86811e25e61be76b64e133",
+    "step_data_selection_dev": "fc72b6a784a2c9f1a04fcd7c126f26788f4acadd7d8c7f711a3fc92b36747757",
+    "step_data_support_dev": "8461d25663b099f3f1a4b862526c23b79243048d07ed2a03b4eb840ee86677ad",
+    "step_manifest_grpo_train": "863755ae7382049f065ddb67b19b17bf2a7c42b49e08aa4c2baae02272f1610b",
+    "step_manifest_selection_dev": "ed6d819280e49e40a7a1b0dd68494af3025b3d4589d6b470c6b051f601c12f8d",
+    "step_manifest_support_dev": "a38bbc13550230b405dc299e76dcb46c1faac0100c08d707e51c66599a5e2973"
+  },
+  "stability_controls": [
+    "post_retry_error_step3",
+    "post_retry_metric_veto_step3",
+    "conflicting_state_step2",
+    "nonretryable_step2",
+    "budget_exhausted_step2",
+    "missing_required_state_step2"
+  ],
+  "status": "frozen_train_support_selection_test_committed",
+  "step_rows": {
+    "grpo_train": {
+      "actions": {
+        "end": 96,
+        "retry": 48
+      },
+      "entities": 24,
+      "prompt_tokens": {
+        "max": 4455,
+        "mean": 4312.152777777777,
+        "min": 4232,
+        "p50": 4256,
+        "p95": 4449
+      },
+      "rows": 144,
+      "scenarios": {
+        "current_success_step2": 48,
+        "fresh_retry_step2": 48,
+        "post_retry_success_step3": 48
+      },
+      "steps": {
+        "2": 96,
+        "3": 48
+      }
+    },
+    "selection_dev": {
+      "actions": {
+        "end": 48,
+        "migrate": 144,
+        "retry": 24
+      },
+      "entities": 12,
+      "prompt_tokens": {
+        "max": 4452,
+        "mean": 4307.527777777777,
+        "min": 4231,
+        "p50": 4249,
+        "p95": 4444
+      },
+      "rows": 216,
+      "scenarios": {
+        "budget_exhausted_step2": 24,
+        "conflicting_state_step2": 24,
+        "current_success_step2": 24,
+        "fresh_retry_step2": 24,
+        "missing_required_state_step2": 24,
+        "nonretryable_step2": 24,
+        "post_retry_error_step3": 24,
+        "post_retry_metric_veto_step3": 24,
+        "post_retry_success_step3": 24
+      },
+      "steps": {
+        "2": 144,
+        "3": 72
+      }
+    },
+    "support_dev": {
+      "actions": {
+        "end": 48,
+        "retry": 24
+      },
+      "entities": 12,
+      "prompt_tokens": {
+        "max": 4460,
+        "mean": 4314.833333333333,
+        "min": 4231,
+        "p50": 4258,
+        "p95": 4449
+      },
+      "rows": 72,
+      "scenarios": {
+        "current_success_step2": 24,
+        "fresh_retry_step2": 24,
+        "post_retry_success_step3": 24
+      },
+      "steps": {
+        "2": 48,
+        "3": 24
+      }
+    }
+  },
+  "study_id": "planner_retry_migrate_residual_v8_qwen35_4b_v1"
+}

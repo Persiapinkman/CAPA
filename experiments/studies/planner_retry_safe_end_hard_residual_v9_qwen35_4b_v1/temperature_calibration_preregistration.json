@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_retry_safe_end_hard_residual_v9_qwen35_4b_v1",
+  "created_at": "2026-07-16T18:18:00Z",
+  "status": "preregistered_before_temperature_calibration",
+  "role": "exploratory_sampling_calibration_only",
+  "source": {
+    "dataset": "planner_retry_migrate_residual_v7",
+    "split": "grpo_dev",
+    "scenario_id": "post_retry_success_step3",
+    "detector_family": "rex",
+    "prompt_groups": 12,
+    "reason": "This was the weakest variance stratum among the three V8-selected primary scenarios at temperature 0.7."
+  },
+  "model": {
+    "base": "/raid/zkq/models/Qwen3.5-4B",
+    "adapter": "experiments/runs/20260716_qwen35_4b_planner_v6_sft_seed42_v1/checkpoint-100"
+  },
+  "fixed_generation": {
+    "samples_per_prompt": 4,
+    "top_p": 0.9,
+    "max_new_tokens": 320,
+    "seed": 42
+  },
+  "candidate_temperatures": [
+    0.9,
+    1.0
+  ],
+  "historical_anchor": {
+    "temperature": 0.7,
+    "gold_action_support_rate": 0.75,
+    "nonzero_reward_variance_rate": 0.08333333333333333
+  },
+  "selection_rule": {
+    "minimum_gold_action_support_rate": 0.7,
+    "minimum_nonzero_reward_variance_rate": 0.25,
+    "choose": "lowest candidate temperature satisfying both thresholds",
+    "fallback": "temperature 0.7 if neither candidate satisfies both thresholds",
+    "ties": "lower temperature"
+  },
+  "anti_leakage": [
+    "V7 calibration prompts cannot enter V9 train, support, selection, or sealed test.",
+    "Calibration results may select only the V9 support/training sampling temperature.",
+    "Calibration results cannot support SFT, GRPO, or larger-model superiority claims."
+  ]
+}

@@ -1,0 +1,666 @@
+{
+  "case_validation": {
+    "errors": [],
+    "factors": {
+      "grpo_train": {
+        "badges": {
+          "amber": 8,
+          "missing": 8,
+          "red": 8
+        },
+        "bundle_aliases": {
+          "hardtrain_detector_contract_shape_unknown": 6,
+          "hardtrain_detector_control_route_broken": 6,
+          "hardtrain_feature_return_path_lost": 6,
+          "hardtrain_inspection_replay_credit_empty": 6,
+          "hardtrain_probe_ack_window_closed": 6,
+          "hardtrain_probe_state_packet_invalid": 6,
+          "hardtrain_sensor_reply_epoch_late": 6,
+          "hardtrain_vision_capacity_lease_absent": 6
+        },
+        "detectors": {
+          "qwen": 216,
+          "rex": 216
+        },
+        "entities": 24,
+        "entity_style_badge_fixture": {
+          "style1|amber|prhv9_ht_amber_star": 1,
+          "style1|amber|prhv9_ht_peacock_rings": 1,
+          "style1|missing|prhv9_ht_amber_star": 1,
+          "style1|missing|prhv9_ht_peacock_rings": 1,
+          "style1|red|prhv9_ht_amber_star": 1,
+          "style1|red|prhv9_ht_peacock_rings": 1,
+          "style2|amber|prhv9_ht_amber_star": 1,
+          "style2|amber|prhv9_ht_peacock_rings": 1,
+          "style2|missing|prhv9_ht_amber_star": 1,
+          "style2|missing|prhv9_ht_peacock_rings": 1,
+          "style2|red|prhv9_ht_amber_star": 1,
+          "style2|red|prhv9_ht_peacock_rings": 1,
+          "style3|amber|prhv9_ht_amber_star": 1,
+          "style3|amber|prhv9_ht_peacock_rings": 1,
+          "style3|missing|prhv9_ht_amber_star": 1,
+          "style3|missing|prhv9_ht_peacock_rings": 1,
+          "style3|red|prhv9_ht_amber_star": 1,
+          "style3|red|prhv9_ht_peacock_rings": 1,
+          "style4|amber|prhv9_ht_amber_star": 1,
+          "style4|amber|prhv9_ht_peacock_rings": 1,
+          "style4|missing|prhv9_ht_amber_star": 1,
+          "style4|missing|prhv9_ht_peacock_rings": 1,
+          "style4|red|prhv9_ht_amber_star": 1,
+          "style4|red|prhv9_ht_peacock_rings": 1
+        },
+        "fixtures": {
+          "prhv9_ht_amber_star": 12,
+          "prhv9_ht_peacock_rings": 12
+        },
+        "scenarios": {
+          "budget_exhausted_step2": 48,
+          "conflicting_state_step2": 48,
+          "current_success_step2": 48,
+          "fresh_retry_step2": 48,
+          "missing_required_state_step2": 48,
+          "nonretryable_step2": 48,
+          "post_retry_error_step3": 48,
+          "post_retry_metric_veto_step3": 48,
+          "post_retry_success_step3": 48
+        },
+        "styles": {
+          "0": 6,
+          "1": 6,
+          "2": 6,
+          "3": 6
+        },
+        "target_actions": {
+          "end": 96,
+          "migrate": 288,
+          "retry": 48
+        },
+        "target_steps": {
+          "2": 288,
+          "3": 144
+        }
+      },
+      "sealed_test_a": {
+        "badges": {
+          "amber": 4,
+          "missing": 4,
+          "red": 4
+        },
+        "bundle_aliases": {
+          "sealedalpha_detector_contract_shape_unknown": 3,
+          "sealedalpha_detector_control_route_broken": 3,
+          "sealedalpha_feature_return_path_lost": 3,
+          "sealedalpha_inspection_replay_credit_empty": 3,
+          "sealedalpha_probe_ack_window_closed": 3,
+          "sealedalpha_probe_state_packet_invalid": 3,
+          "sealedalpha_sensor_reply_epoch_late": 3,
+          "sealedalpha_vision_capacity_lease_absent": 3
+        },
+        "detectors": {
+          "qwen": 108,
+          "rex": 108
+        },
+        "entities": 12,
+        "entity_style_badge_fixture": {
+          "style1|amber|prhv9_ta_wisteria_wheel": 1,
+          "style1|missing|prhv9_ta_copper_cross": 1,
+          "style1|red|prhv9_ta_copper_cross": 1,
+          "style2|amber|prhv9_ta_copper_cross": 1,
+          "style2|missing|prhv9_ta_wisteria_wheel": 1,
+          "style2|red|prhv9_ta_wisteria_wheel": 1,
+          "style3|amber|prhv9_ta_wisteria_wheel": 1,
+          "style3|missing|prhv9_ta_copper_cross": 1,
+          "style3|red|prhv9_ta_copper_cross": 1,
+          "style4|amber|prhv9_ta_copper_cross": 1,
+          "style4|missing|prhv9_ta_wisteria_wheel": 1,
+          "style4|red|prhv9_ta_wisteria_wheel": 1
+        },
+        "fixtures": {
+          "prhv9_ta_copper_cross": 6,
+          "prhv9_ta_wisteria_wheel": 6
+        },
+        "scenarios": {
+          "budget_exhausted_step2": 24,
+          "conflicting_state_step2": 24,
+          "current_success_step2": 24,
+          "fresh_retry_step2": 24,
+          "missing_required_state_step2": 24,
+          "nonretryable_step2": 24,
+          "post_retry_error_step3": 24,
+          "post_retry_metric_veto_step3": 24,
+          "post_retry_success_step3": 24
+        },
+        "styles": {
+          "0": 3,
+          "1": 3,
+          "2": 3,
+          "3": 3
+        },
+        "target_actions": {
+          "end": 48,
+          "migrate": 144,
+          "retry": 24
+        },
+        "target_steps": {
+          "2": 144,
+          "3": 72
+        }
+      },
+      "sealed_test_b": {
+        "badges": {
+          "amber": 4,
+          "missing": 4,
+          "red": 4
+        },
+        "bundle_aliases": {
+          "sealedbravo_detector_contract_shape_unknown": 3,
+          "sealedbravo_detector_control_route_broken": 3,
+          "sealedbravo_feature_return_path_lost": 3,
+          "sealedbravo_inspection_replay_credit_empty": 3,
+          "sealedbravo_probe_ack_window_closed": 3,
+          "sealedbravo_probe_state_packet_invalid": 3,
+          "sealedbravo_sensor_reply_epoch_late": 3,
+          "sealedbravo_vision_capacity_lease_absent": 3
+        },
+        "detectors": {
+          "qwen": 108,
+          "rex": 108
+        },
+        "entities": 12,
+        "entity_style_badge_fixture": {
+          "style1|amber|prhv9_tb_platinum_arch": 1,
+          "style1|missing|prhv9_tb_coral_hex": 1,
+          "style1|red|prhv9_tb_coral_hex": 1,
+          "style2|amber|prhv9_tb_coral_hex": 1,
+          "style2|missing|prhv9_tb_platinum_arch": 1,
+          "style2|red|prhv9_tb_platinum_arch": 1,
+          "style3|amber|prhv9_tb_platinum_arch": 1,
+          "style3|missing|prhv9_tb_coral_hex": 1,
+          "style3|red|prhv9_tb_coral_hex": 1,
+          "style4|amber|prhv9_tb_coral_hex": 1,
+          "style4|missing|prhv9_tb_platinum_arch": 1,
+          "style4|red|prhv9_tb_platinum_arch": 1
+        },
+        "fixtures": {
+          "prhv9_tb_coral_hex": 6,
+          "prhv9_tb_platinum_arch": 6
+        },
+        "scenarios": {
+          "budget_exhausted_step2": 24,
+          "conflicting_state_step2": 24,
+          "current_success_step2": 24,
+          "fresh_retry_step2": 24,
+          "missing_required_state_step2": 24,
+          "nonretryable_step2": 24,
+          "post_retry_error_step3": 24,
+          "post_retry_metric_veto_step3": 24,
+          "post_retry_success_step3": 24
+        },
+        "styles": {
+          "0": 3,
+          "1": 3,
+          "2": 3,
+          "3": 3
+        },
+        "target_actions": {
+          "end": 48,
+          "migrate": 144,
+          "retry": 24
+        },
+        "target_steps": {
+          "2": 144,
+          "3": 72
+        }
+      },
+      "selection_dev": {
+        "badges": {
+          "amber": 4,
+          "missing": 4,
+          "red": 4
+        },
+        "bundle_aliases": {
+          "selectiondelta_detector_contract_shape_unknown": 3,
+          "selectiondelta_detector_control_route_broken": 3,
+          "selectiondelta_feature_return_path_lost": 3,
+          "selectiondelta_inspection_replay_credit_empty": 3,
+          "selectiondelta_probe_ack_window_closed": 3,
+          "selectiondelta_probe_state_packet_invalid": 3,
+          "selectiondelta_sensor_reply_epoch_late": 3,
+          "selectiondelta_vision_capacity_lease_absent": 3
+        },
+        "detectors": {
+          "qwen": 108,
+          "rex": 108
+        },
+        "entities": 12,
+        "entity_style_badge_fixture": {
+          "style1|amber|prhv9_vd_cherry_star": 1,
+          "style1|missing|prhv9_vd_turquoise_rings": 1,
+          "style1|red|prhv9_vd_turquoise_rings": 1,
+          "style2|amber|prhv9_vd_turquoise_rings": 1,
+          "style2|missing|prhv9_vd_cherry_star": 1,
+          "style2|red|prhv9_vd_cherry_star": 1,
+          "style3|amber|prhv9_vd_cherry_star": 1,
+          "style3|missing|prhv9_vd_turquoise_rings": 1,
+          "style3|red|prhv9_vd_turquoise_rings": 1,
+          "style4|amber|prhv9_vd_turquoise_rings": 1,
+          "style4|missing|prhv9_vd_cherry_star": 1,
+          "style4|red|prhv9_vd_cherry_star": 1
+        },
+        "fixtures": {
+          "prhv9_vd_cherry_star": 6,
+          "prhv9_vd_turquoise_rings": 6
+        },
+        "scenarios": {
+          "budget_exhausted_step2": 24,
+          "conflicting_state_step2": 24,
+          "current_success_step2": 24,
+          "fresh_retry_step2": 24,
+          "missing_required_state_step2": 24,
+          "nonretryable_step2": 24,
+          "post_retry_error_step3": 24,
+          "post_retry_metric_veto_step3": 24,
+          "post_retry_success_step3": 24
+        },
+        "styles": {
+          "0": 3,
+          "1": 3,
+          "2": 3,
+          "3": 3
+        },
+        "target_actions": {
+          "end": 48,
+          "migrate": 144,
+          "retry": 24
+        },
+        "target_steps": {
+          "2": 144,
+          "3": 72
+        }
+      },
+      "support_dev_a": {
+        "badges": {
+          "amber": 4,
+          "missing": 4,
+          "red": 4
+        },
+        "bundle_aliases": {
+          "supportalpha_detector_contract_shape_unknown": 3,
+          "supportalpha_detector_control_route_broken": 3,
+          "supportalpha_feature_return_path_lost": 3,
+          "supportalpha_inspection_replay_credit_empty": 3,
+          "supportalpha_probe_ack_window_closed": 3,
+          "supportalpha_probe_state_packet_invalid": 3,
+          "supportalpha_sensor_reply_epoch_late": 3,
+          "supportalpha_vision_capacity_lease_absent": 3
+        },
+        "detectors": {
+          "qwen": 108,
+          "rex": 108
+        },
+        "entities": 12,
+        "entity_style_badge_fixture": {
+          "style1|amber|prhv9_sa_cerulean_wheel": 1,
+          "style1|missing|prhv9_sa_garnet_cross": 1,
+          "style1|red|prhv9_sa_garnet_cross": 1,
+          "style2|amber|prhv9_sa_garnet_cross": 1,
+          "style2|missing|prhv9_sa_cerulean_wheel": 1,
+          "style2|red|prhv9_sa_cerulean_wheel": 1,
+          "style3|amber|prhv9_sa_cerulean_wheel": 1,
+          "style3|missing|prhv9_sa_garnet_cross": 1,
+          "style3|red|prhv9_sa_garnet_cross": 1,
+          "style4|amber|prhv9_sa_garnet_cross": 1,
+          "style4|missing|prhv9_sa_cerulean_wheel": 1,
+          "style4|red|prhv9_sa_cerulean_wheel": 1
+        },
+        "fixtures": {
+          "prhv9_sa_cerulean_wheel": 6,
+          "prhv9_sa_garnet_cross": 6
+        },
+        "scenarios": {
+          "budget_exhausted_step2": 24,
+          "conflicting_state_step2": 24,
+          "current_success_step2": 24,
+          "fresh_retry_step2": 24,
+          "missing_required_state_step2": 24,
+          "nonretryable_step2": 24,
+          "post_retry_error_step3": 24,
+          "post_retry_metric_veto_step3": 24,
+          "post_retry_success_step3": 24
+        },
+        "styles": {
+          "0": 3,
+          "1": 3,
+          "2": 3,
+          "3": 3
+        },
+        "target_actions": {
+          "end": 48,
+          "migrate": 144,
+          "retry": 24
+        },
+        "target_steps": {
+          "2": 144,
+          "3": 72
+        }
+      },
+      "support_dev_b": {
+        "badges": {
+          "amber": 4,
+          "missing": 4,
+          "red": 4
+        },
+        "bundle_aliases": {
+          "supportbravo_detector_contract_shape_unknown": 3,
+          "supportbravo_detector_control_route_broken": 3,
+          "supportbravo_feature_return_path_lost": 3,
+          "supportbravo_inspection_replay_credit_empty": 3,
+          "supportbravo_probe_ack_window_closed": 3,
+          "supportbravo_probe_state_packet_invalid": 3,
+          "supportbravo_sensor_reply_epoch_late": 3,
+          "supportbravo_vision_capacity_lease_absent": 3
+        },
+        "detectors": {
+          "qwen": 108,
+          "rex": 108
+        },
+        "entities": 12,
+        "entity_style_badge_fixture": {
+          "style1|amber|prhv9_sb_brass_arch": 1,
+          "style1|missing|prhv9_sb_ultramarine_hex": 1,
+          "style1|red|prhv9_sb_ultramarine_hex": 1,
+          "style2|amber|prhv9_sb_ultramarine_hex": 1,
+          "style2|missing|prhv9_sb_brass_arch": 1,
+          "style2|red|prhv9_sb_brass_arch": 1,
+          "style3|amber|prhv9_sb_brass_arch": 1,
+          "style3|missing|prhv9_sb_ultramarine_hex": 1,
+          "style3|red|prhv9_sb_ultramarine_hex": 1,
+          "style4|amber|prhv9_sb_ultramarine_hex": 1,
+          "style4|missing|prhv9_sb_brass_arch": 1,
+          "style4|red|prhv9_sb_brass_arch": 1
+        },
+        "fixtures": {
+          "prhv9_sb_brass_arch": 6,
+          "prhv9_sb_ultramarine_hex": 6
+        },
+        "scenarios": {
+          "budget_exhausted_step2": 24,
+          "conflicting_state_step2": 24,
+          "current_success_step2": 24,
+          "fresh_retry_step2": 24,
+          "missing_required_state_step2": 24,
+          "nonretryable_step2": 24,
+          "post_retry_error_step3": 24,
+          "post_retry_metric_veto_step3": 24,
+          "post_retry_success_step3": 24
+        },
+        "styles": {
+          "0": 3,
+          "1": 3,
+          "2": 3,
+          "3": 3
+        },
+        "target_actions": {
+          "end": 48,
+          "migrate": 144,
+          "retry": 24
+        },
+        "target_steps": {
+          "2": 144,
+          "3": 72
+        }
+      }
+    },
+    "split_overlap": {
+      "grpo_train__sealed_test_a": {
+        "bundle_error_alias": 0,
+        "case_id": 0,
+        "entity_id": 0,
+        "image_fixture_family": 0,
+        "project_entity": 0,
+        "target_entity": 0
+      },
+      "grpo_train__sealed_test_b": {
+        "bundle_error_alias": 0,
+        "case_id": 0,
+        "entity_id": 0,
+        "image_fixture_family": 0,
+        "project_entity": 0,
+        "target_entity": 0
+      },
+      "grpo_train__selection_dev": {
+        "bundle_error_alias": 0,
+        "case_id": 0,
+        "entity_id": 0,
+        "image_fixture_family": 0,
+        "project_entity": 0,
+        "target_entity": 0
+      },
+      "grpo_train__support_dev_a": {
+        "bundle_error_alias": 0,
+        "case_id": 0,
+        "entity_id": 0,
+        "image_fixture_family": 0,
+        "project_entity": 0,
+        "target_entity": 0
+      },
+      "grpo_train__support_dev_b": {
+        "bundle_error_alias": 0,
+        "case_id": 0,
+        "entity_id": 0,
+        "image_fixture_family": 0,
+        "project_entity": 0,
+        "target_entity": 0
+      },
+      "sealed_test_a__sealed_test_b": {
+        "bundle_error_alias": 0,
+        "case_id": 0,
+        "entity_id": 0,
+        "image_fixture_family": 0,
+        "project_entity": 0,
+        "target_entity": 0
+      },
+      "selection_dev__sealed_test_a": {
+        "bundle_error_alias": 0,
+        "case_id": 0,
+        "entity_id": 0,
+        "image_fixture_family": 0,
+        "project_entity": 0,
+        "target_entity": 0
+      },
+      "selection_dev__sealed_test_b": {
+        "bundle_error_alias": 0,
+        "case_id": 0,
+        "entity_id": 0,
+        "image_fixture_family": 0,
+        "project_entity": 0,
+        "target_entity": 0
+      },
+      "support_dev_a__sealed_test_a": {
+        "bundle_error_alias": 0,
+        "case_id": 0,
+        "entity_id": 0,
+        "image_fixture_family": 0,
+        "project_entity": 0,
+        "target_entity": 0
+      },
+      "support_dev_a__sealed_test_b": {
+        "bundle_error_alias": 0,
+        "case_id": 0,
+        "entity_id": 0,
+        "image_fixture_family": 0,
+        "project_entity": 0,
+        "target_entity": 0
+      },
+      "support_dev_a__selection_dev": {
+        "bundle_error_alias": 0,
+        "case_id": 0,
+        "entity_id": 0,
+        "image_fixture_family": 0,
+        "project_entity": 0,
+        "target_entity": 0
+      },
+      "support_dev_a__support_dev_b": {
+        "bundle_error_alias": 0,
+        "case_id": 0,
+        "entity_id": 0,
+        "image_fixture_family": 0,
+        "project_entity": 0,
+        "target_entity": 0
+      },
+      "support_dev_b__sealed_test_a": {
+        "bundle_error_alias": 0,
+        "case_id": 0,
+        "entity_id": 0,
+        "image_fixture_family": 0,
+        "project_entity": 0,
+        "target_entity": 0
+      },
+      "support_dev_b__sealed_test_b": {
+        "bundle_error_alias": 0,
+        "case_id": 0,
+        "entity_id": 0,
+        "image_fixture_family": 0,
+        "project_entity": 0,
+        "target_entity": 0
+      },
+      "support_dev_b__selection_dev": {
+        "bundle_error_alias": 0,
+        "case_id": 0,
+        "entity_id": 0,
+        "image_fixture_family": 0,
+        "project_entity": 0,
+        "target_entity": 0
+      }
+    },
+    "status": "pass",
+    "v6_repository_overlap": {
+      "bundle_error_alias": 0,
+      "case_id": 0,
+      "entity_id": 0,
+      "image_fixture_family": 0,
+      "project_entity": 0,
+      "target_entity": 0
+    }
+  },
+  "created_at": "2026-07-16T18:23:21Z",
+  "dataset_id": "planner_retry_safe_end_hard_residual_v9",
+  "historical_protected_value_overlap": {
+    "bundle_error_alias": 0,
+    "case_id": 0,
+    "entity_id": 0,
+    "image_fixture_family": 0,
+    "project_entity": 0,
+    "target_entity": 0
+  },
+  "repository_prompt_audit": {
+    "checked_files": [
+      "training/planner_grpo_seed_v1/step_data/planner_retry_safe_end_residual_v8_selection_dev_qwen35_4b_nothinking_mixed_steps.jsonl",
+      "training/planner_grpo_seed_v1/step_data/planner_multistep_grpo_value_v5_train_v1_qwen35_4b_support80.jsonl",
+      "training/planner_grpo_seed_v1/step_data/planner_retry_migrate_v6_grpo_dev_qwen35_4b_nothinking_step2.jsonl",
+      "training/planner_grpo_seed_v1/step_data/planner_retry_migrate_residual_v7_grpo_train_qwen35_4b_nothinking_mixed_steps.jsonl",
+      "training/planner_grpo_seed_v1/step_data/planner_retry_safe_end_residual_v8_grpo_train_qwen35_4b_nothinking_mixed_steps.jsonl",
+      "training/planner_grpo_seed_v1/step_data/planner_retry_migrate_v6_grpo_train_qwen35_4b_nothinking_step2.jsonl",
+      "training/planner_grpo_seed_v1/step_data/planner_multistep_grpo_value_v5_train_v1_qwen35_4b_nothinking_step2.jsonl",
+      "training/planner_grpo_seed_v1/step_data/planner_retry_safe_end_residual_v8_support_dev_qwen35_4b_nothinking_mixed_steps.jsonl",
+      "training/planner_grpo_seed_v1/step_data/planner_retry_migrate_residual_v7_grpo_dev_qwen35_4b_nothinking_mixed_steps.jsonl"
+    ],
+    "current_prompt_hashes": 504,
+    "historical_prompt_hashes": 2100,
+    "overlap": 0
+  },
+  "schema_version": "1.0",
+  "sealed_test_commitment": {
+    "cohorts": [
+      "sealed_test_a",
+      "sealed_test_b"
+    ],
+    "entities": 24,
+    "materialized": false,
+    "rows": 432,
+    "sha256": "7119b1a06ef528b93c8d400f4e17c272eb1379969517b76dc6c155782a338113"
+  },
+  "step_prompt_audits": {
+    "grpo_train": {
+      "canonical_step_reward": {
+        "max": 1.0,
+        "min": 1.0,
+        "non_unit": 0
+      },
+      "case_id_hits": 0,
+      "duplicate_prompt_hashes": 0,
+      "entity_id_hits": 0,
+      "forbidden_fragment_hits": {
+        "\"_thought\"": 0,
+        "\"external_ref\"": 0,
+        "/raid/": 0,
+        "/tmp/": 0,
+        "按训练样本期望": 0
+      },
+      "max_steps_mismatch": 0,
+      "prompt_tokens": {
+        "max": 4437,
+        "mean": 4285.027777777777,
+        "min": 4207,
+        "p50": 4228,
+        "p95": 4421
+      },
+      "rows": 144,
+      "status": "pass"
+    },
+    "selection_dev": {
+      "canonical_step_reward": {
+        "max": 1.0,
+        "min": 1.0,
+        "non_unit": 0
+      },
+      "case_id_hits": 0,
+      "duplicate_prompt_hashes": 0,
+      "entity_id_hits": 0,
+      "forbidden_fragment_hits": {
+        "\"_thought\"": 0,
+        "\"external_ref\"": 0,
+        "/raid/": 0,
+        "/tmp/": 0,
+        "按训练样本期望": 0
+      },
+      "max_steps_mismatch": 0,
+      "prompt_tokens": {
+        "max": 4436,
+        "mean": 4286.5,
+        "min": 4198,
+        "p50": 4231,
+        "p95": 4429
+      },
+      "rows": 216,
+      "status": "pass"
+    },
+    "support_dev": {
+      "canonical_step_reward": {
+        "max": 1.0,
+        "min": 1.0,
+        "non_unit": 0
+      },
+      "case_id_hits": 0,
+      "duplicate_prompt_hashes": 0,
+      "entity_id_hits": 0,
+      "forbidden_fragment_hits": {
+        "\"_thought\"": 0,
+        "\"external_ref\"": 0,
+        "/raid/": 0,
+        "/tmp/": 0,
+        "按训练样本期望": 0
+      },
+      "max_steps_mismatch": 0,
+      "prompt_tokens": {
+        "max": 4434,
+        "mean": 4284.763888888889,
+        "min": 4203,
+        "p50": 4228,
+        "p95": 4421
+      },
+      "rows": 144,
+      "status": "pass"
+    }
+  }
+}

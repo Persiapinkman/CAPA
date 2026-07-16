@@ -6,6 +6,7 @@ Run `python pipelines/experiments/registry_cli.py render` after registering an e
 
 ## Research Memos
 
+- `POST_TRAINING_SFT_GRPO_PLAYBOOK.md`：Qwen3.5-4B 从 SFT、residual mining、GRPO support gate 到 sealed larger-model comparison 的可复现实战手册。
 - `PLANNER_MULTISTEP_GRPO_HARD_V2_CONFIRMATION_20260714.md`：245 bad-case 驱动的 V2 多步工具路由新集、35B/7B 3x 模型差分、GRPO support gate 与下一阶段训练门。
 - `DEMO_CAPABILITY_LIVE_CHECK_2026-07-14.md`：当前 RAG、Qwen 与 Rex-Omni 的真实服务和 Demo 端到端复验记录。
 - `LONG_HORIZON_AGENT_RL_LANDSCAPE.md`：CAPA long-horizon Agent RL 场景调研、环境/奖励设计、数据构造原则与实验前门槛。当前人工讨论从此文档开始。

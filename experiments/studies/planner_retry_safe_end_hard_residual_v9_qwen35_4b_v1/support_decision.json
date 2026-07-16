@@ -1,0 +1,294 @@
+{
+  "hard_checks": [
+    {
+      "name": "sample_count",
+      "observed": 576,
+      "operator": "==",
+      "passed": true,
+      "threshold": 576
+    },
+    {
+      "name": "complete_prompt_groups",
+      "observed": 144,
+      "operator": "==",
+      "passed": true,
+      "threshold": 144
+    },
+    {
+      "name": "duplicate_sample_keys",
+      "observed": 0,
+      "operator": "==",
+      "passed": true,
+      "threshold": 0
+    },
+    {
+      "name": "nonfinite_rewards",
+      "observed": 0,
+      "operator": "==",
+      "passed": true,
+      "threshold": 0
+    },
+    {
+      "name": "json_valid_rate",
+      "observed": 1.0,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.99
+    },
+    {
+      "name": "clipped_rate",
+      "observed": 0.0,
+      "operator": "<=",
+      "passed": true,
+      "threshold": 0.01
+    },
+    {
+      "name": "primary_gold_action_support_rate",
+      "observed": 0.8055555555555556,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.7
+    },
+    {
+      "name": "primary_nonzero_reward_variance_rate",
+      "observed": 0.3611111111111111,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.2
+    },
+    {
+      "name": "current_success_step2_qwen_gold_support_rate",
+      "observed": 0.875,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.5
+    },
+    {
+      "name": "current_success_step2_qwen_nonzero_variance_groups",
+      "observed": 11,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 3
+    },
+    {
+      "name": "current_success_step2_rex_gold_support_rate",
+      "observed": 0.7916666666666666,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.5
+    },
+    {
+      "name": "current_success_step2_rex_nonzero_variance_groups",
+      "observed": 6,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 3
+    },
+    {
+      "name": "fresh_retry_step2_qwen_gold_support_rate",
+      "observed": 0.8333333333333334,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.5
+    },
+    {
+      "name": "fresh_retry_step2_qwen_nonzero_variance_groups",
+      "observed": 5,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 3
+    },
+    {
+      "name": "fresh_retry_step2_rex_gold_support_rate",
+      "observed": 0.7916666666666666,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.5
+    },
+    {
+      "name": "fresh_retry_step2_rex_nonzero_variance_groups",
+      "observed": 15,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 3
+    },
+    {
+      "name": "post_retry_success_step3_qwen_gold_support_rate",
+      "observed": 0.7916666666666666,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.5
+    },
+    {
+      "name": "post_retry_success_step3_qwen_nonzero_variance_groups",
+      "observed": 9,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 3
+    },
+    {
+      "name": "post_retry_success_step3_rex_gold_support_rate",
+      "observed": 0.75,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.5
+    },
+    {
+      "name": "post_retry_success_step3_rex_nonzero_variance_groups",
+      "observed": 6,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 3
+    },
+    {
+      "name": "support_block_A_groups",
+      "observed": 72,
+      "operator": "==",
+      "passed": true,
+      "threshold": 72
+    },
+    {
+      "name": "support_block_A_gold_support_rate",
+      "observed": 0.8472222222222222,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.6
+    },
+    {
+      "name": "support_block_A_nonzero_variance_rate",
+      "observed": 0.3194444444444444,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.15
+    },
+    {
+      "name": "support_block_B_groups",
+      "observed": 72,
+      "operator": "==",
+      "passed": true,
+      "threshold": 72
+    },
+    {
+      "name": "support_block_B_gold_support_rate",
+      "observed": 0.7638888888888888,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.6
+    },
+    {
+      "name": "support_block_B_nonzero_variance_rate",
+      "observed": 0.4027777777777778,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.15
+    }
+  ],
+  "observed": {
+    "by_scenario": {
+      "current_success_step2": {
+        "gold_action_support_rate": 0.8333333333333334,
+        "groups": 48,
+        "mean_reward": 0.7616319444444445,
+        "nonzero_reward_variance_groups": 17,
+        "nonzero_reward_variance_rate": 0.3541666666666667
+      },
+      "fresh_retry_step2": {
+        "gold_action_support_rate": 0.8125,
+        "groups": 48,
+        "mean_reward": 0.6627604166666666,
+        "nonzero_reward_variance_groups": 20,
+        "nonzero_reward_variance_rate": 0.4166666666666667
+      },
+      "post_retry_success_step3": {
+        "gold_action_support_rate": 0.7708333333333334,
+        "groups": 48,
+        "mean_reward": 0.7208333333333333,
+        "nonzero_reward_variance_groups": 15,
+        "nonzero_reward_variance_rate": 0.3125
+      }
+    },
+    "by_scenario_detector": {
+      "current_success_step2::qwen": {
+        "gold_action_support_rate": 0.875,
+        "groups": 24,
+        "mean_reward": 0.7649305555555556,
+        "nonzero_reward_variance_groups": 11,
+        "nonzero_reward_variance_rate": 0.4583333333333333
+      },
+      "current_success_step2::rex": {
+        "gold_action_support_rate": 0.7916666666666666,
+        "groups": 24,
+        "mean_reward": 0.7583333333333333,
+        "nonzero_reward_variance_groups": 6,
+        "nonzero_reward_variance_rate": 0.25
+      },
+      "fresh_retry_step2::qwen": {
+        "gold_action_support_rate": 0.8333333333333334,
+        "groups": 24,
+        "mean_reward": 0.7721354166666666,
+        "nonzero_reward_variance_groups": 5,
+        "nonzero_reward_variance_rate": 0.20833333333333334
+      },
+      "fresh_retry_step2::rex": {
+        "gold_action_support_rate": 0.7916666666666666,
+        "groups": 24,
+        "mean_reward": 0.5533854166666666,
+        "nonzero_reward_variance_groups": 15,
+        "nonzero_reward_variance_rate": 0.625
+      },
+      "post_retry_success_step3::qwen": {
+        "gold_action_support_rate": 0.7916666666666666,
+        "groups": 24,
+        "mean_reward": 0.725,
+        "nonzero_reward_variance_groups": 9,
+        "nonzero_reward_variance_rate": 0.375
+      },
+      "post_retry_success_step3::rex": {
+        "gold_action_support_rate": 0.75,
+        "groups": 24,
+        "mean_reward": 0.7166666666666667,
+        "nonzero_reward_variance_groups": 6,
+        "nonzero_reward_variance_rate": 0.25
+      }
+    },
+    "by_support_block": {
+      "A": {
+        "gold_action_support_rate": 0.8472222222222222,
+        "groups": 72,
+        "mean_reward": 0.7712962962962963,
+        "nonzero_reward_variance_groups": 23,
+        "nonzero_reward_variance_rate": 0.3194444444444444
+      },
+      "B": {
+        "gold_action_support_rate": 0.7638888888888888,
+        "groups": 72,
+        "mean_reward": 0.6588541666666666,
+        "nonzero_reward_variance_groups": 29,
+        "nonzero_reward_variance_rate": 0.4027777777777778
+      }
+    },
+    "clipped_rate": 0.0,
+    "complete_groups": 144,
+    "duplicate_sample_keys": 0,
+    "json_valid_rate": 1.0,
+    "nonfinite_rewards": 0,
+    "primary": {
+      "gold_action_support_rate": 0.8055555555555556,
+      "groups": 144,
+      "mean_reward": 0.7150752314814814,
+      "nonzero_reward_variance_groups": 52,
+      "nonzero_reward_variance_rate": 0.3611111111111111
+    },
+    "samples": 576
+  },
+  "on_fail": "Run zero optimizer steps; preserve all samples and open a new study version without relaxing or resampling this gate.",
+  "optimizer_authorized": true,
+  "optimizer_scenarios": [
+    "current_success_step2",
+    "fresh_retry_step2",
+    "post_retry_success_step3"
+  ],
+  "schema_version": "1.0",
+  "status": "pass",
+  "study_id": "planner_retry_safe_end_hard_residual_v9_qwen35_4b_v1"
+}

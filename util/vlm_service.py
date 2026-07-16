@@ -11,6 +11,15 @@ from PIL import Image, ImageFile
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 
+def omit_model_image_payload() -> bool:
+    return os.environ.get("CAPA_OMIT_MODEL_IMAGE_PAYLOAD", "0").strip().lower() in {
+        "1",
+        "true",
+        "yes",
+        "on",
+    }
+
+
 class VLMService:
     def __init__(self, api_key: str | None = None, base_url: str | None = None):
         timeout = float(os.environ.get("DEMO_OPENAI_TIMEOUT_SECONDS", "120"))
@@ -32,7 +41,7 @@ class VLMService:
         request_messages = messages if isinstance(messages, list) and messages else [
             {"role": "user", "content": [{"type": "text", "text": str(prompt or "")}]}
         ]
-        if image_paths and len(image_paths) > 0:
+        if image_paths and len(image_paths) > 0 and not omit_model_image_payload():
             user_idx = -1
             for i in range(len(request_messages) - 1, -1, -1):
                 if str(request_messages[i].get("role") or "") == "user":

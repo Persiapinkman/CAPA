@@ -1,0 +1,8 @@
+{
+  "schema_version": "1.0",
+  "status": "invalid_performance_diagnostic_only",
+  "reason": "The serial pilot was interrupted before correctness aggregation and replaced by four non-overlapping shards. It also predated the frozen no-image-payload comparison setting.",
+  "completed_prediction_rows": 4,
+  "include_in_metrics": false,
+  "replacement_run": "experiments/runs/20260716_qwen35_35b_residual_v7_dev_pilot4x"
+}

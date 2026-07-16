@@ -1,0 +1,11 @@
+{
+  "status": "gateway_error",
+  "success": false,
+  "summary": "当前结构化状态：candidate_count=NA；min_confidence=NA；cross_prompt_iou=NA；domain_shift=unknown；gateway_error=detector_input_contract_unknown；retryable=true；retry_count=2。说明：展示字段不覆盖结构化值。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "碧蓝三辐调节轮",
+    "finish_after_tool": false
+  },
+  "_thought": "当前是第一步，query_trajectories 中 steps 为空，表示尚未执行任何工具调用。用户明确要求先使用Qwen检测附件中的'碧蓝三辐调节轮'，检测结果仅作为中间状态。根据约束条件，检测器必须设置 finish_after_tool=false，因为后续还需要根据检测结果判断是否进入迁移评估。用户指定使用Qwen检测器，因此选择 qwen_detection 工具。"
+}

@@ -23,6 +23,12 @@ WANDB_RUN_GROUP="${WANDB_RUN_GROUP:-planner-retry-migrate-v6}"
 WANDB_MODE="${WANDB_MODE:-online}"
 WANDB_TAGS="${WANDB_TAGS:-stage2,grpo,planner-v6,seed${SEED}}"
 RUN_TIMESTAMP="${RUN_TIMESTAMP:-$(date -u +%Y%m%dT%H%M%SZ)}"
+LEARNING_RATE="${LEARNING_RATE:-5e-6}"
+WARMUP_STEPS="${WARMUP_STEPS:-5}"
+SAVE_STEPS="${SAVE_STEPS:-25}"
+SAVE_TOTAL_LIMIT="${SAVE_TOTAL_LIMIT:-4}"
+GENERATION_TEMPERATURE="${GENERATION_TEMPERATURE:-0.7}"
+GENERATION_TOP_P="${GENERATION_TOP_P:-0.9}"
 
 case "${RUN_MODE}" in
   dry-run)
@@ -144,13 +150,13 @@ common_args=(
   --expected-world-size "${NUM_PROCESSES}"
   --per-device-train-batch-size 1
   --gradient-accumulation-steps "${GRAD_ACCUM_STEPS}"
-  --learning-rate 5e-6
-  --warmup-steps 5
-  --save-steps 25
-  --save-total-limit 4
+  --learning-rate "${LEARNING_RATE}"
+  --warmup-steps "${WARMUP_STEPS}"
+  --save-steps "${SAVE_STEPS}"
+  --save-total-limit "${SAVE_TOTAL_LIMIT}"
   --logging-steps 1
-  --temperature 0.7
-  --top-p 0.9
+  --temperature "${GENERATION_TEMPERATURE}"
+  --top-p "${GENERATION_TOP_P}"
   --task-reward-weight 0.95
   --format-reward-weight 0.05
   --report-to "${REPORT_TO}"

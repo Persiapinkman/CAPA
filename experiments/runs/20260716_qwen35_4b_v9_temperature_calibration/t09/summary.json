@@ -1,0 +1,192 @@
+{
+  "actual_actions": {
+    "end": 35,
+    "migration_advisor": 12,
+    "rag_answer": 1
+  },
+  "adapter_path": "/raid/zkq/projects/CAPA/experiments/runs/20260716_qwen35_4b_planner_v6_sft_seed42_v1/checkpoint-100",
+  "by_detector_family": {
+    "rex": {
+      "gold_action_support_rate": 0.8333333333333334,
+      "groups": 12,
+      "mean_distinct_valid_actions": 1.3333333333333333,
+      "mean_reward": 0.7833333333333333,
+      "nonzero_reward_variance_rate": 0.25
+    }
+  },
+  "by_target_action_class": {
+    "end": {
+      "gold_action_support_rate": 0.8333333333333334,
+      "groups": 12,
+      "mean_distinct_valid_actions": 1.3333333333333333,
+      "mean_reward": 0.7833333333333333,
+      "nonzero_reward_variance_rate": 0.25
+    }
+  },
+  "filters": {
+    "detector_families": [
+      "rex"
+    ],
+    "scenario_ids": [
+      "post_retry_success_step3"
+    ]
+  },
+  "generation": {
+    "max_new_tokens": 320,
+    "samples_per_prompt": 4,
+    "seed": 42,
+    "temperature": 0.9,
+    "top_p": 0.9
+  },
+  "groups_detail": [
+    {
+      "case_id": "PRRV7-GD-001-REX-PS3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": false,
+      "reward_mean": 0.2,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "end"
+    },
+    {
+      "case_id": "PRRV7-GD-002-REX-PS3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "end"
+    },
+    {
+      "case_id": "PRRV7-GD-003-REX-PS3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "end"
+    },
+    {
+      "case_id": "PRRV7-GD-004-REX-PS3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 3,
+      "gold_action_supported": true,
+      "reward_mean": 0.6,
+      "reward_std": 0.4,
+      "samples": 4,
+      "target_action_class": "end"
+    },
+    {
+      "case_id": "PRRV7-GD-005-REX-PS3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 2,
+      "gold_action_supported": true,
+      "reward_mean": 0.8,
+      "reward_std": 0.34641016151377546,
+      "samples": 4,
+      "target_action_class": "end"
+    },
+    {
+      "case_id": "PRRV7-GD-006-REX-PS3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "end"
+    },
+    {
+      "case_id": "PRRV7-GD-007-REX-PS3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "end"
+    },
+    {
+      "case_id": "PRRV7-GD-008-REX-PS3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 2,
+      "gold_action_supported": true,
+      "reward_mean": 0.6,
+      "reward_std": 0.4,
+      "samples": 4,
+      "target_action_class": "end"
+    },
+    {
+      "case_id": "PRRV7-GD-009-REX-PS3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "end"
+    },
+    {
+      "case_id": "PRRV7-GD-010-REX-PS3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "end"
+    },
+    {
+      "case_id": "PRRV7-GD-011-REX-PS3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": false,
+      "reward_mean": 0.2,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "end"
+    },
+    {
+      "case_id": "PRRV7-GD-012-REX-PS3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "end"
+    }
+  ],
+  "model_name_or_path": "/raid/zkq/models/Qwen3.5-4B",
+  "num_shards": 1,
+  "overall": {
+    "gold_action_support_rate": 0.8333333333333334,
+    "groups": 12,
+    "mean_distinct_valid_actions": 1.3333333333333333,
+    "mean_reward": 0.7833333333333333,
+    "nonzero_reward_variance_rate": 0.25
+  },
+  "prompt_groups": 12,
+  "sample_metrics": {
+    "action_match_rate": 0.7291666666666666,
+    "argument_match_rate": 0.7291666666666666,
+    "clipped_rate": 0.0,
+    "finish_match_rate": 1.0,
+    "json_valid_rate": 1.0,
+    "mean_reward": 0.7833333333333333,
+    "natural_eos_rate": 1.0,
+    "nonfinite_rewards": 0
+  },
+  "samples": 48,
+  "samples_per_prompt": [
+    [
+      4,
+      12
+    ]
+  ],
+  "shard_index": 0,
+  "step_data": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/step_data/planner_retry_migrate_residual_v7_grpo_dev_qwen35_4b_nothinking_mixed_steps.jsonl"
+}

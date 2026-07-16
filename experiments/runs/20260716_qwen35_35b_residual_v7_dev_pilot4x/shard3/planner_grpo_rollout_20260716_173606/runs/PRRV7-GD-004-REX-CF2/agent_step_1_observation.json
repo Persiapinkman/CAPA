@@ -1,0 +1,11 @@
+{
+  "status": "completed",
+  "success": true,
+  "summary": "当前结构化状态：candidate_count=NA；min_confidence=NA；cross_prompt_iou=NA；domain_shift=unknown；gateway_error=none；retryable=true；retry_count=0；overall_badge=amber。说明：展示字段不覆盖结构化值。",
+  "_action": "rexomni_detection",
+  "_action_input": {
+    "label": "碧蓝三辐调节轮",
+    "finish_after_tool": false
+  },
+  "_thought": "当前是第一步，query_trajectories 中 steps 为空，需要先调用 Rex-Omni 检测工具检测附件中的碧蓝三辐调节轮。根据用户要求，检测结果仅作为中间状态，后续需要判断是否继续现有能力、结束或进入迁移评估，因此 finish_after_tool 应设为 false。"
+}

@@ -1,0 +1,113 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_retry_migrate_residual_v8_qwen35_4b_v1",
+  "created_at": "2026-07-16T17:41:03Z",
+  "status": "frozen_before_v8_scenario_selection",
+  "research_objective": "Make the SFT-initialized Qwen3.5-4B improve through GRPO and exceed a fixed larger reference on a new entity-disjoint retry/migrate residual benchmark.",
+  "evidence_chain": {
+    "sft_gain": {
+      "dataset": "planner_retry_migrate_v6",
+      "base_action_accuracy": 0.7731,
+      "selected_sft_action_accuracy": 0.9769,
+      "absolute_gain": 0.2038,
+      "initializer": "experiments/runs/20260716_qwen35_4b_planner_v6_sft_seed42_v1/checkpoint-100"
+    },
+    "scenario_discovery": {
+      "role": "exploratory_pilot_only",
+      "dataset": "planner_retry_migrate_residual_v7",
+      "split": "grpo_dev",
+      "target_model": "Qwen3.5-4B plus selected SFT adapter",
+      "larger_reference": "Qwen3.5-35B-A3B",
+      "may_inform": [
+        "V8 scenario inclusion",
+        "V8 nuisance wording",
+        "V8 fixed sample allocation"
+      ],
+      "may_not_support": [
+        "final model superiority claim",
+        "V8 checkpoint selection",
+        "V8 test result"
+      ]
+    }
+  },
+  "models": {
+    "target_base": "/raid/zkq/models/Qwen3.5-4B",
+    "target_sft_initializer": "experiments/runs/20260716_qwen35_4b_planner_v6_sft_seed42_v1/checkpoint-100",
+    "larger_reference": {
+      "model_id": "Qwen3.5-35B-A3B",
+      "runtime": "external_openai_compatible_gateway",
+      "required_for_objective": true,
+      "substitution_after_v8_data_generation": "forbidden"
+    },
+    "engineering_floor": {
+      "model_id": "Qwen2.5-7B-Instruct",
+      "role": "secondary_sanity_baseline_only",
+      "cannot_satisfy_larger_model_objective": true
+    }
+  },
+  "common_inference_protocol": {
+    "planner_system_prompt": "repository_current_frozen_at_v8_build",
+    "planner_state_machine": "repository_current_frozen_at_v8_build",
+    "verifier": "training/planner_grpo_seed_v1/scripts/reward_planner_grpo.py",
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "do_sample": false,
+    "seed": 42,
+    "max_steps": 3,
+    "target_max_new_tokens": 320,
+    "reference_max_tokens": 2048,
+    "first_valid_json_scoring": true,
+    "image_path_in_prompt_context": true,
+    "image_pixels_sent_to_planner": false,
+    "reason_for_image_policy": "The Planner selects routes from tool state; detector models, not the Planner, own visual interpretation."
+  },
+  "units_and_metrics": {
+    "independent_unit": "entity_id",
+    "correlated_measurements": [
+      "detector family",
+      "scenario counterfactual",
+      "repeated generation"
+    ],
+    "primary_scope": "V8 preregistered residual-core scenarios",
+    "primary_metric": "mean entity-level complete-trajectory pass rate over primary-scope detector/scenario cases",
+    "secondary_metrics": [
+      "all-scenario complete-trajectory pass rate",
+      "mean verifier reward",
+      "step action accuracy",
+      "JSON validity",
+      "completion clipping",
+      "wrong side-effecting action count"
+    ]
+  },
+  "development_promotion_rule": {
+    "checkpoint_selection_uses_larger_reference": false,
+    "minimum_grpo_minus_sft_primary_gain": 0.05,
+    "maximum_control_pass_rate_regression": 0.02,
+    "maximum_added_wrong_side_effecting_actions": 0,
+    "tie_break_order": [
+      "higher primary entity-level pass rate",
+      "higher control entity-level pass rate",
+      "lower wrong side-effecting action count",
+      "earlier optimizer checkpoint"
+    ]
+  },
+  "sealed_test_objective": {
+    "materialize_only_after_checkpoint_selection": true,
+    "runs_per_model": 1,
+    "objective_met_if": [
+      "target_grpo_primary_rate > target_sft_primary_rate",
+      "target_grpo_primary_rate > larger_reference_primary_rate",
+      "target_grpo_control_rate >= target_sft_control_rate - 0.05",
+      "target_grpo_wrong_side_effecting_actions <= target_sft_wrong_side_effecting_actions"
+    ],
+    "strong_superiority_if": "entity-clustered paired bootstrap 95% confidence interval lower bound for target_grpo minus larger_reference is greater than zero",
+    "if_point_estimate_wins_but_interval_crosses_zero": "Report point-estimate superiority only; do not claim stable superiority.",
+    "if_objective_fails": "Do not rerun or rescore the V8 sealed test. Use a new study version with a new sealed test."
+  },
+  "anti_leakage_rules": [
+    "V8 train, support-dev, selection-dev, and sealed-test entities are disjoint from each other and V6/V7.",
+    "V7 pilot prompts and outcomes cannot be reused as V8 confirmation rows.",
+    "The larger-reference sealed-test result cannot select a target checkpoint.",
+    "Thresholds cannot be relaxed after V8 support sampling begins."
+  ]
+}

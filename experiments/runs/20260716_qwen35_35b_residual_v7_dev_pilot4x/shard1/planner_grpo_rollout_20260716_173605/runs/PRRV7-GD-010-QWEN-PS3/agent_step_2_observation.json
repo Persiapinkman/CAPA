@@ -1,0 +1,11 @@
+{
+  "status": "completed",
+  "success": true,
+  "summary": "当前结构化状态：candidate_count=2；min_confidence=0.93；cross_prompt_iou=0.81；domain_shift=low；gateway_error=none；retryable=false；retry_count=1；overall_badge=amber。说明：展示字段不覆盖结构化值。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "碧蓝三辐调节轮",
+    "finish_after_tool": false
+  },
+  "_thought": "当前observation显示qwen_detection结果为gateway_error，status为错误状态。根据规则'错误状态仅在retryable=true与retry_count=0同时成立时复用原检测器一次'，当前retryable=true且retry_count=0，满足重试条件。因此下一步应再次调用qwen_detection进行重试。检测结果仅作为中间状态，需设置finish_after_tool=false。"
+}

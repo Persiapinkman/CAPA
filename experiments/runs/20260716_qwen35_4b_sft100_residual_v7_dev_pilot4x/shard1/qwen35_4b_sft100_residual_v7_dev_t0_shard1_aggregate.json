@@ -1,0 +1,221 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-07-16T17:54:13.387266+00:00",
+  "cases_path": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/cases/planner_retry_migrate_residual_v7_grpo_dev_cases.jsonl",
+  "model": "Qwen3.5-4B-SFT100",
+  "api_base": "local://transformers",
+  "report_prefix": "qwen35_4b_sft100_residual_v7_dev_t0_shard1",
+  "runs": 1,
+  "generation_config": {
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "seed": 42,
+    "do_sample": "false",
+    "max_tokens": 320,
+    "max_steps": 3,
+    "timeout_seconds": 300,
+    "openai_timeout_seconds": 300
+  },
+  "aggregate": {
+    "mean_score_mean": 0.793871,
+    "mean_score_stdev": 0.0,
+    "pass_rate_mean": 0.37037,
+    "pass_rate_stdev": 0.0,
+    "pass_all_runs_rate": 0.37037,
+    "pass_any_run_rate": 0.37037
+  },
+  "by_category": {
+    "budget_exhausted_step2": {
+      "mean_score_mean": 0.752174,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 0.4,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 0.4,
+      "runs": 1
+    },
+    "conflicting_state_step2": {
+      "mean_score_mean": 1.0,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 1.0,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 1.0,
+      "runs": 1
+    },
+    "current_success_step2": {
+      "mean_score_mean": 1.0,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 1.0,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 1.0,
+      "runs": 1
+    },
+    "missing_required_state_step2": {
+      "mean_score_mean": 0.586957,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 0.0,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 0.0,
+      "runs": 1
+    },
+    "nonretryable_step2": {
+      "mean_score_mean": 0.849803,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 0.636364,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 0.636364,
+      "runs": 1
+    },
+    "post_retry_error_step3": {
+      "mean_score_mean": 0.725852,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 0.0,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 0.0,
+      "runs": 1
+    },
+    "post_retry_metric_veto_step3": {
+      "mean_score_mean": 0.728125,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 0.0,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 0.0,
+      "runs": 1
+    },
+    "post_retry_success_step3": {
+      "mean_score_mean": 0.723437,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 0.125,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 0.125,
+      "runs": 1
+    }
+  },
+  "prediction_stats": {
+    "empty_decisions_mean": 0.0,
+    "empty_decisions_stdev": 0.0,
+    "decision_count_mean": 132.0,
+    "decision_count_stdev": 0.0,
+    "first_length_truncations_total": 0,
+    "retry_length_truncations_total": 0,
+    "retry_count_total": 0,
+    "actions_total": {
+      "rexomni_detection": 40,
+      "qwen_detection": 55,
+      "migration_advisor": 27,
+      "final_answer": 7,
+      "rag_answer": 3
+    },
+    "errors_total": {},
+    "fallback_errors_total": {}
+  },
+  "timing": {
+    "elapsed_ms": 1020235.747
+  },
+  "reports": [
+    {
+      "reward_report": "/raid/zkq/projects/CAPA/experiments/runs/20260716_qwen35_4b_sft100_residual_v7_dev_pilot4x/shard1/qwen35_4b_sft100_residual_v7_dev_t0_shard1_run1_reward.json",
+      "prediction_file": "/raid/zkq/projects/CAPA/experiments/runs/20260716_qwen35_4b_sft100_residual_v7_dev_pilot4x/shard1/qwen35_4b_sft100_residual_v7_dev_t0_shard1_run1_predictions.jsonl",
+      "summary": {
+        "cases": 54,
+        "prediction_mode": "provided",
+        "mean_score": 0.793871,
+        "passed": 20,
+        "failed": 34,
+        "pass_rate": 0.37037,
+        "by_category": {
+          "budget_exhausted_step2": {
+            "count": 5,
+            "mean_score": 0.752174,
+            "passed": 2,
+            "pass_rate": 0.4
+          },
+          "conflicting_state_step2": {
+            "count": 5,
+            "mean_score": 1.0,
+            "passed": 5,
+            "pass_rate": 1.0
+          },
+          "current_success_step2": {
+            "count": 5,
+            "mean_score": 1.0,
+            "passed": 5,
+            "pass_rate": 1.0
+          },
+          "missing_required_state_step2": {
+            "count": 4,
+            "mean_score": 0.586957,
+            "passed": 0,
+            "pass_rate": 0.0
+          },
+          "nonretryable_step2": {
+            "count": 11,
+            "mean_score": 0.849803,
+            "passed": 7,
+            "pass_rate": 0.636364
+          },
+          "post_retry_error_step3": {
+            "count": 11,
+            "mean_score": 0.725852,
+            "passed": 0,
+            "pass_rate": 0.0
+          },
+          "post_retry_metric_veto_step3": {
+            "count": 5,
+            "mean_score": 0.728125,
+            "passed": 0,
+            "pass_rate": 0.0
+          },
+          "post_retry_success_step3": {
+            "count": 8,
+            "mean_score": 0.723437,
+            "passed": 1,
+            "pass_rate": 0.125
+          }
+        },
+        "used_action_counts": {
+          "rexomni_detection": 40,
+          "qwen_detection": 55,
+          "migration_advisor": 27,
+          "end": 7,
+          "rag_answer": 3
+        },
+        "premature_stop_cases": 6
+      },
+      "prediction_stats": {
+        "rows": 54,
+        "decision_count": 132,
+        "empty_decisions": 0,
+        "first_length_truncations": 0,
+        "retry_length_truncations": 0,
+        "retry_count": 0,
+        "errors": {},
+        "fallback_errors": {},
+        "actions": {
+          "rexomni_detection": 40,
+          "qwen_detection": 55,
+          "migration_advisor": 27,
+          "final_answer": 7,
+          "rag_answer": 3
+        }
+      }
+    }
+  ],
+  "evaluation_slice": {
+    "source_cases_path": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/cases/planner_retry_migrate_residual_v7_grpo_dev_cases.jsonl",
+    "source_case_count": 216,
+    "evaluation_cases_path": "/raid/zkq/projects/CAPA/experiments/runs/20260716_qwen35_4b_sft100_residual_v7_dev_pilot4x/shard1/qwen35_4b_sft100_residual_v7_dev_t0_shard1_cases_slice.jsonl",
+    "offset": 54,
+    "limit": 54,
+    "evaluated_case_count": 54
+  },
+  "inference_backend": {
+    "type": "local_transformers",
+    "local_model_path": "/raid/zkq/models/Qwen3.5-4B",
+    "local_adapter_path": "experiments/runs/20260716_qwen35_4b_planner_v6_sft_seed42_v1/checkpoint-100",
+    "omit_model_image_payload": true
+  },
+  "artifacts": {
+    "case_audit_csv": "/raid/zkq/projects/CAPA/experiments/runs/20260716_qwen35_4b_sft100_residual_v7_dev_pilot4x/shard1/qwen35_4b_sft100_residual_v7_dev_t0_shard1_case_audit.csv",
+    "failed_cases_csv": "/raid/zkq/projects/CAPA/experiments/runs/20260716_qwen35_4b_sft100_residual_v7_dev_pilot4x/shard1/qwen35_4b_sft100_residual_v7_dev_t0_shard1_failed_cases.csv"
+  }
+}

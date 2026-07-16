@@ -460,6 +460,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--offset", type=int, default=0)
     parser.add_argument("--limit", type=int, default=0)
     parser.add_argument("--resume-existing", action="store_true")
+    parser.add_argument("--local-model-path", default="")
+    parser.add_argument("--local-adapter-path", default="")
+    parser.add_argument("--local-device", default="cuda")
+    parser.add_argument("--local-attn-implementation", default="sdpa")
     return parser.parse_args()
 
 
@@ -529,6 +533,19 @@ def main() -> None:
         ]
         if args.api_key:
             rollout_cmd.extend(["--api-key", args.api_key])
+        if args.local_model_path:
+            rollout_cmd.extend(
+                [
+                    "--local-model-path",
+                    args.local_model_path,
+                    "--local-device",
+                    args.local_device,
+                    "--local-attn-implementation",
+                    args.local_attn_implementation,
+                ]
+            )
+        if args.local_adapter_path:
+            rollout_cmd.extend(["--local-adapter-path", args.local_adapter_path])
         print(f"[run {run_idx}/{args.runs}] {' '.join(rollout_cmd)}", flush=True)
         subprocess.run(rollout_cmd, cwd=str(ROOT), check=True)
         reward_cmd = [
@@ -560,6 +577,15 @@ def main() -> None:
         "offset": args.offset,
         "limit": args.limit,
         "evaluated_case_count": len(load_jsonl(evaluation_cases_path)),
+    }
+    aggregate["inference_backend"] = {
+        "type": "local_transformers" if args.local_model_path else "openai_compatible",
+        "local_model_path": args.local_model_path,
+        "local_adapter_path": args.local_adapter_path,
+        "omit_model_image_payload": str(
+            __import__("os").environ.get("CAPA_OMIT_MODEL_IMAGE_PAYLOAD", "0")
+        ).strip().lower()
+        in {"1", "true", "yes", "on"},
     }
     audit_paths = write_case_audit_csvs(
         reward_reports=reward_reports,

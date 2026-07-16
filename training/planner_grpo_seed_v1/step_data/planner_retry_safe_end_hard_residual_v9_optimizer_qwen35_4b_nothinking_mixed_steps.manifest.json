@@ -1,0 +1,47 @@
+{
+  "accepted_scenarios": [
+    "current_success_step2",
+    "fresh_retry_step2",
+    "post_retry_success_step3"
+  ],
+  "allowed_step_indices": [
+    2,
+    3
+  ],
+  "created_at": "2026-07-16T18:47:43.594917+00:00",
+  "dataset_id": "planner_retry_safe_end_hard_residual_v9",
+  "distribution": {
+    "detectors": {
+      "qwen": 72,
+      "rex": 72
+    },
+    "scenarios": {
+      "current_success_step2": 48,
+      "fresh_retry_step2": 48,
+      "post_retry_success_step3": 48
+    },
+    "step_indices": {
+      "2": 96,
+      "3": 48
+    }
+  },
+  "entities": 24,
+  "files": {
+    "accepted_scenarios": "data/datasets/planner_retry_safe_end_hard_residual_v9/accepted_optimizer_scenarios.txt",
+    "source_step_data": "training/planner_grpo_seed_v1/step_data/planner_retry_safe_end_hard_residual_v9_grpo_train_qwen35_4b_nothinking_mixed_steps.jsonl",
+    "step_data": "training/planner_grpo_seed_v1/step_data/planner_retry_safe_end_hard_residual_v9_optimizer_qwen35_4b_nothinking_mixed_steps.jsonl",
+    "support_decision": "experiments/studies/planner_retry_safe_end_hard_residual_v9_qwen35_4b_v1/support_decision.json"
+  },
+  "optimizer_authorized": true,
+  "role": "optimization_only",
+  "rows": 144,
+  "schema_version": "1.0",
+  "selection_rule": "preregistered stochastic-support gate",
+  "sha256": {
+    "accepted_scenarios": "ccc9c8d46b70cf05ab10b4123686cce138b4186927902fe9d6e60db354fd87ee",
+    "source_step_data": "a3f5e5f0cadab6ac3ceba9cba42b1570c18bb45a53702c45f1b12744ebcfe47b",
+    "step_data": "a3f5e5f0cadab6ac3ceba9cba42b1570c18bb45a53702c45f1b12744ebcfe47b",
+    "support_decision": "13ff5023eb97c8e35020d5e37c704aab80d4a07e4ddb5513d60e4e50455eee81"
+  },
+  "status": "frozen_support_selected_optimizer_data"
+}

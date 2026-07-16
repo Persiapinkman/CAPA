@@ -1,0 +1,232 @@
+{
+  "hard_checks": [
+    {
+      "name": "sample_count",
+      "observed": 288,
+      "operator": "==",
+      "passed": true,
+      "threshold": 288
+    },
+    {
+      "name": "complete_prompt_groups",
+      "observed": 72,
+      "operator": "==",
+      "passed": true,
+      "threshold": 72
+    },
+    {
+      "name": "duplicate_sample_keys",
+      "observed": 0,
+      "operator": "==",
+      "passed": true,
+      "threshold": 0
+    },
+    {
+      "name": "nonfinite_rewards",
+      "observed": 0,
+      "operator": "==",
+      "passed": true,
+      "threshold": 0
+    },
+    {
+      "name": "json_valid_rate",
+      "observed": 1.0,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.99
+    },
+    {
+      "name": "clipped_rate",
+      "observed": 0.0,
+      "operator": "<=",
+      "passed": true,
+      "threshold": 0.01
+    },
+    {
+      "name": "primary_gold_action_support_rate",
+      "observed": 0.9305555555555556,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.7
+    },
+    {
+      "name": "primary_nonzero_reward_variance_rate",
+      "observed": 0.013888888888888888,
+      "operator": ">=",
+      "passed": false,
+      "threshold": 0.15
+    },
+    {
+      "name": "current_success_step2_qwen_gold_support_rate",
+      "observed": 1.0,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.5
+    },
+    {
+      "name": "current_success_step2_qwen_nonzero_variance_groups",
+      "observed": 1,
+      "operator": ">=",
+      "passed": false,
+      "threshold": 2
+    },
+    {
+      "name": "current_success_step2_rex_gold_support_rate",
+      "observed": 1.0,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.5
+    },
+    {
+      "name": "current_success_step2_rex_nonzero_variance_groups",
+      "observed": 0,
+      "operator": ">=",
+      "passed": false,
+      "threshold": 2
+    },
+    {
+      "name": "fresh_retry_step2_qwen_gold_support_rate",
+      "observed": 1.0,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.5
+    },
+    {
+      "name": "fresh_retry_step2_qwen_nonzero_variance_groups",
+      "observed": 0,
+      "operator": ">=",
+      "passed": false,
+      "threshold": 2
+    },
+    {
+      "name": "fresh_retry_step2_rex_gold_support_rate",
+      "observed": 1.0,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.5
+    },
+    {
+      "name": "fresh_retry_step2_rex_nonzero_variance_groups",
+      "observed": 0,
+      "operator": ">=",
+      "passed": false,
+      "threshold": 2
+    },
+    {
+      "name": "post_retry_success_step3_qwen_gold_support_rate",
+      "observed": 0.6666666666666666,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.5
+    },
+    {
+      "name": "post_retry_success_step3_qwen_nonzero_variance_groups",
+      "observed": 0,
+      "operator": ">=",
+      "passed": false,
+      "threshold": 2
+    },
+    {
+      "name": "post_retry_success_step3_rex_gold_support_rate",
+      "observed": 0.9166666666666666,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.5
+    },
+    {
+      "name": "post_retry_success_step3_rex_nonzero_variance_groups",
+      "observed": 0,
+      "operator": ">=",
+      "passed": false,
+      "threshold": 2
+    }
+  ],
+  "observed": {
+    "by_scenario": {
+      "current_success_step2": {
+        "gold_action_support_rate": 1.0,
+        "groups": 24,
+        "mean_reward": 0.9916666666666667,
+        "nonzero_reward_variance_groups": 1,
+        "nonzero_reward_variance_rate": 0.041666666666666664
+      },
+      "fresh_retry_step2": {
+        "gold_action_support_rate": 1.0,
+        "groups": 24,
+        "mean_reward": 1.0,
+        "nonzero_reward_variance_groups": 0,
+        "nonzero_reward_variance_rate": 0.0
+      },
+      "post_retry_success_step3": {
+        "gold_action_support_rate": 0.7916666666666666,
+        "groups": 24,
+        "mean_reward": 0.8333333333333334,
+        "nonzero_reward_variance_groups": 0,
+        "nonzero_reward_variance_rate": 0.0
+      }
+    },
+    "by_scenario_detector": {
+      "current_success_step2::qwen": {
+        "gold_action_support_rate": 1.0,
+        "groups": 12,
+        "mean_reward": 0.9833333333333334,
+        "nonzero_reward_variance_groups": 1,
+        "nonzero_reward_variance_rate": 0.08333333333333333
+      },
+      "current_success_step2::rex": {
+        "gold_action_support_rate": 1.0,
+        "groups": 12,
+        "mean_reward": 1.0,
+        "nonzero_reward_variance_groups": 0,
+        "nonzero_reward_variance_rate": 0.0
+      },
+      "fresh_retry_step2::qwen": {
+        "gold_action_support_rate": 1.0,
+        "groups": 12,
+        "mean_reward": 1.0,
+        "nonzero_reward_variance_groups": 0,
+        "nonzero_reward_variance_rate": 0.0
+      },
+      "fresh_retry_step2::rex": {
+        "gold_action_support_rate": 1.0,
+        "groups": 12,
+        "mean_reward": 1.0,
+        "nonzero_reward_variance_groups": 0,
+        "nonzero_reward_variance_rate": 0.0
+      },
+      "post_retry_success_step3::qwen": {
+        "gold_action_support_rate": 0.6666666666666666,
+        "groups": 12,
+        "mean_reward": 0.7333333333333334,
+        "nonzero_reward_variance_groups": 0,
+        "nonzero_reward_variance_rate": 0.0
+      },
+      "post_retry_success_step3::rex": {
+        "gold_action_support_rate": 0.9166666666666666,
+        "groups": 12,
+        "mean_reward": 0.9333333333333332,
+        "nonzero_reward_variance_groups": 0,
+        "nonzero_reward_variance_rate": 0.0
+      }
+    },
+    "clipped_rate": 0.0,
+    "complete_groups": 72,
+    "duplicate_sample_keys": 0,
+    "json_valid_rate": 1.0,
+    "nonfinite_rewards": 0,
+    "primary": {
+      "gold_action_support_rate": 0.9305555555555556,
+      "groups": 72,
+      "mean_reward": 0.9416666666666667,
+      "nonzero_reward_variance_groups": 1,
+      "nonzero_reward_variance_rate": 0.013888888888888888
+    },
+    "samples": 288
+  },
+  "on_fail": "Run zero optimizer steps. Preserve V8 and create a new residual-SFT or V8.1 study; do not relax or resample this gate.",
+  "optimizer_authorized": false,
+  "optimizer_scenarios": [],
+  "schema_version": "1.0",
+  "status": "fail",
+  "study_id": "planner_retry_migrate_residual_v8_qwen35_4b_v1"
+}

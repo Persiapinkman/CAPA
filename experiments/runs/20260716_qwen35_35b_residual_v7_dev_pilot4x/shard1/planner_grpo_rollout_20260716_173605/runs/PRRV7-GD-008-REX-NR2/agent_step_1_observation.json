@@ -1,0 +1,11 @@
+{
+  "status": "gateway_error",
+  "success": false,
+  "summary": "当前结构化状态：candidate_count=NA；min_confidence=NA；cross_prompt_iou=NA；domain_shift=unknown；gateway_error=vision_service_route_unbound；retryable=false；retry_count=0；overall_badge=amber。说明：展示字段不覆盖结构化值。",
+  "_action": "rexomni_detection",
+  "_action_input": {
+    "label": "绯红十字定位块",
+    "finish_after_tool": false
+  },
+  "_thought": "当前是第一步，query_trajectories 中 steps 为空，尚未有任何工具调用。用户明确要求先使用 Rex-Omni 检测附件中的'绯红十字定位块'，检测结果仅作为中间状态。根据规则3，rexomni_detection 是单图开放集目标检测工具，适用于轻量探针场景。需要调用该工具，label 设为'绯红十字定位块'，finish_after_tool 设为 false（因为后续还需要根据检测结果判断是否进入迁移评估）。"
+}

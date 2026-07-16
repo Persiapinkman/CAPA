@@ -1,0 +1,11 @@
+{
+  "status": "gateway_error",
+  "success": false,
+  "summary": "当前结构化状态：candidate_count=NA；min_confidence=NA；cross_prompt_iou=NA；domain_shift=unknown；gateway_error=detector_input_contract_unknown；retryable=true；retry_count=1。说明：展示字段不覆盖结构化值。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "碧蓝三辐调节轮",
+    "finish_after_tool": false
+  },
+  "_thought": "当前query_trajectories中step_1已调用qwen_detection，observation显示status='gateway_error'，retryable=true且retry_count=0。根据约束条件'错误状态仅在retryable=true与retry_count=0同时成立时复用原检测器一次'，满足重试条件。因此下一步应再次调用qwen_detection进行重试，label保持'碧蓝三辐调节轮'，finish_after_tool=false（检测结果仍作为中间状态，后续需判断是否进入迁移评估）。"
+}

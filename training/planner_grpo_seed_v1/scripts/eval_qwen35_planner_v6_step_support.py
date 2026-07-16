@@ -47,6 +47,19 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--temperature", type=float, default=0.0)
     parser.add_argument("--top-p", type=float, default=0.9)
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument(
+        "--include-scenario",
+        action="append",
+        default=[],
+        help="Optional scenario_id filter; repeat to include multiple scenarios.",
+    )
+    parser.add_argument(
+        "--include-detector",
+        action="append",
+        default=[],
+        choices=("qwen", "rex"),
+        help="Optional detector-family filter; repeat to include both families.",
+    )
     return parser.parse_args()
 
 
@@ -77,6 +90,9 @@ def action_name(decision: dict[str, Any] | None) -> str:
 
 
 def detector_family(row: dict[str, Any]) -> str:
+    explicit = str(row.get("detector_family") or "").strip().lower()
+    if explicit in {"qwen", "rex"}:
+        return explicit
     actions = json.loads(str(row.get("full_expected_actions") or "[]"))
     first = str(actions[0] if actions else "")
     return "qwen" if first == "qwen_detection" else "rex" if first == "rexomni_detection" else ""
@@ -168,6 +184,16 @@ def main() -> None:
     samples_out = args.samples_out if args.samples_out.is_absolute() else ROOT / args.samples_out
     summary_out = args.summary_out if args.summary_out.is_absolute() else ROOT / args.summary_out
     all_rows = load_jsonl(step_data)
+    if args.include_scenario:
+        included_scenarios = set(args.include_scenario)
+        all_rows = [
+            row for row in all_rows if str(row.get("scenario_id") or "") in included_scenarios
+        ]
+    if args.include_detector:
+        included_detectors = set(args.include_detector)
+        all_rows = [row for row in all_rows if detector_family(row) in included_detectors]
+    if not all_rows:
+        raise ValueError("step-data filters selected zero rows")
     indexed_rows = [(index, row) for index, row in enumerate(all_rows) if index % args.num_shards == args.shard_index]
 
     tokenizer = AutoTokenizer.from_pretrained(
@@ -271,6 +297,10 @@ def main() -> None:
             "temperature": args.temperature,
             "top_p": args.top_p,
             "seed": args.seed,
+        },
+        "filters": {
+            "scenario_ids": list(args.include_scenario),
+            "detector_families": list(args.include_detector),
         },
         **summarize_samples(samples),
     }

@@ -1,0 +1,13 @@
+{
+  "status": "completed",
+  "success": true,
+  "summary": "当前结构化状态：candidate_count=2；min_confidence=0.93；cross_prompt_iou=0.81；domain_shift=low；gateway_error=none；retryable=false；retry_count=1；overall_badge=amber。说明：展示字段不覆盖结构化值。",
+  "_action": "migration_advisor",
+  "_action_input": {
+    "user_query": "请在失联告警背景下核销本轮重试预算：先使用Qwen检测附件中的绯红十字定位块，检测结果仅作为中间状态。最终需要判断航空发动机试车台恢复动作裁决8142号应继续现有能力、结束，还是进入迁移评估。",
+    "use_image": true,
+    "use_visual_probe": true,
+    "finish_after_tool": true
+  },
+  "_thought": "当前 observation 显示 qwen_detection 执行失败（success=false），且所有关键结构化指标（candidate_count、min_confidence、cross_prompt_iou、domain_shift）均为NA或unknown，属于缺省状态。根据规则'缺省、非法、冲突状态采取保守分支'，应调用迁移顾问进行能力边界评估。虽然 retryable=true 且 retry_count=0 允许重试一次检测器，但缺省状态优先采取保守分支。迁移顾问需要使用当前图片和视觉探针，finish_after_tool设为true。"
+}

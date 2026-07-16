@@ -1,0 +1,47 @@
+{
+  "allowed_step_indices": [
+    2,
+    3
+  ],
+  "created_at": "2026-07-16T18:05:00Z",
+  "dataset_id": "planner_retry_safe_end_residual_v8",
+  "distribution": {
+    "actions": {
+      "end": 96,
+      "retry": 48
+    },
+    "entities": 24,
+    "prompt_tokens": {
+      "max": 4455,
+      "mean": 4312.152777777777,
+      "min": 4232,
+      "p50": 4256,
+      "p95": 4449
+    },
+    "rows": 144,
+    "scenarios": {
+      "current_success_step2": 48,
+      "fresh_retry_step2": 48,
+      "post_retry_success_step3": 48
+    },
+    "steps": {
+      "2": 96,
+      "3": 48
+    }
+  },
+  "files": {
+    "cases": "training/planner_grpo_seed_v1/cases/planner_retry_safe_end_residual_v8_grpo_train_cases.jsonl",
+    "step_data": "training/planner_grpo_seed_v1/step_data/planner_retry_safe_end_residual_v8_grpo_train_qwen35_4b_nothinking_mixed_steps.jsonl"
+  },
+  "model_name_or_path": "/raid/zkq/models/Qwen3.5-4B",
+  "role": "optimizer_only",
+  "rows": 144,
+  "schema_version": "1.0",
+  "sha256": {
+    "cases": "b3a1a535914229e655f20ed2724e2fe54945ff07c1c421699c5189637aa38d8a",
+    "chat_template": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+    "config": "ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670",
+    "step_data": "a23c2f51b1d4f28400737f38e78149a73479edac7d86811e25e61be76b64e133",
+    "tokenizer_config": "316230d6a809701f4db5ea8f8fc862bc3a6f3229c937c174e674ff3ca0a64ac8"
+  }
+}

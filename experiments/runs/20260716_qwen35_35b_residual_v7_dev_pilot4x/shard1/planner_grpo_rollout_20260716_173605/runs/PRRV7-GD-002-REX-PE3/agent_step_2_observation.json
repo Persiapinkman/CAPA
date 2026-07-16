@@ -1,0 +1,11 @@
+{
+  "status": "gateway_error",
+  "success": false,
+  "summary": "当前结构化状态：candidate_count=NA；min_confidence=NA；cross_prompt_iou=NA；domain_shift=unknown；gateway_error=detector_return_channel_missing；retryable=true；retry_count=1。说明：展示字段不覆盖结构化值。",
+  "_action": "rexomni_detection",
+  "_action_input": {
+    "label": "碧蓝三辐调节轮",
+    "finish_after_tool": false
+  },
+  "_thought": "当前步骤1已调用rexomni_detection，观察结果显示status='gateway_error'，retryable=true且retry_count=0。根据规则'错误状态仅在retryable=true与retry_count=0同时成立时复用原检测器一次'，可以重试一次。重试后无论结果如何，下一步都应调用迁移顾问（因为已经重试过一次了）。因此本次继续调用rexomni_detection进行重试，finish_after_tool设为false。"
+}
