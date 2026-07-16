@@ -1,12 +1,14 @@
 import argparse
 import hashlib
 import json
+from collections import deque
 
 import pytest
 
 from training.planner_grpo_seed_v1.scripts.train_qwen35_4b_grpo import (
     NONTHINKING_SUFFIX,
     load_step_data,
+    metric_tail,
     parse_step_indices,
 )
 
@@ -44,6 +46,11 @@ def test_parse_step_indices_is_explicit_and_deduplicated():
     assert parse_step_indices("3,2,3") == (2, 3)
     with pytest.raises(argparse.ArgumentTypeError, match="positive integers"):
         parse_step_indices("0")
+
+
+def test_metric_tail_supports_trl_deque_buffers():
+    assert metric_tail([0.1, 0.2, 0.3], 1) == [0.2, 0.3]
+    assert metric_tail(deque((0.1, 0.2, 0.3)), 2) == [0.3]
 
 
 def test_load_step_data_accepts_only_declared_steps(tmp_path):

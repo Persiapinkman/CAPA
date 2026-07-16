@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "status": "fail",
+  "mode": "train",
+  "rank": 3,
+  "started_at": "2026-07-16T18:51:22.630906+00:00",
+  "finished_at": "2026-07-16T18:51:47.248302+00:00",
+  "optimizer_steps": 0,
+  "error": {
+    "type": "TypeError",
+    "message": "sequence index must be integer, not 'slice'",
+    "traceback": "Traceback (most recent call last):\n  File \"/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/scripts/train_qwen35_4b_grpo.py\", line 1042, in main\n    train_result = trainer.train(resume_from_checkpoint=args.resume_from_checkpoint)\n  File \"/raid/zkq/artifacts/CAPA/runtime/venv-qwen35-grpo-cu124-v1/lib/python3.10/site-packages/transformers/trainer.py\", line 1433, in train\n    return inner_training_loop(\n  File \"/raid/zkq/artifacts/CAPA/runtime/venv-qwen35-grpo-cu124-v1/lib/python3.10/site-packages/transformers/trainer.py\", line 1515, in _inner_training_loop\n    self._run_epoch(\n  File \"/raid/zkq/artifacts/CAPA/runtime/venv-qwen35-grpo-cu124-v1/lib/python3.10/site-packages/transformers/trainer.py\", line 1743, in _run_epoch\n    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)\n  File \"/raid/zkq/artifacts/CAPA/runtime/venv-qwen35-grpo-cu124-v1/lib/python3.10/site-packages/trl/trainer/grpo_trainer.py\", line 1401, in training_step\n    output = super().training_step(model, inputs, num_items_in_batch)\n  File \"/raid/zkq/artifacts/CAPA/runtime/venv-qwen35-grpo-cu124-v1/lib/python3.10/site-packages/transformers/trainer.py\", line 1909, in training_step\n    inputs = self._prepare_inputs(inputs)\n  File \"/raid/zkq/artifacts/CAPA/runtime/venv-qwen35-grpo-cu124-v1/lib/python3.10/site-packages/trl/extras/profiling.py\", line 211, in wrapper\n    return func(self, *args, **kwargs)\n  File \"/raid/zkq/artifacts/CAPA/runtime/venv-qwen35-grpo-cu124-v1/lib/python3.10/site-packages/trl/trainer/grpo_trainer.py\", line 1430, in _prepare_inputs\n    generation_batch = self._generate_and_score_completions(generation_batch)\n  File \"/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/scripts/train_qwen35_4b_grpo.py\", line 491, in _generate_and_score_completions\n    new_rewards = {\n  File \"/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/scripts/train_qwen35_4b_grpo.py\", line 492, in <dictcomp>\n    name: self._logs[\"rewards\"][name][reward_offsets[name] :]\nTypeError: sequence index must be integer, not 'slice'\n"
+  }
+}

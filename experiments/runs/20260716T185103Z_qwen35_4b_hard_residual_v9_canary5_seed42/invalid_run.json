@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "status": "invalid_runtime_canary_no_optimizer_step",
+  "started_at": "2026-07-16T18:51:03Z",
+  "git_commit": "4033ad848c28305d1132e341ee29a4c3b7d870af",
+  "optimizer_steps_completed": 0,
+  "checkpoint_usable": false,
+  "failure": {
+    "type": "TypeError",
+    "location": "V100GRPOTrainer._generate_and_score_completions telemetry delta",
+    "message": "TRL 1.8 reward buffers are deque-backed and do not support slicing."
+  },
+  "disposition": "Preserve this canary as runtime evidence, patch deque-compatible telemetry with a regression test, and restart a new five-step canary from the unchanged SFT initializer."
+}

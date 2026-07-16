@@ -399,6 +399,12 @@ def physical_gpu_id() -> str:
     return visible[logical] if logical < len(visible) else str(logical)
 
 
+def metric_tail(values: Any, offset: int) -> list[Any]:
+    """Return newly appended metric values for list- and deque-backed TRL logs."""
+
+    return list(values)[offset:]
+
+
 class V100GRPOTrainer(GRPOTrainer):
     """TRL GRPO with the audited V100 scaler and rollout-distribution evidence."""
 
@@ -488,8 +494,10 @@ class V100GRPOTrainer(GRPOTrainer):
 
         result = super()._generate_and_score_completions(inputs)
         mode = "train" if self.model.training else "eval"
+        # TRL 1.8 stores metric buffers as bounded deques.  Convert to a list
+        # before taking the increment added by the parent call.
         new_rewards = {
-            name: self._logs["rewards"][name][reward_offsets[name] :]
+            name: metric_tail(self._logs["rewards"][name], reward_offsets[name])
             for name in self.reward_func_names
         }
         weights = {
