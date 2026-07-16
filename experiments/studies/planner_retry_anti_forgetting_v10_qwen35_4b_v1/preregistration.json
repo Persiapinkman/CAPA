@@ -57,6 +57,7 @@
   },
   "support_audit": {
     "splits": ["support_dev_a", "support_dev_b"],
+    "include_stability_controls": true,
     "scope": "all three primary and all six stability-control scenarios",
     "expected_prompt_groups": 432,
     "samples_per_prompt": 4,

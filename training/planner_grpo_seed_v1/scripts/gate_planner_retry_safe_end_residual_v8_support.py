@@ -77,12 +77,18 @@ def apply_gate(
     spec = preregistration["support_audit"]
     thresholds = spec["hard_gates"]
     primary_scenarios = tuple(preregistration["design"]["primary_scenarios"])
+    control_scenarios = (
+        tuple(preregistration["design"].get("stability_controls") or [])
+        if bool(spec.get("include_stability_controls"))
+        else ()
+    )
+    support_scenarios = primary_scenarios + control_scenarios
     expected_groups = int(spec["expected_prompt_groups"])
     expected_samples = int(spec["expected_samples"])
     samples_per_prompt = int(spec["samples_per_prompt"])
     if len(data_rows) != expected_groups:
         raise ValueError(f"expected {expected_groups} step rows, found {len(data_rows)}")
-    if {str(row["scenario_id"]) for row in data_rows} != set(primary_scenarios):
+    if {str(row["scenario_id"]) for row in data_rows} != set(support_scenarios):
         raise ValueError("support step data scenario scope does not match preregistration")
     data = {str(row["case_id"]): row for row in data_rows}
     if len(data) != len(data_rows):
@@ -126,7 +132,7 @@ def apply_gate(
     )
     by_scenario = {
         scenario: aggregate([group for group in groups if group["scenario_id"] == scenario])
-        for scenario in primary_scenarios
+        for scenario in support_scenarios
     }
     by_scenario_detector = {
         f"{scenario}::{detector}": aggregate(
@@ -136,7 +142,7 @@ def apply_gate(
                 if group["scenario_id"] == scenario and group["detector_family"] == detector
             ]
         )
-        for scenario in primary_scenarios
+        for scenario in support_scenarios
         for detector in ("qwen", "rex")
     }
     support_blocks = tuple(str(item) for item in spec.get("support_blocks") or [])
@@ -144,7 +150,12 @@ def apply_gate(
         block: aggregate([group for group in groups if group["support_block"] == block])
         for block in support_blocks
     }
-    primary = aggregate(groups)
+    primary = aggregate(
+        [group for group in groups if group["scenario_id"] in set(primary_scenarios)]
+    )
+    controls = aggregate(
+        [group for group in groups if group["scenario_id"] in set(control_scenarios)]
+    )
     json_valid_rate = (
         statistics.fmean(float(bool(sample["json_valid"])) for sample in samples)
         if samples
@@ -193,7 +204,24 @@ def apply_gate(
             float(thresholds["minimum_primary_nonzero_reward_variance_rate"]),
         ),
     ]
-    for scenario in primary_scenarios:
+    if control_scenarios:
+        checks.extend(
+            [
+                check(
+                    "control_gold_action_support_rate",
+                    float(controls["gold_action_support_rate"]),
+                    ">=",
+                    float(thresholds["minimum_control_gold_action_support_rate"]),
+                ),
+                check(
+                    "control_nonzero_reward_variance_rate",
+                    float(controls["nonzero_reward_variance_rate"]),
+                    ">=",
+                    float(thresholds["minimum_control_nonzero_reward_variance_rate"]),
+                ),
+            ]
+        )
+    for scenario in support_scenarios:
         for detector in ("qwen", "rex"):
             metrics = by_scenario_detector[f"{scenario}::{detector}"]
             checks.extend(
@@ -246,7 +274,7 @@ def apply_gate(
         "study_id": preregistration["study_id"],
         "status": "pass" if passed else "fail",
         "optimizer_authorized": passed,
-        "optimizer_scenarios": list(primary_scenarios) if passed else [],
+        "optimizer_scenarios": list(support_scenarios) if passed else [],
         "observed": {
             "samples": len(samples),
             "complete_groups": complete_groups,
@@ -255,6 +283,7 @@ def apply_gate(
             "json_valid_rate": json_valid_rate,
             "clipped_rate": clipped_rate,
             "primary": primary,
+            "controls": controls,
             "by_scenario": by_scenario,
             "by_scenario_detector": by_scenario_detector,
             "by_support_block": by_support_block,
