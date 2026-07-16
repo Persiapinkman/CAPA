@@ -4,15 +4,19 @@
 from __future__ import annotations
 
 import contextlib
+import sys
 from pathlib import Path
 from typing import Iterator
+
+ROOT = Path(__file__).resolve().parents[3]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 from training.planner_grpo_seed_v1.scripts import (
     build_planner_retry_safe_end_hard_residual_v9 as base,
 )
 
 
-ROOT = Path(__file__).resolve().parents[3]
 DATASET_ID = "planner_retry_anti_forgetting_v10"
 STUDY_ID = "planner_retry_anti_forgetting_v10_qwen35_4b_v1"
 SEED = 2026071610
