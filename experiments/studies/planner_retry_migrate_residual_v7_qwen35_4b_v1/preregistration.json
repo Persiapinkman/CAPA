@@ -1,0 +1,134 @@
+{
+  "schema_version": "1.0",
+  "created_at": "2026-07-16T15:30:00+00:00",
+  "study_id": "planner_retry_migrate_residual_v7_qwen35_4b_v1",
+  "status": "preregistered_before_v7_data_generation",
+  "hypothesis": "A residual-focused, entity-disjoint GRPO distribution with hard lexical nuisance combinations will retain useful within-prompt reward variance under the selected V6 SFT checkpoint and can improve fresh-retry routing without regressing nonretryable or exhausted-state controls.",
+  "frozen_initializer": {
+    "base_model": "/raid/zkq/models/Qwen3.5-4B",
+    "adapter": "experiments/runs/20260716_qwen35_4b_planner_v6_sft_seed42_v1/checkpoint-100",
+    "adapter_sha256": "0c09452034727fe41908fc37d35866b68c227c9e8c680e66fbf0a043ae8aca60",
+    "selection_evidence": "experiments/studies/planner_retry_migrate_v6_qwen35_4b_v1/sft_selection.json"
+  },
+  "design": {
+    "seed": 2026071607,
+    "experimental_unit": "entity × detector counterfactual bundle",
+    "independent_replication_unit": "entity",
+    "splits": {
+      "grpo_train": {
+        "entities": 24,
+        "role": "optimization_only",
+        "sealed": false
+      },
+      "grpo_dev": {
+        "entities": 12,
+        "role": "support_gate_and_model_selection_only",
+        "sealed": false
+      },
+      "test": {
+        "entities": 12,
+        "role": "sealed_final_evaluation_only",
+        "sealed": true
+      }
+    },
+    "detectors": [
+      "qwen_detection",
+      "rexomni_detection"
+    ],
+    "primary_residual_scenarios": [
+      "fresh_retry_step2",
+      "post_retry_success_step3",
+      "post_retry_error_step3",
+      "post_retry_metric_veto_step3",
+      "current_success_step2",
+      "conflicting_state_step2"
+    ],
+    "stability_controls": [
+      "nonretryable_step2",
+      "budget_exhausted_step2",
+      "missing_required_state_step2"
+    ],
+    "cases_per_entity_detector_bundle": 9,
+    "expected_case_rows": {
+      "grpo_train": 432,
+      "grpo_dev": 216,
+      "test": 216
+    },
+    "blocking_and_balance": {
+      "grpo_train": "full 4 query styles × 3 badge states × 2 fixture families across 24 entities; every entity is crossed with both detectors and all nine state scenarios",
+      "grpo_dev_and_test": "full 4 query styles × 3 badge states across 12 entities; fixture families are globally balanced and balanced within each badge margin, with at most one-entity imbalance within a query style; every entity is crossed with both detectors and all nine state scenarios",
+      "error_aliases": "four disjoint alias families with two spellings each, balanced across detector bundles",
+      "run_order": "seeded shuffle after the complete blocked layout is generated"
+    },
+    "isolation": [
+      "case_id",
+      "entity_id",
+      "project_entity",
+      "target_entity",
+      "image_fixture_family",
+      "error_alias",
+      "formatted_prompt_sha256"
+    ],
+    "anti_pseudoreplication_rule": "Repeated scenarios and detector variants from one entity are a block, not independent evidence; all reported uncertainty and split isolation are entity-aware."
+  },
+  "support_audit": {
+    "split": "grpo_dev",
+    "samples_per_prompt": 4,
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "max_new_tokens": 320,
+    "seed": 42,
+    "expected_prompt_groups": 216,
+    "expected_samples": 864,
+    "primary_scope": [
+      "fresh_retry_step2",
+      "post_retry_success_step3",
+      "post_retry_error_step3",
+      "post_retry_metric_veto_step3",
+      "current_success_step2",
+      "conflicting_state_step2"
+    ],
+    "hard_gates": {
+      "complete_groups": true,
+      "minimum_json_valid_rate": 0.99,
+      "maximum_clipped_rate": 0.01,
+      "minimum_primary_gold_action_support_rate": 0.8,
+      "minimum_primary_nonzero_reward_variance_rate": 0.1,
+      "minimum_fresh_retry_nonzero_groups_per_detector": 2,
+      "minimum_fresh_retry_gold_support_rate_per_detector": 0.5
+    },
+    "adaptive_scope_rule": "Only residual scenarios with at least two nonzero-variance development groups in each detector family and at least 10% combined nonzero-variance rate may enter the optimizer dataset. fresh_retry_step2 must qualify or optimizer steps remain zero.",
+    "on_fail": "Do not run GRPO. Preserve the audit and redesign a new version rather than changing V7 in place."
+  },
+  "training_if_support_passes": {
+    "first_stage": "five-step health canary",
+    "world_size": 4,
+    "num_generations": 4,
+    "generation_batch_size": 4,
+    "per_device_train_batch_size": 1,
+    "gradient_accumulation_steps": 8,
+    "global_completions_per_optimizer_step": 32,
+    "learning_rate": 5e-6,
+    "reward_weights": {
+      "task_reward": 0.95,
+      "format_reward": 0.05
+    },
+    "wandb": {
+      "entity": "1139090915-tsinghua-university",
+      "project": "capa-planner-post-training",
+      "group": "planner-retry-migrate-residual-v7"
+    },
+    "canary_stop_conditions": [
+      "any non-finite loss, reward, gradient, parameter, or optimizer state",
+      "missing trainable gradients",
+      "peak allocated memory above 28 GiB on any rank",
+      "fewer than 2 GiB free device memory on any rank",
+      "missing reward, policy entropy, gradient norm, or advantage telemetry"
+    ]
+  },
+  "test_policy": {
+    "open_only_after": "support gate passes, training scope and hyperparameters are frozen, and the selected checkpoint is locked",
+    "primary_metric": "entity-blocked full-trajectory action pass rate",
+    "no_reuse": "The opened V6 sealed test is historical design input only and is not a confirmatory V7 endpoint."
+  }
+}

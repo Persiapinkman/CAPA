@@ -1,11 +1,11 @@
 {
-  "timestamp": "2026-07-15T16:52:45.129621",
+  "timestamp": "2026-07-16T15:19:46.631145",
   "os": {
     "system": "Linux",
     "release": "5.15.0-181-generic",
     "version": "#191-Ubuntu SMP Fri May 22 19:09:02 UTC 2026",
     "machine": "x86_64",
-    "python_version": "3.9.13"
+    "python_version": "3.10.12"
   },
   "cpu": {
     "physical_cores": 40,
@@ -13,22 +13,22 @@
     "max_frequency_mhz": 3600.0,
     "architecture": "x86_64",
     "processor": "x86_64",
-    "current_frequency_mhz": 1.4219375000000016
+    "current_frequency_mhz": 1404.930525
   },
   "memory": {
     "total_gb": 503.76,
-    "available_gb": 435.57,
-    "used_gb": 63.75,
-    "percent_used": 13.5,
+    "available_gb": 431.72,
+    "used_gb": 72.04,
+    "percent_used": 14.3,
     "swap_total_gb": 8.0,
-    "swap_available_gb": 7.97
+    "swap_available_gb": 7.79
   },
   "disk": {
     "path": "/raid/zkq/projects/CAPA",
     "total_gb": 7095.35,
-    "available_gb": 1992.93,
-    "used_gb": 4744.81,
-    "percent_used": 70.4
+    "available_gb": 1985.53,
+    "used_gb": 4752.21,
+    "percent_used": 70.5
   },
   "gpu": {
     "nvidia_gpus": [
@@ -36,7 +36,7 @@
         "index": 0,
         "name": "Tesla V100-SXM2-32GB",
         "memory_total_mb": 32768.0,
-        "memory_free_mb": 32495.0,
+        "memory_free_mb": 31361.0,
         "driver_version": "550.163.01",
         "compute_capability": "7.0",
         "type": "NVIDIA",
@@ -46,7 +46,7 @@
         "index": 1,
         "name": "Tesla V100-SXM2-32GB",
         "memory_total_mb": 32768.0,
-        "memory_free_mb": 32495.0,
+        "memory_free_mb": 31359.0,
         "driver_version": "550.163.01",
         "compute_capability": "7.0",
         "type": "NVIDIA",
@@ -96,7 +96,7 @@
         "index": 6,
         "name": "Tesla V100-SXM2-32GB",
         "memory_total_mb": 32768.0,
-        "memory_free_mb": 32495.0,
+        "memory_free_mb": 31919.0,
         "driver_version": "550.163.01",
         "compute_capability": "7.0",
         "type": "NVIDIA",

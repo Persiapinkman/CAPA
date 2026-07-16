@@ -1,0 +1,327 @@
+{
+  "case_validation": {
+    "errors": [],
+    "factors": {
+      "grpo_dev": {
+        "badges": {
+          "amber": 4,
+          "missing": 4,
+          "red": 4
+        },
+        "bundle_aliases": {
+          "detector_capacity_token_absent": 3,
+          "detector_input_contract_unknown": 3,
+          "detector_return_channel_missing": 3,
+          "probe_ack_deadline_closed": 3,
+          "probe_retry_allowance_spent": 3,
+          "vision_service_route_unbound": 3,
+          "vision_state_packet_malformed": 3,
+          "visual_response_clock_elapsed": 3
+        },
+        "detectors": {
+          "qwen": 108,
+          "rex": 108
+        },
+        "entities": 12,
+        "entity_style_badge_fixture": {
+          "style1|amber|prrv7_gd_azure_wheel": 1,
+          "style1|missing|prrv7_gd_crimson_cross": 1,
+          "style1|red|prrv7_gd_crimson_cross": 1,
+          "style2|amber|prrv7_gd_crimson_cross": 1,
+          "style2|missing|prrv7_gd_azure_wheel": 1,
+          "style2|red|prrv7_gd_azure_wheel": 1,
+          "style3|amber|prrv7_gd_azure_wheel": 1,
+          "style3|missing|prrv7_gd_crimson_cross": 1,
+          "style3|red|prrv7_gd_crimson_cross": 1,
+          "style4|amber|prrv7_gd_crimson_cross": 1,
+          "style4|missing|prrv7_gd_azure_wheel": 1,
+          "style4|red|prrv7_gd_azure_wheel": 1
+        },
+        "fixtures": {
+          "prrv7_gd_azure_wheel": 6,
+          "prrv7_gd_crimson_cross": 6
+        },
+        "scenarios": {
+          "budget_exhausted_step2": 24,
+          "conflicting_state_step2": 24,
+          "current_success_step2": 24,
+          "fresh_retry_step2": 24,
+          "missing_required_state_step2": 24,
+          "nonretryable_step2": 24,
+          "post_retry_error_step3": 24,
+          "post_retry_metric_veto_step3": 24,
+          "post_retry_success_step3": 24
+        },
+        "styles": {
+          "0": 3,
+          "1": 3,
+          "2": 3,
+          "3": 3
+        },
+        "target_actions": {
+          "end": 48,
+          "migrate": 144,
+          "retry": 24
+        },
+        "target_steps": {
+          "2": 144,
+          "3": 72
+        }
+      },
+      "grpo_train": {
+        "badges": {
+          "amber": 8,
+          "missing": 8,
+          "red": 8
+        },
+        "bundle_aliases": {
+          "detector_control_plane_unreachable": 6,
+          "detector_request_schema_diverged": 6,
+          "feature_uplink_session_lost": 6,
+          "inspection_retry_credit_empty": 6,
+          "probe_result_envelope_invalid": 6,
+          "sensor_reply_epoch_overrun": 6,
+          "vision_execution_budget_locked": 6,
+          "vision_probe_watch_expired": 6
+        },
+        "detectors": {
+          "qwen": 216,
+          "rex": 216
+        },
+        "entities": 24,
+        "entity_style_badge_fixture": {
+          "style1|amber|prrv7_gt_gold_star": 1,
+          "style1|amber|prrv7_gt_teal_rings": 1,
+          "style1|missing|prrv7_gt_gold_star": 1,
+          "style1|missing|prrv7_gt_teal_rings": 1,
+          "style1|red|prrv7_gt_gold_star": 1,
+          "style1|red|prrv7_gt_teal_rings": 1,
+          "style2|amber|prrv7_gt_gold_star": 1,
+          "style2|amber|prrv7_gt_teal_rings": 1,
+          "style2|missing|prrv7_gt_gold_star": 1,
+          "style2|missing|prrv7_gt_teal_rings": 1,
+          "style2|red|prrv7_gt_gold_star": 1,
+          "style2|red|prrv7_gt_teal_rings": 1,
+          "style3|amber|prrv7_gt_gold_star": 1,
+          "style3|amber|prrv7_gt_teal_rings": 1,
+          "style3|missing|prrv7_gt_gold_star": 1,
+          "style3|missing|prrv7_gt_teal_rings": 1,
+          "style3|red|prrv7_gt_gold_star": 1,
+          "style3|red|prrv7_gt_teal_rings": 1,
+          "style4|amber|prrv7_gt_gold_star": 1,
+          "style4|amber|prrv7_gt_teal_rings": 1,
+          "style4|missing|prrv7_gt_gold_star": 1,
+          "style4|missing|prrv7_gt_teal_rings": 1,
+          "style4|red|prrv7_gt_gold_star": 1,
+          "style4|red|prrv7_gt_teal_rings": 1
+        },
+        "fixtures": {
+          "prrv7_gt_gold_star": 12,
+          "prrv7_gt_teal_rings": 12
+        },
+        "scenarios": {
+          "budget_exhausted_step2": 48,
+          "conflicting_state_step2": 48,
+          "current_success_step2": 48,
+          "fresh_retry_step2": 48,
+          "missing_required_state_step2": 48,
+          "nonretryable_step2": 48,
+          "post_retry_error_step3": 48,
+          "post_retry_metric_veto_step3": 48,
+          "post_retry_success_step3": 48
+        },
+        "styles": {
+          "0": 6,
+          "1": 6,
+          "2": 6,
+          "3": 6
+        },
+        "target_actions": {
+          "end": 96,
+          "migrate": 288,
+          "retry": 48
+        },
+        "target_steps": {
+          "2": 288,
+          "3": 144
+        }
+      },
+      "test": {
+        "badges": {
+          "amber": 4,
+          "missing": 4,
+          "red": 4
+        },
+        "bundle_aliases": {
+          "detector_session_carrier_broken": 3,
+          "detector_state_manifest_corrupt": 3,
+          "feature_exchange_path_unavailable": 3,
+          "inspection_result_horizon_passed": 3,
+          "probe_admission_credit_withheld": 3,
+          "vision_retry_lease_depleted": 3,
+          "visual_request_shape_unrecognized": 3,
+          "visual_worker_reply_window_shut": 3
+        },
+        "detectors": {
+          "qwen": 108,
+          "rex": 108
+        },
+        "entities": 12,
+        "entity_style_badge_fixture": {
+          "style1|amber|prrv7_te_nickel_arch": 1,
+          "style1|missing|prrv7_te_vermilion_hex": 1,
+          "style1|red|prrv7_te_vermilion_hex": 1,
+          "style2|amber|prrv7_te_vermilion_hex": 1,
+          "style2|missing|prrv7_te_nickel_arch": 1,
+          "style2|red|prrv7_te_nickel_arch": 1,
+          "style3|amber|prrv7_te_nickel_arch": 1,
+          "style3|missing|prrv7_te_vermilion_hex": 1,
+          "style3|red|prrv7_te_vermilion_hex": 1,
+          "style4|amber|prrv7_te_vermilion_hex": 1,
+          "style4|missing|prrv7_te_nickel_arch": 1,
+          "style4|red|prrv7_te_nickel_arch": 1
+        },
+        "fixtures": {
+          "prrv7_te_nickel_arch": 6,
+          "prrv7_te_vermilion_hex": 6
+        },
+        "scenarios": {
+          "budget_exhausted_step2": 24,
+          "conflicting_state_step2": 24,
+          "current_success_step2": 24,
+          "fresh_retry_step2": 24,
+          "missing_required_state_step2": 24,
+          "nonretryable_step2": 24,
+          "post_retry_error_step3": 24,
+          "post_retry_metric_veto_step3": 24,
+          "post_retry_success_step3": 24
+        },
+        "styles": {
+          "0": 3,
+          "1": 3,
+          "2": 3,
+          "3": 3
+        },
+        "target_actions": {
+          "end": 48,
+          "migrate": 144,
+          "retry": 24
+        },
+        "target_steps": {
+          "2": 144,
+          "3": 72
+        }
+      }
+    },
+    "split_overlap": {
+      "grpo_dev__test": {
+        "bundle_error_alias": 0,
+        "case_id": 0,
+        "entity_id": 0,
+        "image_fixture_family": 0,
+        "project_entity": 0,
+        "target_entity": 0
+      },
+      "grpo_train__grpo_dev": {
+        "bundle_error_alias": 0,
+        "case_id": 0,
+        "entity_id": 0,
+        "image_fixture_family": 0,
+        "project_entity": 0,
+        "target_entity": 0
+      },
+      "grpo_train__test": {
+        "bundle_error_alias": 0,
+        "case_id": 0,
+        "entity_id": 0,
+        "image_fixture_family": 0,
+        "project_entity": 0,
+        "target_entity": 0
+      }
+    },
+    "status": "pass",
+    "v6_repository_overlap": {
+      "bundle_error_alias": 0,
+      "case_id": 0,
+      "entity_id": 0,
+      "image_fixture_family": 0,
+      "project_entity": 0,
+      "target_entity": 0
+    }
+  },
+  "created_at": "2026-07-16T15:30:00+00:00",
+  "dataset_id": "planner_retry_migrate_residual_v7",
+  "repository_prompt_audit": {
+    "checked_files": [
+      "training/planner_grpo_seed_v1/step_data/planner_multistep_grpo_value_v5_train_v1_qwen35_4b_support80.jsonl",
+      "training/planner_grpo_seed_v1/step_data/planner_retry_migrate_v6_grpo_dev_qwen35_4b_nothinking_step2.jsonl",
+      "training/planner_grpo_seed_v1/step_data/planner_retry_migrate_v6_grpo_train_qwen35_4b_nothinking_step2.jsonl",
+      "training/planner_grpo_seed_v1/step_data/planner_multistep_grpo_value_v5_train_v1_qwen35_4b_nothinking_step2.jsonl"
+    ],
+    "current_prompt_hashes": 648,
+    "historical_prompt_hashes": 1020,
+    "overlap": 0
+  },
+  "schema_version": "1.0",
+  "step_prompt_audits": {
+    "grpo_dev": {
+      "canonical_step_reward": {
+        "max": 1.0,
+        "min": 1.0,
+        "non_unit": 0
+      },
+      "case_id_hits": 0,
+      "duplicate_prompt_hashes": 0,
+      "entity_id_hits": 0,
+      "forbidden_fragment_hits": {
+        "\"_thought\"": 0,
+        "\"external_ref\"": 0,
+        "/raid/": 0,
+        "/tmp/": 0,
+        "按训练样本期望": 0
+      },
+      "max_steps_mismatch": 0,
+      "prompt_tokens": {
+        "max": 4428,
+        "mean": 4278.708333333333,
+        "min": 4190,
+        "p50": 4222,
+        "p95": 4417
+      },
+      "rows": 216,
+      "status": "pass"
+    },
+    "grpo_train": {
+      "canonical_step_reward": {
+        "max": 1.0,
+        "min": 1.0,
+        "non_unit": 0
+      },
+      "case_id_hits": 0,
+      "duplicate_prompt_hashes": 0,
+      "entity_id_hits": 0,
+      "forbidden_fragment_hits": {
+        "\"_thought\"": 0,
+        "\"external_ref\"": 0,
+        "/raid/": 0,
+        "/tmp/": 0,
+        "按训练样本期望": 0
+      },
+      "max_steps_mismatch": 0,
+      "prompt_tokens": {
+        "max": 4482,
+        "mean": 4328.743055555556,
+        "min": 4248,
+        "p50": 4271,
+        "p95": 4466
+      },
+      "rows": 432,
+      "status": "pass"
+    }
+  },
+  "test_commitment": {
+    "materialized": false,
+    "rows": 216,
+    "sha256": "8b2dcfe9c66af3936592e37aafc6b52e8820da009110f6f58f4e1ae716cfc820"
+  }
+}

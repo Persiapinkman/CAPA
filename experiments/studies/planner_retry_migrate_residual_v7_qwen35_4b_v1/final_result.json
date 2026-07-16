@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_retry_migrate_residual_v7_qwen35_4b_v1",
+  "created_at": "2026-07-16T16:04:23Z",
+  "status": "support_gate_failed",
+  "initializer": {
+    "model": "/raid/zkq/models/Qwen3.5-4B",
+    "adapter": "experiments/runs/20260716_qwen35_4b_planner_v6_sft_seed42_v1/checkpoint-100"
+  },
+  "support_audit": {
+    "prompt_groups": 216,
+    "samples_per_prompt": 4,
+    "samples": 864,
+    "json_valid_rate": 1.0,
+    "clipped_rate": 0.0,
+    "nonfinite_rewards": 0,
+    "primary_gold_action_support_rate": 0.7638888888888888,
+    "primary_nonzero_reward_variance_groups": 35,
+    "primary_nonzero_reward_variance_rate": 0.24305555555555555,
+    "failed_check": {
+      "name": "primary_gold_action_support_rate",
+      "observed": 0.7638888888888888,
+      "operator": ">=",
+      "threshold": 0.8
+    },
+    "fresh_retry": {
+      "qwen": {
+        "gold_action_support_rate": 0.8333333333333334,
+        "nonzero_reward_variance_groups": 4
+      },
+      "rex": {
+        "gold_action_support_rate": 0.75,
+        "nonzero_reward_variance_groups": 2
+      }
+    }
+  },
+  "adaptive_scenario_diagnostics": {
+    "passed_before_global_gate": [
+      "fresh_retry_step2",
+      "post_retry_error_step3",
+      "current_success_step2",
+      "conflicting_state_step2"
+    ],
+    "failed": [
+      "post_retry_success_step3",
+      "post_retry_metric_veto_step3"
+    ],
+    "final_optimizer_scenarios": []
+  },
+  "training": {
+    "optimizer_authorized": false,
+    "optimizer_steps": 0,
+    "canary_status": "not_run_due_to_preregistered_support_gate",
+    "wandb_run_created": false
+  },
+  "sealed_test": {
+    "materialized": false,
+    "rows": 216,
+    "sha256_commitment": "8b2dcfe9c66af3936592e37aafc6b52e8820da009110f6f58f4e1ae716cfc820"
+  },
+  "verification": {
+    "pytest_passed": 171,
+    "pytest_skipped": 9,
+    "git_diff_check": "pass"
+  },
+  "artifact_sha256": {
+    "preregistration": "64f1cb84fa6da71bc583f180a5051249b7f1ad00ece56087a0312df806f0ef5d",
+    "support_decision": "6e507cd83e78009e1c079bb9f0c2d1ccf08f70e3d90222f2796e9a9f7ac12001",
+    "samples": "bf233793c253d940e0bb32ac2efea4858cd25953046a648ab9247515465a9158",
+    "summary": "34f5170eb781153b4a3c7ce16ae58cfa14f7902a484bd97731150db9ea2030b7"
+  },
+  "next_recommendation": "Use V7 only as pilot evidence. Preregister an entity-disjoint V8 with fresh-retry and post-retry-error as the first residual arm, and place current-success/conflicting-state in a separate residual-SFT or independent arm before any new GRPO optimizer step."
+}

@@ -1,0 +1,146 @@
+{
+  "case_rows": {
+    "grpo_dev": 216,
+    "grpo_train": 432,
+    "test": 216
+  },
+  "created_at": "2026-07-16T15:30:00+00:00",
+  "dataset_id": "planner_retry_migrate_residual_v7",
+  "experimental_unit": "entity × detector counterfactual bundle",
+  "files": {
+    "audit_report": "data/datasets/planner_retry_migrate_residual_v7/audit_report.json",
+    "builder": "training/planner_grpo_seed_v1/scripts/build_planner_retry_migrate_residual_v7.py",
+    "cases_grpo_dev": "training/planner_grpo_seed_v1/cases/planner_retry_migrate_residual_v7_grpo_dev_cases.jsonl",
+    "cases_grpo_train": "training/planner_grpo_seed_v1/cases/planner_retry_migrate_residual_v7_grpo_train_cases.jsonl",
+    "fixture_01": "examples/images/planner_retry_migrate_residual_v7/teal_double_ring_coupler.png",
+    "fixture_02": "examples/images/planner_retry_migrate_residual_v7/gold_five_star_service_tab.png",
+    "fixture_03": "examples/images/planner_retry_migrate_residual_v7/crimson_cross_locator.png",
+    "fixture_04": "examples/images/planner_retry_migrate_residual_v7/azure_three_spoke_adjuster.png",
+    "fixture_05": "examples/images/planner_retry_migrate_residual_v7/nickel_arch_isolator.png",
+    "fixture_06": "examples/images/planner_retry_migrate_residual_v7/vermilion_hex_inspection_tab.png",
+    "preregistration": "experiments/studies/planner_retry_migrate_residual_v7_qwen35_4b_v1/preregistration.json",
+    "step_data_grpo_dev": "training/planner_grpo_seed_v1/step_data/planner_retry_migrate_residual_v7_grpo_dev_qwen35_4b_nothinking_mixed_steps.jsonl",
+    "step_data_grpo_train": "training/planner_grpo_seed_v1/step_data/planner_retry_migrate_residual_v7_grpo_train_qwen35_4b_nothinking_mixed_steps.jsonl",
+    "step_manifest_grpo_dev": "training/planner_grpo_seed_v1/step_data/planner_retry_migrate_residual_v7_grpo_dev_qwen35_4b_nothinking_mixed_steps.manifest.json",
+    "step_manifest_grpo_train": "training/planner_grpo_seed_v1/step_data/planner_retry_migrate_residual_v7_grpo_train_qwen35_4b_nothinking_mixed_steps.manifest.json"
+  },
+  "independent_replication_unit": "entity",
+  "integrity": {
+    "case_validation": "pass",
+    "independent_human_review": "pending",
+    "repository_prompt_overlap": 0
+  },
+  "scenarios": {
+    "primary_residual": [
+      "fresh_retry_step2",
+      "post_retry_success_step3",
+      "post_retry_error_step3",
+      "post_retry_metric_veto_step3",
+      "current_success_step2",
+      "conflicting_state_step2"
+    ],
+    "stability_control": [
+      "nonretryable_step2",
+      "budget_exhausted_step2",
+      "missing_required_state_step2"
+    ]
+  },
+  "schema_version": "1.0",
+  "seed": 2026071607,
+  "sha256": {
+    "audit_report": "eb37070f69b091d303a2bc1c464071acccae3b2c5d0d02b523e2fff0885b4df1",
+    "builder": "60e8b7fe59b1c8394d976bc132223572c7268ad2c9bab62374131f516f4249d6",
+    "cases_grpo_dev": "5f5ff5c12ff34ba2ba42419412c07be1c90cc2164e17d4822c762bfff0ba972b",
+    "cases_grpo_train": "c66ddeaf70cf4b5417524b51f31cc0582ae6eb6d4f1f2bcfe028cc865ce1762d",
+    "fixture_01": "a83c276585f2f79470789b38cda14dfde94d1dfb970666823bc5f8b6285d7c33",
+    "fixture_02": "ae4fad50eea43deaafa1427565e126700a0d2c7a4353611fd4b6d91274718747",
+    "fixture_03": "52ca16f88aa567b675befedb466b0d76116afc9efcab706fd95d194e8dab6a4b",
+    "fixture_04": "a94c8ea858267b107f42cef9a7d33ff651b93eed80ed29b90ae443b4a2460f99",
+    "fixture_05": "88f65f47642ef172ec6faa3434bc3d4bb17a92e614ac693e6dd0bf6db181f66d",
+    "fixture_06": "381bd02985caf9e769cfe7f466ed515ddf9359382fa2d43b1e318c93991f6157",
+    "preregistration": "64f1cb84fa6da71bc583f180a5051249b7f1ad00ece56087a0312df806f0ef5d",
+    "step_data_grpo_dev": "43eda2caa2e44daacf550d8290d8a2923168ba4739c89dadbfb7c03fb37b6de9",
+    "step_data_grpo_train": "00507449b111319ade5572f1197bca4fb992b23e0c90e6e55ab2d5cb2c3693dc",
+    "step_manifest_grpo_dev": "a5730c581f00d8f10f1565b6d79b993b92ede39cf982915bebad5b9edd921b7a",
+    "step_manifest_grpo_train": "3a3f4af0ea42732999ccebf533c4579b5f55c9aa89f84ac87d16f886aa9d224a"
+  },
+  "status": "frozen_train_dev_test_committed",
+  "step_rows": {
+    "grpo_dev": {
+      "categories": {
+        "budget_exhausted_step2": 24,
+        "conflicting_state_step2": 24,
+        "current_success_step2": 24,
+        "fresh_retry_step2": 24,
+        "missing_required_state_step2": 24,
+        "nonretryable_step2": 24,
+        "post_retry_error_step3": 24,
+        "post_retry_metric_veto_step3": 24,
+        "post_retry_success_step3": 24
+      },
+      "entities": 12,
+      "optimization_scope": {
+        "primary_residual": 144,
+        "stability_control": 72
+      },
+      "prompt_tokens": {
+        "max": 4428,
+        "mean": 4278.708333333333,
+        "min": 4190,
+        "p50": 4222,
+        "p95": 4417
+      },
+      "rows": 216,
+      "target_actions": {
+        "end": 48,
+        "migrate": 144,
+        "retry": 24
+      },
+      "target_steps": {
+        "2": 144,
+        "3": 72
+      }
+    },
+    "grpo_train": {
+      "categories": {
+        "budget_exhausted_step2": 48,
+        "conflicting_state_step2": 48,
+        "current_success_step2": 48,
+        "fresh_retry_step2": 48,
+        "missing_required_state_step2": 48,
+        "nonretryable_step2": 48,
+        "post_retry_error_step3": 48,
+        "post_retry_metric_veto_step3": 48,
+        "post_retry_success_step3": 48
+      },
+      "entities": 24,
+      "optimization_scope": {
+        "primary_residual": 288,
+        "stability_control": 144
+      },
+      "prompt_tokens": {
+        "max": 4482,
+        "mean": 4328.743055555556,
+        "min": 4248,
+        "p50": 4271,
+        "p95": 4466
+      },
+      "rows": 432,
+      "target_actions": {
+        "end": 96,
+        "migrate": 288,
+        "retry": 48
+      },
+      "target_steps": {
+        "2": 288,
+        "3": 144
+      }
+    }
+  },
+  "study_id": "planner_retry_migrate_residual_v7_qwen35_4b_v1",
+  "test_commitment": {
+    "materialized": false,
+    "rows": 216,
+    "sha256": "8b2dcfe9c66af3936592e37aafc6b52e8820da009110f6f58f4e1ae716cfc820"
+  }
+}

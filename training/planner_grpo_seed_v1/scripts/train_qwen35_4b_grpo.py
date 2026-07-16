@@ -12,6 +12,7 @@ import platform
 import sys
 import time
 import traceback
+from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable
@@ -95,6 +96,16 @@ def parse_bool(value: str | bool) -> bool:
     raise argparse.ArgumentTypeError(f"invalid boolean value: {value}")
 
 
+def parse_step_indices(value: str) -> tuple[int, ...]:
+    try:
+        indices = tuple(sorted({int(item.strip()) for item in value.split(",") if item.strip()}))
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError("step indices must be comma-separated integers") from exc
+    if not indices or any(index <= 0 for index in indices):
+        raise argparse.ArgumentTypeError("step indices must be positive integers")
+    return indices
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--mode", choices=["dry-run", "g4", "train"], default="dry-run")
@@ -115,6 +126,12 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--expected-dataset-id", default=EXPECTED_DATASET_ID)
     parser.add_argument("--expected-rows", type=int, default=480)
+    parser.add_argument(
+        "--allowed-step-indices",
+        type=parse_step_indices,
+        default=(2,),
+        help="Comma-separated frozen target steps accepted by the trainer (default: 2).",
+    )
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--max-prompt-tokens", type=int, default=4608)
     parser.add_argument("--max-completion-length", type=int, default=320)
@@ -202,6 +219,7 @@ def load_step_data(
     manifest_path: Path | None = None,
     expected_dataset_id: str = EXPECTED_DATASET_ID,
     expected_rows: int = 480,
+    allowed_step_indices: tuple[int, ...] = (2,),
 ) -> tuple[Dataset, dict[str, Any]]:
     manifest_path = manifest_path or path.with_suffix(".manifest.json")
     if not manifest_path.exists():
@@ -213,13 +231,17 @@ def load_step_data(
         raise ValueError(f"step-data hash mismatch: manifest={expected_hash}, actual={actual_hash}")
     rows: list[dict[str, Any]] = []
     lengths: list[int] = []
+    allowed_steps = set(allowed_step_indices)
+    if not allowed_steps or any(step <= 0 for step in allowed_steps):
+        raise ValueError("allowed_step_indices must contain positive integers")
     for line_number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
         if not line.strip():
             continue
         row = json.loads(line)
         if not isinstance(row, dict):
             raise ValueError(f"{path}:{line_number}: row must be an object")
-        if row.get("dataset_id") != expected_dataset_id or int(row.get("step_index") or 0) != 2:
+        step_index = int(row.get("step_index") or 0)
+        if row.get("dataset_id") != expected_dataset_id or step_index not in allowed_steps:
             raise ValueError(f"{path}:{line_number}: invalid dataset or target step")
         prompt = str(row.get("prompt") or "")
         if not prompt.endswith(NONTHINKING_SUFFIX):
@@ -247,6 +269,10 @@ def load_step_data(
         "manifest_sha256": sha256_file(manifest_path),
         "manifest": str(manifest_path),
         "dataset_id": expected_dataset_id,
+        "allowed_step_indices": sorted(allowed_steps),
+        "step_index_counts": {
+            str(step): count for step, count in sorted(Counter(int(row["step_index"]) for row in rows).items())
+        },
     }
     return Dataset.from_list(rows), stats
 
@@ -766,6 +792,7 @@ def main() -> None:
         manifest_path=step_data_manifest,
         expected_dataset_id=args.expected_dataset_id,
         expected_rows=args.expected_rows,
+        allowed_step_indices=args.allowed_step_indices,
     )
 
     run_config: dict[str, Any] = {
