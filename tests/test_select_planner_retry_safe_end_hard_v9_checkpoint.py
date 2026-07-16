@@ -1,5 +1,7 @@
 from pathlib import Path
 
+import pytest
+
 from training.planner_grpo_seed_v1.scripts.select_planner_retry_safe_end_hard_v9_checkpoint import (
     operational_metrics,
     select_checkpoint,
@@ -93,6 +95,37 @@ def test_operational_metrics_count_length_and_empty_failures():
     assert result == {
         "planner_decisions": 2,
         "empty_cases": 1,
+        "runtime_errors": 0,
         "json_valid_rate": 0.5,
         "clipped_rate": 0.5,
     }
+
+
+def test_selection_rejects_planner_runtime_fallbacks():
+    cases, sft, predictions = _fixture()
+    predictions[10][cases[0]["case_id"]] = {
+        "case_id": cases[0]["case_id"],
+        "decisions": [
+            {
+                "decision_type": "tool",
+                "action": "answerer",
+                "action_input": {},
+                "_planner_metrics": {
+                    "error_type": "RuntimeError",
+                    "error": "cuDNN error: CUDNN_STATUS_NOT_INITIALIZED",
+                },
+            }
+        ],
+    }
+    with pytest.raises(ValueError, match="checkpoint-10.*runtime errors"):
+        select_checkpoint(
+            preregistration=_preregistration(),
+            cases=cases,
+            sft_predictions=sft,
+            candidates=[
+                (f"checkpoint-{checkpoint}", Path(f"{checkpoint}.jsonl"), rows)
+                for checkpoint, rows in predictions.items()
+            ],
+            bootstrap_replicates=10,
+            seed=42,
+        )

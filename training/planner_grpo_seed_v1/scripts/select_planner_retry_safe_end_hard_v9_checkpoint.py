@@ -40,6 +40,7 @@ def operational_metrics(predictions: dict[str, dict[str, Any]]) -> dict[str, Any
     valid = 0
     clipped = 0
     empty_cases = 0
+    runtime_errors = 0
     for prediction in predictions.values():
         decisions = prediction.get("decisions")
         if not isinstance(decisions, list) or not decisions:
@@ -53,6 +54,8 @@ def operational_metrics(predictions: dict[str, dict[str, Any]]) -> dict[str, Any
             metrics = decision.get("_planner_metrics")
             metrics = metrics if isinstance(metrics, dict) else {}
             error_type = str(metrics.get("error_type") or "").strip()
+            error_message = str(metrics.get("error") or "").strip()
+            runtime_errors += int(bool(error_type or error_message))
             has_decision = str(decision.get("decision_type") or "").strip() in {
                 "tool", "end", "clarify"
             }
@@ -64,6 +67,7 @@ def operational_metrics(predictions: dict[str, dict[str, Any]]) -> dict[str, Any
     return {
         "planner_decisions": attempts,
         "empty_cases": empty_cases,
+        "runtime_errors": runtime_errors,
         "json_valid_rate": valid / attempts if attempts else 0.0,
         "clipped_rate": clipped / attempts if attempts else 1.0,
     }
@@ -100,8 +104,19 @@ def select_checkpoint(
         raise ValueError("candidate labels must be unique")
 
     sft_operations = operational_metrics(sft_predictions)
+    if sft_operations["runtime_errors"]:
+        raise ValueError(
+            "SFT selection predictions contain "
+            f"{sft_operations['runtime_errors']} Planner runtime errors"
+        )
     results: list[dict[str, Any]] = []
     for label, path, predictions in candidates:
+        operations = operational_metrics(predictions)
+        if operations["runtime_errors"]:
+            raise ValueError(
+                f"{label} selection predictions contain "
+                f"{operations['runtime_errors']} Planner runtime errors"
+            )
         comparison = compare_rollouts(
             cases=cases,
             candidate_predictions=predictions,
@@ -112,7 +127,6 @@ def select_checkpoint(
             bootstrap_replicates=bootstrap_replicates,
             seed=seed,
         )
-        operations = operational_metrics(predictions)
         checks = {
             "primary_gain": comparison["primary"]["pass_rate_delta"]
             >= float(gates["minimum_primary_complete_trajectory_gain_over_sft"]),

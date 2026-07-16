@@ -6,7 +6,13 @@ cd "${ROOT_DIR}"
 
 SCREEN_DIR="${SCREEN_DIR:?set SCREEN_DIR to the completed V9 screen directory}"
 OUT_DIR="${OUT_DIR:-experiments/runs/20260716_qwen35_4b_v9_selection_dev}"
-PYTHON_BIN="${PYTHON_BIN:-${ROOT_DIR}/.venv-train/bin/python}"
+# The V100 evaluation hosts require the CUDA 12.4/PyTorch 2.6 stack used by
+# the successful GRPO run.  The newer .venv-train CUDA 12.8/cuDNN stack can
+# load the model but fails on the first generation with
+# CUDNN_STATUS_NOT_INITIALIZED, which the Planner runtime converts into a
+# fallback answer.  Pin the known-good runtime so such fallbacks cannot be
+# mistaken for model predictions.
+PYTHON_BIN="${PYTHON_BIN:-${ROOT_DIR}/.venv-qwen35-grpo/bin/python}"
 CASES="training/planner_grpo_seed_v1/cases/planner_retry_safe_end_hard_residual_v9_selection_dev_cases.jsonl"
 STUDY_DIR="experiments/studies/planner_retry_safe_end_hard_residual_v9_qwen35_4b_v1"
 BASE_MODEL="/raid/zkq/models/Qwen3.5-4B"
