@@ -1,0 +1,11 @@
+{
+  "success": false,
+  "status": "gateway_error",
+  "summary": "当前工具状态：candidate_count=NA；min_confidence=NA；cross_prompt_iou=NA；domain_shift=unknown；gateway_error=vision_transport_link_broken；retryable=true；retry_count=2；overall_badge=amber。附注：badge 只用于监控面板。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "finish_after_tool": false,
+    "label": "蓝色圆形检修阀"
+  },
+  "_thought": "按训练样本期望执行该工具。"
+}

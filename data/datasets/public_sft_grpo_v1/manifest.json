@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "public_sft_grpo_v1",
+  "created_at": "2026-07-15",
+  "sources": [
+    {
+      "repo_id": "openai/gsm8k",
+      "repo_type": "dataset",
+      "revision": "740312add88f781978c0658806c59bc2815b9866",
+      "license": "MIT",
+      "files": {
+        "README.md": "a17e882503578c9e324560630e31017617714ee025c87cf4fea6fd916895f3c1",
+        "main/train-00000-of-00001.parquet": "ea82612ea9582142387730c793eb67d3b12849002bc0b7fa6f8efafa7351419d",
+        "main/test-00000-of-00001.parquet": "ee7b8da9e381df27b9e3f7758a159ab2bdaa4dbaa910546cbbc47e0cb44e4f59"
+      }
+    },
+    {
+      "repo_id": "DigitalLearningGmbH/MATH-lighteval",
+      "repo_type": "dataset",
+      "revision": "0530c78699ea5e8eb5530600900e1f328b48acad",
+      "license": "MIT",
+      "files": {
+        "README.md": "3bb056303034d0f49925396ede385ee2feed638c26e2abbf3a8ff0b9976a9bc4",
+        "data/train-00000-of-00001.parquet": "eca6e667f4305dd5e5ba09b4fd55e7f3174a0fbe361cdfd4c44758b593a76933",
+        "data/test-00000-of-00001.parquet": "7dca8d6e41af88ecf82f2b5f36eb5530e083aaaa86ee325f62bd5c31535178c6"
+      }
+    }
+  ],
+  "data_isolation": {
+    "upstream_test_used_for_training": false,
+    "checkpoint_selection_split": "development derived from upstream train",
+    "sealed_evaluation_split": "deterministic subset of upstream test"
+  }
+}

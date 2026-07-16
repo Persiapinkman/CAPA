@@ -1,0 +1,79 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_multistep_tool_routing_grpo_qwen25_7b_v1",
+  "dataset_id": "planner_multistep_grpo_hard_v2",
+  "parent_calibration": {
+    "dataset_id": "planner_multistep_grpo_hard_v1",
+    "status": "failed_minimum_family_gate",
+    "admitted_families": [
+      "qwen_uncertain_to_migration",
+      "image_migration_internal_probe"
+    ]
+  },
+  "frozen_calibration": {
+    "cases": 384,
+    "decisions": 640,
+    "entities": 32,
+    "families": 12,
+    "case_sha256": "9deb1457f15ecaa5aa0642731ad0b5e479659e7b5750cba6364cc04f8992ad24",
+    "step_sha256": "4378974617020be8244d6f6d44e7fbe178f7d7d2d05b6e55bec2ace57db78fee"
+  },
+  "calibration_gate": {
+    "selection_unit": "whole scenario family",
+    "reference_min": 0.95,
+    "base_max": 0.70,
+    "gap_min": 0.25,
+    "min_families": 6,
+    "min_multistep_families": 3,
+    "case_level_filtering": false
+  },
+  "confirmation": {
+    "target_cases": 600,
+    "cases_sha256": "42201f057366411fdfab77621f6b54e3f4c16d7fcdc8109616065e6212cc3008",
+    "steps_sha256": "9490cabf0c27c22e5d8d4e858bbdddcb9bc81be36a3fb9ab9d4a64ce5929ab22",
+    "entities": 75,
+    "families": 8,
+    "generation": "new entities, confirmation-only templates and fixture families",
+    "repeats": 3,
+    "reference_pass_all_min": 0.95,
+    "base_pass_all_max": 0.60,
+    "gap_min": 0.30,
+    "family_reference_min": 0.90,
+    "family_base_max": 0.75,
+    "decision": "accept_or_reject_entire_dataset_version"
+  },
+  "generation_protocol": {
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "do_sample": false,
+    "seed": 42,
+    "max_steps": 3,
+    "max_tokens": 384,
+    "CAPA_ENABLE_ADELA": 0
+  },
+  "grpo_support_gate": {
+    "samples_per_prompt": 8,
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "minimum_gold_action_support_rate": 0.80,
+    "minimum_nonzero_reward_variance_rate": 0.80,
+    "minimum_mean_distinct_valid_actions": 1.4,
+    "minimum_usable_support_rate": 0.80,
+    "minimum_near_exact_task_support_rate": 0.80,
+    "maximum_fully_saturated_rate": 0.25,
+    "sampling_scope": "accepted calibration families only; confirmation forbidden"
+  },
+  "invalid_run_conditions": [
+    "any API or rollout error",
+    "any empty Planner decision",
+    "wrong model or API endpoint",
+    "proxy environment mismatch",
+    "dataset or verifier hash drift",
+    "completion truncation at 384 tokens"
+  ],
+  "protocol_amendments": [
+    "protocol_amendment_t768.json",
+    "protocol_amendment_t2048.json"
+  ],
+  "training_status": "not_started_not_authorized_in_this_phase"
+}

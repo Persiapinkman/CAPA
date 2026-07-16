@@ -11,3 +11,5 @@ The role field distinguishes training, development, regression, and sealed-test 
 - `planner_rag_miss_state_machine_v1`: exploratory weighted view for the full retrieve-rewrite-retrieve miss-recovery sequence.
 - `planner_rag_miss_action_reward_v1`: the same state-machine view with an action-dominant, wrong-action-capped GRPO reward.
 - `planner_focused_v3`: historical focused Planner dataset with a reused development split, not an untouched test set.
+- `planner_runtime_routing_v1`: runtime-owned routing benchmark covering all nine tools, clarify/end, and visual-probe follow-ups.
+- `planner_runtime_probe_curriculum_v1`: strict named-tool GRPO curriculum focused on probe-then-migration versus probe-only termination; its test split remains sealed until the preregistered multi-seed development gate passes.

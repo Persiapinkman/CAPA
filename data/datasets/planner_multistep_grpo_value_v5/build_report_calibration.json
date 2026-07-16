@@ -1,0 +1,71 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "planner_multistep_grpo_value_v5",
+  "split": "calibration",
+  "seed": 20260715,
+  "selection_rule": "whole-family calibration only; confirmation unfiltered",
+  "accepted_scenarios": [],
+  "evaluation_only": true,
+  "exclude_from_training": true,
+  "cases": {
+    "cases": 240,
+    "steps": 480,
+    "unique_case_ids": 240,
+    "unique_queries": 40,
+    "categories": {
+      "qwen_connection_budget_exhausted": 20,
+      "qwen_connection_nonretryable": 20,
+      "qwen_gateway_busy_budget_exhausted": 20,
+      "qwen_payload_nonretryable": 20,
+      "qwen_timeout_budget_exhausted": 20,
+      "qwen_timeout_nonretryable": 20,
+      "rex_connection_budget_exhausted": 20,
+      "rex_connection_nonretryable": 20,
+      "rex_gateway_busy_budget_exhausted": 20,
+      "rex_payload_nonretryable": 20,
+      "rex_timeout_budget_exhausted": 20,
+      "rex_timeout_nonretryable": 20
+    },
+    "expected_actions": {
+      "migration_advisor": 144,
+      "qwen_detection": 168,
+      "rexomni_detection": 168
+    }
+  },
+  "entity_groups": 20,
+  "families": {
+    "qwen_connection_budget_exhausted": 20,
+    "qwen_connection_nonretryable": 20,
+    "qwen_gateway_busy_budget_exhausted": 20,
+    "qwen_payload_nonretryable": 20,
+    "qwen_timeout_budget_exhausted": 20,
+    "qwen_timeout_nonretryable": 20,
+    "rex_connection_budget_exhausted": 20,
+    "rex_connection_nonretryable": 20,
+    "rex_gateway_busy_budget_exhausted": 20,
+    "rex_payload_nonretryable": 20,
+    "rex_timeout_budget_exhausted": 20,
+    "rex_timeout_nonretryable": 20
+  },
+  "target_action_classes": {
+    "migrate": 144,
+    "retry": 96
+  },
+  "integrity": {
+    "existing_dataset_overlap": {
+      "status": "pass",
+      "overlaps": [],
+      "files_scanned": 26
+    },
+    "generated_split_isolation": {
+      "status": "not_applicable",
+      "reason": "both splits were not generated together"
+    }
+  },
+  "files": {
+    "cases": "training/planner_grpo_seed_v1/cases/planner_multistep_grpo_value_v5_calibration_cases.jsonl"
+  },
+  "sha256": {
+    "cases": "ad24e62c7ef08e953a7c55736af15858aa0c500fe843a2b8dfdd73721a612f5c"
+  }
+}

@@ -1,0 +1,484 @@
+{
+  "schema_version": "1.0",
+  "status": "completed",
+  "model_name_or_path": "/raid/zkq/models/Qwen3.5-4B",
+  "adapter_path": "",
+  "data_dir": "/raid/zkq/projects/CAPA/training/public_sft_grpo_v1/data/math_sft1024_v1",
+  "dataset_manifest_sha256": "bd54944a6522c4dec863568d0490cae8745a38c329541671d99d92ad4c1fbeb2",
+  "generation": {
+    "do_sample": false,
+    "max_new_tokens": 1536,
+    "batch_size": 4,
+    "seed": 42,
+    "train_limit": 128,
+    "development_limit": 256
+  },
+  "sharding": {
+    "num_shards": 4,
+    "combined_rows": 384,
+    "global_selected_ids_sha256": "d8e88b6fa9f446e05bf73be003717c9bcdc9b4bd5d9a32e8ad937fae943319d4",
+    "shard_indices": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "wall_runtime_seconds_proxy": 2714.765931562055,
+    "sum_shard_runtime_seconds": 10112.166083812714
+  },
+  "metrics": {
+    "train": {
+      "overall": {
+        "rows": 128,
+        "symbolic_accuracy": 0.8046875,
+        "strict_format_rate": 0.8125,
+        "strict_exact_accuracy": 0.8046875,
+        "parse_success_rate": 0.8125,
+        "eos_rate": 0.8125,
+        "clipped_rate": 0.1875,
+        "completion_tokens": {
+          "min": 232,
+          "p50": 662,
+          "p95": 1536,
+          "max": 1536,
+          "mean": 846.1015625
+        }
+      },
+      "by_level": {
+        "Level 1": {
+          "rows": 7,
+          "symbolic_accuracy": 1.0,
+          "strict_format_rate": 1.0,
+          "strict_exact_accuracy": 1.0,
+          "parse_success_rate": 1.0,
+          "eos_rate": 1.0,
+          "clipped_rate": 0.0,
+          "completion_tokens": {
+            "min": 232,
+            "p50": 398,
+            "p95": 599,
+            "max": 661,
+            "mean": 439.0
+          }
+        },
+        "Level 2": {
+          "rows": 29,
+          "symbolic_accuracy": 1.0,
+          "strict_format_rate": 1.0,
+          "strict_exact_accuracy": 1.0,
+          "parse_success_rate": 1.0,
+          "eos_rate": 1.0,
+          "clipped_rate": 0.0,
+          "completion_tokens": {
+            "min": 304,
+            "p50": 506,
+            "p95": 876,
+            "max": 1268,
+            "mean": 564.2758620689655
+          }
+        },
+        "Level 3": {
+          "rows": 23,
+          "symbolic_accuracy": 0.9565217391304348,
+          "strict_format_rate": 0.9565217391304348,
+          "strict_exact_accuracy": 0.9565217391304348,
+          "parse_success_rate": 0.9565217391304348,
+          "eos_rate": 0.9565217391304348,
+          "clipped_rate": 0.043478260869565216,
+          "completion_tokens": {
+            "min": 261,
+            "p50": 631,
+            "p95": 1391,
+            "max": 1536,
+            "mean": 741.4347826086956
+          }
+        },
+        "Level 4": {
+          "rows": 30,
+          "symbolic_accuracy": 0.8,
+          "strict_format_rate": 0.8,
+          "strict_exact_accuracy": 0.8,
+          "parse_success_rate": 0.8,
+          "eos_rate": 0.8,
+          "clipped_rate": 0.2,
+          "completion_tokens": {
+            "min": 286,
+            "p50": 698,
+            "p95": 1536,
+            "max": 1536,
+            "mean": 884.6
+          }
+        },
+        "Level 5": {
+          "rows": 39,
+          "symbolic_accuracy": 0.5384615384615384,
+          "strict_format_rate": 0.5641025641025641,
+          "strict_exact_accuracy": 0.5384615384615384,
+          "parse_success_rate": 0.5641025641025641,
+          "eos_rate": 0.5641025641025641,
+          "clipped_rate": 0.4358974358974359,
+          "completion_tokens": {
+            "min": 337,
+            "p50": 1250,
+            "p95": 1536,
+            "max": 1536,
+            "mean": 1160.8461538461538
+          }
+        }
+      },
+      "by_type": {
+        "Algebra": {
+          "rows": 31,
+          "symbolic_accuracy": 0.8709677419354839,
+          "strict_format_rate": 0.9032258064516129,
+          "strict_exact_accuracy": 0.8709677419354839,
+          "parse_success_rate": 0.9032258064516129,
+          "eos_rate": 0.9032258064516129,
+          "clipped_rate": 0.0967741935483871,
+          "completion_tokens": {
+            "min": 286,
+            "p50": 548,
+            "p95": 1536,
+            "max": 1536,
+            "mean": 684.3870967741935
+          }
+        },
+        "Counting & Probability": {
+          "rows": 17,
+          "symbolic_accuracy": 1.0,
+          "strict_format_rate": 1.0,
+          "strict_exact_accuracy": 1.0,
+          "parse_success_rate": 1.0,
+          "eos_rate": 1.0,
+          "clipped_rate": 0.0,
+          "completion_tokens": {
+            "min": 324,
+            "p50": 662,
+            "p95": 1268,
+            "max": 1398,
+            "mean": 755.1176470588235
+          }
+        },
+        "Geometry": {
+          "rows": 13,
+          "symbolic_accuracy": 0.6153846153846154,
+          "strict_format_rate": 0.6153846153846154,
+          "strict_exact_accuracy": 0.6153846153846154,
+          "parse_success_rate": 0.6153846153846154,
+          "eos_rate": 0.6153846153846154,
+          "clipped_rate": 0.38461538461538464,
+          "completion_tokens": {
+            "min": 340,
+            "p50": 1261,
+            "p95": 1536,
+            "max": 1536,
+            "mean": 1045.5384615384614
+          }
+        },
+        "Intermediate Algebra": {
+          "rows": 20,
+          "symbolic_accuracy": 0.5,
+          "strict_format_rate": 0.5,
+          "strict_exact_accuracy": 0.5,
+          "parse_success_rate": 0.5,
+          "eos_rate": 0.5,
+          "clipped_rate": 0.5,
+          "completion_tokens": {
+            "min": 527,
+            "p50": 1480,
+            "p95": 1536,
+            "max": 1536,
+            "mean": 1216.2
+          }
+        },
+        "Number Theory": {
+          "rows": 17,
+          "symbolic_accuracy": 0.8823529411764706,
+          "strict_format_rate": 0.8823529411764706,
+          "strict_exact_accuracy": 0.8823529411764706,
+          "parse_success_rate": 0.8823529411764706,
+          "eos_rate": 0.8823529411764706,
+          "clipped_rate": 0.11764705882352941,
+          "completion_tokens": {
+            "min": 398,
+            "p50": 692,
+            "p95": 1536,
+            "max": 1536,
+            "mean": 862.2941176470588
+          }
+        },
+        "Prealgebra": {
+          "rows": 18,
+          "symbolic_accuracy": 0.8888888888888888,
+          "strict_format_rate": 0.8888888888888888,
+          "strict_exact_accuracy": 0.8888888888888888,
+          "parse_success_rate": 0.8888888888888888,
+          "eos_rate": 0.8888888888888888,
+          "clipped_rate": 0.1111111111111111,
+          "completion_tokens": {
+            "min": 232,
+            "p50": 411,
+            "p95": 1536,
+            "max": 1536,
+            "mean": 556.9444444444445
+          }
+        },
+        "Precalculus": {
+          "rows": 12,
+          "symbolic_accuracy": 0.8333333333333334,
+          "strict_format_rate": 0.8333333333333334,
+          "strict_exact_accuracy": 0.8333333333333334,
+          "parse_success_rate": 0.8333333333333334,
+          "eos_rate": 0.8333333333333334,
+          "clipped_rate": 0.16666666666666666,
+          "completion_tokens": {
+            "min": 307,
+            "p50": 810,
+            "p95": 1536,
+            "max": 1536,
+            "mean": 970.6666666666666
+          }
+        }
+      }
+    },
+    "development": {
+      "overall": {
+        "rows": 256,
+        "symbolic_accuracy": 0.7578125,
+        "strict_format_rate": 0.765625,
+        "strict_exact_accuracy": 0.7578125,
+        "parse_success_rate": 0.765625,
+        "eos_rate": 0.765625,
+        "clipped_rate": 0.234375,
+        "completion_tokens": {
+          "min": 243,
+          "p50": 787,
+          "p95": 1536,
+          "max": 1536,
+          "mean": 913.95703125
+        }
+      },
+      "by_level": {
+        "Level 1": {
+          "rows": 23,
+          "symbolic_accuracy": 1.0,
+          "strict_format_rate": 1.0,
+          "strict_exact_accuracy": 1.0,
+          "parse_success_rate": 1.0,
+          "eos_rate": 1.0,
+          "clipped_rate": 0.0,
+          "completion_tokens": {
+            "min": 254,
+            "p50": 423,
+            "p95": 1036,
+            "max": 1171,
+            "mean": 532.8695652173913
+          }
+        },
+        "Level 2": {
+          "rows": 47,
+          "symbolic_accuracy": 0.9574468085106383,
+          "strict_format_rate": 0.9574468085106383,
+          "strict_exact_accuracy": 0.9574468085106383,
+          "parse_success_rate": 0.9574468085106383,
+          "eos_rate": 0.9574468085106383,
+          "clipped_rate": 0.0425531914893617,
+          "completion_tokens": {
+            "min": 243,
+            "p50": 563,
+            "p95": 1459,
+            "max": 1536,
+            "mean": 621.1914893617021
+          }
+        },
+        "Level 3": {
+          "rows": 56,
+          "symbolic_accuracy": 0.8571428571428571,
+          "strict_format_rate": 0.875,
+          "strict_exact_accuracy": 0.8571428571428571,
+          "parse_success_rate": 0.875,
+          "eos_rate": 0.875,
+          "clipped_rate": 0.125,
+          "completion_tokens": {
+            "min": 262,
+            "p50": 695,
+            "p95": 1536,
+            "max": 1536,
+            "mean": 801.2857142857143
+          }
+        },
+        "Level 4": {
+          "rows": 57,
+          "symbolic_accuracy": 0.7017543859649122,
+          "strict_format_rate": 0.7192982456140351,
+          "strict_exact_accuracy": 0.7017543859649122,
+          "parse_success_rate": 0.7192982456140351,
+          "eos_rate": 0.7192982456140351,
+          "clipped_rate": 0.2807017543859649,
+          "completion_tokens": {
+            "min": 320,
+            "p50": 928,
+            "p95": 1536,
+            "max": 1536,
+            "mean": 1037.561403508772
+          }
+        },
+        "Level 5": {
+          "rows": 73,
+          "symbolic_accuracy": 0.5205479452054794,
+          "strict_format_rate": 0.5205479452054794,
+          "strict_exact_accuracy": 0.5205479452054794,
+          "parse_success_rate": 0.5205479452054794,
+          "eos_rate": 0.5205479452054794,
+          "clipped_rate": 0.4794520547945205,
+          "completion_tokens": {
+            "min": 295,
+            "p50": 1370,
+            "p95": 1536,
+            "max": 1536,
+            "mean": 1212.4383561643835
+          }
+        }
+      },
+      "by_type": {
+        "Algebra": {
+          "rows": 56,
+          "symbolic_accuracy": 0.9821428571428571,
+          "strict_format_rate": 0.9821428571428571,
+          "strict_exact_accuracy": 0.9821428571428571,
+          "parse_success_rate": 0.9821428571428571,
+          "eos_rate": 0.9821428571428571,
+          "clipped_rate": 0.017857142857142856,
+          "completion_tokens": {
+            "min": 254,
+            "p50": 549,
+            "p95": 1226,
+            "max": 1536,
+            "mean": 614.9464285714286
+          }
+        },
+        "Counting & Probability": {
+          "rows": 27,
+          "symbolic_accuracy": 0.7407407407407407,
+          "strict_format_rate": 0.7777777777777778,
+          "strict_exact_accuracy": 0.7407407407407407,
+          "parse_success_rate": 0.7777777777777778,
+          "eos_rate": 0.7777777777777778,
+          "clipped_rate": 0.2222222222222222,
+          "completion_tokens": {
+            "min": 423,
+            "p50": 914,
+            "p95": 1536,
+            "max": 1536,
+            "mean": 1000.4074074074074
+          }
+        },
+        "Geometry": {
+          "rows": 30,
+          "symbolic_accuracy": 0.6333333333333333,
+          "strict_format_rate": 0.6333333333333333,
+          "strict_exact_accuracy": 0.6333333333333333,
+          "parse_success_rate": 0.6333333333333333,
+          "eos_rate": 0.6333333333333333,
+          "clipped_rate": 0.36666666666666664,
+          "completion_tokens": {
+            "min": 457,
+            "p50": 1188,
+            "p95": 1536,
+            "max": 1536,
+            "mean": 1120.4666666666667
+          }
+        },
+        "Intermediate Algebra": {
+          "rows": 44,
+          "symbolic_accuracy": 0.5,
+          "strict_format_rate": 0.5227272727272727,
+          "strict_exact_accuracy": 0.5,
+          "parse_success_rate": 0.5227272727272727,
+          "eos_rate": 0.5227272727272727,
+          "clipped_rate": 0.4772727272727273,
+          "completion_tokens": {
+            "min": 376,
+            "p50": 1416,
+            "p95": 1536,
+            "max": 1536,
+            "mean": 1174.3181818181818
+          }
+        },
+        "Number Theory": {
+          "rows": 31,
+          "symbolic_accuracy": 0.7096774193548387,
+          "strict_format_rate": 0.7096774193548387,
+          "strict_exact_accuracy": 0.7096774193548387,
+          "parse_success_rate": 0.7096774193548387,
+          "eos_rate": 0.7096774193548387,
+          "clipped_rate": 0.2903225806451613,
+          "completion_tokens": {
+            "min": 348,
+            "p50": 1148,
+            "p95": 1536,
+            "max": 1536,
+            "mean": 1099.6774193548388
+          }
+        },
+        "Prealgebra": {
+          "rows": 41,
+          "symbolic_accuracy": 0.9024390243902439,
+          "strict_format_rate": 0.9024390243902439,
+          "strict_exact_accuracy": 0.9024390243902439,
+          "parse_success_rate": 0.9024390243902439,
+          "eos_rate": 0.9024390243902439,
+          "clipped_rate": 0.0975609756097561,
+          "completion_tokens": {
+            "min": 243,
+            "p50": 473,
+            "p95": 1536,
+            "max": 1536,
+            "mean": 626.0731707317074
+          }
+        },
+        "Precalculus": {
+          "rows": 27,
+          "symbolic_accuracy": 0.7037037037037037,
+          "strict_format_rate": 0.7037037037037037,
+          "strict_exact_accuracy": 0.7037037037037037,
+          "parse_success_rate": 0.7037037037037037,
+          "eos_rate": 0.7037037037037037,
+          "clipped_rate": 0.2962962962962963,
+          "completion_tokens": {
+            "min": 324,
+            "p50": 979,
+            "p95": 1536,
+            "max": 1536,
+            "mean": 1017.8518518518518
+          }
+        }
+      }
+    }
+  },
+  "nonfinite_metric_count": 0,
+  "inputs": [
+    {
+      "input_dir": "/raid/zkq/projects/CAPA/experiments/runs/20260715_qwen35_4b_math_base_eval_v1/shard0",
+      "result_sha256": "65f8b9e26b0405b98e524ef21564ce0e3f02d80103409f5d417809ad7cda3e0b",
+      "samples_sha256": "ff66bea8667b0756bc1659748580f355fe113f81fd75026e78a14edfd4f72688"
+    },
+    {
+      "input_dir": "/raid/zkq/projects/CAPA/experiments/runs/20260715_qwen35_4b_math_base_eval_v1/shard1",
+      "result_sha256": "9d2cf195b933cba5057beaf90d3e1a23ccf5900a98c9cb2973b292fcf9cfa1bc",
+      "samples_sha256": "57c683ce9ccd275e33b7c9d9c4877bc0205524834dd2f527d04a0bf195d89510"
+    },
+    {
+      "input_dir": "/raid/zkq/projects/CAPA/experiments/runs/20260715_qwen35_4b_math_base_eval_v1/shard2",
+      "result_sha256": "c8183382d2f41a927d3863c1532c08eb956dcdb27534c3b49f11c5497afe9c1b",
+      "samples_sha256": "804dbf3a7f0af2423a5f52ddb86b9635653fe82dbe3da1f06a5210556e67a757"
+    },
+    {
+      "input_dir": "/raid/zkq/projects/CAPA/experiments/runs/20260715_qwen35_4b_math_base_eval_v1/shard3",
+      "result_sha256": "49666bf2304a694c0940d0e183148858579e23a070d1c857ab61b4d7d6a168af",
+      "samples_sha256": "a00c88154d226f835ecfe1d965db6f1b95f9a18b7baf3d74309f688f24911fec"
+    }
+  ],
+  "input_contract_sha256": "f7ff71ef82a2a0424ae7f9ace44c0b572bd6aed429b9be72383b320a37271e56",
+  "samples_sha256": "4f5004c2c531adff914c9b75aa981217f03fb133b4d740371e3a86d2ca7b34cb"
+}

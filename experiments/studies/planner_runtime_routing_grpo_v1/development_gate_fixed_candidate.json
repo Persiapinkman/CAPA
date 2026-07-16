@@ -1,0 +1,240 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_runtime_routing_grpo_v1",
+  "baseline": {
+    "steps": 120,
+    "cases": 104,
+    "action_match_rate": 0.6833333333333333,
+    "strict_case_action_rate": 0.6346153846153846,
+    "wrong_side_effect_count": 11,
+    "categories": {
+      "adela_eval": {
+        "steps": 8,
+        "action_match_rate": 1.0,
+        "mean_score": 0.9166666666666667,
+        "strict_case_action_rate": 1.0,
+        "wrong_side_effect_count": 0
+      },
+      "clarify_incomplete": {
+        "steps": 8,
+        "action_match_rate": 0.0,
+        "mean_score": 0.2,
+        "strict_case_action_rate": 0.0,
+        "wrong_side_effect_count": 8
+      },
+      "flux_generation": {
+        "steps": 8,
+        "action_match_rate": 1.0,
+        "mean_score": 1.0,
+        "strict_case_action_rate": 1.0,
+        "wrong_side_effect_count": 0
+      },
+      "general_answer": {
+        "steps": 8,
+        "action_match_rate": 0.0,
+        "mean_score": 0.07500000000000001,
+        "strict_case_action_rate": 0.0,
+        "wrong_side_effect_count": 0
+      },
+      "memory_end": {
+        "steps": 8,
+        "action_match_rate": 1.0,
+        "mean_score": 1.0,
+        "strict_case_action_rate": 1.0,
+        "wrong_side_effect_count": 0
+      },
+      "migration_advisor": {
+        "steps": 8,
+        "action_match_rate": 1.0,
+        "mean_score": 1.0,
+        "strict_case_action_rate": 1.0,
+        "wrong_side_effect_count": 0
+      },
+      "pipeline_eval": {
+        "steps": 8,
+        "action_match_rate": 0.625,
+        "mean_score": 0.4625000000000001,
+        "strict_case_action_rate": 0.625,
+        "wrong_side_effect_count": 3
+      },
+      "private_lookup": {
+        "steps": 8,
+        "action_match_rate": 1.0,
+        "mean_score": 1.0,
+        "strict_case_action_rate": 1.0,
+        "wrong_side_effect_count": 0
+      },
+      "qwen_probe": {
+        "steps": 8,
+        "action_match_rate": 1.0,
+        "mean_score": 1.0,
+        "strict_case_action_rate": 1.0,
+        "wrong_side_effect_count": 0
+      },
+      "qwen_probe_only_contrast": {
+        "steps": 8,
+        "action_match_rate": 1.0,
+        "mean_score": 0.96875,
+        "strict_case_action_rate": 1.0,
+        "wrong_side_effect_count": 0
+      },
+      "qwen_probe_then_migration": {
+        "steps": 16,
+        "action_match_rate": 0.8125,
+        "mean_score": 0.6750000000000002,
+        "strict_case_action_rate": 0.625,
+        "wrong_side_effect_count": 0
+      },
+      "rex_probe": {
+        "steps": 8,
+        "action_match_rate": 0.0,
+        "mean_score": 0.9500000000000001,
+        "strict_case_action_rate": 0.0,
+        "wrong_side_effect_count": 0
+      },
+      "rex_probe_then_migration": {
+        "steps": 16,
+        "action_match_rate": 0.5,
+        "mean_score": 0.8031250000000001,
+        "strict_case_action_rate": 0.0,
+        "wrong_side_effect_count": 0
+      }
+    }
+  },
+  "candidate": {
+    "steps": 120,
+    "cases": 104,
+    "action_match_rate": 0.6916666666666667,
+    "strict_case_action_rate": 0.6442307692307693,
+    "wrong_side_effect_count": 11,
+    "categories": {
+      "adela_eval": {
+        "steps": 8,
+        "action_match_rate": 1.0,
+        "mean_score": 0.9166666666666667,
+        "strict_case_action_rate": 1.0,
+        "wrong_side_effect_count": 0
+      },
+      "clarify_incomplete": {
+        "steps": 8,
+        "action_match_rate": 0.0,
+        "mean_score": 0.2,
+        "strict_case_action_rate": 0.0,
+        "wrong_side_effect_count": 8
+      },
+      "flux_generation": {
+        "steps": 8,
+        "action_match_rate": 1.0,
+        "mean_score": 1.0,
+        "strict_case_action_rate": 1.0,
+        "wrong_side_effect_count": 0
+      },
+      "general_answer": {
+        "steps": 8,
+        "action_match_rate": 0.125,
+        "mean_score": 0.18125000000000002,
+        "strict_case_action_rate": 0.125,
+        "wrong_side_effect_count": 0
+      },
+      "memory_end": {
+        "steps": 8,
+        "action_match_rate": 1.0,
+        "mean_score": 1.0,
+        "strict_case_action_rate": 1.0,
+        "wrong_side_effect_count": 0
+      },
+      "migration_advisor": {
+        "steps": 8,
+        "action_match_rate": 1.0,
+        "mean_score": 1.0,
+        "strict_case_action_rate": 1.0,
+        "wrong_side_effect_count": 0
+      },
+      "pipeline_eval": {
+        "steps": 8,
+        "action_match_rate": 0.625,
+        "mean_score": 0.45000000000000007,
+        "strict_case_action_rate": 0.625,
+        "wrong_side_effect_count": 3
+      },
+      "private_lookup": {
+        "steps": 8,
+        "action_match_rate": 1.0,
+        "mean_score": 1.0,
+        "strict_case_action_rate": 1.0,
+        "wrong_side_effect_count": 0
+      },
+      "qwen_probe": {
+        "steps": 8,
+        "action_match_rate": 1.0,
+        "mean_score": 1.0,
+        "strict_case_action_rate": 1.0,
+        "wrong_side_effect_count": 0
+      },
+      "qwen_probe_only_contrast": {
+        "steps": 8,
+        "action_match_rate": 1.0,
+        "mean_score": 0.96875,
+        "strict_case_action_rate": 1.0,
+        "wrong_side_effect_count": 0
+      },
+      "qwen_probe_then_migration": {
+        "steps": 16,
+        "action_match_rate": 0.8125,
+        "mean_score": 0.7041666666666667,
+        "strict_case_action_rate": 0.625,
+        "wrong_side_effect_count": 0
+      },
+      "rex_probe": {
+        "steps": 8,
+        "action_match_rate": 0.0,
+        "mean_score": 0.9500000000000001,
+        "strict_case_action_rate": 0.0,
+        "wrong_side_effect_count": 0
+      },
+      "rex_probe_then_migration": {
+        "steps": 16,
+        "action_match_rate": 0.5,
+        "mean_score": 0.8250000000000001,
+        "strict_case_action_rate": 0.0,
+        "wrong_side_effect_count": 0
+      }
+    }
+  },
+  "primary": {
+    "category": "qwen_probe_then_migration",
+    "strict_case_action_delta": 0.0,
+    "minimum_action_delta": 0.05,
+    "verifier_delta": 0.029166666666666563,
+    "minimum_verifier_delta": 0.03
+  },
+  "contrast": {
+    "category": "qwen_probe_only_contrast",
+    "action_delta": 0.0
+  },
+  "category_action_deltas": {
+    "adela_eval": 0.0,
+    "clarify_incomplete": 0.0,
+    "flux_generation": 0.0,
+    "general_answer": 0.125,
+    "memory_end": 0.0,
+    "migration_advisor": 0.0,
+    "pipeline_eval": 0.0,
+    "private_lookup": 0.0,
+    "qwen_probe": 0.0,
+    "qwen_probe_only_contrast": 0.0,
+    "qwen_probe_then_migration": 0.0,
+    "rex_probe": 0.0,
+    "rex_probe_then_migration": 0.0
+  },
+  "wrong_side_effect_delta": 0,
+  "checks": {
+    "primary_action": false,
+    "primary_verifier": false,
+    "contrast": true,
+    "guardrails": true,
+    "side_effects": true
+  },
+  "passed": false,
+  "test_may_open": false
+}

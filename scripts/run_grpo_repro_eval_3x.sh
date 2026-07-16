@@ -17,6 +17,7 @@ DO_SAMPLE="${DO_SAMPLE:-false}"
 TIMEOUT_SECONDS="${TIMEOUT_SECONDS:-180}"
 OPENAI_TIMEOUT_SECONDS="${OPENAI_TIMEOUT_SECONDS:-180}"
 MAX_STEPS="${MAX_STEPS:-3}"
+MAX_TOKENS="${MAX_TOKENS:-384}"
 
 export NO_PROXY="${NO_PROXY:-127.0.0.1,localhost}"
 export no_proxy="${no_proxy:-127.0.0.1,localhost}"
@@ -37,6 +38,7 @@ exec "$PYTHON_BIN" training/planner_grpo_seed_v1/scripts/run_repeated_planner_gr
   --timeout-seconds "$TIMEOUT_SECONDS" \
   --openai-timeout-seconds "$OPENAI_TIMEOUT_SECONDS" \
   --max-steps "$MAX_STEPS" \
+  --max-tokens "$MAX_TOKENS" \
   --temperature "$TEMPERATURE" \
   --top-p "$TOP_P" \
   --seed "$SEED" \

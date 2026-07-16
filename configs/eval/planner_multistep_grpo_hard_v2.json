@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "planner_multistep_grpo_hard_v2",
+  "cases": {
+    "calibration": "training/planner_grpo_seed_v1/cases/planner_multistep_grpo_hard_v2_calibration_cases.jsonl",
+    "confirmation": "training/planner_grpo_seed_v1/cases/planner_multistep_grpo_hard_v2_confirmation_cases.jsonl"
+  },
+  "models": {
+    "train_base": {
+      "label": "Qwen2.5-7B-Instruct",
+      "path": "/raid/zkq/models/Qwen2.5-7B-Instruct",
+      "runtime": "local_fp16_sdpa_openai_compatible_server",
+      "proxy_policy": "unset_all_proxy_and_set_NO_PROXY_for_localhost"
+    },
+    "reference": {
+      "label": "Qwen3.5-35B-A3B",
+      "runtime": "external_openai_compatible_gateway",
+      "environment": "/raid/zkq/projects/CAPA/init_env.sh",
+      "python": ".venv-trl-grpo-cu124/bin/python",
+      "proxy_policy": "preserve_init_env_SOCKS_proxy"
+    }
+  },
+  "generation": {
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "do_sample": false,
+    "seed": 42,
+    "max_steps": 3,
+    "max_tokens": 2048,
+    "timeout_seconds": 300,
+    "openai_timeout_seconds": 300,
+    "calibration_repeats": 1,
+    "confirmation_repeats": 3,
+    "protocol_amendment": "experiments/studies/planner_multistep_tool_routing_grpo_qwen25_7b_v1/protocol_amendment_t2048.json"
+  },
+  "action_space": {
+    "CAPA_ENABLE_ADELA": 0
+  },
+  "selection": {
+    "unit": "complete_scenario_family",
+    "reference_min": 0.95,
+    "base_max": 0.70,
+    "gap_min": 0.25,
+    "min_families": 6,
+    "min_multistep_families": 3,
+    "case_level_filtering": false
+  },
+  "accepted_scenarios_file": "data/datasets/planner_multistep_grpo_hard_v2/accepted_scenarios.txt",
+  "grpo_support_gate": {
+    "samples_per_prompt": 8,
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "minimum_gold_action_support_rate": 0.80,
+    "minimum_nonzero_reward_variance_rate": 0.80,
+    "minimum_mean_distinct_valid_actions": 1.4,
+    "scope": "accepted calibration families only"
+  },
+  "confirmation_gate": {
+    "expected_cases": 600,
+    "repeats": 3,
+    "reference_pass_all_min": 0.95,
+    "base_pass_all_max": 0.60,
+    "gap_min": 0.30,
+    "family_reference_min": 0.90,
+    "family_base_max": 0.75,
+    "api_errors": 0,
+    "empty_decisions": 0,
+    "case_level_filtering": false
+  }
+}

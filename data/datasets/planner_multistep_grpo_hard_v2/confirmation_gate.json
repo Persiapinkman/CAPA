@@ -1,0 +1,100 @@
+{
+  "mode": "confirmation",
+  "status": "pass",
+  "thresholds": {
+    "reference_min": 0.95,
+    "base_max": 0.6,
+    "gap_min": 0.3,
+    "family_reference_min": 0.9,
+    "family_base_max": 0.75,
+    "expected_cases": 600,
+    "required_runs": 3
+  },
+  "overall": {
+    "reference_pass_all": 0.971667,
+    "base_pass_all": 0.226667,
+    "gap": 0.7449999999999999
+  },
+  "runtime_diagnostics": {
+    "base_recovered_first_length_truncations": 0,
+    "reference_recovered_first_length_truncations": 5,
+    "base_retry_length_truncations": 0,
+    "reference_retry_length_truncations": 0
+  },
+  "checks": {
+    "expected_case_count": true,
+    "required_repeats": true,
+    "no_errors": true,
+    "no_empty_decisions": true,
+    "no_unrecovered_length_truncations": true,
+    "reference_at_least_min": true,
+    "base_at_most_max": true,
+    "gap_at_least_min": true,
+    "all_families_reference_supported": true,
+    "all_families_base_challenging": true
+  },
+  "families": {
+    "qwen_box_variance_to_migration": {
+      "reference_pass_all": 1.0,
+      "base_pass_all": 0.306667,
+      "gap": 0.693333,
+      "reference_at_least_min": true,
+      "base_at_most_max": true
+    },
+    "qwen_empty_result_to_migration": {
+      "reference_pass_all": 0.973333,
+      "base_pass_all": 0.066667,
+      "gap": 0.906666,
+      "reference_at_least_min": true,
+      "base_at_most_max": true
+    },
+    "qwen_domain_shift_to_migration": {
+      "reference_pass_all": 0.986667,
+      "base_pass_all": 0.56,
+      "gap": 0.4266669999999999,
+      "reference_at_least_min": true,
+      "base_at_most_max": true
+    },
+    "rex_box_variance_to_migration": {
+      "reference_pass_all": 0.946667,
+      "base_pass_all": 0.12,
+      "gap": 0.826667,
+      "reference_at_least_min": true,
+      "base_at_most_max": true
+    },
+    "rex_empty_result_to_migration": {
+      "reference_pass_all": 0.946667,
+      "base_pass_all": 0.026667,
+      "gap": 0.92,
+      "reference_at_least_min": true,
+      "base_at_most_max": true
+    },
+    "rex_domain_shift_to_migration": {
+      "reference_pass_all": 0.933333,
+      "base_pass_all": 0.04,
+      "gap": 0.8933329999999999,
+      "reference_at_least_min": true,
+      "base_at_most_max": true
+    },
+    "qwen_confident_stop_guardrail": {
+      "reference_pass_all": 0.986667,
+      "base_pass_all": 0.56,
+      "gap": 0.4266669999999999,
+      "reference_at_least_min": true,
+      "base_at_most_max": true
+    },
+    "rex_confident_stop_guardrail": {
+      "reference_pass_all": 1.0,
+      "base_pass_all": 0.133333,
+      "gap": 0.866667,
+      "reference_at_least_min": true,
+      "base_at_most_max": true
+    }
+  },
+  "note": "Confirmation is accepted or rejected as a whole; no case-level filtering is permitted.",
+  "inputs": {
+    "base_aggregate": "/raid/zkq/artifacts/CAPA/evals/20260714_planner_multistep_grpo_hard_v2/confirmation/base_combined/qwen25_7b_base_v2_confirmation_t0_3x_aggregate.json",
+    "reference_aggregate": "/raid/zkq/artifacts/CAPA/evals/20260714_planner_multistep_grpo_hard_v2/confirmation/qwen35_combined/qwen35_a3b_v2_confirmation_t0_3x_aggregate.json",
+    "cases": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/cases/planner_multistep_grpo_hard_v2_confirmation_cases.jsonl"
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0",
+  "created_at": "2026-07-16T01:08:00+00:00",
+  "study_id": "planner_retry_migrate_v6_qwen35_4b_v1",
+  "stage": "sft",
+  "status": "frozen_before_optimizer_steps",
+  "objective": "Teach Qwen3.5-4B the complete Planner V6 state machine and JSON action contract before any GRPO optimization.",
+  "protocol_status": {
+    "user_authorized_training": true,
+    "independent_human_review_complete": false,
+    "deviation": "The user explicitly requested training before the preplanned independent human review was completed.",
+    "claim_scope": "exploratory until the 45-case independent review is signed off"
+  },
+  "base_model": {
+    "path": "/raid/zkq/models/Qwen3.5-4B",
+    "class": "Qwen3_5ForCausalLM",
+    "dtype": "float16",
+    "attention": "sdpa",
+    "trust_remote_code": false,
+    "eos_token_id": 248046,
+    "pad_token_id": 248044,
+    "config_sha256": "ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670",
+    "tokenizer_config_sha256": "316230d6a809701f4db5ea8f8fc862bc3a6f3229c937c174e674ff3ca0a64ac8",
+    "chat_template_sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715"
+  },
+  "data": {
+    "dataset_id": "planner_retry_migrate_v6",
+    "manifest": "data/datasets/planner_retry_migrate_v6/manifest.json",
+    "manifest_sha256": "f9c554f7d26faabd004996dd12cd5e711e43bf02e17388e29a0825b195db6d38",
+    "train": "training/planner_grpo_seed_v1/sft_data_planner_retry_migrate_v6_qwen35_nothinking/train.jsonl",
+    "train_rows": 1040,
+    "train_sha256": "9ac8bd5d91d8fac1500e40ce034d20ea70e9aafde63279a18bb2c93e5609a657",
+    "dev": "training/planner_grpo_seed_v1/sft_data_planner_retry_migrate_v6_qwen35_nothinking/dev.jsonl",
+    "dev_rows": 260,
+    "dev_sha256": "8455ea1fabc5487da114d0c85eb370769b34651ce8232accac062a84bebd2837",
+    "max_full_tokens_train": 4667,
+    "max_full_tokens_dev": 4641
+  },
+  "training": {
+    "entrypoint": "training/planner_grpo_seed_v1/scripts/train_qwen35_4b_planner_v6_sft.py",
+    "entrypoint_sha256": "78bf374a90a6fd345784319d4056f4dc6de3f37ca24328679d7d4afe30da9610",
+    "seed": 42,
+    "visible_gpus": [0, 1, 3, 4, 5, 6],
+    "world_size": 6,
+    "per_device_batch_size": 1,
+    "gradient_accumulation_steps": 2,
+    "global_batch_size": 12,
+    "max_steps": 100,
+    "learning_rate": 0.00002,
+    "warmup_steps": 5,
+    "scheduler": "constant_with_warmup",
+    "max_length": 4800,
+    "completion_only_loss": true,
+    "gradient_checkpointing": true,
+    "max_grad_norm": 1.0,
+    "eval_steps": 10,
+    "save_steps": 25,
+    "save_total_limit": 4,
+    "lora": {
+      "r": 16,
+      "alpha": 32,
+      "dropout": 0.0,
+      "expected_modules": 152,
+      "expected_trainable_parameters": 14376960
+    },
+    "hardware_gates": {
+      "maximum_allocated_gib": 28.0,
+      "minimum_free_gib": 2.0,
+      "grad_scaler_init_scale": 1.0,
+      "grad_scaler_growth_interval": 100000,
+      "finite_gradient_required": true
+    }
+  },
+  "checkpoint_selection": {
+    "candidates": [25, 50, 75, 100],
+    "primary_metric": "V6 SFT-dev action_match_rate",
+    "secondary_metrics": [
+      "mean_rule_reward",
+      "json_valid_rate",
+      "eval_loss"
+    ],
+    "tie_break": "earlier checkpoint"
+  },
+  "next_stage_gate": {
+    "required_before_grpo": [
+      "completed SFT run with finite gradients",
+      "selected checkpoint beats the base model on SFT-dev action match",
+      "GRPO-dev sampled retry support is nonzero for both detector families"
+    ]
+  },
+  "resource_snapshot": "experiments/resource_snapshot_2026-07-16_qwen35_v6_train.json"
+}

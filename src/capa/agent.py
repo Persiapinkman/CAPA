@@ -98,7 +98,8 @@ RAG_RESOLUTION_JUDGE_ENABLED = str(
     "no",
 }
 KNOWLEDGE_BASE_SCORE_THRESHOLD = float(
-    os.environ.get("DEMO_KB_ANSWER_THRESHOLD", "0.97")
+    # GBrain scores fully supported answers in the 0.85-1.0 band.
+    os.environ.get("DEMO_KB_ANSWER_THRESHOLD", "0.85")
 )
 LLM_DEBUG_DIR = ROOT / "demo" / "llm_debug"
 BEIJING_TZ = timezone(timedelta(hours=8))
@@ -921,6 +922,11 @@ def is_rag_miss(observation: dict | None) -> bool:
     return score < KNOWLEDGE_BASE_SCORE_THRESHOLD
 
 
+def queries_equivalent(left: str, right: str) -> bool:
+    normalize = lambda value: " ".join(str(value or "").lower().split())
+    return bool(normalize(left)) and normalize(left) == normalize(right)
+
+
 def rewrite_query_llm(
     *,
     query: str,
@@ -1321,13 +1327,16 @@ def _is_self_intro_query(text: str) -> bool:
 
 
 SELF_INTRO_FIXED_ANSWER = (
-    "你好，我是 RD-Claw Agent Demo！当前主要有三方面能力：\n"
+    "你好，我是 RD-Claw Agent Demo！当前主要有五方面能力：\n"
     "1、自主通用问答：可直接回答通用知识问题。\n"
     "例如：\"解释条件随机场解码\"、\"苹果是当季水果吗\"。\n"
     "2、企业知识检索问答：可基于 ONES 发版文档、Adela 平台部署模型信息、评测结论和模型汇总表格进行回答。\n"
     "例如：\"safety_rope v0.2.1 新增了哪些标签？\"、\"某模型在 Adela 上的部署平台和推荐阈值是什么？\"。\n"
     "3、视觉能力：可执行图片生成、图片标注、评测报告生成。\n"
-    "例如：\"生成 3 张河道巡检海报\"、\"标注图片中的横幅并输出结果\"、\"对检测结果生成评测报告\"。"
+    "例如：\"生成 3 张河道巡检海报\"、\"标注图片中的横幅并输出结果\"、\"对检测结果生成评测报告\"。\n"
+    "4、能力迁移顾问：可检索历史模型和资产，并结合样例图评估新需求的迁移边界、数据量、成本与风险。\n"
+    "5、Adela 评测：在用户明确提供模型和部署平台后，可解析模型 ID 并执行精度或性能评测。\n"
+    "多轮任务中我还会保留同一 thread 的查询轨迹；缺少图片、标签、平台等必要信息时会先向你澄清。"
 )
 
 
@@ -1386,6 +1395,50 @@ class AgentOrchestrator:
         rag_round_trace: list[dict] = []
         current_planner_ctx: dict = dict(planner_context)
         pending_forced_step = dict(forced_first_step) if isinstance(forced_first_step, dict) else None
+
+        def offer_migration_after_rag(reason: str) -> dict:
+            offer_text = (
+                "知识库没有找到可直接回答的模型信息。是否基于相似模型和已有能力生成迁移顾问报告？"
+            )
+            tid = str(session.get("active_thread_id") or active_thread_id).strip()
+            session["pending_migration_advisor"] = {
+                "status": "pending",
+                "query_id": active_query_id,
+                "thread_id": tid,
+                "original_user_text": str(text or "").strip(),
+                "rag_round_trace": rag_round_trace,
+            }
+            emit(
+                {
+                    "type": "meta",
+                    "flow": "migration_advisor_offer",
+                    "decision": {
+                        "action": "migration_advisor_offer",
+                        "reason": reason,
+                        "direct_reply": "",
+                    },
+                    "run_stamp": run_stamp,
+                    "step_index": max(1, rag_round_count),
+                }
+            )
+            emit(
+                {
+                    "type": "migration_advisor_offer",
+                    "text": offer_text,
+                    "query_id": active_query_id,
+                    "options": [
+                        {"id": "start", "label": "生成迁移顾问报告"},
+                        {"id": "fallback_answer", "label": "直接回答"},
+                        {"id": "cancel", "label": "取消"},
+                    ],
+                }
+            )
+            return {
+                "final_answer": offer_text,
+                "assistant_text": offer_text,
+                "assistant_event_type": "migration_advisor_offer",
+                "query_completed": False,
+            }
 
         for step_index in range(1, AGENT_MAX_STEPS + 1):
             working_memory = ms.MemoryProjector.derive_working_memory(
@@ -1814,8 +1867,23 @@ class AgentOrchestrator:
             )
 
             if action == TOOL_RE_QUESTION:
+                rewrite_source_query = str(
+                    (observation or {}).get("source_query") or last_rag_query
+                ).strip()
                 latest_rewritten_query = str((observation or {}).get("rewritten_query") or "").strip() or latest_rewritten_query
                 must_do_requestion = False
+                if queries_equivalent(rewrite_source_query, latest_rewritten_query):
+                    emit(
+                        {
+                            "type": "re_question_noop",
+                            "source_query": rewrite_source_query,
+                            "rewritten_query": latest_rewritten_query,
+                            "reason": "改写未改变查询，停止重复检索。",
+                        }
+                    )
+                    return offer_migration_after_rag(
+                        "RAG 未充分命中且 query 改写无变化，提前停止重复检索。"
+                    )
                 # re_question 执行后同轮立即进入 rag 外层状态机，不再等待下一轮 planner。
                 rag_followup_query = (
                     latest_rewritten_query
@@ -1932,49 +2000,9 @@ class AgentOrchestrator:
                     emit({"type": "final_answer", "text": final_text})
                     return {"final_answer": final_text}
 
-                # 第 3 轮仍未命中：按固定闭环，下一步强制进入 answerer。
-                offer_text = (
-                    "知识库没有找到可直接回答的模型信息。是否基于相似模型和已有能力生成迁移顾问报告？"
+                return offer_migration_after_rag(
+                    "RAG 已完成 3 轮且均未充分命中，询问用户是否进入迁移顾问分析。"
                 )
-                tid = str(session.get("active_thread_id") or active_thread_id).strip()
-                session["pending_migration_advisor"] = {
-                    "status": "pending",
-                    "query_id": active_query_id,
-                    "thread_id": tid,
-                    "original_user_text": str(text or "").strip(),
-                    "rag_round_trace": rag_round_trace,
-                }
-                emit(
-                    {
-                        "type": "meta",
-                        "flow": "migration_advisor_offer",
-                        "decision": {
-                            "action": "migration_advisor_offer",
-                            "reason": "RAG 已完成 3 轮且均未充分命中，询问用户是否进入迁移顾问分析。",
-                            "direct_reply": "",
-                        },
-                        "run_stamp": run_stamp,
-                        "step_index": step_index,
-                    }
-                )
-                emit(
-                    {
-                        "type": "migration_advisor_offer",
-                        "text": offer_text,
-                        "query_id": active_query_id,
-                        "options": [
-                            {"id": "start", "label": "生成迁移顾问报告"},
-                            {"id": "fallback_answer", "label": "直接回答"},
-                            {"id": "cancel", "label": "取消"},
-                        ],
-                    }
-                )
-                return {
-                    "final_answer": offer_text,
-                    "assistant_text": offer_text,
-                    "assistant_event_type": "migration_advisor_offer",
-                    "query_completed": False,
-                }
 
             if action == TOOL_PIPELINE_EVAL:
                 # 评测报告生成后直接结束，不再进入 LLM 回答流。

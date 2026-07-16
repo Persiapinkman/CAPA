@@ -1,0 +1,163 @@
+{
+  "dataset_id": "planner_runtime_probe_curriculum_v1",
+  "source_dataset_id": "planner_runtime_routing_v1",
+  "reward": {
+    "json_valid": 0.02,
+    "decision_type_valid": 0.03,
+    "action_match": 0.55,
+    "argument_match": 0.25,
+    "finish_after_tool": 0.1,
+    "no_forbidden_action": 0.05,
+    "wrong_action_cap": 0.2,
+    "strict_action_match": true,
+    "no_premature_stop": 0.1,
+    "no_skip_required_probe": 0.15,
+    "final_tool_finish": 0.05
+  },
+  "splits": {
+    "train": {
+      "cases": {
+        "cases": 540,
+        "steps": 690,
+        "entity_groups": 30,
+        "categories": {
+          "adela_eval": 30,
+          "clarify_incomplete": 30,
+          "flux_generation": 30,
+          "general_answer": 30,
+          "memory_end": 30,
+          "migration_advisor": 30,
+          "pipeline_eval": 30,
+          "private_lookup": 30,
+          "qwen_probe": 30,
+          "qwen_probe_only_contrast": 90,
+          "qwen_probe_then_migration": 120,
+          "rex_probe": 30,
+          "rex_probe_then_migration": 30
+        },
+        "exact_queries": 540
+      },
+      "steps": {
+        "rows": 690,
+        "cases": 540,
+        "exact_prompt_completion_duplicates": 0,
+        "duplicate_rate": 0.0,
+        "max_rows_per_case": 2,
+        "categories": {
+          "adela_eval": 30,
+          "clarify_incomplete": 30,
+          "flux_generation": 30,
+          "general_answer": 30,
+          "memory_end": 30,
+          "migration_advisor": 30,
+          "pipeline_eval": 30,
+          "private_lookup": 30,
+          "qwen_probe": 30,
+          "qwen_probe_only_contrast": 90,
+          "qwen_probe_then_migration": 240,
+          "rex_probe": 30,
+          "rex_probe_then_migration": 60
+        }
+      },
+      "source_cases": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/cases/planner_runtime_routing_v1_train_cases.jsonl",
+      "case_file": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/cases/planner_runtime_probe_curriculum_v1_train_cases.jsonl",
+      "step_file": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/sft_data_runtime_probe_curriculum_v1_chatml/train.jsonl"
+    },
+    "dev": {
+      "cases": {
+        "cases": 104,
+        "steps": 120,
+        "entity_groups": 8,
+        "categories": {
+          "adela_eval": 8,
+          "clarify_incomplete": 8,
+          "flux_generation": 8,
+          "general_answer": 8,
+          "memory_end": 8,
+          "migration_advisor": 8,
+          "pipeline_eval": 8,
+          "private_lookup": 8,
+          "qwen_probe": 8,
+          "qwen_probe_only_contrast": 8,
+          "qwen_probe_then_migration": 8,
+          "rex_probe": 8,
+          "rex_probe_then_migration": 8
+        },
+        "exact_queries": 92
+      },
+      "steps": {
+        "rows": 120,
+        "cases": 104,
+        "exact_prompt_completion_duplicates": 0,
+        "duplicate_rate": 0.0,
+        "max_rows_per_case": 2,
+        "categories": {
+          "adela_eval": 8,
+          "clarify_incomplete": 8,
+          "flux_generation": 8,
+          "general_answer": 8,
+          "memory_end": 8,
+          "migration_advisor": 8,
+          "pipeline_eval": 8,
+          "private_lookup": 8,
+          "qwen_probe": 8,
+          "qwen_probe_only_contrast": 8,
+          "qwen_probe_then_migration": 16,
+          "rex_probe": 8,
+          "rex_probe_then_migration": 16
+        }
+      },
+      "source_cases": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/cases/planner_runtime_routing_v1_dev_cases.jsonl",
+      "case_file": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/cases/planner_runtime_probe_curriculum_v1_dev_cases.jsonl",
+      "step_file": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/sft_data_runtime_probe_curriculum_v1_chatml/dev.jsonl"
+    },
+    "test": {
+      "cases": {
+        "cases": 208,
+        "steps": 240,
+        "entity_groups": 16,
+        "categories": {
+          "adela_eval": 16,
+          "clarify_incomplete": 16,
+          "flux_generation": 16,
+          "general_answer": 16,
+          "memory_end": 16,
+          "migration_advisor": 16,
+          "pipeline_eval": 16,
+          "private_lookup": 16,
+          "qwen_probe": 16,
+          "qwen_probe_only_contrast": 16,
+          "qwen_probe_then_migration": 16,
+          "rex_probe": 16,
+          "rex_probe_then_migration": 16
+        },
+        "exact_queries": 164
+      },
+      "steps": {
+        "rows": 240,
+        "cases": 208,
+        "exact_prompt_completion_duplicates": 0,
+        "duplicate_rate": 0.0,
+        "max_rows_per_case": 2,
+        "categories": {
+          "adela_eval": 16,
+          "clarify_incomplete": 16,
+          "flux_generation": 16,
+          "general_answer": 16,
+          "memory_end": 16,
+          "migration_advisor": 16,
+          "pipeline_eval": 16,
+          "private_lookup": 16,
+          "qwen_probe": 16,
+          "qwen_probe_only_contrast": 16,
+          "qwen_probe_then_migration": 32,
+          "rex_probe": 16,
+          "rex_probe_then_migration": 32
+        }
+      },
+      "source_cases": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/cases/planner_runtime_routing_v1_test_cases.jsonl",
+      "case_file": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/cases/planner_runtime_probe_curriculum_v1_test_cases.jsonl",
+      "step_file": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/sft_data_runtime_probe_curriculum_v1_chatml/test.jsonl"
+    }
+  }
+}

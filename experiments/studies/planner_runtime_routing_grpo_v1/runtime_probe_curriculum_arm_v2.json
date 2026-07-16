@@ -1,0 +1,99 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_runtime_routing_grpo_v1",
+  "arm_id": "runtime_probe_curriculum_v2_primary_support_seed42",
+  "status": "seed42_passed_multiseed_replication_failed_test_sealed",
+  "change_from_v1": "Support diversity is evaluated on the trainable two-step primary category; the intentionally saturated probe-only category remains a development guardrail. Dataset, reward, model, seed, and training hyperparameters are unchanged.",
+  "initializer": "/raid/zkq/artifacts/CAPA/outputs/merged-qwen25-7b-sft-v3-chatml",
+  "dataset": {
+    "dataset_id": "planner_runtime_probe_curriculum_v1",
+    "train_file": "training/planner_grpo_seed_v1/sft_data_runtime_probe_curriculum_v1_chatml/train.jsonl",
+    "train_rows": 690,
+    "primary_train_rows": 240,
+    "contrast_train_rows": 90,
+    "dev_file": "training/planner_grpo_seed_v1/sft_data_runtime_probe_curriculum_v1_chatml/dev.jsonl",
+    "test_status": "sealed_unopened"
+  },
+  "support_gate": {
+    "artifact": "runtime_probe_curriculum_support_strict.json",
+    "primary_category": "qwen_probe_then_migration",
+    "minimum_primary_nonzero_task_reward_std_rate": 0.80,
+    "minimum_primary_exact_action_support_rate": 0.90,
+    "minimum_primary_mean_distinct_actions": 1.40,
+    "maximum_primary_fully_saturated_rate": 0.25,
+    "minimum_overall_nonzero_task_reward_std_rate": 0.60,
+    "require_exact_action_support_at_each_step": true,
+    "observed": {
+      "primary_nonzero_task_reward_std_rate": 1.0,
+      "primary_exact_action_support_rate": 1.0,
+      "primary_mean_distinct_actions": 1.5625,
+      "primary_fully_saturated_rate": 0.0,
+      "overall_nonzero_task_reward_std_rate": 0.6666666666666666,
+      "step_exact_action_support_rate": {
+        "1": 1.0,
+        "2": 1.0
+      }
+    },
+    "passed": true
+  },
+  "training": {
+    "screen_seed": 42,
+    "max_steps": 80,
+    "learning_rate": 1e-5,
+    "num_generations": 8,
+    "generation_batch_size": 8,
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "world_size": 8,
+    "per_device_train_batch_size": 1,
+    "gradient_accumulation_steps": 2,
+    "global_effective_batch_size": 16,
+    "loss_type": "dr_grpo",
+    "beta": 0.0,
+    "lora_rank": 16,
+    "lora_alpha": 32,
+    "lora_targets": "q_proj,k_proj,v_proj,o_proj",
+    "outer_task_weight": 0.95,
+    "outer_format_weight": 0.05,
+    "strict_named_detection_action": true
+  },
+  "development_gate": {
+    "primary_category": "qwen_probe_then_migration",
+    "minimum_strict_case_action_delta": 0.125,
+    "minimum_primary_verifier_delta": 0.05,
+    "require_step2_action_match_no_regression": true,
+    "contrast_category": "qwen_probe_only_contrast",
+    "maximum_contrast_action_regression": 0.0,
+    "maximum_any_other_category_action_regression": 0.125,
+    "require_no_increase_in_wrong_side_effecting_actions": true
+  },
+  "confirmation": {
+    "trigger": "Only after the seed-42 development gate passes.",
+    "additional_seeds": [43, 44],
+    "test_trigger": "A separately preregistered multi-seed development replication gate must pass before test is opened.",
+    "test_status": "sealed_unopened"
+  },
+  "stop_rule": "If seed 42 fails development, do not run additional seeds or inspect test.",
+  "seed42_result": {
+    "training_run_id": "20260713_runtime_probe_curriculum_v2_seed42_train",
+    "development_run_id": "20260713_runtime_probe_curriculum_v2_grpo42_dev",
+    "gate": "development_gate_runtime_probe_v2_seed42.json",
+    "passed": true,
+    "primary_strict_case_action_delta": 0.375,
+    "primary_verifier_delta": 0.2297619047619046,
+    "primary_step2_action_delta": 0.0,
+    "contrast_action_delta": 0.0,
+    "wrong_side_effect_delta": 0,
+    "next": "runtime_probe_multiseed_replication_v1.json"
+  },
+  "multiseed_result": {
+    "seeds": [42, 43, 44],
+    "three_repeat_development_gate": "development_gate_runtime_probe_v2_multiseed_dev3x.json",
+    "passed": false,
+    "primary_growth_replicated": true,
+    "mean_primary_strict_case_action_delta": 0.3333333333333333,
+    "failed_guardrail": "no mean increase in wrong side-effecting actions",
+    "mean_wrong_side_effect_delta": 0.6666666666666661,
+    "test_status": "sealed_unopened"
+  }
+}

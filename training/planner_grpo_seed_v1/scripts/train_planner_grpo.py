@@ -340,6 +340,7 @@ def score_step_completion(
         spec = {}
     reward_spec_data = dict(rewardlib.DEFAULT_REWARD_SPEC)
     reward_spec_data.update(spec)
+    strict_argument_types = bool(reward_spec_data.get("strict_argument_types", False))
     base_score, info = rewardlib.score_expected_step(
         expected=expected,
         actual=actual,
@@ -368,7 +369,11 @@ def score_step_completion(
             continues = (
                 str(actual.get("decision_type") or "") == "tool"
                 and action not in rewardlib.STOP_ACTIONS
-                and rewardlib.value_matches(rewardlib.get_arg(actual, "finish_after_tool"), False)
+                and rewardlib.value_matches(
+                    rewardlib.get_arg(actual, "finish_after_tool"),
+                    False,
+                    strict_types=strict_argument_types,
+                )
             )
             numerator += weight if continues else 0.0
             denominator += weight
@@ -405,12 +410,27 @@ def score_step_completion(
         weight = float(reward_spec_data.get("final_tool_finish", 0.0))
         if weight > 0:
             expected_type = str(expected.get("decision_type") or "tool")
-            if expected_type == "tool":
+            required_args = (
+                expected.get("required_args")
+                if isinstance(expected.get("required_args"), dict)
+                else {}
+            )
+            requires_finished_tool = (
+                expected_type == "tool"
+                and required_args.get("finish_after_tool") is True
+            )
+            if requires_finished_tool:
                 finished = rewardlib.value_matches(
-                    rewardlib.get_arg(actual, "finish_after_tool"), True
+                    rewardlib.get_arg(actual, "finish_after_tool"),
+                    True,
+                    strict_types=strict_argument_types,
                 )
             else:
-                finished = str(actual.get("decision_type") or "") == expected_type
+                # Match the full-trajectory scorer: final_tool_finish is only a
+                # constraint when the gold step explicitly requires a finished
+                # substantive tool.  Retry steps (finish=false) and end steps
+                # therefore treat this process item as not applicable.
+                finished = True
             numerator += weight if finished else 0.0
             denominator += weight
 

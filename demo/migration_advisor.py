@@ -55,6 +55,16 @@ BEIJING_TZ = timezone(timedelta(hours=8))
 REPORT_EVIDENCE_PER_FIELD = 5
 REPORT_ASSETS_PER_FIELD = 10
 REPORT_EVIDENCE_PER_ASSET = 3
+MIGRATION_QUERIES_PER_FIELD = max(
+    2,
+    min(4, int(os.environ.get("DEMO_MIGRATION_QUERIES_PER_FIELD", "2"))),
+)
+FACT_EVIDENCE_PER_FIELD = 12
+FACT_DOCUMENTS_PER_FIELD = 3
+FACT_DOCUMENT_CONTENT_CHARS = 6000
+ARTIFACT_CHUNKS_PER_RESULT = 20
+ARTIFACT_DOCUMENTS_PER_RESULT = 4
+ARTIFACT_DOCUMENT_CONTENT_CHARS = 1200
 MIGRATION_FIELDS = [
     {
         "field": "existing_models",
@@ -375,6 +385,9 @@ REPORT_INPUT_SCHEMA = {
         "分字段检索结果：field, assets[]。assets 按模型/方案聚合，包含模型身份字段、labels、"
         "benchmark_info 摘要，以及 evidence[]（evidence_id/section_type/index_text）。"
     ),
+    "validated_evidence_facts": (
+        "经 evidence_id/doc_id 与原文 quote 双重校验的事实；数值、标签、数据规模、周期和成本只能来自此列表。"
+    ),
 }
 
 REPORT_OUTPUT_SCHEMA = {
@@ -395,7 +408,9 @@ REPORT_SYSTEM_PROMPT = (
     "只要检索到的模型/方案在对象、属性、任务形态、标签体系、评测方式、部署平台中任一方面与需求相近，"
     "就应作为 similar_assets 的有效候选，优先提炼其可复用信息。\n"
     "必须区分证据支持和合理推断；证据不足时明确写「证据不足」，不要编造精度、周期或成本。\n"
-    "若可估计成本/周期，只能给区间和依赖前提。\n"
+    "validated_evidence_facts 是唯一可用于事实性结论和数字的来源；field_results 只用于候选资产组织。\n"
+    "若 validated_evidence_facts 没有周期或成本事实，estimated_timeline/estimated_cost 必须写「证据不足」。\n"
+    "迁移路径和建议属于工程推断，必须说明依赖前提，不能伪装成知识库事实。\n"
     "direct_match 仅用于回答“是否存在直接匹配模型”。即使不存在直接匹配，也不影响 similar_assets 充分展开。\n"
     "similar_assets 中每个相似模型/方案必须逐项填写：\n"
     "- label_schema：该模型的类别/标签定义（含类别名、取值范围）；\n"
@@ -405,15 +420,13 @@ REPORT_SYSTEM_PROMPT = (
     "benchmark_info 与 evidence.index_text 中提取标签、训练数据和精度。无对应文本则写「证据不足」。\n"
     "若某个 asset 已有标签、精度、平台或场景中的部分信息，必须先如实填写已知部分，"
     "只对缺失字段写「证据不足」，不要因为“不是直接模型”就把整项写成「证据不足」。\n"
-    "evidence 数组可引用 evidence_id 或证据原文短句。只输出 JSON。"
+    "evidence 数组必须只填写 validated_evidence_facts 中已有的 evidence_id 或 doc_id，不能填写自由文本。只输出 JSON。"
 )
 
 REPORT_REX_ACCURACY_COMPARE_PROMPT = (
-    "\n若输入含 rex_omni_benchmark（用户上传图经 Rex-Omni 标注后的预估准确率），且 similar_assets 中检索到相似模型并填写了 reported_metrics：\n"
-    "1) 在 migration_plan.approach 中对比两侧精度（勿编造未给出的数值）；\n"
-    "2) 在 recommendation 中给出路径建议：检索模型精度更高 → 说明自训练/已有模型更有优势，建议优先训练或微调自有模型；"
-    "Rex-Omni 预估更高 → 建议先用开源开集模型验证，再积累标注数据训练专用模型；接近则两种路径均可并说明取舍；\n"
-    "3) expected_performance.baseline 写相似模型侧精度，target 写 Rex-Omni 样例侧预估。\n"
+    "\n若输入含 rex_omni_benchmark，它只是用户样例图上的无 GT 视觉定性检查，不是准确率。"
+    "不得把它与知识库文档指标比较高低，也不得据此宣称任一模型更优。"
+    "expected_performance.target 必须明确写无人工 GT、不可直接比较。\n"
 )
 
 _ACCURACY_NUMBER = re.compile(r"(\d+(?:\.\d+)?)")
@@ -438,7 +451,7 @@ REX_ACCURACY_RESPONSE_FORMAT = {
             "properties": {
                 "accuracy": {
                     "type": "string",
-                    "description": "预估准确率，例如 85% 或 70-80%",
+                    "description": "无人工 GT 时固定写 N/A（无人工GT）",
                 },
                 "reason": {
                     "type": "string",
@@ -452,8 +465,8 @@ REX_ACCURACY_RESPONSE_FORMAT = {
 }
 
 REX_ACCURACY_OUTPUT_SCHEMA = {
-    "accuracy": "预估准确率（如 85% 或 70-80%）",
-    "reason": "依据说明",
+    "accuracy": "固定为 N/A（无人工GT）",
+    "reason": "2-4 句视觉定性评估依据",
 }
 
 
@@ -718,7 +731,10 @@ def _fallback_queries_for_field(user_query: str, field: str) -> list[str]:
             f"{core} 迭代 成本",
         ],
     }
-    return _dedupe_queries(templates.get(field, [core]), limit=4)
+    return _dedupe_queries(
+        templates.get(field, [core]),
+        limit=MIGRATION_QUERIES_PER_FIELD,
+    )
 
 
 def _fallback_plan(user_query: str) -> dict:
@@ -835,7 +851,10 @@ def build_retrieval_plan(
         raw_queries = item.get("queries")
         if not isinstance(raw_queries, list):
             raw_queries = [item.get("query")]
-        queries = _dedupe_queries([str(q or "") for q in raw_queries], limit=4)
+        queries = _dedupe_queries(
+            [str(q or "") for q in raw_queries],
+            limit=MIGRATION_QUERIES_PER_FIELD,
+        )
         if field in valid and queries:
             by_field[field] = queries
     out = {
@@ -929,6 +948,7 @@ def _compact_chunk(chunk: dict, idx: int, *, include_rank_meta: bool = True) -> 
             or payload.get("text")
             or payload.get("content")
             or payload.get("summary")
+            or payload.get("index_text")
             or entity.get("model_info")
             or ""
         )
@@ -965,6 +985,142 @@ def _compact_chunk(chunk: dict, idx: int, *, include_rank_meta: bool = True) -> 
         if score > 0:
             out["score"] = round(score, 6)
     return out
+
+
+def _compact_document_for_artifact(doc: dict, idx: int) -> dict:
+    if not isinstance(doc, dict):
+        return {}
+    metadata = doc.get("metadata") if isinstance(doc.get("metadata"), dict) else {}
+    matched_ids = metadata.get("matched_evidence_ids")
+    return {
+        "doc_id": _trim_text(str(doc.get("doc_id") or f"doc_{idx}").strip(), 120),
+        "doc_name": _trim_text(str(doc.get("doc_name") or "").strip(), 160),
+        "source_type": _trim_text(str(doc.get("source_type") or "").strip(), 64),
+        "matched_evidence_ids": (
+            [str(x).strip() for x in matched_ids if str(x).strip()]
+            if isinstance(matched_ids, list)
+            else []
+        )[:20],
+        "content_preview": _trim_text(
+            _normalize_snippet(str(doc.get("content") or "")),
+            ARTIFACT_DOCUMENT_CONTENT_CHARS,
+        ),
+    }
+
+
+def _compact_reference_for_artifact(reference: Any) -> Any:
+    if isinstance(reference, dict):
+        out = {}
+        for key in ("evidence_id", "doc_id", "title", "doc_name", "url", "source_type"):
+            value = reference.get(key)
+            if value not in (None, "", [], {}):
+                out[key] = _trim_text(str(value), 300)
+        return out
+    return _trim_text(str(reference or ""), 500)
+
+
+def compact_retrieve_result_for_artifact(result: dict) -> dict:
+    """Return a bounded audit record while the caller keeps full evidence in memory."""
+    row = result if isinstance(result, dict) else {}
+    chunks = [
+        item
+        for item in (row.get("retrieved_chunks") if isinstance(row.get("retrieved_chunks"), list) else [])
+        if isinstance(item, dict) and not _contains_excluded_evidence(item)
+    ]
+    documents = [
+        item
+        for item in (row.get("full_documents") if isinstance(row.get("full_documents"), list) else [])
+        if isinstance(item, dict) and not _contains_excluded_evidence(item)
+    ]
+    references = [
+        item
+        for item in (row.get("references") if isinstance(row.get("references"), list) else [])
+        if not _contains_excluded_evidence(item)
+    ]
+    compact = {
+        "success": bool(row.get("success")),
+        "field": _trim_text(str(row.get("field") or "").strip(), 80),
+        "query": _trim_text(str(row.get("query") or "").strip(), 500),
+        "api_mode": _trim_text(str(row.get("api_mode") or "").strip(), 80),
+        "error": _trim_text(str(row.get("error") or "").strip(), 1000),
+        "retrieved_count": len(chunks),
+        "full_document_count": len(documents),
+        "retrieved_chunks": [
+            _compact_chunk(chunk, idx)
+            for idx, chunk in enumerate(
+                _top_chunks_by_score(chunks, limit=ARTIFACT_CHUNKS_PER_RESULT),
+                start=1,
+            )
+        ],
+        "full_documents": [
+            _compact_document_for_artifact(doc, idx)
+            for idx, doc in enumerate(documents[:ARTIFACT_DOCUMENTS_PER_RESULT], start=1)
+            if isinstance(doc, dict)
+        ],
+        "references": [
+            _compact_reference_for_artifact(reference)
+            for reference in references[:ARTIFACT_CHUNKS_PER_RESULT]
+        ],
+    }
+    return {key: value for key, value in compact.items() if value not in ("", [], {})}
+
+
+def compact_field_results_for_artifact(field_results: list[dict]) -> list[dict]:
+    """Remove runtime-only response copies from the persisted migration report."""
+    output: list[dict] = []
+    for result in field_results if isinstance(field_results, list) else []:
+        if not isinstance(result, dict):
+            continue
+        chunks = [
+            item
+            for item in (
+                result.get("retrieved_chunks")
+                if isinstance(result.get("retrieved_chunks"), list)
+                else []
+            )
+            if isinstance(item, dict) and not _contains_excluded_evidence(item)
+        ]
+        documents = [
+            item
+            for item in (
+                result.get("full_documents")
+                if isinstance(result.get("full_documents"), list)
+                else []
+            )
+            if isinstance(item, dict) and not _contains_excluded_evidence(item)
+        ]
+        summaries = result.get("query_summaries")
+        if not isinstance(summaries, list):
+            summaries = []
+        output.append(
+            {
+                "field": _trim_text(str(result.get("field") or "").strip(), 80),
+                "queries": [
+                    _trim_text(str(query or "").strip(), 500)
+                    for query in (
+                        result.get("queries") if isinstance(result.get("queries"), list) else []
+                    )
+                    if str(query or "").strip()
+                ],
+                "coverage": _trim_text(str(result.get("coverage") or "none").strip(), 32),
+                "evidence_count": len(chunks),
+                "full_document_count": len(documents),
+                "retrieved_chunks": [
+                    _compact_chunk(chunk, idx)
+                    for idx, chunk in enumerate(
+                        _top_chunks_by_score(chunks, limit=ARTIFACT_CHUNKS_PER_RESULT),
+                        start=1,
+                    )
+                ],
+                "full_documents": [
+                    _compact_document_for_artifact(doc, idx)
+                    for idx, doc in enumerate(documents[:ARTIFACT_DOCUMENTS_PER_RESULT], start=1)
+                    if isinstance(doc, dict)
+                ],
+                "query_summaries": summaries,
+            }
+        )
+    return output
 
 
 def _compact_chunk_index_text(chunk: dict, idx: int) -> dict:
@@ -1266,11 +1422,22 @@ def _compact_chunk_for_report(chunk: dict, idx: int) -> dict:
     snippet = _snippet_to_plain_text(str(base.pop("snippet", "") or ""))
     out: dict = {"evidence_id": str(base.get("evidence_id") or "").strip()}
     if snippet:
-        out["snippet"] = _trim_text(snippet, None)
-    for key in ("model_name", "algorithm_name", "algorithm_type", "application_scene"):
-        value = _clean_text_for_report_markdown(str(base.get(key) or ""))
-        if value and not re.fullmatch(r"[A-Za-z0-9_.\-/]+", value):
-            out[key] = _trim_text(value, None)
+        out["snippet"] = _trim_text(snippet, 1200)
+    for key, source_keys in (
+        ("model_name", ("model_name", "canonical_model_name", "csv_model_name", "name")),
+        ("target_name", ("target_name", "canonical_target_name")),
+        ("algorithm_name", ("algorithm_name", "canonical_algorithm_name")),
+        ("algorithm_type", ("algorithm_type", "canonical_algorithm_type")),
+        ("application_scene", ("application_scene", "canonical_application_scene")),
+    ):
+        value = str(_first_chunk_raw(chunk, *source_keys) or "").strip()
+        if value:
+            out[key] = _trim_text(value, 160)
+    labels = _normalize_label_values(
+        _first_chunk_raw(chunk, "label_list", "labels", "class_labels", "canonical_label_list")
+    )
+    if labels:
+        out["labels"] = labels
     return out
 
 
@@ -1289,7 +1456,7 @@ def _compact_document_for_fact(doc: dict, idx: int) -> dict:
             if isinstance(matched_ids, list)
             else []
         )[:20],
-        "content": _trim_text(content, None),
+        "content": _trim_text(_normalize_snippet(content), FACT_DOCUMENT_CONTENT_CHARS),
     }
 
 
@@ -1429,6 +1596,95 @@ def _compact_rag_trace(trace: list[dict] | None, *, chunks_per_round: int = 6) -
     return out
 
 
+_REQUIREMENT_GENERIC_TERMS = (
+    "目标检测",
+    "检测",
+    "识别",
+    "分类",
+    "模型",
+    "算法",
+    "能力",
+    "场景",
+    "监控",
+    "迁移",
+    "方案",
+    "性能",
+    "精度",
+    "数据",
+    "需求",
+    "人员",
+    "人体",
+)
+
+
+def _contains_excluded_evidence(value: Any) -> bool:
+    try:
+        text = json.dumps(value, ensure_ascii=False, default=str)
+    except (TypeError, ValueError):
+        text = str(value)
+    return "adela" in text.casefold()
+
+
+def _requirement_anchors(user_query: str, plan: dict | None) -> set[str]:
+    plan_obj = plan if isinstance(plan, dict) else {}
+    abstract = plan_obj.get("abstract_requirement") if isinstance(plan_obj.get("abstract_requirement"), dict) else {}
+    segments = [
+        str(abstract.get(key) or "").strip()
+        for key in ("object", "attribute")
+        if str(abstract.get(key) or "").strip()
+    ]
+    if not segments and str(abstract.get("scene") or "").strip():
+        segments = [str(abstract.get("scene") or "").strip()]
+    if not segments:
+        segments = [str(user_query or "").strip()]
+    anchors: set[str] = set()
+    for segment in segments:
+        cleaned = segment.casefold()
+        for term in _REQUIREMENT_GENERIC_TERMS:
+            cleaned = cleaned.replace(term, " ")
+        for token in re.findall(r"[\u4e00-\u9fff]+|[a-z0-9_-]+", cleaned):
+            if re.fullmatch(r"[a-z0-9_-]+", token):
+                if len(token) >= 3:
+                    anchors.add(token)
+                continue
+            if len(token) == 2:
+                anchors.add(token)
+                continue
+            for width in (2, 3, 4):
+                anchors.update(token[idx : idx + width] for idx in range(len(token) - width + 1))
+    return {anchor for anchor in anchors if len(anchor) >= 2}
+
+
+def _matches_requirement(value: Any, anchors: set[str]) -> bool:
+    if not anchors or _contains_excluded_evidence(value):
+        return False
+    if (
+        isinstance(value, dict)
+        and "content" in value
+        and not isinstance(value.get("payload"), dict)
+    ):
+        text = " ".join(
+            str(value.get(key) or "")
+            for key in ("doc_name", "source_type", "content")
+        ).casefold()
+    elif isinstance(value, dict):
+        parts = [_index_text_for_report(value)]
+        for keys in (
+            ("model_name", "canonical_model_name", "name"),
+            ("target_name", "canonical_target_name"),
+            ("algorithm_name", "canonical_algorithm_name"),
+            ("application_scene", "canonical_application_scene"),
+            ("label_list", "labels", "class_labels"),
+        ):
+            raw = _first_chunk_raw(value, *keys)
+            if raw not in (None, "", [], {}):
+                parts.append(_compact_json_value(raw, limit=1000))
+        text = " ".join(parts).casefold()
+    else:
+        text = str(value).casefold()
+    return any(anchor in text for anchor in anchors)
+
+
 def _chunk_dedupe_key(chunk: dict) -> str:
     payload = chunk.get("payload") if isinstance(chunk.get("payload"), dict) else {}
     entity = payload.get("entity") if isinstance(payload.get("entity"), dict) else {}
@@ -1458,7 +1714,7 @@ def merge_retrieve_chunks(results: list[dict], *, limit: int = 20) -> list[dict]
             continue
         chunks = result.get("retrieved_chunks") if isinstance(result.get("retrieved_chunks"), list) else []
         for chunk in chunks:
-            if not isinstance(chunk, dict):
+            if not isinstance(chunk, dict) or _contains_excluded_evidence(chunk):
                 continue
             key = _chunk_dedupe_key(chunk)
             if key in seen:
@@ -1490,7 +1746,7 @@ def merge_full_documents(results: list[dict], *, limit: int = 12) -> list[dict]:
             continue
         docs = result.get("full_documents") if isinstance(result.get("full_documents"), list) else []
         for doc in docs:
-            if not isinstance(doc, dict):
+            if not isinstance(doc, dict) or _contains_excluded_evidence(doc):
                 continue
             key = _doc_dedupe_key(doc)
             if key in seen:
@@ -1502,13 +1758,52 @@ def merge_full_documents(results: list[dict], *, limit: int = 12) -> list[dict]:
     return out
 
 
-def _build_evidence_packages(field_results: list[dict]) -> list[dict]:
+def _build_evidence_packages(
+    field_results: list[dict],
+    *,
+    user_query: str = "",
+    plan: dict | None = None,
+) -> list[dict]:
     packages: list[dict] = []
+    anchors = _requirement_anchors(user_query, plan)
     for result in field_results:
         if not isinstance(result, dict):
             continue
         chunks = result.get("retrieved_chunks") if isinstance(result.get("retrieved_chunks"), list) else []
         docs = result.get("full_documents") if isinstance(result.get("full_documents"), list) else []
+        ranked_chunks = [
+            chunk
+            for chunk in _top_chunks_by_score(chunks, limit=max(len(chunks), FACT_EVIDENCE_PER_FIELD))
+            if _matches_requirement(chunk, anchors)
+        ][:FACT_EVIDENCE_PER_FIELD]
+        relevant_ids = {
+            str(
+                chunk.get("evidence_id")
+                or chunk.get("legacy_evidence_id")
+                or _chunk_payload(chunk).get("chunk_id")
+                or ""
+            ).strip()
+            for chunk in ranked_chunks
+            if isinstance(chunk, dict)
+        }
+        relevant_docs: list[dict] = []
+        for doc in docs:
+            if not isinstance(doc, dict) or _contains_excluded_evidence(doc):
+                continue
+            metadata = doc.get("metadata") if isinstance(doc.get("metadata"), dict) else {}
+            matched_ids = {
+                str(value).strip()
+                for value in (
+                    metadata.get("matched_evidence_ids")
+                    if isinstance(metadata.get("matched_evidence_ids"), list)
+                    else []
+                )
+                if str(value).strip()
+            }
+            if _matches_requirement(doc, anchors) or matched_ids.intersection(relevant_ids):
+                relevant_docs.append(doc)
+            if len(relevant_docs) >= FACT_DOCUMENTS_PER_FIELD:
+                break
         packages.append(
             {
                 "field": str(result.get("field") or "").strip(),
@@ -1516,17 +1811,86 @@ def _build_evidence_packages(field_results: list[dict]) -> list[dict]:
                 "coverage": str(result.get("coverage") or "").strip(),
                 "evidences": [
                     _compact_chunk_for_report(chunk, idx)
-                    for idx, chunk in enumerate(chunks, start=1)
+                    for idx, chunk in enumerate(ranked_chunks, start=1)
                     if isinstance(chunk, dict)
                 ],
                 "full_documents": [
                     _compact_document_for_fact(doc, idx)
-                    for idx, doc in enumerate(docs, start=1)
+                    for idx, doc in enumerate(relevant_docs, start=1)
                     if isinstance(doc, dict)
                 ],
             }
         )
     return packages
+
+
+def _structured_facts_from_packages(evidence_packages: list[dict]) -> list[dict]:
+    """Extract explicit structured metadata without relying on generative inference."""
+    grouped: dict[tuple[str, str, str], dict] = {}
+    for package in evidence_packages if isinstance(evidence_packages, list) else []:
+        if not isinstance(package, dict):
+            continue
+        field = str(package.get("field") or "similar_capabilities").strip()
+        evidences = package.get("evidences") if isinstance(package.get("evidences"), list) else []
+        for item in evidences:
+            if not isinstance(item, dict):
+                continue
+            evidence_id = str(item.get("evidence_id") or "").strip()
+            quote = str(item.get("snippet") or "").strip()
+            if not evidence_id or len(re.sub(r"\s+", "", quote)) < 6:
+                continue
+            model_name = str(item.get("model_name") or "").strip()
+            algorithm_name = str(item.get("algorithm_name") or "").strip()
+            target_name = str(item.get("target_name") or "").strip()
+            algorithm_type = str(item.get("algorithm_type") or "").strip()
+            application_scene = str(item.get("application_scene") or "").strip()
+            labels = item.get("labels") if isinstance(item.get("labels"), list) else []
+            subject = model_name or algorithm_name or target_name or "未命名知识库资产"
+            candidates: list[tuple[str, str]] = []
+            identity_parts = []
+            if model_name:
+                identity_parts.append(f"模型名称为 {model_name}")
+            if algorithm_name:
+                identity_parts.append(f"算法名称为 {algorithm_name}")
+            if identity_parts:
+                candidates.append(("model_identity", "；".join(identity_parts)))
+            scope_parts = []
+            if target_name:
+                scope_parts.append(f"目标为 {target_name}")
+            if algorithm_type:
+                scope_parts.append(f"算法类型为 {algorithm_type}")
+            if application_scene:
+                scope_parts.append(f"应用场景为 {application_scene}")
+            if scope_parts:
+                candidates.append(("task_scope", "；".join(scope_parts)))
+            if labels:
+                candidates.append(
+                    (
+                        "category_count",
+                        f"标签共 {len(labels)} 类：{', '.join(str(label) for label in labels)}",
+                    )
+                )
+            for fact_type, statement in candidates:
+                key = (fact_type, subject, statement)
+                if key not in grouped:
+                    grouped[key] = {
+                        "fact_type": fact_type,
+                        "field": field,
+                        "subject": subject,
+                        "fact": statement,
+                        "value": "",
+                        "unit": "",
+                        "evidence_ids": [evidence_id],
+                        "doc_ids": [],
+                        "quote": quote,
+                        "confidence": "high",
+                    }
+                elif evidence_id not in grouped[key]["evidence_ids"]:
+                    grouped[key]["evidence_ids"].append(evidence_id)
+    return _normalize_fact_list(
+        list(grouped.values()),
+        evidence_packages=evidence_packages,
+    )
 
 
 def _valid_fact_ids(evidence_packages: list[dict]) -> tuple[set[str], set[str]]:
@@ -1550,10 +1914,55 @@ def _valid_fact_ids(evidence_packages: list[dict]) -> tuple[set[str], set[str]]:
     return evidence_ids, doc_ids
 
 
+def _fact_source_text_by_id(evidence_packages: list[dict]) -> dict[str, list[str]]:
+    sources: dict[str, list[str]] = {}
+    for package in evidence_packages if isinstance(evidence_packages, list) else []:
+        if not isinstance(package, dict):
+            continue
+        for item in package.get("evidences") if isinstance(package.get("evidences"), list) else []:
+            if not isinstance(item, dict):
+                continue
+            evidence_id = str(item.get("evidence_id") or "").strip()
+            if evidence_id:
+                bucket = sources.setdefault(evidence_id, [])
+                bucket.append(_normalize_snippet(str(item.get("snippet") or "")))
+                bucket.append(
+                    _normalize_snippet(
+                        "\n".join(
+                            _compact_json_value(value, limit=2000)
+                            for value in item.values()
+                            if value not in (None, "", [], {})
+                        )
+                    )
+                )
+        for item in package.get("full_documents") if isinstance(package.get("full_documents"), list) else []:
+            if not isinstance(item, dict):
+                continue
+            doc_id = str(item.get("doc_id") or "").strip()
+            if doc_id:
+                sources.setdefault(doc_id, []).append(
+                    _normalize_snippet(str(item.get("content") or ""))
+                )
+    return sources
+
+
+def _fact_quote_is_supported(quote: str, source_ids: list[str], sources: dict[str, list[str]]) -> bool:
+    needle = re.sub(r"\s+", "", str(quote or "")).casefold()
+    if len(needle) < 6:
+        return False
+    for source_id in source_ids:
+        for source in sources.get(str(source_id), []):
+            haystack = re.sub(r"\s+", "", source).casefold()
+            if needle in haystack:
+                return True
+    return False
+
+
 def _normalize_fact_list(raw_facts, *, evidence_packages: list[dict], limit: int = 60) -> list[dict]:
     if not isinstance(raw_facts, list):
         return []
     valid_eids, valid_dids = _valid_fact_ids(evidence_packages)
+    source_texts = _fact_source_text_by_id(evidence_packages)
     valid_fields = {item["field"] for item in MIGRATION_FIELDS}
     valid_types = {
         "model_identity",
@@ -1580,14 +1989,16 @@ def _normalize_fact_list(raw_facts, *, evidence_packages: list[dict], limit: int
         evidence_ids = [
             str(x).strip()
             for x in (item.get("evidence_ids") if isinstance(item.get("evidence_ids"), list) else [])
-            if str(x).strip() and (not valid_eids or str(x).strip() in valid_eids)
+            if str(x).strip() and str(x).strip() in valid_eids
         ]
         doc_ids = [
             str(x).strip()
             for x in (item.get("doc_ids") if isinstance(item.get("doc_ids"), list) else [])
-            if str(x).strip() and (not valid_dids or str(x).strip() in valid_dids)
+            if str(x).strip() and str(x).strip() in valid_dids
         ]
         if not evidence_ids and not doc_ids:
+            continue
+        if not _fact_quote_is_supported(quote, evidence_ids + doc_ids, source_texts):
             continue
         field = str(item.get("field") or "").strip()
         if field not in valid_fields:
@@ -1601,13 +2012,13 @@ def _normalize_fact_list(raw_facts, *, evidence_packages: list[dict], limit: int
         normalized = {
             "fact_type": fact_type,
             "field": field,
-            "subject": _trim_text(str(item.get("subject") or "").strip(), None),
-            "fact": fact,
-            "value": _trim_text(str(item.get("value") or "").strip(), None),
-            "unit": _trim_text(str(item.get("unit") or "").strip(), None),
+            "subject": _trim_text(str(item.get("subject") or "").strip(), 160),
+            "fact": _trim_text(fact, 600),
+            "value": _trim_text(str(item.get("value") or "").strip(), 160),
+            "unit": _trim_text(str(item.get("unit") or "").strip(), 40),
             "evidence_ids": evidence_ids[:8],
             "doc_ids": doc_ids[:8],
-            "quote": quote,
+            "quote": _trim_text(quote, 800),
             "confidence": confidence,
         }
         key = json.dumps(
@@ -1640,13 +2051,18 @@ def extract_evidence_facts(
     model: str | None = None,
     debug_meta: dict | None = None,
 ) -> list[dict]:
-    evidence_packages = _build_evidence_packages(field_results)
+    evidence_packages = _build_evidence_packages(
+        field_results,
+        user_query=user_query,
+        plan=plan,
+    )
+    structured_facts = _structured_facts_from_packages(evidence_packages)
     if not any(
         (package.get("evidences") or package.get("full_documents"))
         for package in evidence_packages
         if isinstance(package, dict)
     ):
-        return []
+        return structured_facts
     structured_input = {
         "user_query": str(user_query or "").strip(),
         "retrieval_plan": plan if isinstance(plan, dict) else {},
@@ -1677,18 +2093,46 @@ def extract_evidence_facts(
             evidence_item_fields=COMPACT_EVIDENCE_FIELDS + ["full_documents"],
         ),
     )
-    raw = _generate_migration_text(
-        messages=messages,
-        model=use_model,
-        response_format=FACT_EXTRACTION_RESPONSE_FORMAT,
-        api_key=api_key,
-        base_url=base_url,
-    )
-    data = _extract_first_json_object(raw)
-    facts = _normalize_fact_list(
-        data.get("facts") if isinstance(data, dict) else [],
-        evidence_packages=evidence_packages,
-    )
+    try:
+        raw = _generate_migration_text(
+            messages=messages,
+            model=use_model,
+            response_format=FACT_EXTRACTION_RESPONSE_FORMAT,
+            api_key=api_key,
+            base_url=base_url,
+        )
+        data = _extract_first_json_object(raw)
+        generated_facts = _normalize_fact_list(
+            data.get("facts") if isinstance(data, dict) else [],
+            evidence_packages=evidence_packages,
+        )
+    except Exception as exc:
+        _write_migration_llm_debug(
+            debug_meta=debug_meta,
+            stage="migration_fact_extraction_response",
+            step_index=2,
+            payload=_debug_response_payload(
+                model=use_model,
+                raw="",
+                output_schema=FACT_EXTRACTION_OUTPUT_SCHEMA,
+                structured_output={"facts": structured_facts},
+                error=str(exc),
+                used_fallback=True,
+            ),
+        )
+        return structured_facts
+    facts: list[dict] = []
+    seen: set[tuple[str, str, str]] = set()
+    for fact in structured_facts + generated_facts:
+        key = (
+            str(fact.get("fact_type") or ""),
+            str(fact.get("subject") or ""),
+            str(fact.get("fact") or ""),
+        )
+        if key in seen:
+            continue
+        seen.add(key)
+        facts.append(fact)
     _write_migration_llm_debug(
         debug_meta=debug_meta,
         stage="migration_fact_extraction_response",
@@ -1699,6 +2143,7 @@ def extract_evidence_facts(
             output_schema=FACT_EXTRACTION_OUTPUT_SCHEMA,
             structured_output={"facts": facts},
             extracted_count=len(facts),
+            deterministic_count=len(structured_facts),
         ),
     )
     return facts
@@ -1902,13 +2347,14 @@ def estimate_rex_accuracy(
     multi = len(vis_paths) > 1
     system = (
         "你是视觉检测标注质量评估助手。请结合用户上传的标注图片（含 Rex-Omni 预测框）和预测框统计，"
-        "对 Rex-Omni 开集检测标注效果做定性评估，给出预估准确率（如 85% 或 70-80%）和 2-4 句中文依据。"
+        "对 Rex-Omni 开集检测标注效果做定性评估。没有人工 GT，accuracy 必须写“N/A（无人工GT）”，"
+        "不得伪造准确率；reason 用 2-4 句中文描述可见的覆盖、漏检/误检风险。"
         + (
             "本次包含多张图片，请综合所有图片的表现给出整体准确率，并说明是否存在某些图片明显更差。"
             if multi
             else "说明图中大约有多少目标、模型预测了多少框、框是否覆盖目标、是否存在明显漏检/误检/过检。"
         )
-        + "无真实 GT 时基于视觉合理性估计，不要过于乐观。只输出 JSON。"
+        + "只输出 JSON。"
     )
     hit_json = json.dumps(
         {
@@ -1988,7 +2434,7 @@ def estimate_rex_accuracy(
         )
         return {
             "accuracy": "证据不足",
-            "reason": f"准确率预估失败：{exc}",
+            "reason": f"无 GT 视觉定性评估失败：{exc}",
         }
 
 
@@ -2033,7 +2479,7 @@ def rex_result_to_markdown(rex_result: dict | None) -> str:
                 f"未命中 {', '.join(str(x) for x in misses) if misses else '无'}"
             )
     if accuracy:
-        lines.append(f"**准确率预估**：{accuracy}")
+        lines.append(f"**无 GT 视觉定性评估**：{accuracy}")
     if reason:
         lines.append(f"**评估说明**：{reason}")
     err = str(r.get("error") or "").strip()
@@ -2101,63 +2547,40 @@ def _best_similar_model_accuracy(report: dict) -> tuple[float | None, str, str]:
 
 
 def _apply_accuracy_comparison_to_report(report: dict, rex_result: dict | None) -> dict:
-    """对比 Rex-Omni 样例预估与相似模型 reported_metrics，写入方案与建议。"""
+    """Record the Rex visual estimate without ranking incomparable, no-GT metrics."""
     out = dict(report) if isinstance(report, dict) else {}
     snap = _rex_accuracy_snapshot(rex_result)
-    rex_pct = snap.get("accuracy_percent")
-    if rex_pct is None:
+    if not snap:
         return out
     sim_pct, sim_name, sim_metrics = _best_similar_model_accuracy(out)
-    if sim_pct is None:
-        return out
-
-    rex_text = str(snap.get("accuracy") or f"{rex_pct:.0f}%").strip()
-    if sim_pct > rex_pct:
-        compare_rec = (
-            f"知识库相似模型「{sim_name or '未命名'}」报告精度为 {sim_metrics}（约 {sim_pct:.0f}%），"
-            f"高于 Rex-Omni 在用户样例上的预估 {rex_text}（约 {rex_pct:.0f}%）。"
-            "说明现有或可迁移的自训练模型在该类任务上更具优势，建议优先基于检索方案进行模型训练或微调。"
-        )
-        approach_note = (
-            f"精度对比：检索相似模型（约 {sim_pct:.0f}%）高于 Rex-Omni 样例预估（约 {rex_pct:.0f}%），"
-            "倾向训练/部署自有模型。"
-        )
-    elif rex_pct > sim_pct:
-        compare_rec = (
-            f"Rex-Omni 在用户样例上的预估为 {rex_text}（约 {rex_pct:.0f}%），"
-            f"高于知识库相似模型「{sim_name or '未命名'}」的 {sim_metrics}（约 {sim_pct:.0f}%）。"
-            "建议先使用 Rex-Omni 等开源开集模型快速验证与上线，同时构建标注数据，"
-            "待场景与数据稳定后再训练专用模型。"
-        )
-        approach_note = (
-            f"精度对比：Rex-Omni 样例预估（约 {rex_pct:.0f}%）高于检索相似模型（约 {sim_pct:.0f}%），"
-            "可先采用开源模型，再积累数据训练专用模型。"
-        )
-    else:
-        compare_rec = (
-            f"Rex-Omni 预估（{rex_text}，约 {rex_pct:.0f}%）与相似模型「{sim_name or '未命名'}」"
-            f"（{sim_metrics}，约 {sim_pct:.0f}%）接近。"
-            "可按交付周期选择：短期用开源开集模型验证，中期并行数据积累与自训练。"
-        )
-        approach_note = (
-            f"精度对比：Rex-Omni（约 {rex_pct:.0f}%）与检索模型（约 {sim_pct:.0f}%）接近，可并行评估两条路径。"
-        )
+    rex_text = str(snap.get("accuracy") or "证据不足").strip()
+    benchmark = (
+        f"知识库相似模型「{sim_name}」文档指标为 {sim_metrics}；" if sim_pct is not None else ""
+    )
+    comparison_note = (
+        f"{benchmark}Rex-Omni 在当前样例上的视觉定性估计为 {rex_text}。"
+        "两者不是同一有 GT 测试集上的实测结果，不能据此判断高低或模型优劣。"
+    )
 
     existing_rec = str(out.get("recommendation") or "").strip()
-    out["recommendation"] = f"{compare_rec}\n\n{existing_rec}" if existing_rec else compare_rec
+    out["recommendation"] = (
+        f"{comparison_note}\n\n{existing_rec}" if existing_rec else comparison_note
+    )
 
     plan = dict(out.get("migration_plan")) if isinstance(out.get("migration_plan"), dict) else {}
     old_approach = str(plan.get("approach") or "").strip()
-    plan["approach"] = f"{approach_note} {old_approach}".strip() if old_approach else approach_note
+    plan["approach"] = f"{comparison_note} {old_approach}".strip() if old_approach else comparison_note
     out["migration_plan"] = plan
 
     perf = dict(out.get("expected_performance")) if isinstance(out.get("expected_performance"), dict) else {}
-    perf["baseline"] = (
-        f"相似模型「{sim_name}」：{sim_metrics}" if sim_name else f"相似模型精度：{sim_metrics}"
-    )
-    perf["target"] = f"Rex-Omni 样例预估：{rex_text}"
-    if not str(perf.get("uncertainty") or "").strip():
-        perf["uncertainty"] = "中（基于样例图与文档指标对比，非同集实测）"
+    if sim_pct is not None:
+        perf["baseline"] = (
+            f"相似模型「{sim_name}」文档指标：{sim_metrics}"
+            if sim_name
+            else f"相似模型文档指标：{sim_metrics}"
+        )
+    perf["target"] = f"Rex-Omni 样例视觉定性估计：{rex_text}（无人工 GT，非准确率）"
+    perf["uncertainty"] = "高（非同集、无人工 GT，不可直接比较）"
     out["expected_performance"] = perf
     return out
 
@@ -2167,6 +2590,7 @@ def build_report(
     user_query: str,
     plan: dict,
     field_results: list[dict],
+    evidence_facts: list[dict] | None = None,
     rex_result: dict | None = None,
     api_key: str | None = None,
     base_url: str | None = None,
@@ -2190,6 +2614,9 @@ def build_report(
     structured_input = {
         "user_query": str(user_query or "").strip(),
         "field_results": compact_fields,
+        "validated_evidence_facts": (
+            evidence_facts if isinstance(evidence_facts, list) else []
+        ),
     }
     if rex_snap:
         structured_input["rex_omni_benchmark"] = rex_snap
@@ -2249,7 +2676,14 @@ def _referenced_fact_ids(evidence_facts: list[dict]) -> set[str]:
     return ids
 
 
-def enforce_report_evidence_bounds(report: dict, evidence_facts: list[dict]) -> dict:
+def enforce_report_evidence_bounds(
+    report: dict,
+    evidence_facts: list[dict],
+    *,
+    rex_result: dict | None = None,
+    retrieval_plan: dict | None = None,
+    user_query: str = "",
+) -> dict:
     out = dict(report) if isinstance(report, dict) else {}
     allowed = _referenced_fact_ids(evidence_facts)
     has_facts = bool(allowed)
@@ -2259,8 +2693,83 @@ def enforce_report_evidence_bounds(report: dict, evidence_facts: list[dict]) -> 
             return []
         return [str(x).strip() for x in values if str(x).strip() and str(x).strip() in allowed]
 
-    direct = out.get("direct_match") if isinstance(out.get("direct_match"), dict) else {}
-    direct_evidence = _filter_ids(direct.get("evidence"))
+    def _fact_ids(fact: dict) -> set[str]:
+        ids: set[str] = set()
+        for key in ("evidence_ids", "doc_ids"):
+            values = fact.get(key)
+            if isinstance(values, list):
+                ids.update(str(value).strip() for value in values if str(value).strip())
+        return ids
+
+    def _fact_summary(facts: list[dict], *, limit: int = 3) -> str:
+        rows: list[str] = []
+        for fact in facts:
+            if not isinstance(fact, dict):
+                continue
+            subject = str(fact.get("subject") or "").strip()
+            statement = str(fact.get("fact") or "").strip()
+            ids = sorted(_fact_ids(fact))
+            text = f"{subject}：{statement}" if subject and subject not in statement else statement
+            if ids:
+                text = f"{text} [{', '.join(ids[:3])}]"
+            if text and text not in rows:
+                rows.append(text)
+            if len(rows) >= limit:
+                break
+        return "；".join(rows) if rows else "证据不足"
+
+    def _facts_of_type(*fact_types: str) -> list[dict]:
+        expected = set(fact_types)
+        return [
+            fact
+            for fact in (evidence_facts if isinstance(evidence_facts, list) else [])
+            if isinstance(fact, dict) and str(fact.get("fact_type") or "") in expected
+        ]
+
+    identity_facts = _facts_of_type("model_identity")
+    task_facts = _facts_of_type("task_scope", "category_count")
+    data_facts = _facts_of_type("data_scale")
+    candidate_subjects: list[str] = []
+    for fact in identity_facts:
+        subject = str(fact.get("subject") or "").strip()
+        if subject and subject not in candidate_subjects:
+            candidate_subjects.append(subject)
+
+    plan_obj = retrieval_plan if isinstance(retrieval_plan, dict) else {}
+    abstract = plan_obj.get("abstract_requirement") if isinstance(plan_obj.get("abstract_requirement"), dict) else {}
+    task_anchor_plan = {
+        "abstract_requirement": {
+            "object": "",
+            "attribute": str(abstract.get("attribute") or ""),
+            "scene": "",
+        }
+    }
+    object_anchor_plan = {
+        "abstract_requirement": {
+            "object": str(abstract.get("object") or ""),
+            "attribute": "",
+            "scene": "",
+        }
+    }
+    scene_anchor_plan = {
+        "abstract_requirement": {
+            "object": "",
+            "attribute": str(abstract.get("scene") or ""),
+            "scene": "",
+        }
+    }
+    task_anchors = _requirement_anchors(user_query, task_anchor_plan)
+    object_anchors = _requirement_anchors("", object_anchor_plan) if abstract else set()
+    scene_anchors = _requirement_anchors("", scene_anchor_plan) if abstract else set()
+    fact_corpus = " ".join(
+        f"{str(fact.get('subject') or '')} {str(fact.get('fact') or '')} {str(fact.get('quote') or '')}"
+        for fact in (evidence_facts if isinstance(evidence_facts, list) else [])
+        if isinstance(fact, dict)
+    ).casefold()
+    task_supported = bool(task_anchors and any(anchor in fact_corpus for anchor in task_anchors))
+    object_supported = not object_anchors or any(anchor in fact_corpus for anchor in object_anchors)
+    scene_supported = not scene_anchors or any(anchor in fact_corpus for anchor in scene_anchors)
+
     if not has_facts:
         direct = {
             "exists": False,
@@ -2268,10 +2777,32 @@ def enforce_report_evidence_bounds(report: dict, evidence_facts: list[dict]) -> 
             "evidence": [],
         }
     else:
-        direct["evidence"] = direct_evidence
-        if bool(direct.get("exists")) and not direct_evidence:
-            direct["exists"] = False
-            direct["summary"] = "证据不足，未找到可引用事实支撑直接匹配。"
+        direct_ids = sorted(
+            set().union(*(_fact_ids(fact) for fact in identity_facts + task_facts))
+            if identity_facts or task_facts
+            else set()
+        )
+        direct_exists = bool(
+            candidate_subjects and task_supported and object_supported and scene_supported
+        )
+        candidate_text = "、".join(candidate_subjects[:3]) or "相关候选"
+        if direct_exists:
+            summary = (
+                f"知识库事实同时覆盖目标任务与场景，候选为 {candidate_text}；"
+                "是否可直接复用仍需在同集人工 GT 上验证。"
+            )
+        elif candidate_subjects:
+            summary = (
+                f"检索到任务相关候选 {candidate_text}，但知识库事实未同时覆盖目标部署场景，"
+                "因此不能判定为直接匹配。"
+            )
+        else:
+            summary = "未抽取到同时支撑目标任务与场景的候选事实。"
+        direct = {
+            "exists": direct_exists,
+            "summary": summary,
+            "evidence": direct_ids if direct_exists else [],
+        }
     out["direct_match"] = direct
 
     assets_out: list[dict] = []
@@ -2281,8 +2812,43 @@ def enforce_report_evidence_bounds(report: dict, evidence_facts: list[dict]) -> 
         ev = _filter_ids(item.get("evidence"))
         if not ev:
             continue
+        relevant = [
+            fact
+            for fact in (evidence_facts if isinstance(evidence_facts, list) else [])
+            if isinstance(fact, dict) and _fact_ids(fact).intersection(ev)
+        ]
+        if not relevant:
+            continue
         row = dict(item)
         row["evidence"] = ev
+        relevant_identity = [fact for fact in relevant if fact.get("fact_type") == "model_identity"]
+        relevant_subjects = [
+            str(fact.get("subject") or "").strip()
+            for fact in relevant_identity
+            if str(fact.get("subject") or "").strip()
+        ]
+        if relevant_subjects:
+            row["model_or_solution"] = relevant_subjects[0]
+        row["reported_metrics"] = _fact_summary(
+            [fact for fact in relevant if fact.get("fact_type") in {"accuracy", "performance"}]
+        )
+        row["training_data"] = _fact_summary(
+            [fact for fact in relevant if fact.get("fact_type") == "data_scale"]
+        )
+        row["label_schema"] = _fact_summary(
+            [fact for fact in relevant if fact.get("fact_type") in {"category_count", "task_scope"}]
+        )
+        row["covered_capability"] = _fact_summary(
+            [
+                fact
+                for fact in relevant
+                if fact.get("fact_type") in {"model_identity", "task_scope", "category_count"}
+            ]
+        )
+        row["gap"] = (
+            "工程推断（非知识库事实，需验证）：目标部署场景、训练数据、行为语义和性能指标"
+            "尚未被当前证据同时覆盖。"
+        )
         assets_out.append(row)
     out["similar_assets"] = assets_out
 
@@ -2308,6 +2874,89 @@ def enforce_report_evidence_bounds(report: dict, evidence_facts: list[dict]) -> 
         )
         out["migration_plan"] = plan
         out["recommendation"] = "建议补充更明确的业务场景、样例图片、标签体系和目标指标后重新检索评估。"
+    else:
+        metric_facts = _facts_of_type("accuracy", "performance")
+        timeline_facts = [
+            fact
+            for fact in _facts_of_type("cost_or_timeline")
+            if re.search(r"周期|时间|天|周|月|工期|timeline|day|week|month", str(fact.get("fact") or ""), re.I)
+        ]
+        cost_facts = [
+            fact
+            for fact in _facts_of_type("cost_or_timeline")
+            if re.search(r"成本|费用|预算|元|万|cost|budget", str(fact.get("fact") or ""), re.I)
+        ]
+        rex_snap = _rex_accuracy_snapshot(rex_result)
+        rex_target = "证据不足（未进行同集有人工 GT 的验证）"
+        if rex_snap:
+            rex_target = (
+                f"Rex-Omni 样例视觉定性估计：{str(rex_snap.get('accuracy') or '证据不足')}"
+                "（无人工 GT，非准确率，不可与文档指标直接排名）"
+            )
+        out["expected_performance"] = {
+            "baseline": _fact_summary(metric_facts),
+            "target": rex_target,
+            "uncertainty": "高（需要同一数据集、同一指标和人工 GT 的受控评测）",
+        }
+        deployment_facts = _facts_of_type("deployment", "model_size")
+        candidate_text = "、".join(candidate_subjects[:3])
+        feasibility = (
+            "high"
+            if direct_exists and metric_facts and data_facts
+            else "medium"
+            if candidate_subjects
+            else "low"
+        )
+        approach = (
+            f"工程推断（非知识库事实，需验证）：将已校验候选 {candidate_text} 仅作为 POC 起点；"
+            "先在目标部署场景建立带人工 GT 的同集基线，再决定直接复用、微调或重训。"
+            if candidate_text
+            else "工程推断（非知识库事实，需验证）：先建立带人工 GT 的最小基线，再重新检索候选。"
+        )
+        data_note = _fact_summary(data_facts)
+        if data_note == "证据不足":
+            data_note = "证据不足；工程上需定义正负样本、困难样本分层、标注规范和独立测试集。"
+        compute_note = _fact_summary(deployment_facts)
+        if compute_note == "证据不足":
+            compute_note = "证据不足；需在模型接口、输入分辨率、时延和吞吐目标明确后实测。"
+        out["migration_plan"] = {
+            "feasibility": feasibility,
+            "approach": approach,
+            "data_requirements": data_note,
+            "compute_requirements": compute_note,
+            "engineering_work": (
+                "工程推断（非知识库事实，需验证）：完成候选模型接入、目标场景数据采样、"
+                "人工 GT 标注、统一指标评测、误差分桶和部署压测。"
+            ),
+            "estimated_timeline": _fact_summary(timeline_facts),
+            "estimated_cost": _fact_summary(cost_facts),
+            "dependencies": [
+                "工程推断（非知识库事实，需验证）：候选模型权重与推理接口可用",
+                "工程推断（非知识库事实，需验证）：目标场景样本、标注规范和验收指标已定义",
+            ],
+            "risks": [
+                "工程推断（非知识库事实，需验证）：知识库未提供目标场景同集性能，候选可能无法泛化",
+                "工程推断（非知识库事实，需验证）：行为语义、遮挡、小目标和负样本可能造成误检漏检",
+            ],
+        }
+        out["recommendation"] = (
+            f"工程推断（非知识库事实，需验证）：优先对 {candidate_text} 做小规模、带人工 GT 的目标场景 POC；"
+            "在取得同集基线前，不比较模型优劣，也不承诺精度、周期或成本。"
+            if candidate_text
+            else "工程推断（非知识库事实，需验证）：补充目标场景样本与验收指标后重新检索并建立基线。"
+        )
+    out["evidence_audit"] = {
+        "grounding": "validated_quote_and_source_id",
+        "requirement_relevance_gate": True,
+        "excluded_evidence_terms": ["adela"],
+        "validated_fact_count": len(evidence_facts) if isinstance(evidence_facts, list) else 0,
+        "allowed_source_ids": sorted(allowed),
+        "assumption_fields": [
+            "similar_assets.gap",
+            "migration_plan",
+            "recommendation",
+        ],
+    }
     return out
 
 
@@ -2316,10 +2965,13 @@ def report_to_markdown(report: dict) -> str:
     dm = r.get("direct_match") if isinstance(r.get("direct_match"), dict) else {}
     plan = r.get("migration_plan") if isinstance(r.get("migration_plan"), dict) else {}
     perf = r.get("expected_performance") if isinstance(r.get("expected_performance"), dict) else {}
+    audit = r.get("evidence_audit") if isinstance(r.get("evidence_audit"), dict) else {}
     lines = [
         "### 迁移顾问报告",
         "",
         f"**需求摘要**：{str(r.get('requirement_summary') or '').strip() or '未提取到明确摘要'}",
+        f"**已校验证据事实数**：{int(audit.get('validated_fact_count') or 0)}",
+        "**口径**：性能正确性只能由同集人工 GT 评测确认；工程方案与建议均为待验证假设。",
         "",
         f"**是否存在直接同款**：{'是' if bool(dm.get('exists')) else '否'}",
         str(dm.get("summary") or "").strip(),
@@ -2411,16 +3063,30 @@ def run_workflow(
         raw_queries = field.get("queries")
         if not isinstance(raw_queries, list):
             raw_queries = [field.get("query")]
-        queries = _dedupe_queries([str(q or "") for q in raw_queries], limit=4)
+        queries = _dedupe_queries(
+            [str(q or "") for q in raw_queries],
+            limit=MIGRATION_QUERIES_PER_FIELD,
+        )
         if not name or not queries:
             continue
         query_results: list[dict] = []
+        query_summaries: list[dict] = []
         for query in queries:
             emit({"type": "migration_advisor_retrieve", "field": name, "query": query, "status": "running"})
             result_raw = retrieve(name, query)
             result = result_raw if isinstance(result_raw, dict) else {}
             query_results.append(result)
             chunks_count = len(result.get("retrieved_chunks")) if isinstance(result.get("retrieved_chunks"), list) else 0
+            document_count = len(result.get("full_documents")) if isinstance(result.get("full_documents"), list) else 0
+            query_summaries.append(
+                {
+                    "query": query,
+                    "success": bool(result.get("success")),
+                    "error": _trim_text(str(result.get("error") or "").strip(), 500),
+                    "retrieved_count": chunks_count,
+                    "full_document_count": document_count,
+                }
+            )
             emit(
                 {
                     "type": "migration_advisor_retrieve",
@@ -2439,7 +3105,9 @@ def run_workflow(
             "coverage": coverage,
             "retrieved_chunks": chunks,
             "full_documents": full_documents,
-            "raw_results": query_results,
+            "evidence_count": len(chunks),
+            "full_document_count": len(full_documents),
+            "query_summaries": query_summaries,
         }
         field_results.append(row)
         emit(
@@ -2598,11 +3266,40 @@ def run_workflow(
                         "error": str(exc),
                     }
                 )
+    evidence_facts: list[dict] = []
+    try:
+        emit({"type": "migration_advisor_facts", "status": "running"})
+        evidence_facts = extract_evidence_facts(
+            user_query=user_query,
+            plan=plan,
+            field_results=field_results,
+            api_key=api_key,
+            base_url=base_url,
+            debug_meta=meta,
+        )
+        emit(
+            {
+                "type": "migration_advisor_facts",
+                "status": "done",
+                "validated_fact_count": len(evidence_facts),
+            }
+        )
+    except Exception as exc:
+        emit(
+            {
+                "type": "migration_advisor_facts",
+                "status": "error",
+                "error": str(exc),
+                "validated_fact_count": 0,
+            }
+        )
+
     try:
         report = build_report(
             user_query=user_query,
             plan=plan,
             field_results=field_results,
+            evidence_facts=evidence_facts,
             rex_result=rex_result,
             api_key=api_key,
             base_url=base_url,
@@ -2647,12 +3344,20 @@ def run_workflow(
             },
             "recommendation": "建议先人工查看分字段检索结果，再补充样例图片、标注规范和目标指标。",
         }
+    report = enforce_report_evidence_bounds(
+        report,
+        evidence_facts,
+        rex_result=rex_result,
+        retrieval_plan=plan,
+        user_query=user_query,
+    )
     report_md = report_to_markdown(report)
     rex_md = rex_result_to_markdown(rex_result)
     markdown = "\n\n".join(part for part in (rex_md, report_md) if part).strip()
     output = {
         "plan": plan,
-        "field_results": field_results,
+        "field_results": compact_field_results_for_artifact(field_results),
+        "evidence_facts": evidence_facts,
         "rex_result": rex_result,
         "report": report,
         "markdown": markdown,

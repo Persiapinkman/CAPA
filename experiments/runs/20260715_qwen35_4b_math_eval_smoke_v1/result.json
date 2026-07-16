@@ -1,0 +1,142 @@
+{
+  "schema_version": "1.0",
+  "status": "completed",
+  "finished_at": "2026-07-15T17:15:04.767635+00:00",
+  "runtime_seconds": 2.2848375090397894,
+  "model_name_or_path": "/raid/zkq/models/Qwen3.5-4B",
+  "adapter_path": "",
+  "data_dir": "/raid/zkq/projects/CAPA/training/public_sft_grpo_v1/data/math_sft1024_v1",
+  "dataset_manifest_sha256": "bd54944a6522c4dec863568d0490cae8745a38c329541671d99d92ad4c1fbeb2",
+  "packages": {
+    "math-verify": "0.9.0",
+    "latex2sympy2-extended": "1.11.0"
+  },
+  "generation": {
+    "do_sample": false,
+    "max_new_tokens": 8,
+    "batch_size": 1,
+    "seed": 42,
+    "train_limit": 128,
+    "development_limit": 256
+  },
+  "sharding": {
+    "num_shards": 384,
+    "shard_index": 0,
+    "global_selected_rows": 384,
+    "shard_rows": 2,
+    "global_selected_ids_sha256": "d8e88b6fa9f446e05bf73be003717c9bcdc9b4bd5d9a32e8ad937fae943319d4",
+    "shard_ids_sha256": "ba5b6c7e71f8db240d2859983ab3a8c2c3ed4ac8f90fd4ec751c510165a735ce"
+  },
+  "metrics": {
+    "train": {
+      "overall": {
+        "rows": 1,
+        "symbolic_accuracy": 0.0,
+        "strict_format_rate": 0.0,
+        "strict_exact_accuracy": 0.0,
+        "parse_success_rate": 0.0,
+        "eos_rate": 0.0,
+        "clipped_rate": 1.0,
+        "completion_tokens": {
+          "min": 8,
+          "p50": 8,
+          "p95": 8,
+          "max": 8,
+          "mean": 8.0
+        }
+      },
+      "by_level": {
+        "Level 2": {
+          "rows": 1,
+          "symbolic_accuracy": 0.0,
+          "strict_format_rate": 0.0,
+          "strict_exact_accuracy": 0.0,
+          "parse_success_rate": 0.0,
+          "eos_rate": 0.0,
+          "clipped_rate": 1.0,
+          "completion_tokens": {
+            "min": 8,
+            "p50": 8,
+            "p95": 8,
+            "max": 8,
+            "mean": 8.0
+          }
+        }
+      },
+      "by_type": {
+        "Precalculus": {
+          "rows": 1,
+          "symbolic_accuracy": 0.0,
+          "strict_format_rate": 0.0,
+          "strict_exact_accuracy": 0.0,
+          "parse_success_rate": 0.0,
+          "eos_rate": 0.0,
+          "clipped_rate": 1.0,
+          "completion_tokens": {
+            "min": 8,
+            "p50": 8,
+            "p95": 8,
+            "max": 8,
+            "mean": 8.0
+          }
+        }
+      }
+    },
+    "development": {
+      "overall": {
+        "rows": 1,
+        "symbolic_accuracy": 0.0,
+        "strict_format_rate": 0.0,
+        "strict_exact_accuracy": 0.0,
+        "parse_success_rate": 0.0,
+        "eos_rate": 0.0,
+        "clipped_rate": 1.0,
+        "completion_tokens": {
+          "min": 8,
+          "p50": 8,
+          "p95": 8,
+          "max": 8,
+          "mean": 8.0
+        }
+      },
+      "by_level": {
+        "Level 1": {
+          "rows": 1,
+          "symbolic_accuracy": 0.0,
+          "strict_format_rate": 0.0,
+          "strict_exact_accuracy": 0.0,
+          "parse_success_rate": 0.0,
+          "eos_rate": 0.0,
+          "clipped_rate": 1.0,
+          "completion_tokens": {
+            "min": 8,
+            "p50": 8,
+            "p95": 8,
+            "max": 8,
+            "mean": 8.0
+          }
+        }
+      },
+      "by_type": {
+        "Number Theory": {
+          "rows": 1,
+          "symbolic_accuracy": 0.0,
+          "strict_format_rate": 0.0,
+          "strict_exact_accuracy": 0.0,
+          "parse_success_rate": 0.0,
+          "eos_rate": 0.0,
+          "clipped_rate": 1.0,
+          "completion_tokens": {
+            "min": 8,
+            "p50": 8,
+            "p95": 8,
+            "max": 8,
+            "mean": 8.0
+          }
+        }
+      }
+    }
+  },
+  "nonfinite_metric_count": 0,
+  "samples_sha256": "89b0d913aeb46a0abcfe5e3c118e4420798e2a4900c03837f7cc26c31a474603"
+}

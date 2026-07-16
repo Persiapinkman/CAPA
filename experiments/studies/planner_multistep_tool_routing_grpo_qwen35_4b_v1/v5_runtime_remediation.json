@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "recorded_at": "2026-07-15T02:39:00Z",
+  "dataset_id": "planner_multistep_grpo_value_v5",
+  "invalid_run": "qwen35_a3b_v5_calibration_t0",
+  "reason": "28 first completions and 2 parse-repair completions reached max_tokens=384; the preregistered invalid-run condition therefore fired",
+  "disposition": "exclude the entire 35B run from calibration selection",
+  "replacement_protocol": {
+    "cases_sha256": "ad24e62c7ef08e953a7c55736af15858aa0c500fe843a2b8dfdd73721a612f5c",
+    "model": "Qwen3.5-35B-A3B",
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "do_sample": false,
+    "seed": 42,
+    "max_steps": 2,
+    "max_tokens": 1024,
+    "timeout_seconds": 180,
+    "openai_timeout_seconds": 180
+  },
+  "unchanged": [
+    "all cases and gold trajectories",
+    "all selection and acceptance thresholds",
+    "the completed 4B calibration run",
+    "whole-family selection order"
+  ],
+  "replacement_acceptance": "The replacement is valid only if retry_length_truncations_total=0 and all other runtime-validity checks pass."
+}

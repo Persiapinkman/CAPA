@@ -1,0 +1,790 @@
+{
+  "schema_version": "2.0",
+  "run_id": "20260713_runtime_routing_v1_sftv3_dev",
+  "study_id": "planner_runtime_routing_grpo_v1",
+  "date": "2026-07-13",
+  "kind": "eval_generation_repeated",
+  "status": "completed",
+  "purpose": "Fixed external development baseline on runtime-owned Planner decisions.",
+  "hypothesis": "SFTv3 leaves headroom on probe continuation and full tool routing.",
+  "parent_run_id": null,
+  "provenance": {
+    "git_commit": "b702ed80a2e73af6009178f9d0f3762c395c3262",
+    "git_dirty": true,
+    "command": "/raid/zkq/projects/CAPA/.venv-trl-grpo-cu124/bin/python pipelines/eval/run_generation_eval.py --run-id 20260713_runtime_routing_v1_sftv3_dev --study-id planner_runtime_routing_grpo_v1 --purpose 'Fixed external development baseline on runtime-owned Planner decisions.' --hypothesis 'SFTv3 leaves headroom on probe continuation and full tool routing.' --model-label sft_v3 --model-name-or-path /raid/zkq/artifacts/CAPA/outputs/merged-qwen25-7b-sft-v3-chatml --prompt-format qwen_chatml --dataset-id planner_runtime_routing_v1 --split dev --eval-file training/planner_grpo_seed_v1/sft_data_runtime_routing_v1_chatml/dev.jsonl --run-dir experiments/runs/20260713_runtime_routing_v1_sftv3_dev --artifact-dir /raid/zkq/artifacts/CAPA/evals/20260713_runtime_routing_v1_sftv3_dev --repeats 1 --max-new-tokens 128 --batch-size 4 --seed 42",
+    "seed": 42,
+    "started_at": "2026-07-13T06:30:21.357707+00:00",
+    "finished_at": "2026-07-13T06:35:39.313245+00:00",
+    "environment": {
+      "python": "3.10.12",
+      "torch": "2.6.0+cu124",
+      "transformers": "4.57.6",
+      "trl": "1.8.0",
+      "peft": "0.19.1",
+      "datasets": "5.0.0",
+      "accelerate": "1.14.0",
+      "cuda_visible_devices": "0",
+      "gpu": "Tesla V100-SXM2-32GB",
+      "dtype": "float16",
+      "attention": "sdpa"
+    }
+  },
+  "data": {
+    "dataset_id": "planner_runtime_routing_v1",
+    "split": "dev",
+    "files": {
+      "eval": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/sft_data_runtime_routing_v1_chatml/dev.jsonl"
+    },
+    "sha256": {
+      "eval": "b71b6ed51429364f2db84c507ea6fc2ff4131e35f33a165f3ce5cf558463e93f"
+    },
+    "rows": 120,
+    "offset": 0,
+    "total_source_rows": 120
+  },
+  "method": {
+    "model_label": "sft_v3",
+    "model": "/raid/zkq/artifacts/CAPA/outputs/merged-qwen25-7b-sft-v3-chatml",
+    "adapter_path": "",
+    "prompt_format": "qwen_chatml",
+    "generation": {
+      "temperature": 0.0,
+      "top_p": 1.0,
+      "do_sample": false,
+      "max_new_tokens": 128,
+      "batch_size": 4,
+      "repeats": 1,
+      "score_first_json_only": true
+    }
+  },
+  "metrics": {
+    "primary": {
+      "name": "step_mean_verifier_score",
+      "value": 0.7686111111111115,
+      "higher_is_better": true
+    },
+    "aggregate": {
+      "repeat_count": 1,
+      "overall": {
+        "mean_score": {
+          "mean": 0.7686111111111115,
+          "stdev": 0.0,
+          "min": 0.7686111111111115,
+          "max": 0.7686111111111115
+        },
+        "action_match_rate": {
+          "mean": 0.6833333333333333,
+          "stdev": 0.0,
+          "min": 0.6833333333333333,
+          "max": 0.6833333333333333
+        },
+        "json_valid_rate": {
+          "mean": 1.0,
+          "stdev": 0.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "extra_text_after_json_rate": {
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "mean_extra_text_chars": {
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "effective_json_valid_rate": {
+          "mean": 1.0,
+          "stdev": 0.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "effective_extra_text_after_json_rate": {
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "effective_mean_extra_text_chars": {
+          "mean": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        }
+      },
+      "categories": {
+        "adela_eval": {
+          "mean_score": {
+            "mean": 0.9166666666666669,
+            "stdev": 0.0,
+            "min": 0.9166666666666669,
+            "max": 0.9166666666666669
+          },
+          "action_match_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "effective_extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "clarify_incomplete": {
+          "mean_score": {
+            "mean": 0.19999999999999998,
+            "stdev": 0.0,
+            "min": 0.19999999999999998,
+            "max": 0.19999999999999998
+          },
+          "action_match_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "effective_extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "flux_generation": {
+          "mean_score": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "action_match_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "effective_extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "general_answer": {
+          "mean_score": {
+            "mean": 0.075,
+            "stdev": 0.0,
+            "min": 0.075,
+            "max": 0.075
+          },
+          "action_match_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "effective_extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "memory_end": {
+          "mean_score": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "action_match_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "effective_extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "migration_advisor": {
+          "mean_score": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "action_match_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "effective_extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "pipeline_eval": {
+          "mean_score": {
+            "mean": 0.4625,
+            "stdev": 0.0,
+            "min": 0.4625,
+            "max": 0.4625
+          },
+          "action_match_rate": {
+            "mean": 0.625,
+            "stdev": 0.0,
+            "min": 0.625,
+            "max": 0.625
+          },
+          "json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "effective_extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "private_lookup": {
+          "mean_score": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "action_match_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "effective_extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "qwen_probe": {
+          "mean_score": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "action_match_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "effective_extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "qwen_probe_only_contrast": {
+          "mean_score": {
+            "mean": 0.96875,
+            "stdev": 0.0,
+            "min": 0.96875,
+            "max": 0.96875
+          },
+          "action_match_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "effective_extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "qwen_probe_then_migration": {
+          "mean_score": {
+            "mean": 0.6750000000000003,
+            "stdev": 0.0,
+            "min": 0.6750000000000003,
+            "max": 0.6750000000000003
+          },
+          "action_match_rate": {
+            "mean": 0.8125,
+            "stdev": 0.0,
+            "min": 0.8125,
+            "max": 0.8125
+          },
+          "json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "effective_extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "rex_probe": {
+          "mean_score": {
+            "mean": 0.9500000000000001,
+            "stdev": 0.0,
+            "min": 0.9500000000000001,
+            "max": 0.9500000000000001
+          },
+          "action_match_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "effective_extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "rex_probe_then_migration": {
+          "mean_score": {
+            "mean": 0.8031250000000001,
+            "stdev": 0.0,
+            "min": 0.8031250000000001,
+            "max": 0.8031250000000001
+          },
+          "action_match_rate": {
+            "mean": 0.5,
+            "stdev": 0.0,
+            "min": 0.5,
+            "max": 0.5
+          },
+          "json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_json_valid_rate": {
+            "mean": 1.0,
+            "stdev": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "effective_extra_text_after_json_rate": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "effective_mean_extra_text_chars": {
+            "mean": 0.0,
+            "stdev": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        }
+      },
+      "determinism": {
+        "rows_compared": 120,
+        "identical_score_and_completion_rows": 120,
+        "agreement_rate": 1.0
+      },
+      "runtime_seconds": 317.8747800285928,
+      "peak_gpu_memory_gb": 17.534307956695557
+    }
+  },
+  "artifacts": {
+    "run_dir": "/raid/zkq/projects/CAPA/experiments/runs/20260713_runtime_routing_v1_sftv3_dev",
+    "metrics": "/raid/zkq/projects/CAPA/experiments/runs/20260713_runtime_routing_v1_sftv3_dev/metrics.json",
+    "predictions": [
+      "/raid/zkq/artifacts/CAPA/evals/20260713_runtime_routing_v1_sftv3_dev/predictions_run1.jsonl"
+    ]
+  },
+  "decision": {
+    "outcome": "baseline",
+    "rationale": "Reference arm for the fixed existing route-GRPO external validation."
+  }
+}

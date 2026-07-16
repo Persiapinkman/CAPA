@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "source": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/sft_data_multistep_grpo_hard_v2_chatml/calibration.jsonl",
+  "source_sha256": "4378974617020be8244d6f6d44e7fbe178f7d7d2d05b6e55bec2ace57db78fee",
+  "accepted_scenarios": [
+    "qwen_box_variance_to_migration",
+    "qwen_empty_result_to_migration",
+    "qwen_domain_shift_to_migration",
+    "rex_box_variance_to_migration",
+    "rex_empty_result_to_migration",
+    "rex_domain_shift_to_migration",
+    "qwen_confident_stop_guardrail",
+    "rex_confident_stop_guardrail"
+  ],
+  "entities_per_category": 8,
+  "rows": 128,
+  "cases": 64,
+  "entities": 8,
+  "categories": {
+    "qwen_box_variance_to_migration": 16,
+    "qwen_confident_stop_guardrail": 16,
+    "qwen_domain_shift_to_migration": 16,
+    "qwen_empty_result_to_migration": 16,
+    "rex_box_variance_to_migration": 16,
+    "rex_confident_stop_guardrail": 16,
+    "rex_domain_shift_to_migration": 16,
+    "rex_empty_result_to_migration": 16
+  },
+  "output": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/sft_data_multistep_grpo_hard_v2_chatml/support_audit.jsonl",
+  "output_sha256": "7b0e7ace7e959d3303d8a69715a0569f42f05389824de45c74fdbfce25d40427"
+}

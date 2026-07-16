@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_multistep_tool_routing_grpo_qwen25_7b_v1_primary_step2",
+  "dataset_id": "planner_multistep_grpo_hard_v2",
+  "gate_role": "role-aware GRPO suitability gate from README B2; saturated routing prefixes and evaluation-only stop guardrails are reported separately",
+  "support_gate": {
+    "split": "calibration_support_subset",
+    "scope_categories": [
+      "qwen_box_variance_to_migration",
+      "qwen_empty_result_to_migration",
+      "qwen_domain_shift_to_migration",
+      "rex_box_variance_to_migration",
+      "rex_empty_result_to_migration",
+      "rex_domain_shift_to_migration"
+    ],
+    "scope_steps": [2],
+    "samples_per_prompt": 8,
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "minimum_nonzero_reward_std_rate": 0.80,
+    "minimum_usable_support_rate": 0.80,
+    "minimum_near_exact_task_support_rate": 0.0,
+    "minimum_exact_action_support_rate": 0.80,
+    "minimum_mean_distinct_valid_actions": 1.40,
+    "maximum_fully_saturated_rate": 0.25
+  }
+}

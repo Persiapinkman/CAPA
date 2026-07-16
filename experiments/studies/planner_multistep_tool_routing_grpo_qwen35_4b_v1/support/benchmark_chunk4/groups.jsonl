@@ -1,0 +1,1 @@
+{"case_id": "PMGV5TRAINV1-001-Q01", "category": "qwen_timeout_nonretryable", "step_index": 2, "entity_id": "pmgv5trainv1_entity_001", "mean_reward": 0.0, "reward_std": 0.0, "min_reward": 0.0, "max_reward": 0.0, "distinct_actions": 1, "action_counts": {"invalid": 8}}

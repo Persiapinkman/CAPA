@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 import argparse
+from io import BytesIO
 import sys
 from pathlib import Path
 
 import requests
 from openai import OpenAI
+from PIL import Image, UnidentifiedImageError
 
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT))
@@ -15,8 +17,23 @@ def download_image(url: str, save_path: Path, timeout: int = 20) -> None:
     save_path.parent.mkdir(parents=True, exist_ok=True)
     resp = requests.get(url, timeout=timeout)
     resp.raise_for_status()
-    with open(save_path, "wb") as f:
-        f.write(resp.content)
+    try:
+        with Image.open(BytesIO(resp.content)) as image:
+            image.load()
+            suffix = save_path.suffix.lower()
+            if suffix in {".jpg", ".jpeg"}:
+                image.convert("RGB").save(save_path, format="JPEG", quality=95)
+            elif suffix == ".png":
+                image.save(save_path, format="PNG")
+            elif suffix == ".webp":
+                image.save(save_path, format="WEBP", quality=95)
+            else:
+                image.save(save_path)
+    except UnidentifiedImageError as exc:
+        content_type = str(resp.headers.get("Content-Type") or "unknown")
+        raise ValueError(
+            f"Flux download did not return a decodable image (Content-Type: {content_type})"
+        ) from exc
 
 
 def main() -> None:

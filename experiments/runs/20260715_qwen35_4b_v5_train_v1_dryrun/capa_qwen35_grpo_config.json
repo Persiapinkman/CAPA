@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "status": "prepared",
+  "started_at": "2026-07-15T09:37:50.373716+00:00",
+  "mode": "dry-run",
+  "optimizer_steps_authorized": false,
+  "model_name_or_path": "/raid/zkq/models/Qwen3.5-4B",
+  "step_data": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/step_data/planner_multistep_grpo_value_v5_train_v1_qwen35_4b_nothinking_step2.jsonl",
+  "output_dir": "/raid/zkq/projects/CAPA/experiments/runs/20260715_qwen35_4b_v5_train_v1_dryrun",
+  "dataset": {
+    "rows": 480,
+    "min_prompt_tokens": 4300,
+    "p50_prompt_tokens": 4309,
+    "p95_prompt_tokens": 4316,
+    "p99_prompt_tokens": 4317,
+    "max_prompt_tokens": 4319,
+    "step_data_sha256": "d84bf1681337603aebc0f2f169340c2dbd82f7faee5217ea60ba16de087f782d",
+    "manifest_sha256": "591274ed441e20495c81c4c71f69a5f1569ba2316d0a9fa8929ec7aecda41de4"
+  },
+  "packages": {
+    "python": "3.10.12",
+    "torch": "2.6.0+cu124",
+    "transformers": "5.12.0",
+    "trl": "1.8.0",
+    "peft": "0.19.1",
+    "accelerate": "1.14.0",
+    "datasets": "5.0.0"
+  },
+  "distributed": {
+    "world_size": 1,
+    "rank": 0,
+    "cuda_visible_devices": "",
+    "per_device_train_batch_size": 1,
+    "num_generations": 4,
+    "generation_batch_size": 8,
+    "gradient_accumulation_steps": 4
+  },
+  "generation": {
+    "max_completion_length": 128,
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "eos_token_id": 248046,
+    "pad_token_id": 248044,
+    "use_cache": true,
+    "remove_invalid_values": true,
+    "renormalize_logits": true
+  },
+  "optimization": {
+    "max_steps": 100,
+    "learning_rate": 5e-06,
+    "weight_decay": 0.0,
+    "lr_scheduler_type": "constant_with_warmup",
+    "warmup_steps": 5,
+    "max_grad_norm": 1.0,
+    "loss_type": "dr_grpo",
+    "scale_rewards": "group",
+    "beta": 0.0,
+    "epsilon": 0.2,
+    "fp16": true,
+    "bf16": false,
+    "grad_scaler_init_scale": 1.0,
+    "grad_scaler_growth_interval": 100000
+  },
+  "reward_weights": {
+    "task_reward": 0.95,
+    "format_reward": 0.05,
+    "route_exact": 0.0,
+    "argument_exact": 0.0,
+    "stop_exact": 0.0,
+    "no_forbidden_action": 0.0
+  },
+  "lora": {
+    "r": 16,
+    "alpha": 32,
+    "dropout": 0.0,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "in_proj_qkv",
+      "in_proj_z",
+      "in_proj_a",
+      "in_proj_b",
+      "out_proj"
+    ]
+  },
+  "hardware_guards": {
+    "cudnn_enabled": false,
+    "max_allocated_gib": 28.0,
+    "minimum_free_gib": 2.0
+  }
+}

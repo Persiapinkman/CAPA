@@ -191,6 +191,71 @@ class PlannerSequenceRewardTests(unittest.TestCase):
         self.assertLessEqual(wrong_action, 0.20)
         self.assertGreater(correct_action, 0.90)
 
+    def test_strict_action_match_distinguishes_named_detection_models(self) -> None:
+        expected = {
+            "decision_type": "tool",
+            "action": "qwen_detection",
+            "required_args": {"finish_after_tool": True},
+            "arg_contains": {"label": ["烟雾"]},
+        }
+        actual = {
+            "decision_type": "tool",
+            "action": "rexomni_detection",
+            "action_input": {"label": "烟雾", "finish_after_tool": True},
+        }
+        equivalent_score = score(
+            actual,
+            expected,
+            full_actions=["qwen_detection"],
+            step_index=1,
+        )
+        strict_score = score(
+            actual,
+            expected,
+            full_actions=["qwen_detection"],
+            step_index=1,
+            reward_spec={"strict_action_match": True, "wrong_action_cap": 0.20},
+        )
+        self.assertGreater(equivalent_score, 0.90)
+        self.assertLessEqual(strict_score, 0.20)
+
+    def test_strict_argument_types_rejects_string_booleans(self) -> None:
+        expected = {
+            "decision_type": "tool",
+            "action": "migration_advisor",
+            "required_args": {
+                "use_image": True,
+                "use_visual_probe": True,
+                "finish_after_tool": True,
+            },
+            "arg_contains": {"user_query": ["烟雾迁移"]},
+        }
+        string_typed = {
+            "decision_type": "tool",
+            "action": "migration_advisor",
+            "action_input": {
+                "user_query": "烟雾迁移",
+                "use_image": "true",
+                "use_visual_probe": "true",
+                "finish_after_tool": "true",
+            },
+        }
+        legacy_score = score(
+            string_typed,
+            expected,
+            full_actions=["migration_advisor"],
+            step_index=1,
+        )
+        strict_score = score(
+            string_typed,
+            expected,
+            full_actions=["migration_advisor"],
+            step_index=1,
+            reward_spec={"strict_argument_types": True},
+        )
+        self.assertEqual(legacy_score, 1.0)
+        self.assertLess(strict_score, 1.0)
+
 
 if __name__ == "__main__":
     unittest.main()

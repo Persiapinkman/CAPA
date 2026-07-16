@@ -1,0 +1,98 @@
+{
+  "schema_version": "1.0",
+  "status": "prepared",
+  "started_at": "2026-07-16T01:12:08.078380+00:00",
+  "mode": "dry-run",
+  "optimizer_steps_authorized": false,
+  "model_name_or_path": "/raid/zkq/models/Qwen3.5-4B",
+  "adapter_path": "/raid/zkq/projects/CAPA/experiments/runs/20260716_qwen35_4b_planner_v6_sft_canary1",
+  "adapter_sha256": "fd926c582351eccf9a81d508759d247d35c0a9b818f1650a1b39ca458715ccf0",
+  "step_data": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/step_data/planner_retry_migrate_v6_grpo_train_qwen35_4b_nothinking_step2.jsonl",
+  "output_dir": "/raid/zkq/projects/CAPA/experiments/runs/20260716_qwen35_4b_planner_v6_grpo_dryrun_v1",
+  "dataset": {
+    "rows": 360,
+    "min_prompt_tokens": 4238,
+    "p50_prompt_tokens": 4255,
+    "p95_prompt_tokens": 4268,
+    "p99_prompt_tokens": 4270,
+    "max_prompt_tokens": 4272,
+    "step_data_sha256": "330ec8067ca2788357019a979b525805a09b3bb37d592783e2644012064f0598",
+    "manifest_sha256": "5f2ba9fb1a3ff28b2e049b69c442f91b43a8466b8a438f693103ebac1cd6db21",
+    "manifest": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/sft_data_planner_retry_migrate_v6_qwen35_nothinking/metadata.json",
+    "dataset_id": "planner_retry_migrate_v6"
+  },
+  "packages": {
+    "python": "3.10.12",
+    "torch": "2.6.0+cu124",
+    "transformers": "5.12.0",
+    "trl": "1.8.0",
+    "peft": "0.19.1",
+    "accelerate": "1.14.0",
+    "datasets": "5.0.0"
+  },
+  "distributed": {
+    "world_size": 1,
+    "expected_world_size": 4,
+    "rank": 0,
+    "cuda_visible_devices": "",
+    "per_device_train_batch_size": 1,
+    "num_generations": 4,
+    "generation_batch_size": 4,
+    "gradient_accumulation_steps": 8
+  },
+  "generation": {
+    "max_completion_length": 320,
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "eos_token_id": 248046,
+    "pad_token_id": 248044,
+    "use_cache": true,
+    "remove_invalid_values": true,
+    "renormalize_logits": true
+  },
+  "optimization": {
+    "max_steps": 100,
+    "learning_rate": 5e-06,
+    "weight_decay": 0.0,
+    "lr_scheduler_type": "constant_with_warmup",
+    "warmup_steps": 5,
+    "max_grad_norm": 1.0,
+    "loss_type": "dr_grpo",
+    "scale_rewards": "group",
+    "beta": 0.0,
+    "epsilon": 0.2,
+    "fp16": true,
+    "bf16": false,
+    "grad_scaler_init_scale": 1.0,
+    "grad_scaler_growth_interval": 100000
+  },
+  "reward_weights": {
+    "task_reward": 0.95,
+    "format_reward": 0.05,
+    "route_exact": 0.0,
+    "argument_exact": 0.0,
+    "stop_exact": 0.0,
+    "no_forbidden_action": 0.0
+  },
+  "lora": {
+    "r": 16,
+    "alpha": 32,
+    "dropout": 0.0,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "in_proj_qkv",
+      "in_proj_z",
+      "in_proj_a",
+      "in_proj_b",
+      "out_proj"
+    ]
+  },
+  "hardware_guards": {
+    "cudnn_enabled": false,
+    "max_allocated_gib": 28.0,
+    "minimum_free_gib": 2.0
+  }
+}

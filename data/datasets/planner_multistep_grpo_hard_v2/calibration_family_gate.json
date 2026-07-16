@@ -1,0 +1,199 @@
+{
+  "mode": "calibration",
+  "status": "pass",
+  "thresholds": {
+    "reference_min": 0.95,
+    "base_max": 0.7,
+    "gap_min": 0.25,
+    "min_families": 6,
+    "min_multistep_families": 3
+  },
+  "global_checks": {
+    "run_valid": true,
+    "accepted_family_count": true,
+    "accepted_multistep_family_count": true
+  },
+  "accepted_scenarios": [
+    "qwen_box_variance_to_migration",
+    "qwen_empty_result_to_migration",
+    "qwen_domain_shift_to_migration",
+    "rex_box_variance_to_migration",
+    "rex_empty_result_to_migration",
+    "rex_domain_shift_to_migration",
+    "qwen_confident_stop_guardrail",
+    "rex_confident_stop_guardrail"
+  ],
+  "accepted_multistep_scenarios": [
+    "qwen_box_variance_to_migration",
+    "qwen_empty_result_to_migration",
+    "qwen_domain_shift_to_migration",
+    "rex_box_variance_to_migration",
+    "rex_empty_result_to_migration",
+    "rex_domain_shift_to_migration",
+    "qwen_confident_stop_guardrail",
+    "rex_confident_stop_guardrail"
+  ],
+  "families": {
+    "qwen_box_variance_to_migration": {
+      "reference_pass_all": 1.0,
+      "base_pass_all": 0.0,
+      "gap": 1.0,
+      "max_steps": 2,
+      "checks": {
+        "reference_at_least_min": true,
+        "base_at_most_max": true,
+        "gap_at_least_min": true,
+        "run_valid": true
+      },
+      "admitted": true
+    },
+    "qwen_empty_result_to_migration": {
+      "reference_pass_all": 1.0,
+      "base_pass_all": 0.0,
+      "gap": 1.0,
+      "max_steps": 2,
+      "checks": {
+        "reference_at_least_min": true,
+        "base_at_most_max": true,
+        "gap_at_least_min": true,
+        "run_valid": true
+      },
+      "admitted": true
+    },
+    "qwen_domain_shift_to_migration": {
+      "reference_pass_all": 1.0,
+      "base_pass_all": 0.0,
+      "gap": 1.0,
+      "max_steps": 2,
+      "checks": {
+        "reference_at_least_min": true,
+        "base_at_most_max": true,
+        "gap_at_least_min": true,
+        "run_valid": true
+      },
+      "admitted": true
+    },
+    "rex_box_variance_to_migration": {
+      "reference_pass_all": 1.0,
+      "base_pass_all": 0.0,
+      "gap": 1.0,
+      "max_steps": 2,
+      "checks": {
+        "reference_at_least_min": true,
+        "base_at_most_max": true,
+        "gap_at_least_min": true,
+        "run_valid": true
+      },
+      "admitted": true
+    },
+    "rex_empty_result_to_migration": {
+      "reference_pass_all": 1.0,
+      "base_pass_all": 0.0,
+      "gap": 1.0,
+      "max_steps": 2,
+      "checks": {
+        "reference_at_least_min": true,
+        "base_at_most_max": true,
+        "gap_at_least_min": true,
+        "run_valid": true
+      },
+      "admitted": true
+    },
+    "rex_domain_shift_to_migration": {
+      "reference_pass_all": 1.0,
+      "base_pass_all": 0.0,
+      "gap": 1.0,
+      "max_steps": 2,
+      "checks": {
+        "reference_at_least_min": true,
+        "base_at_most_max": true,
+        "gap_at_least_min": true,
+        "run_valid": true
+      },
+      "admitted": true
+    },
+    "qwen_confident_stop_guardrail": {
+      "reference_pass_all": 0.96875,
+      "base_pass_all": 0.4375,
+      "gap": 0.53125,
+      "max_steps": 2,
+      "checks": {
+        "reference_at_least_min": true,
+        "base_at_most_max": true,
+        "gap_at_least_min": true,
+        "run_valid": true
+      },
+      "admitted": true
+    },
+    "rex_confident_stop_guardrail": {
+      "reference_pass_all": 1.0,
+      "base_pass_all": 0.1875,
+      "gap": 0.8125,
+      "max_steps": 2,
+      "checks": {
+        "reference_at_least_min": true,
+        "base_at_most_max": true,
+        "gap_at_least_min": true,
+        "run_valid": true
+      },
+      "admitted": true
+    },
+    "image_migration_capability_probe": {
+      "reference_pass_all": 1.0,
+      "base_pass_all": 1.0,
+      "gap": 0.0,
+      "max_steps": 1,
+      "checks": {
+        "reference_at_least_min": true,
+        "base_at_most_max": false,
+        "gap_at_least_min": false,
+        "run_valid": true
+      },
+      "admitted": false
+    },
+    "image_migration_validation_probe": {
+      "reference_pass_all": 1.0,
+      "base_pass_all": 1.0,
+      "gap": 0.0,
+      "max_steps": 1,
+      "checks": {
+        "reference_at_least_min": true,
+        "base_at_most_max": false,
+        "gap_at_least_min": false,
+        "run_valid": true
+      },
+      "admitted": false
+    },
+    "image_migration_risk_probe": {
+      "reference_pass_all": 1.0,
+      "base_pass_all": 1.0,
+      "gap": 0.0,
+      "max_steps": 1,
+      "checks": {
+        "reference_at_least_min": true,
+        "base_at_most_max": false,
+        "gap_at_least_min": false,
+        "run_valid": true
+      },
+      "admitted": false
+    },
+    "image_migration_data_probe": {
+      "reference_pass_all": 1.0,
+      "base_pass_all": 1.0,
+      "gap": 0.0,
+      "max_steps": 1,
+      "checks": {
+        "reference_at_least_min": true,
+        "base_at_most_max": false,
+        "gap_at_least_min": false,
+        "run_valid": true
+      },
+      "admitted": false
+    }
+  },
+  "inputs": {
+    "base_aggregate": "/raid/zkq/artifacts/CAPA/evals/20260714_planner_multistep_grpo_hard_v2/calibration/base_combined/qwen25_7b_base_v2_calibration_t0_1x_aggregate.json",
+    "reference_aggregate": "/raid/zkq/artifacts/CAPA/evals/20260714_planner_multistep_grpo_hard_v2/calibration/qwen35_combined/qwen35_a3b_v2_calibration_t0_1x_aggregate.json",
+    "cases": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/cases/planner_multistep_grpo_hard_v2_calibration_cases.jsonl"
+  }
+}

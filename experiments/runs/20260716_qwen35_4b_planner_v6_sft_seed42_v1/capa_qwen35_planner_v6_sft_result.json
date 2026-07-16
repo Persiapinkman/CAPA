@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.0",
+  "status": "completed",
+  "started_at": "2026-07-16T01:10:51.576862+00:00",
+  "finished_at": "2026-07-16T02:29:43.266791+00:00",
+  "runtime_seconds": 4731.689972797874,
+  "optimizer_steps": 100,
+  "train_metrics": {
+    "train_runtime": 4683.6931,
+    "train_samples_per_second": 0.256,
+    "train_steps_per_second": 0.021,
+    "total_flos": 1.1152511595446272e+17,
+    "train_loss": 0.26180317755293797,
+    "epoch": 1.1494252873563218
+  },
+  "log_summary": {
+    "training_log_count": 100,
+    "first_train": {
+      "loss": 1.4070357084274292,
+      "grad_norm": 9.516267776489258,
+      "learning_rate": 0.0,
+      "entropy": 0.6344657242298126,
+      "mean_token_accuracy": 0.7051671743392944,
+      "num_tokens": 51457.0,
+      "epoch": 0.011494252873563218,
+      "step": 1
+    },
+    "final_train": {
+      "loss": 0.0015137892914935946,
+      "grad_norm": 0.20237301290035248,
+      "learning_rate": 2e-05,
+      "entropy": 0.007806685753166676,
+      "mean_token_accuracy": 1.0,
+      "num_tokens": 5151859.0,
+      "epoch": 1.1494252873563218,
+      "step": 100
+    },
+    "minimum_loss": 0.0001600190589670092,
+    "maximum_mean_token_accuracy": 1.0,
+    "eval_log_count": 10,
+    "final_eval": {
+      "eval_loss": 0.21907028555870056,
+      "eval_runtime": 149.8241,
+      "eval_samples_per_second": 1.735,
+      "eval_steps_per_second": 0.294,
+      "eval_entropy": 0.020747497042810373,
+      "eval_mean_token_accuracy": 0.9740661084651947,
+      "eval_num_tokens": 5151859.0,
+      "epoch": 1.1494252873563218,
+      "step": 100
+    },
+    "nonfinite_logged_values": 0
+  },
+  "model_audit": {
+    "base_model_class": "Qwen3_5ForCausalLM",
+    "visual_module_count": 0,
+    "lora_module_count": 152,
+    "trainable_parameter_count": 14376960
+  },
+  "nonfinite_state_values": 0,
+  "output_dir": "/raid/zkq/projects/CAPA/experiments/runs/20260716_qwen35_4b_planner_v6_sft_seed42_v1"
+}

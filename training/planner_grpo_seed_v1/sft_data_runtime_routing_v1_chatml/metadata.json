@@ -1,0 +1,102 @@
+{
+  "dataset_id": "planner_runtime_routing_v1",
+  "provenance": "Synthetic and deidentified; scenario frequencies and phrasing classes are derived from aggregate demo sessions, not copied user turns.",
+  "splits": {
+    "train": {
+      "cases": 390,
+      "steps": 450,
+      "entity_groups": 30,
+      "categories": {
+        "adela_eval": 30,
+        "clarify_incomplete": 30,
+        "flux_generation": 30,
+        "general_answer": 30,
+        "memory_end": 30,
+        "migration_advisor": 30,
+        "pipeline_eval": 30,
+        "private_lookup": 30,
+        "qwen_probe": 30,
+        "qwen_probe_only_contrast": 30,
+        "qwen_probe_then_migration": 30,
+        "rex_probe": 30,
+        "rex_probe_then_migration": 30
+      },
+      "expected_actions": {
+        "adela_cli_eval": 30,
+        "answerer": 30,
+        "clarify": 30,
+        "end": 30,
+        "flux-image-generation": 30,
+        "migration_advisor": 90,
+        "pipeline_eval": 30,
+        "qwen_detection": 90,
+        "rag_answer": 30,
+        "rexomni_detection": 60
+      }
+    },
+    "dev": {
+      "cases": 104,
+      "steps": 120,
+      "entity_groups": 8,
+      "categories": {
+        "adela_eval": 8,
+        "clarify_incomplete": 8,
+        "flux_generation": 8,
+        "general_answer": 8,
+        "memory_end": 8,
+        "migration_advisor": 8,
+        "pipeline_eval": 8,
+        "private_lookup": 8,
+        "qwen_probe": 8,
+        "qwen_probe_only_contrast": 8,
+        "qwen_probe_then_migration": 8,
+        "rex_probe": 8,
+        "rex_probe_then_migration": 8
+      },
+      "expected_actions": {
+        "adela_cli_eval": 8,
+        "answerer": 8,
+        "clarify": 8,
+        "end": 8,
+        "flux-image-generation": 8,
+        "migration_advisor": 24,
+        "pipeline_eval": 8,
+        "qwen_detection": 24,
+        "rag_answer": 8,
+        "rexomni_detection": 16
+      }
+    },
+    "test": {
+      "cases": 208,
+      "steps": 240,
+      "entity_groups": 16,
+      "categories": {
+        "adela_eval": 16,
+        "clarify_incomplete": 16,
+        "flux_generation": 16,
+        "general_answer": 16,
+        "memory_end": 16,
+        "migration_advisor": 16,
+        "pipeline_eval": 16,
+        "private_lookup": 16,
+        "qwen_probe": 16,
+        "qwen_probe_only_contrast": 16,
+        "qwen_probe_then_migration": 16,
+        "rex_probe": 16,
+        "rex_probe_then_migration": 16
+      },
+      "expected_actions": {
+        "adela_cli_eval": 16,
+        "answerer": 16,
+        "clarify": 16,
+        "end": 16,
+        "flux-image-generation": 16,
+        "migration_advisor": 48,
+        "pipeline_eval": 16,
+        "qwen_detection": 48,
+        "rag_answer": 16,
+        "rexomni_detection": 32
+      }
+    }
+  }
+}

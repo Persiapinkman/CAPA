@@ -1,0 +1,120 @@
+{
+  "schema_version": "1.0",
+  "recorded_at": "2026-07-15T02:00:27Z",
+  "amended_at_before_any_v4_generation_or_evaluation": "2026-07-15T02:04:00Z",
+  "amendment_reason": "Prevent an always-migrate shortcut by making every selectable family contain migrate, retry, and end controls.",
+  "study_id": "planner_multistep_tool_routing_grpo_qwen35_4b_v1",
+  "dataset_id": "planner_multistep_grpo_value_v4",
+  "supersedes_for_new_eval": "planner_multistep_grpo_value_v3",
+  "v3_disposition": "rejected_after_valid_calibration: reference strict accuracy 0.651042 and base strict accuracy 0.671875; only hard technical-error families separated the models",
+  "objective": "Measure observation-conditioned technical-error routing after a required visual detector call: migrate on non-retryable errors or exhausted retry budgets, without leaking the next action in the observation.",
+  "experimental_unit": "entity_id cluster",
+  "design": {
+    "type": "blocked whole-family calibration followed by frozen confirmation",
+    "calibration_entities": 20,
+    "candidate_families": 12,
+    "calibration_cases": 240,
+    "detectors": [
+      "qwen_detection",
+      "rexomni_detection"
+    ],
+    "policy_packs": [
+      "payload_contract",
+      "authorization_contract",
+      "quota_contract",
+      "response_schema_contract",
+      "transport_contract",
+      "upstream_contract"
+    ],
+    "blocking": "Every calibration entity contains every detector-by-policy-pack family.",
+    "counterfactual_control": "Within each detector and entity the policy query is identical; current structured observations determine the second action.",
+    "action_hint_in_current_observation": false,
+    "within_family_action_mix": {
+      "calibration_per_20_cases": {
+        "migrate_on_nonretryable_or_exhausted_error": 12,
+        "retry_same_detector_when_budget_available": 6,
+        "end_on_clean_all-gates-pass": 2
+      },
+      "confirmation_per_30_cases": {
+        "migrate_on_nonretryable_or_exhausted_error": 18,
+        "retry_same_detector_when_budget_available": 9,
+        "end_on_clean_all-gates-pass": 3
+      }
+    },
+    "gold_trajectory": "required detector first, followed by one of migration_advisor, the same detector, or end according to the latest observation"
+  },
+  "calibration": {
+    "repeats": 1,
+    "selection_unit": "complete scenario family",
+    "reference_min": 0.95,
+    "base_min": 0.0,
+    "base_max": 0.8,
+    "gap_min": 0.2,
+    "base_route_failure_rate_min": 0.15,
+    "argument_only_failure_share_max": 0.25,
+    "balanced_selection": "Select the first four admitted Qwen and first four admitted Rex policy-pack families in the frozen scenario order.",
+    "required_selected_families": 8,
+    "case_level_filtering": false
+  },
+  "confirmation": {
+    "generation_condition": "Generate only after the eight calibration families are frozen.",
+    "entities": 30,
+    "families": 8,
+    "cases": 240,
+    "qualification_repeats": 1,
+    "new_entities_templates_error_aliases_and_fixture_families": true,
+    "reference_strict_min": 0.95,
+    "base_strict_max": 0.8,
+    "gap_min": 0.2,
+    "family_reference_min": 0.9,
+    "base_route_failure_rate_min": 0.15,
+    "base_route_failure_share_of_failures_min": 0.7,
+    "base_argument_only_failure_share_max": 0.2,
+    "decision": "accept_or_reject_entire_dataset_version",
+    "case_level_filtering": false,
+    "promotion_note": "A later release/regression claim still requires the existing three-repeat protocol; this task performs the preregistered one-run qualification requested for dataset construction."
+  },
+  "models": {
+    "base": {
+      "label": "Qwen3.5-4B",
+      "path": "/raid/zkq/models/Qwen3.5-4B",
+      "runtime": "local Transformers fp16 non-thinking"
+    },
+    "reference": {
+      "label": "Qwen3.5-35B-A3B",
+      "runtime": "external OpenAI-compatible endpoint",
+      "environment": "/raid/zkq/projects/CAPA/init_env.sh",
+      "client_environment": "/raid/zkq/projects/CAPA/.venv"
+    }
+  },
+  "generation_protocol": {
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "do_sample": false,
+    "seed": 42,
+    "max_steps": 2,
+    "max_tokens": 384,
+    "timeout_seconds": 180,
+    "openai_timeout_seconds": 180,
+    "CAPA_ENABLE_ADELA": 0
+  },
+  "invalid_run_conditions": [
+    "any infrastructure or API fallback error",
+    "any empty Planner decision",
+    "wrong model or endpoint",
+    "dataset or verifier hash drift",
+    "any unrecovered completion truncation"
+  ],
+  "analysis": {
+    "primary": "strict full-trajectory accuracy",
+    "route_metric": "exact decision_type/action sequence",
+    "failure_decomposition": [
+      "route failure",
+      "argument-only failure",
+      "model-output parse failure"
+    ],
+    "future_grpo_value_contrast": "SFT+GRPO minus the same SFT-only initializer; this reference/base gap establishes a target capability, not causal proof that GRPO alone creates it.",
+    "future_training_gate": "Before GRPO, audit stochastic positive/negative support at the target step; use SFT warm-up for families with zero positive support."
+  },
+  "training_status": "not_started_not_authorized_in_this_study"
+}

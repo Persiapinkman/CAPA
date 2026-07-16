@@ -93,77 +93,29 @@ Return a JSON object with key "results": an array of length {}.
 
 
 evaluation_summary_prompt = """
-你是一个视觉检测评测分析助手。现在给你一批图片（按 image_idx=0..N-1 顺序输入，包含原始图片和由原图扩展生成的多张图片），任务描述、目标类别，以及两个模型在每张图片上的预测结果（只包含 bbox 列表，不含 GT）。
+你是视觉检测评测分析助手。输入图片按 image_idx=0..N-1 排列，包含原始图片和扩增图片；每张图已经画框：红框来自 Qwen，蓝框来自 Rex-Omni。你还会收到两个模型的 bbox 列表，但没有人工 GT。
 
-prediction.json 结构示例（仅供你理解，不会直接给你看文件）：
-[
-  {{
-    "image": "orig.jpg",
-    "source": "original",
-    "image_idx": 0,
-    "models": [
-      {{"model": "qwen3-vl-8b", "pred_bboxes": [[x1,y1,x2,y2], ...]}},
-      {{"model": "rex-omni", "pred_bboxes": [[x1,y1,x2,y2], ...]}}
-    ]
-  }},
-  {{
-    "image": "banner_123.jpg",
-    "source": "generated",
-    "image_idx": 1,
-    "models": [...]
-  }},
-  ...
-]
+必须遵守以下证据边界：
+1. 只能基于图片中可见目标、红蓝框位置、预测数量和给定统计作定性评估。
+2. 没有 GT，不能把定性判断写成真实 benchmark accuracy、mAP 或 IoU-to-GT。accuracy 字段应明确写“定性估计”或“N/A（无GT）”。
+3. cross_model_agreement 中的 IoU 只表示两个模型相互一致，不表示任一模型正确。
+4. 当两个模型框数量相同且跨模型 IoU 较高时，除非标注图给出明确相反证据，不得声称其中一个模型存在严重偏移、过检或大幅落后。
+5. 如果扩增图没有遵循目标数量、场景或多样性要求，应明确指出生成数据质量问题，不能把生成器问题归因于检测模型。
+6. 不预设哪个模型更好；证据不足以区分时 recommendation 必须为 inconclusive。
 
-你将收到的 reports_json 是一个 JSON 数组，其中每条记录都包含 image_idx、image、source、model、pred_bboxes、num_boxes。
-你必须基于 image_idx 来将图片与该条记录对应起来，并按图片顺序逐张评估两个模型的“标注效果”（这里的标注效果指预测框是否看起来合理、是否覆盖目标、是否明显偏离/误检/漏检，属于定性评估）。
-
-请基于图片内容和 reports_json（不依赖 GT），输出一个可直接展示给用户的评测结论（严格输出 JSON，输出中文），要求：
-- per_image_evaluation：按 image_idx 顺序输出每张图片对两个模型的评估。每个元素必须包含：
-  - image_idx、image、source
-  - qwen3-vl-8b、rex-omni 的 accuracy（预估的准确率，例如90%）和 reason(2-4句话，说明图片上有多少个目标，模型预测了多少个目标框，其中有多少个框是准确命中的，IOU超过0.5认为预测准确，预测框是否覆盖目标，是否出现明显偏离，是否存在漏检/误检/过检的情况)
-- overall_conclusion：3-6 句话中文总结，分别说明整体检测表现（例如：是否大部分图片都有预测、是否经常漏检/过检、对扩展场景的鲁棒性、边界情况表现等）
-- model_results：分别对 qwen3-vl-8b 和 rex-omni 用accuracy给出一个预估的准确率范围，尽量预估准确，不要过于乐观或悲观。并用 reason 解释依据（是否存在漏检/误检/过检的情况，泛化性能等），尽量详细，100个字左右。
-- recommendation：给出一个推荐的标注模型(qwen3-vl-8b 或 rex-omni)。
-
-请严格按 evaluation_summary_schema 的 JSON 结构返回结果。
-
-输出示例如下：
-{{
-  "per_image_evaluation": [
-    {{
-      "image_idx": 0,
-      "image": "orig.jpg",
-      "source": "original",
-      "qwen3-vl-8b": {{
-        "accuracy": "95%",
-        "reason": "图中约有2个目标，模型预测了2个框，其中1个框准确覆盖目标，另1个存在轻微偏移但仍命中目标区域。整体框位置较为合理，没有明显误检，但对边界的贴合程度一般。未出现明显漏检情况。"
-      }},
-      "rex-omni": {{
-        "accuracy": "60%",
-        "reason": "图中约有2个目标，模型预测了3个框，其中1个准确命中目标，1个偏移较大，另有1个为误检。存在一定过检问题，同时框位置稳定性较差，但未完全漏掉主要目标。"
-      }}
-    }}
-  ],
-  "overall_conclusion": "整体来看，qwen3-vl-8b 在大部分图片上都能稳定给出预测结果，且较少出现明显误检，定位精度相对较高。在原始图片上表现较好，在生成图片上略有下降但仍保持一定鲁棒性。rex-omni 则存在较多过检和定位偏移问题，尤其是在生成图片场景下泛化能力不足。两者相比，qwen3-vl-8b 的整体稳定性和准确性更优，但在边界贴合和复杂场景下仍有优化空间。",
-  "model_results": {{
-    "qwen3-vl-8b": {{
-      "accuracy": "80-90%",
-      "reason": "该模型在多数图片中均能检测到目标，漏检情况较少，说明召回能力较强。同时预测框位置整体较为合理，虽然存在轻微偏移或框过大的问题，但大多数情况下能够覆盖目标区域。对于生成图片的泛化能力略有下降，但仍保持稳定输出，误检较少，整体表现较为均衡。"
-    }},
-    "rex-omni": {{
-      "accuracy": "65-75%",
-      "reason": "该模型存在较明显的过检问题，经常预测多余的框，同时部分预测框偏离目标较远，定位精度不足。在部分图片中虽然能够检测到目标，但稳定性较差。对于生成图片的适应能力较弱，误检和定位偏移问题更加突出，整体表现不如另一模型稳定。"
-    }}
-  }},
-  "recommendation": "综合评估结果，推荐使用 qwen3-vl-8b 作为标注模型，其在大多数场景下具有更高的稳定性和准确率，同时误检较少，更适合用于实际标注任务。"
-}}
-
+请严格按 evaluation_summary_schema 输出中文 JSON：
+- per_image_evaluation：按 image_idx 顺序，包含 image_idx、image、source，以及两个模型的 accuracy 和 reason。reason 用2-4句话说明可见目标数、预测框数、框是否覆盖目标及证据限制。
+- overall_conclusion：3-6句话，总结原图、扩增图、模型间一致性和生成数据质量。
+- model_results：分别给出定性框质量结论和依据，不得伪造真实准确率。
+- recommendation：只能是 qwen3-vl-8b、rex-omni 或 inconclusive。
 
 任务描述：{task_text}
-目标类别（target_label）：{target_label}
-模型预测统计结果（JSON 格式）：
+目标类别：{target_label}
+模型预测统计：
 {reports_json}
+
+确定性跨模型一致性（不是 GT）：
+{agreement_json}
 """.strip()
 
 

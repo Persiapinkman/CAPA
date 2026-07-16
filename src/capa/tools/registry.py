@@ -14,6 +14,8 @@ Tool registry for the demo agent.
 
 from __future__ import annotations
 
+import os
+
 from . import schemas as schema_defs
 
 TOOL_RAG_ANSWER = "rag_answer"
@@ -45,8 +47,8 @@ TOOL_DECLARATIONS = [
         "requires_image": False,
         "schema": {
             "description": (
-                "适合用**知识库 / RAG 检索**回答的问题：如公司内部私有业务知识、项目文档、模型版本、标签含义、safety_rope 等业务与配置类问答；"
-                "不适用于已在问题中写明 Adela 类部署平台标识（如 cuda*-trt*-*）并追问该模型在该平台上的精度、性能或 benchmark 数值的场景，此类应使用 adela_cli_eval。"
+                "适合用**知识库 / RAG 检索**回答的问题：如公司内部私有业务知识、项目文档、"
+                "模型版本、标签含义、safety_rope 等业务与配置类问答。"
             ),
             "parameters": {
                 **schema_defs.RAG_ANSWER_PARAMETERS,
@@ -75,6 +77,7 @@ TOOL_DECLARATIONS = [
     {
         "name": TOOL_ANSWERER,
         "legacy_action": ACTION_ANSWERER,
+        "aliases": ["evidence_synthesis_answer"],
         "executor_branch": "answerer",
         "flow": "direct_answer",
         "requires_image": False,
@@ -155,6 +158,7 @@ TOOL_DECLARATIONS = [
     {
         "name": TOOL_MIGRATION_ADVISOR,
         "legacy_action": ACTION_MIGRATION_ADVISOR,
+        "aliases": ["transfer_advisory"],
         "executor_branch": "migration_advisor",
         "flow": "migration_advisor",
         "requires_image": False,
@@ -172,7 +176,10 @@ TOOL_DECLARATIONS = [
     },
     {
         "name": TOOL_ADELA_CLI_EVAL,
+        "enabled_by_default": False,
+        "enable_env": "CAPA_ENABLE_ADELA",
         "legacy_action": ACTION_ADELA_CLI_EVAL,
+        "aliases": ["adela_cli_benchmark"],
         "executor_branch": "adela_cli",
         "flow": "adela_eval",
         "requires_image": False,
@@ -191,14 +198,20 @@ TOOL_DECLARATIONS = [
 ]
 
 TOOL_NAME_TO_DECLARATION = {item["name"]: item for item in TOOL_DECLARATIONS}
-LEGACY_ACTION_TO_DECLARATION = {
-    item["legacy_action"]: item for item in TOOL_DECLARATIONS
+ACTION_ALIAS_TO_DECLARATION = {
+    alias: item
+    for item in TOOL_DECLARATIONS
+    for alias in [item["legacy_action"], *item.get("aliases", [])]
 }
+# Compatibility export retained for older imports.
+LEGACY_ACTION_TO_DECLARATION = ACTION_ALIAS_TO_DECLARATION
 TOOL_NAME_TO_LEGACY_ACTION = {
     item["name"]: item["legacy_action"] for item in TOOL_DECLARATIONS
 }
 LEGACY_ACTION_TO_TOOL_NAME = {
-    item["legacy_action"]: item["name"] for item in TOOL_DECLARATIONS
+    alias: item["name"]
+    for item in TOOL_DECLARATIONS
+    for alias in [item["legacy_action"], *item.get("aliases", [])]
 }
 TOOL_NAME_TO_FLOW = {item["name"]: item["flow"] for item in TOOL_DECLARATIONS}
 TOOL_NAME_TO_EXECUTOR_BRANCH = {
@@ -209,6 +222,24 @@ TOOL_NAME_REQUIRES_IMAGE = {
 }
 
 
+def _env_flag(name: str, default: bool) -> bool:
+    raw = str(os.environ.get(name, "1" if default else "0")).strip().lower()
+    return raw not in {"0", "false", "off", "no", ""}
+
+
+def is_tool_enabled(tool_name: str) -> bool:
+    declaration = TOOL_NAME_TO_DECLARATION.get(normalize_tool_action(tool_name))
+    if not declaration:
+        return False
+    default = bool(declaration.get("enabled_by_default", True))
+    enable_env = str(declaration.get("enable_env") or "").strip()
+    return _env_flag(enable_env, default) if enable_env else default
+
+
+def get_active_tool_declarations() -> list[dict]:
+    return [item for item in TOOL_DECLARATIONS if is_tool_enabled(item["name"])]
+
+
 def get_tool_schemas() -> list[dict]:
     return [
         {
@@ -216,12 +247,21 @@ def get_tool_schemas() -> list[dict]:
             "description": item["schema"]["description"],
             "parameters": item["schema"]["parameters"],
         }
-        for item in TOOL_DECLARATIONS
+        for item in get_active_tool_declarations()
     ]
 
 
 def get_declared_tool_names() -> list[str]:
+    return [item["name"] for item in get_active_tool_declarations()]
+
+
+def get_all_tool_names() -> list[str]:
     return [item["name"] for item in TOOL_DECLARATIONS]
+
+
+def get_action_aliases() -> dict[str, str]:
+    """Return every historical action name mapped to its canonical tool name."""
+    return dict(LEGACY_ACTION_TO_TOOL_NAME)
 
 
 def normalize_tool_action(action: str) -> str:
@@ -254,4 +294,4 @@ def action_requires_image(action: str) -> bool:
 def is_valid_tool_action(action: str) -> bool:
     valid = set(get_declared_tool_names())
     valid.add(ACTION_FINAL_ANSWER)
-    return str(action or "").strip() in valid
+    return normalize_tool_action(action) in valid

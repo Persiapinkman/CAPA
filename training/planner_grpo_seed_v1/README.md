@@ -316,3 +316,54 @@ The training script converts each multi-step case into step-level Planner
 prompts. For step 2, the prompt includes the step-1 mock observation in
 `query_trajectories`, so the model trains on the actual state transition
 condition rather than on a flattened answer string.
+
+## W&B post-training observability
+
+The versioned dashboard contract is
+`configs/wandb/post_training_v1.json`. It places all runs in the
+`capa-planner-post-training` project and the `planner-retry-migrate-v6` group,
+with separate `sft` and `grpo` job types. Every plot uses
+`train/global_step`, so checkpoints and repeated seeds can be compared on the
+same optimizer-step axis.
+
+Install the training logger in the selected Qwen3.5 environment and the
+workspace control-plane dependency in the project environment:
+
+```bash
+uv pip install --python .venv-qwen35-grpo/bin/python wandb==0.28.0
+uv sync --extra observability
+```
+
+Validate the dashboard without credentials or network writes, then create it
+after authenticating W&B:
+
+```bash
+python scripts/setup_wandb_dashboard.py --dry-run
+export WANDB_API_KEY='<from your W&B account>'
+export WANDB_ENTITY='<team or username>'
+python scripts/setup_wandb_dashboard.py --entity "${WANDB_ENTITY}"
+```
+
+The SFT launcher enables W&B automatically only for an authorized training
+run; dry-runs stay local and perform no W&B write:
+
+```bash
+RUN_MODE=train CONFIRM_TRAIN=YES \
+WANDB_ENTITY="${WANDB_ENTITY}" \
+bash scripts/run_qwen35_4b_planner_v6_sft.sh
+```
+
+For each GRPO run the dashboard records aggregate and component reward
+statistics, policy entropy, gradient norm, and advantage diagnostics. Raw
+group-normalized mean advantage should remain near zero by construction;
+`train/advantage/abs_mean` and `train/advantage/std` show whether a useful
+within-group learning signal remains. SFT has no reward or advantage, so those
+panels are expected to be empty for SFT runs.
+
+Stage 1 is already satisfied by the frozen 2026-07-16 study: checkpoint-100
+improved entity-disjoint SFT-dev action match from 77.31% to 97.69% (+20.38
+percentage points), with 100% JSON validity. The current GRPO split failed its
+preregistered support gate (only 2/180 checkpoint-100 prompt groups had
+non-zero reward variance), so GRPO optimizer steps remain intentionally at
+zero until a residual-focused split passes the support gate. See
+`experiments/studies/planner_retry_migrate_v6_qwen35_4b_v1/TRAINING_REPORT.md`.

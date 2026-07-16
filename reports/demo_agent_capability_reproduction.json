@@ -1,0 +1,767 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-07-13T08:20:11.957896+00:00",
+  "static_contract": {
+    "passed": true,
+    "errors": []
+  },
+  "capabilities": [
+    {
+      "tool_name": "rag_answer",
+      "runtime_owner": "executor",
+      "components": [
+        "rag-retrieve-answer"
+      ],
+      "services": [
+        "rag"
+      ],
+      "side_effecting": false,
+      "executor_branch": "rag",
+      "flow": "rag",
+      "requires_image": false,
+      "aliases": [],
+      "assets": {
+        "rag-retrieve-answer": [
+          {
+            "path": "skills/rag-retrieve-answer/SKILL.md",
+            "exists": true
+          },
+          {
+            "path": "skills/rag-retrieve-answer/scripts/run_rag.py",
+            "exists": true
+          },
+          {
+            "path": "demo/gbrain_rag_client.py",
+            "exists": true
+          }
+        ]
+      },
+      "live_status": "partial_or_offline"
+    },
+    {
+      "tool_name": "re_question",
+      "runtime_owner": "executor",
+      "components": [
+        "query-rewrite"
+      ],
+      "services": [
+        "model_gateway"
+      ],
+      "side_effecting": false,
+      "executor_branch": "re_question",
+      "flow": "re_question",
+      "requires_image": false,
+      "aliases": [],
+      "assets": {
+        "query-rewrite": [
+          {
+            "path": "src/capa/agent.py",
+            "exists": true
+          }
+        ]
+      },
+      "live_status": "online"
+    },
+    {
+      "tool_name": "answerer",
+      "runtime_owner": "orchestrator",
+      "components": [
+        "answerer"
+      ],
+      "services": [
+        "model_gateway"
+      ],
+      "side_effecting": false,
+      "executor_branch": "answerer",
+      "flow": "direct_answer",
+      "requires_image": false,
+      "aliases": [
+        "evidence_synthesis_answer"
+      ],
+      "assets": {
+        "answerer": [
+          {
+            "path": "src/capa/agent.py",
+            "exists": true
+          }
+        ]
+      },
+      "live_status": "online"
+    },
+    {
+      "tool_name": "flux-image-generation",
+      "runtime_owner": "executor",
+      "components": [
+        "user-intent-understanding",
+        "llm-prompts-generation",
+        "flux-image-generation"
+      ],
+      "services": [
+        "model_gateway",
+        "flux_api"
+      ],
+      "side_effecting": true,
+      "executor_branch": "flux",
+      "flow": "flux",
+      "requires_image": false,
+      "aliases": [],
+      "assets": {
+        "user-intent-understanding": [
+          {
+            "path": "skills/user-intent-understanding/SKILL.md",
+            "exists": true
+          },
+          {
+            "path": "skills/user-intent-understanding/scripts/run_intent.py",
+            "exists": true
+          }
+        ],
+        "llm-prompts-generation": [
+          {
+            "path": "skills/llm-prompts-generation/SKILL.md",
+            "exists": true
+          },
+          {
+            "path": "skills/llm-prompts-generation/scripts/run_prompt_generation.py",
+            "exists": true
+          }
+        ],
+        "flux-image-generation": [
+          {
+            "path": "skills/flux-image-generation/SKILL.md",
+            "exists": true
+          },
+          {
+            "path": "skills/flux-image-generation/scripts/run_generation.py",
+            "exists": true
+          }
+        ]
+      },
+      "live_status": "unverified"
+    },
+    {
+      "tool_name": "qwen_detection",
+      "runtime_owner": "executor",
+      "components": [
+        "qwen-vlm-open-set-delection"
+      ],
+      "services": [
+        "qwen_detection"
+      ],
+      "side_effecting": false,
+      "executor_branch": "qwen_detection",
+      "flow": "qwen_detect",
+      "requires_image": true,
+      "aliases": [
+        "qwen-vlm-open-set-delection"
+      ],
+      "assets": {
+        "qwen-vlm-open-set-delection": [
+          {
+            "path": "skills/qwen-vlm-open-set-delection/SKILL.md",
+            "exists": true
+          },
+          {
+            "path": "skills/qwen-vlm-open-set-delection/scripts/run_detection.py",
+            "exists": true
+          }
+        ]
+      },
+      "live_status": "partial_or_offline"
+    },
+    {
+      "tool_name": "rexomni_detection",
+      "runtime_owner": "executor",
+      "components": [
+        "rexomni-open-set-detection"
+      ],
+      "services": [
+        "model_gateway"
+      ],
+      "side_effecting": false,
+      "executor_branch": "rexomni_detection",
+      "flow": "rexomni_detect",
+      "requires_image": true,
+      "aliases": [
+        "rexomni-open-set-detection"
+      ],
+      "assets": {
+        "rexomni-open-set-detection": [
+          {
+            "path": "skills/rexomni-open-set-detection/SKILL.md",
+            "exists": true
+          },
+          {
+            "path": "skills/rexomni-open-set-detection/scripts/run_detection.py",
+            "exists": true
+          }
+        ]
+      },
+      "live_status": "online"
+    },
+    {
+      "tool_name": "pipeline_eval",
+      "runtime_owner": "executor",
+      "components": [
+        "target-detection-evaluation",
+        "user-intent-understanding",
+        "llm-prompts-generation",
+        "flux-image-generation",
+        "qwen-vlm-open-set-delection",
+        "rexomni-open-set-detection",
+        "eval-reports-generation"
+      ],
+      "services": [
+        "model_gateway",
+        "flux_api",
+        "qwen_detection"
+      ],
+      "side_effecting": true,
+      "executor_branch": "pipeline",
+      "flow": "pipeline",
+      "requires_image": true,
+      "aliases": [
+        "target-detection-evaluation"
+      ],
+      "assets": {
+        "target-detection-evaluation": [
+          {
+            "path": "skills/target-detection-evaluation/SKILL.md",
+            "exists": true
+          },
+          {
+            "path": "skills/target-detection-evaluation/scripts/run_pipeline.py",
+            "exists": true
+          }
+        ],
+        "user-intent-understanding": [
+          {
+            "path": "skills/user-intent-understanding/SKILL.md",
+            "exists": true
+          },
+          {
+            "path": "skills/user-intent-understanding/scripts/run_intent.py",
+            "exists": true
+          }
+        ],
+        "llm-prompts-generation": [
+          {
+            "path": "skills/llm-prompts-generation/SKILL.md",
+            "exists": true
+          },
+          {
+            "path": "skills/llm-prompts-generation/scripts/run_prompt_generation.py",
+            "exists": true
+          }
+        ],
+        "flux-image-generation": [
+          {
+            "path": "skills/flux-image-generation/SKILL.md",
+            "exists": true
+          },
+          {
+            "path": "skills/flux-image-generation/scripts/run_generation.py",
+            "exists": true
+          }
+        ],
+        "qwen-vlm-open-set-delection": [
+          {
+            "path": "skills/qwen-vlm-open-set-delection/SKILL.md",
+            "exists": true
+          },
+          {
+            "path": "skills/qwen-vlm-open-set-delection/scripts/run_detection.py",
+            "exists": true
+          }
+        ],
+        "rexomni-open-set-detection": [
+          {
+            "path": "skills/rexomni-open-set-detection/SKILL.md",
+            "exists": true
+          },
+          {
+            "path": "skills/rexomni-open-set-detection/scripts/run_detection.py",
+            "exists": true
+          }
+        ],
+        "eval-reports-generation": [
+          {
+            "path": "skills/eval-reports-generation/SKILL.md",
+            "exists": true
+          },
+          {
+            "path": "skills/eval-reports-generation/scripts/run_eval_report_generation.py",
+            "exists": true
+          }
+        ]
+      },
+      "live_status": "unverified"
+    },
+    {
+      "tool_name": "migration_advisor",
+      "runtime_owner": "executor",
+      "components": [
+        "migration-advisor",
+        "rag-retrieve-answer",
+        "rexomni-open-set-detection"
+      ],
+      "services": [
+        "rag",
+        "model_gateway"
+      ],
+      "side_effecting": false,
+      "executor_branch": "migration_advisor",
+      "flow": "migration_advisor",
+      "requires_image": false,
+      "aliases": [
+        "transfer_advisory"
+      ],
+      "assets": {
+        "migration-advisor": [
+          {
+            "path": "demo/migration_advisor.py",
+            "exists": true
+          }
+        ],
+        "rag-retrieve-answer": [
+          {
+            "path": "skills/rag-retrieve-answer/SKILL.md",
+            "exists": true
+          },
+          {
+            "path": "skills/rag-retrieve-answer/scripts/run_rag.py",
+            "exists": true
+          },
+          {
+            "path": "demo/gbrain_rag_client.py",
+            "exists": true
+          }
+        ],
+        "rexomni-open-set-detection": [
+          {
+            "path": "skills/rexomni-open-set-detection/SKILL.md",
+            "exists": true
+          },
+          {
+            "path": "skills/rexomni-open-set-detection/scripts/run_detection.py",
+            "exists": true
+          }
+        ]
+      },
+      "live_status": "partial_or_offline"
+    },
+    {
+      "tool_name": "adela_cli_eval",
+      "runtime_owner": "executor",
+      "components": [
+        "adela-cli",
+        "rag-retrieve-answer"
+      ],
+      "services": [
+        "rag",
+        "adela_cli"
+      ],
+      "side_effecting": true,
+      "executor_branch": "adela_cli",
+      "flow": "adela_eval",
+      "requires_image": false,
+      "aliases": [
+        "adela_cli_benchmark"
+      ],
+      "assets": {
+        "adela-cli": [
+          {
+            "path": "skills/adela-cli/README.md",
+            "exists": true
+          },
+          {
+            "path": "skills/adela-cli/scripts/run_pipeline.py",
+            "exists": true
+          }
+        ],
+        "rag-retrieve-answer": [
+          {
+            "path": "skills/rag-retrieve-answer/SKILL.md",
+            "exists": true
+          },
+          {
+            "path": "skills/rag-retrieve-answer/scripts/run_rag.py",
+            "exists": true
+          },
+          {
+            "path": "demo/gbrain_rag_client.py",
+            "exists": true
+          }
+        ]
+      },
+      "live_status": "partial_or_offline"
+    }
+  ],
+  "historical_sessions": {
+    "privacy": {
+      "contains_user_text": false,
+      "contains_client_addresses": false,
+      "description": "Aggregate counts only; no query, answer, or client address is emitted."
+    },
+    "files": {
+      "discovered": 272,
+      "parsed": 272,
+      "parse_errors": 0
+    },
+    "dates": {
+      "20260428": 25,
+      "20260429": 2,
+      "20260507": 1,
+      "20260511": 7,
+      "20260512": 6,
+      "20260513": 16,
+      "20260514": 15,
+      "20260518": 11,
+      "20260519": 3,
+      "20260520": 21,
+      "20260521": 9,
+      "20260522": 14,
+      "20260525": 4,
+      "20260526": 7,
+      "20260527": 3,
+      "20260529": 31,
+      "20260601": 71,
+      "20260602": 5,
+      "20260603": 20,
+      "20260713": 1
+    },
+    "cohorts": {
+      "browser_session": 61,
+      "codex_eval": 51,
+      "migration_dataset": 51,
+      "smoke": 1,
+      "uuid_session": 108
+    },
+    "sessions_with_images": 7,
+    "threads": 446,
+    "queries": 295,
+    "trajectory_steps": 1083,
+    "event_types": {
+      "PLAN_DECISION": 735,
+      "OBSERVATION": 712,
+      "USER_INPUT": 371,
+      "ASSISTANT_OUTPUT": 371
+    },
+    "plan_actions": {
+      "rag_answer": 436,
+      "re_question": 237,
+      "adela_cli_eval": 23,
+      "clarify": 23,
+      "flux-image-generation": 5,
+      "qwen_detection": 4,
+      "": 4,
+      "pipeline_eval": 2,
+      "migration_advisor": 1
+    },
+    "raw_plan_actions": {
+      "rag_answer": 436,
+      "re_question": 237,
+      "clarify": 23,
+      "adela_cli_eval": 22,
+      "flux-image-generation": 5,
+      "qwen_detection": 4,
+      "": 4,
+      "pipeline_eval": 2,
+      "adela_cli_benchmark": 1,
+      "transfer_advisory": 1
+    },
+    "observation_actions": {
+      "rag_answer": 436,
+      "re_question": 237,
+      "adela_cli_eval": 23,
+      "flux-image-generation": 5,
+      "qwen_detection": 4,
+      "unknown": 4,
+      "pipeline_eval": 2,
+      "migration_advisor": 1
+    },
+    "observation_outcomes": {
+      "adela_cli_eval": {
+        "failure": 18,
+        "success": 5
+      },
+      "flux-image-generation": {
+        "failure": 2,
+        "unknown": 3
+      },
+      "migration_advisor": {
+        "success": 1
+      },
+      "pipeline_eval": {
+        "failure": 1,
+        "unknown": 1
+      },
+      "qwen_detection": {
+        "unknown": 3,
+        "failure": 1
+      },
+      "rag_answer": {
+        "unknown": 410,
+        "failure": 19,
+        "success": 7
+      },
+      "re_question": {
+        "success": 237
+      },
+      "unknown": {
+        "failure": 4
+      }
+    },
+    "trajectory_actions": {
+      "rag_answer": 436,
+      "final_answer": 241,
+      "re_question": 237,
+      "migration_advisor_offer": 91,
+      "clarify": 39,
+      "adela_cli_eval": 23,
+      "flux-image-generation": 5,
+      "qwen_detection": 4,
+      "": 4,
+      "pipeline_eval": 2,
+      "migration_advisor": 1
+    },
+    "top_trajectory_sequences": {
+      "rag_answer -> final_answer": 76,
+      "final_answer": 52,
+      "rag_answer -> re_question -> rag_answer -> re_question -> rag_answer -> migration_advisor_offer -> final_answer": 48,
+      "rag_answer -> re_question -> rag_answer -> re_question -> rag_answer -> migration_advisor_offer": 42,
+      "rag_answer -> re_question -> rag_answer -> re_question -> rag_answer -> final_answer": 23,
+      "adela_cli_eval -> final_answer": 14,
+      "clarify": 9,
+      "flux-image-generation -> final_answer": 5,
+      "qwen_detection -> final_answer": 4,
+      "clarify -> clarify -> clarify -> adela_cli_eval -> final_answer": 4,
+      "clarify -> clarify -> adela_cli_eval -> final_answer": 4,
+      "rag_answer -> re_question -> rag_answer -> final_answer": 4,
+      "pipeline_eval -> final_answer": 2,
+      "clarify -> clarify": 2,
+      "re_question -> rag_answer -> final_answer": 1,
+      "rag_answer -> clarify -> rag_answer -> clarify ->  -> rag_answer -> clarify": 1,
+      "clarify ->  -> clarify ->  -> adela_cli_eval -> rag_answer -> re_question -> rag_answer -> re_question -> rag_answer -> final_answer": 1,
+      "rag_answer -> re_question -> rag_answer -> re_question -> rag_answer -> final_answer -> final_answer": 1,
+      "migration_advisor -> final_answer": 1,
+      "clarify ->  -> rag_answer -> re_question -> rag_answer -> re_question -> rag_answer -> migration_advisor_offer": 1
+    },
+    "unknown_actions": {},
+    "pending_clarification": {
+      "present": 227,
+      "pending": 13
+    }
+  },
+  "historical_llm_debug": {
+    "privacy": {
+      "contains_prompts": false,
+      "contains_responses": false,
+      "contains_session_ids": false,
+      "description": "Aggregate stage, model, action, and parse counts only."
+    },
+    "files": {
+      "discovered": 2178,
+      "parsed": 2178,
+      "parse_errors": 0
+    },
+    "dates": {
+      "20260624": 161,
+      "20260625": 180,
+      "20260626": 186,
+      "20260703": 180,
+      "20260709": 843,
+      "20260710": 612,
+      "20260713": 16
+    },
+    "cohorts": {
+      "grpo_eval": 1455,
+      "runtime": 707,
+      "synthetic_smoke": 16
+    },
+    "stages": {
+      "planner_request": 1074,
+      "planner_response": 1045,
+      "planner_retry_request": 28,
+      "planner_retry_response": 23,
+      "answerer_tool_request": 3,
+      "answerer_tool_response": 3,
+      "answerer_request": 1,
+      "answerer_response": 1
+    },
+    "models": {
+      "Qwen2.5-7B-Instruct": 306,
+      "qwen3.5-9b": 228,
+      "qwen3-32b": 196,
+      "qwen35-4b-dpo": 95,
+      "qwen3.5-4b": 93,
+      "qwen35-4b-newarch-dpo": 90,
+      "qwen35-4b-sft-chosen": 90,
+      "Qwen3.5-4B": 7,
+      "Qwen3.5-35B-A3B": 1
+    },
+    "planner_responses": 1068,
+    "raw_json_parse_failures": 31,
+    "actions": {
+      "qwen_detection": 385,
+      "migration_advisor": 332,
+      "rag_answer": 179,
+      "pipeline_eval": 34,
+      "answerer": 29,
+      "adela_cli_eval": 24,
+      "flux-image-generation": 23,
+      "": 20,
+      "rexomni_detection": 11
+    },
+    "decision_types": {
+      "tool": 965,
+      "unknown": 55,
+      "clarify": 10,
+      "end": 7
+    }
+  },
+  "service_probes": {
+    "model_gateway": {
+      "status": "online",
+      "url": "http://10.111.32.253:8000/v1/models",
+      "elapsed_ms": 5294.583,
+      "models": [
+        "GLM-OCR",
+        "KM_essos_LargeFace_224x224_nart_cuda11.0-trt7.1-int8-T4_b64_8.0.1.model",
+        "KM_essos_SmallFace_544x960_nart_cuda11.0-trt7.1-int8-T4_b48_3.0.0.model",
+        "KM_essos_struct_nart_cuda11.0-trt7.1-int8-T4_b8_3.0.1.model",
+        "Qwen3-Embedding-8B",
+        "Qwen3.5-27B",
+        "Qwen3.5-35B-A3B",
+        "Qwen3.5-4B",
+        "Qwen3.5-9B",
+        "Rex-Omni",
+        "Sensenova-4B",
+        "Shikra-VAD-2B",
+        "mvad",
+        "yolo-world"
+      ],
+      "missing_required_models": []
+    },
+    "qwen_detection": {
+      "status": "offline",
+      "url": "http://127.0.0.1:9012/v1/models",
+      "error": "ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=9012): Max retries exceeded with url: /v1/models (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=9012): Failed to establish a new connection: [Errno 111] Connection refused\"))"
+    },
+    "rag_playbook": {
+      "status": "offline",
+      "url": "http://127.0.0.1:6062/api/v1/playbook/health",
+      "error": "ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=6062): Max retries exceeded with url: /api/v1/playbook/health (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=6062): Failed to establish a new connection: [Errno 111] Connection refused\"))"
+    },
+    "rag_unified": {
+      "status": "offline",
+      "url": "http://127.0.0.1:6061/api/v1/rag/health",
+      "error": "ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=6061): Max retries exceeded with url: /api/v1/rag/health (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=6061): Failed to establish a new connection: [Errno 111] Connection refused\"))"
+    },
+    "adela_cli": {
+      "status": "offline",
+      "command": "",
+      "pipeline_script_exists": true
+    },
+    "flux_api": {
+      "status": "not_probed",
+      "reason": "enable include_flux for a credentialed read-only model-list probe"
+    }
+  },
+  "service_summary": {
+    "online": 1,
+    "degraded": 0,
+    "offline": 4,
+    "other": 1
+  },
+  "recorded_smokes": {
+    "rag": {
+      "schema_version": "1.0",
+      "generated_at": "2026-07-13T06:12:00.964208+00:00",
+      "status": "contract_passed_content_missing",
+      "http_contract_passed": true,
+      "content_ready": false,
+      "miss_contract_passed": true,
+      "gbrain": {
+        "health_status": "degraded",
+        "chunks": 0,
+        "sources": {},
+        "retrieved_count": 0
+      },
+      "ace": {
+        "health_status": "ok",
+        "v2_reachable": true,
+        "active_playbook_items": 0,
+        "retrieved_count": 0,
+        "knowledge_base_fully_answered": 0.0,
+        "answer_present": true
+      },
+      "artifacts": {
+        "run_dir": "/raid/zkq/artifacts/CAPA/capability_reproduction/rag-smoke-20260713T061144Z",
+        "gbrain_log": "/raid/zkq/artifacts/CAPA/capability_reproduction/rag-smoke-20260713T061144Z/gbrain.log",
+        "ace_log": "/raid/zkq/artifacts/CAPA/capability_reproduction/rag-smoke-20260713T061144Z/ace.log"
+      },
+      "boundary": "This smoke verifies HTTP and empty-index miss behavior only. The repository does not contain the production corpus or indexes."
+    },
+    "rex": {
+      "status": "passed",
+      "elapsed_ms": 2902.883,
+      "fixture": "banner.jpg",
+      "categories": [
+        "banner_slogan"
+      ],
+      "annotations": 1,
+      "bbox_valid": true,
+      "artifact": "/raid/zkq/artifacts/CAPA/capability_reproduction/rex-smoke-20260713T082023Z.json"
+    }
+  },
+  "model_smoke": {
+    "planner": {
+      "status": "passed",
+      "decision_type": "tool",
+      "action": "answerer",
+      "elapsed_ms": 2774.737,
+      "metrics": {
+        "prompt_build_ms": 0.422,
+        "retry_count": 0,
+        "retry_reason": "",
+        "first_api_call_ms": 2557.25,
+        "api_call_ms": 2557.25,
+        "input_tokens": 4053,
+        "first_input_tokens": 4053,
+        "output_tokens": 107,
+        "first_output_tokens": 107,
+        "total_tokens": 4160,
+        "first_total_tokens": 4160,
+        "first_finish_reason": "stop",
+        "parse_ms": 0.385,
+        "planner_total_ms": 2774.717
+      }
+    },
+    "answerer": {
+      "status": "passed",
+      "answer_characters": 68,
+      "elapsed_ms": 1146.224
+    }
+  },
+  "http_smoke": {
+    "status": "passed",
+    "elapsed_ms": 6741.313,
+    "static_health_ok": true,
+    "capability_count": 9,
+    "event_types": [
+      "done",
+      "final_answer",
+      "meta",
+      "session",
+      "thread_routed"
+    ],
+    "planner_actions": [
+      "answerer",
+      "final_answer"
+    ],
+    "final_answer_characters": 81,
+    "done_ok": true,
+    "synthetic_session_cleaned": true
+  }
+}

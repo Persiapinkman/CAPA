@@ -13,14 +13,12 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[3]
-if str(ROOT) not in sys.path:
-    sys.path.insert(0, str(ROOT))
-DEMO_DIR = ROOT / "demo"
-if str(DEMO_DIR) not in sys.path:
-    sys.path.insert(0, str(DEMO_DIR))
+for import_root in (ROOT / "src", ROOT, ROOT / "demo"):
+    if str(import_root) not in sys.path:
+        sys.path.insert(0, str(import_root))
 
-import agent  # noqa: E402
-import memory_system as ms  # noqa: E402
+from capa import agent  # noqa: E402
+from capa import memory as ms  # noqa: E402
 
 
 class PlannerRolloutTimeout(BaseException):
@@ -267,6 +265,8 @@ def configure_generation(args: argparse.Namespace) -> None:
         os.environ["DEMO_OPENAI_DO_SAMPLE"] = str(args.do_sample)
     if args.openai_timeout_seconds is not None:
         os.environ["DEMO_OPENAI_TIMEOUT_SECONDS"] = str(args.openai_timeout_seconds)
+    if getattr(args, "max_tokens", None) is not None:
+        os.environ["DEMO_OPENAI_MAX_TOKENS"] = str(args.max_tokens)
 
 
 def main() -> None:
@@ -275,11 +275,16 @@ def main() -> None:
     parser.add_argument("--out", type=Path, required=True, help="Prediction JSONL output")
     parser.add_argument("--model", default="", help="Planner model name/endpoint identifier")
     parser.add_argument("--api-base", default="", help="OpenAI-compatible Planner API base")
-    parser.add_argument("--api-key", default="token.sdc@2026", help="Planner API key")
+    parser.add_argument(
+        "--api-key",
+        default="",
+        help="Optional Planner API key override; otherwise use DEMO_ROUTE_API_KEY",
+    )
     parser.add_argument("--limit", type=int, default=0, help="Optional case limit")
     parser.add_argument("--max-steps", type=int, default=3, help="Maximum Planner decisions per case")
     parser.add_argument("--timeout-seconds", type=int, default=45, help="Hard timeout for each Planner step")
     parser.add_argument("--openai-timeout-seconds", type=int, default=120, help="HTTP client timeout")
+    parser.add_argument("--max-tokens", type=int, default=384, help="Maximum Planner completion tokens")
     parser.add_argument("--temperature", type=float, default=0.0)
     parser.add_argument("--top-p", type=float, default=1.0)
     parser.add_argument("--seed", type=int, default=42)

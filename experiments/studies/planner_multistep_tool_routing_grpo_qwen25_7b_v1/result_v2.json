@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_multistep_tool_routing_grpo_qwen25_7b_v1",
+  "dataset_id": "planner_multistep_grpo_hard_v2",
+  "date": "2026-07-14",
+  "status": "confirmation_gate_pass_training_not_started",
+  "dataset": {
+    "calibration_cases": 384,
+    "confirmation_cases": 600,
+    "confirmation_clusters": 75,
+    "confirmation_families": 8,
+    "calibration_cases_sha256": "9deb1457f15ecaa5aa0642731ad0b5e479659e7b5750cba6364cc04f8992ad24",
+    "confirmation_cases_sha256": "42201f057366411fdfab77621f6b54e3f4c16d7fcdc8109616065e6212cc3008"
+  },
+  "confirmation": {
+    "protocol": {
+      "runs": 3,
+      "temperature": 0.0,
+      "top_p": 1.0,
+      "do_sample": false,
+      "seed": 42,
+      "max_steps": 3,
+      "max_tokens": 2048,
+      "timeout_seconds": 300,
+      "protocol_amendment": "protocol_amendment_t2048.json"
+    },
+    "reference": {
+      "model": "Qwen3.5-35B-A3B",
+      "passed_by_run": [593, 594, 591],
+      "pass_rate_mean": 0.987778,
+      "pass_all_runs_rate": 0.971667,
+      "pass_any_run_rate": 1.0,
+      "mean_score_mean": 0.999496,
+      "final_errors": 0,
+      "empty_decisions": 0,
+      "recovered_first_length_truncations": 5,
+      "retry_length_truncations": 0
+    },
+    "base": {
+      "model": "/raid/zkq/models/Qwen2.5-7B-Instruct",
+      "passed_by_run": [146, 147, 147],
+      "pass_rate_mean": 0.244444,
+      "pass_all_runs_rate": 0.226667,
+      "pass_any_run_rate": 0.26,
+      "mean_score_mean": 0.724724,
+      "final_errors": 0,
+      "empty_decisions": 0,
+      "recovered_first_length_truncations": 0,
+      "retry_length_truncations": 0
+    },
+    "reference_minus_base_pass_all_gap": 0.745,
+    "gap_cluster_bootstrap_95ci": [0.696667, 0.793333],
+    "gate": "pass"
+  },
+  "grpo_support": {
+    "global_gate": false,
+    "primary_step2_gate": true,
+    "primary_step2_nonzero_reward_std_rate": 0.916667,
+    "primary_step2_usable_support_rate": 0.833333,
+    "primary_step2_exact_action_support_rate": 0.854167,
+    "primary_step2_exact_task_support_rate": 0.041667,
+    "decision": "mandatory short SFT before any GRPO; repeat strict support audit after SFT"
+  },
+  "artifacts": {
+    "report": "reports/PLANNER_MULTISTEP_GRPO_HARD_V2_CONFIRMATION_20260714.md",
+    "calibration_gate": "data/datasets/planner_multistep_grpo_hard_v2/calibration_family_gate.json",
+    "confirmation_gate": "data/datasets/planner_multistep_grpo_hard_v2/confirmation_gate.json",
+    "cluster_bootstrap": "data/datasets/planner_multistep_grpo_hard_v2/confirmation_cluster_bootstrap.json",
+    "base_aggregate": "/raid/zkq/artifacts/CAPA/evals/20260714_planner_multistep_grpo_hard_v2/confirmation/base_combined/qwen25_7b_base_v2_confirmation_t0_3x_aggregate.json",
+    "reference_aggregate": "/raid/zkq/artifacts/CAPA/evals/20260714_planner_multistep_grpo_hard_v2/confirmation/qwen35_combined/qwen35_a3b_v2_confirmation_t0_3x_aggregate.json"
+  },
+  "human_gold_review": "pending_business_signoff",
+  "training_status": "not_started"
+}

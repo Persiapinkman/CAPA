@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "planner_multistep_grpo_value_v4",
+  "split": "calibration",
+  "seed": 20260715,
+  "selection_rule": "whole-family calibration only; confirmation unfiltered",
+  "accepted_scenarios": [],
+  "evaluation_only": true,
+  "exclude_from_training": true,
+  "cases": {
+    "cases": 240,
+    "steps": 480,
+    "unique_case_ids": 240,
+    "unique_queries": 40,
+    "categories": {
+      "qwen_authorization_contract": 20,
+      "qwen_payload_contract": 20,
+      "qwen_quota_contract": 20,
+      "qwen_response_schema_contract": 20,
+      "qwen_transport_contract": 20,
+      "qwen_upstream_contract": 20,
+      "rex_authorization_contract": 20,
+      "rex_payload_contract": 20,
+      "rex_quota_contract": 20,
+      "rex_response_schema_contract": 20,
+      "rex_transport_contract": 20,
+      "rex_upstream_contract": 20
+    },
+    "expected_actions": {
+      "end": 24,
+      "migration_advisor": 144,
+      "qwen_detection": 156,
+      "rexomni_detection": 156
+    }
+  },
+  "entity_groups": 20,
+  "families": {
+    "qwen_authorization_contract": 20,
+    "qwen_payload_contract": 20,
+    "qwen_quota_contract": 20,
+    "qwen_response_schema_contract": 20,
+    "qwen_transport_contract": 20,
+    "qwen_upstream_contract": 20,
+    "rex_authorization_contract": 20,
+    "rex_payload_contract": 20,
+    "rex_quota_contract": 20,
+    "rex_response_schema_contract": 20,
+    "rex_transport_contract": 20,
+    "rex_upstream_contract": 20
+  },
+  "target_action_classes": {
+    "end": 24,
+    "migrate": 144,
+    "retry": 72
+  },
+  "integrity": {
+    "existing_dataset_overlap": {
+      "status": "pass",
+      "overlaps": [],
+      "files_scanned": 25
+    },
+    "generated_split_isolation": {
+      "status": "not_applicable",
+      "reason": "both splits were not generated together"
+    }
+  },
+  "files": {
+    "cases": "training/planner_grpo_seed_v1/cases/planner_multistep_grpo_value_v4_calibration_cases.jsonl"
+  },
+  "sha256": {
+    "cases": "93c30d53aad1fc6a4ee5e2122c711ae9efe4c19c4a9db3dfdfc0bea4f54a6c66"
+  }
+}

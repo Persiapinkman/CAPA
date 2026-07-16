@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0",
+  "model": "/raid/zkq/models/Qwen3.5-4B",
+  "adapter_path": "",
+  "data": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/step_data/planner_multistep_grpo_value_v5_train_v1_qwen35_4b_support80.jsonl",
+  "rows": 13,
+  "offset": 41,
+  "filters": {
+    "categories": [],
+    "steps": []
+  },
+  "sampling": {
+    "samples_per_prompt": 8,
+    "generation_chunk_size": 2,
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "seed": 42,
+    "max_new_tokens": 320
+  },
+  "reward_weights": {
+    "task": 0.95,
+    "format": 0.05
+  },
+  "support": {
+    "overall": {
+      "groups": 13,
+      "mean_reward": 0.5616125801282051,
+      "mean_group_std": 0.19019782479704564,
+      "nonzero_std_rate": 0.9230769230769231,
+      "positive_support_rate": 0.5384615384615384,
+      "usable_support_rate": 0.6153846153846154,
+      "fully_saturated_rate": 0.07692307692307693,
+      "mean_distinct_actions": 1.5384615384615385
+    },
+    "categories": {
+      "rex_connection_budget_exhausted": {
+        "groups": 9,
+        "mean_reward": 0.5855837673611111,
+        "mean_group_std": 0.1603495300392883,
+        "nonzero_std_rate": 0.8888888888888888,
+        "positive_support_rate": 0.5555555555555556,
+        "usable_support_rate": 0.5555555555555556,
+        "fully_saturated_rate": 0.1111111111111111,
+        "mean_distinct_actions": 1.4444444444444444
+      },
+      "rex_connection_nonretryable": {
+        "groups": 4,
+        "mean_reward": 0.5076774088541667,
+        "mean_group_std": 0.2573564880019996,
+        "nonzero_std_rate": 1.0,
+        "positive_support_rate": 0.5,
+        "usable_support_rate": 0.75,
+        "fully_saturated_rate": 0.0,
+        "mean_distinct_actions": 1.75
+      }
+    },
+    "steps": {
+      "2": {
+        "groups": 13,
+        "mean_reward": 0.5616125801282051,
+        "mean_group_std": 0.19019782479704564,
+        "nonzero_std_rate": 0.9230769230769231,
+        "positive_support_rate": 0.5384615384615384,
+        "usable_support_rate": 0.6153846153846154,
+        "fully_saturated_rate": 0.07692307692307693,
+        "mean_distinct_actions": 1.5384615384615385
+      }
+    },
+    "category_steps": {
+      "rex_connection_budget_exhausted::step2": {
+        "groups": 9,
+        "mean_reward": 0.5855837673611111,
+        "mean_group_std": 0.1603495300392883,
+        "nonzero_std_rate": 0.8888888888888888,
+        "positive_support_rate": 0.5555555555555556,
+        "usable_support_rate": 0.5555555555555556,
+        "fully_saturated_rate": 0.1111111111111111,
+        "mean_distinct_actions": 1.4444444444444444
+      },
+      "rex_connection_nonretryable::step2": {
+        "groups": 4,
+        "mean_reward": 0.5076774088541667,
+        "mean_group_std": 0.2573564880019996,
+        "nonzero_std_rate": 1.0,
+        "positive_support_rate": 0.5,
+        "usable_support_rate": 0.75,
+        "fully_saturated_rate": 0.0,
+        "mean_distinct_actions": 1.75
+      }
+    }
+  }
+}

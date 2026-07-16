@@ -1,0 +1,110 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "planner_multistep_grpo_value_v3",
+  "seed": 20260715,
+  "selection_rule": "calibration-only whole-family selection; confirmation is unfiltered",
+  "accepted_scenarios": [],
+  "splits": {
+    "calibration": {
+      "cases": {
+        "cases": 384,
+        "steps": 912,
+        "unique_case_ids": 384,
+        "unique_queries": 48,
+        "categories": {
+          "qwen_accept_all_gates_stop": 24,
+          "qwen_domain_veto_migrate": 24,
+          "qwen_empty_veto_migrate": 24,
+          "qwen_hard_failure_migrate": 24,
+          "qwen_iou_veto_migrate": 24,
+          "qwen_retry_accept_stop": 24,
+          "qwen_retry_domain_migrate": 24,
+          "qwen_retry_iou_migrate": 24,
+          "rex_accept_all_gates_stop": 24,
+          "rex_domain_veto_migrate": 24,
+          "rex_empty_veto_migrate": 24,
+          "rex_hard_failure_migrate": 24,
+          "rex_iou_veto_migrate": 24,
+          "rex_retry_accept_stop": 24,
+          "rex_retry_domain_migrate": 24,
+          "rex_retry_iou_migrate": 24
+        },
+        "expected_actions": {
+          "end": 96,
+          "migration_advisor": 288,
+          "qwen_detection": 264,
+          "rexomni_detection": 264
+        }
+      },
+      "steps": {
+        "rows": 912,
+        "cases": 384,
+        "exact_prompt_completion_duplicates": 0,
+        "duplicate_rate": 0.0,
+        "max_rows_per_case": 3,
+        "categories": {
+          "qwen_accept_all_gates_stop": 48,
+          "qwen_domain_veto_migrate": 48,
+          "qwen_empty_veto_migrate": 48,
+          "qwen_hard_failure_migrate": 48,
+          "qwen_iou_veto_migrate": 48,
+          "qwen_retry_accept_stop": 72,
+          "qwen_retry_domain_migrate": 72,
+          "qwen_retry_iou_migrate": 72,
+          "rex_accept_all_gates_stop": 48,
+          "rex_domain_veto_migrate": 48,
+          "rex_empty_veto_migrate": 48,
+          "rex_hard_failure_migrate": 48,
+          "rex_iou_veto_migrate": 48,
+          "rex_retry_accept_stop": 72,
+          "rex_retry_domain_migrate": 72,
+          "rex_retry_iou_migrate": 72
+        }
+      },
+      "entity_groups": 24,
+      "families": {
+        "qwen_accept_all_gates_stop": 24,
+        "qwen_domain_veto_migrate": 24,
+        "qwen_empty_veto_migrate": 24,
+        "qwen_hard_failure_migrate": 24,
+        "qwen_iou_veto_migrate": 24,
+        "qwen_retry_accept_stop": 24,
+        "qwen_retry_domain_migrate": 24,
+        "qwen_retry_iou_migrate": 24,
+        "rex_accept_all_gates_stop": 24,
+        "rex_domain_veto_migrate": 24,
+        "rex_empty_veto_migrate": 24,
+        "rex_hard_failure_migrate": 24,
+        "rex_iou_veto_migrate": 24,
+        "rex_retry_accept_stop": 24,
+        "rex_retry_domain_migrate": 24,
+        "rex_retry_iou_migrate": 24
+      },
+      "step_counts": {
+        "2": 240,
+        "3": 144
+      },
+      "case_file": "training/planner_grpo_seed_v1/cases/planner_multistep_grpo_value_v3_calibration_cases.jsonl",
+      "step_file": "training/planner_grpo_seed_v1/sft_data_multistep_grpo_value_v3_qwen35_chatml/calibration.jsonl"
+    }
+  },
+  "integrity": {
+    "existing_dataset_overlap": {
+      "status": "pass",
+      "overlaps": [],
+      "files_scanned": 25
+    },
+    "generated_split_isolation": {
+      "status": "not_applicable",
+      "reason": "both splits were not generated together"
+    }
+  },
+  "files": {
+    "calibration_cases": "training/planner_grpo_seed_v1/cases/planner_multistep_grpo_value_v3_calibration_cases.jsonl",
+    "calibration_steps": "training/planner_grpo_seed_v1/sft_data_multistep_grpo_value_v3_qwen35_chatml/calibration.jsonl"
+  },
+  "sha256": {
+    "calibration_cases": "9023b5e6b5afe02b193d591920d1876453fda16bfe60bb6a818b83c082ea83c7",
+    "calibration_steps": "0c1aedfc80eac956c01c56fb1fd3dd476a0dd31e571f96fb78b6f4a3d2635d6f"
+  }
+}

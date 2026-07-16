@@ -1,0 +1,75 @@
+{
+  "schema_version": "1.0",
+  "recorded_at": "2026-07-14T17:07:00Z",
+  "study_id": "planner_multistep_tool_routing_grpo_qwen25_7b_v1",
+  "evaluation_id": "qwen35_4b_planner_multistep_grpo_hard_v2_confirmation_3x",
+  "purpose": "Evaluate Qwen3.5-4B on the already-frozen V2 confirmation set before deciding how to adapt the existing GRPO framework.",
+  "model": {
+    "name": "Qwen3.5-4B",
+    "source_path": "/mnt/zkq/models/Qwen3.5-4B",
+    "evaluation_path": "/raid/zkq/models/Qwen3.5-4B",
+    "source_and_target_filesystems_differ": true,
+    "copy_validation": {
+      "method": "rsync -a --checksum --dry-run --itemize-changes",
+      "remaining_differences": 0,
+      "regular_files": 32,
+      "regular_file_bytes": 9343257586
+    },
+    "inference": {
+      "loader": "transformers.AutoModelForCausalLM",
+      "resolved_class": "Qwen3_5ForCausalLM",
+      "dtype": "float16",
+      "attention_implementation": "sdpa",
+      "enable_thinking": false
+    }
+  },
+  "dataset": {
+    "dataset_id": "planner_multistep_grpo_hard_v2",
+    "split": "confirmation",
+    "cases_path": "training/planner_grpo_seed_v1/cases/planner_multistep_grpo_hard_v2_confirmation_cases.jsonl",
+    "cases": 600,
+    "decisions_per_run": 1200,
+    "entity_clusters": 75,
+    "families": 8,
+    "cases_sha256": "42201f057366411fdfab77621f6b54e3f4c16d7fcdc8109616065e6212cc3008"
+  },
+  "protocol": {
+    "repeats": 3,
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "do_sample": false,
+    "seed": 42,
+    "max_steps": 3,
+    "max_tokens": 2048,
+    "timeout_seconds": 300,
+    "openai_timeout_seconds": 300,
+    "CAPA_ENABLE_ADELA": 0,
+    "verifier": "strict named action, exact step order and stop, strict JSON boolean, typed arguments"
+  },
+  "analysis": {
+    "primary_metrics": [
+      "strict pass count per run",
+      "mean strict pass rate",
+      "pass-all-3 rate",
+      "pass-any-3 rate",
+      "mean dense score"
+    ],
+    "secondary_metrics": [
+      "pass-all-3 by family",
+      "entity-cluster bootstrap 95% confidence interval",
+      "paired comparison with Qwen3.5-35B-A3B and raw Qwen2.5-7B-Instruct",
+      "API errors, empty decisions, retries and length truncations"
+    ],
+    "role": "descriptive candidate-model evaluation; it does not rewrite the frozen 35B-versus-7B dataset gate",
+    "case_level_filtering_after_results": false
+  },
+  "invalid_run_conditions": [
+    "any unrecovered API or rollout error",
+    "any empty Planner decision",
+    "wrong model or API endpoint",
+    "proxy environment mismatch",
+    "dataset or verifier hash drift",
+    "any unrecovered completion truncation"
+  ],
+  "training_status": "not_started_not_authorized_in_this_evaluation"
+}

@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_multistep_tool_routing_grpo_qwen25_7b_v1",
+  "amended_at": "2026-07-14",
+  "scope": "planner_multistep_grpo_hard_v2 confirmation evaluation only",
+  "status": "superseded_by_protocol_amendment_t2048_before_any_confirmation_score_or_case-level_correctness_was_inspected",
+  "invalid_attempt": {
+    "max_tokens": 384,
+    "timeout_seconds": 180,
+    "observed_operational_failures_at_stop": {
+      "reference_first_completion_length_truncations": 4,
+      "reference_timeout_rows": 3,
+      "base_timeout_rows": 0
+    },
+    "artifact_root": "/raid/zkq/artifacts/CAPA/evals/20260714_planner_multistep_grpo_hard_v2/confirmation/invalid_t384",
+    "use_in_metrics": false
+  },
+  "replacement_protocol": {
+    "max_tokens": 768,
+    "timeout_seconds": 300,
+    "openai_timeout_seconds": 300,
+    "restart_policy": "rerun all 600 cases for all 3 repeats from case 1 for both arms",
+    "validity_requirement": "zero API errors, zero empty decisions, zero first-completion length truncations"
+  },
+  "unchanged": [
+    "case file and SHA256",
+    "gold decisions and verifier",
+    "accepted scenario allowlist",
+    "model identities",
+    "temperature, top_p, do_sample and seed",
+    "family and confirmation gates"
+  ],
+  "rationale": "The 384-token ceiling censored valid reference completions and triggered retries. The amendment changes only run validity, not item selection or scoring."
+}

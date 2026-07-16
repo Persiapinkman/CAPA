@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_multistep_tool_routing_grpo_qwen25_7b_v1",
+  "model": "/raid/zkq/models/Qwen2.5-7B-Instruct",
+  "audit": "/raid/zkq/artifacts/CAPA/evals/20260714_planner_multistep_grpo_hard_v2/support/combined/summary.json",
+  "scope_categories": [
+    "qwen_box_variance_to_migration",
+    "qwen_empty_result_to_migration",
+    "qwen_domain_shift_to_migration",
+    "rex_box_variance_to_migration",
+    "rex_empty_result_to_migration",
+    "rex_domain_shift_to_migration",
+    "qwen_confident_stop_guardrail",
+    "rex_confident_stop_guardrail"
+  ],
+  "scope_steps": [],
+  "passed": false,
+  "checks": {
+    "nonzero_reward_std_rate": {
+      "observed": 0.546875,
+      "operator": ">=",
+      "threshold": 0.8,
+      "passed": false
+    },
+    "usable_support_rate": {
+      "observed": 0.4453125,
+      "operator": ">=",
+      "threshold": 0.8,
+      "passed": false
+    },
+    "near_exact_task_support_rate": {
+      "observed": 0.5703125,
+      "operator": ">=",
+      "threshold": 0.8,
+      "passed": false
+    },
+    "fully_saturated_rate": {
+      "observed": 0.4375,
+      "operator": "<=",
+      "threshold": 0.25,
+      "passed": false
+    },
+    "exact_action_support_rate": {
+      "observed": 0.875,
+      "operator": ">=",
+      "threshold": 0.8,
+      "passed": true
+    },
+    "mean_distinct_valid_actions": {
+      "observed": 1.5,
+      "operator": ">=",
+      "threshold": 1.4,
+      "passed": true
+    }
+  }
+}

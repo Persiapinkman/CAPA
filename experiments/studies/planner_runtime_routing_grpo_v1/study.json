@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_runtime_routing_grpo_v1",
+  "arm_id": "fixed_existing_route_grpo_external_validation",
+  "status": "runtime_probe_primary_growth_replicated_development_guardrail_failed_test_unopened",
+  "objective": "Test whether an existing route-focused GRPO policy improves Planner decisions that are actually model-controlled in the demo runtime.",
+  "runtime_policy_audit": {
+    "planner_owned": [
+      "initial decision_type/tool route",
+      "tool arguments and finish_after_tool",
+      "follow-up after a nonterminal visual probe"
+    ],
+    "orchestrator_owned_excluded_from_primary_claim": [
+      "RAG miss to re_question",
+      "re_question to RAG follow-up",
+      "third RAG miss migration offer",
+      "tool precondition enforcement"
+    ]
+  },
+  "dataset": {
+    "dataset_id": "planner_runtime_routing_v1",
+    "train_rows": 450,
+    "dev_rows": 120,
+    "test_rows": 240,
+    "test_status": "sealed_unopened",
+    "bootstrap_cluster": "entity_id",
+    "provenance": "deidentified synthetic cases derived from aggregate demo-session patterns"
+  },
+  "fixed_arms": {
+    "baseline": {
+      "label": "sft_v3",
+      "model": "/raid/zkq/artifacts/CAPA/outputs/merged-qwen25-7b-sft-v3-chatml",
+      "adapter": ""
+    },
+    "candidate": {
+      "label": "route_grpo_v4",
+      "model": "/raid/zkq/artifacts/CAPA/outputs/merged-qwen25-7b-sft-v3-chatml",
+      "adapter": "/raid/zkq/artifacts/CAPA/outputs/planner-grpo-qwen25-7b-trl-lora-v4-chatml-format-formal-v1",
+      "training_data": "planner_focused_v3 train split",
+      "training_steps": 60
+    }
+  },
+  "generation": {
+    "temperature": 0.0,
+    "do_sample": false,
+    "max_new_tokens": 128,
+    "repeats": 1,
+    "score_first_json_only": true
+  },
+  "development_gate": {
+    "primary_category": "qwen_probe_then_migration",
+    "primary_endpoint": "strict action match across both steps",
+    "minimum_primary_action_delta": 0.05,
+    "minimum_primary_verifier_delta": 0.03,
+    "contrast_category": "qwen_probe_only_contrast",
+    "maximum_contrast_action_regression": 0.05,
+    "maximum_any_guardrail_action_regression": 0.05,
+    "require_no_increase_in_wrong_side_effecting_actions": true
+  },
+  "confirmation": {
+    "trigger": "Open test once only if every development gate passes without changing the fixed arms or generation settings.",
+    "test_primary_endpoint": "qwen_probe_then_migration strict action match across both steps",
+    "bootstrap_samples": 20000,
+    "test_status": "sealed_unopened"
+  },
+  "fallback_if_gate_fails": "Keep test sealed. Audit sampling support on train/dev and preregister a new route-focused GRPO training arm; do not tune against test.",
+  "claim_boundary": "Planner routing and nonterminal visual-probe continuation only; no claim about actual tool output quality or hard-coded RAG recovery transitions.",
+  "fixed_candidate_result": {
+    "development_gate": "development_gate_fixed_candidate.json",
+    "passed": false,
+    "baseline_primary_strict_case_action_rate": 0.625,
+    "candidate_primary_strict_case_action_rate": 0.625,
+    "strict_case_action_delta": 0.0,
+    "verifier_delta": 0.029166666666666563,
+    "test_opened": false,
+    "next_arm": "runtime_probe_curriculum_arm_v2.json"
+  },
+  "runtime_probe_curriculum_result": {
+    "dataset_id": "planner_runtime_probe_curriculum_v1",
+    "training_seeds": [42, 43, 44],
+    "evaluation_repeats": 3,
+    "primary_category": "qwen_probe_then_migration",
+    "mean_primary_strict_case_action_delta": 0.3333333333333333,
+    "mean_overall_action_delta": 0.1333333333333333,
+    "overall_action_ci95": [0.09166666666666666, 0.17777777777777778],
+    "development_gate_passed": false,
+    "failed_check": "wrong_side_effects",
+    "mean_wrong_side_effect_delta": 0.6666666666666661,
+    "test_status": "sealed_unopened",
+    "decision": "Narrow runtime-owned growth is supported, but the whole policy is rejected for safe promotion."
+  }
+}

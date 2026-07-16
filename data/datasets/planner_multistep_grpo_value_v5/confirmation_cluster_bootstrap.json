@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "experimental_unit": "case_id",
+  "bootstrap_cluster": "entity_id",
+  "cases": 240,
+  "clusters": 30,
+  "bootstrap_samples": 20000,
+  "seed": 20260715,
+  "metrics": {
+    "base_pass_all": 0.6583333333333333,
+    "base_cluster_bootstrap_95ci": [
+      0.5208333333333334,
+      0.7875
+    ],
+    "reference_pass_all": 0.9916666666666667,
+    "reference_cluster_bootstrap_95ci": [
+      0.9791666666666666,
+      1.0
+    ],
+    "reference_minus_base_gap": 0.33333333333333337,
+    "gap_cluster_bootstrap_95ci": [
+      0.20416666666666672,
+      0.4708333333333333
+    ]
+  },
+  "paired_case_counts": {
+    "reference_only": 82,
+    "base_only": 2,
+    "both": 156,
+    "neither": 0
+  }
+}

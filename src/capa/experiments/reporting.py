@@ -132,7 +132,7 @@ def render_leaderboard(*, registry_path: Path, output_path: Path) -> None:
         "metric_value",
         "decision",
     ]
-    writer = csv.DictWriter(buffer, fieldnames=fieldnames)
+    writer = csv.DictWriter(buffer, fieldnames=fieldnames, lineterminator="\n")
     writer.writeheader()
     for row in sorted(rows, key=lambda item: (str(item.get("date")), str(item.get("run_id")))):
         metric_name, metric_value = _primary_metric(row)

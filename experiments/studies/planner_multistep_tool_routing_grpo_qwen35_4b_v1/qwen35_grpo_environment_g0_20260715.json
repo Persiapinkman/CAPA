@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0",
+  "status": "passed",
+  "scope": "G0_static_environment_contract_only",
+  "created_at_utc": "2026-07-15T08:52:11Z",
+  "environment": "/raid/zkq/artifacts/CAPA/runtime/venv-qwen35-grpo-cu124-v1",
+  "project_link": "/raid/zkq/projects/CAPA/.venv-qwen35-grpo",
+  "model": "/raid/zkq/models/Qwen3.5-4B",
+  "python": "3.10.12",
+  "versions": {
+    "torch": "2.6.0+cu124",
+    "transformers": "5.12.0",
+    "trl": "1.8.0",
+    "peft": "0.19.1",
+    "accelerate": "1.14.0",
+    "datasets": "5.0.0",
+    "huggingface-hub": "1.19.0",
+    "tokenizers": "0.22.2",
+    "safetensors": "0.8.0",
+    "evaluate": "0.4.6"
+  },
+  "dependency_check": "uv_pip_check_passed_90_packages",
+  "package_freeze": {
+    "path": "/raid/zkq/artifacts/CAPA/runtime/venv-qwen35-grpo-cu124-v1/requirements.freeze.txt",
+    "sha256": "da047777e3b3b66322ffa04d9f60f5349e5ca3813a7f28565798c5f9ef9adb55",
+    "matches_installed_packages": true
+  },
+  "optional_packages_present": {
+    "vllm": false,
+    "flash_attn": false,
+    "bitsandbytes": false,
+    "torchvision": false
+  },
+  "project_imports": {
+    "training.planner_grpo_seed_v1.scripts.reward_planner_grpo": true,
+    "training.planner_grpo_seed_v1.scripts.train_planner_grpo": true,
+    "training.planner_grpo_seed_v1.scripts.train_planner_grpo_trl": true,
+    "capa.agent": true
+  },
+  "qwen35": {
+    "config_class": "Qwen3_5Config",
+    "model_type": "qwen3_5",
+    "text_config_class": "Qwen3_5TextConfig",
+    "auto_causal_lm_class": "Qwen3_5ForCausalLM",
+    "trust_remote_code": false,
+    "tokenizer_class": "Qwen2Tokenizer",
+    "eos_token": "<|im_end|>",
+    "eos_token_id": 248046,
+    "pad_token": "<|endoftext|>",
+    "pad_token_id": 248044,
+    "template_nonthinking_ok": true
+  },
+  "trl": {
+    "grpo_trainer_import": true,
+    "rollout_func_present": true,
+    "required_config_fields_present": true,
+    "grad_scaler_init_scale_1_constructs": true,
+    "accelerate_cli": true,
+    "torchrun_cli": true
+  },
+  "cuda": {
+    "torch_cuda_build": "12.4",
+    "available": true,
+    "device_name": "Tesla V100-SXM2-32GB",
+    "capability": [7, 0],
+    "torch_bf16_including_emulation": true,
+    "native_bf16_supported": false,
+    "cudnn_version": 90100
+  },
+  "model_file_sha256": {
+    "config.json": "ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670",
+    "tokenizer_config.json": "316230d6a809701f4db5ea8f8fc862bc3a6f3229c937c174e674ff3ca0a64ac8",
+    "chat_template.jinja": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715"
+  },
+  "limits": {
+    "model_weights_loaded": false,
+    "cuda_forward_executed": false,
+    "optimizer_steps": 0,
+    "training_started": false,
+    "next_gate": "G1_real_weight_text_only_load"
+  },
+  "all_checks_passed": true
+}

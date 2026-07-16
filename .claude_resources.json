@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-07-12T15:43:54.367761",
+  "timestamp": "2026-07-15T16:52:45.129621",
   "os": {
     "system": "Linux",
     "release": "5.15.0-181-generic",
@@ -13,22 +13,22 @@
     "max_frequency_mhz": 3600.0,
     "architecture": "x86_64",
     "processor": "x86_64",
-    "current_frequency_mhz": 1.8276374999999991
+    "current_frequency_mhz": 1.4219375000000016
   },
   "memory": {
     "total_gb": 503.76,
-    "available_gb": 431.76,
-    "used_gb": 68.72,
-    "percent_used": 14.3,
+    "available_gb": 435.57,
+    "used_gb": 63.75,
+    "percent_used": 13.5,
     "swap_total_gb": 8.0,
-    "swap_available_gb": 7.9
+    "swap_available_gb": 7.97
   },
   "disk": {
     "path": "/raid/zkq/projects/CAPA",
     "total_gb": 7095.35,
-    "available_gb": 1068.38,
-    "used_gb": 5669.36,
-    "percent_used": 84.1
+    "available_gb": 1992.93,
+    "used_gb": 4744.81,
+    "percent_used": 70.4
   },
   "gpu": {
     "nvidia_gpus": [
@@ -56,7 +56,7 @@
         "index": 2,
         "name": "Tesla V100-SXM2-32GB",
         "memory_total_mb": 32768.0,
-        "memory_free_mb": 32495.0,
+        "memory_free_mb": 25795.0,
         "driver_version": "550.163.01",
         "compute_capability": "7.0",
         "type": "NVIDIA",

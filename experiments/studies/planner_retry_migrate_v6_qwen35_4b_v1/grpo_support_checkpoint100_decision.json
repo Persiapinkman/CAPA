@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "created_at": "2026-07-16T03:32:55Z",
+  "study_id": "planner_retry_migrate_v6_qwen35_4b_v1",
+  "stage": "grpo_support_gate_result",
+  "initializer": "checkpoint-100",
+  "status": "optimizer_not_authorized",
+  "preregistration": "experiments/studies/planner_retry_migrate_v6_qwen35_4b_v1/preregistration_grpo_support.json",
+  "artifacts": {
+    "summary": "experiments/runs/20260716_qwen35_4b_planner_v6_grpo_support_ckpt100_full4x/summary.json",
+    "summary_sha256": "0772c8a25dfc759caafdd05a7a92a7624a8296dfb946402f72a92c597e52a9a9",
+    "samples": "experiments/runs/20260716_qwen35_4b_planner_v6_grpo_support_ckpt100_full4x/samples.jsonl",
+    "samples_sha256": "0de0c7eb5c306f029734884e0d719d8dd56dcbfb74cd3f5cccd293a647685ea6"
+  },
+  "observed": {
+    "prompt_groups": 180,
+    "samples": 720,
+    "json_valid_rate": 1.0,
+    "natural_eos_rate": 1.0,
+    "clipped_rate": 0.0,
+    "sample_action_match_rate": 0.9958333333333333,
+    "mean_reward": 0.9965625,
+    "gold_action_support_rate": 1.0,
+    "nonzero_reward_variance_groups": 2,
+    "nonzero_reward_variance_rate": 0.011111111111111112,
+    "qwen_nonzero_variance_groups": 1,
+    "qwen_nonzero_variance_rate": 0.011111111111111112,
+    "rex_nonzero_variance_groups": 1,
+    "rex_nonzero_variance_rate": 0.011111111111111112,
+    "migrate_nonzero_variance_groups": 1,
+    "migrate_nonzero_variance_rate": 0.008333333333333333,
+    "retry_nonzero_variance_groups": 1,
+    "retry_nonzero_variance_rate": 0.016666666666666666,
+    "nonfinite_rewards": 0
+  },
+  "gate_results": {
+    "original_nonzero_support_gate": "pass",
+    "json_validity_gate": "pass",
+    "clipping_gate": "pass",
+    "overall_variance_rate_at_least_0_1": "fail",
+    "at_least_5_variance_groups_per_detector": "fail",
+    "at_least_5_variance_groups_per_target": "fail",
+    "practical_optimizer_utility_gate": "fail"
+  },
+  "decision": {
+    "perform_g4_no_update": false,
+    "perform_optimizer_canary": false,
+    "perform_formal_grpo": false,
+    "reason": "Checkpoint-100 already solves the core-only GRPO distribution. Only 2 of 180 prompt groups have nonzero reward variance, so a 100-step GRPO run would spend nearly all updates on zero-advantage groups and cannot target the remaining SFT errors, which are step-3 and guardrail states absent from GRPO data."
+  },
+  "next": "Evaluate the prospectively frozen checkpoint-75 alternative initializer; if it also fails, rebuild GRPO data around residual state-boundary failures."
+}

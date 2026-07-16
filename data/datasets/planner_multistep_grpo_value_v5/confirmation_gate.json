@@ -1,0 +1,237 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "planner_multistep_grpo_value_v5",
+  "mode": "confirmation",
+  "status": "fail",
+  "overall": {
+    "base": {
+      "cases": 240,
+      "strict_pass_all": 0.6583333333333333,
+      "route_pass_all": 0.7333333333333333,
+      "route_failure_rate": 0.26666666666666666,
+      "route_failure_share_of_strict_failures": 0.7804878048780488,
+      "argument_only_failure_share": 0.21951219512195122
+    },
+    "reference": {
+      "cases": 240,
+      "strict_pass_all": 0.9916666666666667,
+      "route_pass_all": 1.0,
+      "route_failure_rate": 0.0,
+      "route_failure_share_of_strict_failures": 0.0,
+      "argument_only_failure_share": 1.0
+    },
+    "strict_gap": 0.33333333333333337
+  },
+  "action_mix": {
+    "migrate": 144,
+    "retry": 96
+  },
+  "checks": {
+    "exactly_240_cases": true,
+    "eight_families": true,
+    "four_qwen_families": true,
+    "four_rex_families": true,
+    "preregistered_action_mix": true,
+    "shortcut_ceiling_at_most_0_60": true,
+    "one_repeat_and_runtime_valid": true,
+    "reference_at_least_0_95": true,
+    "base_at_most_0_80": true,
+    "gap_at_least_0_20": true,
+    "base_route_failure_rate_at_least_0_15": true,
+    "base_route_failures_dominate": true,
+    "base_argument_only_share_at_most_0_20": false,
+    "all_families_reference_supported": true
+  },
+  "families": {
+    "qwen_timeout_nonretryable": {
+      "base": {
+        "cases": 30,
+        "strict_pass_all": 0.5333333333333333,
+        "route_pass_all": 0.6,
+        "route_failure_rate": 0.4,
+        "strict_failed_cases": 14,
+        "route_failed_cases": 12,
+        "argument_only_failed_cases": 2,
+        "argument_only_failure_share": 0.14285714285714285
+      },
+      "reference": {
+        "cases": 30,
+        "strict_pass_all": 1.0,
+        "route_pass_all": 1.0,
+        "route_failure_rate": 0.0,
+        "strict_failed_cases": 0,
+        "route_failed_cases": 0,
+        "argument_only_failed_cases": 0,
+        "argument_only_failure_share": 0.0
+      },
+      "reference_at_least_0_90": true
+    },
+    "rex_timeout_nonretryable": {
+      "base": {
+        "cases": 30,
+        "strict_pass_all": 0.8,
+        "route_pass_all": 0.9,
+        "route_failure_rate": 0.1,
+        "strict_failed_cases": 6,
+        "route_failed_cases": 3,
+        "argument_only_failed_cases": 3,
+        "argument_only_failure_share": 0.5
+      },
+      "reference": {
+        "cases": 30,
+        "strict_pass_all": 1.0,
+        "route_pass_all": 1.0,
+        "route_failure_rate": 0.0,
+        "strict_failed_cases": 0,
+        "route_failed_cases": 0,
+        "argument_only_failed_cases": 0,
+        "argument_only_failure_share": 0.0
+      },
+      "reference_at_least_0_90": true
+    },
+    "qwen_timeout_budget_exhausted": {
+      "base": {
+        "cases": 30,
+        "strict_pass_all": 0.5,
+        "route_pass_all": 0.5666666666666667,
+        "route_failure_rate": 0.43333333333333335,
+        "strict_failed_cases": 15,
+        "route_failed_cases": 13,
+        "argument_only_failed_cases": 2,
+        "argument_only_failure_share": 0.13333333333333333
+      },
+      "reference": {
+        "cases": 30,
+        "strict_pass_all": 0.9666666666666667,
+        "route_pass_all": 1.0,
+        "route_failure_rate": 0.0,
+        "strict_failed_cases": 1,
+        "route_failed_cases": 0,
+        "argument_only_failed_cases": 1,
+        "argument_only_failure_share": 1.0
+      },
+      "reference_at_least_0_90": true
+    },
+    "rex_timeout_budget_exhausted": {
+      "base": {
+        "cases": 30,
+        "strict_pass_all": 0.8,
+        "route_pass_all": 0.9,
+        "route_failure_rate": 0.1,
+        "strict_failed_cases": 6,
+        "route_failed_cases": 3,
+        "argument_only_failed_cases": 3,
+        "argument_only_failure_share": 0.5
+      },
+      "reference": {
+        "cases": 30,
+        "strict_pass_all": 0.9666666666666667,
+        "route_pass_all": 1.0,
+        "route_failure_rate": 0.0,
+        "strict_failed_cases": 1,
+        "route_failed_cases": 0,
+        "argument_only_failed_cases": 1,
+        "argument_only_failure_share": 1.0
+      },
+      "reference_at_least_0_90": true
+    },
+    "qwen_connection_nonretryable": {
+      "base": {
+        "cases": 30,
+        "strict_pass_all": 0.5666666666666667,
+        "route_pass_all": 0.6,
+        "route_failure_rate": 0.4,
+        "strict_failed_cases": 13,
+        "route_failed_cases": 12,
+        "argument_only_failed_cases": 1,
+        "argument_only_failure_share": 0.07692307692307693
+      },
+      "reference": {
+        "cases": 30,
+        "strict_pass_all": 1.0,
+        "route_pass_all": 1.0,
+        "route_failure_rate": 0.0,
+        "strict_failed_cases": 0,
+        "route_failed_cases": 0,
+        "argument_only_failed_cases": 0,
+        "argument_only_failure_share": 0.0
+      },
+      "reference_at_least_0_90": true
+    },
+    "rex_connection_nonretryable": {
+      "base": {
+        "cases": 30,
+        "strict_pass_all": 0.7333333333333333,
+        "route_pass_all": 0.8333333333333334,
+        "route_failure_rate": 0.16666666666666666,
+        "strict_failed_cases": 8,
+        "route_failed_cases": 5,
+        "argument_only_failed_cases": 3,
+        "argument_only_failure_share": 0.375
+      },
+      "reference": {
+        "cases": 30,
+        "strict_pass_all": 1.0,
+        "route_pass_all": 1.0,
+        "route_failure_rate": 0.0,
+        "strict_failed_cases": 0,
+        "route_failed_cases": 0,
+        "argument_only_failed_cases": 0,
+        "argument_only_failure_share": 0.0
+      },
+      "reference_at_least_0_90": true
+    },
+    "qwen_connection_budget_exhausted": {
+      "base": {
+        "cases": 30,
+        "strict_pass_all": 0.6,
+        "route_pass_all": 0.6333333333333333,
+        "route_failure_rate": 0.36666666666666664,
+        "strict_failed_cases": 12,
+        "route_failed_cases": 11,
+        "argument_only_failed_cases": 1,
+        "argument_only_failure_share": 0.08333333333333333
+      },
+      "reference": {
+        "cases": 30,
+        "strict_pass_all": 1.0,
+        "route_pass_all": 1.0,
+        "route_failure_rate": 0.0,
+        "strict_failed_cases": 0,
+        "route_failed_cases": 0,
+        "argument_only_failed_cases": 0,
+        "argument_only_failure_share": 0.0
+      },
+      "reference_at_least_0_90": true
+    },
+    "rex_connection_budget_exhausted": {
+      "base": {
+        "cases": 30,
+        "strict_pass_all": 0.7333333333333333,
+        "route_pass_all": 0.8333333333333334,
+        "route_failure_rate": 0.16666666666666666,
+        "strict_failed_cases": 8,
+        "route_failed_cases": 5,
+        "argument_only_failed_cases": 3,
+        "argument_only_failure_share": 0.375
+      },
+      "reference": {
+        "cases": 30,
+        "strict_pass_all": 1.0,
+        "route_pass_all": 1.0,
+        "route_failure_rate": 0.0,
+        "strict_failed_cases": 0,
+        "route_failed_cases": 0,
+        "argument_only_failed_cases": 0,
+        "argument_only_failure_share": 0.0
+      },
+      "reference_at_least_0_90": true
+    }
+  },
+  "note": "Confirmation is accepted or rejected as a whole; no case-level filtering.",
+  "inputs": {
+    "base_aggregate": "/raid/zkq/artifacts/CAPA/evals/20260715_planner_multistep_grpo_value_v5/confirmation/qwen35_4b_combined/qwen35_4b_v5_confirmation_t1024_aggregate.json",
+    "reference_aggregate": "/raid/zkq/artifacts/CAPA/evals/20260715_planner_multistep_grpo_value_v5/confirmation/qwen35_a3b_combined/qwen35_a3b_v5_confirmation_t1024_aggregate.json",
+    "cases": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/cases/planner_multistep_grpo_value_v5_confirmation_cases.jsonl"
+  }
+}

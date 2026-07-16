@@ -1,0 +1,98 @@
+{
+  "schema_version": "1.0",
+  "created_at": "2026-07-16T03:02:15Z",
+  "study_id": "planner_retry_migrate_v6_qwen35_4b_v1",
+  "stage": "sft_checkpoint_selection",
+  "status": "selected",
+  "selection_rule": {
+    "primary": "SFT-dev action_match_rate",
+    "secondary": [
+      "mean_rule_reward",
+      "json_valid_rate",
+      "eval_loss"
+    ],
+    "tie_break": "earlier checkpoint"
+  },
+  "evaluation_set": {
+    "path": "training/planner_grpo_seed_v1/sft_data_planner_retry_migrate_v6_qwen35_nothinking/dev.jsonl",
+    "rows": 260,
+    "sha256": "8455ea1fabc5487da114d0c85eb370769b34651ce8232accac062a84bebd2837",
+    "entity_overlap_with_sft_train": 0
+  },
+  "candidates": [
+    {
+      "name": "base",
+      "action_match_rate": 0.7730769230769231,
+      "argument_match_rate": 0.7730769230769231,
+      "finish_match_rate": 0.8615384615384616,
+      "mean_rule_reward": 0.8068356643356639,
+      "json_valid_rate": 1.0,
+      "report": "experiments/runs/20260716_qwen35_4b_planner_v6_base_sftdev_eval/report.json",
+      "report_sha256": "be8895b50c2ce411744d485db2ced11a068cd5b0a5c0946d6188174146aa676b"
+    },
+    {
+      "name": "checkpoint-25",
+      "action_match_rate": 0.7730769230769231,
+      "argument_match_rate": 0.7730769230769231,
+      "finish_match_rate": 0.823076923076923,
+      "mean_rule_reward": 0.8049621212121212,
+      "json_valid_rate": 1.0,
+      "adapter_sha256": "b4b01d0a87ded17e2a2f47606e0cae704ff517be79479b7a45d73df07b0d61c3",
+      "report": "experiments/runs/20260716_qwen35_4b_planner_v6_sft_ckpt25_sftdev_eval/report.json",
+      "report_sha256": "313c2d99c5872f8a1c280ae9627865da2b9ebb3ec987a78659e6b686fdc82f37"
+    },
+    {
+      "name": "checkpoint-50",
+      "action_match_rate": 0.65,
+      "argument_match_rate": 0.65,
+      "finish_match_rate": 0.65,
+      "mean_rule_reward": 0.6930069930069929,
+      "json_valid_rate": 1.0,
+      "eval_loss": 0.2418803721666336,
+      "adapter_sha256": "2932f6a0bdf8b6c688ac9bbbbb1e94cc8ed66ce327f369de139ddb210e334d9d",
+      "report": "experiments/runs/20260716_qwen35_4b_planner_v6_sft_ckpt50_sftdev_eval/report.json",
+      "report_sha256": "c49c57245fdbe3aac834bc7ef419d83900e4e4e01bb03e3e892bcc48a6a70ccb"
+    },
+    {
+      "name": "checkpoint-75",
+      "action_match_rate": 0.9576923076923077,
+      "argument_match_rate": 0.9576923076923077,
+      "finish_match_rate": 0.9653846153846154,
+      "mean_rule_reward": 0.9635576923076922,
+      "json_valid_rate": 1.0,
+      "adapter_sha256": "3472e7e62d5de5a3ef81c52530f52f795a1f51b631ef39523f06dea637baedbd",
+      "report": "experiments/runs/20260716_qwen35_4b_planner_v6_sft_ckpt75_sftdev_eval/report.json",
+      "report_sha256": "4d961e5cce1b7ba3ec13cd3828b28a2565f03bc8fa32d8cd04b1665d6ebf80db"
+    },
+    {
+      "name": "checkpoint-100",
+      "action_match_rate": 0.9769230769230769,
+      "argument_match_rate": 0.9769230769230769,
+      "finish_match_rate": 0.9846153846153847,
+      "mean_rule_reward": 0.9803846153846153,
+      "json_valid_rate": 1.0,
+      "eval_loss": 0.21907028555870056,
+      "adapter_sha256": "0c09452034727fe41908fc37d35866b68c227c9e8c680e66fbf0a043ae8aca60",
+      "report": "experiments/runs/20260716_qwen35_4b_planner_v6_sft_ckpt100_sftdev_eval/report.json",
+      "report_sha256": "21ede99848f3404fabfecbdb4e5d0cc4867796d3b329b23f97b77039ca2751b2"
+    }
+  ],
+  "selected": {
+    "name": "checkpoint-100",
+    "path": "experiments/runs/20260716_qwen35_4b_planner_v6_sft_seed42_v1/checkpoint-100",
+    "adapter_sha256": "0c09452034727fe41908fc37d35866b68c227c9e8c680e66fbf0a043ae8aca60",
+    "absolute_action_gain_over_base": 0.2038461538461538,
+    "relative_error_reduction_over_base": 0.8983050847457628,
+    "reason": "Highest preregistered SFT-dev action-match rate; it also has the highest mean rule reward and 100% JSON validity."
+  },
+  "residual_failures": {
+    "core_retryable_fresh": 2,
+    "guard_missing_required_state_migrate": 4,
+    "all_other_rows": 0
+  },
+  "next_stage_gate": {
+    "beats_base_on_action_match": true,
+    "sampled_grpo_support": "pending",
+    "formal_grpo_optimizer_authorized": false
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0",
+  "status": "completed",
+  "finished_at": "2026-07-15T15:27:22.528144+00:00",
+  "runtime_seconds": 389.36735767219216,
+  "model_name_or_path": "/raid/zkq/models/Qwen3.5-4B",
+  "adapter_path": "/raid/zkq/projects/CAPA/experiments/runs/20260715_qwen35_4b_gsm8k_sft32_overfit_v3/checkpoint-50",
+  "data_dir": "/raid/zkq/projects/CAPA/training/public_sft_grpo_v1/data/gsm8k_sft32_v1",
+  "dataset_manifest_sha256": "de52206d4692eb41932992c308066747276c823b760e82d5b27a363ff3a27dd4",
+  "generation": {
+    "do_sample": false,
+    "max_new_tokens": 384,
+    "batch_size": 4,
+    "seed": 42
+  },
+  "metrics": {
+    "train": {
+      "rows": 32,
+      "exact_numeric_accuracy": 0.8125,
+      "strict_format_rate": 0.90625,
+      "loose_numeric_accuracy": 0.8125,
+      "eos_rate": 0.96875,
+      "clipped_rate": 0.03125,
+      "completion_tokens": {
+        "min": 47,
+        "p50": 141,
+        "p95": 232,
+        "max": 384,
+        "mean": 143.4375
+      }
+    },
+    "development": {
+      "rows": 32,
+      "exact_numeric_accuracy": 0.8125,
+      "strict_format_rate": 0.96875,
+      "loose_numeric_accuracy": 0.8125,
+      "eos_rate": 1.0,
+      "clipped_rate": 0.0,
+      "completion_tokens": {
+        "min": 53,
+        "p50": 109,
+        "p95": 199,
+        "max": 265,
+        "mean": 123.6875
+      }
+    }
+  },
+  "nonfinite_metric_count": 0,
+  "samples_sha256": "87900291eeeb52667b7289b59c885de2794ef2003ef6ee47e59c02bb3b0436f3"
+}

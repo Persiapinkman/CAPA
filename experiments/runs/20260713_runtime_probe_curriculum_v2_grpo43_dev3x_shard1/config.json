@@ -1,0 +1,13 @@
+{
+  "run_id": "20260713_runtime_probe_curriculum_v2_grpo43_dev3x_shard1",
+  "study_id": "planner_runtime_routing_grpo_v1",
+  "model_label": "runtime_probe_grpo43_dev3x",
+  "model_name_or_path": "/raid/zkq/artifacts/CAPA/outputs/merged-qwen25-7b-sft-v3-chatml",
+  "adapter_path": "/raid/zkq/artifacts/CAPA/outputs/planner-grpo-qwen25-7b-runtime-probe-curriculum-v1-seed43/checkpoint-80",
+  "prompt_format": "qwen_chatml",
+  "eval_file": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/sft_data_runtime_probe_curriculum_v1_chatml/dev.jsonl",
+  "repeats": 3,
+  "seed": 42,
+  "offset": 60,
+  "limit": 60
+}

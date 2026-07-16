@@ -1,0 +1,72 @@
+{
+  "actual_actions": {
+    "qwen_detection": 4
+  },
+  "adapter_path": "/raid/zkq/projects/CAPA/experiments/runs/20260716_qwen35_4b_planner_v6_sft_seed42_v1/checkpoint-100",
+  "by_detector_family": {
+    "qwen": {
+      "gold_action_support_rate": 1.0,
+      "groups": 1,
+      "mean_distinct_valid_actions": 1.0,
+      "mean_reward": 1.0,
+      "nonzero_reward_variance_rate": 0.0
+    }
+  },
+  "by_target_action_class": {
+    "retry": {
+      "gold_action_support_rate": 1.0,
+      "groups": 1,
+      "mean_distinct_valid_actions": 1.0,
+      "mean_reward": 1.0,
+      "nonzero_reward_variance_rate": 0.0
+    }
+  },
+  "generation": {
+    "max_new_tokens": 320,
+    "samples_per_prompt": 4,
+    "seed": 42,
+    "temperature": 1.0,
+    "top_p": 0.9
+  },
+  "groups_detail": [
+    {
+      "case_id": "PRMV6-GD-001-QWEN-RF",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "retry"
+    }
+  ],
+  "model_name_or_path": "/raid/zkq/models/Qwen3.5-4B",
+  "num_shards": 180,
+  "overall": {
+    "gold_action_support_rate": 1.0,
+    "groups": 1,
+    "mean_distinct_valid_actions": 1.0,
+    "mean_reward": 1.0,
+    "nonzero_reward_variance_rate": 0.0
+  },
+  "prompt_groups": 1,
+  "sample_metrics": {
+    "action_match_rate": 1.0,
+    "argument_match_rate": 1.0,
+    "clipped_rate": 0.0,
+    "finish_match_rate": 1.0,
+    "json_valid_rate": 1.0,
+    "mean_reward": 1.0,
+    "natural_eos_rate": 1.0,
+    "nonfinite_rewards": 0
+  },
+  "samples": 4,
+  "samples_per_prompt": [
+    [
+      4,
+      1
+    ]
+  ],
+  "shard_index": 2,
+  "step_data": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/step_data/planner_retry_migrate_v6_grpo_dev_qwen35_4b_nothinking_step2.jsonl"
+}

@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_runtime_routing_grpo_v1",
+  "arm_id": "runtime_probe_test_confirmation_v1",
+  "preregistered_at": "2026-07-13T08:27:12Z",
+  "protocol_finalized_at": "2026-07-13T08:30:07Z",
+  "protocol_amendment": "Added three deterministic repeats to conform to experiments/EVALUATION_POLICY.md; no metric threshold, split hash, model, or opening condition changed, and test remained sealed.",
+  "preregistered_after": "seed42_development_screen",
+  "preregistered_before": "seeds43_44_development_results_and_any_test_generation",
+  "dataset": {
+    "dataset_id": "planner_runtime_probe_curriculum_v1",
+    "split": "test",
+    "status": "sealed_unopened",
+    "cases_sha256": "cf45755a61fa5fa77279a307b236de17e4abc91cabafca353204953d6fea815e",
+    "steps_sha256": "71ef5091f68bf12dd833f2e05be097baa4f3949738685b89312e7328ead69d64"
+  },
+  "opening_condition": "Every check in development_replication_gate of runtime_probe_multiseed_replication_v1.json must pass.",
+  "models_if_opened": ["sft_v3", "seed42", "seed43", "seed44"],
+  "bootstrap": {
+    "cluster": "entity_id",
+    "samples": 20000,
+    "seed": 42
+  },
+  "generation": {
+    "repeats": 3,
+    "do_sample": false,
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "max_new_tokens": 128
+  },
+  "confirmation_gate": {
+    "primary_category": "qwen_probe_then_migration",
+    "require_three_seed_mean_strict_case_action_delta_positive": true,
+    "require_three_seed_mean_step_action_delta_positive": true,
+    "minimum_positive_seed_count": 2,
+    "require_entity_clustered_action_ci_lower_above_zero": true,
+    "require_three_seed_mean_verifier_delta_positive": true,
+    "require_mean_step2_action_no_regression": true,
+    "contrast_category": "qwen_probe_only_contrast",
+    "maximum_mean_contrast_action_regression": 0.0,
+    "maximum_mean_other_category_action_regression": 0.125,
+    "require_no_mean_increase_in_wrong_side_effecting_actions": true
+  },
+  "stop_rule": "Evaluate this frozen split once only. Do not add seeds, tune thresholds, or reuse it for model selection after opening."
+}

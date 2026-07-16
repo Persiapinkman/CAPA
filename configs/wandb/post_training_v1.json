@@ -1,0 +1,107 @@
+{
+  "schema_version": "1.0",
+  "workspace_name": "CAPA Post-training: SFT to GRPO",
+  "project": "capa-planner-post-training",
+  "stage_1_goal": "A frozen V6 SFT checkpoint must beat the base model on generation-based sft_dev action_match_rate before GRPO starts.",
+  "x_axis": "train/global_step",
+  "sections": [
+    {
+      "name": "Stage 1 - SFT Improvement",
+      "is_open": true,
+      "panels": [
+        {
+          "title": "SFT Train and Eval Loss",
+          "type": "line",
+          "y": ["train/loss", "eval/loss"]
+        },
+        {
+          "title": "SFT Token Accuracy",
+          "type": "line",
+          "y": ["train/mean_token_accuracy", "eval/mean_token_accuracy"]
+        }
+      ]
+    },
+    {
+      "name": "Train Reward Statistics",
+      "is_open": true,
+      "panels": [
+        {
+          "title": "Aggregate Train Reward",
+          "type": "line",
+          "y": ["train/reward", "train/reward_std", "train/reward_min", "train/reward_max"]
+        },
+        {
+          "title": "Planner Reward Components",
+          "type": "line",
+          "y": [
+            "train/rewards/task_reward/mean",
+            "train/rewards/format_reward/mean",
+            "train/rewards/route_exact/mean",
+            "train/rewards/argument_exact/mean",
+            "train/rewards/stop_exact/mean",
+            "train/rewards/no_forbidden_action/mean"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Policy Entropy",
+      "is_open": true,
+      "panels": [
+        {
+          "title": "Policy Entropy by Optimizer Step",
+          "type": "line",
+          "y": ["train/policy_entropy", "eval/policy_entropy"]
+        }
+      ]
+    },
+    {
+      "name": "Gradient Norm",
+      "is_open": true,
+      "panels": [
+        {
+          "title": "Gradient Norm",
+          "type": "line",
+          "y": ["train/grad_norm"]
+        }
+      ]
+    },
+    {
+      "name": "Mean Advantage Estimate",
+      "is_open": true,
+      "note": "GRPO group normalization centers raw mean advantage near zero. abs_mean and std show whether useful within-group learning signal remains.",
+      "panels": [
+        {
+          "title": "Advantage Estimate",
+          "type": "line",
+          "y": [
+            "train/advantage/mean",
+            "train/advantage/abs_mean",
+            "train/advantage/std",
+            "train/advantage/positive_fraction"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Optimization Health",
+      "is_open": false,
+      "panels": [
+        {
+          "title": "Learning Rate and Zero-Variance Groups",
+          "type": "line",
+          "y": ["train/learning_rate", "train/frac_reward_zero_std"]
+        },
+        {
+          "title": "GRPO Clip Ratio",
+          "type": "line",
+          "y": [
+            "train/clip_ratio/region_mean",
+            "train/clip_ratio/low_mean",
+            "train/clip_ratio/high_mean"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "created_at": "2026-07-16T04:01:52Z",
+  "study_id": "planner_retry_migrate_v6_qwen35_4b_v1",
+  "stage": "alternative_grpo_initializer_support_gate_result",
+  "initializer": "checkpoint-75",
+  "status": "optimizer_not_authorized",
+  "preregistration": "experiments/studies/planner_retry_migrate_v6_qwen35_4b_v1/preregistration_grpo_support_checkpoint75_alternative.json",
+  "preregistration_sha256": "09be11d317e2aed8493f138866ed70e79dbb774a39bc121dd7d8d1080848948b",
+  "artifacts": {
+    "summary": "experiments/runs/20260716_qwen35_4b_planner_v6_grpo_support_ckpt75_full4x/summary.json",
+    "summary_sha256": "639e7d7a0452d68702945f8772cff836a463140fc3bd3a46142948923d73ceb2",
+    "samples": "experiments/runs/20260716_qwen35_4b_planner_v6_grpo_support_ckpt75_full4x/samples.jsonl",
+    "samples_sha256": "520e986179bbb3e0fa63f2f55199c31f99490596a4452e35ebf04d2d7d1efbae"
+  },
+  "observed": {
+    "prompt_groups": 180,
+    "samples": 720,
+    "json_valid_rate": 1.0,
+    "natural_eos_rate": 1.0,
+    "clipped_rate": 0.0,
+    "sample_action_match_rate": 0.9513888888888888,
+    "mean_reward": 0.9574652777777778,
+    "gold_action_support_rate": 0.9666666666666667,
+    "nonzero_reward_variance_groups": 5,
+    "nonzero_reward_variance_rate": 0.027777777777777776,
+    "qwen_gold_action_support_rate": 0.9777777777777777,
+    "qwen_nonzero_variance_groups": 3,
+    "qwen_nonzero_variance_rate": 0.03333333333333333,
+    "rex_gold_action_support_rate": 0.9555555555555556,
+    "rex_nonzero_variance_groups": 2,
+    "rex_nonzero_variance_rate": 0.022222222222222223,
+    "migrate_gold_action_support_rate": 0.95,
+    "migrate_nonzero_variance_groups": 5,
+    "migrate_nonzero_variance_rate": 0.041666666666666664,
+    "retry_sample_action_match_rate": 1.0,
+    "retry_nonzero_variance_groups": 0,
+    "retry_nonzero_variance_rate": 0.0,
+    "nonfinite_rewards": 0
+  },
+  "gate_results": {
+    "json_validity_gate": "pass",
+    "clipping_gate": "pass",
+    "nonfinite_reward_gate": "pass",
+    "gold_action_support_by_detector_gate": "pass",
+    "retry_accuracy_gate": "pass",
+    "overall_variance_rate_at_least_0_1": "fail",
+    "at_least_5_variance_groups_per_detector": "fail",
+    "at_least_10_migrate_variance_groups": "fail",
+    "practical_optimizer_utility_gate": "fail"
+  },
+  "diagnostic_panel_check": {
+    "panel_prompt_groups": 14,
+    "panel_nonzero_variance_rate": 0.14285714285714285,
+    "full_prompt_groups": 180,
+    "full_nonzero_variance_rate": 0.027777777777777776,
+    "interpretation": "The 14-prompt diagnostic panel overestimated useful GRPO support; the prospectively frozen full audit is authoritative."
+  },
+  "decision": {
+    "perform_optimizer_canary": false,
+    "perform_formal_grpo": false,
+    "retain_deployment_candidate": "checkpoint-100",
+    "reason": "Checkpoint-75 also fails the prospectively frozen optimizer-utility gate. Only 5 of 180 prompt groups have nonzero reward variance, with fewer than five groups in each detector family and no variance at all on retry. Optimizing the core-only split would mostly produce zero-advantage batches and would not target the selected checkpoint's residual step-3 and guardrail errors."
+  },
+  "next": "Do not run GRPO on planner_retry_migrate_v6 core-only data. Build a new residual-focused GRPO split covering step-3 post-retry outcomes and missing-state guardrails, then repeat support sampling before any optimizer step."
+}

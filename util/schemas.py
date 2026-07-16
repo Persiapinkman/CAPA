@@ -215,7 +215,7 @@ evaluation_summary_response_schema = {
         },
         "recommendation": {
             "type": "string",
-            "enum": ["qwen3-vl-8b", "rex-omni"]
+            "enum": ["qwen3-vl-8b", "rex-omni", "inconclusive"]
             }
     },
     "required": [

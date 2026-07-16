@@ -26,6 +26,7 @@ import re
 import secrets
 import socket
 import subprocess
+import sys
 import tempfile
 import threading
 import warnings
@@ -44,10 +45,13 @@ import gbrain_rag_client as gbrain_rag
 import migration_advisor
 import memory_system as ms
 import prompts
+from capa.capabilities import build_capability_inventory, validate_capability_inventory
+from capa.service_health import probe_demo_services, service_summary
 from tools import schemas as tool_schemas
 from tools.executor import ToolExecutor
 from frontend_page import HTML_PAGE
 from util.rex_label_extraction import extract_rex_detection_labels
+from util.image_quality import audit_image_diversity
 from util.vlm_service import VLMService
 
 warnings.filterwarnings("ignore", category=RequestsDependencyWarning)
@@ -73,7 +77,9 @@ QUERY_TRAJ_SUMMARY_TIMEOUT_SEC = int(os.environ.get("DEMO_QUERY_TRAJ_SUMMARY_TIM
 API_KEY_FILE = ROOT / "api_key.txt"
 IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
 MAX_UPLOAD_IMAGES = 10
-NUM_GENERATED_IMAGES = 3
+NUM_GENERATED_IMAGES = max(
+    1, min(5, int(os.environ.get("DEMO_PIPELINE_NUM_GENERATED_IMAGES", "3")))
+)
 QWEN_BASE_URL = os.environ.get("DEMO_QWEN_BASE_URL", "http://10.111.32.253:8000/v1")
 QWEN_DETECTION_URL = os.environ.get("DEMO_QWEN_DETECTION_URL", "http://127.0.0.1:9012/v1")
 REX_BASE_URL = os.environ.get("DEMO_REX_BASE_URL", "http://10.111.32.253:8000/v1")
@@ -565,6 +571,8 @@ def _heuristic_forced_adela_cli_step(user_text: str) -> dict | None:
     当问句同时包含 Adela 类平台串 + 精度/性能类意图 + 可猜模型名或显式 rawmodel_id 时，
     强制第一步走 adela_cli_eval（模型名在 executor 内仍经 RAG 解析为 ID），避免 Planner 误走 rag_answer。
     """
+    if agent.TOOL_ADELA_CLI_EVAL not in agent.VALID_AGENT_ACTIONS:
+        return None
     raw = str(user_text or "").strip()
     if len(raw) < 10:
         return None
@@ -2153,6 +2161,41 @@ class DemoHandler(BaseHTTPRequestHandler):
         if parsed.path == "/":
             self._send_html(HTML_PAGE)
             return
+        if parsed.path == "/health":
+            errors = validate_capability_inventory(ROOT)
+            self._send_json(
+                {
+                    "ok": not errors,
+                    "service": "capa-demo-agent",
+                    "static_contract_errors": errors,
+                },
+                status=200 if not errors else 503,
+            )
+            return
+        if parsed.path == "/health/capabilities":
+            qs = parse_qs(parsed.query or "", keep_blank_values=False)
+            run_live = _parse_bool_flag((qs.get("live") or ["0"])[0], default=False)
+            include_flux = _parse_bool_flag(
+                (qs.get("include_flux") or ["0"])[0], default=False
+            )
+            errors = validate_capability_inventory(ROOT)
+            probes = (
+                probe_demo_services(ROOT, include_flux=include_flux)
+                if run_live
+                else {}
+            )
+            self._send_json(
+                {
+                    "ok": not errors,
+                    "static_contract_errors": errors,
+                    "capabilities": build_capability_inventory(ROOT),
+                    "live_probed": run_live,
+                    "service_probes": probes,
+                    "service_summary": service_summary(probes) if probes else {},
+                },
+                status=200 if not errors else 503,
+            )
+            return
         if parsed.path == "/sessions":
             client_ip = _client_ip_from_request(self)
             client_scope = _client_scope_from_request(self)
@@ -2500,6 +2543,9 @@ class DemoHandler(BaseHTTPRequestHandler):
         knowledge_base_fully_answered = agent.normalize_knowledge_base_score(
             final_packet.get("knowledge_base_fully_answered")
         )
+        rag_miss = agent.is_rag_miss(
+            {"knowledge_base_fully_answered": knowledge_base_fully_answered}
+        )
 
         try:
             rag_out.write_text(
@@ -2527,26 +2573,36 @@ class DemoHandler(BaseHTTPRequestHandler):
             if emit_done:
                 emit({"type": "done", "ok": False})
             return None
-        emit({"type": "direct_reply", "text": answer})
+        if rag_miss:
+            emit(
+                {
+                    "type": "rag_miss",
+                    "knowledge_base_fully_answered": knowledge_base_fully_answered,
+                    "retrieved_count": len(retrieved_chunks),
+                    "message": "知识库证据不足，候选答案未向用户发布。",
+                }
+            )
+        else:
+            emit({"type": "direct_reply", "text": answer})
         elapsed_ms = int((datetime.now() - t0).total_seconds() * 1000)
         emit({"type": "step_timing", "step": "rag", "elapsed_ms": elapsed_ms})
         if run_id:
             emit({"type": "rag_run", "run_id": run_id, "evidence_ids": evidence_ids})
-        if refs:
+        if refs and not rag_miss:
             emit({"type": "rag_references", "references": refs})
         if emit_done:
             emit({"type": "done", "ok": True})
         observation_kwargs = {
-            "answer": answer,
+            "answer": "" if rag_miss else answer,
+            "candidate_answer_withheld": bool(rag_miss and answer),
+            "summary": "知识库证据不足" if rag_miss else answer,
             "elapsed_ms": elapsed_ms,
             "references": refs,
             "run_id": run_id,
             "evidence_ids": evidence_ids,
             "knowledge_base_fully_answered": knowledge_base_fully_answered,
         }
-        if agent.is_rag_miss(
-            {"knowledge_base_fully_answered": knowledge_base_fully_answered}
-        ):
+        if rag_miss:
             observation_kwargs["retrieved_chunks"] = retrieved_chunks
         return _build_observation(
             agent.ACTION_RAG_ANSWER,
@@ -2583,7 +2639,6 @@ class DemoHandler(BaseHTTPRequestHandler):
             "api_mode": api_mode,
             "retrieved_chunks": [],
             "full_documents": [],
-            "raw_response": {},
             "error": "",
         }
         try:
@@ -2604,7 +2659,6 @@ class DemoHandler(BaseHTTPRequestHandler):
                 "success": bool(chunks),
                 "retrieved_chunks": chunks,
                 "full_documents": gbrain_rag.extract_full_documents(data),
-                "raw_response": data,
                 "references": _normalize_rag_refs(data.get("reference"))
                 or _normalize_rag_refs(data.get("evidences"))
                 or _normalize_rag_refs(data.get("fused_evidences")),
@@ -2614,7 +2668,8 @@ class DemoHandler(BaseHTTPRequestHandler):
             query_key = hashlib.sha1(q.encode("utf-8")).hexdigest()[:10]
             prefix = "unified_retrieve" if use_unified else "playbook_retrieve"
             out = run_dir / f"{prefix}_{f}_{query_key}.json"
-            out.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
+            artifact = migration_advisor.compact_retrieve_result_for_artifact(result)
+            out.write_text(json.dumps(artifact, ensure_ascii=False, indent=2), encoding="utf-8")
         except OSError:
             pass
         return result
@@ -2677,7 +2732,7 @@ class DemoHandler(BaseHTTPRequestHandler):
         try:
             ph.write_rex_prompt_json(rex_prompt_path, det)
             cmd = [
-                "python3",
+                sys.executable,
                 "skills/rexomni-open-set-detection/scripts/run_detection.py",
                 "--images",
                 str(input_dir),
@@ -2919,7 +2974,7 @@ class DemoHandler(BaseHTTPRequestHandler):
         has_source_image = bool(image_path) and Path(image_path).is_file()
         intent_json = run_dir / "intent.json"
         cmd_intent = [
-            "python3",
+            sys.executable,
             "skills/user-intent-understanding/scripts/run_intent.py",
             "--text",
             task_text,
@@ -2944,7 +2999,7 @@ class DemoHandler(BaseHTTPRequestHandler):
 
         prompts_json = run_dir / "prompts.json"
         cmd_prompts = [
-            "python3",
+            sys.executable,
             "skills/llm-prompts-generation/scripts/run_prompt_generation.py",
             "--intent",
             str(intent_json),
@@ -2995,7 +3050,7 @@ class DemoHandler(BaseHTTPRequestHandler):
             prompt = tail[i % len(tail)]
             out_image = gen_dir / f"generated_{i}.jpg"
             cmd_flux = [
-                "python3",
+                sys.executable,
                 "skills/flux-image-generation/scripts/run_generation.py",
                 "--prompt",
                 prompt,
@@ -3069,7 +3124,7 @@ class DemoHandler(BaseHTTPRequestHandler):
         emit({"type": "detection_info", "label": lab})
         qwen_out = run_dir / "qwen_detect.json"
         cmd = [
-            "python3",
+            sys.executable,
             "skills/qwen-vlm-open-set-delection/scripts/run_detection.py",
             "--images",
             image_path,
@@ -3184,7 +3239,7 @@ class DemoHandler(BaseHTTPRequestHandler):
         try:
             ph.write_rex_prompt_json(rex_prompt_path, detection)
             cmd = [
-                "python3",
+                sys.executable,
                 "skills/rexomni-open-set-detection/scripts/run_detection.py",
                 "--images",
                 image_path,
@@ -3263,6 +3318,7 @@ class DemoHandler(BaseHTTPRequestHandler):
     ) -> dict | None:
         emit = self._emit_stream
         ph = _pipeline_helpers()
+        t_pipeline = datetime.now()
         t_intent = datetime.now()
 
         def url(rel: str) -> str:
@@ -3276,7 +3332,7 @@ class DemoHandler(BaseHTTPRequestHandler):
         evaluation_json = ws / "evaluation.json"
 
         cmd_intent = [
-            "python3",
+            sys.executable,
             "skills/user-intent-understanding/scripts/run_intent.py",
             "--text",
             text,
@@ -3301,11 +3357,12 @@ class DemoHandler(BaseHTTPRequestHandler):
         with open(intent_json, "r", encoding="utf-8") as f:
             intent = json.load(f)
         emit({"type": "intent_summary", "summary": _intent_summary(intent)})
-        emit({"type": "step_timing", "step": "intent", "elapsed_ms": int((datetime.now() - t_intent).total_seconds() * 1000)})
+        intent_elapsed_ms = int((datetime.now() - t_intent).total_seconds() * 1000)
+        emit({"type": "step_timing", "step": "intent", "elapsed_ms": intent_elapsed_ms})
 
         t_gen = datetime.now()
         cmd_prompts = [
-            "python3",
+            sys.executable,
             "skills/llm-prompts-generation/scripts/run_prompt_generation.py",
             "--intent",
             str(intent_json),
@@ -3342,7 +3399,7 @@ class DemoHandler(BaseHTTPRequestHandler):
             prompt = prompts_for_generation[i % len(prompts_for_generation)]
             out_image = generated_dir / f"generated_{i}.jpg"
             cmd_flux = [
-                "python3",
+                sys.executable,
                 "skills/flux-image-generation/scripts/run_generation.py",
                 "--source-image",
                 image_path,
@@ -3370,7 +3427,8 @@ class DemoHandler(BaseHTTPRequestHandler):
 
         with open(gen_json, "w", encoding="utf-8") as f:
             json.dump({"generated_images": generated_records}, f, indent=2, ensure_ascii=False)
-        emit({"type": "step_timing", "step": "gen", "elapsed_ms": int((datetime.now() - t_gen).total_seconds() * 1000)})
+        gen_elapsed_ms = int((datetime.now() - t_gen).total_seconds() * 1000)
+        emit({"type": "step_timing", "step": "gen", "elapsed_ms": gen_elapsed_ms})
 
         target_label = str(intent["target_label"]).replace("_", " ")
         gen_dir = ws / "generated_images"
@@ -3382,6 +3440,15 @@ class DemoHandler(BaseHTTPRequestHandler):
         image_paths = [orig_image] + gen_files
         images_abs = [str(p.resolve()) for p in image_paths]
         image_map = {p.name: p for p in image_paths}
+        generation_quality = audit_image_diversity(orig_image, gen_files)
+        emit({"type": "generation_quality", "data": generation_quality})
+        if not generation_quality.get("passed"):
+            emit(
+                {
+                    "type": "quality_warning",
+                    "message": "扩增图多样性门未通过；检测结果可供诊断，但不可视为合格扩增数据。",
+                }
+            )
 
         qwen_orig_tmp = ws / ".qwen_orig_tmp.json"
         qwen_gen_tmp = ws / ".qwen_gen_tmp.json"
@@ -3393,7 +3460,7 @@ class DemoHandler(BaseHTTPRequestHandler):
             ph.write_rex_prompt_json(rex_prompt_path, intent)
 
             cmd_q_o = [
-                "python3",
+                sys.executable,
                 "skills/qwen-vlm-open-set-delection/scripts/run_detection.py",
                 "--images",
                 str(orig_image),
@@ -3415,7 +3482,7 @@ class DemoHandler(BaseHTTPRequestHandler):
                 return None
 
             cmd_q_g = [
-                "python3",
+                sys.executable,
                 "skills/qwen-vlm-open-set-delection/scripts/run_detection.py",
                 "--images",
                 str(gen_dir.resolve()),
@@ -3454,7 +3521,7 @@ class DemoHandler(BaseHTTPRequestHandler):
                 return None
 
             cmd_r_o = [
-                "python3",
+                sys.executable,
                 "skills/rexomni-open-set-detection/scripts/run_detection.py",
                 "--images",
                 str(orig_image),
@@ -3476,7 +3543,7 @@ class DemoHandler(BaseHTTPRequestHandler):
                 return None
 
             cmd_r_g = [
-                "python3",
+                sys.executable,
                 "skills/rexomni-open-set-detection/scripts/run_detection.py",
                 "--images",
                 str(gen_dir.resolve()),
@@ -3545,14 +3612,25 @@ class DemoHandler(BaseHTTPRequestHandler):
             if p.is_file() and p.suffix.lower() in IMAGE_EXTENSIONS:
                 ann_urls.append(url(f"annotated_images/{p.name}"))
         emit({"type": "annotated", "urls": ann_urls})
-        emit({"type": "step_timing", "step": "anno", "elapsed_ms": int((datetime.now() - t_det).total_seconds() * 1000)})
+        anno_elapsed_ms = int((datetime.now() - t_det).total_seconds() * 1000)
+        emit({"type": "step_timing", "step": "anno", "elapsed_ms": anno_elapsed_ms})
 
         t_eval = datetime.now()
+        annotated_paths = [
+            str((viz_dir / image_path_item.name).resolve())
+            for image_path_item in image_paths
+            if (viz_dir / image_path_item.name).is_file()
+        ]
+        if len(annotated_paths) != len(images_abs):
+            emit({"type": "error", "message": "标注图数量与待评测图片数量不一致"})
+            if emit_done:
+                emit({"type": "done", "ok": False})
+            return None
         cmd_rep = [
-            "python3",
+            sys.executable,
             "skills/eval-reports-generation/scripts/run_eval_report_generation.py",
             "--images",
-            json.dumps(images_abs, ensure_ascii=False),
+            json.dumps(annotated_paths, ensure_ascii=False),
             "--prediction",
             str(prediction_json),
             "--task-text",
@@ -3577,6 +3655,15 @@ class DemoHandler(BaseHTTPRequestHandler):
             return None
         with open(evaluation_json, "r", encoding="utf-8") as f:
             ev = json.load(f)
+        ev["generation_quality"] = generation_quality
+        if not generation_quality.get("passed"):
+            ev["overall_conclusion"] = (
+                "扩增图多样性门未通过，当前生成样本不可直接进入训练集。"
+                + str(ev.get("overall_conclusion") or "")
+            )
+            ev["recommendation"] = "inconclusive"
+        with open(evaluation_json, "w", encoding="utf-8") as f:
+            json.dump(ev, f, indent=2, ensure_ascii=False)
         emit({"type": "evaluation", "data": _evaluation_for_demo(ev)})
         elapsed_eval_ms = int((datetime.now() - t_eval).total_seconds() * 1000)
         emit({"type": "step_timing", "step": "eval", "elapsed_ms": elapsed_eval_ms})
@@ -3593,12 +3680,15 @@ class DemoHandler(BaseHTTPRequestHandler):
             intent_summary=_intent_summary(intent),
             num_images=len(images_abs),
             annotated_count=len(ann_urls),
+            quality_gate_passed=bool(generation_quality.get("passed")),
+            generation_quality=generation_quality,
             evaluation=ev_demo,
             elapsed_ms={
-                "intent": int((datetime.now() - t_intent).total_seconds() * 1000),
-                "gen": int((datetime.now() - t_gen).total_seconds() * 1000),
-                "anno": int((datetime.now() - t_det).total_seconds() * 1000),
+                "intent": intent_elapsed_ms,
+                "gen": gen_elapsed_ms,
+                "anno": anno_elapsed_ms,
                 "eval": elapsed_eval_ms,
+                "total": int((datetime.now() - t_pipeline).total_seconds() * 1000),
             },
         )
 
@@ -3615,7 +3705,7 @@ class DemoHandler(BaseHTTPRequestHandler):
         emit = self._emit_stream
         t0 = datetime.now()
         cmd = [
-            "python3",
+            sys.executable,
             "-u",
             "skills/adela-cli/scripts/run_pipeline.py",
             "--rawmodel_id",
@@ -4112,11 +4202,14 @@ class DemoHandler(BaseHTTPRequestHandler):
                     self._send_json({"ok": False, "error": "session_id is required"}, status=400)
                     return
                 client_scope = _client_scope_from_request(self)
-                session = _load_session_state(session_id)
-                if str(session.get("client_scope") or "").strip() != client_scope:
-                    self._send_json({"ok": False, "error": "session not found"}, status=404)
-                    return
-                _delete_session_files(session_id)
+                # Background topic/trajectory writers use the same lock. Waiting here prevents
+                # a completed asynchronous writer from recreating a just-deleted session file.
+                with _session_guard(session_id):
+                    session = _load_session_state(session_id)
+                    if str(session.get("client_scope") or "").strip() != client_scope:
+                        self._send_json({"ok": False, "error": "session not found"}, status=404)
+                        return
+                    _delete_session_files(session_id)
                 self._send_json({"ok": True, "session_id": session_id})
                 return
             except Exception as exc:

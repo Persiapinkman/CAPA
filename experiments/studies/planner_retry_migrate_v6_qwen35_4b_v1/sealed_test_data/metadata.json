@@ -1,0 +1,122 @@
+{
+  "created_at": "2026-07-16T04:05:18.515342+00:00",
+  "dataset_id": "planner_retry_migrate_v6",
+  "formatted": {
+    "categories": {
+      "core_budget_exhausted": 240,
+      "core_nonretryable": 120,
+      "core_retryable_fresh": 240,
+      "guard_conflicting_state_migrate": 30,
+      "guard_initial_metric_veto_migrate": 30,
+      "guard_initial_success_end": 30,
+      "guard_missing_required_state_migrate": 30,
+      "guard_stale_history_current_error_migrate": 30,
+      "guard_stale_history_current_success_end": 30
+    },
+    "detector_families": {
+      "qwen": 390,
+      "rex": 390
+    },
+    "path": "experiments/studies/planner_retry_migrate_v6_qwen35_4b_v1/sealed_test_data/test.jsonl",
+    "rows": 780,
+    "sha256": "844cbc99dea43fb4497fbb90f674ddb0a1ac914ed3505c771a9f010e5b4a25c9",
+    "step_indices": {
+      "1": 210,
+      "2": 450,
+      "3": 120
+    },
+    "target_action_classes": {
+      "end": 60,
+      "migrate": 480,
+      "retry": 240
+    },
+    "unique_prompt_hashes": 780
+  },
+  "human_review_status": "pending",
+  "isolation": {
+    "comparison_case_files": [
+      "training/planner_grpo_seed_v1/cases/planner_retry_migrate_v6_sft_train_cases.jsonl",
+      "training/planner_grpo_seed_v1/cases/planner_retry_migrate_v6_sft_dev_cases.jsonl",
+      "training/planner_grpo_seed_v1/cases/planner_retry_migrate_v6_grpo_train_cases.jsonl",
+      "training/planner_grpo_seed_v1/cases/planner_retry_migrate_v6_grpo_dev_cases.jsonl"
+    ],
+    "comparison_stage_files": [
+      "training/planner_grpo_seed_v1/sft_data_planner_retry_migrate_v6_qwen35_nothinking/train.jsonl",
+      "training/planner_grpo_seed_v1/sft_data_planner_retry_migrate_v6_qwen35_nothinking/dev.jsonl",
+      "training/planner_grpo_seed_v1/step_data/planner_retry_migrate_v6_grpo_train_qwen35_4b_nothinking_step2.jsonl",
+      "training/planner_grpo_seed_v1/step_data/planner_retry_migrate_v6_grpo_dev_qwen35_4b_nothinking_step2.jsonl"
+    ],
+    "formatted_prompt_hash_overlap": 0,
+    "source_field_overlaps": {
+      "case_id": 0,
+      "counterfactual_bundle_id": 0,
+      "entity_id": 0,
+      "project_entity": 0,
+      "target_entity": 0
+    },
+    "status": "pass"
+  },
+  "prompt_audit": {
+    "canonical_step_reward": {
+      "max": 1.0,
+      "min": 1.0,
+      "non_unit": 0
+    },
+    "case_id_hits": 0,
+    "duplicate_prompt_hashes": 0,
+    "entity_id_hits": 0,
+    "forbidden_fragment_hits": {
+      "\"_thought\"": 0,
+      "\"external_ref\"": 0,
+      "/raid/": 0,
+      "/tmp/": 0,
+      "按训练样本期望": 0
+    },
+    "max_steps_mismatch": 0,
+    "prompt_tokens": {
+      "max": 4607,
+      "mean": 4273.662820512821,
+      "min": 4069,
+      "p50": 4271,
+      "p95": 4471
+    },
+    "rows": 780,
+    "status": "pass"
+  },
+  "role": "sealed_final_evaluation_only",
+  "schema_version": "1.0",
+  "selection_frozen_before_materialization": {
+    "grpo_decisions": [
+      {
+        "initializer": "checkpoint-100",
+        "path": "experiments/studies/planner_retry_migrate_v6_qwen35_4b_v1/grpo_support_checkpoint100_decision.json",
+        "sha256": "98af414544609607a6f77fbd8bd58f3a2a601db79c1c2a50b82f3cac106fb0ed",
+        "status": "optimizer_not_authorized"
+      },
+      {
+        "initializer": "checkpoint-75",
+        "path": "experiments/studies/planner_retry_migrate_v6_qwen35_4b_v1/grpo_support_checkpoint75_decision.json",
+        "sha256": "f5971236e4445dead39c7fb51a3bec64beddbb31c3d2d54c5b7ed49d87d01c1f",
+        "status": "optimizer_not_authorized"
+      }
+    ],
+    "selected_checkpoint": {
+      "absolute_action_gain_over_base": 0.2038461538461538,
+      "adapter_sha256": "0c09452034727fe41908fc37d35866b68c227c9e8c680e66fbf0a043ae8aca60",
+      "name": "checkpoint-100",
+      "path": "experiments/runs/20260716_qwen35_4b_planner_v6_sft_seed42_v1/checkpoint-100",
+      "reason": "Highest preregistered SFT-dev action-match rate; it also has the highest mean rule reward and 100% JSON validity.",
+      "relative_error_reduction_over_base": 0.8983050847457628
+    },
+    "sft_selection": "experiments/studies/planner_retry_migrate_v6_qwen35_4b_v1/sft_selection.json",
+    "sft_selection_sha256": "0c8f9847c9ec90055ce824999457e9ffa6b839f5e5cbc4b721d9ff85ef9855c0"
+  },
+  "source": {
+    "cases": 450,
+    "entities": 60,
+    "manifest": "data/datasets/planner_retry_migrate_v6/manifest.json",
+    "manifest_sha256": "f9c554f7d26faabd004996dd12cd5e711e43bf02e17388e29a0825b195db6d38",
+    "path": "training/planner_grpo_seed_v1/cases/planner_retry_migrate_v6_test_cases.jsonl",
+    "sha256": "c91b9a8134a145e7ca3010441e8fc8393ca60eeba4cc5d6583332ef1f77444ef"
+  }
+}

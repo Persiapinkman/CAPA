@@ -1,0 +1,98 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "planner_multistep_grpo_value_v5",
+  "generated_at": "2026-07-15T02:55:00Z",
+  "disposition": "route_qualified_strict_gate_failed",
+  "training_started": false,
+  "cases": {
+    "calibration": 240,
+    "confirmation": 240,
+    "confirmation_sha256": "ce93598667167c2ae3d0cdf69e303fec0652e5719923728cd8eb806d1eaa17e3",
+    "confirmation_entity_clusters": 30,
+    "confirmation_action_mix": {
+      "migrate": 144,
+      "retry": 96
+    }
+  },
+  "models": {
+    "reference": "Qwen3.5-35B-A3B",
+    "base": "/raid/zkq/models/Qwen3.5-4B"
+  },
+  "protocol": {
+    "runs": 1,
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "do_sample": false,
+    "seed": 42,
+    "max_steps": 2,
+    "max_tokens": 1024
+  },
+  "calibration": {
+    "status": "pass",
+    "reference_strict": 0.9833333333333333,
+    "base_strict": 0.5833333333333334,
+    "strict_gap": 0.4,
+    "selected_scenarios": [
+      "qwen_timeout_nonretryable",
+      "rex_timeout_nonretryable",
+      "qwen_timeout_budget_exhausted",
+      "rex_timeout_budget_exhausted",
+      "qwen_connection_nonretryable",
+      "rex_connection_nonretryable",
+      "qwen_connection_budget_exhausted",
+      "rex_connection_budget_exhausted"
+    ]
+  },
+  "confirmation": {
+    "strict": {
+      "reference_passed": 238,
+      "base_passed": 158,
+      "cases": 240,
+      "reference_rate": 0.9916666666666667,
+      "base_rate": 0.6583333333333333,
+      "gap": 0.33333333333333337,
+      "gap_cluster_bootstrap_95ci": [
+        0.20416666666666672,
+        0.4708333333333333
+      ]
+    },
+    "route": {
+      "reference_passed": 240,
+      "base_passed": 176,
+      "cases": 240,
+      "reference_rate": 1.0,
+      "base_rate": 0.7333333333333333,
+      "gap": 0.2666666666666667
+    },
+    "runtime_valid": true,
+    "empty_decisions": 0,
+    "infrastructure_errors": 0,
+    "completion_truncations": 0,
+    "gate_status": "fail",
+    "gate_checks_passed": 12,
+    "gate_checks_total": 13,
+    "failed_check": {
+      "name": "base_argument_only_share_at_most_0_20",
+      "observed": 0.21951219512195122,
+      "threshold": 0.2
+    }
+  },
+  "recommended_use": [
+    "route-progress evaluation during SFT versus SFT-plus-GRPO experiments",
+    "strict action-argument diagnostic without claiming full strict-gate acceptance"
+  ],
+  "not_yet_authorized_for": [
+    "formal release regression before three-repeat validation",
+    "training-data inclusion",
+    "causal claims that GRPO outperforms SFT"
+  ],
+  "artifacts": {
+    "preregistration": "experiments/studies/planner_multistep_tool_routing_grpo_qwen35_4b_v1/preregistration_v5.json",
+    "runtime_remediation": "experiments/studies/planner_multistep_tool_routing_grpo_qwen35_4b_v1/v5_runtime_remediation.json",
+    "confirmation_cases": "training/planner_grpo_seed_v1/cases/planner_multistep_grpo_value_v5_confirmation_cases.jsonl",
+    "calibration_gate": "data/datasets/planner_multistep_grpo_value_v5/calibration_family_gate_t1024.json",
+    "confirmation_gate": "data/datasets/planner_multistep_grpo_value_v5/confirmation_gate.json",
+    "bootstrap": "data/datasets/planner_multistep_grpo_value_v5/confirmation_cluster_bootstrap.json",
+    "report": "experiments/studies/planner_multistep_tool_routing_grpo_qwen35_4b_v1/GRPO_VALUE_EVAL_V5_20260715.md"
+  }
+}

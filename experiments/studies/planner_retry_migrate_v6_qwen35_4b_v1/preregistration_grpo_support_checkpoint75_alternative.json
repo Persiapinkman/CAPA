@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0",
+  "created_at": "2026-07-16T03:20:36Z",
+  "study_id": "planner_retry_migrate_v6_qwen35_4b_v1",
+  "stage": "alternative_grpo_initializer_support_gate",
+  "status": "frozen_before_full_checkpoint75_support_sampling",
+  "rationale": {
+    "best_sft_checkpoint_remains": "checkpoint-100",
+    "alternative_initializer": "checkpoint-75",
+    "reason": "Checkpoint-75 is the earliest high-performing SFT checkpoint with measurable sampled migrate reward variance in both detector families; checkpoint-100 is better for deployment but its preliminary support rate is too low for useful GRPO.",
+    "protocol_class": "prospectively frozen exploratory branch; does not alter the preregistered SFT checkpoint selection"
+  },
+  "initializer": {
+    "path": "experiments/runs/20260716_qwen35_4b_planner_v6_sft_seed42_v1/checkpoint-75",
+    "adapter_sha256": "3472e7e62d5de5a3ef81c52530f52f795a1f51b631ef39523f06dea637baedbd",
+    "sft_dev_action_match_rate": 0.9576923076923077,
+    "sft_dev_mean_rule_reward": 0.9635576923076922,
+    "diagnostic_panel": "experiments/runs/20260716_qwen35_4b_planner_v6_step_support_panel_ckpt75_core14x4/summary.json",
+    "diagnostic_panel_sha256": "ace8cc8d80e4a12885e5ec696e6ce0352faf9d09a6e4f234fbfc5ac2d515376d",
+    "diagnostic_panel_nonzero_variance_rate": 0.14285714285714285
+  },
+  "data": {
+    "dataset_id": "planner_retry_migrate_v6",
+    "split": "grpo_dev",
+    "path": "training/planner_grpo_seed_v1/step_data/planner_retry_migrate_v6_grpo_dev_qwen35_4b_nothinking_step2.jsonl",
+    "rows": 180,
+    "sha256": "b60d1da247e784ce83c6a79263c9e640c4a7d118d53f4d67b7d10425c3b60265"
+  },
+  "sampling": {
+    "entrypoint": "training/planner_grpo_seed_v1/scripts/eval_qwen35_planner_v6_step_support.py",
+    "entrypoint_sha256": "846e08148e41e56f7ed867025b24d8f05fb2dd74ed496affd1cbfcdadcbf1f6d",
+    "num_shards": 4,
+    "samples_per_prompt": 4,
+    "total_samples": 720,
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "max_new_tokens": 320,
+    "seed": 42
+  },
+  "optimizer_utility_gate": {
+    "json_valid_rate_min": 0.99,
+    "clipped_rate_max": 0.01,
+    "nonfinite_rewards_max": 0,
+    "gold_action_support_rate_min_by_detector": 0.95,
+    "nonzero_reward_variance_rate_overall_min": 0.1,
+    "minimum_nonzero_variance_groups_per_detector_family": 5,
+    "minimum_nonzero_variance_groups_for_migrate": 10,
+    "retry_sample_action_match_rate_min": 0.95,
+    "retry_variance_requirement": "none when retry sample action-match remains at or above 0.95; a solved stratum need not manufacture errors"
+  },
+  "decision": {
+    "on_pass": "use checkpoint-75 only as the GRPO initializer, preserve checkpoint-100 as the SFT reference, and require post-GRPO dev comparison against checkpoint-100",
+    "on_fail": "do not optimize this core-only GRPO dataset; rebuild the GRPO split around residual step-3 and guardrail failures"
+  }
+}

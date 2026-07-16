@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_runtime_routing_grpo_v1",
+  "arm_id": "runtime_probe_multiseed_replication_v1",
+  "candidate_seeds": [
+    "seed42",
+    "seed43",
+    "seed44"
+  ],
+  "expected_seed_count": 3,
+  "primary": {
+    "category": "qwen_probe_then_migration",
+    "mean_strict_case_action_delta": 0.3333333333333333,
+    "minimum_mean_strict_case_action_delta": 0.125,
+    "seed_strict_case_action_deltas": {
+      "seed42": 0.375,
+      "seed43": 0.375,
+      "seed44": 0.25
+    },
+    "positive_seed_count": 3,
+    "minimum_positive_seed_count": 2,
+    "mean_verifier_delta": 0.2147486772486772,
+    "minimum_mean_verifier_delta": 0.05,
+    "mean_step2_action_delta": 0.0
+  },
+  "overall": {
+    "mean_step_action_delta": 0.1333333333333333,
+    "minimum_mean_step_action_delta": 0.1,
+    "entity_clustered_action_ci95": [
+      0.09166666666666666,
+      0.17777777777777778
+    ]
+  },
+  "contrast": {
+    "category": "qwen_probe_only_contrast",
+    "mean_action_delta": 0.0
+  },
+  "category_action_deltas": {
+    "adela_eval": 0.0,
+    "clarify_incomplete": 0.0,
+    "flux_generation": 0.0,
+    "general_answer": 0.3333333333333333,
+    "memory_end": 0.0,
+    "migration_advisor": 0.0,
+    "pipeline_eval": -0.08333333333333337,
+    "private_lookup": 0.0,
+    "qwen_probe": 0.0,
+    "qwen_probe_only_contrast": 0.0,
+    "qwen_probe_then_migration": 0.16666666666666663,
+    "rex_probe": 1.0,
+    "rex_probe_then_migration": 0.20833333333333337
+  },
+  "other_category_action_deltas": {
+    "adela_eval": 0.0,
+    "clarify_incomplete": 0.0,
+    "flux_generation": 0.0,
+    "general_answer": 0.3333333333333333,
+    "memory_end": 0.0,
+    "migration_advisor": 0.0,
+    "pipeline_eval": -0.08333333333333337,
+    "private_lookup": 0.0,
+    "qwen_probe": 0.0,
+    "rex_probe": 1.0,
+    "rex_probe_then_migration": 0.20833333333333337
+  },
+  "mean_wrong_side_effect_delta": 0.6666666666666661,
+  "checks": {
+    "candidate_seed_count": true,
+    "primary_strict_case_action": true,
+    "overall_step_action": true,
+    "positive_seeds": true,
+    "entity_clustered_action_ci": true,
+    "primary_verifier": true,
+    "primary_step2": true,
+    "contrast": true,
+    "other_categories": true,
+    "wrong_side_effects": false
+  },
+  "passed": false,
+  "test_may_open": false
+}

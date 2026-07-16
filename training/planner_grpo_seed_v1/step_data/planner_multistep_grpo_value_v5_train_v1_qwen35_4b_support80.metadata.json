@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "created_at": "2026-07-15T11:00:46.737782+00:00",
+  "role": "optimization_pool_stochastic_support_only",
+  "source": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/step_data/planner_multistep_grpo_value_v5_train_v1_qwen35_4b_nothinking_step2.jsonl",
+  "source_sha256": "d84bf1681337603aebc0f2f169340c2dbd82f7faee5217ea60ba16de087f782d",
+  "output": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/step_data/planner_multistep_grpo_value_v5_train_v1_qwen35_4b_support80.jsonl",
+  "output_sha256": "f24debec5ecc8b428afe3d8583626b01435c42af2e3f9313ee949650dcb957dc",
+  "rows": 80,
+  "samples_per_prompt": 8,
+  "categories": {
+    "qwen_connection_budget_exhausted": 10,
+    "qwen_connection_nonretryable": 10,
+    "qwen_timeout_budget_exhausted": 10,
+    "qwen_timeout_nonretryable": 10,
+    "rex_connection_budget_exhausted": 10,
+    "rex_connection_nonretryable": 10,
+    "rex_timeout_budget_exhausted": 10,
+    "rex_timeout_nonretryable": 10
+  },
+  "target_action_classes": {
+    "migrate": 48,
+    "retry": 32
+  },
+  "unique_entities": 60,
+  "maximum_rows_per_entity": 2,
+  "entity_exposure_histogram": {
+    "1": 40,
+    "2": 20
+  },
+  "selection": {
+    "seed_material": "20260715",
+    "per_category_quotas": {
+      "migrate": 6,
+      "retry": 4
+    },
+    "priority": "minimize prior entity use, then stable SHA256 order"
+  }
+}

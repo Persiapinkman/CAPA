@@ -1,0 +1,127 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-07-14T18:20:00Z",
+  "model": "/raid/zkq/models/Qwen3.5-4B",
+  "decision": "adaptation_required_not_a_direct_model_path_swap",
+  "model_architecture": {
+    "auto_causal_lm_class": "Qwen3_5ForCausalLM",
+    "hidden_size": 2560,
+    "layers": 32,
+    "full_attention_layers": 8,
+    "gated_deltanet_layers": 24,
+    "max_position_embeddings": 262144
+  },
+  "environment_audit": {
+    "current_qwen25_grpo_environment": {
+      "transformers": "4.57.6",
+      "trl": "1.8.0",
+      "peft": "0.19.1",
+      "torch": "2.6.0+cu124",
+      "result": "fail",
+      "failure": "Transformers does not recognize model_type qwen3_5."
+    },
+    "qwen35_model_loading_environment": {
+      "transformers": "5.13.0.dev0",
+      "trl": "1.7.0.dev0",
+      "peft": "0.19.1",
+      "torch": "2.8.0+cu128",
+      "vllm": "0.10.2",
+      "model_load_result": "pass",
+      "grpo_trainer_import_result": "fail",
+      "failure": "TRL imports StructuredOutputsParams, which is absent from the installed vLLM 0.10.2.",
+      "interface_import_when_vllm_is_treated_as_unavailable": "pass"
+    },
+    "required_action": "Create a separate pinned Qwen3.5 GRPO environment. Do not modify the working Qwen2.5 environment. Omit vLLM for the Transformers generation path, or install a TRL-compatible Qwen3.5-capable vLLM version."
+  },
+  "prompt_contract": {
+    "existing_step_rows_checked": 128,
+    "existing_rows_ending_at_legacy_assistant_marker": 128,
+    "existing_rows_with_qwen35_empty_think_marker": 0,
+    "required_non_thinking_suffix": "<|im_start|>assistant\n<think>\n\n</think>\n\n",
+    "additional_tokens_per_prompt": 4,
+    "rebuilt_prompt_token_min": 3829,
+    "rebuilt_prompt_token_max": 4108,
+    "required_action": "Rebuild and freeze Qwen3.5-specific step data with tokenizer.apply_chat_template(enable_thinking=false); do not reuse the Qwen2.5 ChatML strings."
+  },
+  "lora_audit": {
+    "legacy_targets": {
+      "target_modules": [
+        "q_proj",
+        "k_proj",
+        "v_proj",
+        "o_proj"
+      ],
+      "covered_layers": 8,
+      "trainable_params": 3145728,
+      "runtime_total_params_with_adapters": 4208897024,
+      "trainable_percent": 0.07474
+    },
+    "qwen35_hybrid_targets": {
+      "target_modules": [
+        "q_proj",
+        "k_proj",
+        "v_proj",
+        "o_proj",
+        "in_proj_qkv",
+        "in_proj_z",
+        "in_proj_a",
+        "in_proj_b",
+        "out_proj"
+      ],
+      "covered_full_attention_layers": 8,
+      "covered_gated_deltanet_layers": 24,
+      "trainable_params": 14376960,
+      "runtime_total_params_with_adapters": 4220128256,
+      "trainable_percent": 0.340676
+    }
+  },
+  "precision_and_kernel_audit": {
+    "hardware": "Tesla V100-SXM2-32GB compute capability 7.0",
+    "native_bfloat16": false,
+    "required_precision": "float16 autocast",
+    "cudnn_depthwise_conv1d": "fails with CUDNN_STATUS_NOT_INITIALIZED in the tested Torch 2.8/cu128/cuDNN 9.19 stack",
+    "cudnn_disabled_path": "pass",
+    "existing_training_common_module_disables_cudnn": true,
+    "optional_fast_linear_attention_kernels_available": false,
+    "current_behavior": "pure PyTorch Gated DeltaNet fallback",
+    "default_high_loss_scale": "unsafe; scales 65536 and 4096 overflow even at 512 tokens",
+    "full_context_scale_256": "unsafe; 64 of 304 gradient tensors are non-finite at 4177 tokens",
+    "full_context_scale_1": "pass; 304 of 304 gradient tensors are finite at 4177 tokens"
+  },
+  "no_update_contract": {
+    "status": "pass_with_required_settings",
+    "prompt_tokens": 4108,
+    "completion_tokens": 69,
+    "sequence_tokens": 4177,
+    "autocast": "float16",
+    "loss_scale": 1.0,
+    "gradient_checkpointing": true,
+    "cudnn_enabled": false,
+    "loss": 0.815358,
+    "gradient_tensors": 304,
+    "finite_gradient_tensors": 304,
+    "initially_nonzero_gradient_tensors": 152,
+    "max_memory_allocated_gib": 22.191,
+    "optimizer_created": false,
+    "optimizer_step": false,
+    "weights_saved": false
+  },
+  "dry_run": {
+    "artifact": "/raid/zkq/artifacts/CAPA/compat/qwen35_4b_grpo_dry_run/capa_trl_grpo_config.json",
+    "step_rows_before": 128,
+    "step_rows_after": 128,
+    "prompt_tokens_min": 3825,
+    "prompt_tokens_max": 4104,
+    "max_completion_length": 256
+  },
+  "required_changes_before_training": [
+    "Use an isolated dependency set that both recognizes qwen3_5 and imports GRPOTrainer successfully.",
+    "Generate Qwen3.5 non-thinking prompts with the model chat template.",
+    "Use hybrid full-attention plus Gated DeltaNet LoRA targets.",
+    "Keep cuDNN disabled for the tested V100 stack and use fp16 autocast.",
+    "Configure the fp16 GradScaler initial scale at 1.0, or otherwise demonstrate finite gradients at representative 4k length.",
+    "Run a no-update GRPO generation-and-loss memory microbenchmark; the existing num_generations=8 path is not covered by the 22.191 GiB single-sequence contract.",
+    "Re-run Qwen3.5-specific sampling-support gates on disjoint training/calibration prompts before GRPO."
+  ],
+  "training_status": "not_started"
+}

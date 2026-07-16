@@ -1,0 +1,201 @@
+{
+  "schema_version": "1.0",
+  "status": "prepared",
+  "mode": "train",
+  "started_at": "2026-07-15T15:08:34.643739+00:00",
+  "optimizer_steps_authorized": true,
+  "model_name_or_path": "/raid/zkq/models/Qwen3.5-4B",
+  "data_dir": "/raid/zkq/projects/CAPA/training/public_sft_grpo_v1/data/gsm8k_sft32_v1",
+  "data_manifest_sha256": "de52206d4692eb41932992c308066747276c823b760e82d5b27a363ff3a27dd4",
+  "output_dir": "/raid/zkq/projects/CAPA/experiments/runs/20260715_qwen35_4b_gsm8k_sft32_overfit_v3",
+  "packages": {
+    "python": "3.10.12",
+    "torch": "2.6.0+cu124",
+    "transformers": "5.12.0",
+    "trl": "1.8.0",
+    "peft": "0.19.1",
+    "accelerate": "1.14.0",
+    "datasets": "5.0.0"
+  },
+  "distributed": {
+    "world_size": 4,
+    "expected_world_size": 4,
+    "gradient_accumulation_steps": 2,
+    "global_batch_size": 8,
+    "cuda_visible_devices": "0,1,3,5"
+  },
+  "sft": {
+    "max_steps": 100,
+    "max_length": 1024,
+    "learning_rate": 2e-05,
+    "warmup_steps": 5,
+    "assistant_only_loss": true,
+    "completion_only_loss": false,
+    "packing": false,
+    "loss_type": "nll",
+    "template": "qwen3_5_nothink_training",
+    "template_sha256": "2394dc8c5833499b9aade0b513df8d164c69ec6e185fa84d1b57d4005342ad8c",
+    "eos_token_id": 248046,
+    "pad_token_id": 248044,
+    "model_loader": "AutoModelForCausalLM"
+  },
+  "label_audit": {
+    "train": {
+      "rows": 32,
+      "min_tokens": 126,
+      "max_tokens": 427,
+      "min_supervised_tokens": 44,
+      "max_supervised_tokens": 303,
+      "assistant_mask_nonempty_rate": 1.0,
+      "eos_supervised_rate": 1.0
+    },
+    "development": {
+      "rows": 32,
+      "min_tokens": 130,
+      "max_tokens": 390,
+      "min_supervised_tokens": 54,
+      "max_supervised_tokens": 279,
+      "assistant_mask_nonempty_rate": 1.0,
+      "eos_supervised_rate": 1.0
+    }
+  },
+  "lora": {
+    "r": 16,
+    "alpha": 32,
+    "dropout": 0.0,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "in_proj_qkv",
+      "in_proj_z",
+      "in_proj_a",
+      "in_proj_b",
+      "out_proj"
+    ]
+  },
+  "data_manifest": {
+    "schema_version": "1.0",
+    "dataset_id": "public_sft_grpo_v1_gsm8k_sft32",
+    "created_at": "2026-07-15T14:40:55.429348+00:00",
+    "seed": 42,
+    "model_name_or_path": "/raid/zkq/models/Qwen3.5-4B",
+    "template": "trl_qwen3_5_nothink_training_chat_template",
+    "template_sha256": "2394dc8c5833499b9aade0b513df8d164c69ec6e185fa84d1b57d4005342ad8c",
+    "tokenizer": {
+      "eos_token_id": 248046,
+      "pad_token_id": 248044
+    },
+    "max_length": 1024,
+    "sources": {
+      "gsm8k_revision": "740312add88f781978c0658806c59bc2815b9866",
+      "math_lighteval_revision": "0530c78699ea5e8eb5530600900e1f328b48acad",
+      "source_file_sha256": {
+        "/raid/zkq/artifacts/CAPA/datasets/public_sft_grpo_v1/raw/hf/openai__gsm8k/740312add88f781978c0658806c59bc2815b9866/README.md": "a17e882503578c9e324560630e31017617714ee025c87cf4fea6fd916895f3c1",
+        "/raid/zkq/artifacts/CAPA/datasets/public_sft_grpo_v1/raw/hf/openai__gsm8k/740312add88f781978c0658806c59bc2815b9866/main/train-00000-of-00001.parquet": "ea82612ea9582142387730c793eb67d3b12849002bc0b7fa6f8efafa7351419d",
+        "/raid/zkq/artifacts/CAPA/datasets/public_sft_grpo_v1/raw/hf/openai__gsm8k/740312add88f781978c0658806c59bc2815b9866/main/test-00000-of-00001.parquet": "ee7b8da9e381df27b9e3f7758a159ab2bdaa4dbaa910546cbbc47e0cb44e4f59",
+        "/raid/zkq/artifacts/CAPA/datasets/public_sft_grpo_v1/raw/hf/DigitalLearningGmbH__MATH-lighteval/0530c78699ea5e8eb5530600900e1f328b48acad/README.md": "3bb056303034d0f49925396ede385ee2feed638c26e2abbf3a8ff0b9976a9bc4",
+        "/raid/zkq/artifacts/CAPA/datasets/public_sft_grpo_v1/raw/hf/DigitalLearningGmbH__MATH-lighteval/0530c78699ea5e8eb5530600900e1f328b48acad/data/train-00000-of-00001.parquet": "eca6e667f4305dd5e5ba09b4fd55e7f3174a0fbe361cdfd4c44758b593a76933",
+        "/raid/zkq/artifacts/CAPA/datasets/public_sft_grpo_v1/raw/hf/DigitalLearningGmbH__MATH-lighteval/0530c78699ea5e8eb5530600900e1f328b48acad/data/test-00000-of-00001.parquet": "7dca8d6e41af88ecf82f2b5f36eb5530e083aaaa86ee325f62bd5c31535178c6"
+      }
+    },
+    "isolation": {
+      "normalized_upstream_train_test_overlap": 0,
+      "derived_question_overlap": 0,
+      "development_source": "official train",
+      "sealed_test_source": "official test",
+      "sealed_test_allowed_for_checkpoint_selection": false
+    },
+    "splits": {
+      "train": {
+        "rows": 32,
+        "total_tokens": {
+          "min": 126,
+          "p50": 240,
+          "p95": 290,
+          "max": 427
+        },
+        "assistant_tokens": {
+          "min": 44,
+          "p50": 135,
+          "max": 303
+        },
+        "prompt_tokens": {
+          "min": 76,
+          "p50": 104,
+          "max": 129
+        },
+        "eos_supervised_rate": 1.0,
+        "assistant_mask_nonempty_rate": 1.0
+      },
+      "development": {
+        "rows": 32,
+        "total_tokens": {
+          "min": 130,
+          "p50": 204,
+          "p95": 325,
+          "max": 390
+        },
+        "assistant_tokens": {
+          "min": 54,
+          "p50": 112,
+          "max": 279
+        },
+        "prompt_tokens": {
+          "min": 73,
+          "p50": 104,
+          "max": 141
+        },
+        "eos_supervised_rate": 1.0,
+        "assistant_mask_nonempty_rate": 1.0
+      },
+      "sealed_test": {
+        "rows": 128,
+        "total_tokens": {
+          "min": 122,
+          "p50": 229,
+          "p95": 380,
+          "max": 498
+        },
+        "assistant_tokens": {
+          "min": 35,
+          "p50": 126,
+          "max": 352
+        },
+        "prompt_tokens": {
+          "min": 73,
+          "p50": 104,
+          "max": 209
+        },
+        "eos_supervised_rate": 1.0,
+        "assistant_mask_nonempty_rate": 1.0
+      }
+    },
+    "files": {
+      "train": {
+        "path": "/raid/zkq/projects/CAPA/training/public_sft_grpo_v1/data/gsm8k_sft32_v1/train.jsonl",
+        "sha256": "db862dcbf9eb678dc209ed5d5880b6d32b571cb0327f649b72fa5358e955107c"
+      },
+      "development": {
+        "path": "/raid/zkq/projects/CAPA/training/public_sft_grpo_v1/data/gsm8k_sft32_v1/development.jsonl",
+        "sha256": "bdd312b02ac0fcf0868abff268f7fa71078a7e3b919b7bd4cc7969919c380320"
+      },
+      "sealed_test": {
+        "path": "/raid/zkq/projects/CAPA/training/public_sft_grpo_v1/data/gsm8k_sft32_v1/sealed_test.jsonl",
+        "sha256": "41682f80567268f5218af6689be20ec03c8fdf448eaffcc7c6bb95524c9099fc"
+      }
+    }
+  },
+  "sft_config_signature_validated": true,
+  "model_audit": {
+    "base_model_class": "Qwen3_5ForCausalLM",
+    "visual_module_count": 0,
+    "lora_module_count": 152,
+    "trainable_parameter_count": 14376960
+  },
+  "grad_scaler": {
+    "scale": 1.0,
+    "growth_interval": 100000
+  }
+}

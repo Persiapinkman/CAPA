@@ -66,6 +66,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--task-reward-weight", type=float, default=0.85)
     parser.add_argument("--format-reward-weight", type=float, default=0.15)
     parser.add_argument("--attn-implementation", default="sdpa")
+    parser.add_argument(
+        "--trust-remote-code",
+        action="store_true",
+        help="Opt in to custom Hub model code. Local Qwen3.5 audits leave this disabled.",
+    )
     return parser.parse_args()
 
 
@@ -82,9 +87,13 @@ def action_name(completion: str) -> str:
 def aggregate(groups: list[dict[str, Any]]) -> dict[str, Any]:
     by_category: dict[str, list[dict[str, Any]]] = defaultdict(list)
     by_step: dict[int, list[dict[str, Any]]] = defaultdict(list)
+    by_category_step: dict[tuple[str, int], list[dict[str, Any]]] = defaultdict(list)
     for group in groups:
-        by_category[str(group["category"])].append(group)
-        by_step[int(group["step_index"])].append(group)
+        category = str(group["category"])
+        step_index = int(group["step_index"])
+        by_category[category].append(group)
+        by_step[step_index].append(group)
+        by_category_step[(category, step_index)].append(group)
 
     def stats(items: list[dict[str, Any]]) -> dict[str, Any]:
         result = {
@@ -118,12 +127,24 @@ def aggregate(groups: list[dict[str, Any]]) -> dict[str, Any]:
                     ),
                 }
             )
+        if all("exact_action_support" in item for item in items):
+            result["exact_action_support_rate"] = statistics.mean(
+                float(bool(item["exact_action_support"])) for item in items
+            )
+        if all("distinct_valid_actions" in item for item in items):
+            result["mean_distinct_valid_actions"] = statistics.mean(
+                float(item["distinct_valid_actions"]) for item in items
+            )
         return result
 
     return {
         "overall": stats(groups),
         "categories": {key: stats(value) for key, value in sorted(by_category.items())},
         "steps": {str(key): stats(value) for key, value in sorted(by_step.items())},
+        "category_steps": {
+            f"{category}::step{step_index}": stats(value)
+            for (category, step_index), value in sorted(by_category_step.items())
+        },
     }
 
 
@@ -154,7 +175,10 @@ def main() -> None:
 
     model_path = resolve_model_name_or_path(args.model_name_or_path, ROOT)
     tokenizer = AutoTokenizer.from_pretrained(
-        model_path, trust_remote_code=True, use_fast=True, padding_side="left"
+        model_path,
+        trust_remote_code=args.trust_remote_code,
+        use_fast=True,
+        padding_side="left",
     )
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
@@ -163,7 +187,7 @@ def main() -> None:
         dtype=torch.float16,
         attn_implementation=args.attn_implementation,
         low_cpu_mem_usage=True,
-        trust_remote_code=True,
+        trust_remote_code=args.trust_remote_code,
     ).to("cuda")
     adapter_path = str((ROOT / args.adapter_path).resolve()) if args.adapter_path else ""
     model = PeftModel.from_pretrained(base, adapter_path).to("cuda") if adapter_path else base

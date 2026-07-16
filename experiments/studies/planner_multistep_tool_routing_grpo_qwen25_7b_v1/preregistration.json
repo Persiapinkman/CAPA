@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_multistep_tool_routing_grpo_qwen25_7b_v1",
+  "dataset_id": "planner_multistep_grpo_hard_v1",
+  "registered_at": "2026-07-14",
+  "objective": "Create a GRPO-suitable Planner challenge where Qwen3.5-35B-A3B is competent and raw Qwen2.5-7B-Instruct has substantial room to improve.",
+  "experimental_unit": "case_id",
+  "cluster_unit": "entity_id",
+  "blocking_factors": [
+    "scenario_id",
+    "image_fixture_family",
+    "named_detection_model",
+    "observation_status"
+  ],
+  "calibration": {
+    "cases": 288,
+    "entities": 24,
+    "scenarios": 12,
+    "repeats": 1,
+    "selection_unit": "whole scenario family",
+    "reference_min": 0.95,
+    "base_max": 0.70,
+    "gap_min": 0.25,
+    "min_families": 6,
+    "min_multistep_families": 3
+  },
+  "confirmation": {
+    "target_cases": 600,
+    "repeats": 3,
+    "reference_pass_all_min": 0.95,
+    "base_pass_all_max": 0.60,
+    "gap_min": 0.30,
+    "family_reference_min": 0.90,
+    "family_base_max": 0.75,
+    "case_level_filtering": false,
+    "decision": "accept_or_reject_entire_dataset_version"
+  },
+  "invalid_run_conditions": [
+    "any API or rollout error",
+    "any empty Planner decision",
+    "wrong model or API endpoint",
+    "proxy environment mismatch",
+    "dataset or verifier hash drift"
+  ],
+  "training_status": "not_authorized_in_this_phase"
+}

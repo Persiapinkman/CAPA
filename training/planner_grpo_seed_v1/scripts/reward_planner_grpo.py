@@ -89,10 +89,14 @@ def as_decision_list(value: Any) -> tuple[list[dict[str, Any]], bool]:
     return clean, len(clean) == len(decisions)
 
 
-def value_matches(actual: Any, expected: Any) -> bool:
+def value_matches(actual: Any, expected: Any, *, strict_types: bool = False) -> bool:
     if isinstance(expected, bool):
+        if strict_types:
+            return isinstance(actual, bool) and actual is expected
         return bool(actual) is expected
     if isinstance(expected, int) and not isinstance(expected, bool):
+        if strict_types:
+            return isinstance(actual, int) and not isinstance(actual, bool) and actual == expected
         try:
             return int(actual) == expected
         except (TypeError, ValueError):
@@ -127,6 +131,7 @@ def score_expected_step(
     actual: dict[str, Any] | None,
     reward_spec: dict[str, float],
 ) -> tuple[float, dict[str, Any]]:
+    strict_argument_types = bool(reward_spec.get("strict_argument_types", False))
     detail = {
         "json_valid": 0.0,
         "decision_type_valid": 0.0,
@@ -155,7 +160,11 @@ def score_expected_step(
         actual_action = actual_decision_type
     else:
         actual_action = normalize_action(str(actual.get("action") or ""))
-    accepted_actions = ACTION_EQUIVALENTS.get(expected_action, {expected_action})
+    accepted_actions = (
+        {expected_action}
+        if bool(reward_spec.get("strict_action_match", False))
+        else ACTION_EQUIVALENTS.get(expected_action, {expected_action})
+    )
     if actual_action in accepted_actions:
         detail["action_match"] = 1.0
     else:
@@ -173,12 +182,20 @@ def score_expected_step(
     for key, expected_value in required_args.items():
         if key == "finish_after_tool":
             finish_checked = True
-            finish_hit = value_matches(get_arg(actual, key), expected_value)
+            finish_hit = value_matches(
+                get_arg(actual, key),
+                expected_value,
+                strict_types=strict_argument_types,
+            )
             if not finish_hit:
                 failures.append(f"finish_after_tool expected {expected_value!r}, got {get_arg(actual, key)!r}")
             continue
         arg_checks += 1
-        if value_matches(get_arg(actual, key), expected_value):
+        if value_matches(
+            get_arg(actual, key),
+            expected_value,
+            strict_types=strict_argument_types,
+        ):
             arg_hits += 1
         else:
             failures.append(f"arg {key!r} expected {expected_value!r}, got {get_arg(actual, key)!r}")
@@ -308,6 +325,8 @@ def detect_skip_required_probe(
 def detect_final_tool_not_finished(
     expected_list: list[dict[str, Any]],
     decisions: list[dict[str, Any]],
+    *,
+    strict_types: bool = False,
 ) -> bool:
     """Penalize a correct final substantive tool that still sets finish_after_tool=false."""
     if not expected_list or not decisions:
@@ -321,7 +340,11 @@ def detect_final_tool_not_finished(
     required_args = final_expected.get("required_args") if isinstance(final_expected.get("required_args"), dict) else {}
     if required_args.get("finish_after_tool") is not True:
         return False
-    return value_matches(get_arg(final_actual, "finish_after_tool"), True) is False
+    return value_matches(
+        get_arg(final_actual, "finish_after_tool"),
+        True,
+        strict_types=strict_types,
+    ) is False
 
 
 def score_case(
@@ -429,7 +452,13 @@ def score_case(
 
     final_finish_weight = float(reward_spec.get("final_tool_finish", 0.0))
     final_tool_not_finished_hit = (
-        detect_final_tool_not_finished(expected_list, decisions) if final_finish_weight > 0 else False
+        detect_final_tool_not_finished(
+            expected_list,
+            decisions,
+            strict_types=bool(reward_spec.get("strict_argument_types", False)),
+        )
+        if final_finish_weight > 0
+        else False
     )
     final_finish_score = 0.0 if final_tool_not_finished_hit else final_finish_weight
 

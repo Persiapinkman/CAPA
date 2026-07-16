@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "planner_multistep_grpo_value_v3",
+  "study": "experiments/studies/planner_multistep_tool_routing_grpo_qwen35_4b_v1/preregistration.json",
+  "cases": {
+    "calibration": "training/planner_grpo_seed_v1/cases/planner_multistep_grpo_value_v3_calibration_cases.jsonl",
+    "confirmation": "training/planner_grpo_seed_v1/cases/planner_multistep_grpo_value_v3_confirmation_cases.jsonl"
+  },
+  "models": {
+    "base": {
+      "label": "Qwen3.5-4B",
+      "path": "/raid/zkq/models/Qwen3.5-4B",
+      "runtime": "local_transformers_fp16_non_thinking",
+      "proxy_policy": "unset_proxy_for_localhost"
+    },
+    "reference": {
+      "label": "Qwen3.5-35B-A3B",
+      "runtime": "external_openai_compatible_gateway",
+      "environment": "/raid/zkq/projects/CAPA/init_env.sh",
+      "proxy_policy": "preserve_init_env_proxy"
+    }
+  },
+  "generation": {
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "do_sample": false,
+    "seed": 42,
+    "max_steps": 3,
+    "max_tokens": 2048,
+    "timeout_seconds": 300,
+    "openai_timeout_seconds": 300,
+    "calibration_repeats": 1,
+    "confirmation_repeats": 3
+  },
+  "action_space": {
+    "CAPA_ENABLE_ADELA": 0
+  },
+  "gate": "pipelines/eval/check_grpo_value_challenge_gate.py"
+}

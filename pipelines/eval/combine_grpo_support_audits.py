@@ -18,8 +18,23 @@ if str(ROOT) not in sys.path:
 
 from pipelines.eval.audit_grpo_sampling_support import aggregate  # noqa: E402
 from training.planner_grpo_seed_v1.scripts.train_planner_grpo import (  # noqa: E402
+    expected_action_name,
     score_step_completion,
 )
+
+
+VALID_PLANNER_ACTIONS = {
+    "adela_cli_eval",
+    "answerer",
+    "clarify",
+    "end",
+    "flux_image_generation",
+    "migration_advisor",
+    "pipeline_eval",
+    "qwen_detection",
+    "rag_answer",
+    "rexomni_detection",
+}
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -89,9 +104,15 @@ def main() -> None:
         group_samples = enriched_by_group[key]
         task_rewards = [float(item["task_reward"]) for item in group_samples]
         actions = [str(item["action"]) for item in group_samples]
+        raw_expected = data_rows[key]["expected_step"]
+        expected_step = json.loads(raw_expected) if isinstance(raw_expected, str) else raw_expected
+        expected_action = expected_action_name(expected_step)
         enriched_groups.append(
             {
                 **group,
+                "expected_action": expected_action,
+                "exact_action_support": expected_action in actions,
+                "distinct_valid_actions": len(set(actions) & VALID_PLANNER_ACTIONS),
                 "mean_task_reward": statistics.mean(task_rewards),
                 "max_task_reward": max(task_rewards),
                 "min_task_reward": min(task_rewards),

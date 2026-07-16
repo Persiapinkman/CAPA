@@ -1,23 +1,24 @@
 {
   "schema_version": "1.0",
-  "objective": "Find a reproducible strict-action GRPO improvement for CAPA Planner state transitions under V100 constraints, with entity-isolated train/dev/test evidence.",
+  "objective": "Find a reproducible strict-action GRPO improvement for CAPA Planner decisions that are actually policy-owned at runtime, without increasing side-effect risk.",
   "demo_default": "Qwen3.5-35B-A3B",
-  "research_candidate": "Qwen2.5-7B SFTv3 initializer plus the planner_stateful_retrieval_v2 action-dominant GRPO recipe",
-  "current_study": "planner_complex_retrieval_grpo_v2",
+  "research_candidate": "Qwen2.5-7B SFTv3 initializer plus planner_runtime_probe_curriculum_v1 strict-action GRPO; diagnostic only, not promoted",
+  "current_study": "planner_runtime_routing_grpo_v1",
   "study_arm_order": [
-    "full_v2_seed42_screen",
-    "first_miss_transition_seed42",
-    "replicated_full_v2_growth_seeds42_43_44",
-    "sealed_test_confirmation"
+    "fixed_existing_route_grpo_external_validation",
+    "runtime_probe_curriculum_support_v1_rejected",
+    "runtime_probe_curriculum_v2_seed42_screen",
+    "runtime_probe_curriculum_v2_seeds42_43_44_development_replication"
   ],
-  "evidence_grade": "sealed_test_confirmed_controlled_state_machine",
-  "key_result": "On rag_double_miss_recovery, the three-seed mean policy improved sealed-test strict action match by 0.1292 with entity-clustered 95% CI [0.0750, 0.1896] and improved verifier score by 0.1096.",
+  "evidence_grade": "development_replicated_narrow_runtime_growth_policy_guardrail_failed_test_sealed",
+  "key_result": "On qwen_probe_then_migration, three-seed mean strict complete-case action improved by 0.3333 and overall action by 0.1333 (entity-clustered 95% CI [0.0917, 0.1778]); however mean wrong side-effecting actions increased by 0.6667, so the preregistered development gate failed and test remained sealed.",
   "caveats": [
-    "The original seed-42 practical development gate of +0.10 strict action remained failed; the confirmed claim is the separately preregistered three-seed measurable-growth claim.",
-    "Observations are deterministic mocked retrieval transitions and do not establish real retriever or end-to-end answer quality.",
-    "The data are controlled synthetic templates despite entity and template isolation across splits.",
-    "Test was opened once only after the adaptive three-seed development replication gate passed; it must not be reused for further model selection.",
-    "The demo default and the confirmed research recipe remain different model lines."
+    "The supported effect is a narrow runtime-owned routing scene, not a safely promotable whole Planner policy.",
+    "Seed44 added two wrong Flux calls on requests that required the full pipeline; no-side-effect-increase was a hard preregistered guardrail.",
+    "All eight underspecified clarify cases route to side-effecting Adela in both baseline and every seed, exposing a pre-existing safety weakness not solved by this curriculum.",
+    "Cases and observations are controlled synthetic templates; no real tool execution, visual quality, retrieval quality, or end-to-end answer quality is established.",
+    "The runtime-probe test split was not generated against any model and remains sealed for a future fixed candidate, but this development split must not be reused to tune the next arm.",
+    "The demo default and research model remain different model lines; the shared tokenizer warning requires a separate future ablation."
   ],
-  "next_decision": "Freeze the v2 test split and recipe. Build a new external evaluation with noisy retrieval replay, bounded tool budgets, contradictory evidence, and a small read-only deidentified real-trajectory slice; do not tune against the confirmed v2 test."
+  "next_decision": "Freeze this arm and its unopened test. Create a new versioned side-effect-constrained study with independent train/dev/test entities, explicit clarify-vs-Adela and pipeline-vs-Flux contrasts, outcome-dependent tool observations, and a cost/safety verifier; do not tune against the current dev or test."
 }

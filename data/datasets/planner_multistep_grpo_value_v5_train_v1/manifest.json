@@ -1,0 +1,302 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "planner_multistep_grpo_value_v5_train_v1",
+  "role": "optimization_training_pool",
+  "source_evaluation_dataset_id": "planner_multistep_grpo_value_v5",
+  "source_evaluation_split": "confirmation_aggregate_distribution",
+  "seed": 2026071501,
+  "construction": {
+    "method": "independent synthetic analogue from aggregate taxonomy and class counts",
+    "copied_evaluation_rows": 0,
+    "train_entity_groups": 60,
+    "fixed_grpo_target_step": 2
+  },
+  "stats": {
+    "cases": 480,
+    "steps": 960,
+    "unique_case_ids": 480,
+    "unique_queries": 120,
+    "categories": {
+      "qwen_connection_budget_exhausted": 60,
+      "qwen_connection_nonretryable": 60,
+      "qwen_timeout_budget_exhausted": 60,
+      "qwen_timeout_nonretryable": 60,
+      "rex_connection_budget_exhausted": 60,
+      "rex_connection_nonretryable": 60,
+      "rex_timeout_budget_exhausted": 60,
+      "rex_timeout_nonretryable": 60
+    },
+    "expected_actions": {
+      "migration_advisor": 288,
+      "qwen_detection": 336,
+      "rexomni_detection": 336
+    },
+    "entity_groups": 60,
+    "project_entities": 60,
+    "target_entities": 2,
+    "target_action_classes": {
+      "migrate": 288,
+      "retry": 192
+    },
+    "detector_families": {
+      "qwen": 240,
+      "rex": 240
+    },
+    "error_aliases": {
+      "detector_deadline_consumed": 120,
+      "detector_peer_channel_closed": 120,
+      "vision_rpc_window_expired": 120,
+      "vision_transport_link_broken": 120
+    },
+    "fixture_families": {
+      "v5_train_v1_blue_service_valve": 240,
+      "v5_train_v1_orange_warning_marker": 240
+    }
+  },
+  "distribution_match": {
+    "status": "pass",
+    "source_split": "confirmation",
+    "case_scale_factor": 2.0,
+    "source": {
+      "cases": 240,
+      "families": {
+        "qwen_connection_budget_exhausted": 30,
+        "qwen_connection_nonretryable": 30,
+        "qwen_timeout_budget_exhausted": 30,
+        "qwen_timeout_nonretryable": 30,
+        "rex_connection_budget_exhausted": 30,
+        "rex_connection_nonretryable": 30,
+        "rex_timeout_budget_exhausted": 30,
+        "rex_timeout_nonretryable": 30
+      },
+      "target_action_classes": {
+        "migrate": 144,
+        "retry": 96
+      }
+    },
+    "train": {
+      "cases": 480,
+      "families": {
+        "qwen_connection_budget_exhausted": 60,
+        "qwen_connection_nonretryable": 60,
+        "qwen_timeout_budget_exhausted": 60,
+        "qwen_timeout_nonretryable": 60,
+        "rex_connection_budget_exhausted": 60,
+        "rex_connection_nonretryable": 60,
+        "rex_timeout_budget_exhausted": 60,
+        "rex_timeout_nonretryable": 60
+      },
+      "target_action_classes": {
+        "migrate": 288,
+        "retry": 192
+      },
+      "detector_families": {
+        "qwen": 240,
+        "rex": 240
+      },
+      "fixture_families": {
+        "v5_train_v1_blue_service_valve": 240,
+        "v5_train_v1_orange_warning_marker": 240
+      },
+      "error_aliases": {
+        "detector_deadline_consumed": 120,
+        "detector_peer_channel_closed": 120,
+        "vision_rpc_window_expired": 120,
+        "vision_transport_link_broken": 120
+      },
+      "overall_badges": {
+        "amber": 288,
+        "red": 192
+      }
+    },
+    "probability_delta": {
+      "families": {
+        "qwen_connection_budget_exhausted": 0.0,
+        "qwen_connection_nonretryable": 0.0,
+        "qwen_timeout_budget_exhausted": 0.0,
+        "qwen_timeout_nonretryable": 0.0,
+        "rex_connection_budget_exhausted": 0.0,
+        "rex_connection_nonretryable": 0.0,
+        "rex_timeout_budget_exhausted": 0.0,
+        "rex_timeout_nonretryable": 0.0
+      },
+      "target_action_classes": {
+        "migrate": 0.0,
+        "retry": 0.0
+      }
+    },
+    "total_variation_distance": {
+      "families": 0.0,
+      "target_action_classes": 0.0
+    },
+    "text_shape_diagnostic": {
+      "status": "pass",
+      "audit_only": true,
+      "source_rows_used_for_construction": false,
+      "source": {
+        "user_query_chars": {
+          "min": 429,
+          "mean": 434.1,
+          "median": 434.0,
+          "max": 439
+        },
+        "observation_chars": {
+          "min": 176,
+          "mean": 182,
+          "median": 182.0,
+          "max": 188
+        }
+      },
+      "train": {
+        "user_query_chars": {
+          "min": 454,
+          "mean": 457.1666666666667,
+          "median": 457.0,
+          "max": 460
+        },
+        "observation_chars": {
+          "min": 189,
+          "mean": 192.25,
+          "median": 192.0,
+          "max": 195
+        }
+      },
+      "relative_mean_delta": {
+        "user_query_chars": 0.05313675804346155,
+        "observation_chars": 0.05631868131868132
+      },
+      "maximum_allowed_absolute_relative_mean_delta": 0.15
+    }
+  },
+  "integrity": {
+    "status": "pass",
+    "canonical_gold_passed": 480,
+    "canonical_gold_total": 480,
+    "entity_and_content_isolation": {
+      "status": "pass",
+      "construction_source": "aggregate V5 confirmation distribution metadata only; V5 rows are read after construction solely for protected-field overlap auditing",
+      "protected_fields": [
+        "case_id",
+        "entity_id",
+        "project_entity",
+        "target_entity",
+        "normalized_query",
+        "template_id",
+        "error_alias",
+        "fixture_family",
+        "fixture_path",
+        "fixture_sha256"
+      ],
+      "v5_evaluation": {
+        "label": "v5_calibration_and_confirmation",
+        "status": "pass",
+        "files_scanned": [
+          "training/planner_grpo_seed_v1/cases/planner_multistep_grpo_value_v5_calibration_cases.jsonl",
+          "training/planner_grpo_seed_v1/cases/planner_multistep_grpo_value_v5_confirmation_cases.jsonl"
+        ],
+        "case_id_overlap": 0,
+        "entity_id_overlap": 0,
+        "project_entity_overlap": 0,
+        "target_entity_overlap": 0,
+        "normalized_query_overlap": 0,
+        "template_id_overlap": 0,
+        "error_alias_overlap": 0,
+        "fixture_family_overlap": 0,
+        "fixture_path_overlap": 0,
+        "fixture_sha256_overlap": 0,
+        "shared_taxonomy": {
+          "scenario_id_overlap": 8,
+          "scenario_ids": [
+            "qwen_connection_budget_exhausted",
+            "qwen_connection_nonretryable",
+            "qwen_timeout_budget_exhausted",
+            "qwen_timeout_nonretryable",
+            "rex_connection_budget_exhausted",
+            "rex_connection_nonretryable",
+            "rex_timeout_budget_exhausted",
+            "rex_timeout_nonretryable"
+          ],
+          "expected": true
+        },
+        "overlap_examples": {}
+      },
+      "repository_cases": {
+        "label": "all_other_repository_case_files",
+        "status": "pass",
+        "files_scanned": [
+          "training/planner_grpo_seed_v1/cases/planner_grpo_compound245_eval_cases.jsonl",
+          "training/planner_grpo_seed_v1/cases/planner_grpo_expanded_cases.jsonl",
+          "training/planner_grpo_seed_v1/cases/planner_grpo_focused_4b_cases.jsonl",
+          "training/planner_grpo_seed_v1/cases/planner_grpo_focused_train_v3_cases.jsonl",
+          "training/planner_grpo_seed_v1/cases/planner_grpo_focused_train_v5_augmented_cases.jsonl",
+          "training/planner_grpo_seed_v1/cases/planner_grpo_focused_val_v3_cases.jsonl",
+          "training/planner_grpo_seed_v1/cases/planner_grpo_seed_cases.jsonl",
+          "training/planner_grpo_seed_v1/cases/planner_grpo_train_cases.jsonl",
+          "training/planner_grpo_seed_v1/cases/planner_multistep_grpo_hard_v1_calibration_cases.jsonl",
+          "training/planner_grpo_seed_v1/cases/planner_multistep_grpo_hard_v2_calibration_cases.jsonl",
+          "training/planner_grpo_seed_v1/cases/planner_multistep_grpo_hard_v2_confirmation_cases.jsonl",
+          "training/planner_grpo_seed_v1/cases/planner_multistep_grpo_value_v3_calibration_cases.jsonl",
+          "training/planner_grpo_seed_v1/cases/planner_multistep_grpo_value_v4_calibration_cases.jsonl",
+          "training/planner_grpo_seed_v1/cases/planner_multistep_grpo_value_v5_calibration_cases.jsonl",
+          "training/planner_grpo_seed_v1/cases/planner_multistep_grpo_value_v5_confirmation_cases.jsonl",
+          "training/planner_grpo_seed_v1/cases/planner_runtime_probe_curriculum_v1_dev_cases.jsonl",
+          "training/planner_grpo_seed_v1/cases/planner_runtime_probe_curriculum_v1_test_cases.jsonl",
+          "training/planner_grpo_seed_v1/cases/planner_runtime_probe_curriculum_v1_train_cases.jsonl",
+          "training/planner_grpo_seed_v1/cases/planner_runtime_routing_v1_dev_cases.jsonl",
+          "training/planner_grpo_seed_v1/cases/planner_runtime_routing_v1_test_cases.jsonl",
+          "training/planner_grpo_seed_v1/cases/planner_runtime_routing_v1_train_cases.jsonl",
+          "training/planner_grpo_seed_v1/cases/planner_stateful_retrieval_v1_all_cases.jsonl",
+          "training/planner_grpo_seed_v1/cases/planner_stateful_retrieval_v1_dev_cases.jsonl",
+          "training/planner_grpo_seed_v1/cases/planner_stateful_retrieval_v1_test_cases.jsonl",
+          "training/planner_grpo_seed_v1/cases/planner_stateful_retrieval_v1_train_cases.jsonl",
+          "training/planner_grpo_seed_v1/cases/planner_stateful_retrieval_v2_all_cases.jsonl",
+          "training/planner_grpo_seed_v1/cases/planner_stateful_retrieval_v2_dev_cases.jsonl",
+          "training/planner_grpo_seed_v1/cases/planner_stateful_retrieval_v2_test_cases.jsonl",
+          "training/planner_grpo_seed_v1/cases/planner_stateful_retrieval_v2_train_cases.jsonl"
+        ],
+        "case_id_overlap": 0,
+        "entity_id_overlap": 0,
+        "project_entity_overlap": 0,
+        "target_entity_overlap": 0,
+        "normalized_query_overlap": 0,
+        "template_id_overlap": 0,
+        "error_alias_overlap": 0,
+        "fixture_family_overlap": 0,
+        "fixture_path_overlap": 0,
+        "fixture_sha256_overlap": 0,
+        "shared_taxonomy": {
+          "scenario_id_overlap": 8,
+          "scenario_ids": [
+            "qwen_connection_budget_exhausted",
+            "qwen_connection_nonretryable",
+            "qwen_timeout_budget_exhausted",
+            "qwen_timeout_nonretryable",
+            "rex_connection_budget_exhausted",
+            "rex_connection_nonretryable",
+            "rex_timeout_budget_exhausted",
+            "rex_timeout_nonretryable"
+          ],
+          "expected": true
+        },
+        "overlap_examples": {}
+      }
+    },
+    "source_confirmation_sha256_verified": true
+  },
+  "files": {
+    "train_cases": "training/planner_grpo_seed_v1/cases/planner_multistep_grpo_value_v5_train_v1_train_cases.jsonl",
+    "source_confirmation_report": "data/datasets/planner_multistep_grpo_value_v5/build_report_confirmation.json",
+    "source_calibration_cases": "training/planner_grpo_seed_v1/cases/planner_multistep_grpo_value_v5_calibration_cases.jsonl",
+    "source_confirmation_cases": "training/planner_grpo_seed_v1/cases/planner_multistep_grpo_value_v5_confirmation_cases.jsonl",
+    "fixture_1": "examples/images/planner_multistep_grpo_value_v5_train_v1/orange_warning_marker.png",
+    "fixture_2": "examples/images/planner_multistep_grpo_value_v5_train_v1/blue_service_valve.png"
+  },
+  "sha256": {
+    "train_cases": "bc7d50c69eb710442065a53d37f6202dc5952ae110e0d45406c62f40f48ba258",
+    "source_confirmation_report": "279322ba1977ac89f7e6a37920320e01e0bf011ec044bd4a95e14ee814f437ee",
+    "source_calibration_cases": "ad24e62c7ef08e953a7c55736af15858aa0c500fe843a2b8dfdd73721a612f5c",
+    "source_confirmation_cases": "ce93598667167c2ae3d0cdf69e303fec0652e5719923728cd8eb806d1eaa17e3",
+    "fixture_1": "9f40de0904440ab3c224a02f178e1a1dde4b7a4b98d0f912eaef52c301011c22",
+    "fixture_2": "5ba21ae8f9d03c0cab90513a504358c2d3dd7dd036c6213c4c73e2bad66b2ca6"
+  }
+}

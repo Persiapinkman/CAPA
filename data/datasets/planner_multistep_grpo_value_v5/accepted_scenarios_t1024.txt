@@ -1,0 +1,8 @@
+qwen_timeout_nonretryable
+rex_timeout_nonretryable
+qwen_timeout_budget_exhausted
+rex_timeout_budget_exhausted
+qwen_connection_nonretryable
+rex_connection_nonretryable
+qwen_connection_budget_exhausted
+rex_connection_budget_exhausted

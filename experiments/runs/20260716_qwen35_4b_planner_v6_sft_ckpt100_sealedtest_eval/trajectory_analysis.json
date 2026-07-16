@@ -1,0 +1,1258 @@
+{
+  "schema_version": "1.0",
+  "inputs": {
+    "cases": {
+      "path": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/cases/planner_retry_migrate_v6_test_cases.jsonl",
+      "sha256": "c91b9a8134a145e7ca3010441e8fc8393ca60eeba4cc5d6583332ef1f77444ef"
+    },
+    "formatted": {
+      "path": "/raid/zkq/projects/CAPA/experiments/studies/planner_retry_migrate_v6_qwen35_4b_v1/sealed_test_data/test.jsonl",
+      "sha256": "844cbc99dea43fb4497fbb90f674ddb0a1ac914ed3505c771a9f010e5b4a25c9"
+    },
+    "predictions": {
+      "path": "/raid/zkq/projects/CAPA/experiments/runs/20260716_qwen35_4b_planner_v6_sft_ckpt100_sealedtest_eval/predictions.jsonl",
+      "sha256": "55eceab332ad1fd077ccaf46e381a50442e0470268e32c400568491a7ae6c5bf"
+    }
+  },
+  "cardinality": {
+    "source_cases": 450,
+    "unique_formatted_decisions": 780,
+    "expanded_case_decisions": 1020,
+    "trajectories": 450
+  },
+  "unique_decisions": {
+    "overall": {
+      "count": 780,
+      "action_match_rate": 0.9448717948717948,
+      "argument_match_rate": 0.9448717948717948,
+      "finish_match_rate": 0.9512820512820512,
+      "mean_reward": 0.9544337606837608
+    },
+    "action_confusion_on_errors": {
+      "end->migration_advisor": 5,
+      "migration_advisor->end": 1,
+      "migration_advisor->qwen_detection": 2,
+      "qwen_detection->migration_advisor": 17,
+      "rexomni_detection->migration_advisor": 18
+    },
+    "errors": [
+      {
+        "representative_case_id": "PRMV6-TE-004-QWEN-G064",
+        "source_case_ids": [
+          "PRMV6-TE-004-QWEN-G064"
+        ],
+        "source_case_count": 1,
+        "category": "guard_conflicting_state_migrate",
+        "step_index": 2,
+        "prompt_token_count": 4266,
+        "expected_action": "migration_advisor",
+        "actual_action": "qwen_detection",
+        "score": 0.125,
+        "completion": "{\"thought\":\"最新状态未满足继续或结束条件，需要按规则尝试重试检测器。\",\"decision_type\":\"tool\",\"action\":\"qwen_detection\",\"action_input\":{\"finish_after_tool\":false,\"label\":\"湖蓝折线警示框\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-004-QWEN-RF",
+        "source_case_ids": [
+          "PRMV6-TE-004-QWEN-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 2,
+        "prompt_token_count": 4271,
+        "expected_action": "qwen_detection",
+        "actual_action": "migration_advisor",
+        "score": 0.125,
+        "completion": "{\"thought\":\"最新状态未满足重试或通过条件，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"沿海防潮闸站故障处置裁决5935号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-004-REX-RF",
+        "source_case_ids": [
+          "PRMV6-TE-004-REX-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 2,
+        "prompt_token_count": 4279,
+        "expected_action": "rexomni_detection",
+        "actual_action": "migration_advisor",
+        "score": 0.2,
+        "completion": "{\"thought\":\"最新状态未满足重试或通过条件，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"沿海防潮闸站故障处置裁决5935号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-005-REX-RF",
+        "source_case_ids": [
+          "PRMV6-TE-005-REX-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 2,
+        "prompt_token_count": 4271,
+        "expected_action": "rexomni_detection",
+        "actual_action": "migration_advisor",
+        "score": 0.125,
+        "completion": "{\"thought\":\"最新状态未满足重试或通过条件，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"卫星总装测试厅视觉链路终审8050号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-008-QWEN-RF",
+        "source_case_ids": [
+          "PRMV6-TE-008-QWEN-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 2,
+        "prompt_token_count": 4279,
+        "expected_action": "qwen_detection",
+        "actual_action": "migration_advisor",
+        "score": 0.2,
+        "completion": "{\"thought\":\"最新状态未满足重测或通过的硬性条件，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"危废焚烧配伍间探针恢复定级5399号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-008-REX-RF",
+        "source_case_ids": [
+          "PRMV6-TE-008-REX-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 2,
+        "prompt_token_count": 4287,
+        "expected_action": "rexomni_detection",
+        "actual_action": "migration_advisor",
+        "score": 0.125,
+        "completion": "{\"thought\":\"最新状态未满足重测或通过的硬性条件，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"危废焚烧配伍间探针恢复定级5399号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-010-QWEN-G010",
+        "source_case_ids": [
+          "PRMV6-TE-010-QWEN-G010"
+        ],
+        "source_case_count": 1,
+        "category": "guard_conflicting_state_migrate",
+        "step_index": 2,
+        "prompt_token_count": 4270,
+        "expected_action": "migration_advisor",
+        "actual_action": "qwen_detection",
+        "score": 0.125,
+        "completion": "{\"thought\":\"最新状态未满足继续或结束条件，需要按规则尝试重试同一检测器。\",\"decision_type\":\"tool\",\"action\":\"qwen_detection\",\"action_input\":{\"finish_after_tool\":false,\"label\":\"湖蓝折线警示框\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-012-QWEN-RF",
+        "source_case_ids": [
+          "PRMV6-TE-012-QWEN-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 2,
+        "prompt_token_count": 4260,
+        "expected_action": "qwen_detection",
+        "actual_action": "migration_advisor",
+        "score": 0.2,
+        "completion": "{\"thought\":\"最新状态未满足重测或通过的硬条件，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"生鲜冷链预冷库边界条件复查2065号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-012-REX-RF",
+        "source_case_ids": [
+          "PRMV6-TE-012-REX-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 2,
+        "prompt_token_count": 4277,
+        "expected_action": "rexomni_detection",
+        "actual_action": "migration_advisor",
+        "score": 0.2,
+        "completion": "{\"thought\":\"最新状态未满足重测或通过条件，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"生鲜冷链预冷库边界条件复查2065号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-013-REX-RF",
+        "source_case_ids": [
+          "PRMV6-TE-013-REX-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 2,
+        "prompt_token_count": 4278,
+        "expected_action": "rexomni_detection",
+        "actual_action": "migration_advisor",
+        "score": 0.2,
+        "completion": "{\"thought\":\"最新状态未满足重试或通过条件，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"无人矿卡调度区状态转移终验4855号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-016-QWEN-RF",
+        "source_case_ids": [
+          "PRMV6-TE-016-QWEN-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 2,
+        "prompt_token_count": 4268,
+        "expected_action": "qwen_detection",
+        "actual_action": "migration_advisor",
+        "score": 0.125,
+        "completion": "{\"thought\":\"最新状态未满足重测或通过条件，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"沿海防潮闸站边界条件复查1521号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-016-REX-RF",
+        "source_case_ids": [
+          "PRMV6-TE-016-REX-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 2,
+        "prompt_token_count": 4273,
+        "expected_action": "rexomni_detection",
+        "actual_action": "migration_advisor",
+        "score": 0.2,
+        "completion": "{\"thought\":\"最新状态未满足重测或通过条件，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"沿海防潮闸站边界条件复查1521号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-016-REX-RF",
+        "source_case_ids": [
+          "PRMV6-TE-016-REX-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 3,
+        "prompt_token_count": 4467,
+        "expected_action": "migration_advisor",
+        "actual_action": "end",
+        "score": 0.18333333333333332,
+        "completion": "{\"thought\":\"最新状态已满足全部硬条件，可以结束本轮规划。\",\"decision_type\":\"end\",\"end_reason\":\"memory_hit\",\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-019-REX-G019",
+        "source_case_ids": [
+          "PRMV6-TE-019-REX-G019"
+        ],
+        "source_case_count": 1,
+        "category": "guard_initial_success_end",
+        "step_index": 2,
+        "prompt_token_count": 4279,
+        "expected_action": "end",
+        "actual_action": "migration_advisor",
+        "score": 0.2,
+        "completion": "{\"thought\":\"最新结构化状态已满足全部硬条件，可以进入能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"高铁道岔监测房探针恢复定级3569号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-020-QWEN-RF",
+        "source_case_ids": [
+          "PRMV6-TE-020-QWEN-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 2,
+        "prompt_token_count": 4275,
+        "expected_action": "qwen_detection",
+        "actual_action": "migration_advisor",
+        "score": 0.2,
+        "completion": "{\"thought\":\"最新状态未满足重测或通过条件，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"高铁道岔监测房视觉链路终审7253号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-020-REX-RF",
+        "source_case_ids": [
+          "PRMV6-TE-020-REX-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 2,
+        "prompt_token_count": 4276,
+        "expected_action": "rexomni_detection",
+        "actual_action": "migration_advisor",
+        "score": 0.125,
+        "completion": "{\"thought\":\"最新状态未满足重测或通过条件，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"高铁道岔监测房视觉链路终审7253号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-021-REX-RF",
+        "source_case_ids": [
+          "PRMV6-TE-021-REX-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 2,
+        "prompt_token_count": 4270,
+        "expected_action": "rexomni_detection",
+        "actual_action": "migration_advisor",
+        "score": 0.2,
+        "completion": "{\"thought\":\"最新状态未满足重试或通过条件，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"海洋牧场控制台视觉链路终审4122号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-022-QWEN-RF",
+        "source_case_ids": [
+          "PRMV6-TE-022-QWEN-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 3,
+        "prompt_token_count": 4464,
+        "expected_action": "end",
+        "actual_action": "migration_advisor",
+        "score": 0.2,
+        "completion": "{\"thought\":\"最新状态已满足全部硬条件，可以进入能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"卫星总装测试厅探针恢复定级7743号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-024-QWEN-RF",
+        "source_case_ids": [
+          "PRMV6-TE-024-QWEN-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 2,
+        "prompt_token_count": 4270,
+        "expected_action": "qwen_detection",
+        "actual_action": "migration_advisor",
+        "score": 0.2,
+        "completion": "{\"thought\":\"最新状态未满足重测或通过条件，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"古建消防值守点故障处置裁决8344号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-024-REX-RF",
+        "source_case_ids": [
+          "PRMV6-TE-024-REX-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 2,
+        "prompt_token_count": 4282,
+        "expected_action": "rexomni_detection",
+        "actual_action": "migration_advisor",
+        "score": 0.2,
+        "completion": "{\"thought\":\"最新状态未满足重测或通过条件，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"古建消防值守点故障处置裁决8344号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-025-REX-G085",
+        "source_case_ids": [
+          "PRMV6-TE-025-REX-G085"
+        ],
+        "source_case_count": 1,
+        "category": "guard_initial_success_end",
+        "step_index": 2,
+        "prompt_token_count": 4271,
+        "expected_action": "end",
+        "actual_action": "migration_advisor",
+        "score": 0.2,
+        "completion": "{\"thought\":\"最新结构化状态已满足全部硬条件，可以进入能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"古建消防值守点状态转移终验5614号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-027-QWEN-RF",
+        "source_case_ids": [
+          "PRMV6-TE-027-QWEN-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 2,
+        "prompt_token_count": 4262,
+        "expected_action": "qwen_detection",
+        "actual_action": "migration_advisor",
+        "score": 0.2,
+        "completion": "{\"thought\":\"最新状态未满足重试或通过条件，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"无人矿卡调度区视觉链路终审6124号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-028-QWEN-RF",
+        "source_case_ids": [
+          "PRMV6-TE-028-QWEN-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 2,
+        "prompt_token_count": 4273,
+        "expected_action": "qwen_detection",
+        "actual_action": "migration_advisor",
+        "score": 0.125,
+        "completion": "{\"thought\":\"最新状态未满足重测或通过条件，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"生鲜冷链预冷库状态转移终验8058号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-028-REX-RF",
+        "source_case_ids": [
+          "PRMV6-TE-028-REX-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 2,
+        "prompt_token_count": 4276,
+        "expected_action": "rexomni_detection",
+        "actual_action": "migration_advisor",
+        "score": 0.2,
+        "completion": "{\"thought\":\"最新状态未满足重测或通过条件，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"生鲜冷链预冷库状态转移终验8058号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-032-QWEN-RF",
+        "source_case_ids": [
+          "PRMV6-TE-032-QWEN-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 2,
+        "prompt_token_count": 4274,
+        "expected_action": "qwen_detection",
+        "actual_action": "migration_advisor",
+        "score": 0.2,
+        "completion": "{\"thought\":\"最新状态未满足重测或通过的硬条件，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"海洋牧场控制台探针恢复定级3483号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-032-REX-RF",
+        "source_case_ids": [
+          "PRMV6-TE-032-REX-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 2,
+        "prompt_token_count": 4276,
+        "expected_action": "rexomni_detection",
+        "actual_action": "migration_advisor",
+        "score": 0.125,
+        "completion": "{\"thought\":\"最新状态未满足重测或通过条件，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"海洋牧场控制台探针恢复定级3483号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-036-QWEN-RF",
+        "source_case_ids": [
+          "PRMV6-TE-036-QWEN-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 2,
+        "prompt_token_count": 4261,
+        "expected_action": "qwen_detection",
+        "actual_action": "migration_advisor",
+        "score": 0.2,
+        "completion": "{\"thought\":\"最新状态未满足重测或通过的硬条件，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"古建消防值守点探针恢复定级2006号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-036-REX-RF",
+        "source_case_ids": [
+          "PRMV6-TE-036-REX-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 2,
+        "prompt_token_count": 4277,
+        "expected_action": "rexomni_detection",
+        "actual_action": "migration_advisor",
+        "score": 0.2,
+        "completion": "{\"thought\":\"最新状态未满足重测或通过的硬条件，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"古建消防值守点探针恢复定级2006号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-037-QWEN-G037",
+        "source_case_ids": [
+          "PRMV6-TE-037-QWEN-G037"
+        ],
+        "source_case_count": 1,
+        "category": "guard_initial_success_end",
+        "step_index": 2,
+        "prompt_token_count": 4276,
+        "expected_action": "end",
+        "actual_action": "migration_advisor",
+        "score": 0.2,
+        "completion": "{\"thought\":\"最新状态已满足全部硬条件，可以进入能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"无人矿卡调度区探针恢复定级9814号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-037-QWEN-RF",
+        "source_case_ids": [
+          "PRMV6-TE-037-QWEN-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 2,
+        "prompt_token_count": 4279,
+        "expected_action": "qwen_detection",
+        "actual_action": "migration_advisor",
+        "score": 0.125,
+        "completion": "{\"thought\":\"最新状态未满足重测或通过条件，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"无人矿卡调度区探针恢复定级9814号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-040-QWEN-RF",
+        "source_case_ids": [
+          "PRMV6-TE-040-QWEN-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 2,
+        "prompt_token_count": 4276,
+        "expected_action": "qwen_detection",
+        "actual_action": "migration_advisor",
+        "score": 0.125,
+        "completion": "{\"thought\":\"最新状态未满足重测或成功条件，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"古建消防值守点边界条件复查9820号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-040-QWEN-RF",
+        "source_case_ids": [
+          "PRMV6-TE-040-QWEN-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 3,
+        "prompt_token_count": 4467,
+        "expected_action": "end",
+        "actual_action": "migration_advisor",
+        "score": 0.2,
+        "completion": "{\"thought\":\"最新状态未满足硬阈值，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"古建消防值守点边界条件复查9820号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-044-QWEN-RF",
+        "source_case_ids": [
+          "PRMV6-TE-044-QWEN-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 2,
+        "prompt_token_count": 4274,
+        "expected_action": "qwen_detection",
+        "actual_action": "migration_advisor",
+        "score": 0.2,
+        "completion": "{\"thought\":\"最新状态未满足重测或通过条件，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"古建消防值守点异常状态确认9300号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-044-REX-RF",
+        "source_case_ids": [
+          "PRMV6-TE-044-REX-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 2,
+        "prompt_token_count": 4277,
+        "expected_action": "rexomni_detection",
+        "actual_action": "migration_advisor",
+        "score": 0.125,
+        "completion": "{\"thought\":\"最新状态未满足重测或通过条件，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"古建消防值守点异常状态确认9300号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-048-QWEN-RF",
+        "source_case_ids": [
+          "PRMV6-TE-048-QWEN-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 2,
+        "prompt_token_count": 4266,
+        "expected_action": "qwen_detection",
+        "actual_action": "migration_advisor",
+        "score": 0.2,
+        "completion": "{\"thought\":\"最新状态未满足重测或成功条件，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"卫星总装测试厅边界条件复查7564号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-048-REX-RF",
+        "source_case_ids": [
+          "PRMV6-TE-048-REX-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 2,
+        "prompt_token_count": 4279,
+        "expected_action": "rexomni_detection",
+        "actual_action": "migration_advisor",
+        "score": 0.2,
+        "completion": "{\"thought\":\"最新状态未满足重测或成功条件，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"卫星总装测试厅边界条件复查7564号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-052-QWEN-RF",
+        "source_case_ids": [
+          "PRMV6-TE-052-QWEN-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 2,
+        "prompt_token_count": 4274,
+        "expected_action": "qwen_detection",
+        "actual_action": "migration_advisor",
+        "score": 0.125,
+        "completion": "{\"thought\":\"最新状态未满足重测或通过的硬条件，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"深井提升机硐室视觉链路终审9723号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-052-REX-RF",
+        "source_case_ids": [
+          "PRMV6-TE-052-REX-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 2,
+        "prompt_token_count": 4285,
+        "expected_action": "rexomni_detection",
+        "actual_action": "migration_advisor",
+        "score": 0.2,
+        "completion": "{\"thought\":\"最新状态未满足重测或通过的硬条件，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"深井提升机硐室视觉链路终审9723号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-053-REX-RF",
+        "source_case_ids": [
+          "PRMV6-TE-053-REX-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 2,
+        "prompt_token_count": 4265,
+        "expected_action": "rexomni_detection",
+        "actual_action": "migration_advisor",
+        "score": 0.125,
+        "completion": "{\"thought\":\"最新状态未满足重试或通过条件，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"沿海防潮闸站异常状态确认8702号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-056-QWEN-RF",
+        "source_case_ids": [
+          "PRMV6-TE-056-QWEN-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 2,
+        "prompt_token_count": 4265,
+        "expected_action": "qwen_detection",
+        "actual_action": "migration_advisor",
+        "score": 0.2,
+        "completion": "{\"thought\":\"最新状态未满足重试或通过条件，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"海洋牧场控制台异常状态确认8147号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-056-REX-RF",
+        "source_case_ids": [
+          "PRMV6-TE-056-REX-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 2,
+        "prompt_token_count": 4269,
+        "expected_action": "rexomni_detection",
+        "actual_action": "migration_advisor",
+        "score": 0.125,
+        "completion": "{\"thought\":\"最新状态未满足重试或通过条件，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"海洋牧场控制台异常状态确认8147号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-060-QWEN-RF",
+        "source_case_ids": [
+          "PRMV6-TE-060-QWEN-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 2,
+        "prompt_token_count": 4268,
+        "expected_action": "qwen_detection",
+        "actual_action": "migration_advisor",
+        "score": 0.2,
+        "completion": "{\"thought\":\"最新状态未满足重测或通过的硬条件，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"极地科考补给舱视觉链路终审9269号\"},\"final_answer\":\"\"}<|im_end|>"
+      },
+      {
+        "representative_case_id": "PRMV6-TE-060-REX-RF",
+        "source_case_ids": [
+          "PRMV6-TE-060-REX-RF"
+        ],
+        "source_case_count": 1,
+        "category": "core_retryable_fresh",
+        "step_index": 2,
+        "prompt_token_count": 4285,
+        "expected_action": "rexomni_detection",
+        "actual_action": "migration_advisor",
+        "score": 0.2,
+        "completion": "{\"thought\":\"最新状态未满足重测或通过条件，需要能力迁移评估。\",\"decision_type\":\"tool\",\"action\":\"migration_advisor\",\"action_input\":{\"use_image\":true,\"use_visual_probe\":true,\"finish_after_tool\":true,\"user_query\":\"极地科考补给舱视觉链路终审9269号\"},\"final_answer\":\"\"}<|im_end|>"
+      }
+    ]
+  },
+  "expanded_decisions": {
+    "overall": {
+      "count": 1020,
+      "action_match_rate": 0.957843137254902,
+      "argument_match_rate": 0.957843137254902,
+      "finish_match_rate": 0.9627450980392157,
+      "mean_reward": 0.9651552287581703
+    },
+    "by_category": {
+      "core_budget_exhausted": {
+        "count": 240,
+        "action_match_rate": 1.0,
+        "argument_match_rate": 1.0,
+        "finish_match_rate": 1.0,
+        "mean_reward": 1.0
+      },
+      "core_nonretryable": {
+        "count": 240,
+        "action_match_rate": 1.0,
+        "argument_match_rate": 1.0,
+        "finish_match_rate": 1.0,
+        "mean_reward": 1.0
+      },
+      "core_retryable_fresh": {
+        "count": 360,
+        "action_match_rate": 0.8944444444444445,
+        "argument_match_rate": 0.8944444444444445,
+        "finish_match_rate": 0.9,
+        "mean_reward": 0.9128009259259257
+      },
+      "guard_conflicting_state_migrate": {
+        "count": 30,
+        "action_match_rate": 0.9333333333333333,
+        "argument_match_rate": 0.9333333333333333,
+        "finish_match_rate": 0.9333333333333333,
+        "mean_reward": 0.9416666666666667
+      },
+      "guard_initial_metric_veto_migrate": {
+        "count": 30,
+        "action_match_rate": 1.0,
+        "argument_match_rate": 1.0,
+        "finish_match_rate": 1.0,
+        "mean_reward": 1.0
+      },
+      "guard_initial_success_end": {
+        "count": 30,
+        "action_match_rate": 0.9,
+        "argument_match_rate": 0.9,
+        "finish_match_rate": 1.0,
+        "mean_reward": 0.9199999999999999
+      },
+      "guard_missing_required_state_migrate": {
+        "count": 30,
+        "action_match_rate": 1.0,
+        "argument_match_rate": 1.0,
+        "finish_match_rate": 1.0,
+        "mean_reward": 1.0
+      },
+      "guard_stale_history_current_error_migrate": {
+        "count": 30,
+        "action_match_rate": 1.0,
+        "argument_match_rate": 1.0,
+        "finish_match_rate": 1.0,
+        "mean_reward": 1.0
+      },
+      "guard_stale_history_current_success_end": {
+        "count": 30,
+        "action_match_rate": 1.0,
+        "argument_match_rate": 1.0,
+        "finish_match_rate": 1.0,
+        "mean_reward": 1.0
+      }
+    },
+    "by_detector_family": {
+      "qwen": {
+        "count": 510,
+        "action_match_rate": 0.9568627450980393,
+        "argument_match_rate": 0.9568627450980393,
+        "finish_match_rate": 0.9627450980392157,
+        "mean_reward": 0.9643137254901958
+      },
+      "rex": {
+        "count": 510,
+        "action_match_rate": 0.9588235294117647,
+        "argument_match_rate": 0.9588235294117647,
+        "finish_match_rate": 0.9627450980392157,
+        "mean_reward": 0.9659967320261437
+      }
+    },
+    "by_error_alias": {
+      "detector_frame_contract_mismatch": {
+        "count": 105,
+        "action_match_rate": 0.9238095238095239,
+        "argument_match_rate": 0.9238095238095239,
+        "finish_match_rate": 0.9333333333333333,
+        "mean_reward": 0.9376190476190478
+      },
+      "detector_queue_budget_unavailable": {
+        "count": 137,
+        "action_match_rate": 1.0,
+        "argument_match_rate": 1.0,
+        "finish_match_rate": 1.0,
+        "mean_reward": 1.0
+      },
+      "detector_turnaround_limit_reached": {
+        "count": 133,
+        "action_match_rate": 0.9924812030075187,
+        "argument_match_rate": 0.9924812030075187,
+        "finish_match_rate": 0.9924812030075187,
+        "mean_reward": 0.993421052631579
+      },
+      "inference_backplane_route_lost": {
+        "count": 105,
+        "action_match_rate": 0.9333333333333333,
+        "argument_match_rate": 0.9333333333333333,
+        "finish_match_rate": 0.9333333333333333,
+        "mean_reward": 0.9443650793650795
+      },
+      "none": {
+        "count": 120,
+        "action_match_rate": 0.9583333333333334,
+        "argument_match_rate": 0.9583333333333334,
+        "finish_match_rate": 0.9833333333333333,
+        "mean_reward": 0.9654166666666667
+      },
+      "probe_execution_ticket_exhausted": {
+        "count": 105,
+        "action_match_rate": 0.9523809523809523,
+        "argument_match_rate": 0.9523809523809523,
+        "finish_match_rate": 0.9523809523809523,
+        "mean_reward": 0.9604761904761906
+      },
+      "vision_exchange_channel_broken": {
+        "count": 105,
+        "action_match_rate": 0.9142857142857143,
+        "argument_match_rate": 0.9142857142857143,
+        "finish_match_rate": 0.9238095238095239,
+        "mean_reward": 0.93
+      },
+      "visual_ack_window_missed": {
+        "count": 105,
+        "action_match_rate": 1.0,
+        "argument_match_rate": 1.0,
+        "finish_match_rate": 1.0,
+        "mean_reward": 1.0
+      },
+      "visual_job_descriptor_invalid": {
+        "count": 105,
+        "action_match_rate": 0.9238095238095239,
+        "argument_match_rate": 0.9238095238095239,
+        "finish_match_rate": 0.9238095238095239,
+        "mean_reward": 0.9369047619047619
+      }
+    },
+    "by_badge_condition": {
+      "amber": {
+        "count": 340,
+        "action_match_rate": 0.9676470588235294,
+        "argument_match_rate": 0.9676470588235294,
+        "finish_match_rate": 0.9676470588235294,
+        "mean_reward": 0.9740686274509802
+      },
+      "missing": {
+        "count": 340,
+        "action_match_rate": 0.961764705882353,
+        "argument_match_rate": 0.961764705882353,
+        "finish_match_rate": 0.961764705882353,
+        "mean_reward": 0.9678676470588233
+      },
+      "red": {
+        "count": 340,
+        "action_match_rate": 0.9441176470588235,
+        "argument_match_rate": 0.9441176470588235,
+        "finish_match_rate": 0.9588235294117647,
+        "mean_reward": 0.9535294117647057
+      }
+    },
+    "by_fixture_family": {
+      "prmv6_te_star_mark": {
+        "count": 510,
+        "action_match_rate": 0.9823529411764705,
+        "argument_match_rate": 0.9823529411764705,
+        "finish_match_rate": 0.9882352941176471,
+        "mean_reward": 0.9854411764705882
+      },
+      "prmv6_te_zigzag_frame": {
+        "count": 510,
+        "action_match_rate": 0.9333333333333333,
+        "argument_match_rate": 0.9333333333333333,
+        "finish_match_rate": 0.9372549019607843,
+        "mean_reward": 0.9448692810457513
+      }
+    },
+    "by_template_id": {
+      "prmv6_test_qwen_guard_1": {
+        "count": 28,
+        "action_match_rate": 1.0,
+        "argument_match_rate": 1.0,
+        "finish_match_rate": 1.0,
+        "mean_reward": 1.0
+      },
+      "prmv6_test_qwen_guard_2": {
+        "count": 26,
+        "action_match_rate": 0.9230769230769231,
+        "argument_match_rate": 0.9230769230769231,
+        "finish_match_rate": 0.9615384615384616,
+        "mean_reward": 0.9355769230769231
+      },
+      "prmv6_test_qwen_guard_3": {
+        "count": 14,
+        "action_match_rate": 0.9285714285714286,
+        "argument_match_rate": 0.9285714285714286,
+        "finish_match_rate": 0.9285714285714286,
+        "mean_reward": 0.9375
+      },
+      "prmv6_test_qwen_guard_4": {
+        "count": 22,
+        "action_match_rate": 1.0,
+        "argument_match_rate": 1.0,
+        "finish_match_rate": 1.0,
+        "mean_reward": 1.0
+      },
+      "prmv6_test_qwen_policy_1": {
+        "count": 105,
+        "action_match_rate": 0.9904761904761905,
+        "argument_match_rate": 0.9904761904761905,
+        "finish_match_rate": 0.9904761904761905,
+        "mean_reward": 0.9916666666666667
+      },
+      "prmv6_test_qwen_policy_2": {
+        "count": 105,
+        "action_match_rate": 0.9904761904761905,
+        "argument_match_rate": 0.9904761904761905,
+        "finish_match_rate": 1.0,
+        "mean_reward": 0.9923809523809524
+      },
+      "prmv6_test_qwen_policy_3": {
+        "count": 105,
+        "action_match_rate": 0.9904761904761905,
+        "argument_match_rate": 0.9904761904761905,
+        "finish_match_rate": 0.9904761904761905,
+        "mean_reward": 0.9923809523809524
+      },
+      "prmv6_test_qwen_policy_4": {
+        "count": 105,
+        "action_match_rate": 0.8476190476190476,
+        "argument_match_rate": 0.8476190476190476,
+        "finish_match_rate": 0.8571428571428571,
+        "mean_reward": 0.8745238095238097
+      },
+      "prmv6_test_rex_guard_1": {
+        "count": 16,
+        "action_match_rate": 1.0,
+        "argument_match_rate": 1.0,
+        "finish_match_rate": 1.0,
+        "mean_reward": 1.0
+      },
+      "prmv6_test_rex_guard_2": {
+        "count": 18,
+        "action_match_rate": 1.0,
+        "argument_match_rate": 1.0,
+        "finish_match_rate": 1.0,
+        "mean_reward": 1.0
+      },
+      "prmv6_test_rex_guard_3": {
+        "count": 32,
+        "action_match_rate": 0.96875,
+        "argument_match_rate": 0.96875,
+        "finish_match_rate": 1.0,
+        "mean_reward": 0.975
+      },
+      "prmv6_test_rex_guard_4": {
+        "count": 24,
+        "action_match_rate": 0.9583333333333334,
+        "argument_match_rate": 0.9583333333333334,
+        "finish_match_rate": 1.0,
+        "mean_reward": 0.9666666666666667
+      },
+      "prmv6_test_rex_policy_1": {
+        "count": 105,
+        "action_match_rate": 0.9619047619047619,
+        "argument_match_rate": 0.9619047619047619,
+        "finish_match_rate": 0.9619047619047619,
+        "mean_reward": 0.9680952380952381
+      },
+      "prmv6_test_rex_policy_2": {
+        "count": 105,
+        "action_match_rate": 1.0,
+        "argument_match_rate": 1.0,
+        "finish_match_rate": 1.0,
+        "mean_reward": 1.0
+      },
+      "prmv6_test_rex_policy_3": {
+        "count": 105,
+        "action_match_rate": 1.0,
+        "argument_match_rate": 1.0,
+        "finish_match_rate": 1.0,
+        "mean_reward": 1.0
+      },
+      "prmv6_test_rex_policy_4": {
+        "count": 105,
+        "action_match_rate": 0.8571428571428571,
+        "argument_match_rate": 0.8571428571428571,
+        "finish_match_rate": 0.8571428571428571,
+        "mean_reward": 0.8819841269841271
+      }
+    },
+    "by_step_index": {
+      "1": {
+        "count": 450,
+        "action_match_rate": 1.0,
+        "argument_match_rate": 1.0,
+        "finish_match_rate": 1.0,
+        "mean_reward": 1.0
+      },
+      "2": {
+        "count": 450,
+        "action_match_rate": 0.9111111111111111,
+        "argument_match_rate": 0.9111111111111111,
+        "finish_match_rate": 0.9177777777777778,
+        "mean_reward": 0.9263888888888884
+      },
+      "3": {
+        "count": 120,
+        "action_match_rate": 0.975,
+        "argument_match_rate": 0.975,
+        "finish_match_rate": 0.9916666666666667,
+        "mean_reward": 0.9798611111111112
+      }
+    },
+    "by_post_retry_outcome": {
+      "error": {
+        "count": 120,
+        "action_match_rate": 0.9083333333333333,
+        "argument_match_rate": 0.9083333333333333,
+        "finish_match_rate": 0.9083333333333333,
+        "mean_reward": 0.926666666666667
+      },
+      "metric_veto": {
+        "count": 120,
+        "action_match_rate": 0.9,
+        "argument_match_rate": 0.9,
+        "finish_match_rate": 0.9,
+        "mean_reward": 0.9198611111111112
+      },
+      "none": {
+        "count": 660,
+        "action_match_rate": 0.9924242424242424,
+        "argument_match_rate": 0.9924242424242424,
+        "finish_match_rate": 0.996969696969697,
+        "mean_reward": 0.993712121212121
+      },
+      "success": {
+        "count": 120,
+        "action_match_rate": 0.875,
+        "argument_match_rate": 0.875,
+        "finish_match_rate": 0.8916666666666667,
+        "mean_reward": 0.8918750000000001
+      }
+    },
+    "action_confusion_on_errors": {
+      "end->migration_advisor": 5,
+      "migration_advisor->end": 1,
+      "migration_advisor->qwen_detection": 2,
+      "qwen_detection->migration_advisor": 17,
+      "rexomni_detection->migration_advisor": 18
+    }
+  },
+  "trajectories": {
+    "overall": {
+      "count": 450,
+      "full_action_match_rate": 0.9088888888888889,
+      "full_argument_match_rate": 0.9088888888888889,
+      "full_finish_match_rate": 0.9177777777777778,
+      "full_rule_pass_rate": 0.9088888888888889
+    },
+    "by_category": {
+      "core_budget_exhausted": {
+        "count": 120,
+        "full_action_match_rate": 1.0,
+        "full_argument_match_rate": 1.0,
+        "full_finish_match_rate": 1.0,
+        "full_rule_pass_rate": 1.0
+      },
+      "core_nonretryable": {
+        "count": 120,
+        "full_action_match_rate": 1.0,
+        "full_argument_match_rate": 1.0,
+        "full_finish_match_rate": 1.0,
+        "full_rule_pass_rate": 1.0
+      },
+      "core_retryable_fresh": {
+        "count": 120,
+        "full_action_match_rate": 0.7,
+        "full_argument_match_rate": 0.7,
+        "full_finish_match_rate": 0.7083333333333334,
+        "full_rule_pass_rate": 0.7
+      },
+      "guard_conflicting_state_migrate": {
+        "count": 15,
+        "full_action_match_rate": 0.8666666666666667,
+        "full_argument_match_rate": 0.8666666666666667,
+        "full_finish_match_rate": 0.8666666666666667,
+        "full_rule_pass_rate": 0.8666666666666667
+      },
+      "guard_initial_metric_veto_migrate": {
+        "count": 15,
+        "full_action_match_rate": 1.0,
+        "full_argument_match_rate": 1.0,
+        "full_finish_match_rate": 1.0,
+        "full_rule_pass_rate": 1.0
+      },
+      "guard_initial_success_end": {
+        "count": 15,
+        "full_action_match_rate": 0.8,
+        "full_argument_match_rate": 0.8,
+        "full_finish_match_rate": 1.0,
+        "full_rule_pass_rate": 0.8
+      },
+      "guard_missing_required_state_migrate": {
+        "count": 15,
+        "full_action_match_rate": 1.0,
+        "full_argument_match_rate": 1.0,
+        "full_finish_match_rate": 1.0,
+        "full_rule_pass_rate": 1.0
+      },
+      "guard_stale_history_current_error_migrate": {
+        "count": 15,
+        "full_action_match_rate": 1.0,
+        "full_argument_match_rate": 1.0,
+        "full_finish_match_rate": 1.0,
+        "full_rule_pass_rate": 1.0
+      },
+      "guard_stale_history_current_success_end": {
+        "count": 15,
+        "full_action_match_rate": 1.0,
+        "full_argument_match_rate": 1.0,
+        "full_finish_match_rate": 1.0,
+        "full_rule_pass_rate": 1.0
+      }
+    },
+    "by_detector_family": {
+      "qwen": {
+        "count": 225,
+        "full_action_match_rate": 0.9066666666666666,
+        "full_argument_match_rate": 0.9066666666666666,
+        "full_finish_match_rate": 0.9155555555555556,
+        "full_rule_pass_rate": 0.9066666666666666
+      },
+      "rex": {
+        "count": 225,
+        "full_action_match_rate": 0.9111111111111111,
+        "full_argument_match_rate": 0.9111111111111111,
+        "full_finish_match_rate": 0.92,
+        "full_rule_pass_rate": 0.9111111111111111
+      }
+    },
+    "by_error_alias": {
+      "detector_frame_contract_mismatch": {
+        "count": 45,
+        "full_action_match_rate": 0.8444444444444444,
+        "full_argument_match_rate": 0.8444444444444444,
+        "full_finish_match_rate": 0.8444444444444444,
+        "full_rule_pass_rate": 0.8444444444444444
+      },
+      "detector_queue_budget_unavailable": {
+        "count": 61,
+        "full_action_match_rate": 1.0,
+        "full_argument_match_rate": 1.0,
+        "full_finish_match_rate": 1.0,
+        "full_rule_pass_rate": 1.0
+      },
+      "detector_turnaround_limit_reached": {
+        "count": 59,
+        "full_action_match_rate": 0.9830508474576272,
+        "full_argument_match_rate": 0.9830508474576272,
+        "full_finish_match_rate": 0.9830508474576272,
+        "full_rule_pass_rate": 0.9830508474576272
+      },
+      "inference_backplane_route_lost": {
+        "count": 45,
+        "full_action_match_rate": 0.8666666666666667,
+        "full_argument_match_rate": 0.8666666666666667,
+        "full_finish_match_rate": 0.8666666666666667,
+        "full_rule_pass_rate": 0.8666666666666667
+      },
+      "none": {
+        "count": 60,
+        "full_action_match_rate": 0.9166666666666666,
+        "full_argument_match_rate": 0.9166666666666666,
+        "full_finish_match_rate": 0.9666666666666667,
+        "full_rule_pass_rate": 0.9166666666666666
+      },
+      "probe_execution_ticket_exhausted": {
+        "count": 45,
+        "full_action_match_rate": 0.8888888888888888,
+        "full_argument_match_rate": 0.8888888888888888,
+        "full_finish_match_rate": 0.8888888888888888,
+        "full_rule_pass_rate": 0.8888888888888888
+      },
+      "vision_exchange_channel_broken": {
+        "count": 45,
+        "full_action_match_rate": 0.8,
+        "full_argument_match_rate": 0.8,
+        "full_finish_match_rate": 0.8222222222222222,
+        "full_rule_pass_rate": 0.8
+      },
+      "visual_ack_window_missed": {
+        "count": 45,
+        "full_action_match_rate": 1.0,
+        "full_argument_match_rate": 1.0,
+        "full_finish_match_rate": 1.0,
+        "full_rule_pass_rate": 1.0
+      },
+      "visual_job_descriptor_invalid": {
+        "count": 45,
+        "full_action_match_rate": 0.8222222222222222,
+        "full_argument_match_rate": 0.8222222222222222,
+        "full_finish_match_rate": 0.8222222222222222,
+        "full_rule_pass_rate": 0.8222222222222222
+      }
+    },
+    "by_badge_condition": {
+      "amber": {
+        "count": 150,
+        "full_action_match_rate": 0.9333333333333333,
+        "full_argument_match_rate": 0.9333333333333333,
+        "full_finish_match_rate": 0.9333333333333333,
+        "full_rule_pass_rate": 0.9333333333333333
+      },
+      "missing": {
+        "count": 150,
+        "full_action_match_rate": 0.9133333333333333,
+        "full_argument_match_rate": 0.9133333333333333,
+        "full_finish_match_rate": 0.9133333333333333,
+        "full_rule_pass_rate": 0.9133333333333333
+      },
+      "red": {
+        "count": 150,
+        "full_action_match_rate": 0.88,
+        "full_argument_match_rate": 0.88,
+        "full_finish_match_rate": 0.9066666666666666,
+        "full_rule_pass_rate": 0.88
+      }
+    },
+    "by_fixture_family": {
+      "prmv6_te_star_mark": {
+        "count": 225,
+        "full_action_match_rate": 0.96,
+        "full_argument_match_rate": 0.96,
+        "full_finish_match_rate": 0.9733333333333334,
+        "full_rule_pass_rate": 0.96
+      },
+      "prmv6_te_zigzag_frame": {
+        "count": 225,
+        "full_action_match_rate": 0.8577777777777778,
+        "full_argument_match_rate": 0.8577777777777778,
+        "full_finish_match_rate": 0.8622222222222222,
+        "full_rule_pass_rate": 0.8577777777777778
+      }
+    },
+    "by_post_retry_outcome": {
+      "error": {
+        "count": 40,
+        "full_action_match_rate": 0.725,
+        "full_argument_match_rate": 0.725,
+        "full_finish_match_rate": 0.725,
+        "full_rule_pass_rate": 0.725
+      },
+      "metric_veto": {
+        "count": 40,
+        "full_action_match_rate": 0.725,
+        "full_argument_match_rate": 0.725,
+        "full_finish_match_rate": 0.725,
+        "full_rule_pass_rate": 0.725
+      },
+      "none": {
+        "count": 330,
+        "full_action_match_rate": 0.9848484848484849,
+        "full_argument_match_rate": 0.9848484848484849,
+        "full_finish_match_rate": 0.9939393939393939,
+        "full_rule_pass_rate": 0.9848484848484849
+      },
+      "success": {
+        "count": 40,
+        "full_action_match_rate": 0.65,
+        "full_argument_match_rate": 0.65,
+        "full_finish_match_rate": 0.675,
+        "full_rule_pass_rate": 0.65
+      }
+    },
+    "by_target_action_class": {
+      "end": {
+        "count": 30,
+        "full_action_match_rate": 0.9,
+        "full_argument_match_rate": 0.9,
+        "full_finish_match_rate": 1.0,
+        "full_rule_pass_rate": 0.9
+      },
+      "migrate": {
+        "count": 300,
+        "full_action_match_rate": 0.9933333333333333,
+        "full_argument_match_rate": 0.9933333333333333,
+        "full_finish_match_rate": 0.9933333333333333,
+        "full_rule_pass_rate": 0.9933333333333333
+      },
+      "retry": {
+        "count": 120,
+        "full_action_match_rate": 0.7,
+        "full_argument_match_rate": 0.7,
+        "full_finish_match_rate": 0.7083333333333334,
+        "full_rule_pass_rate": 0.7
+      }
+    }
+  }
+}

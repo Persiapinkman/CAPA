@@ -1,0 +1,198 @@
+{
+  "schema_version": "demo-full-e2e-v1",
+  "base_url": "http://127.0.0.1:59119",
+  "elapsed_ms": 161656.503,
+  "health_ok": true,
+  "active_tools": [
+    "answerer",
+    "flux-image-generation",
+    "migration_advisor",
+    "pipeline_eval",
+    "qwen_detection",
+    "rag_answer",
+    "re_question",
+    "rexomni_detection"
+  ],
+  "expected_tools": [
+    "answerer",
+    "flux-image-generation",
+    "migration_advisor",
+    "pipeline_eval",
+    "qwen_detection",
+    "rag_answer",
+    "re_question",
+    "rexomni_detection"
+  ],
+  "adela_excluded": true,
+  "capability_contract_ok": true,
+  "runtime_status": "passed",
+  "rl_readiness": "blocked",
+  "rl_blockers": [
+    "pipeline content compliance was not independently checked",
+    "generation diversity was unstable across the one-image and three-image live runs",
+    "no independent human ground truth is available for terminal correctness"
+  ],
+  "follow_up_pipeline": {
+    "run_stamp": "20260714_043913_3bb13007",
+    "runtime_status": "passed",
+    "elapsed_ms": 160975.046,
+    "generated_images": 1,
+    "evaluated_images": 2,
+    "generation_diversity_gate": true,
+    "reference_dhash_distance": 0.589844,
+    "content_compliance_checked": false,
+    "qwen_boxes": 4,
+    "rex_boxes": 4,
+    "mean_matched_iou": 0.849,
+    "ground_truth_available": false,
+    "recommendation": "inconclusive",
+    "session_cleaned": true
+  },
+  "cases": [
+    {
+      "name": "answerer",
+      "runtime_status": "passed",
+      "elapsed_ms": 5733.919,
+      "expected_action": "answerer",
+      "planner_actions": [
+        "answerer",
+        "final_answer"
+      ],
+      "required_event": "final_answer",
+      "event_types": [
+        "done",
+        "final_answer",
+        "meta",
+        "session",
+        "thread_routed"
+      ],
+      "error_count": 0,
+      "errors": [],
+      "done_ok": true,
+      "generated_images": 0,
+      "annotated_images": 0,
+      "generation_quality_gate": null,
+      "validated_migration_facts": 0,
+      "migration_grounding": "",
+      "session_cleaned": true
+    },
+    {
+      "name": "rag",
+      "runtime_status": "passed",
+      "elapsed_ms": 26857.401,
+      "expected_action": "rag_answer",
+      "planner_actions": [
+        "rag_answer"
+      ],
+      "required_event": "direct_reply",
+      "event_types": [
+        "direct_reply",
+        "done",
+        "final_answer",
+        "meta",
+        "rag_references",
+        "session",
+        "step_timing",
+        "thread_routed"
+      ],
+      "error_count": 0,
+      "errors": [],
+      "done_ok": true,
+      "generated_images": 0,
+      "annotated_images": 0,
+      "generation_quality_gate": null,
+      "validated_migration_facts": 0,
+      "migration_grounding": "",
+      "session_cleaned": true
+    },
+    {
+      "name": "qwen",
+      "runtime_status": "passed",
+      "elapsed_ms": 43056.717,
+      "expected_action": "qwen_detection",
+      "planner_actions": [
+        "qwen_detection"
+      ],
+      "required_event": "annotated",
+      "event_types": [
+        "annotated",
+        "detection_info",
+        "done",
+        "final_answer",
+        "meta",
+        "session",
+        "step_timing",
+        "thread_routed"
+      ],
+      "error_count": 0,
+      "errors": [],
+      "done_ok": true,
+      "generated_images": 0,
+      "annotated_images": 1,
+      "generation_quality_gate": null,
+      "validated_migration_facts": 0,
+      "migration_grounding": "",
+      "session_cleaned": true
+    },
+    {
+      "name": "rexomni",
+      "runtime_status": "passed",
+      "elapsed_ms": 8762.678,
+      "expected_action": "rexomni_detection",
+      "planner_actions": [
+        "rexomni_detection"
+      ],
+      "required_event": "annotated",
+      "event_types": [
+        "annotated",
+        "detection_info",
+        "done",
+        "final_answer",
+        "meta",
+        "session",
+        "step_timing",
+        "thread_routed"
+      ],
+      "error_count": 0,
+      "errors": [],
+      "done_ok": true,
+      "generated_images": 0,
+      "annotated_images": 1,
+      "generation_quality_gate": null,
+      "validated_migration_facts": 0,
+      "migration_grounding": "",
+      "session_cleaned": true
+    },
+    {
+      "name": "migration",
+      "runtime_status": "passed",
+      "elapsed_ms": 76098.614,
+      "expected_action": "migration_advisor",
+      "planner_actions": [
+        "migration_advisor"
+      ],
+      "required_event": "migration_advisor_report",
+      "event_types": [
+        "done",
+        "final_answer",
+        "meta",
+        "migration_advisor_facts",
+        "migration_advisor_plan",
+        "migration_advisor_report",
+        "migration_advisor_retrieve",
+        "session",
+        "step_timing",
+        "thread_routed"
+      ],
+      "error_count": 0,
+      "errors": [],
+      "done_ok": true,
+      "generated_images": 0,
+      "annotated_images": 0,
+      "generation_quality_gate": null,
+      "validated_migration_facts": 4,
+      "migration_grounding": "validated_quote_and_source_id",
+      "session_cleaned": true
+    }
+  ]
+}

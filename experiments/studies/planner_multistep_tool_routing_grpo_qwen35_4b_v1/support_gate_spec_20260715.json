@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_multistep_tool_routing_grpo_qwen35_4b_v1_support80",
+  "dataset_id": "planner_multistep_grpo_value_v5_train_v1",
+  "role": "pre_optimizer_stochastic_support_gate",
+  "support_pool": "training/planner_grpo_seed_v1/step_data/planner_multistep_grpo_value_v5_train_v1_qwen35_4b_support80.jsonl",
+  "support_gate": {
+    "primary_target_action_classes": ["migrate"],
+    "anchor_target_action_classes": ["retry"],
+    "scope_categories": [
+      "qwen_connection_budget_exhausted",
+      "qwen_connection_nonretryable",
+      "qwen_timeout_budget_exhausted",
+      "qwen_timeout_nonretryable",
+      "rex_connection_budget_exhausted",
+      "rex_connection_nonretryable",
+      "rex_timeout_budget_exhausted",
+      "rex_timeout_nonretryable"
+    ],
+    "scope_steps": [2],
+    "minimum_nonzero_reward_std_rate": 0.8,
+    "minimum_usable_support_rate": 0.8,
+    "minimum_near_exact_task_support_rate": 0.0,
+    "minimum_exact_action_support_rate": 0.8,
+    "minimum_mean_distinct_valid_actions": 1.4,
+    "maximum_fully_saturated_rate": 0.25,
+    "minimum_anchor_exact_action_support_rate": 0.95,
+    "maximum_completion_clipped_rate": 0.01
+  },
+  "sampling": {
+    "model": "/raid/zkq/models/Qwen3.5-4B",
+    "samples_per_prompt": 8,
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "max_new_tokens": 320,
+    "task_reward_weight": 0.95,
+    "format_reward_weight": 0.05,
+    "sealed_evaluation_rows_used": 0
+  },
+  "decision": {
+    "pass": "Base initializer may proceed to G3/G4 and then the optimizer canary.",
+    "fail": "Do not run optimizer; diagnose support by action class and use only disjoint training data for any initializer warm-up."
+  }
+}

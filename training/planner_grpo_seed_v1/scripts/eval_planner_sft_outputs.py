@@ -21,6 +21,7 @@ for path in (ROOT, ROOT / "demo"):
         sys.path.insert(0, str(path))
 
 from training.planner_grpo_seed_v1.scripts.train_planner_grpo import first_json_text, score_step_completion  # noqa: E402
+from training.planner_grpo_seed_v1.scripts import reward_planner_grpo as rewardlib  # noqa: E402
 from util.path_resolver import resolve_model_name_or_path  # noqa: E402
 
 
@@ -35,10 +36,13 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--out", type=Path, default=ROOT / "training" / "planner_grpo_seed_v1" / "reports" / "sft_eval.json")
     parser.add_argument("--predictions-out", type=Path, default=ROOT / "training" / "planner_grpo_seed_v1" / "reports" / "sft_eval_predictions.jsonl")
     parser.add_argument("--limit", type=int, default=0)
-    parser.add_argument("--max-new-tokens", type=int, default=128)
+    parser.add_argument("--shard-index", type=int, default=0)
+    parser.add_argument("--num-shards", type=int, default=1)
+    parser.add_argument("--max-new-tokens", type=int, default=320)
     parser.add_argument("--temperature", type=float, default=0.0)
     parser.add_argument("--top-p", type=float, default=0.9)
     parser.add_argument("--attn-implementation", default="sdpa")
+    parser.add_argument("--progress-every", type=int, default=25)
     parser.add_argument(
         "--score-first-json-only",
         action=argparse.BooleanOptionalAction,
@@ -115,6 +119,8 @@ def summarize(predictions: list[dict[str, Any]]) -> dict[str, Any]:
         }
         if rows and all("action_match" in row for row in rows):
             metrics["action_match_rate"] = sum(bool(row["action_match"]) for row in rows) / n
+            metrics["argument_match_rate"] = sum(bool(row["argument_match"]) for row in rows) / n
+            metrics["finish_match_rate"] = sum(bool(row["finish_match"]) for row in rows) / n
         return metrics
 
     return {
@@ -130,10 +136,17 @@ def main() -> None:
     model_path = resolve_model_name_or_path(args.model_name_or_path, ROOT)
     eval_path = args.eval_file if args.eval_file.is_absolute() else ROOT / args.eval_file
     rows = load_jsonl(eval_path)
+    if args.num_shards < 1 or not (0 <= args.shard_index < args.num_shards):
+        raise ValueError("require num_shards>=1 and 0<=shard_index<num_shards")
+    rows = rows[args.shard_index :: args.num_shards]
     if args.limit > 0:
         rows = rows[: args.limit]
 
-    tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True, use_fast=True, padding_side="left")
+    pred_path = args.predictions_out if args.predictions_out.is_absolute() else ROOT / args.predictions_out
+    pred_path.parent.mkdir(parents=True, exist_ok=True)
+    pred_path.write_text("", encoding="utf-8")
+
+    tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=False, use_fast=True, padding_side="left")
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
     base = AutoModelForCausalLM.from_pretrained(
@@ -141,7 +154,7 @@ def main() -> None:
         dtype=torch.float16,
         attn_implementation=args.attn_implementation,
         low_cpu_mem_usage=True,
-        trust_remote_code=True,
+        trust_remote_code=False,
     ).to("cuda")
     if args.adapter_path:
         model = PeftModel.from_pretrained(base, args.adapter_path).to("cuda")
@@ -180,33 +193,70 @@ def main() -> None:
             step_index=int(row["step_index"]),
             first_json_only=args.score_first_json_only,
         )
-        predictions.append(
-            {
-                "case_id": row["case_id"],
-                "category": row["category"],
-                "step_index": int(row["step_index"]),
-                "score": score,
-                **stats,
-                "effective_json_valid": effective_stats["json_valid"],
-                "effective_extra_text_after_json": effective_stats["extra_text_after_json"],
-                "effective_extra_text_chars": effective_stats["extra_text_chars"],
-                "scored_completion": scored_completion,
-                "completion": completion,
-            }
+        actual = None
+        if effective_stats["json_valid"]:
+            parsed_decisions, _ = rewardlib.as_decision_list(json.loads(scored_completion))
+            actual = parsed_decisions[0] if parsed_decisions else None
+        expected_object = json.loads(expected_step)
+        _, detail_info = rewardlib.score_expected_step(
+            expected=expected_object,
+            actual=actual,
+            reward_spec={
+                **rewardlib.DEFAULT_REWARD_SPEC,
+                **json.loads(row.get("reward_spec", "{}")),
+            },
         )
+        detail = detail_info.get("detail", {})
+        prediction = {
+            "case_id": row["case_id"],
+            "category": row["category"],
+            "step_index": int(row["step_index"]),
+            "score": score,
+            "action_match": float(detail.get("action_match") or 0.0) >= 1.0,
+            "argument_match": float(detail.get("argument_match") or 0.0) >= 1.0,
+            "finish_match": float(detail.get("finish_after_tool") or 0.0) >= 1.0,
+            "detector_family": row.get("detector_family", ""),
+            "target_action_class": row.get("target_action_class", ""),
+            "scenario_id": row.get("scenario_id", ""),
+            "group_id": row.get("group_id", ""),
+            **stats,
+            "effective_json_valid": effective_stats["json_valid"],
+            "effective_extra_text_after_json": effective_stats["extra_text_after_json"],
+            "effective_extra_text_chars": effective_stats["extra_text_chars"],
+            "scored_completion": scored_completion,
+            "completion": completion,
+        }
+        predictions.append(prediction)
+        with pred_path.open("a", encoding="utf-8") as handle:
+            handle.write(json.dumps(prediction, ensure_ascii=False) + "\n")
+        if args.progress_every > 0 and (
+            len(predictions) % args.progress_every == 0 or len(predictions) == len(rows)
+        ):
+            print(
+                json.dumps(
+                    {
+                        "event": "progress",
+                        "completed": len(predictions),
+                        "total": len(rows),
+                        "shard_index": args.shard_index,
+                    },
+                    ensure_ascii=False,
+                ),
+                flush=True,
+            )
 
     report = {
         "model_name_or_path": model_path,
         "adapter_path": args.adapter_path,
         "eval_file": str(eval_path),
         "limit": args.limit,
+        "shard_index": args.shard_index,
+        "num_shards": args.num_shards,
         "score_first_json_only": args.score_first_json_only,
         **summarize(predictions),
     }
     out_path = args.out if args.out.is_absolute() else ROOT / args.out
-    pred_path = args.predictions_out if args.predictions_out.is_absolute() else ROOT / args.predictions_out
     write_json(out_path, report)
-    write_jsonl(pred_path, predictions)
     print(json.dumps(report, ensure_ascii=False, indent=2))
 
 

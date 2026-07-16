@@ -1,0 +1,1739 @@
+{
+  "schema_version": "1.0",
+  "method": "beta-binomial clustered Monte Carlo; model arms simulated independently (conservative for a positively paired comparison)",
+  "thresholds": {
+    "reference_min": 0.95,
+    "base_max": 0.6,
+    "gap_min": 0.3
+  },
+  "results": [
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.5,
+      "icc": 0.02,
+      "simulations": 5000,
+      "acceptance_probability": 0.8922,
+      "monte_carlo_95ci": [
+        0.8833006229707467,
+        0.9004971695093349
+      ],
+      "median_observed_reference": 0.96,
+      "median_observed_base": 0.5
+    },
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.5,
+      "icc": 0.05,
+      "simulations": 5000,
+      "acceptance_probability": 0.8852,
+      "monte_carlo_95ci": [
+        0.8760665710108375,
+        0.8937419696911704
+      ],
+      "median_observed_reference": 0.96,
+      "median_observed_base": 0.5
+    },
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.5,
+      "icc": 0.1,
+      "simulations": 5000,
+      "acceptance_probability": 0.872,
+      "monte_carlo_95ci": [
+        0.862453058272335,
+        0.880975750505305
+      ],
+      "median_observed_reference": 0.9616666666666667,
+      "median_observed_base": 0.5
+    },
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.5,
+      "icc": 0.15,
+      "simulations": 5000,
+      "acceptance_probability": 0.846,
+      "monte_carlo_95ci": [
+        0.8357296907150209,
+        0.8557390400297733
+      ],
+      "median_observed_reference": 0.96,
+      "median_observed_base": 0.5
+    },
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.55,
+      "icc": 0.02,
+      "simulations": 5000,
+      "acceptance_probability": 0.8934,
+      "monte_carlo_95ci": [
+        0.8845418599397342,
+        0.9016540899880173
+      ],
+      "median_observed_reference": 0.96,
+      "median_observed_base": 0.55
+    },
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.55,
+      "icc": 0.05,
+      "simulations": 5000,
+      "acceptance_probability": 0.88,
+      "monte_carlo_95ci": [
+        0.8706995216107413,
+        0.8887170034846975
+      ],
+      "median_observed_reference": 0.96,
+      "median_observed_base": 0.55
+    },
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.55,
+      "icc": 0.1,
+      "simulations": 5000,
+      "acceptance_probability": 0.8436,
+      "monte_carlo_95ci": [
+        0.8332682804522809,
+        0.8534041353971737
+      ],
+      "median_observed_reference": 0.96,
+      "median_observed_base": 0.5483333333333333
+    },
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.55,
+      "icc": 0.15,
+      "simulations": 5000,
+      "acceptance_probability": 0.8152,
+      "monte_carlo_95ci": [
+        0.8042008601072153,
+        0.825715162814054
+      ],
+      "median_observed_reference": 0.96,
+      "median_observed_base": 0.55
+    },
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.6,
+      "icc": 0.02,
+      "simulations": 5000,
+      "acceptance_probability": 0.4566,
+      "monte_carlo_95ci": [
+        0.44283159572586395,
+        0.4704350432500781
+      ],
+      "median_observed_reference": 0.96,
+      "median_observed_base": 0.6
+    },
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.6,
+      "icc": 0.05,
+      "simulations": 5000,
+      "acceptance_probability": 0.4618,
+      "monte_carlo_95ci": [
+        0.4480158160808782,
+        0.4756428385016331
+      ],
+      "median_observed_reference": 0.96,
+      "median_observed_base": 0.6
+    },
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.6,
+      "icc": 0.1,
+      "simulations": 5000,
+      "acceptance_probability": 0.4386,
+      "monte_carlo_95ci": [
+        0.4248979406707053,
+        0.45239633659018974
+      ],
+      "median_observed_reference": 0.96,
+      "median_observed_base": 0.6
+    },
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.6,
+      "icc": 0.15,
+      "simulations": 5000,
+      "acceptance_probability": 0.4442,
+      "monte_carlo_95ci": [
+        0.43047534376917757,
+        0.4580103349141765
+      ],
+      "median_observed_reference": 0.96,
+      "median_observed_base": 0.6
+    },
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.5,
+      "icc": 0.02,
+      "simulations": 5000,
+      "acceptance_probability": 0.9958,
+      "monte_carlo_95ci": [
+        0.9935874720960507,
+        0.9972512466995245
+      ],
+      "median_observed_reference": 0.97,
+      "median_observed_base": 0.5
+    },
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.5,
+      "icc": 0.05,
+      "simulations": 5000,
+      "acceptance_probability": 0.9922,
+      "monte_carlo_95ci": [
+        0.9893554701846748,
+        0.9942887762678908
+      ],
+      "median_observed_reference": 0.97,
+      "median_observed_base": 0.5
+    },
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.5,
+      "icc": 0.1,
+      "simulations": 5000,
+      "acceptance_probability": 0.9866,
+      "monte_carlo_95ci": [
+        0.9830187301424377,
+        0.989434114887669
+      ],
+      "median_observed_reference": 0.97,
+      "median_observed_base": 0.5
+    },
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.5,
+      "icc": 0.15,
+      "simulations": 5000,
+      "acceptance_probability": 0.9806,
+      "monte_carlo_95ci": [
+        0.9763916068781576,
+        0.9840704509135999
+      ],
+      "median_observed_reference": 0.97,
+      "median_observed_base": 0.5
+    },
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.55,
+      "icc": 0.02,
+      "simulations": 5000,
+      "acceptance_probability": 0.988,
+      "monte_carlo_95ci": [
+        0.984585187686808,
+        0.9906655076989132
+      ],
+      "median_observed_reference": 0.97,
+      "median_observed_base": 0.55
+    },
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.55,
+      "icc": 0.05,
+      "simulations": 5000,
+      "acceptance_probability": 0.98,
+      "monte_carlo_95ci": [
+        0.975734912746554,
+        0.9835280663213686
+      ],
+      "median_observed_reference": 0.97,
+      "median_observed_base": 0.55
+    },
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.55,
+      "icc": 0.1,
+      "simulations": 5000,
+      "acceptance_probability": 0.9658,
+      "monte_carlo_95ci": [
+        0.9603939968236589,
+        0.9704907857801709
+      ],
+      "median_observed_reference": 0.97,
+      "median_observed_base": 0.55
+    },
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.55,
+      "icc": 0.15,
+      "simulations": 5000,
+      "acceptance_probability": 0.9598,
+      "monte_carlo_95ci": [
+        0.9539929460185922,
+        0.9649010493468887
+      ],
+      "median_observed_reference": 0.97,
+      "median_observed_base": 0.55
+    },
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.6,
+      "icc": 0.02,
+      "simulations": 5000,
+      "acceptance_probability": 0.5034,
+      "monte_carlo_95ci": [
+        0.4895437379878128,
+        0.5172510414472516
+      ],
+      "median_observed_reference": 0.97,
+      "median_observed_base": 0.6
+    },
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.6,
+      "icc": 0.05,
+      "simulations": 5000,
+      "acceptance_probability": 0.5112,
+      "monte_carlo_95ci": [
+        0.4973409030826068,
+        0.5250418997623114
+      ],
+      "median_observed_reference": 0.97,
+      "median_observed_base": 0.6
+    },
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.6,
+      "icc": 0.1,
+      "simulations": 5000,
+      "acceptance_probability": 0.5032,
+      "monte_carlo_95ci": [
+        0.48934385498663796,
+        0.5170512315404814
+      ],
+      "median_observed_reference": 0.97,
+      "median_observed_base": 0.6
+    },
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.6,
+      "icc": 0.15,
+      "simulations": 5000,
+      "acceptance_probability": 0.5028,
+      "monte_carlo_95ci": [
+        0.48894409562948127,
+        0.5166516050817482
+      ],
+      "median_observed_reference": 0.97,
+      "median_observed_base": 0.6
+    },
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.5,
+      "icc": 0.02,
+      "simulations": 5000,
+      "acceptance_probability": 1.0,
+      "monte_carlo_95ci": [
+        0.9992322698624194,
+        1.0
+      ],
+      "median_observed_reference": 0.98,
+      "median_observed_base": 0.5
+    },
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.5,
+      "icc": 0.05,
+      "simulations": 5000,
+      "acceptance_probability": 1.0,
+      "monte_carlo_95ci": [
+        0.9992322698624194,
+        1.0
+      ],
+      "median_observed_reference": 0.98,
+      "median_observed_base": 0.5
+    },
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.5,
+      "icc": 0.1,
+      "simulations": 5000,
+      "acceptance_probability": 0.9998,
+      "monte_carlo_95ci": [
+        0.998867881829747,
+        0.9999646951247276
+      ],
+      "median_observed_reference": 0.98,
+      "median_observed_base": 0.5
+    },
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.5,
+      "icc": 0.15,
+      "simulations": 5000,
+      "acceptance_probability": 0.9998,
+      "monte_carlo_95ci": [
+        0.998867881829747,
+        0.9999646951247276
+      ],
+      "median_observed_reference": 0.98,
+      "median_observed_base": 0.5
+    },
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.55,
+      "icc": 0.02,
+      "simulations": 5000,
+      "acceptance_probability": 0.9904,
+      "monte_carlo_95ci": [
+        0.9872956481628825,
+        0.9927513621181783
+      ],
+      "median_observed_reference": 0.98,
+      "median_observed_base": 0.55
+    },
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.55,
+      "icc": 0.05,
+      "simulations": 5000,
+      "acceptance_probability": 0.988,
+      "monte_carlo_95ci": [
+        0.984585187686808,
+        0.9906655076989132
+      ],
+      "median_observed_reference": 0.98,
+      "median_observed_base": 0.55
+    },
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.55,
+      "icc": 0.1,
+      "simulations": 5000,
+      "acceptance_probability": 0.9802,
+      "monte_carlo_95ci": [
+        0.975953709271145,
+        0.9837089627047224
+      ],
+      "median_observed_reference": 0.98,
+      "median_observed_base": 0.55
+    },
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.55,
+      "icc": 0.15,
+      "simulations": 5000,
+      "acceptance_probability": 0.971,
+      "monte_carlo_95ci": [
+        0.9659747880417363,
+        0.9753020101686626
+      ],
+      "median_observed_reference": 0.98,
+      "median_observed_base": 0.55
+    },
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.6,
+      "icc": 0.02,
+      "simulations": 5000,
+      "acceptance_probability": 0.5108,
+      "monte_carlo_95ci": [
+        0.49694096647299674,
+        0.5246424505560315
+      ],
+      "median_observed_reference": 0.98,
+      "median_observed_base": 0.6
+    },
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.6,
+      "icc": 0.05,
+      "simulations": 5000,
+      "acceptance_probability": 0.5068,
+      "monte_carlo_95ci": [
+        0.4929420879345686,
+        0.5206474709355603
+      ],
+      "median_observed_reference": 0.98,
+      "median_observed_base": 0.6
+    },
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.6,
+      "icc": 0.1,
+      "simulations": 5000,
+      "acceptance_probability": 0.507,
+      "monte_carlo_95ci": [
+        0.4931420108110273,
+        0.5208472409670466
+      ],
+      "median_observed_reference": 0.98,
+      "median_observed_base": 0.6
+    },
+    {
+      "clusters": 100,
+      "cluster_size": 6,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.6,
+      "icc": 0.15,
+      "simulations": 5000,
+      "acceptance_probability": 0.5102,
+      "monte_carlo_95ci": [
+        0.49634107818206913,
+        0.5240432601231243
+      ],
+      "median_observed_reference": 0.9816666666666667,
+      "median_observed_base": 0.6
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.5,
+      "icc": 0.02,
+      "simulations": 5000,
+      "acceptance_probability": 0.8914,
+      "monte_carlo_95ci": [
+        0.8824733172665039,
+        0.8997257035817979
+      ],
+      "median_observed_reference": 0.96,
+      "median_observed_base": 0.5
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.5,
+      "icc": 0.05,
+      "simulations": 5000,
+      "acceptance_probability": 0.8818,
+      "monte_carlo_95ci": [
+        0.8725567141982763,
+        0.8904570470686671
+      ],
+      "median_observed_reference": 0.96,
+      "median_observed_base": 0.5
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.5,
+      "icc": 0.1,
+      "simulations": 5000,
+      "acceptance_probability": 0.8468,
+      "monte_carlo_95ci": [
+        0.8365503482152097,
+        0.8565171541613643
+      ],
+      "median_observed_reference": 0.96,
+      "median_observed_base": 0.5
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.5,
+      "icc": 0.15,
+      "simulations": 5000,
+      "acceptance_probability": 0.8238,
+      "monte_carlo_95ci": [
+        0.8129920264197847,
+        0.8341107915431181
+      ],
+      "median_observed_reference": 0.96,
+      "median_observed_base": 0.5
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.55,
+      "icc": 0.02,
+      "simulations": 5000,
+      "acceptance_probability": 0.8768,
+      "monte_carlo_95ci": [
+        0.8673994491202875,
+        0.8856219894480318
+      ],
+      "median_observed_reference": 0.96,
+      "median_observed_base": 0.5483333333333333
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.55,
+      "icc": 0.05,
+      "simulations": 5000,
+      "acceptance_probability": 0.8622,
+      "monte_carlo_95ci": [
+        0.8523672312798021,
+        0.8714766250085344
+      ],
+      "median_observed_reference": 0.96,
+      "median_observed_base": 0.55
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.55,
+      "icc": 0.1,
+      "simulations": 5000,
+      "acceptance_probability": 0.833,
+      "monte_carlo_95ci": [
+        0.8224067897600502,
+        0.8430819019683211
+      ],
+      "median_observed_reference": 0.96,
+      "median_observed_base": 0.5483333333333333
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.55,
+      "icc": 0.15,
+      "simulations": 5000,
+      "acceptance_probability": 0.8002,
+      "monte_carlo_95ci": [
+        0.788888111379506,
+        0.8110509434458907
+      ],
+      "median_observed_reference": 0.96,
+      "median_observed_base": 0.55
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.6,
+      "icc": 0.02,
+      "simulations": 5000,
+      "acceptance_probability": 0.4568,
+      "monte_carlo_95ci": [
+        0.4430309608397535,
+        0.4706353710441335
+      ],
+      "median_observed_reference": 0.96,
+      "median_observed_base": 0.6
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.6,
+      "icc": 0.05,
+      "simulations": 5000,
+      "acceptance_probability": 0.4562,
+      "monte_carlo_95ci": [
+        0.44243287221887184,
+        0.47003438094118033
+      ],
+      "median_observed_reference": 0.96,
+      "median_observed_base": 0.6
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.6,
+      "icc": 0.1,
+      "simulations": 5000,
+      "acceptance_probability": 0.4512,
+      "monte_carlo_95ci": [
+        0.43744958523486815,
+        0.46502534522655986
+      ],
+      "median_observed_reference": 0.96,
+      "median_observed_base": 0.6
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.6,
+      "icc": 0.15,
+      "simulations": 5000,
+      "acceptance_probability": 0.4344,
+      "monte_carlo_95ci": [
+        0.4207160538070808,
+        0.44818467238696985
+      ],
+      "median_observed_reference": 0.9616666666666667,
+      "median_observed_base": 0.6
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.5,
+      "icc": 0.02,
+      "simulations": 5000,
+      "acceptance_probability": 0.9954,
+      "monte_carlo_95ci": [
+        0.9931065624565739,
+        0.9969327705231111
+      ],
+      "median_observed_reference": 0.97,
+      "median_observed_base": 0.5
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.5,
+      "icc": 0.05,
+      "simulations": 5000,
+      "acceptance_probability": 0.9898,
+      "monte_carlo_95ci": [
+        0.9866146287579864,
+        0.9922333027992396
+      ],
+      "median_observed_reference": 0.97,
+      "median_observed_base": 0.5
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.5,
+      "icc": 0.1,
+      "simulations": 5000,
+      "acceptance_probability": 0.9808,
+      "monte_carlo_95ci": [
+        0.9766107110063997,
+        0.9842510396933029
+      ],
+      "median_observed_reference": 0.97,
+      "median_observed_base": 0.5
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.5,
+      "icc": 0.15,
+      "simulations": 5000,
+      "acceptance_probability": 0.967,
+      "monte_carlo_95ci": [
+        0.9616788517487943,
+        0.9716040883027054
+      ],
+      "median_observed_reference": 0.97,
+      "median_observed_base": 0.5
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.55,
+      "icc": 0.02,
+      "simulations": 5000,
+      "acceptance_probability": 0.9864,
+      "monte_carlo_95ci": [
+        0.9827956975516026,
+        0.989257454570559
+      ],
+      "median_observed_reference": 0.97,
+      "median_observed_base": 0.55
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.55,
+      "icc": 0.05,
+      "simulations": 5000,
+      "acceptance_probability": 0.9746,
+      "monte_carlo_95ci": [
+        0.9698609583319949,
+        0.9786103122214135
+      ],
+      "median_observed_reference": 0.9716666666666667,
+      "median_observed_base": 0.55
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.55,
+      "icc": 0.1,
+      "simulations": 5000,
+      "acceptance_probability": 0.9516,
+      "monte_carlo_95ci": [
+        0.9452967932215336,
+        0.9572097929182036
+      ],
+      "median_observed_reference": 0.97,
+      "median_observed_base": 0.55
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.55,
+      "icc": 0.15,
+      "simulations": 5000,
+      "acceptance_probability": 0.9266,
+      "monte_carlo_95ci": [
+        0.9190390593950244,
+        0.9335059132515917
+      ],
+      "median_observed_reference": 0.9716666666666667,
+      "median_observed_base": 0.55
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.6,
+      "icc": 0.02,
+      "simulations": 5000,
+      "acceptance_probability": 0.5128,
+      "monte_carlo_95ci": [
+        0.4989407381900182,
+        0.5266396079184599
+      ],
+      "median_observed_reference": 0.97,
+      "median_observed_base": 0.6
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.6,
+      "icc": 0.05,
+      "simulations": 5000,
+      "acceptance_probability": 0.5068,
+      "monte_carlo_95ci": [
+        0.4929420879345686,
+        0.5206474709355603
+      ],
+      "median_observed_reference": 0.97,
+      "median_observed_base": 0.6
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.6,
+      "icc": 0.1,
+      "simulations": 5000,
+      "acceptance_probability": 0.498,
+      "monte_carlo_95ci": [
+        0.4841476744160659,
+        0.5118553965044845
+      ],
+      "median_observed_reference": 0.97,
+      "median_observed_base": 0.6
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.6,
+      "icc": 0.15,
+      "simulations": 5000,
+      "acceptance_probability": 0.4824,
+      "monte_carlo_95ci": [
+        0.46856811913858026,
+        0.4962589049622627
+      ],
+      "median_observed_reference": 0.9716666666666667,
+      "median_observed_base": 0.6016666666666667
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.5,
+      "icc": 0.02,
+      "simulations": 5000,
+      "acceptance_probability": 0.9998,
+      "monte_carlo_95ci": [
+        0.998867881829747,
+        0.9999646951247276
+      ],
+      "median_observed_reference": 0.98,
+      "median_observed_base": 0.5
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.5,
+      "icc": 0.05,
+      "simulations": 5000,
+      "acceptance_probability": 1.0,
+      "monte_carlo_95ci": [
+        0.9992322698624194,
+        1.0
+      ],
+      "median_observed_reference": 0.98,
+      "median_observed_base": 0.5
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.5,
+      "icc": 0.1,
+      "simulations": 5000,
+      "acceptance_probability": 0.9994,
+      "monte_carlo_95ci": [
+        0.99823726209947,
+        0.9997959290391145
+      ],
+      "median_observed_reference": 0.98,
+      "median_observed_base": 0.5
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.5,
+      "icc": 0.15,
+      "simulations": 5000,
+      "acceptance_probability": 0.9986,
+      "monte_carlo_95ci": [
+        0.9971127434504155,
+        0.9993216760563892
+      ],
+      "median_observed_reference": 0.9816666666666667,
+      "median_observed_base": 0.5
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.55,
+      "icc": 0.02,
+      "simulations": 5000,
+      "acceptance_probability": 0.99,
+      "monte_carlo_95ci": [
+        0.9868413590706434,
+        0.9924062653945275
+      ],
+      "median_observed_reference": 0.98,
+      "median_observed_base": 0.55
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.55,
+      "icc": 0.05,
+      "simulations": 5000,
+      "acceptance_probability": 0.9826,
+      "monte_carlo_95ci": [
+        0.9785876063517265,
+        0.9858713805194808
+      ],
+      "median_observed_reference": 0.98,
+      "median_observed_base": 0.55
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.55,
+      "icc": 0.1,
+      "simulations": 5000,
+      "acceptance_probability": 0.9716,
+      "monte_carlo_95ci": [
+        0.9666210776243886,
+        0.9758547993098454
+      ],
+      "median_observed_reference": 0.98,
+      "median_observed_base": 0.5516666666666666
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.55,
+      "icc": 0.15,
+      "simulations": 5000,
+      "acceptance_probability": 0.9592,
+      "monte_carlo_95ci": [
+        0.9533547649056917,
+        0.9643401517359544
+      ],
+      "median_observed_reference": 0.98,
+      "median_observed_base": 0.5483333333333333
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.6,
+      "icc": 0.02,
+      "simulations": 5000,
+      "acceptance_probability": 0.5138,
+      "monte_carlo_95ci": [
+        0.4999407071861922,
+        0.5276381034620107
+      ],
+      "median_observed_reference": 0.98,
+      "median_observed_base": 0.6
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.6,
+      "icc": 0.05,
+      "simulations": 5000,
+      "acceptance_probability": 0.5202,
+      "monte_carlo_95ci": [
+        0.5063418219392236,
+        0.5340271617632181
+      ],
+      "median_observed_reference": 0.98,
+      "median_observed_base": 0.6
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.6,
+      "icc": 0.1,
+      "simulations": 5000,
+      "acceptance_probability": 0.5204,
+      "monte_carlo_95ci": [
+        0.5065418933943475,
+        0.5342267832160392
+      ],
+      "median_observed_reference": 0.98,
+      "median_observed_base": 0.6
+    },
+    {
+      "clusters": 75,
+      "cluster_size": 8,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.6,
+      "icc": 0.15,
+      "simulations": 5000,
+      "acceptance_probability": 0.5104,
+      "monte_carlo_95ci": [
+        0.4965410387293221,
+        0.5242429924838161
+      ],
+      "median_observed_reference": 0.98,
+      "median_observed_base": 0.6
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.5,
+      "icc": 0.02,
+      "simulations": 5000,
+      "acceptance_probability": 0.8912,
+      "monte_carlo_95ci": [
+        0.8822665138348116,
+        0.8995328141055454
+      ],
+      "median_observed_reference": 0.96,
+      "median_observed_base": 0.5
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.5,
+      "icc": 0.05,
+      "simulations": 5000,
+      "acceptance_probability": 0.8674,
+      "monte_carlo_95ci": [
+        0.857716778485784,
+        0.8765190934091216
+      ],
+      "median_observed_reference": 0.96,
+      "median_observed_base": 0.5
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.5,
+      "icc": 0.1,
+      "simulations": 5000,
+      "acceptance_probability": 0.835,
+      "monte_carlo_95ci": [
+        0.8244549454070553,
+        0.8450306754007655
+      ],
+      "median_observed_reference": 0.96,
+      "median_observed_base": 0.5
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.5,
+      "icc": 0.15,
+      "simulations": 5000,
+      "acceptance_probability": 0.8204,
+      "monte_carlo_95ci": [
+        0.8095153721188452,
+        0.8307926664089932
+      ],
+      "median_observed_reference": 0.9616666666666667,
+      "median_observed_base": 0.5
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.55,
+      "icc": 0.02,
+      "simulations": 5000,
+      "acceptance_probability": 0.8802,
+      "monte_carlo_95ci": [
+        0.8709058438871056,
+        0.888910374116278
+      ],
+      "median_observed_reference": 0.96,
+      "median_observed_base": 0.55
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.55,
+      "icc": 0.05,
+      "simulations": 5000,
+      "acceptance_probability": 0.8504,
+      "monte_carlo_95ci": [
+        0.8402444878242238,
+        0.8600174868953597
+      ],
+      "median_observed_reference": 0.96,
+      "median_observed_base": 0.5516666666666666
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.55,
+      "icc": 0.1,
+      "simulations": 5000,
+      "acceptance_probability": 0.8118,
+      "monte_carlo_95ci": [
+        0.800727722969258,
+        0.8223935205169466
+      ],
+      "median_observed_reference": 0.96,
+      "median_observed_base": 0.55
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.55,
+      "icc": 0.15,
+      "simulations": 5000,
+      "acceptance_probability": 0.7778,
+      "monte_carlo_95ci": [
+        0.7660658693159133,
+        0.789107579819647
+      ],
+      "median_observed_reference": 0.9616666666666667,
+      "median_observed_base": 0.55
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.6,
+      "icc": 0.02,
+      "simulations": 5000,
+      "acceptance_probability": 0.4718,
+      "monte_carlo_95ci": [
+        0.4579897132707278,
+        0.4856535867090318
+      ],
+      "median_observed_reference": 0.96,
+      "median_observed_base": 0.6
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.6,
+      "icc": 0.05,
+      "simulations": 5000,
+      "acceptance_probability": 0.445,
+      "monte_carlo_95ci": [
+        0.4312722602450146,
+        0.45881219007011936
+      ],
+      "median_observed_reference": 0.96,
+      "median_observed_base": 0.6
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.6,
+      "icc": 0.1,
+      "simulations": 5000,
+      "acceptance_probability": 0.429,
+      "monte_carlo_95ci": [
+        0.4153408157563847,
+        0.4427682019231518
+      ],
+      "median_observed_reference": 0.96,
+      "median_observed_base": 0.6
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.96,
+      "assumed_base_rate": 0.6,
+      "icc": 0.15,
+      "simulations": 5000,
+      "acceptance_probability": 0.4102,
+      "monte_carlo_95ci": [
+        0.3966400654379219,
+        0.42389781889478767
+      ],
+      "median_observed_reference": 0.96,
+      "median_observed_base": 0.6
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.5,
+      "icc": 0.02,
+      "simulations": 5000,
+      "acceptance_probability": 0.9954,
+      "monte_carlo_95ci": [
+        0.9931065624565739,
+        0.9969327705231111
+      ],
+      "median_observed_reference": 0.97,
+      "median_observed_base": 0.5
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.5,
+      "icc": 0.05,
+      "simulations": 5000,
+      "acceptance_probability": 0.9886,
+      "monte_carlo_95ci": [
+        0.9852595777823054,
+        0.9911901963272509
+      ],
+      "median_observed_reference": 0.97,
+      "median_observed_base": 0.5
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.5,
+      "icc": 0.1,
+      "simulations": 5000,
+      "acceptance_probability": 0.9722,
+      "monte_carlo_95ci": [
+        0.9672679059027314,
+        0.9764070497553374
+      ],
+      "median_observed_reference": 0.97,
+      "median_observed_base": 0.49833333333333335
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.5,
+      "icc": 0.15,
+      "simulations": 5000,
+      "acceptance_probability": 0.9646,
+      "monte_carlo_95ci": [
+        0.9591107903825019,
+        0.9693758347736582
+      ],
+      "median_observed_reference": 0.9716666666666667,
+      "median_observed_base": 0.5
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.55,
+      "icc": 0.02,
+      "simulations": 5000,
+      "acceptance_probability": 0.9838,
+      "monte_carlo_95ci": [
+        0.9799109445821863,
+        0.9869461997366906
+      ],
+      "median_observed_reference": 0.97,
+      "median_observed_base": 0.55
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.55,
+      "icc": 0.05,
+      "simulations": 5000,
+      "acceptance_probability": 0.967,
+      "monte_carlo_95ci": [
+        0.9616788517487943,
+        0.9716040883027054
+      ],
+      "median_observed_reference": 0.9716666666666667,
+      "median_observed_base": 0.55
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.55,
+      "icc": 0.1,
+      "simulations": 5000,
+      "acceptance_probability": 0.9444,
+      "monte_carlo_95ci": [
+        0.9377004507543115,
+        0.9504171906994069
+      ],
+      "median_observed_reference": 0.97,
+      "median_observed_base": 0.55
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.55,
+      "icc": 0.15,
+      "simulations": 5000,
+      "acceptance_probability": 0.9182,
+      "monte_carlo_95ci": [
+        0.910278518082528,
+        0.9254793524303996
+      ],
+      "median_observed_reference": 0.97,
+      "median_observed_base": 0.55
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.6,
+      "icc": 0.02,
+      "simulations": 5000,
+      "acceptance_probability": 0.5126,
+      "monte_carlo_95ci": [
+        0.4987407510423948,
+        0.526439902158138
+      ],
+      "median_observed_reference": 0.97,
+      "median_observed_base": 0.6
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.6,
+      "icc": 0.05,
+      "simulations": 5000,
+      "acceptance_probability": 0.4986,
+      "monte_carlo_95ci": [
+        0.48474715729683737,
+        0.512454992347548
+      ],
+      "median_observed_reference": 0.97,
+      "median_observed_base": 0.6
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.6,
+      "icc": 0.1,
+      "simulations": 5000,
+      "acceptance_probability": 0.5078,
+      "monte_carlo_95ci": [
+        0.4939417244730911,
+        0.5216462989367627
+      ],
+      "median_observed_reference": 0.97,
+      "median_observed_base": 0.6
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.97,
+      "assumed_base_rate": 0.6,
+      "icc": 0.15,
+      "simulations": 5000,
+      "acceptance_probability": 0.4818,
+      "monte_carlo_95ci": [
+        0.46796917486764633,
+        0.4956587705093617
+      ],
+      "median_observed_reference": 0.9716666666666667,
+      "median_observed_base": 0.6016666666666667
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.5,
+      "icc": 0.02,
+      "simulations": 5000,
+      "acceptance_probability": 1.0,
+      "monte_carlo_95ci": [
+        0.9992322698624194,
+        1.0
+      ],
+      "median_observed_reference": 0.98,
+      "median_observed_base": 0.5
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.5,
+      "icc": 0.05,
+      "simulations": 5000,
+      "acceptance_probability": 0.9998,
+      "monte_carlo_95ci": [
+        0.998867881829747,
+        0.9999646951247276
+      ],
+      "median_observed_reference": 0.98,
+      "median_observed_base": 0.5
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.5,
+      "icc": 0.1,
+      "simulations": 5000,
+      "acceptance_probability": 0.9986,
+      "monte_carlo_95ci": [
+        0.9971127434504155,
+        0.9993216760563892
+      ],
+      "median_observed_reference": 0.98,
+      "median_observed_base": 0.5
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.5,
+      "icc": 0.15,
+      "simulations": 5000,
+      "acceptance_probability": 0.9982,
+      "monte_carlo_95ci": [
+        0.9965823163898597,
+        0.9990527173010548
+      ],
+      "median_observed_reference": 0.9816666666666667,
+      "median_observed_base": 0.5
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.55,
+      "icc": 0.02,
+      "simulations": 5000,
+      "acceptance_probability": 0.9882,
+      "monte_carlo_95ci": [
+        0.9848097677579681,
+        0.9908406205356981
+      ],
+      "median_observed_reference": 0.98,
+      "median_observed_base": 0.55
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.55,
+      "icc": 0.05,
+      "simulations": 5000,
+      "acceptance_probability": 0.9808,
+      "monte_carlo_95ci": [
+        0.9766107110063997,
+        0.9842510396933029
+      ],
+      "median_observed_reference": 0.98,
+      "median_observed_base": 0.55
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.55,
+      "icc": 0.1,
+      "simulations": 5000,
+      "acceptance_probability": 0.9668,
+      "monte_carlo_95ci": [
+        0.9614645911863957,
+        0.9714186559571589
+      ],
+      "median_observed_reference": 0.98,
+      "median_observed_base": 0.55
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.55,
+      "icc": 0.15,
+      "simulations": 5000,
+      "acceptance_probability": 0.9444,
+      "monte_carlo_95ci": [
+        0.9377004507543115,
+        0.9504171906994069
+      ],
+      "median_observed_reference": 0.9816666666666667,
+      "median_observed_base": 0.55
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.6,
+      "icc": 0.02,
+      "simulations": 5000,
+      "acceptance_probability": 0.5088,
+      "monte_carlo_95ci": [
+        0.49494141640521583,
+        0.5226450715443628
+      ],
+      "median_observed_reference": 0.98,
+      "median_observed_base": 0.6
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.6,
+      "icc": 0.05,
+      "simulations": 5000,
+      "acceptance_probability": 0.5076,
+      "monte_carlo_95ci": [
+        0.49374179273406327,
+        0.5214465377678457
+      ],
+      "median_observed_reference": 0.98,
+      "median_observed_base": 0.6
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.6,
+      "icc": 0.1,
+      "simulations": 5000,
+      "acceptance_probability": 0.5094,
+      "monte_carlo_95ci": [
+        0.49554125815568617,
+        0.5232443085177272
+      ],
+      "median_observed_reference": 0.98,
+      "median_observed_base": 0.6
+    },
+    {
+      "clusters": 60,
+      "cluster_size": 10,
+      "total_cases": 600,
+      "assumed_reference_rate": 0.98,
+      "assumed_base_rate": 0.6,
+      "icc": 0.15,
+      "simulations": 5000,
+      "acceptance_probability": 0.5106,
+      "monte_carlo_95ci": [
+        0.4967410014929462,
+        0.5244427226281373
+      ],
+      "median_observed_reference": 0.9816666666666667,
+      "median_observed_base": 0.6
+    }
+  ]
+}

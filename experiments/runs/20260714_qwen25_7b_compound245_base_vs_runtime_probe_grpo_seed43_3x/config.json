@@ -1,0 +1,46 @@
+{
+  "run_id": "20260714_qwen25_7b_compound245_base_vs_runtime_probe_grpo_seed43_3x",
+  "study_id": "planner_multistep_tool_routing_grpo_qwen25_7b_v1",
+  "scope": "compound245_legacy_regression",
+  "dataset": {
+    "path": "training/planner_grpo_seed_v1/cases/planner_grpo_compound245_eval_cases.jsonl",
+    "sha256": "cd0f03acdb15f586386c50936b4f997b7b1226732b37eb1a3409076ca2e02388",
+    "cases": 245,
+    "single_step_cases": 184,
+    "two_step_cases": 61,
+    "decisions_per_repeat": 306
+  },
+  "arms": {
+    "base": {
+      "model": "/raid/zkq/models/Qwen2.5-7B-Instruct",
+      "adapter": null
+    },
+    "candidate": {
+      "model": "/raid/zkq/artifacts/CAPA/outputs/merged-qwen25-7b-sft-v3-chatml",
+      "adapter": "/raid/zkq/artifacts/CAPA/outputs/planner-grpo-qwen25-7b-runtime-probe-curriculum-v1-seed43/checkpoint-80",
+      "selection": "Frozen before compound245 evaluation using existing development evidence: highest dev case-macro score among seeds without seed44's added Flux regressions."
+    }
+  },
+  "generation": {
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "do_sample": false,
+    "seed": 42,
+    "max_tokens": 128,
+    "max_steps": 3,
+    "step_timeout_seconds": 180,
+    "repeats": 3,
+    "CAPA_ENABLE_ADELA": 1
+  },
+  "execution": {
+    "serving": "demo/deploy_qwen_server.py",
+    "dtype": "float16",
+    "base_gpus": [3, 5],
+    "candidate_gpus": [4, 6],
+    "repeat_1_2": "sequential on each primary service",
+    "repeat_3": "concurrent identical replica service",
+    "real_tools_executed": false,
+    "external_model_calls": false,
+    "init_env_sourced": false
+  }
+}

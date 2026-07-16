@@ -1,0 +1,134 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-07-14T18:20:00Z",
+  "evaluation_id": "qwen35_4b_planner_multistep_grpo_hard_v2_confirmation_3x",
+  "preregistration": "experiments/studies/planner_multistep_tool_routing_grpo_qwen25_7b_v1/qwen35_4b_evaluation_preregistration_20260714.json",
+  "model": {
+    "name": "Qwen3.5-4B",
+    "path": "/raid/zkq/models/Qwen3.5-4B",
+    "dtype": "float16",
+    "attention_implementation": "sdpa",
+    "enable_thinking": false
+  },
+  "dataset": {
+    "dataset_id": "planner_multistep_grpo_hard_v2",
+    "split": "confirmation",
+    "cases": 600,
+    "decisions_per_run": 1200,
+    "entity_clusters": 75,
+    "families": 8,
+    "cases_sha256": "42201f057366411fdfab77621f6b54e3f4c16d7fcdc8109616065e6212cc3008"
+  },
+  "protocol": {
+    "runs": 3,
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "do_sample": false,
+    "seed": 42,
+    "max_steps": 3,
+    "max_tokens": 2048,
+    "timeout_seconds": 300,
+    "openai_timeout_seconds": 300,
+    "CAPA_ENABLE_ADELA": 0
+  },
+  "strict_results": {
+    "passed_per_run": [
+      380,
+      380,
+      380
+    ],
+    "cases_per_run": 600,
+    "pass_rate_mean": 0.633333,
+    "pass_rate_stdev": 0.0,
+    "pass_all_3": 380,
+    "pass_all_3_rate": 0.633333,
+    "pass_any_3": 380,
+    "pass_any_3_rate": 0.633333,
+    "mean_dense_score": 0.935241,
+    "mean_dense_score_stdev": 0.0,
+    "entity_cluster_bootstrap_95ci": [
+      0.528333,
+      0.735
+    ]
+  },
+  "pass_all_3_by_family": {
+    "qwen_box_variance_to_migration": 0.613333,
+    "qwen_empty_result_to_migration": 0.586667,
+    "qwen_domain_shift_to_migration": 0.626667,
+    "rex_box_variance_to_migration": 0.666667,
+    "rex_empty_result_to_migration": 0.666667,
+    "rex_domain_shift_to_migration": 0.666667,
+    "qwen_confident_stop_guardrail": 0.573333,
+    "rex_confident_stop_guardrail": 0.666667
+  },
+  "repeat_stability": {
+    "cases_with_same_strict_verdict_all_3_runs": 600,
+    "cases_with_identical_decision_type_action_and_action_input_all_3_runs": 591,
+    "cases_with_structural_variation_but_no_verdict_flip": 9
+  },
+  "failure_diagnostic": {
+    "strict_failed_cases": 220,
+    "only_label_visible_smoke_vs_smoke": 185,
+    "only_label_visible_smoke_vs_smoke_rate_of_failures": 0.840909,
+    "genuine_route_or_stop_failures": 35,
+    "genuine_failure_pattern": "Skipped the detector/probe and called migration_advisor directly.",
+    "alias_tolerant_diagnostic_only_passed": 565,
+    "alias_tolerant_diagnostic_only_rate": 0.941667,
+    "official_metric_remains_frozen_strict": true
+  },
+  "paired_comparisons": {
+    "qwen35_4b_minus_raw_qwen25_7b": {
+      "raw_qwen25_7b_pass_all": 0.226667,
+      "qwen35_4b_pass_all": 0.633333,
+      "gap": 0.406667,
+      "gap_entity_cluster_bootstrap_95ci": [
+        0.333333,
+        0.48
+      ],
+      "paired_case_counts": {
+        "qwen35_4b_only": 254,
+        "raw_qwen25_7b_only": 10,
+        "both": 126,
+        "neither": 210
+      }
+    },
+    "qwen35_a3b_minus_qwen35_4b": {
+      "qwen35_4b_pass_all": 0.633333,
+      "qwen35_a3b_pass_all": 0.971667,
+      "gap": 0.338333,
+      "gap_entity_cluster_bootstrap_95ci": [
+        0.236667,
+        0.445
+      ],
+      "paired_case_counts": {
+        "qwen35_a3b_only": 214,
+        "qwen35_4b_only": 11,
+        "both": 369,
+        "neither": 6
+      }
+    }
+  },
+  "operational_validity": {
+    "case_runs": 1800,
+    "decisions": 3600,
+    "api_or_rollout_errors": 0,
+    "empty_decisions": 0,
+    "first_length_truncations": 0,
+    "retry_length_truncations": 0,
+    "retries": 0,
+    "related_tests_passed": 16
+  },
+  "interpretation": {
+    "passes_original_4b_candidate_base_ceiling_of_0_60": false,
+    "reason": "The 0.633333 strict pass-all rate exceeds the original base ceiling, and 185 of 220 failures are one lexical typed-argument mismatch rather than a routing failure.",
+    "recommended_use": "Keep this split sealed for evaluation. Build disjoint Qwen3.5-4B calibration/train scenarios around genuine detector-versus-migration transitions, while handling exact typed-argument copying primarily with SFT."
+  },
+  "artifacts": {
+    "aggregate": "/raid/zkq/artifacts/CAPA/evals/20260714_planner_multistep_grpo_hard_v2/confirmation/qwen35_4b_combined/qwen35_4b_v2_confirmation_t0_3x_aggregate.json",
+    "case_audit": "/raid/zkq/artifacts/CAPA/evals/20260714_planner_multistep_grpo_hard_v2/confirmation/qwen35_4b_combined/qwen35_4b_v2_confirmation_t0_3x_case_audit.csv",
+    "failed_cases": "/raid/zkq/artifacts/CAPA/evals/20260714_planner_multistep_grpo_hard_v2/confirmation/qwen35_4b_combined/qwen35_4b_v2_confirmation_t0_3x_failed_cases.csv",
+    "vs_35b_bootstrap": "/raid/zkq/artifacts/CAPA/evals/20260714_planner_multistep_grpo_hard_v2/confirmation/qwen35_4b_combined/qwen35_4b_vs_qwen35_a3b_cluster_bootstrap.json",
+    "vs_7b_bootstrap": "/raid/zkq/artifacts/CAPA/evals/20260714_planner_multistep_grpo_hard_v2/confirmation/qwen35_4b_combined/qwen25_7b_vs_qwen35_4b_cluster_bootstrap.json"
+  },
+  "training_status": "not_started"
+}

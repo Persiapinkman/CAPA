@@ -3,18 +3,18 @@
 
 ## Objective
 
-Find a reproducible strict-action GRPO improvement for CAPA Planner state transitions under V100 constraints, with entity-isolated train/dev/test evidence.
+Find a reproducible strict-action GRPO improvement for CAPA Planner decisions that are actually policy-owned at runtime, without increasing side-effect risk.
 
 ## Active State
 
 - Demo default: `Qwen3.5-35B-A3B`
-- Research candidate: `Qwen2.5-7B SFTv3 initializer plus the planner_stateful_retrieval_v2 action-dominant GRPO recipe`
-- Current study: `planner_complex_retrieval_grpo_v2`
-- Evidence grade: `sealed_test_confirmed_controlled_state_machine`
+- Research candidate: `Qwen2.5-7B SFTv3 initializer plus planner_runtime_probe_curriculum_v1 strict-action GRPO; diagnostic only, not promoted`
+- Current study: `planner_runtime_routing_grpo_v1`
+- Evidence grade: `development_replicated_narrow_runtime_growth_policy_guardrail_failed_test_sealed`
 
 ## Key Result
 
-On rag_double_miss_recovery, the three-seed mean policy improved sealed-test strict action match by 0.1292 with entity-clustered 95% CI [0.0750, 0.1896] and improved verifier score by 0.1096.
+On qwen_probe_then_migration, three-seed mean strict complete-case action improved by 0.3333 and overall action by 0.1333 (entity-clustered 95% CI [0.0917, 0.1778]); however mean wrong side-effecting actions increased by 0.6667, so the preregistered development gate failed and test remained sealed.
 
 ## Dataset Registry
 
@@ -25,6 +25,8 @@ On rag_double_miss_recovery, the three-seed mean policy improved sealed-test str
 | `planner_focused_v3` | development_train_dev_and_regression | 154 | 245 | development_only_not_sealed |
 | `planner_rag_miss_action_reward_v1` | exploratory_action_aligned_weighted_training_view | 120 | 240 | weighted_view_with_action_separated_reward |
 | `planner_rag_miss_state_machine_v1` | exploratory_weighted_training_view | 120 | 240 | weighted_view_with_inherited_split_isolation |
+| `planner_runtime_probe_curriculum_v1` | train_dev_and_sealed_test | 852 | 1050 | sealed_test_created_unopened |
+| `planner_runtime_routing_v1` | train_dev_and_sealed_test | 702 | 810 | sealed_test_created_unopened |
 | `planner_stateful_retrieval_v1` | train_dev_and_sealed_test |  |  | sealed_test_created_unopened |
 | `planner_stateful_retrieval_v2` | train_dev_and_sealed_test |  |  | test_opened_once_after_development_replication_passed_frozen |
 
@@ -32,28 +34,27 @@ On rag_double_miss_recovery, the three-seed mean policy improved sealed-test str
 
 | Date | Run | Model | Method | Status | Primary metric | Decision |
 |---|---|---|---|---|---:|---|
-| 2026-07-12 | `20260712_complex_v2_grpo80_seed42_dev` | complex_v2_grpo80_seed42 | eval_generation_repeated | completed | case_macro_mean_verifier_score=0.865126 | reject_development_gate |
-| 2026-07-12 | `20260712_complex_v2_grpo80_seed42_test` | complex_v2_grpo80_seed42 | eval_generation_repeated | completed | step_mean_verifier_score=0.766187 | supports_sealed_test_confirmation |
-| 2026-07-12 | `20260712_complex_v2_grpo80_seed42_train` | /raid/zkq/artifacts/CAPA/outputs/merged-qwen25-7b-sft-v3-chatml | train_grpo_lora_checkpoint | completed | train_reward_mean=0.804180 | reject_development_gate |
-| 2026-07-12 | `20260712_complex_v2_grpo80_seed43_dev` | complex_v2_grpo80_seed43 | eval_generation_repeated | completed | step_mean_verifier_score=0.822604 | passes_multiseed_development_replication_gate |
-| 2026-07-12 | `20260712_complex_v2_grpo80_seed43_test` | complex_v2_grpo80_seed43 | eval_generation_repeated | completed | step_mean_verifier_score=0.771594 | supports_sealed_test_confirmation |
-| 2026-07-12 | `20260712_complex_v2_grpo80_seed43_train` | /raid/zkq/artifacts/CAPA/outputs/merged-qwen25-7b-sft-v3-chatml | train_grpo_lora_checkpoint | completed | train_reward_mean=0.791191 | supports_adaptive_replication_confirmation |
-| 2026-07-12 | `20260712_complex_v2_grpo80_seed44_dev` | complex_v2_grpo80_seed44 | eval_generation_repeated | completed | step_mean_verifier_score=0.860417 | passes_multiseed_development_replication_gate |
-| 2026-07-12 | `20260712_complex_v2_grpo80_seed44_test` | complex_v2_grpo80_seed44 | eval_generation_repeated | completed | step_mean_verifier_score=0.791115 | supports_sealed_test_confirmation |
-| 2026-07-12 | `20260712_complex_v2_grpo80_seed44_train` | /raid/zkq/artifacts/CAPA/outputs/merged-qwen25-7b-sft-v3-chatml | train_grpo_lora_checkpoint | completed | train_reward_mean=0.824033 | supports_adaptive_replication_confirmation |
-| 2026-07-12 | `20260712_complex_v2_sftv3_dev` | sft_v3 | eval_generation_repeated | completed | step_mean_verifier_score=0.803521 | pending_comparison |
-| 2026-07-12 | `20260712_complex_v2_sftv3_test` | complex_v2_sftv3 | eval_generation_repeated | completed | step_mean_verifier_score=0.731365 | sealed_test_reference |
-| 2026-07-12 | `20260712_first_miss_transition_v1_grpo80_seed42_dev` | first_miss_transition_grpo80_seed42 | eval_generation_repeated | completed | case_macro_mean_verifier_score=0.873810 | reject_development_gate |
-| 2026-07-12 | `20260712_first_miss_transition_v1_grpo80_seed42_train` | /raid/zkq/artifacts/CAPA/outputs/merged-qwen25-7b-sft-v3-chatml | train_grpo_lora_checkpoint | completed | train_reward_mean=0.767081 | reject_development_gate |
+| 2026-07-13 | `20260713_runtime_probe_curriculum_v2_grpo42_dev` | runtime_probe_grpo42 | eval_generation_repeated | completed | case_macro_mean_verifier_score=0.811416 | screen_passed_replication_gate_failed |
+| 2026-07-13 | `20260713_runtime_probe_curriculum_v2_grpo42_dev3x` | runtime_probe_grpo42_dev3x | eval_generation_repeated | completed | case_macro_mean_verifier_score=0.811416 | supports_narrow_primary_growth_not_policy_promotion |
+| 2026-07-13 | `20260713_runtime_probe_curriculum_v2_grpo43_dev3x` | runtime_probe_grpo43_dev3x | eval_generation_repeated | completed | case_macro_mean_verifier_score=0.830220 | supports_narrow_primary_growth_not_policy_promotion |
+| 2026-07-13 | `20260713_runtime_probe_curriculum_v2_grpo44_dev3x` | runtime_probe_grpo44_dev3x | eval_generation_repeated | completed | case_macro_mean_verifier_score=0.771499 | reject_safe_policy_promotion |
+| 2026-07-13 | `20260713_runtime_probe_curriculum_v2_seed42_train` | /raid/zkq/artifacts/CAPA/outputs/merged-qwen25-7b-sft-v3-chatml | train_grpo_lora_checkpoint | completed | train_reward_mean=0.822647 | supports_narrow_primary_growth_not_policy_promotion |
+| 2026-07-13 | `20260713_runtime_probe_curriculum_v2_seed43_train` | /raid/zkq/artifacts/CAPA/outputs/merged-qwen25-7b-sft-v3-chatml | train_grpo_lora_checkpoint | completed | train_reward_mean=0.876919 | supports_narrow_primary_growth_not_policy_promotion |
+| 2026-07-13 | `20260713_runtime_probe_curriculum_v2_seed44_train` | /raid/zkq/artifacts/CAPA/outputs/merged-qwen25-7b-sft-v3-chatml | train_grpo_lora_checkpoint | completed | train_reward_mean=0.821741 | reject_safe_policy_promotion |
+| 2026-07-13 | `20260713_runtime_probe_curriculum_v2_sftv3_dev` | sft_v3_strict | eval_generation_repeated | completed | case_macro_mean_verifier_score=0.688895 | baseline |
+| 2026-07-13 | `20260713_runtime_probe_curriculum_v2_sftv3_dev3x` | runtime_probe_sftv3_dev3x | eval_generation_repeated | completed | case_macro_mean_verifier_score=0.688895 | baseline |
+| 2026-07-13 | `20260713_runtime_routing_v1_routegrpo_dev` | route_grpo_v4 | eval_generation_repeated | completed | step_mean_verifier_score=0.781667 | reject_fixed_candidate_gate |
+| 2026-07-13 | `20260713_runtime_routing_v1_sftv3_dev` | sft_v3 | eval_generation_repeated | completed | step_mean_verifier_score=0.768611 | baseline |
 
 ## Current Caveats
 
-- The original seed-42 practical development gate of +0.10 strict action remained failed; the confirmed claim is the separately preregistered three-seed measurable-growth claim.
-- Observations are deterministic mocked retrieval transitions and do not establish real retriever or end-to-end answer quality.
-- The data are controlled synthetic templates despite entity and template isolation across splits.
-- Test was opened once only after the adaptive three-seed development replication gate passed; it must not be reused for further model selection.
-- The demo default and the confirmed research recipe remain different model lines.
+- The supported effect is a narrow runtime-owned routing scene, not a safely promotable whole Planner policy.
+- Seed44 added two wrong Flux calls on requests that required the full pipeline; no-side-effect-increase was a hard preregistered guardrail.
+- All eight underspecified clarify cases route to side-effecting Adela in both baseline and every seed, exposing a pre-existing safety weakness not solved by this curriculum.
+- Cases and observations are controlled synthetic templates; no real tool execution, visual quality, retrieval quality, or end-to-end answer quality is established.
+- The runtime-probe test split was not generated against any model and remains sealed for a future fixed candidate, but this development split must not be reused to tune the next arm.
+- The demo default and research model remain different model lines; the shared tokenizer warning requires a separate future ablation.
 
 ## Next Decision
 
-Freeze the v2 test split and recipe. Build a new external evaluation with noisy retrieval replay, bounded tool budgets, contradictory evidence, and a small read-only deidentified real-trajectory slice; do not tune against the confirmed v2 test.
+Freeze this arm and its unopened test. Create a new versioned side-effect-constrained study with independent train/dev/test entities, explicit clarify-vs-Adela and pipeline-vs-Flux contrasts, outcome-dependent tool observations, and a cost/safety verifier; do not tune against the current dev or test.

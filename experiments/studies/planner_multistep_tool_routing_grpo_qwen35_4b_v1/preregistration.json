@@ -1,0 +1,105 @@
+{
+  "schema_version": "1.0",
+  "recorded_at": "2026-07-15T01:10:00Z",
+  "study_id": "planner_multistep_tool_routing_grpo_qwen35_4b_v1",
+  "dataset_id": "planner_multistep_grpo_value_v3",
+  "objective": "Create a route-centric evaluation where Qwen3.5-35B-A3B is competent, raw Qwen3.5-4B retains learnable headroom, and failures are dominated by observation-conditioned route decisions rather than lexical arguments.",
+  "experimental_unit": "entity_id cluster",
+  "design": {
+    "type": "blocked paired counterfactual calibration followed by frozen confirmation",
+    "calibration_entities": 24,
+    "candidate_families": 16,
+    "calibration_cases": 384,
+    "detectors": [
+      "qwen_detection",
+      "rexomni_detection"
+    ],
+    "branch_policies": [
+      "accept_all_gates_stop",
+      "domain_veto_migrate",
+      "iou_veto_migrate",
+      "empty_veto_migrate",
+      "retry_accept_stop",
+      "retry_domain_migrate",
+      "retry_iou_migrate",
+      "hard_failure_migrate"
+    ],
+    "blocking": "Every entity contains all 16 detector-by-branch families.",
+    "counterfactual_control": "Within each detector and entity, the user policy is identical; only current observations and preregistered stale-history decoys vary.",
+    "action_hint_in_current_observation": false
+  },
+  "calibration": {
+    "repeats": 1,
+    "selection_unit": "complete scenario family",
+    "reference_min": 0.95,
+    "base_min": 0.08,
+    "base_max": 0.80,
+    "gap_min": 0.20,
+    "base_route_failure_rate_min": 0.15,
+    "argument_only_failure_share_max": 0.25,
+    "balanced_selection": "Select the first four admitted Qwen and first four admitted Rex families in the frozen scenario order.",
+    "required_selected_families": 8,
+    "required_three_step_families_min": 2,
+    "case_level_filtering": false
+  },
+  "confirmation": {
+    "generation_condition": "Only after calibration selection is frozen.",
+    "entities": 75,
+    "families": 8,
+    "cases": 600,
+    "repeats": 3,
+    "new_entities_templates_and_fixture_families": true,
+    "reference_pass_all_min": 0.95,
+    "base_pass_all_min": 0.08,
+    "base_pass_all_max": 0.80,
+    "gap_min": 0.20,
+    "family_reference_min": 0.90,
+    "family_base_max": 0.90,
+    "base_route_failure_rate_min": 0.15,
+    "base_route_failure_share_of_failures_min": 0.70,
+    "base_argument_only_failure_share_max": 0.20,
+    "decision": "accept_or_reject_entire_dataset_version",
+    "case_level_filtering": false
+  },
+  "models": {
+    "base": {
+      "label": "Qwen3.5-4B",
+      "path": "/raid/zkq/models/Qwen3.5-4B",
+      "runtime": "local Transformers AutoModelForCausalLM fp16 non-thinking"
+    },
+    "reference": {
+      "label": "Qwen3.5-35B-A3B",
+      "runtime": "external OpenAI-compatible endpoint",
+      "environment": "/raid/zkq/projects/CAPA/init_env.sh"
+    }
+  },
+  "generation_protocol": {
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "do_sample": false,
+    "seed": 42,
+    "max_steps": 3,
+    "max_tokens": 2048,
+    "timeout_seconds": 300,
+    "openai_timeout_seconds": 300,
+    "CAPA_ENABLE_ADELA": 0
+  },
+  "invalid_run_conditions": [
+    "any unrecovered API or rollout error",
+    "any empty Planner decision",
+    "wrong model or endpoint",
+    "dataset or verifier hash drift",
+    "any unrecovered completion truncation"
+  ],
+  "analysis": {
+    "primary": "strict pass-all across repeats",
+    "route_metric": "exact decision_type/action sequence across repeats",
+    "failure_decomposition": [
+      "route failure",
+      "argument-only failure"
+    ],
+    "uncertainty": "paired entity-cluster bootstrap with 20000 samples",
+    "future_grpo_value_contrast": "SFT+GRPO minus the same SFT-only initializer; raw-base separation alone is not causal evidence of GRPO value."
+  },
+  "training_status": "not_started_not_authorized_in_this_study"
+}

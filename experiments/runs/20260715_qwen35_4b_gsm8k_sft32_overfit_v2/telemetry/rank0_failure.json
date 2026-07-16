@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "status": "fail",
+  "rank": 0,
+  "started_at": "2026-07-15T15:06:03.478176+00:00",
+  "finished_at": "2026-07-15T15:06:22.433604+00:00",
+  "optimizer_steps": 0,
+  "error": {
+    "type": "TypeError",
+    "message": "expected Qwen3_5ForCausalLM, got Qwen3_5ForConditionalGeneration",
+    "traceback": "Traceback (most recent call last):\n  File \"/raid/zkq/projects/CAPA/training/public_sft_grpo_v1/scripts/train_qwen35_gsm8k_sft.py\", line 457, in main\n    audit = model_audit(trainer.model)\n  File \"/raid/zkq/projects/CAPA/training/public_sft_grpo_v1/scripts/train_qwen35_gsm8k_sft.py\", line 271, in model_audit\n    raise TypeError(f\"expected {EXPECTED_MODEL_CLASS}, got {base.__class__.__name__}\")\nTypeError: expected Qwen3_5ForCausalLM, got Qwen3_5ForConditionalGeneration\n"
+  }
+}

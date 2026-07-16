@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "planner_multistep_grpo_hard_v1",
+  "seed": 20260714,
+  "role": "visible_family_calibration_and_frozen_confirmation_challenge",
+  "selection_rule": "Admit/reject whole scenario families using calibration only; never filter individual confirmation cases.",
+  "accepted_scenarios": [],
+  "splits": {
+    "calibration": {
+      "cases": {
+        "cases": 288,
+        "steps": 432,
+        "unique_case_ids": 288,
+        "unique_queries": 172,
+        "categories": {
+          "flux_generation_only": 24,
+          "image_migration_internal_probe": 24,
+          "image_migration_no_probe": 24,
+          "pipeline_full_eval": 24,
+          "qwen_confident_stop": 24,
+          "qwen_failure_retry": 24,
+          "qwen_uncertain_to_migration": 24,
+          "rex_confident_stop": 24,
+          "rex_failure_retry": 24,
+          "rex_uncertain_to_migration": 24,
+          "text_migration": 24,
+          "visual_intent_clarify": 24
+        },
+        "expected_actions": {
+          "clarify": 24,
+          "end": 48,
+          "flux-image-generation": 24,
+          "migration_advisor": 120,
+          "pipeline_eval": 24,
+          "qwen_detection": 96,
+          "rexomni_detection": 96
+        }
+      },
+      "steps": {
+        "rows": 432,
+        "cases": 288,
+        "exact_prompt_completion_duplicates": 0,
+        "duplicate_rate": 0.0,
+        "max_rows_per_case": 2,
+        "categories": {
+          "flux_generation_only": 24,
+          "image_migration_internal_probe": 24,
+          "image_migration_no_probe": 24,
+          "pipeline_full_eval": 24,
+          "qwen_confident_stop": 48,
+          "qwen_failure_retry": 48,
+          "qwen_uncertain_to_migration": 48,
+          "rex_confident_stop": 48,
+          "rex_failure_retry": 48,
+          "rex_uncertain_to_migration": 48,
+          "text_migration": 24,
+          "visual_intent_clarify": 24
+        }
+      },
+      "entity_groups": 24,
+      "scenario_tiers": {
+        "guardrail": 48,
+        "primary_challenge": 240
+      },
+      "fixture_families": {
+        "fisherman": 132,
+        "none": 24,
+        "trash_truck": 132
+      },
+      "case_file": "training/planner_grpo_seed_v1/cases/planner_multistep_grpo_hard_v1_calibration_cases.jsonl",
+      "step_file": "training/planner_grpo_seed_v1/sft_data_multistep_grpo_hard_v1_chatml/calibration.jsonl"
+    }
+  },
+  "integrity": {
+    "existing_dataset_overlap": {
+      "status": "pass",
+      "overlaps": [],
+      "files_scanned": 22
+    },
+    "generated_split_isolation": {
+      "status": "not_applicable",
+      "reason": "both splits were not generated together"
+    }
+  },
+  "files": {
+    "calibration_cases": "training/planner_grpo_seed_v1/cases/planner_multistep_grpo_hard_v1_calibration_cases.jsonl",
+    "calibration_steps": "training/planner_grpo_seed_v1/sft_data_multistep_grpo_hard_v1_chatml/calibration.jsonl"
+  },
+  "sha256": {
+    "calibration_cases": "83e3e1bbf5b1d744b534a6a565b05d0a1da7253b92d2135ffb3aae391a636167",
+    "calibration_steps": "ba5d6439015e1d3b978e0b5aaac6a22cf00b5afc29fdfd1d45e45956dc4dd454"
+  }
+}

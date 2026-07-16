@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_multistep_tool_routing_grpo_qwen25_7b_v1",
+  "amended_at": "2026-07-14",
+  "scope": "planner_multistep_grpo_hard_v2 confirmation evaluation only",
+  "status": "applied_before_any_confirmation_correctness_score_was_inspected",
+  "supersedes": "protocol_amendment_t768.json",
+  "invalid_attempt": {
+    "max_tokens": 768,
+    "timeout_seconds": 300,
+    "observed_operational_failures_at_stop": {
+      "reference_first_completion_length_truncations": 1,
+      "reference_timeout_rows": 0,
+      "base_timeout_rows": 0
+    },
+    "artifact_root": "/raid/zkq/artifacts/CAPA/evals/20260714_planner_multistep_grpo_hard_v2/confirmation/invalid_t768",
+    "use_in_metrics": false
+  },
+  "replacement_protocol": {
+    "max_tokens": 2048,
+    "timeout_seconds": 300,
+    "openai_timeout_seconds": 300,
+    "restart_policy": "rerun all 600 cases for all 3 repeats from case 1 for both arms",
+    "validity_requirement": "zero API errors, zero empty decisions, zero retry-completion length truncations; recovered first-call truncations are reported as runtime defects"
+  },
+  "unchanged": [
+    "case file and SHA256",
+    "gold decisions and verifier",
+    "accepted scenario allowlist",
+    "model identities",
+    "temperature, top_p, do_sample and seed",
+    "family and confirmation gates"
+  ],
+  "rationale": "One reference stop-branch completion still reached 768 tokens before a successful parser retry. A 2048-token ceiling reduces censoring while retaining a bounded response contract. Because a model may emit a nonterminating malformed string at any finite ceiling, the deployed Planner retry is part of the evaluated runtime: recovered first-call truncations are counted, while retry truncation or final error/empty output invalidates the run."
+}

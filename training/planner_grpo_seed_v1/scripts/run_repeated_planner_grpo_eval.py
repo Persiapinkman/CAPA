@@ -37,6 +37,14 @@ def write_json(path: Path, data: dict[str, Any]) -> None:
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+def write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        "".join(json.dumps(row, ensure_ascii=False) + "\n" for row in rows),
+        encoding="utf-8",
+    )
+
+
 def write_csv(path: Path, rows: list[dict[str, Any]], fieldnames: list[str]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="") as f:
@@ -72,6 +80,10 @@ def prediction_stats(path: Path) -> dict[str, Any]:
     error_counts: Counter[str] = Counter()
     empty_decisions = 0
     decision_count = 0
+    first_length_truncations = 0
+    retry_length_truncations = 0
+    retry_count = 0
+    fallback_error_counts: Counter[str] = Counter()
     for row in rows:
         decisions = row.get("decisions") if isinstance(row.get("decisions"), list) else []
         if not decisions:
@@ -82,13 +94,24 @@ def prediction_stats(path: Path) -> dict[str, Any]:
             if not isinstance(decision, dict):
                 continue
             decision_count += 1
+            metrics = decision.get("_planner_metrics") if isinstance(decision.get("_planner_metrics"), dict) else {}
+            fallback_error_type = str(metrics.get("error_type") or "").strip()
+            if fallback_error_type:
+                fallback_error_counts[fallback_error_type] += 1
+            first_length_truncations += int(str(metrics.get("first_finish_reason") or "") == "length")
+            retry_length_truncations += int(str(metrics.get("retry_finish_reason") or "") == "length")
+            retry_count += int(metrics.get("retry_count") or 0)
             action = "clarify" if str(decision.get("decision_type") or "") == "clarify" else str(decision.get("action") or "")
             action_counts[action or ""] += 1
     return {
         "rows": len(rows),
         "decision_count": decision_count,
         "empty_decisions": empty_decisions,
+        "first_length_truncations": first_length_truncations,
+        "retry_length_truncations": retry_length_truncations,
+        "retry_count": retry_count,
         "errors": dict(error_counts),
+        "fallback_errors": dict(fallback_error_counts),
         "actions": dict(action_counts),
     }
 
@@ -329,11 +352,16 @@ def aggregate_reports(
     stats = [prediction_stats(path) for path in prediction_files]
     empty = [float(item["empty_decisions"]) for item in stats]
     decisions = [float(item["decision_count"]) for item in stats]
+    first_length_truncations = [float(item["first_length_truncations"]) for item in stats]
+    retry_length_truncations = [float(item["retry_length_truncations"]) for item in stats]
+    retry_counts = [float(item["retry_count"]) for item in stats]
     action_total: Counter[str] = Counter()
     error_total: Counter[str] = Counter()
+    fallback_error_total: Counter[str] = Counter()
     for item in stats:
         action_total.update(item.get("actions") or {})
         error_total.update(item.get("errors") or {})
+        fallback_error_total.update(item.get("fallback_errors") or {})
 
     return {
         "schema_version": "1.0",
@@ -348,6 +376,10 @@ def aggregate_reports(
             "top_p": args.top_p,
             "seed": args.seed,
             "do_sample": args.do_sample,
+            "max_tokens": args.max_tokens,
+            "max_steps": args.max_steps,
+            "timeout_seconds": args.timeout_seconds,
+            "openai_timeout_seconds": args.openai_timeout_seconds,
         },
         "aggregate": {
             "mean_score_mean": rounded(mean(mean_scores)),
@@ -382,8 +414,12 @@ def aggregate_reports(
             "empty_decisions_stdev": rounded(stdev(empty)),
             "decision_count_mean": rounded(mean(decisions)),
             "decision_count_stdev": rounded(stdev(decisions)),
+            "first_length_truncations_total": int(sum(first_length_truncations)),
+            "retry_length_truncations_total": int(sum(retry_length_truncations)),
+            "retry_count_total": int(sum(retry_counts)),
             "actions_total": dict(action_total),
             "errors_total": dict(error_total),
+            "fallback_errors_total": dict(fallback_error_total),
         },
         "timing": {
             "elapsed_ms": round(elapsed_ms, 3),
@@ -407,15 +443,21 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--report-prefix", required=True)
     parser.add_argument("--model", required=True)
     parser.add_argument("--api-base", required=True)
-    parser.add_argument("--api-key", default="token.sdc@2026")
+    parser.add_argument(
+        "--api-key",
+        default="",
+        help="Optional Planner API key override; otherwise use DEMO_ROUTE_API_KEY",
+    )
     parser.add_argument("--runs", type=int, default=3)
     parser.add_argument("--timeout-seconds", type=int, default=180)
     parser.add_argument("--openai-timeout-seconds", type=int, default=180)
+    parser.add_argument("--max-tokens", type=int, default=384)
     parser.add_argument("--max-steps", type=int, default=3)
     parser.add_argument("--temperature", type=float, default=0.0)
     parser.add_argument("--top-p", type=float, default=1.0)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--do-sample", default="false")
+    parser.add_argument("--offset", type=int, default=0)
     parser.add_argument("--limit", type=int, default=0)
     parser.add_argument("--resume-existing", action="store_true")
     return parser.parse_args()
@@ -429,6 +471,20 @@ def main() -> None:
     cases_path = Path(args.cases)
     if not cases_path.is_absolute():
         cases_path = ROOT / cases_path
+    if args.offset < 0:
+        raise ValueError("--offset must be non-negative")
+
+    source_case_count = len(load_jsonl(cases_path))
+    evaluation_cases_path = cases_path
+    if args.offset > 0 or args.limit > 0:
+        source_rows = load_jsonl(cases_path)
+        selected_rows = source_rows[args.offset :]
+        if args.limit > 0:
+            selected_rows = selected_rows[: args.limit]
+        if not selected_rows:
+            raise ValueError("evaluation slice is empty")
+        evaluation_cases_path = out_dir / f"{args.report_prefix}_cases_slice.jsonl"
+        write_jsonl(evaluation_cases_path, selected_rows)
 
     rollout_script = ROOT / "training" / "planner_grpo_seed_v1" / "scripts" / "run_planner_grpo_rollout.py"
     reward_script = ROOT / "training" / "planner_grpo_seed_v1" / "scripts" / "reward_planner_grpo.py"
@@ -447,21 +503,21 @@ def main() -> None:
             sys.executable,
             str(rollout_script),
             "--cases",
-            str(cases_path),
+            str(evaluation_cases_path),
             "--out",
             str(pred_path),
             "--model",
             args.model,
             "--api-base",
             args.api_base,
-            "--api-key",
-            args.api_key,
             "--max-steps",
             str(args.max_steps),
             "--timeout-seconds",
             str(args.timeout_seconds),
             "--openai-timeout-seconds",
             str(args.openai_timeout_seconds),
+            "--max-tokens",
+            str(args.max_tokens),
             "--temperature",
             str(args.temperature),
             "--top-p",
@@ -471,15 +527,15 @@ def main() -> None:
             "--do-sample",
             str(args.do_sample),
         ]
-        if args.limit > 0:
-            rollout_cmd.extend(["--limit", str(args.limit)])
+        if args.api_key:
+            rollout_cmd.extend(["--api-key", args.api_key])
         print(f"[run {run_idx}/{args.runs}] {' '.join(rollout_cmd)}", flush=True)
         subprocess.run(rollout_cmd, cwd=str(ROOT), check=True)
         reward_cmd = [
             sys.executable,
             str(reward_script),
             "--cases",
-            str(cases_path),
+            str(evaluation_cases_path),
             "--predictions",
             str(pred_path),
             "--out",
@@ -497,10 +553,18 @@ def main() -> None:
         args=args,
         elapsed_ms=elapsed_ms,
     )
+    aggregate["evaluation_slice"] = {
+        "source_cases_path": str(cases_path.resolve()),
+        "source_case_count": source_case_count,
+        "evaluation_cases_path": str(evaluation_cases_path.resolve()),
+        "offset": args.offset,
+        "limit": args.limit,
+        "evaluated_case_count": len(load_jsonl(evaluation_cases_path)),
+    }
     audit_paths = write_case_audit_csvs(
         reward_reports=reward_reports,
         prediction_files=prediction_files,
-        cases_path=cases_path,
+        cases_path=evaluation_cases_path,
         out_dir=out_dir,
         report_prefix=args.report_prefix,
     )

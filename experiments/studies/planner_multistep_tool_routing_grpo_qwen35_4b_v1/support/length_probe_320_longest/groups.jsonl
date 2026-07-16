@@ -1,0 +1,1 @@
+{"case_id": "PMGV5TRAINV1-004-R02", "category": "rex_timeout_nonretryable", "step_index": 2, "entity_id": "pmgv5trainv1_entity_004", "mean_reward": 0.9961865234374999, "reward_std": 0.008952664348475406, "min_reward": 0.9724999999999999, "max_reward": 0.9995703125, "distinct_actions": 1, "action_counts": {"migration_advisor": 8}}

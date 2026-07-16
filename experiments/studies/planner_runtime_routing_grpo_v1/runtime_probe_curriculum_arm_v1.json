@@ -1,0 +1,80 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_runtime_routing_grpo_v1",
+  "arm_id": "runtime_probe_curriculum_v1_seed42",
+  "status": "support_gate_failed_not_trained",
+  "reason": "The fixed legacy route-GRPO candidate did not change strict actions on the external development set.",
+  "initializer": "/raid/zkq/artifacts/CAPA/outputs/merged-qwen25-7b-sft-v3-chatml",
+  "dataset": {
+    "dataset_id": "planner_runtime_probe_curriculum_v1",
+    "train_file": "training/planner_grpo_seed_v1/sft_data_runtime_probe_curriculum_v1_chatml/train.jsonl",
+    "train_rows": 690,
+    "train_cases": 540,
+    "primary_train_rows": 240,
+    "contrast_train_rows": 90,
+    "dev_file": "training/planner_grpo_seed_v1/sft_data_runtime_probe_curriculum_v1_chatml/dev.jsonl",
+    "dev_rows": 120,
+    "test_status": "sealed_unopened"
+  },
+  "support_gate": {
+    "categories": [
+      "qwen_probe_then_migration",
+      "qwen_probe_only_contrast"
+    ],
+    "samples_per_prompt": 8,
+    "temperature": 0.7,
+    "minimum_nonzero_task_reward_std_rate": 0.60,
+    "minimum_exact_action_support_rate": 0.75,
+    "minimum_mean_distinct_actions": 1.40,
+    "maximum_fully_saturated_rate": 0.50,
+    "require_exact_action_support_at_each_step": true
+  },
+  "training": {
+    "screen_seed": 42,
+    "max_steps": 80,
+    "learning_rate": 1e-5,
+    "num_generations": 8,
+    "generation_batch_size": 8,
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "world_size": 8,
+    "per_device_train_batch_size": 1,
+    "gradient_accumulation_steps": 2,
+    "global_effective_batch_size": 16,
+    "loss_type": "dr_grpo",
+    "beta": 0.0,
+    "lora_rank": 16,
+    "lora_alpha": 32,
+    "lora_targets": "q_proj,k_proj,v_proj,o_proj",
+    "outer_task_weight": 0.95,
+    "outer_format_weight": 0.05,
+    "strict_named_detection_action": true
+  },
+  "development_gate": {
+    "primary_category": "qwen_probe_then_migration",
+    "minimum_strict_case_action_delta": 0.125,
+    "minimum_primary_verifier_delta": 0.05,
+    "require_step2_action_match_no_regression": true,
+    "contrast_category": "qwen_probe_only_contrast",
+    "maximum_contrast_action_regression": 0.0,
+    "maximum_any_other_category_action_regression": 0.125,
+    "require_no_increase_in_wrong_side_effecting_actions": true
+  },
+  "confirmation": {
+    "trigger": "Only after the seed-42 development gate passes.",
+    "additional_seeds": [43, 44],
+    "test_trigger": "A separately preregistered multi-seed development replication gate must pass before test is opened.",
+    "test_status": "sealed_unopened"
+  },
+  "stop_rule": "If support fails, do not train. If seed 42 fails development, do not run additional seeds or inspect test.",
+  "support_result": {
+    "artifact": "runtime_probe_curriculum_support_strict.json",
+    "overall_nonzero_task_reward_std_rate": 0.6666666666666666,
+    "overall_exact_action_support_rate": 1.0,
+    "overall_mean_distinct_actions": 1.375,
+    "minimum_mean_distinct_actions": 1.4,
+    "fully_saturated_rate": 0.2916666666666667,
+    "passed": false,
+    "decision": "Do not train this arm. The combined diversity gate failed by 0.025."
+  }
+}

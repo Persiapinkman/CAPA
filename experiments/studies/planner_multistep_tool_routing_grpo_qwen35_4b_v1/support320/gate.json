@@ -1,0 +1,94 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_multistep_tool_routing_grpo_qwen35_4b_v1_support80",
+  "model": "/raid/zkq/models/Qwen3.5-4B",
+  "audit": "experiments/studies/planner_multistep_tool_routing_grpo_qwen35_4b_v1/support320/combined",
+  "data": "training/planner_grpo_seed_v1/step_data/planner_multistep_grpo_value_v5_train_v1_qwen35_4b_support80.jsonl",
+  "primary_target_action_classes": [
+    "migrate"
+  ],
+  "anchor_target_action_classes": [
+    "retry"
+  ],
+  "primary": {
+    "groups": 48,
+    "nonzero_std_rate": 0.875,
+    "usable_support_rate": 0.875,
+    "exact_action_support_rate": 1.0,
+    "mean_distinct_valid_actions": 1.0,
+    "fully_saturated_rate": 0.6875,
+    "near_exact_task_support_rate": 1.0
+  },
+  "anchor": {
+    "groups": 32,
+    "nonzero_std_rate": 0.84375,
+    "usable_support_rate": 0.53125,
+    "exact_action_support_rate": 0.5625,
+    "mean_distinct_valid_actions": 1.5,
+    "fully_saturated_rate": 0.0,
+    "near_exact_task_support_rate": 0.0
+  },
+  "completion": {
+    "samples": 640,
+    "eos_token_id": 248046,
+    "natural_eos_length_min": 52,
+    "natural_eos_length_p50": 265,
+    "natural_eos_length_p95": 269,
+    "natural_eos_length_p99": 320,
+    "natural_eos_length_max": 320,
+    "clipped_samples": 25,
+    "clipped_rate": 0.0390625
+  },
+  "checks": [
+    {
+      "name": "primary_nonzero_reward_std_rate",
+      "observed": 0.875,
+      "operator": ">=",
+      "threshold": 0.8,
+      "passed": true
+    },
+    {
+      "name": "primary_usable_support_rate",
+      "observed": 0.875,
+      "operator": ">=",
+      "threshold": 0.8,
+      "passed": true
+    },
+    {
+      "name": "primary_exact_action_support_rate",
+      "observed": 1.0,
+      "operator": ">=",
+      "threshold": 0.8,
+      "passed": true
+    },
+    {
+      "name": "primary_mean_distinct_valid_actions",
+      "observed": 1.0,
+      "operator": ">=",
+      "threshold": 1.4,
+      "passed": false
+    },
+    {
+      "name": "primary_fully_saturated_rate",
+      "observed": 0.6875,
+      "operator": "<=",
+      "threshold": 0.25,
+      "passed": false
+    },
+    {
+      "name": "anchor_exact_action_support_rate",
+      "observed": 0.5625,
+      "operator": ">=",
+      "threshold": 0.95,
+      "passed": false
+    },
+    {
+      "name": "completion_clipped_rate",
+      "observed": 0.0390625,
+      "operator": "<=",
+      "threshold": 0.01,
+      "passed": false
+    }
+  ],
+  "passed": false
+}

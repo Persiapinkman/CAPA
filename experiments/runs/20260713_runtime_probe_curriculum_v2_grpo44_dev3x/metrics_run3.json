@@ -1,0 +1,171 @@
+{
+  "overall": {
+    "count": 120,
+    "mean_score": 0.7671851851851852,
+    "json_valid_rate": 1.0,
+    "extra_text_after_json_rate": 0.0,
+    "mean_extra_text_chars": 0.0,
+    "effective_json_valid_rate": 1.0,
+    "effective_extra_text_after_json_rate": 0.0,
+    "effective_mean_extra_text_chars": 0.0,
+    "action_match_rate": 0.7916666666666666
+  },
+  "categories": {
+    "adela_eval": {
+      "count": 8,
+      "mean_score": 1.0,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.0,
+      "mean_extra_text_chars": 0.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0,
+      "action_match_rate": 1.0
+    },
+    "clarify_incomplete": {
+      "count": 8,
+      "mean_score": 0.19999999999999998,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.0,
+      "mean_extra_text_chars": 0.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0,
+      "action_match_rate": 0.0
+    },
+    "flux_generation": {
+      "count": 8,
+      "mean_score": 1.0,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.0,
+      "mean_extra_text_chars": 0.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0,
+      "action_match_rate": 1.0
+    },
+    "general_answer": {
+      "count": 8,
+      "mean_score": 0.13690476190476192,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.0,
+      "mean_extra_text_chars": 0.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0,
+      "action_match_rate": 0.0
+    },
+    "memory_end": {
+      "count": 8,
+      "mean_score": 1.0,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.0,
+      "mean_extra_text_chars": 0.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0,
+      "action_match_rate": 1.0
+    },
+    "migration_advisor": {
+      "count": 8,
+      "mean_score": 0.9821428571428572,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.0,
+      "mean_extra_text_chars": 0.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0,
+      "action_match_rate": 1.0
+    },
+    "pipeline_eval": {
+      "count": 8,
+      "mean_score": 0.261904761904762,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.0,
+      "mean_extra_text_chars": 0.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0,
+      "action_match_rate": 0.375
+    },
+    "private_lookup": {
+      "count": 8,
+      "mean_score": 1.0,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.0,
+      "mean_extra_text_chars": 0.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0,
+      "action_match_rate": 1.0
+    },
+    "qwen_probe": {
+      "count": 8,
+      "mean_score": 1.0,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.0,
+      "mean_extra_text_chars": 0.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0,
+      "action_match_rate": 1.0
+    },
+    "qwen_probe_only_contrast": {
+      "count": 8,
+      "mean_score": 0.9702380952380952,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.0,
+      "mean_extra_text_chars": 0.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0,
+      "action_match_rate": 1.0
+    },
+    "qwen_probe_then_migration": {
+      "count": 16,
+      "mean_score": 0.791666666666667,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.0,
+      "mean_extra_text_chars": 0.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0,
+      "action_match_rate": 0.9375
+    },
+    "rex_probe": {
+      "count": 8,
+      "mean_score": 1.0,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.0,
+      "mean_extra_text_chars": 0.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0,
+      "action_match_rate": 1.0
+    },
+    "rex_probe_then_migration": {
+      "count": 16,
+      "mean_score": 0.6866269841269843,
+      "json_valid_rate": 1.0,
+      "extra_text_after_json_rate": 0.0,
+      "mean_extra_text_chars": 0.0,
+      "effective_json_valid_rate": 1.0,
+      "effective_extra_text_after_json_rate": 0.0,
+      "effective_mean_extra_text_chars": 0.0,
+      "action_match_rate": 0.8125
+    }
+  },
+  "score_distribution": {
+    "0.048": 8,
+    "0.19": 5,
+    "0.2": 12,
+    "0.619": 3,
+    "0.698": 13,
+    "0.762": 1,
+    "0.778": 3,
+    "0.8": 2,
+    "0.84": 1,
+    "0.857": 1,
+    "1.0": 71
+  }
+}

@@ -4,7 +4,7 @@ CAPA is a Planner-centric agent and evaluation workspace for visual AI capabilit
 
 ## Current Research Question
 
-The demo defaults to Qwen3.5-35B-A3B, while the confirmed research recipe uses a Qwen2.5-7B SFTv3 initializer. The current study establishes that action-dominant GRPO produces reproducible strict-action growth on an entity-isolated five-step retrieval-recovery state machine; its sealed-test three-seed mean action gain is `+0.1292` with entity-clustered 95% CI `[+0.0750, +0.1896]`.
+The demo defaults to Qwen3.5-35B-A3B, while the research line uses a Qwen2.5-7B SFTv3 initializer. The current study moved from hard-coded RAG transitions to a runtime-owned two-step route: Qwen visual probe followed by migration advice. Three GRPO seeds replicated narrow strict-action growth (`+0.3333` complete-case action; overall action `+0.1333`, entity-clustered 95% CI `[+0.0917,+0.1778]`), but one seed added two wrong side-effecting Flux routes. The preregistered development gate therefore failed and the test remains sealed.
 
 Current status is generated at:
 
@@ -68,6 +68,7 @@ PYTHONPATH=src:. .venv-trl-grpo-cu124/bin/python -m unittest discover -s tests -
 Start the demo:
 
 ```bash
+source init_env.sh
 python demo/demo_server.py --port 18080
 ```
 
@@ -76,7 +77,8 @@ python demo/demo_server.py --port 18080
 - `planner_focused_v3` is a reused development split, not a sealed test set.
 - The compound245 set is a regression suite with historical train overlap.
 - `planner_stateful_retrieval_v2` test was opened once after its preregistered development replication gate passed and is now frozen against further model selection.
+- `planner_runtime_probe_curriculum_v1` test remains sealed because the multi-seed development safety gate failed; it was not used for model selection.
 - Offline multi-step evaluation uses mock observations and does not establish end-to-end tool success.
 - A training-method promotion requires case-level confidence intervals and independent training seeds.
 
-See `experiments/EVALUATION_POLICY.md` and `experiments/TECHNICAL_DECISIONS.md` for the full protocol and current rationale.
+For manual data review, start at `data/datasets/planner_runtime_probe_curriculum_v1/HUMAN_REVIEW.md`. See `reports/DEMO_AGENT_RUNTIME_ANALYSIS.md`, `experiments/EVALUATION_POLICY.md`, and `experiments/TECHNICAL_DECISIONS.md` for the runtime boundary and current rationale.

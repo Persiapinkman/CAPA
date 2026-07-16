@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "created_at": "2026-07-15T09:37:41.914390+00:00",
+  "dataset_id": "planner_multistep_grpo_value_v5_train_v1",
+  "role": "optimization_only_qwen35_step_data",
+  "model_name_or_path": "/raid/zkq/models/Qwen3.5-4B",
+  "cases": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/cases/planner_multistep_grpo_value_v5_train_v1_train_cases.jsonl",
+  "output": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/step_data/planner_multistep_grpo_value_v5_train_v1_qwen35_4b_nothinking_step2.jsonl",
+  "rows": 480,
+  "target_step": 2,
+  "prompt_contract": {
+    "chat_template": "native_qwen35",
+    "enable_thinking": false,
+    "suffix": "<|im_start|>assistant\n<think>\n\n</think>\n\n",
+    "eos_token_id": 248046,
+    "pad_token_id": 248044,
+    "max_prompt_tokens_hard_gate": 4608,
+    "token_stats": {
+      "min": 4300,
+      "mean": 4309.047916666666,
+      "p50": 4309,
+      "p95": 4316,
+      "p99": 4317,
+      "max": 4319,
+      "over_limit": 0
+    }
+  },
+  "distribution": {
+    "expected_actions": {
+      "migration_advisor": 288,
+      "qwen_detection": 96,
+      "rexomni_detection": 96
+    },
+    "scenarios": {
+      "qwen_connection_budget_exhausted": 60,
+      "qwen_connection_nonretryable": 60,
+      "qwen_timeout_budget_exhausted": 60,
+      "qwen_timeout_nonretryable": 60,
+      "rex_connection_budget_exhausted": 60,
+      "rex_connection_nonretryable": 60,
+      "rex_timeout_budget_exhausted": 60,
+      "rex_timeout_nonretryable": 60
+    }
+  },
+  "sha256": {
+    "cases": "bc7d50c69eb710442065a53d37f6202dc5952ae110e0d45406c62f40f48ba258",
+    "step_data": "d84bf1681337603aebc0f2f169340c2dbd82f7faee5217ea60ba16de087f782d",
+    "tokenizer_config": "316230d6a809701f4db5ea8f8fc862bc3a6f3229c937c174e674ff3ca0a64ac8",
+    "config": "ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670",
+    "chat_template": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715"
+  }
+}

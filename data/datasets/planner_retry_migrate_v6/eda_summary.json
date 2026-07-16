@@ -1,0 +1,569 @@
+{
+  "analysis_parameters": {
+    "core_states": [
+      "retryable_fresh",
+      "nonretryable",
+      "budget_exhausted"
+    ],
+    "experimental_unit": "entity × detector × error_alias counterfactual bundle",
+    "guardrail_ratio_to_core": 0.25,
+    "nuisance_blocking": [
+      "query",
+      "entity",
+      "detector",
+      "error_alias",
+      "badge",
+      "fixture"
+    ],
+    "seed": 2026071506
+  },
+  "dataset_id": "planner_retry_migrate_v6",
+  "dimensions": {
+    "cases": 1875,
+    "core_cases": 1500,
+    "entities": 250,
+    "guardrail_cases": 375,
+    "splits": 5
+  },
+  "format": "JSONL with one case object per line; nested expected decisions and observations",
+  "generated_at": "2026-07-15T00:00:00+00:00",
+  "quality": {
+    "canonical_full_trajectory_failures": 0,
+    "duplicate_case_ids": 0,
+    "missing_required_case_keys": 0,
+    "repository_isolation_status": "pass",
+    "split_isolation_status": "pass",
+    "validation_errors": [],
+    "validation_status": "pass"
+  },
+  "schema_version": "1.0",
+  "splits": {
+    "grpo_dev": {
+      "alias_action_mutual_information_bits_core": 1.7084941353679556e-16,
+      "badge_action_mutual_information_bits_core": 0.0,
+      "badge_conditions_core": {
+        "amber": 60,
+        "missing": 60,
+        "red": 60
+      },
+      "canonical_full_trajectory_pass": 225,
+      "cases": 225,
+      "core_cases": 180,
+      "core_target_action_classes": {
+        "migrate": 120,
+        "retry": 60
+      },
+      "counterfactual_bundles": 60,
+      "detector_families": {
+        "qwen": 113,
+        "rex": 112
+      },
+      "entities": 30,
+      "error_aliases_core": {
+        "detector_admission_window_full": 24,
+        "detector_wait_epoch_finished": 24,
+        "frame_manifest_field_invalid": 24,
+        "inference_link_epoch_reset": 24,
+        "probe_request_signature_bad": 21,
+        "probe_response_horizon_crossed": 21,
+        "vision_relay_tunnel_closed": 21,
+        "visual_probe_lease_denied": 21
+      },
+      "expected_decision_rows_before_sft_dedup": 510,
+      "fixture_families": {
+        "prmv6_gd_arch_isolator": 113,
+        "prmv6_gd_slot_flange": 112
+      },
+      "guard_scenarios": {
+        "guard_conflicting_state_migrate": 7,
+        "guard_initial_metric_veto_migrate": 8,
+        "guard_initial_success_end": 8,
+        "guard_missing_required_state_migrate": 8,
+        "guard_stale_history_current_error_migrate": 7,
+        "guard_stale_history_current_success_end": 7
+      },
+      "guardrail_cases": 45,
+      "guardrail_fraction": 0.25,
+      "independent_oracle_transitions_pass": 285,
+      "independent_oracle_transitions_total": 285,
+      "post_retry_outcomes": {
+        "error": 20,
+        "metric_veto": 20,
+        "success": 20
+      },
+      "role": "grpo_validation_only",
+      "second_observation_cases": 60,
+      "split": "grpo_dev",
+      "target_action_classes": {
+        "end": 15,
+        "migrate": 150,
+        "retry": 60
+      },
+      "target_step_actions": {
+        "end": 15,
+        "migration_advisor": 150,
+        "qwen_detection": 30,
+        "rexomni_detection": 30
+      },
+      "templates": 16,
+      "terminal_actions": {
+        "end": 35,
+        "migration_advisor": 190
+      },
+      "three_step_cases": 60
+    },
+    "grpo_train": {
+      "alias_action_mutual_information_bits_core": 0.0,
+      "badge_action_mutual_information_bits_core": 0.0,
+      "badge_conditions_core": {
+        "amber": 120,
+        "missing": 120,
+        "red": 120
+      },
+      "canonical_full_trajectory_pass": 450,
+      "cases": 450,
+      "core_cases": 360,
+      "core_target_action_classes": {
+        "migrate": 240,
+        "retry": 120
+      },
+      "counterfactual_bundles": 120,
+      "detector_families": {
+        "qwen": 225,
+        "rex": 225
+      },
+      "entities": 60,
+      "error_aliases_core": {
+        "detector_mesh_edge_dropped": 45,
+        "detector_payload_shape_unsupported": 45,
+        "feature_bus_session_aborted": 45,
+        "image_request_header_corrupt": 45,
+        "inference_watchdog_interval_closed": 45,
+        "probe_concurrency_ceiling_hit": 45,
+        "vision_worker_permit_unavailable": 45,
+        "visual_task_clock_consumed": 45
+      },
+      "expected_decision_rows_before_sft_dedup": 1020,
+      "fixture_families": {
+        "prmv6_gt_cross_locator": 225,
+        "prmv6_gt_lobe_knob": 225
+      },
+      "guard_scenarios": {
+        "guard_conflicting_state_migrate": 15,
+        "guard_initial_metric_veto_migrate": 15,
+        "guard_initial_success_end": 15,
+        "guard_missing_required_state_migrate": 15,
+        "guard_stale_history_current_error_migrate": 15,
+        "guard_stale_history_current_success_end": 15
+      },
+      "guardrail_cases": 90,
+      "guardrail_fraction": 0.25,
+      "independent_oracle_transitions_pass": 570,
+      "independent_oracle_transitions_total": 570,
+      "post_retry_outcomes": {
+        "error": 40,
+        "metric_veto": 40,
+        "success": 40
+      },
+      "role": "optimization_only_grpo_train",
+      "second_observation_cases": 120,
+      "split": "grpo_train",
+      "target_action_classes": {
+        "end": 30,
+        "migrate": 300,
+        "retry": 120
+      },
+      "target_step_actions": {
+        "end": 30,
+        "migration_advisor": 300,
+        "qwen_detection": 60,
+        "rexomni_detection": 60
+      },
+      "templates": 16,
+      "terminal_actions": {
+        "end": 70,
+        "migration_advisor": 380
+      },
+      "three_step_cases": 120
+    },
+    "sft_dev": {
+      "alias_action_mutual_information_bits_core": 0.0,
+      "badge_action_mutual_information_bits_core": 1.121199276335221e-16,
+      "badge_conditions_core": {
+        "amber": 42,
+        "missing": 39,
+        "red": 39
+      },
+      "canonical_full_trajectory_pass": 150,
+      "cases": 150,
+      "core_cases": 120,
+      "core_target_action_classes": {
+        "migrate": 80,
+        "retry": 40
+      },
+      "counterfactual_bundles": 40,
+      "detector_families": {
+        "qwen": 75,
+        "rex": 75
+      },
+      "entities": 20,
+      "error_aliases_core": {
+        "detector_input_stamp_malformed": 15,
+        "detector_route_carrier_lost": 15,
+        "feature_probe_deadline_over": 15,
+        "inspection_token_pool_depleted": 15,
+        "probe_lane_capacity_exceeded": 15,
+        "render_wait_budget_spent": 15,
+        "vision_peer_pipe_detached": 15,
+        "visual_packet_contract_broken": 15
+      },
+      "expected_decision_rows_before_sft_dedup": 340,
+      "fixture_families": {
+        "prmv6_sd_double_ring": 75,
+        "prmv6_sd_trapezoid": 75
+      },
+      "guard_scenarios": {
+        "guard_conflicting_state_migrate": 5,
+        "guard_initial_metric_veto_migrate": 5,
+        "guard_initial_success_end": 5,
+        "guard_missing_required_state_migrate": 5,
+        "guard_stale_history_current_error_migrate": 5,
+        "guard_stale_history_current_success_end": 5
+      },
+      "guardrail_cases": 30,
+      "guardrail_fraction": 0.25,
+      "independent_oracle_transitions_pass": 190,
+      "independent_oracle_transitions_total": 190,
+      "post_retry_outcomes": {
+        "error": 13,
+        "metric_veto": 13,
+        "success": 14
+      },
+      "role": "sft_validation_only",
+      "second_observation_cases": 40,
+      "split": "sft_dev",
+      "target_action_classes": {
+        "end": 10,
+        "migrate": 100,
+        "retry": 40
+      },
+      "target_step_actions": {
+        "end": 10,
+        "migration_advisor": 100,
+        "qwen_detection": 20,
+        "rexomni_detection": 20
+      },
+      "templates": 16,
+      "terminal_actions": {
+        "end": 24,
+        "migration_advisor": 126
+      },
+      "three_step_cases": 40
+    },
+    "sft_train": {
+      "alias_action_mutual_information_bits_core": 0.0,
+      "badge_action_mutual_information_bits_core": 0.0,
+      "badge_conditions_core": {
+        "amber": 162,
+        "missing": 159,
+        "red": 159
+      },
+      "canonical_full_trajectory_pass": 600,
+      "cases": 600,
+      "core_cases": 480,
+      "core_target_action_classes": {
+        "migrate": 320,
+        "retry": 160
+      },
+      "counterfactual_bundles": 160,
+      "detector_families": {
+        "qwen": 300,
+        "rex": 300
+      },
+      "entities": 80,
+      "error_aliases_core": {
+        "detector_credit_window_empty": 60,
+        "detector_envelope_schema_rejected": 60,
+        "detector_probe_clock_expired": 60,
+        "feature_stream_channel_reset": 60,
+        "inference_socket_half_closed": 60,
+        "probe_slot_limit_reached": 60,
+        "vision_frame_lease_elapsed": 60,
+        "vision_request_digest_invalid": 60
+      },
+      "expected_decision_rows_before_sft_dedup": 1360,
+      "fixture_families": {
+        "prmv6_st_hex_marker": 300,
+        "prmv6_st_spoke_wheel": 300
+      },
+      "guard_scenarios": {
+        "guard_conflicting_state_migrate": 20,
+        "guard_initial_metric_veto_migrate": 20,
+        "guard_initial_success_end": 20,
+        "guard_missing_required_state_migrate": 20,
+        "guard_stale_history_current_error_migrate": 20,
+        "guard_stale_history_current_success_end": 20
+      },
+      "guardrail_cases": 120,
+      "guardrail_fraction": 0.25,
+      "independent_oracle_transitions_pass": 760,
+      "independent_oracle_transitions_total": 760,
+      "post_retry_outcomes": {
+        "error": 53,
+        "metric_veto": 53,
+        "success": 54
+      },
+      "role": "optimization_only_sft_train",
+      "second_observation_cases": 160,
+      "split": "sft_train",
+      "target_action_classes": {
+        "end": 40,
+        "migrate": 400,
+        "retry": 160
+      },
+      "target_step_actions": {
+        "end": 40,
+        "migration_advisor": 400,
+        "qwen_detection": 80,
+        "rexomni_detection": 80
+      },
+      "templates": 16,
+      "terminal_actions": {
+        "end": 94,
+        "migration_advisor": 506
+      },
+      "three_step_cases": 160
+    },
+    "test": {
+      "alias_action_mutual_information_bits_core": 0.0,
+      "badge_action_mutual_information_bits_core": 0.0,
+      "badge_conditions_core": {
+        "amber": 120,
+        "missing": 120,
+        "red": 120
+      },
+      "canonical_full_trajectory_pass": 450,
+      "cases": 450,
+      "core_cases": 360,
+      "core_target_action_classes": {
+        "migrate": 240,
+        "retry": 120
+      },
+      "counterfactual_bundles": 120,
+      "detector_families": {
+        "qwen": 225,
+        "rex": 225
+      },
+      "entities": 60,
+      "error_aliases_core": {
+        "detector_frame_contract_mismatch": 45,
+        "detector_queue_budget_unavailable": 45,
+        "detector_turnaround_limit_reached": 45,
+        "inference_backplane_route_lost": 45,
+        "probe_execution_ticket_exhausted": 45,
+        "vision_exchange_channel_broken": 45,
+        "visual_ack_window_missed": 45,
+        "visual_job_descriptor_invalid": 45
+      },
+      "expected_decision_rows_before_sft_dedup": 1020,
+      "fixture_families": {
+        "prmv6_te_star_mark": 225,
+        "prmv6_te_zigzag_frame": 225
+      },
+      "guard_scenarios": {
+        "guard_conflicting_state_migrate": 15,
+        "guard_initial_metric_veto_migrate": 15,
+        "guard_initial_success_end": 15,
+        "guard_missing_required_state_migrate": 15,
+        "guard_stale_history_current_error_migrate": 15,
+        "guard_stale_history_current_success_end": 15
+      },
+      "guardrail_cases": 90,
+      "guardrail_fraction": 0.25,
+      "independent_oracle_transitions_pass": 570,
+      "independent_oracle_transitions_total": 570,
+      "post_retry_outcomes": {
+        "error": 40,
+        "metric_veto": 40,
+        "success": 40
+      },
+      "role": "sealed_final_evaluation",
+      "second_observation_cases": 120,
+      "split": "test",
+      "target_action_classes": {
+        "end": 30,
+        "migrate": 300,
+        "retry": 120
+      },
+      "target_step_actions": {
+        "end": 30,
+        "migration_advisor": 300,
+        "qwen_detection": 60,
+        "rexomni_detection": 60
+      },
+      "templates": 16,
+      "terminal_actions": {
+        "end": 70,
+        "migration_advisor": 380
+      },
+      "three_step_cases": 120
+    }
+  },
+  "stage_data": {
+    "audits": {
+      "grpo_dev": {
+        "canonical_step_reward": {
+          "max": 1.0,
+          "min": 1.0,
+          "non_unit": 0
+        },
+        "case_id_hits": 0,
+        "duplicate_prompt_hashes": 0,
+        "entity_id_hits": 0,
+        "forbidden_fragment_hits": {
+          "\"_thought\"": 0,
+          "\"external_ref\"": 0,
+          "/raid/": 0,
+          "/tmp/": 0,
+          "按训练样本期望": 0
+        },
+        "max_steps_mismatch": 0,
+        "prompt_tokens": {
+          "max": 4261,
+          "mean": 4248.383333333333,
+          "min": 4234,
+          "p50": 4249,
+          "p95": 4257
+        },
+        "rows": 180,
+        "status": "pass"
+      },
+      "grpo_train": {
+        "canonical_step_reward": {
+          "max": 1.0,
+          "min": 1.0,
+          "non_unit": 0
+        },
+        "case_id_hits": 0,
+        "duplicate_prompt_hashes": 0,
+        "entity_id_hits": 0,
+        "forbidden_fragment_hits": {
+          "\"_thought\"": 0,
+          "\"external_ref\"": 0,
+          "/raid/": 0,
+          "/tmp/": 0,
+          "按训练样本期望": 0
+        },
+        "max_steps_mismatch": 0,
+        "prompt_tokens": {
+          "max": 4272,
+          "mean": 4255.933333333333,
+          "min": 4238,
+          "p50": 4255,
+          "p95": 4268
+        },
+        "rows": 360,
+        "status": "pass"
+      },
+      "sft_dev": {
+        "canonical_step_reward": {
+          "max": 1.0,
+          "min": 1.0,
+          "non_unit": 0
+        },
+        "case_id_hits": 0,
+        "duplicate_prompt_hashes": 0,
+        "entity_id_hits": 0,
+        "forbidden_fragment_hits": {
+          "\"_thought\"": 0,
+          "\"external_ref\"": 0,
+          "/raid/": 0,
+          "/tmp/": 0,
+          "按训练样本期望": 0
+        },
+        "max_steps_mismatch": 0,
+        "prompt_tokens": {
+          "max": 4590,
+          "mean": 4251.823076923077,
+          "min": 4052,
+          "p50": 4249,
+          "p95": 4451
+        },
+        "rows": 260,
+        "status": "pass"
+      },
+      "sft_train": {
+        "canonical_step_reward": {
+          "max": 1.0,
+          "min": 1.0,
+          "non_unit": 0
+        },
+        "case_id_hits": 0,
+        "duplicate_prompt_hashes": 0,
+        "entity_id_hits": 0,
+        "forbidden_fragment_hits": {
+          "\"_thought\"": 0,
+          "\"external_ref\"": 0,
+          "/raid/": 0,
+          "/tmp/": 0,
+          "按训练样本期望": 0
+        },
+        "max_steps_mismatch": 0,
+        "prompt_tokens": {
+          "max": 4601,
+          "mean": 4263.221153846154,
+          "min": 4056,
+          "p50": 4260,
+          "p95": 4460
+        },
+        "rows": 1040,
+        "status": "pass"
+      }
+    },
+    "created_at": "2026-07-15T00:00:00+00:00",
+    "dataset_id": "planner_retry_migrate_v6",
+    "deduplication": {
+      "rule": "deduplicate identical prompt+completion pairs created by matched core step-1 probes",
+      "sft_dev_rows": 260,
+      "sft_dev_source_decisions": 340,
+      "sft_train_rows": 1040,
+      "sft_train_source_decisions": 1360
+    },
+    "files": {
+      "grpo_dev": "training/planner_grpo_seed_v1/step_data/planner_retry_migrate_v6_grpo_dev_qwen35_4b_nothinking_step2.jsonl",
+      "grpo_train": "training/planner_grpo_seed_v1/step_data/planner_retry_migrate_v6_grpo_train_qwen35_4b_nothinking_step2.jsonl",
+      "sft_dev": "training/planner_grpo_seed_v1/sft_data_planner_retry_migrate_v6_qwen35_nothinking/dev.jsonl",
+      "sft_train": "training/planner_grpo_seed_v1/sft_data_planner_retry_migrate_v6_qwen35_nothinking/train.jsonl"
+    },
+    "model_contract_sha256": {
+      "chat_template": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+      "config": "ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670",
+      "tokenizer_config": "316230d6a809701f4db5ea8f8fc862bc3a6f3229c937c174e674ff3ca0a64ac8"
+    },
+    "model_name_or_path": "/raid/zkq/models/Qwen3.5-4B",
+    "prompt_contract": {
+      "assistant_suffix": "<|im_start|>assistant\n<think>\n\n</think>\n\n",
+      "chat_template": "native_qwen35",
+      "completion_suffix_sft": "<|im_end|>",
+      "enable_thinking": false,
+      "eos_token_id": 248046,
+      "max_prompt_tokens": 4608,
+      "max_steps": 3,
+      "pad_token_id": 248044,
+      "sanitized_context": true
+    },
+    "rows": {
+      "grpo_dev": 180,
+      "grpo_train": 360,
+      "sft_dev": 260,
+      "sft_train": 1040
+    },
+    "schema_version": "1.0",
+    "sha256": {
+      "grpo_dev": "b60d1da247e784ce83c6a79263c9e640c4a7d118d53f4d67b7d10425c3b60265",
+      "grpo_train": "330ec8067ca2788357019a979b525805a09b3bb37d592783e2644012064f0598",
+      "sft_dev": "8455ea1fabc5487da114d0c85eb370769b34651ce8232accac062a84bebd2837",
+      "sft_train": "9ac8bd5d91d8fac1500e40ce034d20ea70e9aafde63279a18bb2c93e5609a657"
+    }
+  }
+}

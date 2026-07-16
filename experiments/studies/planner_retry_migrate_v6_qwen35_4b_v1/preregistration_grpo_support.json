@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "created_at": "2026-07-16T03:03:18Z",
+  "study_id": "planner_retry_migrate_v6_qwen35_4b_v1",
+  "stage": "grpo_support_gate",
+  "status": "frozen_before_formal_support_sampling",
+  "protocol_status": {
+    "independent_human_review_complete": false,
+    "claim_scope": "exploratory",
+    "diagnostic_smokes_completed_before_freeze": true,
+    "note": "Small smoke panels showed deterministic correct retry outputs; the full gate and practical-utility threshold are frozen here before inspecting formal full-dev samples."
+  },
+  "selected_sft": {
+    "selection": "experiments/studies/planner_retry_migrate_v6_qwen35_4b_v1/sft_selection.json",
+    "selection_sha256": "0c8f9847c9ec90055ce824999457e9ffa6b839f5e5cbc4b721d9ff85ef9855c0",
+    "adapter": "experiments/runs/20260716_qwen35_4b_planner_v6_sft_seed42_v1/checkpoint-100",
+    "adapter_sha256": "0c09452034727fe41908fc37d35866b68c227c9e8c680e66fbf0a043ae8aca60"
+  },
+  "data": {
+    "dataset_id": "planner_retry_migrate_v6",
+    "split": "grpo_dev",
+    "path": "training/planner_grpo_seed_v1/step_data/planner_retry_migrate_v6_grpo_dev_qwen35_4b_nothinking_step2.jsonl",
+    "rows": 180,
+    "sha256": "b60d1da247e784ce83c6a79263c9e640c4a7d118d53f4d67b7d10425c3b60265",
+    "entity_overlap_with_sft_or_grpo_train": 0
+  },
+  "sampling": {
+    "entrypoint": "training/planner_grpo_seed_v1/scripts/eval_qwen35_planner_v6_step_support.py",
+    "entrypoint_sha256": "846e08148e41e56f7ed867025b24d8f05fb2dd74ed496affd1cbfcdadcbf1f6d",
+    "visible_gpus": [
+      0,
+      3,
+      4,
+      5
+    ],
+    "num_shards": 4,
+    "samples_per_prompt": 4,
+    "total_samples": 720,
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "max_new_tokens": 320,
+    "seed": 42,
+    "eos_token_id": 248046,
+    "pad_token_id": 248044
+  },
+  "original_next_stage_gate": {
+    "gold_action_support_nonzero_for_qwen": true,
+    "gold_action_support_nonzero_for_rex": true,
+    "reward_variance_nonzero_for_qwen": true,
+    "reward_variance_nonzero_for_rex": true
+  },
+  "optimizer_utility_gate": {
+    "json_valid_rate_min": 0.99,
+    "clipped_rate_max": 0.01,
+    "nonfinite_rewards_max": 0,
+    "nonzero_reward_variance_rate_overall_min": 0.1,
+    "minimum_nonzero_variance_groups_per_detector_family": 5,
+    "minimum_nonzero_variance_groups_per_target_action_class": 5,
+    "reason": "With 180 prompt groups, isolated variance is not enough to support a 100-step GRPO run; at least 18 groups overall and 5 in every detector/target stratum must contribute a policy-gradient signal."
+  },
+  "decision": {
+    "on_pass": "freeze GRPO optimizer recipe, run no-update G4, then run an optimizer canary",
+    "on_fail": "do not perform GRPO optimizer updates on this easy core-only distribution; redesign the GRPO split to include state-boundary and guardrail cases"
+  }
+}

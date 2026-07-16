@@ -1,0 +1,13 @@
+{
+  "run_id": "20260713_runtime_routing_v1_routegrpo_dev",
+  "study_id": "planner_runtime_routing_grpo_v1",
+  "model_label": "route_grpo_v4",
+  "model_name_or_path": "/raid/zkq/artifacts/CAPA/outputs/merged-qwen25-7b-sft-v3-chatml",
+  "adapter_path": "/raid/zkq/artifacts/CAPA/outputs/planner-grpo-qwen25-7b-trl-lora-v4-chatml-format-formal-v1",
+  "prompt_format": "qwen_chatml",
+  "eval_file": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/sft_data_runtime_routing_v1_chatml/dev.jsonl",
+  "repeats": 1,
+  "seed": 42,
+  "offset": 0,
+  "limit": 0
+}

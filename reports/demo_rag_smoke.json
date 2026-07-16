@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-07-13T06:12:00.964208+00:00",
+  "status": "contract_passed_content_missing",
+  "http_contract_passed": true,
+  "content_ready": false,
+  "miss_contract_passed": true,
+  "gbrain": {
+    "health_status": "degraded",
+    "chunks": 0,
+    "sources": {},
+    "retrieved_count": 0
+  },
+  "ace": {
+    "health_status": "ok",
+    "v2_reachable": true,
+    "active_playbook_items": 0,
+    "retrieved_count": 0,
+    "knowledge_base_fully_answered": 0.0,
+    "answer_present": true
+  },
+  "artifacts": {
+    "run_dir": "/raid/zkq/artifacts/CAPA/capability_reproduction/rag-smoke-20260713T061144Z",
+    "gbrain_log": "/raid/zkq/artifacts/CAPA/capability_reproduction/rag-smoke-20260713T061144Z/gbrain.log",
+    "ace_log": "/raid/zkq/artifacts/CAPA/capability_reproduction/rag-smoke-20260713T061144Z/ace.log"
+  },
+  "boundary": "This smoke verifies HTTP and empty-index miss behavior only. The repository does not contain the production corpus or indexes."
+}

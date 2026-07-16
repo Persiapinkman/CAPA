@@ -53,7 +53,7 @@ class ToolExecutor:
 
     @staticmethod
     def _parse_adela_eval_type(raw_value) -> int | None:
-        text = str(raw_value or "").strip()
+        text = str("" if raw_value is None else raw_value).strip()
         if not text:
             return None
         low = text.lower()
@@ -146,6 +146,16 @@ class ToolExecutor:
         emit = self._emit
         action = agent.normalize_agent_action(str(tool_call.action or "").strip())
         action_input = tool_call.action_input or {}
+        if not tool_registry.is_valid_tool_action(action):
+            msg = f"Agent 工具已禁用或未知：{action or 'unknown'}"
+            emit({"type": "error", "message": msg})
+            data = self._failure_observation(action or "unknown", msg)
+            return ToolResult(
+                action=action or "unknown",
+                observation=data,
+                ok=False,
+                error_message=msg,
+            )
         branch = tool_registry.executor_branch_for_action(action)
 
         if branch == "rag":

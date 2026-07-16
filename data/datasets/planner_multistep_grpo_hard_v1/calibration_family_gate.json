@@ -1,0 +1,186 @@
+{
+  "mode": "calibration",
+  "status": "fail",
+  "thresholds": {
+    "reference_min": 0.95,
+    "base_max": 0.7,
+    "gap_min": 0.25,
+    "min_families": 6,
+    "min_multistep_families": 3
+  },
+  "global_checks": {
+    "run_valid": true,
+    "accepted_family_count": false,
+    "accepted_multistep_family_count": false
+  },
+  "accepted_scenarios": [
+    "qwen_uncertain_to_migration",
+    "image_migration_internal_probe"
+  ],
+  "accepted_multistep_scenarios": [
+    "qwen_uncertain_to_migration"
+  ],
+  "families": {
+    "qwen_uncertain_to_migration": {
+      "reference_pass_all": 0.958333,
+      "base_pass_all": 0.0,
+      "gap": 0.958333,
+      "max_steps": 2,
+      "checks": {
+        "reference_at_least_min": true,
+        "base_at_most_max": true,
+        "gap_at_least_min": true,
+        "run_valid": true
+      },
+      "admitted": true
+    },
+    "qwen_confident_stop": {
+      "reference_pass_all": 0.75,
+      "base_pass_all": 1.0,
+      "gap": -0.25,
+      "max_steps": 2,
+      "checks": {
+        "reference_at_least_min": false,
+        "base_at_most_max": false,
+        "gap_at_least_min": false,
+        "run_valid": true
+      },
+      "admitted": false
+    },
+    "qwen_failure_retry": {
+      "reference_pass_all": 0.375,
+      "base_pass_all": 0.0,
+      "gap": 0.375,
+      "max_steps": 2,
+      "checks": {
+        "reference_at_least_min": false,
+        "base_at_most_max": true,
+        "gap_at_least_min": true,
+        "run_valid": true
+      },
+      "admitted": false
+    },
+    "rex_uncertain_to_migration": {
+      "reference_pass_all": 0.916667,
+      "base_pass_all": 0.0,
+      "gap": 0.916667,
+      "max_steps": 2,
+      "checks": {
+        "reference_at_least_min": false,
+        "base_at_most_max": true,
+        "gap_at_least_min": true,
+        "run_valid": true
+      },
+      "admitted": false
+    },
+    "rex_confident_stop": {
+      "reference_pass_all": 0.875,
+      "base_pass_all": 1.0,
+      "gap": -0.125,
+      "max_steps": 2,
+      "checks": {
+        "reference_at_least_min": false,
+        "base_at_most_max": false,
+        "gap_at_least_min": false,
+        "run_valid": true
+      },
+      "admitted": false
+    },
+    "rex_failure_retry": {
+      "reference_pass_all": 0.333333,
+      "base_pass_all": 0.0,
+      "gap": 0.333333,
+      "max_steps": 2,
+      "checks": {
+        "reference_at_least_min": false,
+        "base_at_most_max": true,
+        "gap_at_least_min": true,
+        "run_valid": true
+      },
+      "admitted": false
+    },
+    "image_migration_internal_probe": {
+      "reference_pass_all": 1.0,
+      "base_pass_all": 0.0,
+      "gap": 1.0,
+      "max_steps": 1,
+      "checks": {
+        "reference_at_least_min": true,
+        "base_at_most_max": true,
+        "gap_at_least_min": true,
+        "run_valid": true
+      },
+      "admitted": true
+    },
+    "image_migration_no_probe": {
+      "reference_pass_all": 1.0,
+      "base_pass_all": 0.875,
+      "gap": 0.125,
+      "max_steps": 1,
+      "checks": {
+        "reference_at_least_min": true,
+        "base_at_most_max": false,
+        "gap_at_least_min": false,
+        "run_valid": true
+      },
+      "admitted": false
+    },
+    "text_migration": {
+      "reference_pass_all": 1.0,
+      "base_pass_all": 0.791667,
+      "gap": 0.208333,
+      "max_steps": 1,
+      "checks": {
+        "reference_at_least_min": true,
+        "base_at_most_max": false,
+        "gap_at_least_min": false,
+        "run_valid": true
+      },
+      "admitted": false
+    },
+    "pipeline_full_eval": {
+      "reference_pass_all": 1.0,
+      "base_pass_all": 0.75,
+      "gap": 0.25,
+      "max_steps": 1,
+      "checks": {
+        "reference_at_least_min": true,
+        "base_at_most_max": false,
+        "gap_at_least_min": true,
+        "run_valid": true
+      },
+      "admitted": false
+    },
+    "flux_generation_only": {
+      "reference_pass_all": 0.541667,
+      "base_pass_all": 0.708333,
+      "gap": -0.16666599999999998,
+      "max_steps": 1,
+      "checks": {
+        "reference_at_least_min": false,
+        "base_at_most_max": false,
+        "gap_at_least_min": false,
+        "run_valid": true
+      },
+      "admitted": false
+    },
+    "visual_intent_clarify": {
+      "reference_pass_all": 0.0,
+      "base_pass_all": 0.0,
+      "gap": 0.0,
+      "max_steps": 1,
+      "checks": {
+        "reference_at_least_min": false,
+        "base_at_most_max": true,
+        "gap_at_least_min": false,
+        "run_valid": true
+      },
+      "admitted": false
+    }
+  },
+  "inputs": {
+    "base_aggregate": "/raid/zkq/artifacts/CAPA/evals/20260714_planner_multistep_grpo_hard_v1/calibration/base_combined/qwen25_7b_base_calibration_t0_1x_aggregate.json",
+    "reference_aggregate": "/raid/zkq/artifacts/CAPA/evals/20260714_planner_multistep_grpo_hard_v1/calibration/qwen35_combined/qwen35_a3b_calibration_t0_1x_aggregate.json",
+    "cases": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/cases/planner_multistep_grpo_hard_v1_calibration_cases.jsonl"
+  }
+}

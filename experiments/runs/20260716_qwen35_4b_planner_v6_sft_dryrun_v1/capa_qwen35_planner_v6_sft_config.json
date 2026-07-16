@@ -1,0 +1,256 @@
+{
+  "schema_version": "1.0",
+  "status": "prepared",
+  "mode": "dry-run",
+  "started_at": "2026-07-16T01:04:58.473665+00:00",
+  "optimizer_steps_authorized": false,
+  "model_name_or_path": "/raid/zkq/models/Qwen3.5-4B",
+  "model_contract": {
+    "mapped_model_class": "Qwen3_5ForCausalLM",
+    "sha256": {
+      "config": "ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670",
+      "tokenizer_config": "316230d6a809701f4db5ea8f8fc862bc3a6f3229c937c174e674ff3ca0a64ac8",
+      "chat_template": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715"
+    }
+  },
+  "data_dir": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/sft_data_planner_retry_migrate_v6_qwen35_nothinking",
+  "data_metadata_sha256": "5f2ba9fb1a3ff28b2e049b69c442f91b43a8466b8a438f693103ebac1cd6db21",
+  "output_dir": "/raid/zkq/projects/CAPA/experiments/runs/20260716_qwen35_4b_planner_v6_sft_dryrun_v1",
+  "packages": {
+    "python": "3.10.12",
+    "torch": "2.6.0+cu124",
+    "transformers": "5.12.0",
+    "trl": "1.8.0",
+    "peft": "0.19.1",
+    "accelerate": "1.14.0",
+    "datasets": "5.0.0"
+  },
+  "distributed": {
+    "world_size": 1,
+    "expected_world_size": 6,
+    "gradient_accumulation_steps": 2,
+    "global_batch_size": 12,
+    "cuda_visible_devices": ""
+  },
+  "sft": {
+    "max_steps": 100,
+    "max_length": 4800,
+    "learning_rate": 2e-05,
+    "warmup_steps": 5,
+    "completion_only_loss": true,
+    "assistant_only_loss": false,
+    "packing": false,
+    "eos_token_id": 248046,
+    "pad_token_id": 248044
+  },
+  "label_audit": {
+    "train": {
+      "rows": 1040,
+      "min_tokens": 4105,
+      "mean_tokens": 4322.310576923077,
+      "p50_tokens": 4328,
+      "p95_tokens": 4533,
+      "max_tokens": 4667,
+      "min_prompt_tokens": 4056,
+      "max_prompt_tokens": 4601,
+      "min_supervised_tokens": 34,
+      "max_supervised_tokens": 73,
+      "eos_supervised_rate": 1.0,
+      "deduplicated_source_cases": 1360
+    },
+    "dev": {
+      "rows": 260,
+      "min_tokens": 4100,
+      "mean_tokens": 4310.226923076923,
+      "p50_tokens": 4315,
+      "p95_tokens": 4522,
+      "max_tokens": 4641,
+      "min_prompt_tokens": 4052,
+      "max_prompt_tokens": 4590,
+      "min_supervised_tokens": 34,
+      "max_supervised_tokens": 72,
+      "eos_supervised_rate": 1.0,
+      "deduplicated_source_cases": 340
+    }
+  },
+  "lora": {
+    "r": 16,
+    "alpha": 32,
+    "dropout": 0.0,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "in_proj_qkv",
+      "in_proj_z",
+      "in_proj_a",
+      "in_proj_b",
+      "out_proj"
+    ]
+  },
+  "hardware_guards": {
+    "cudnn_enabled": false,
+    "max_allocated_gib": 28.0,
+    "minimum_free_gib": 2.0,
+    "grad_scaler_init_scale": 1.0,
+    "grad_scaler_growth_interval": 100000
+  },
+  "data_metadata": {
+    "audits": {
+      "grpo_dev": {
+        "canonical_step_reward": {
+          "max": 1.0,
+          "min": 1.0,
+          "non_unit": 0
+        },
+        "case_id_hits": 0,
+        "duplicate_prompt_hashes": 0,
+        "entity_id_hits": 0,
+        "forbidden_fragment_hits": {
+          "\"_thought\"": 0,
+          "\"external_ref\"": 0,
+          "/raid/": 0,
+          "/tmp/": 0,
+          "按训练样本期望": 0
+        },
+        "max_steps_mismatch": 0,
+        "prompt_tokens": {
+          "max": 4261,
+          "mean": 4248.383333333333,
+          "min": 4234,
+          "p50": 4249,
+          "p95": 4257
+        },
+        "rows": 180,
+        "status": "pass"
+      },
+      "grpo_train": {
+        "canonical_step_reward": {
+          "max": 1.0,
+          "min": 1.0,
+          "non_unit": 0
+        },
+        "case_id_hits": 0,
+        "duplicate_prompt_hashes": 0,
+        "entity_id_hits": 0,
+        "forbidden_fragment_hits": {
+          "\"_thought\"": 0,
+          "\"external_ref\"": 0,
+          "/raid/": 0,
+          "/tmp/": 0,
+          "按训练样本期望": 0
+        },
+        "max_steps_mismatch": 0,
+        "prompt_tokens": {
+          "max": 4272,
+          "mean": 4255.933333333333,
+          "min": 4238,
+          "p50": 4255,
+          "p95": 4268
+        },
+        "rows": 360,
+        "status": "pass"
+      },
+      "sft_dev": {
+        "canonical_step_reward": {
+          "max": 1.0,
+          "min": 1.0,
+          "non_unit": 0
+        },
+        "case_id_hits": 0,
+        "duplicate_prompt_hashes": 0,
+        "entity_id_hits": 0,
+        "forbidden_fragment_hits": {
+          "\"_thought\"": 0,
+          "\"external_ref\"": 0,
+          "/raid/": 0,
+          "/tmp/": 0,
+          "按训练样本期望": 0
+        },
+        "max_steps_mismatch": 0,
+        "prompt_tokens": {
+          "max": 4590,
+          "mean": 4251.823076923077,
+          "min": 4052,
+          "p50": 4249,
+          "p95": 4451
+        },
+        "rows": 260,
+        "status": "pass"
+      },
+      "sft_train": {
+        "canonical_step_reward": {
+          "max": 1.0,
+          "min": 1.0,
+          "non_unit": 0
+        },
+        "case_id_hits": 0,
+        "duplicate_prompt_hashes": 0,
+        "entity_id_hits": 0,
+        "forbidden_fragment_hits": {
+          "\"_thought\"": 0,
+          "\"external_ref\"": 0,
+          "/raid/": 0,
+          "/tmp/": 0,
+          "按训练样本期望": 0
+        },
+        "max_steps_mismatch": 0,
+        "prompt_tokens": {
+          "max": 4601,
+          "mean": 4263.221153846154,
+          "min": 4056,
+          "p50": 4260,
+          "p95": 4460
+        },
+        "rows": 1040,
+        "status": "pass"
+      }
+    },
+    "created_at": "2026-07-15T00:00:00+00:00",
+    "dataset_id": "planner_retry_migrate_v6",
+    "deduplication": {
+      "rule": "deduplicate identical prompt+completion pairs created by matched core step-1 probes",
+      "sft_dev_rows": 260,
+      "sft_dev_source_decisions": 340,
+      "sft_train_rows": 1040,
+      "sft_train_source_decisions": 1360
+    },
+    "files": {
+      "grpo_dev": "training/planner_grpo_seed_v1/step_data/planner_retry_migrate_v6_grpo_dev_qwen35_4b_nothinking_step2.jsonl",
+      "grpo_train": "training/planner_grpo_seed_v1/step_data/planner_retry_migrate_v6_grpo_train_qwen35_4b_nothinking_step2.jsonl",
+      "sft_dev": "training/planner_grpo_seed_v1/sft_data_planner_retry_migrate_v6_qwen35_nothinking/dev.jsonl",
+      "sft_train": "training/planner_grpo_seed_v1/sft_data_planner_retry_migrate_v6_qwen35_nothinking/train.jsonl"
+    },
+    "model_contract_sha256": {
+      "chat_template": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+      "config": "ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670",
+      "tokenizer_config": "316230d6a809701f4db5ea8f8fc862bc3a6f3229c937c174e674ff3ca0a64ac8"
+    },
+    "model_name_or_path": "/raid/zkq/models/Qwen3.5-4B",
+    "prompt_contract": {
+      "assistant_suffix": "<|im_start|>assistant\n<think>\n\n</think>\n\n",
+      "chat_template": "native_qwen35",
+      "completion_suffix_sft": "<|im_end|>",
+      "enable_thinking": false,
+      "eos_token_id": 248046,
+      "max_prompt_tokens": 4608,
+      "max_steps": 3,
+      "pad_token_id": 248044,
+      "sanitized_context": true
+    },
+    "rows": {
+      "grpo_dev": 180,
+      "grpo_train": 360,
+      "sft_dev": 260,
+      "sft_train": 1040
+    },
+    "schema_version": "1.0",
+    "sha256": {
+      "grpo_dev": "b60d1da247e784ce83c6a79263c9e640c4a7d118d53f4d67b7d10425c3b60265",
+      "grpo_train": "330ec8067ca2788357019a979b525805a09b3bb37d592783e2644012064f0598",
+      "sft_dev": "8455ea1fabc5487da114d0c85eb370769b34651ce8232accac062a84bebd2837",
+      "sft_train": "9ac8bd5d91d8fac1500e40ce034d20ea70e9aafde63279a18bb2c93e5609a657"
+    }
+  }
+}

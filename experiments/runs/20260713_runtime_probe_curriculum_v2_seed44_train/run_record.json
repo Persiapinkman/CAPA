@@ -1,0 +1,139 @@
+{
+  "schema_version": "2.0",
+  "run_id": "20260713_runtime_probe_curriculum_v2_seed44_train",
+  "study_id": "planner_runtime_routing_grpo_v1",
+  "date": "2026-07-13",
+  "kind": "train_grpo_lora_checkpoint",
+  "status": "completed",
+  "purpose": "Replicate the preregistered runtime probe curriculum with independent seed 44.",
+  "hypothesis": "The strict action-dominant runtime-owned routing effect replicates across independent training seeds.",
+  "parent_run_id": "20260713_runtime_probe_curriculum_v2_seed42_train",
+  "provenance": {
+    "git_commit": "b702ed80a2e73af6009178f9d0f3762c395c3262",
+    "command": "/raid/zkq/projects/CAPA/.venv-trl-grpo-cu124/bin/python training/planner_grpo_seed_v1/scripts/train_planner_grpo_trl.py --model-name-or-path /raid/zkq/artifacts/CAPA/outputs/merged-qwen25-7b-sft-v3-chatml --cases training/planner_grpo_seed_v1/cases/planner_runtime_probe_curriculum_v1_train_cases.jsonl --step-data training/planner_grpo_seed_v1/sft_data_runtime_probe_curriculum_v1_chatml/train.jsonl --output-dir /raid/zkq/artifacts/CAPA/outputs/planner-grpo-qwen25-7b-runtime-probe-curriculum-v1-seed44 --prompt-format qwen_chatml --max-prompt-tokens 6144 --max-completion-length 128 --num-generations 8 --generation-batch-size 8 --temperature 0.7 --top-p 0.9 --learning-rate 1e-5 --max-steps 80 --per-device-train-batch-size 1 --gradient-accumulation-steps 4 --logging-steps 1 --save-steps 80 --save-total-limit 1 --seed 44 --fp16 true --bf16 false --gradient-checkpointing true --attn-implementation sdpa --use-lora true --lora-r 16 --lora-alpha 32 --lora-dropout 0.05 --lora-target-modules q_proj,k_proj,v_proj,o_proj --loss-type dr_grpo --beta 0.0 --score-first-json-only true --task-reward-weight 0.95 --format-reward-weight 0.05 --penalize-truncated-completions true --report-to none --run-name qwen25-runtime-probe-curriculum-v1-seed44",
+    "seed": 44,
+    "environment": {
+      "python": "3.10.12",
+      "torch": "2.6.0+cu124",
+      "cuda": "12.4",
+      "gpu": "Tesla V100-SXM2-32GB",
+      "world_size": 4,
+      "precision": "fp16",
+      "attention": "sdpa"
+    },
+    "started_at": "2026-07-13T07:57:54.808510+00:00",
+    "finished_at": "2026-07-13T09:10:06.065812+00:00"
+  },
+  "data": {
+    "dataset_id": "planner_runtime_probe_curriculum_v1",
+    "split": "train",
+    "files": {
+      "cases": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/cases/planner_runtime_probe_curriculum_v1_train_cases.jsonl",
+      "steps": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/sft_data_runtime_probe_curriculum_v1_chatml/train.jsonl"
+    },
+    "sha256": {
+      "cases": "f8de38c802cd5670bc77c03842f85a678ab2db4d2e9f3d3c31221467c93a02af",
+      "steps": "6138a00562868bf8ff8e13cc0d3d162dd137982e134c8c9dddb3d59905ed124f"
+    },
+    "rows": 690
+  },
+  "method": {
+    "model": "/raid/zkq/artifacts/CAPA/outputs/merged-qwen25-7b-sft-v3-chatml",
+    "adapter_path": "/raid/zkq/artifacts/CAPA/outputs/planner-grpo-qwen25-7b-runtime-probe-curriculum-v1-seed44/checkpoint-80",
+    "training": {
+      "learning_rate": 1e-05,
+      "num_train_epochs": 1.0,
+      "max_steps": 80,
+      "per_device_train_batch_size": 1,
+      "gradient_accumulation_steps": 4,
+      "loss_type": "dr_grpo",
+      "beta": 0.0,
+      "precision": "fp16",
+      "attention_implementation": "sdpa"
+    },
+    "generation": {
+      "num_generations": 8,
+      "generation_batch_size": 8,
+      "max_completion_length": 128
+    },
+    "reward_weights": {
+      "task": 0.95,
+      "format": 0.05,
+      "tail_penalty_tokens": 64,
+      "prefix_penalty_tokens": 16,
+      "penalize_truncated_completions": true
+    },
+    "lora": {
+      "enabled": true,
+      "r": 16,
+      "alpha": 32,
+      "dropout": 0.05,
+      "target_modules": "q_proj,k_proj,v_proj,o_proj"
+    }
+  },
+  "metrics": {
+    "primary": {
+      "name": "train_reward_mean",
+      "value": 0.8217411919496953,
+      "higher_is_better": true
+    },
+    "train": {
+      "train_runtime": 4313.9934,
+      "train_samples_per_second": 0.297,
+      "train_steps_per_second": 0.019,
+      "total_flos": 0.0,
+      "train_loss": -0.006991978455334902,
+      "epoch": 0.2318840579710145
+    },
+    "log_summary": {
+      "logged_steps": 80,
+      "mean_reward": 0.8217411919496953,
+      "mean_reward_std": 0.08586611145874486,
+      "informative_reward_steps": 60,
+      "mean_frac_reward_zero_std": 0.5125,
+      "mean_entropy": 0.10175025211065077,
+      "mean_completion_clipped_ratio": 0.04296875,
+      "max_completion_clipped_ratio": 0.4375,
+      "clipped_generation_steps": 18,
+      "nonfinite_gradient_steps": 0,
+      "zero_gradient_steps": 20,
+      "final": {
+        "clip_ratio/high_max": 0.0,
+        "clip_ratio/high_mean": 0.0,
+        "clip_ratio/low_mean": 0.0,
+        "clip_ratio/low_min": 0.0,
+        "clip_ratio/region_mean": 0.0,
+        "completions/clipped_ratio": 0.0,
+        "completions/max_length": 88.5,
+        "completions/max_terminated_length": 88.5,
+        "completions/mean_length": 80.625,
+        "completions/mean_terminated_length": 80.625,
+        "completions/min_length": 67.5,
+        "completions/min_terminated_length": 67.5,
+        "entropy": 0.14254485443234444,
+        "epoch": 0.2318840579710145,
+        "frac_reward_zero_std": 0.0,
+        "grad_norm": 0.29124727845191956,
+        "learning_rate": 1.2500000000000002e-07,
+        "loss": -0.0349,
+        "num_tokens": 5392896.0,
+        "reward": 0.7513789534568787,
+        "reward_std": 0.15020184591412544,
+        "rewards/reward_func/mean": 0.7513789534568787,
+        "rewards/reward_func/std": 0.15020184591412544,
+        "step": 80,
+        "step_time": 49.72379477182403
+      }
+    }
+  },
+  "artifacts": {
+    "output_dir": "/raid/zkq/artifacts/CAPA/outputs/planner-grpo-qwen25-7b-runtime-probe-curriculum-v1-seed44",
+    "config": "/raid/zkq/artifacts/CAPA/outputs/planner-grpo-qwen25-7b-runtime-probe-curriculum-v1-seed44/capa_trl_grpo_config.json",
+    "trainer_state": "/raid/zkq/artifacts/CAPA/outputs/planner-grpo-qwen25-7b-runtime-probe-curriculum-v1-seed44/checkpoint-80/trainer_state.json",
+    "result": "/raid/zkq/artifacts/CAPA/outputs/planner-grpo-qwen25-7b-runtime-probe-curriculum-v1-seed44/capa_trl_grpo_result.json"
+  },
+  "decision": {
+    "outcome": "reject_safe_policy_promotion",
+    "rationale": "Seed44 improved the primary route but added two wrong side-effecting Flux routes on pipeline requests, causing the preregistered three-seed development gate to fail."
+  }
+}

@@ -1,0 +1,518 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "planner_runtime_probe_curriculum_v1",
+  "role": "train_dev_and_sealed_test",
+  "experimental_unit": "case_id",
+  "bootstrap_cluster": "entity_id",
+  "description": "Runtime-owned Planner routing and two-step probe-to-migration benchmark.",
+  "provenance": {
+    "class": "deidentified_synthetic_from_demo_patterns",
+    "source_records": [
+      "demo/sessions",
+      "demo/llm_debug"
+    ],
+    "copies_user_text": false,
+    "copies_answers": false,
+    "copies_identifiers": false
+  },
+  "stats": {
+    "cases": 852,
+    "steps": 1050,
+    "entity_groups": 54
+  },
+  "splits": {
+    "train": {
+      "cases": {
+        "cases": 540,
+        "steps": 690,
+        "unique_case_ids": 540,
+        "unique_queries": 540,
+        "categories": {
+          "adela_eval": 30,
+          "clarify_incomplete": 30,
+          "flux_generation": 30,
+          "general_answer": 30,
+          "memory_end": 30,
+          "migration_advisor": 30,
+          "pipeline_eval": 30,
+          "private_lookup": 30,
+          "qwen_probe": 30,
+          "qwen_probe_only_contrast": 90,
+          "qwen_probe_then_migration": 120,
+          "rex_probe": 30,
+          "rex_probe_then_migration": 30
+        },
+        "expected_actions": {
+          "adela_cli_eval": 30,
+          "answerer": 30,
+          "clarify": 30,
+          "end": 30,
+          "flux-image-generation": 30,
+          "migration_advisor": 180,
+          "pipeline_eval": 30,
+          "qwen_detection": 240,
+          "rag_answer": 30,
+          "rexomni_detection": 60
+        }
+      },
+      "steps": {
+        "rows": 690,
+        "cases": 540,
+        "exact_prompt_completion_duplicates": 0,
+        "duplicate_rate": 0.0,
+        "max_rows_per_case": 2,
+        "categories": {
+          "adela_eval": 30,
+          "clarify_incomplete": 30,
+          "flux_generation": 30,
+          "general_answer": 30,
+          "memory_end": 30,
+          "migration_advisor": 30,
+          "pipeline_eval": 30,
+          "private_lookup": 30,
+          "qwen_probe": 30,
+          "qwen_probe_only_contrast": 90,
+          "qwen_probe_then_migration": 240,
+          "rex_probe": 30,
+          "rex_probe_then_migration": 60
+        }
+      },
+      "entity_groups": 30,
+      "template_ids": [
+        "adela_eval_train_1",
+        "adela_eval_train_2",
+        "adela_eval_train_3",
+        "adela_eval_train_4",
+        "clarify_incomplete_train_1",
+        "clarify_incomplete_train_2",
+        "clarify_incomplete_train_3",
+        "clarify_incomplete_train_4",
+        "flux_generation_train_1",
+        "flux_generation_train_2",
+        "flux_generation_train_3",
+        "flux_generation_train_4",
+        "general_answer_train_1",
+        "general_answer_train_2",
+        "general_answer_train_3",
+        "general_answer_train_4",
+        "memory_end_train_1",
+        "memory_end_train_2",
+        "memory_end_train_3",
+        "memory_end_train_4",
+        "migration_advisor_train_1",
+        "migration_advisor_train_2",
+        "migration_advisor_train_3",
+        "migration_advisor_train_4",
+        "pipeline_eval_train_1",
+        "pipeline_eval_train_2",
+        "pipeline_eval_train_3",
+        "pipeline_eval_train_4",
+        "private_lookup_train_1",
+        "private_lookup_train_2",
+        "private_lookup_train_3",
+        "private_lookup_train_4",
+        "qwen_probe_only_contrast_curriculum_train_1",
+        "qwen_probe_only_contrast_curriculum_train_2",
+        "qwen_probe_only_contrast_train_1",
+        "qwen_probe_only_contrast_train_2",
+        "qwen_probe_only_contrast_train_3",
+        "qwen_probe_only_contrast_train_4",
+        "qwen_probe_then_migration_curriculum_train_1",
+        "qwen_probe_then_migration_curriculum_train_2",
+        "qwen_probe_then_migration_curriculum_train_3",
+        "qwen_probe_then_migration_train_1",
+        "qwen_probe_then_migration_train_2",
+        "qwen_probe_then_migration_train_3",
+        "qwen_probe_then_migration_train_4",
+        "qwen_probe_train_1",
+        "qwen_probe_train_2",
+        "qwen_probe_train_3",
+        "qwen_probe_train_4",
+        "rex_probe_then_migration_train_1",
+        "rex_probe_then_migration_train_2",
+        "rex_probe_then_migration_train_3",
+        "rex_probe_then_migration_train_4",
+        "rex_probe_train_1",
+        "rex_probe_train_2",
+        "rex_probe_train_3",
+        "rex_probe_train_4"
+      ]
+    },
+    "dev": {
+      "cases": {
+        "cases": 104,
+        "steps": 120,
+        "unique_case_ids": 104,
+        "unique_queries": 92,
+        "categories": {
+          "adela_eval": 8,
+          "clarify_incomplete": 8,
+          "flux_generation": 8,
+          "general_answer": 8,
+          "memory_end": 8,
+          "migration_advisor": 8,
+          "pipeline_eval": 8,
+          "private_lookup": 8,
+          "qwen_probe": 8,
+          "qwen_probe_only_contrast": 8,
+          "qwen_probe_then_migration": 8,
+          "rex_probe": 8,
+          "rex_probe_then_migration": 8
+        },
+        "expected_actions": {
+          "adela_cli_eval": 8,
+          "answerer": 8,
+          "clarify": 8,
+          "end": 8,
+          "flux-image-generation": 8,
+          "migration_advisor": 24,
+          "pipeline_eval": 8,
+          "qwen_detection": 24,
+          "rag_answer": 8,
+          "rexomni_detection": 16
+        }
+      },
+      "steps": {
+        "rows": 120,
+        "cases": 104,
+        "exact_prompt_completion_duplicates": 0,
+        "duplicate_rate": 0.0,
+        "max_rows_per_case": 2,
+        "categories": {
+          "adela_eval": 8,
+          "clarify_incomplete": 8,
+          "flux_generation": 8,
+          "general_answer": 8,
+          "memory_end": 8,
+          "migration_advisor": 8,
+          "pipeline_eval": 8,
+          "private_lookup": 8,
+          "qwen_probe": 8,
+          "qwen_probe_only_contrast": 8,
+          "qwen_probe_then_migration": 16,
+          "rex_probe": 8,
+          "rex_probe_then_migration": 16
+        }
+      },
+      "entity_groups": 8,
+      "template_ids": [
+        "adela_eval_dev_1",
+        "adela_eval_dev_2",
+        "adela_eval_dev_3",
+        "clarify_incomplete_dev_1",
+        "clarify_incomplete_dev_2",
+        "clarify_incomplete_dev_3",
+        "flux_generation_dev_1",
+        "flux_generation_dev_2",
+        "flux_generation_dev_3",
+        "general_answer_dev_1",
+        "general_answer_dev_2",
+        "general_answer_dev_3",
+        "memory_end_dev_1",
+        "memory_end_dev_2",
+        "memory_end_dev_3",
+        "migration_advisor_dev_1",
+        "migration_advisor_dev_2",
+        "migration_advisor_dev_3",
+        "pipeline_eval_dev_1",
+        "pipeline_eval_dev_2",
+        "pipeline_eval_dev_3",
+        "private_lookup_dev_1",
+        "private_lookup_dev_2",
+        "private_lookup_dev_3",
+        "qwen_probe_dev_1",
+        "qwen_probe_dev_2",
+        "qwen_probe_dev_3",
+        "qwen_probe_only_contrast_dev_1",
+        "qwen_probe_only_contrast_dev_2",
+        "qwen_probe_only_contrast_dev_3",
+        "qwen_probe_then_migration_dev_1",
+        "qwen_probe_then_migration_dev_2",
+        "qwen_probe_then_migration_dev_3",
+        "rex_probe_dev_1",
+        "rex_probe_dev_2",
+        "rex_probe_dev_3",
+        "rex_probe_then_migration_dev_1",
+        "rex_probe_then_migration_dev_2",
+        "rex_probe_then_migration_dev_3"
+      ]
+    },
+    "test": {
+      "cases": {
+        "cases": 208,
+        "steps": 240,
+        "unique_case_ids": 208,
+        "unique_queries": 164,
+        "categories": {
+          "adela_eval": 16,
+          "clarify_incomplete": 16,
+          "flux_generation": 16,
+          "general_answer": 16,
+          "memory_end": 16,
+          "migration_advisor": 16,
+          "pipeline_eval": 16,
+          "private_lookup": 16,
+          "qwen_probe": 16,
+          "qwen_probe_only_contrast": 16,
+          "qwen_probe_then_migration": 16,
+          "rex_probe": 16,
+          "rex_probe_then_migration": 16
+        },
+        "expected_actions": {
+          "adela_cli_eval": 16,
+          "answerer": 16,
+          "clarify": 16,
+          "end": 16,
+          "flux-image-generation": 16,
+          "migration_advisor": 48,
+          "pipeline_eval": 16,
+          "qwen_detection": 48,
+          "rag_answer": 16,
+          "rexomni_detection": 32
+        }
+      },
+      "steps": {
+        "rows": 240,
+        "cases": 208,
+        "exact_prompt_completion_duplicates": 0,
+        "duplicate_rate": 0.0,
+        "max_rows_per_case": 2,
+        "categories": {
+          "adela_eval": 16,
+          "clarify_incomplete": 16,
+          "flux_generation": 16,
+          "general_answer": 16,
+          "memory_end": 16,
+          "migration_advisor": 16,
+          "pipeline_eval": 16,
+          "private_lookup": 16,
+          "qwen_probe": 16,
+          "qwen_probe_only_contrast": 16,
+          "qwen_probe_then_migration": 32,
+          "rex_probe": 16,
+          "rex_probe_then_migration": 32
+        }
+      },
+      "entity_groups": 16,
+      "template_ids": [
+        "adela_eval_test_1",
+        "adela_eval_test_2",
+        "adela_eval_test_3",
+        "clarify_incomplete_test_1",
+        "clarify_incomplete_test_2",
+        "clarify_incomplete_test_3",
+        "flux_generation_test_1",
+        "flux_generation_test_2",
+        "flux_generation_test_3",
+        "general_answer_test_1",
+        "general_answer_test_2",
+        "general_answer_test_3",
+        "memory_end_test_1",
+        "memory_end_test_2",
+        "memory_end_test_3",
+        "migration_advisor_test_1",
+        "migration_advisor_test_2",
+        "migration_advisor_test_3",
+        "pipeline_eval_test_1",
+        "pipeline_eval_test_2",
+        "pipeline_eval_test_3",
+        "private_lookup_test_1",
+        "private_lookup_test_2",
+        "private_lookup_test_3",
+        "qwen_probe_only_contrast_test_1",
+        "qwen_probe_only_contrast_test_2",
+        "qwen_probe_only_contrast_test_3",
+        "qwen_probe_test_1",
+        "qwen_probe_test_2",
+        "qwen_probe_test_3",
+        "qwen_probe_then_migration_test_1",
+        "qwen_probe_then_migration_test_2",
+        "qwen_probe_then_migration_test_3",
+        "rex_probe_test_1",
+        "rex_probe_test_2",
+        "rex_probe_test_3",
+        "rex_probe_then_migration_test_1",
+        "rex_probe_then_migration_test_2",
+        "rex_probe_then_migration_test_3"
+      ]
+    }
+  },
+  "files": {
+    "train_cases": "training/planner_grpo_seed_v1/cases/planner_runtime_probe_curriculum_v1_train_cases.jsonl",
+    "train_steps": "training/planner_grpo_seed_v1/sft_data_runtime_probe_curriculum_v1_chatml/train.jsonl",
+    "dev_cases": "training/planner_grpo_seed_v1/cases/planner_runtime_probe_curriculum_v1_dev_cases.jsonl",
+    "dev_steps": "training/planner_grpo_seed_v1/sft_data_runtime_probe_curriculum_v1_chatml/dev.jsonl",
+    "test_cases": "training/planner_grpo_seed_v1/cases/planner_runtime_probe_curriculum_v1_test_cases.jsonl",
+    "test_steps": "training/planner_grpo_seed_v1/sft_data_runtime_probe_curriculum_v1_chatml/test.jsonl"
+  },
+  "sha256": {
+    "train_cases": "f8de38c802cd5670bc77c03842f85a678ab2db4d2e9f3d3c31221467c93a02af",
+    "train_steps": "6138a00562868bf8ff8e13cc0d3d162dd137982e134c8c9dddb3d59905ed124f",
+    "dev_cases": "48a434b524638b1f4a784d54d273deefd00f99f96431f01acd14c9d7718092a3",
+    "dev_steps": "6acdeb912bc361d669f9dde2e4039aafd5d80821480b8430fdee62aab5d781a2",
+    "test_cases": "cf45755a61fa5fa77279a307b236de17e4abc91cabafca353204953d6fea815e",
+    "test_steps": "71ef5091f68bf12dd833f2e05be097baa4f3949738685b89312e7328ead69d64"
+  },
+  "integrity": {
+    "status": "sealed_test_created_unopened",
+    "train_dev": {
+      "case_id_overlap": 0,
+      "exact_query_overlap": 0,
+      "entity_overlap": 0,
+      "template_overlap": 0
+    },
+    "train_test": {
+      "case_id_overlap": 0,
+      "exact_query_overlap": 0,
+      "entity_overlap": 0,
+      "template_overlap": 0
+    },
+    "dev_test": {
+      "case_id_overlap": 0,
+      "exact_query_overlap": 0,
+      "entity_overlap": 0,
+      "template_overlap": 0
+    },
+    "dev_similarity_to_train": {
+      "count": 104,
+      "mean": 0.3646465860640287,
+      "median": 0.345141065830721,
+      "count_ge_0_8": 0,
+      "count_ge_0_9": 0,
+      "top_examples": [
+        {
+          "dev_case_id": "RRV1-DEV-ADELA_EVAL-001",
+          "train_case_id": "RRV1-TRAIN-ADELA_EVAL-029",
+          "category": "adela_eval",
+          "similarity": 0.707483
+        },
+        {
+          "dev_case_id": "RRV1-DEV-ADELA_EVAL-002",
+          "train_case_id": "RRV1-TRAIN-ADELA_EVAL-001",
+          "category": "adela_eval",
+          "similarity": 0.707483
+        },
+        {
+          "dev_case_id": "RRV1-DEV-ADELA_EVAL-003",
+          "train_case_id": "RRV1-TRAIN-ADELA_EVAL-009",
+          "category": "adela_eval",
+          "similarity": 0.707483
+        },
+        {
+          "dev_case_id": "RRV1-DEV-ADELA_EVAL-004",
+          "train_case_id": "RRV1-TRAIN-ADELA_EVAL-001",
+          "category": "adela_eval",
+          "similarity": 0.707483
+        },
+        {
+          "dev_case_id": "RRV1-DEV-ADELA_EVAL-005",
+          "train_case_id": "RRV1-TRAIN-ADELA_EVAL-001",
+          "category": "adela_eval",
+          "similarity": 0.707483
+        },
+        {
+          "dev_case_id": "RRV1-DEV-ADELA_EVAL-006",
+          "train_case_id": "RRV1-TRAIN-ADELA_EVAL-001",
+          "category": "adela_eval",
+          "similarity": 0.707483
+        },
+        {
+          "dev_case_id": "RRV1-DEV-ADELA_EVAL-007",
+          "train_case_id": "RRV1-TRAIN-ADELA_EVAL-001",
+          "category": "adela_eval",
+          "similarity": 0.707483
+        },
+        {
+          "dev_case_id": "RRV1-DEV-ADELA_EVAL-008",
+          "train_case_id": "RRV1-TRAIN-ADELA_EVAL-005",
+          "category": "adela_eval",
+          "similarity": 0.707483
+        },
+        {
+          "dev_case_id": "RRV1-DEV-REX_PROBE_THEN_MIGRATION-006",
+          "train_case_id": "RRV1-TRAIN-REX_PROBE_THEN_MIGRATION-026",
+          "category": "rex_probe_then_migration",
+          "similarity": 0.453782
+        },
+        {
+          "dev_case_id": "RRV1-DEV-REX_PROBE_THEN_MIGRATION-004",
+          "train_case_id": "RRV1-TRAIN-REX_PROBE_THEN_MIGRATION-015",
+          "category": "rex_probe_then_migration",
+          "similarity": 0.442623
+        }
+      ],
+      "method": "difflib.SequenceMatcher on normalized query text; diagnostic only"
+    },
+    "test_similarity_to_train": {
+      "count": 208,
+      "mean": 0.33091354797269884,
+      "median": 0.360330836454432,
+      "count_ge_0_8": 0,
+      "count_ge_0_9": 0,
+      "top_examples": [
+        {
+          "dev_case_id": "RRV1-TEST-GENERAL_ANSWER-016",
+          "train_case_id": "RRV1-TRAIN-GENERAL_ANSWER-005",
+          "category": "general_answer",
+          "similarity": 0.482759
+        },
+        {
+          "dev_case_id": "RRV1-TEST-GENERAL_ANSWER-009",
+          "train_case_id": "RRV1-TRAIN-GENERAL_ANSWER-002",
+          "category": "general_answer",
+          "similarity": 0.47619
+        },
+        {
+          "dev_case_id": "RRV1-TEST-QWEN_PROBE_THEN_MIGRATION-007",
+          "train_case_id": "RRV1-TRAIN-QWEN_PROBE_THEN_MIGRATION-016-CURR-1",
+          "category": "qwen_probe_then_migration",
+          "similarity": 0.46729
+        },
+        {
+          "dev_case_id": "RRV1-TEST-QWEN_PROBE_THEN_MIGRATION-009",
+          "train_case_id": "RRV1-TRAIN-QWEN_PROBE_THEN_MIGRATION-004-CURR-1",
+          "category": "qwen_probe_then_migration",
+          "similarity": 0.46729
+        },
+        {
+          "dev_case_id": "RRV1-TEST-GENERAL_ANSWER-010",
+          "train_case_id": "RRV1-TRAIN-GENERAL_ANSWER-003",
+          "category": "general_answer",
+          "similarity": 0.466667
+        },
+        {
+          "dev_case_id": "RRV1-TEST-FLUX_GENERATION-009",
+          "train_case_id": "RRV1-TRAIN-FLUX_GENERATION-004",
+          "category": "flux_generation",
+          "similarity": 0.457831
+        },
+        {
+          "dev_case_id": "RRV1-TEST-QWEN_PROBE_THEN_MIGRATION-016",
+          "train_case_id": "RRV1-TRAIN-QWEN_PROBE_THEN_MIGRATION-005-CURR-1",
+          "category": "qwen_probe_then_migration",
+          "similarity": 0.457143
+        },
+        {
+          "dev_case_id": "RRV1-TEST-FLUX_GENERATION-016",
+          "train_case_id": "RRV1-TRAIN-FLUX_GENERATION-005",
+          "category": "flux_generation",
+          "similarity": 0.455696
+        },
+        {
+          "dev_case_id": "RRV1-TEST-QWEN_PROBE_THEN_MIGRATION-006",
+          "train_case_id": "RRV1-TRAIN-QWEN_PROBE_THEN_MIGRATION-002-CURR-1",
+          "category": "qwen_probe_then_migration",
+          "similarity": 0.454545
+        },
+        {
+          "dev_case_id": "RRV1-TEST-QWEN_PROBE_THEN_MIGRATION-004",
+          "train_case_id": "RRV1-TRAIN-QWEN_PROBE_THEN_MIGRATION-005-CURR-1",
+          "category": "qwen_probe_then_migration",
+          "similarity": 0.45283
+        }
+      ],
+      "method": "difflib.SequenceMatcher on normalized query text; diagnostic only"
+    },
+    "missing_image_fixtures": []
+  }
+}

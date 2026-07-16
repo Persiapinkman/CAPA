@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "planner_multistep_grpo_value_v5",
+  "split": "confirmation",
+  "seed": 20260715,
+  "selection_rule": "whole-family calibration only; confirmation unfiltered",
+  "accepted_scenarios": [
+    "qwen_timeout_nonretryable",
+    "rex_timeout_nonretryable",
+    "qwen_timeout_budget_exhausted",
+    "rex_timeout_budget_exhausted",
+    "qwen_connection_nonretryable",
+    "rex_connection_nonretryable",
+    "qwen_connection_budget_exhausted",
+    "rex_connection_budget_exhausted"
+  ],
+  "evaluation_only": true,
+  "exclude_from_training": true,
+  "cases": {
+    "cases": 240,
+    "steps": 480,
+    "unique_case_ids": 240,
+    "unique_queries": 60,
+    "categories": {
+      "qwen_connection_budget_exhausted": 30,
+      "qwen_connection_nonretryable": 30,
+      "qwen_timeout_budget_exhausted": 30,
+      "qwen_timeout_nonretryable": 30,
+      "rex_connection_budget_exhausted": 30,
+      "rex_connection_nonretryable": 30,
+      "rex_timeout_budget_exhausted": 30,
+      "rex_timeout_nonretryable": 30
+    },
+    "expected_actions": {
+      "migration_advisor": 144,
+      "qwen_detection": 168,
+      "rexomni_detection": 168
+    }
+  },
+  "entity_groups": 30,
+  "families": {
+    "qwen_connection_budget_exhausted": 30,
+    "qwen_connection_nonretryable": 30,
+    "qwen_timeout_budget_exhausted": 30,
+    "qwen_timeout_nonretryable": 30,
+    "rex_connection_budget_exhausted": 30,
+    "rex_connection_nonretryable": 30,
+    "rex_timeout_budget_exhausted": 30,
+    "rex_timeout_nonretryable": 30
+  },
+  "target_action_classes": {
+    "migrate": 144,
+    "retry": 96
+  },
+  "integrity": {
+    "existing_dataset_overlap": {
+      "status": "pass",
+      "overlaps": [],
+      "files_scanned": 27
+    },
+    "generated_split_isolation": {
+      "status": "pass",
+      "case_id_overlap": 0,
+      "entity_id_overlap": 0,
+      "template_id_overlap": 0,
+      "normalized_query_overlap": 0,
+      "fixture_family_overlap": 0
+    }
+  },
+  "files": {
+    "cases": "training/planner_grpo_seed_v1/cases/planner_multistep_grpo_value_v5_confirmation_cases.jsonl"
+  },
+  "sha256": {
+    "cases": "ce93598667167c2ae3d0cdf69e303fec0652e5719923728cd8eb806d1eaa17e3"
+  }
+}

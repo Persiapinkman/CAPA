@@ -1,0 +1,10 @@
+{
+  "run_id": "20260713_runtime_probe_curriculum_v2_grpo42_dev3x",
+  "study_id": "planner_runtime_routing_grpo_v1",
+  "shard_run_records": [
+    "/raid/zkq/projects/CAPA/experiments/runs/20260713_runtime_probe_curriculum_v2_grpo42_dev3x_shard0/run_record.json",
+    "/raid/zkq/projects/CAPA/experiments/runs/20260713_runtime_probe_curriculum_v2_grpo42_dev3x_shard1/run_record.json"
+  ],
+  "rows": 120,
+  "repeats": 3
+}

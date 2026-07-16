@@ -1,0 +1,94 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_runtime_routing_grpo_v1",
+  "arm_id": "runtime_probe_multiseed_replication_v1",
+  "status": "development_replication_gate_failed_test_sealed",
+  "trigger_result": "development_gate_runtime_probe_v2_seed42.json",
+  "fixed_recipe": {
+    "dataset_id": "planner_runtime_probe_curriculum_v1",
+    "initializer": "/raid/zkq/artifacts/CAPA/outputs/merged-qwen25-7b-sft-v3-chatml",
+    "max_steps": 80,
+    "learning_rate": 1e-5,
+    "num_generations": 8,
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "loss_type": "dr_grpo",
+    "beta": 0.0,
+    "lora_rank": 16,
+    "lora_alpha": 32,
+    "outer_task_weight": 0.95,
+    "outer_format_weight": 0.05
+  },
+  "replication_execution": {
+    "seeds": [43, 44],
+    "parallel_jobs": 2,
+    "gpus_per_job": 4,
+    "per_device_train_batch_size": 1,
+    "gradient_accumulation_steps": 4,
+    "global_effective_batch_size": 16,
+    "equivalence_note": "Seed 42 used 8 GPUs and accumulation 2. Replication uses 4 GPUs and accumulation 4 while preserving the effective batch and all policy/reward hyperparameters."
+  },
+  "development_replication_gate": {
+    "primary_category": "qwen_probe_then_migration",
+    "minimum_three_seed_mean_strict_case_action_delta": 0.125,
+    "minimum_three_seed_mean_step_action_delta": 0.10,
+    "minimum_positive_seed_count": 2,
+    "require_entity_clustered_action_ci_lower_above_zero": true,
+    "minimum_three_seed_mean_verifier_delta": 0.05,
+    "require_mean_step2_action_no_regression": true,
+    "contrast_category": "qwen_probe_only_contrast",
+    "maximum_mean_contrast_action_regression": 0.0,
+    "maximum_mean_other_category_action_regression": 0.125,
+    "require_no_mean_increase_in_wrong_side_effecting_actions": true
+  },
+  "development_evaluation_protocol": {
+    "repeats": 3,
+    "do_sample": false,
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "max_new_tokens": 128,
+    "models": ["sft_v3", "seed42", "seed43", "seed44"]
+  },
+  "development_result": {
+    "gate_artifact": "development_gate_runtime_probe_v2_multiseed_dev3x.json",
+    "comparison_report": "reports/planner_runtime_probe_curriculum_v2_multiseed_dev3x.json",
+    "passed": false,
+    "deterministic_repeat_agreement": 1.0,
+    "mean_primary_strict_case_action_delta": 0.3333333333333333,
+    "seed_primary_strict_case_action_deltas": {
+      "seed42": 0.375,
+      "seed43": 0.375,
+      "seed44": 0.25
+    },
+    "mean_step_action_delta": 0.1333333333333333,
+    "entity_clustered_action_ci95": [0.09166666666666666, 0.17777777777777778],
+    "mean_primary_verifier_delta": 0.2147486772486772,
+    "mean_wrong_side_effect_delta": 0.6666666666666661,
+    "failed_checks": ["wrong_side_effects"],
+    "failure_detail": "Seed44 routed two additional pipeline_eval cases to side-effecting flux-image-generation; thresholds and seed count were not changed."
+  },
+  "test_confirmation": {
+    "trigger": "Open the frozen test once only if every development replication check passes.",
+    "models": ["sft_v3", "seed42", "seed43", "seed44"],
+    "bootstrap_cluster": "entity_id",
+    "bootstrap_samples": 20000,
+    "repeats": 3,
+    "test_status": "sealed_unopened",
+    "not_opened_reason": "Development replication failed the no-mean-increase wrong-side-effect guardrail."
+  },
+  "test_confirmation_gate": {
+    "primary_category": "qwen_probe_then_migration",
+    "require_three_seed_mean_strict_case_action_delta_positive": true,
+    "require_three_seed_mean_step_action_delta_positive": true,
+    "minimum_positive_seed_count": 2,
+    "require_entity_clustered_action_ci_lower_above_zero": true,
+    "require_three_seed_mean_verifier_delta_positive": true,
+    "require_mean_step2_action_no_regression": true,
+    "contrast_category": "qwen_probe_only_contrast",
+    "maximum_mean_contrast_action_regression": 0.0,
+    "maximum_mean_other_category_action_regression": 0.125,
+    "require_no_mean_increase_in_wrong_side_effecting_actions": true,
+    "preregistered_while_test_sealed": true
+  },
+  "stop_rule": "If the development replication gate fails, do not open test and do not add seeds or change thresholds."
+}

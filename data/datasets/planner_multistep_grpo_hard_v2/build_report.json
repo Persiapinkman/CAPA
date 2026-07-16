@@ -1,0 +1,150 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "planner_multistep_grpo_hard_v2",
+  "seed": 20260715,
+  "parent_calibration": "planner_multistep_grpo_hard_v1",
+  "selection_rule": "whole-family calibration only; confirmation is never item-filtered",
+  "accepted_scenarios": [
+    "qwen_box_variance_to_migration",
+    "qwen_empty_result_to_migration",
+    "qwen_domain_shift_to_migration",
+    "rex_box_variance_to_migration",
+    "rex_empty_result_to_migration",
+    "rex_domain_shift_to_migration",
+    "qwen_confident_stop_guardrail",
+    "rex_confident_stop_guardrail"
+  ],
+  "splits": {
+    "calibration": {
+      "cases": {
+        "cases": 384,
+        "steps": 640,
+        "unique_case_ids": 384,
+        "unique_queries": 192,
+        "categories": {
+          "image_migration_capability_probe": 32,
+          "image_migration_data_probe": 32,
+          "image_migration_risk_probe": 32,
+          "image_migration_validation_probe": 32,
+          "qwen_box_variance_to_migration": 32,
+          "qwen_confident_stop_guardrail": 32,
+          "qwen_domain_shift_to_migration": 32,
+          "qwen_empty_result_to_migration": 32,
+          "rex_box_variance_to_migration": 32,
+          "rex_confident_stop_guardrail": 32,
+          "rex_domain_shift_to_migration": 32,
+          "rex_empty_result_to_migration": 32
+        },
+        "expected_actions": {
+          "end": 64,
+          "migration_advisor": 320,
+          "qwen_detection": 128,
+          "rexomni_detection": 128
+        }
+      },
+      "steps": {
+        "rows": 640,
+        "cases": 384,
+        "exact_prompt_completion_duplicates": 0,
+        "duplicate_rate": 0.0,
+        "max_rows_per_case": 2,
+        "categories": {
+          "image_migration_capability_probe": 32,
+          "image_migration_data_probe": 32,
+          "image_migration_risk_probe": 32,
+          "image_migration_validation_probe": 32,
+          "qwen_box_variance_to_migration": 64,
+          "qwen_confident_stop_guardrail": 64,
+          "qwen_domain_shift_to_migration": 64,
+          "qwen_empty_result_to_migration": 64,
+          "rex_box_variance_to_migration": 64,
+          "rex_confident_stop_guardrail": 64,
+          "rex_domain_shift_to_migration": 64,
+          "rex_empty_result_to_migration": 64
+        }
+      },
+      "entity_groups": 32,
+      "scenario_tiers": {
+        "counterfactual_guardrail": 64,
+        "primary_challenge": 320
+      },
+      "case_file": "training/planner_grpo_seed_v1/cases/planner_multistep_grpo_hard_v2_calibration_cases.jsonl",
+      "step_file": "training/planner_grpo_seed_v1/sft_data_multistep_grpo_hard_v2_chatml/calibration.jsonl"
+    },
+    "confirmation": {
+      "cases": {
+        "cases": 600,
+        "steps": 1200,
+        "unique_case_ids": 600,
+        "unique_queries": 150,
+        "categories": {
+          "qwen_box_variance_to_migration": 75,
+          "qwen_confident_stop_guardrail": 75,
+          "qwen_domain_shift_to_migration": 75,
+          "qwen_empty_result_to_migration": 75,
+          "rex_box_variance_to_migration": 75,
+          "rex_confident_stop_guardrail": 75,
+          "rex_domain_shift_to_migration": 75,
+          "rex_empty_result_to_migration": 75
+        },
+        "expected_actions": {
+          "end": 150,
+          "migration_advisor": 450,
+          "qwen_detection": 300,
+          "rexomni_detection": 300
+        }
+      },
+      "steps": {
+        "rows": 1200,
+        "cases": 600,
+        "exact_prompt_completion_duplicates": 0,
+        "duplicate_rate": 0.0,
+        "max_rows_per_case": 2,
+        "categories": {
+          "qwen_box_variance_to_migration": 150,
+          "qwen_confident_stop_guardrail": 150,
+          "qwen_domain_shift_to_migration": 150,
+          "qwen_empty_result_to_migration": 150,
+          "rex_box_variance_to_migration": 150,
+          "rex_confident_stop_guardrail": 150,
+          "rex_domain_shift_to_migration": 150,
+          "rex_empty_result_to_migration": 150
+        }
+      },
+      "entity_groups": 75,
+      "scenario_tiers": {
+        "counterfactual_guardrail": 150,
+        "primary_challenge": 450
+      },
+      "case_file": "training/planner_grpo_seed_v1/cases/planner_multistep_grpo_hard_v2_confirmation_cases.jsonl",
+      "step_file": "training/planner_grpo_seed_v1/sft_data_multistep_grpo_hard_v2_chatml/confirmation.jsonl"
+    }
+  },
+  "integrity": {
+    "existing_dataset_overlap": {
+      "status": "pass",
+      "overlaps": [],
+      "files_scanned": 23
+    },
+    "generated_split_isolation": {
+      "status": "pass",
+      "case_id_overlap": 0,
+      "entity_id_overlap": 0,
+      "template_id_overlap": 0,
+      "normalized_query_overlap": 0,
+      "fixture_family_overlap": 0
+    }
+  },
+  "files": {
+    "calibration_cases": "training/planner_grpo_seed_v1/cases/planner_multistep_grpo_hard_v2_calibration_cases.jsonl",
+    "confirmation_cases": "training/planner_grpo_seed_v1/cases/planner_multistep_grpo_hard_v2_confirmation_cases.jsonl",
+    "calibration_steps": "training/planner_grpo_seed_v1/sft_data_multistep_grpo_hard_v2_chatml/calibration.jsonl",
+    "confirmation_steps": "training/planner_grpo_seed_v1/sft_data_multistep_grpo_hard_v2_chatml/confirmation.jsonl"
+  },
+  "sha256": {
+    "calibration_cases": "9deb1457f15ecaa5aa0642731ad0b5e479659e7b5750cba6364cc04f8992ad24",
+    "confirmation_cases": "42201f057366411fdfab77621f6b54e3f4c16d7fcdc8109616065e6212cc3008",
+    "calibration_steps": "4378974617020be8244d6f6d44e7fbe178f7d7d2d05b6e55bec2ace57db78fee",
+    "confirmation_steps": "9490cabf0c27c22e5d8d4e858bbdddcb9bc81be36a3fb9ab9d4a64ce5929ab22"
+  }
+}

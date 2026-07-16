@@ -5,7 +5,9 @@ __pycache__/
 .pytest_cache/
 *.py[cod]
 dist/
+*.egg-info/
 *.log
+/wandb/
 
 # Local credentials. The existing in-code defaults are intentionally unchanged.
 api_key.txt
@@ -20,6 +22,17 @@ demo/llm_debug
 outputs
 logs
 .codegraph
+
+# Training run records stay reviewable in git, but model/optimizer payloads
+# belong in the external artifact store and exceed normal git object limits.
+experiments/runs/**/adapter_model.safetensors
+experiments/runs/**/optimizer.pt
+experiments/runs/**/rng_state_*.pth
+experiments/runs/**/scaler.pt
+experiments/runs/**/scheduler.pt
+experiments/runs/**/tokenizer.json
+experiments/runs/**/training_args.bin
+experiments/runs/**/wandb/
 
 # Regenerated prompt contexts and raw historical rollouts live externally.
 training/planner_grpo_seed_v1/reports/grpo_train_prompt_contexts
