@@ -231,6 +231,54 @@ SCREEN_DIR="${RUN_DIR}" scripts/run_qwen35_4b_v10_selection_eval.sh
 scripts/run_qwen35_v10_sealed_eval.sh
 ```
 
+### 从 V11 的失败学会“support 必须代表 optimizer”
+
+V11 不是因为模型完全没有安全信号而失败。它的 1,728 个样本全部完整，JSON 为 100%，clipped 为 0，primary gold support/任务方差为 `81.25%/22.22%`，禁用动作样本率为 `8.22%`；三个 primary 场景各自的 safety-variance group 也都通过门槛。唯一失败项是总体 safety-variance group：`32 < 43`。
+
+根因是分布不一致：V11 optimizer 为了抵消 V10 的迁移先验，把三个非迁移动作场景各加入一份独立 replay，因此 optimizer 有 288 个 primary rows 和 288 个 control rows；support 却仍只有基础九场景 factorial，即 144 个 primary groups 和 288 个 control groups。安全 reward 主要只会在 primary 的错误迁移动作上产生方差，所以 support 系统性低估了 optimizer 中安全信号所占的比例。
+
+不能在看见 32 后把门槛改成 30。V12 在生成任何新数据前做了以下改动：
+
+| 项目 | V11 | V12 |
+| --- | ---: | ---: |
+| Support primary groups | 144 | 288 |
+| Support control groups | 288 | 288 |
+| Support action ratio | 1:2 | 1:1，与 optimizer 相同 |
+| Samples (`G=4`) | 1,728 | 2,304 |
+| Overall safety-variance 门槛 | 43 | 43，未降低 |
+| 新增门禁 | 无 | primary safety-variance rate ≥15% |
+
+V12 的权限链如下：
+
+```bash
+# 1. 预注册已经先于数据提交；构建只生成 train/support/selection 和 sealed hash
+.venv-qwen35-grpo/bin/python \
+  training/planner_grpo_seed_v1/scripts/build_planner_retry_optimizer_matched_v12.py
+
+# 2. 六个执行分片不改变全局 row/sample seed；完成 2,304 个样本后原子判门
+scripts/run_qwen35_4b_v12_support.sh
+
+# 3. 只有 support_decision=pass 才能冻结 576 条 optimizer 数据
+.venv-qwen35-grpo/bin/python \
+  training/planner_grpo_seed_v1/scripts/freeze_planner_retry_optimizer_matched_v12_data.py \
+  --source training/planner_grpo_seed_v1/step_data/planner_retry_optimizer_matched_v12_grpo_train_qwen35_4b_nothinking_mixed_steps.jsonl \
+  --support-decision experiments/studies/planner_retry_optimizer_matched_v12_qwen35_4b_v1/support_decision.json \
+  --accepted-scenarios data/datasets/planner_retry_optimizer_matched_v12/accepted_optimizer_scenarios.txt \
+  --output training/planner_grpo_seed_v1/step_data/planner_retry_optimizer_matched_v12_optimizer_qwen35_4b_nothinking_mixed_steps.jsonl \
+  --manifest training/planner_grpo_seed_v1/step_data/planner_retry_optimizer_matched_v12_optimizer_qwen35_4b_nothinking_mixed_steps.manifest.json
+
+# 4. screen 启动器会强制要求 canary_health=pass
+RUN_MODE=canary scripts/run_qwen35_4b_retry_optimizer_matched_v12_grpo.sh
+RUN_MODE=screen scripts/run_qwen35_4b_retry_optimizer_matched_v12_grpo.sh
+
+# 5. V12 审计额外检查 safety component、reward 权重和冻结训练配方
+.venv-qwen35-grpo/bin/python \
+  training/planner_grpo_seed_v1/scripts/audit_qwen35_4b_v12_grpo.py \
+  --run-dir "${RUN_DIR}" --expected-steps 8 --world-size 4 \
+  --candidate-checkpoint 2 --candidate-checkpoint 5 --candidate-checkpoint 8 \
+  --output experiments/studies/planner_retry_optimizer_matched_v12_qwen35_4b_v1/screen_health.json
+```
+
 ## 📊 如何阅读 W&B，而不是只看 loss
 
 | 看板 | 你要判断什么 | 危险信号 |
