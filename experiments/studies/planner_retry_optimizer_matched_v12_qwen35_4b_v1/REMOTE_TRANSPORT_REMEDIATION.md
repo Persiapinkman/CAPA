@@ -1,15 +1,18 @@
-# V12 larger-reference transport remediation
+# V12 larger-reference runtime remediation
 
-The first sealed `Qwen3.5-35B-A3B` attempt was stopped as an invalid runtime run: each of four shards wrote exactly one row, every row had zero decisions, and every error was `planner rollout step timed out`. No larger-reference decision or score was available, and neither target model had been scored.
+The first sealed `Qwen3.5-35B-A3B` attempt was an invalid runtime run: each of four shards wrote one row with zero decisions and `planner rollout step timed out`. A first diagnosis attributed this to non-streaming schema handling and was committed as `5bf9971`; that diagnosis was incomplete because its successful and failing probes used different proxy routes.
 
-The fault was isolated to the shared gateway's non-streaming transport for the frozen complex JSON schema. With the same real prompt, model, schema, temperature, sampling settings, seed, and 2048-token limit, streaming completed twice in 5.097 s and 4.732 s. Both outputs were valid JSON and byte-identical (`5661c014...f2cd3`). A fake-client regression also confirmed that the new transport path reassembles the same content as the non-streaming path.
+The corrected root cause is network routing. The evaluation script forced `10.111.32.253` into `NO_PROXY`, while this compute host reaches that gateway through its configured SOCKS proxy. Four fresh direct connections remained in TCP `SYN-SENT` for more than 200 seconds and wrote zero rows. At the same time, proxy-routed models/chat checks returned HTTP 200 in 0.554/1.900 seconds.
 
-Before the formal retry, the following remediation is frozen:
+With the proxy route inherited, the original non-streaming protocol completed the same real prompt and frozen schema twice in 4.878 s and 4.470 s. Both outputs were valid, byte-identical, and had the same hash as two streaming probes (`5661c014...f2cd3`). No output content or formal score was inspected.
 
-- keep every inference and scoring parameter unchanged;
-- set `DEMO_OPENAI_STREAM=1` and extend only the infrastructure timeout from 300 s to 900 s;
-- write all 432 reference predictions to a new `larger_stream_retry` directory;
-- retain, but never merge or score, the four timeout rows;
+Before the valid retry, the following is frozen:
+
+- restore the original non-streaming transport and 300-second timeout;
+- keep model, prompt, schema, temperature, sampling, seed, step/token limits, and verifier unchanged;
+- remove only the script's forced gateway `NO_PROXY` override and inherit the configured proxy;
+- write all 432 predictions to a new `larger_proxy_retry` directory;
+- retain, but never merge or score, both failed runtime attempts;
 - compute no sealed result until SFT, GRPO, and the valid larger reference all have complete 432/432 coverage.
 
-The machine-readable audit is `remote_transport_remediation.json`.
+The corrected machine-readable audit is `remote_transport_remediation.json`.

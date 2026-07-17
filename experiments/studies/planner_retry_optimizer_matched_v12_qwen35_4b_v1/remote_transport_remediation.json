@@ -1,39 +1,60 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "created_at": "2026-07-17T07:06:22Z",
-  "status": "frozen_before_larger_reference_retry",
+  "corrected_at": "2026-07-17T07:16:28Z",
+  "status": "frozen_before_proxy_routed_larger_reference_retry",
   "study_id": "planner_retry_optimizer_matched_v12_qwen35_4b_v1",
-  "reason": "The shared gateway buffered schema-constrained non-streaming responses beyond the client deadline. Streaming returned the same frozen completion promptly and changes HTTP transport only.",
+  "correction_of_commit": "5bf9971",
+  "reason": "The evaluation script forced the private gateway into NO_PROXY, but this compute host reaches that gateway through its configured SOCKS proxy. Direct Python sockets remained in SYN-SENT; proxy-routed requests completed normally.",
   "blind_state": {
     "formal_sealed_objective_computed": false,
     "larger_reference_valid_decisions_observed": 0,
-    "larger_reference_scores_observed": false,
-    "target_sealed_scores_observed": false
+    "larger_reference_formal_scores_observed": false,
+    "target_sealed_scores_observed": false,
+    "runtime_failure_rows_scored_as_formal_results": false
   },
-  "failed_attempt": {
-    "output_root": "experiments/runs/20260717_qwen35_v12_sealed/larger",
-    "transport": "non_stream",
-    "hard_timeout_seconds": 300,
-    "rows_written": 4,
-    "valid_decisions": 0,
-    "common_error": "planner rollout step timed out",
-    "prediction_sha256": {
-      "shard0": "c5534c8de33fd73a9ab7d5731e2ab0b41f6d8415294e487eaeab4b776d43e305",
-      "shard1": "0dde7f7cea307c47f957fb24912e085d3fc6ae540e896234daf2a96e087dc909",
-      "shard2": "324ccc548d7004953d57f102fc25346e8ca9fa7774e5e03972122b50b388410f",
-      "shard3": "eefc083de814e861f0e3fe0e1af0c64229c4605a0d3aa1bfec54479321ca92b1"
+  "failed_attempts": [
+    {
+      "output_root": "experiments/runs/20260717_qwen35_v12_sealed/larger",
+      "transport": "non_stream",
+      "network_route": "forced_direct_via_NO_PROXY",
+      "hard_timeout_seconds": 300,
+      "rows_written": 4,
+      "valid_decisions": 0,
+      "common_error": "planner rollout step timed out",
+      "prediction_sha256": {
+        "shard0": "c5534c8de33fd73a9ab7d5731e2ab0b41f6d8415294e487eaeab4b776d43e305",
+        "shard1": "0dde7f7cea307c47f957fb24912e085d3fc6ae540e896234daf2a96e087dc909",
+        "shard2": "324ccc548d7004953d57f102fc25346e8ca9fa7774e5e03972122b50b388410f",
+        "shard3": "eefc083de814e861f0e3fe0e1af0c64229c4605a0d3aa1bfec54479321ca92b1"
+      },
+      "disposition": "Retain as runtime-failure evidence; never merge or score these rows."
     },
-    "disposition": "Retain as runtime-failure evidence; never merge or score these rows."
-  },
-  "diagnostics_before_retry": {
-    "same_real_prompt_without_response_format": {
-      "elapsed_seconds": 1.597,
-      "purpose": "Isolate network, model, and prompt-prefill health; not an evaluation result."
+    {
+      "output_root": "experiments/runs/20260717_qwen35_v12_sealed/larger_stream_retry",
+      "transport": "stream",
+      "network_route": "forced_direct_via_NO_PROXY",
+      "rows_written": 0,
+      "valid_decisions": 0,
+      "observed_socket_state": "four TCP connections remained SYN-SENT after more than 200 seconds",
+      "disposition": "Retain as connection-failure evidence; never merge or score."
+    }
+  ],
+  "root_cause_diagnostics": {
+    "gateway_with_inherited_proxy": {
+      "models_http_status": 200,
+      "models_elapsed_seconds": 0.554,
+      "chat_http_status": 200,
+      "chat_elapsed_seconds": 1.9
     },
-    "same_real_prompt_and_frozen_schema_streamed_twice": {
+    "gateway_forced_direct": {
+      "python_client_success_before_diagnostic_deadline": false,
+      "socket_state": "SYN-SENT"
+    },
+    "same_real_prompt_frozen_schema_non_stream_via_proxy_twice": {
       "elapsed_seconds": [
-        5.097,
-        4.732
+        4.878,
+        4.47
       ],
       "valid_json": [
         true,
@@ -50,10 +71,22 @@
       "byte_identical": true,
       "content_or_score_inspected": false
     },
-    "fake_client_stream_reassembly_regression": "pass"
+    "same_real_prompt_frozen_schema_stream_via_proxy_twice": {
+      "elapsed_seconds": [
+        5.097,
+        4.732
+      ],
+      "completion_sha256": [
+        "5661c014af1377affe922b6202baa15663ff90f76d33c9d37d8a26795c3f2cd3",
+        "5661c014af1377affe922b6202baa15663ff90f76d33c9d37d8a26795c3f2cd3"
+      ],
+      "byte_identical_to_non_stream": true,
+      "content_or_score_inspected": false
+    },
+    "corrected_inference": "The earlier streaming diagnosis was confounded by proxy routing. Streaming is byte-equivalent in the diagnostic but is not needed for the formal retry."
   },
   "frozen_retry": {
-    "output_root": "experiments/runs/20260717_qwen35_v12_sealed/larger_stream_retry",
+    "output_root": "experiments/runs/20260717_qwen35_v12_sealed/larger_proxy_retry",
     "sealed_cases_sha256": "6e9413858d6e9cc09672d00d80dbda593e13e190457915498f5240c97b16c149",
     "rows": 432,
     "shards": 4,
@@ -65,20 +98,21 @@
     "max_steps": 3,
     "max_tokens": 2048,
     "response_format": "repository_current_frozen_at_v12_build",
-    "transport": "stream",
-    "hard_timeout_seconds": 900,
+    "transport": "non_stream",
+    "gateway_network_route": "inherit configured HTTP/SOCKS proxy; do not add the gateway to NO_PROXY",
+    "hard_timeout_seconds": 300,
     "scoring": "unchanged reward_planner_grpo.py after complete 432/432 coverage only",
-    "merge_failed_attempt": false
+    "merge_failed_attempts": false
   },
   "invariants": [
     "Model identity and substitution rule are unchanged.",
-    "Prompt, Planner state machine, response schema, temperature, top-p, sampling flag, seed, step limit, token limit, and verifier are unchanged.",
-    "The timeout is an infrastructure budget, not a statistical or generation parameter.",
-    "No sealed score or valid larger-reference decision was available when this remediation was frozen."
+    "Prompt, Planner state machine, response schema, temperature, top-p, sampling flag, seed, step limit, token limit, timeout, and verifier are unchanged from the original formal command.",
+    "Only the erroneous forced-direct network route is removed.",
+    "No sealed score or valid larger-reference decision was available when this corrected remediation was frozen."
   ],
   "implementation_sha256": {
     "util/vlm_service.py": "f89f1c92365b2f7702a8c74f8bf0f297949baf332ff4c9af935c1377abcd28cb",
-    "scripts/run_qwen35_v9_larger_reference_eval.sh": "76e535533a6c8992c68c78a62336b672adae2038a13842089264e1ebf3e2fcbe",
+    "scripts/run_qwen35_v9_larger_reference_eval.sh": "6eef5760698e2bd6501b5ab02190783f60059ec0d9ce4e4e717be8480a557b4b",
     "src/capa/agent.py": "928ce51aa326924288afb61eacbd5947f9d4a2357da8d0d42b94bd3421fecdea"
   }
 }

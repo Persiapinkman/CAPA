@@ -12,7 +12,7 @@ MODEL="${MODEL:-Qwen3.5-35B-A3B}"
 API_BASE="${API_BASE:-http://10.111.32.253:8000/v1}"
 EXPECTED_ROWS="${EXPECTED_ROWS:?set EXPECTED_ROWS to the frozen case count}"
 NUM_SHARDS=4
-TIMEOUT_SECONDS="${TIMEOUT_SECONDS:-900}"
+TIMEOUT_SECONDS="${TIMEOUT_SECONDS:-300}"
 
 if (( EXPECTED_ROWS % NUM_SHARDS != 0 )); then
   echo "EXPECTED_ROWS must be divisible by ${NUM_SHARDS}" >&2
@@ -22,13 +22,11 @@ LIMIT=$((EXPECTED_ROWS / NUM_SHARDS))
 mkdir -p "${OUT_DIR}"
 export PYTHONPATH="${ROOT_DIR}${PYTHONPATH:+:${PYTHONPATH}}"
 export CAPA_OMIT_MODEL_IMAGE_PAYLOAD=1
-# The shared gateway can leave schema-constrained non-streaming responses
-# buffered past the client deadline even though the same completion streams
-# immediately.  Streaming changes only HTTP transport; model, schema, sampling,
-# seed, token budget, and scoring remain frozen.
-export DEMO_OPENAI_STREAM="${DEMO_OPENAI_STREAM:-1}"
-export NO_PROXY="${NO_PROXY:-127.0.0.1,localhost,10.111.32.253}"
-export no_proxy="${no_proxy:-${NO_PROXY}}"
+# Keep the original non-streaming protocol.  Do not force this private gateway
+# into NO_PROXY: some compute nodes (including the V12 host) reach it through
+# their configured HTTP/SOCKS proxy.  Operators with a direct route may still
+# provide NO_PROXY explicitly in their environment.
+export DEMO_OPENAI_STREAM="${DEMO_OPENAI_STREAM:-0}"
 
 pids=()
 for shard in 0 1 2 3; do
