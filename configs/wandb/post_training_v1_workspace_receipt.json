@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "status": "saved_and_verified",
+  "verified_at": "2026-07-17T01:02:22Z",
+  "entity": "1139090915-tsinghua-university",
+  "project": "capa-planner-post-training",
+  "workspace_name": "CAPA Post-training: SFT to GRPO",
+  "workspace_url": "https://wandb.ai/1139090915-tsinghua-university/capa-planner-post-training",
+  "dashboard_config": "configs/wandb/post_training_v1.json",
+  "dashboard_config_sha256": "3167970175f692ee2eda68f5a202681cd2c773ec2a378397e79030cba4e41ffc",
+  "required_sections": [
+    "Train Reward Statistics",
+    "Policy Entropy",
+    "Gradient Norm",
+    "Mean Advantage Estimate"
+  ],
+  "verification_run": {
+    "run_id": "14e25kpx",
+    "run_name": "20260717T001316Z_qwen35_4b_anti_forgetting_v10_screen10_seed42",
+    "global_step": 10,
+    "required_metrics_present": true
+  }
+}
