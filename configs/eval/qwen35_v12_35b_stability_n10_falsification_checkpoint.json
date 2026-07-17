@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "study_id": "qwen35_v12_35b_stability_n10",
+  "checkpoint_role": "first_irreversible_hard_gate_falsification_observation",
+  "run": 1,
+  "observed_rows": 14,
+  "expected_runtime_error_rows": 14,
+  "expected_transport_failure_rows": 0,
+  "expected_strict_passes": 0,
+  "runtime_error_signature": "planner schema parse failed after retry: first=planner response is empty; retry=planner response is empty",
+  "case_ids": [
+    "PROMV12-TA-006-REX-PV3",
+    "PROMV12-TA-003-QWEN-PV3",
+    "PROMV12-TA-012-REX-PV3",
+    "PROMV12-TA-010-REX-PV3",
+    "PROMV12-TA-007-QWEN-CS2",
+    "PROMV12-TA-012-QWEN-PV3",
+    "PROMV12-TB-002-REX-PV3",
+    "PROMV12-TB-011-QWEN-CS2",
+    "PROMV12-TB-007-QWEN-CS2",
+    "PROMV12-TB-003-QWEN-CS2",
+    "PROMV12-TB-005-QWEN-CS2",
+    "PROMV12-TB-009-REX-CS2",
+    "PROMV12-TB-001-QWEN-CS2",
+    "PROMV12-TB-008-QWEN-CS2"
+  ],
+  "decision": "irreversible_failure_of_zero_runtime_error_hard_gate; stop after coordinator instruction; no retry because failures are non-transport"
+}
