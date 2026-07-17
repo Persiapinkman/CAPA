@@ -1,0 +1,754 @@
+{
+  "checks": {
+    "control_guardrail": true,
+    "grpo_above_larger_primary": true,
+    "grpo_above_sft_primary": true,
+    "wrong_side_effecting_action_guardrail": false
+  },
+  "grpo_vs_larger": {
+    "by_detector": {
+      "qwen": {
+        "grpo": {
+          "cases": 216,
+          "mean_reward": 0.8677553101851851,
+          "pass_rate": 0.5787037037037037,
+          "wrong_side_effecting_actions": 42
+        },
+        "larger": {
+          "cases": 216,
+          "mean_reward": 0.8967736944444444,
+          "pass_rate": 0.6712962962962963,
+          "wrong_side_effecting_actions": 70
+        },
+        "mean_reward_delta": -0.02901838425925929,
+        "paired_case_counts": {
+          "both": 102,
+          "candidate_only": 23,
+          "neither": 48,
+          "reference_only": 43
+        },
+        "pass_rate_delta": -0.09259259259259256
+      },
+      "rex": {
+        "grpo": {
+          "cases": 216,
+          "mean_reward": 0.8735731666666666,
+          "pass_rate": 0.5925925925925926,
+          "wrong_side_effecting_actions": 46
+        },
+        "larger": {
+          "cases": 216,
+          "mean_reward": 0.9005535138888888,
+          "pass_rate": 0.6805555555555556,
+          "wrong_side_effecting_actions": 68
+        },
+        "mean_reward_delta": -0.0269803472222222,
+        "paired_case_counts": {
+          "both": 108,
+          "candidate_only": 20,
+          "neither": 49,
+          "reference_only": 39
+        },
+        "pass_rate_delta": -0.08796296296296302
+      }
+    },
+    "by_scenario": {
+      "budget_exhausted_step2": {
+        "grpo": {
+          "cases": 48,
+          "mean_reward": 0.982186,
+          "pass_rate": 0.9166666666666666,
+          "wrong_side_effecting_actions": 0
+        },
+        "larger": {
+          "cases": 48,
+          "mean_reward": 1.0,
+          "pass_rate": 1.0,
+          "wrong_side_effecting_actions": 0
+        },
+        "mean_reward_delta": -0.017813999999999997,
+        "paired_case_counts": {
+          "both": 44,
+          "candidate_only": 0,
+          "neither": 0,
+          "reference_only": 4
+        },
+        "pass_rate_delta": -0.08333333333333337
+      },
+      "conflicting_state_step2": {
+        "grpo": {
+          "cases": 48,
+          "mean_reward": 0.96557975,
+          "pass_rate": 0.9166666666666666,
+          "wrong_side_effecting_actions": 0
+        },
+        "larger": {
+          "cases": 48,
+          "mean_reward": 0.9913949375,
+          "pass_rate": 0.9791666666666666,
+          "wrong_side_effecting_actions": 0
+        },
+        "mean_reward_delta": -0.025815187500000003,
+        "paired_case_counts": {
+          "both": 43,
+          "candidate_only": 1,
+          "neither": 0,
+          "reference_only": 4
+        },
+        "pass_rate_delta": -0.0625
+      },
+      "current_success_step2": {
+        "grpo": {
+          "cases": 48,
+          "mean_reward": 0.9681159166666666,
+          "pass_rate": 0.9166666666666666,
+          "wrong_side_effecting_actions": 4
+        },
+        "larger": {
+          "cases": 48,
+          "mean_reward": 0.6413040625,
+          "pass_rate": 0.0625,
+          "wrong_side_effecting_actions": 45
+        },
+        "mean_reward_delta": 0.3268118541666666,
+        "paired_case_counts": {
+          "both": 3,
+          "candidate_only": 41,
+          "neither": 4,
+          "reference_only": 0
+        },
+        "pass_rate_delta": 0.8541666666666666
+      },
+      "fresh_retry_step2": {
+        "grpo": {
+          "cases": 48,
+          "mean_reward": 0.7014973958333334,
+          "pass_rate": 0.0,
+          "wrong_side_effecting_actions": 41
+        },
+        "larger": {
+          "cases": 48,
+          "mean_reward": 0.7307291666666665,
+          "pass_rate": 0.020833333333333332,
+          "wrong_side_effecting_actions": 47
+        },
+        "mean_reward_delta": -0.02923177083333317,
+        "paired_case_counts": {
+          "both": 0,
+          "candidate_only": 0,
+          "neither": 47,
+          "reference_only": 1
+        },
+        "pass_rate_delta": -0.020833333333333332
+      },
+      "missing_required_state_step2": {
+        "grpo": {
+          "cases": 48,
+          "mean_reward": 0.9652778125,
+          "pass_rate": 0.8958333333333334,
+          "wrong_side_effecting_actions": 0
+        },
+        "larger": {
+          "cases": 48,
+          "mean_reward": 1.0,
+          "pass_rate": 1.0,
+          "wrong_side_effecting_actions": 0
+        },
+        "mean_reward_delta": -0.0347221875,
+        "paired_case_counts": {
+          "both": 43,
+          "candidate_only": 0,
+          "neither": 0,
+          "reference_only": 5
+        },
+        "pass_rate_delta": -0.10416666666666663
+      },
+      "nonretryable_step2": {
+        "grpo": {
+          "cases": 48,
+          "mean_reward": 0.9824879375000001,
+          "pass_rate": 0.9375,
+          "wrong_side_effecting_actions": 0
+        },
+        "larger": {
+          "cases": 48,
+          "mean_reward": 1.0,
+          "pass_rate": 1.0,
+          "wrong_side_effecting_actions": 0
+        },
+        "mean_reward_delta": -0.017512062499999925,
+        "paired_case_counts": {
+          "both": 45,
+          "candidate_only": 0,
+          "neither": 0,
+          "reference_only": 3
+        },
+        "pass_rate_delta": -0.0625
+      },
+      "post_retry_error_step3": {
+        "grpo": {
+          "cases": 48,
+          "mean_reward": 0.7146484375000001,
+          "pass_rate": 0.020833333333333332,
+          "wrong_side_effecting_actions": 0
+        },
+        "larger": {
+          "cases": 48,
+          "mean_reward": 1.0,
+          "pass_rate": 1.0,
+          "wrong_side_effecting_actions": 0
+        },
+        "mean_reward_delta": -0.28535156249999993,
+        "paired_case_counts": {
+          "both": 1,
+          "candidate_only": 0,
+          "neither": 0,
+          "reference_only": 47
+        },
+        "pass_rate_delta": -0.9791666666666666
+      },
+      "post_retry_metric_veto_step3": {
+        "grpo": {
+          "cases": 48,
+          "mean_reward": 0.8529296875,
+          "pass_rate": 0.6666666666666666,
+          "wrong_side_effecting_actions": 0
+        },
+        "larger": {
+          "cases": 48,
+          "mean_reward": 0.9880859375000001,
+          "pass_rate": 0.9791666666666666,
+          "wrong_side_effecting_actions": 0
+        },
+        "mean_reward_delta": -0.1351562500000001,
+        "paired_case_counts": {
+          "both": 31,
+          "candidate_only": 1,
+          "neither": 0,
+          "reference_only": 16
+        },
+        "pass_rate_delta": -0.3125
+      },
+      "post_retry_success_step3": {
+        "grpo": {
+          "cases": 48,
+          "mean_reward": 0.7032552083333333,
+          "pass_rate": 0.0,
+          "wrong_side_effecting_actions": 43
+        },
+        "larger": {
+          "cases": 48,
+          "mean_reward": 0.7364583333333333,
+          "pass_rate": 0.041666666666666664,
+          "wrong_side_effecting_actions": 46
+        },
+        "mean_reward_delta": -0.033203125,
+        "paired_case_counts": {
+          "both": 0,
+          "candidate_only": 0,
+          "neither": 46,
+          "reference_only": 2
+        },
+        "pass_rate_delta": -0.041666666666666664
+      }
+    },
+    "candidate_label": "grpo",
+    "controls": {
+      "grpo": {
+        "cases": 288,
+        "mean_reward": 0.9105182708333334,
+        "pass_rate": 0.7256944444444444,
+        "wrong_side_effecting_actions": 0
+      },
+      "larger": {
+        "cases": 288,
+        "mean_reward": 0.9965801458333333,
+        "pass_rate": 0.9930555555555556,
+        "wrong_side_effecting_actions": 0
+      },
+      "mean_reward_delta": -0.08606187499999995,
+      "paired_case_counts": {
+        "both": 207,
+        "candidate_only": 2,
+        "neither": 0,
+        "reference_only": 79
+      },
+      "pass_rate_delta": -0.26736111111111116
+    },
+    "entity_clustered_primary_delta_bootstrap": {
+      "ci95": [
+        0.20833333333333334,
+        0.3125
+      ],
+      "point_estimate": 0.2638888888888889,
+      "replicates": 10000,
+      "seed": 42
+    },
+    "entity_primary_deltas": {
+      "promv12_ta_entity_001": 0.3333333333333333,
+      "promv12_ta_entity_002": 0.3333333333333333,
+      "promv12_ta_entity_003": 0.0,
+      "promv12_ta_entity_004": 0.3333333333333333,
+      "promv12_ta_entity_005": 0.16666666666666666,
+      "promv12_ta_entity_006": 0.3333333333333333,
+      "promv12_ta_entity_007": 0.3333333333333333,
+      "promv12_ta_entity_008": 0.3333333333333333,
+      "promv12_ta_entity_009": 0.3333333333333333,
+      "promv12_ta_entity_010": 0.3333333333333333,
+      "promv12_ta_entity_011": 0.16666666666666666,
+      "promv12_ta_entity_012": 0.3333333333333333,
+      "promv12_tb_entity_001": 0.3333333333333333,
+      "promv12_tb_entity_002": 0.3333333333333333,
+      "promv12_tb_entity_003": 0.3333333333333333,
+      "promv12_tb_entity_004": 0.3333333333333333,
+      "promv12_tb_entity_005": 0.3333333333333333,
+      "promv12_tb_entity_006": -0.16666666666666666,
+      "promv12_tb_entity_007": 0.3333333333333333,
+      "promv12_tb_entity_008": 0.3333333333333333,
+      "promv12_tb_entity_009": 0.3333333333333333,
+      "promv12_tb_entity_010": 0.0,
+      "promv12_tb_entity_011": 0.3333333333333333,
+      "promv12_tb_entity_012": 0.16666666666666666
+    },
+    "independent_unit": "entity_id",
+    "overall": {
+      "grpo": {
+        "cases": 432,
+        "mean_reward": 0.870664238425926,
+        "pass_rate": 0.5856481481481481,
+        "wrong_side_effecting_actions": 88
+      },
+      "larger": {
+        "cases": 432,
+        "mean_reward": 0.8986636041666666,
+        "pass_rate": 0.6759259259259259,
+        "wrong_side_effecting_actions": 138
+      },
+      "mean_reward_delta": -0.02799936574074058,
+      "paired_case_counts": {
+        "both": 210,
+        "candidate_only": 43,
+        "neither": 97,
+        "reference_only": 82
+      },
+      "pass_rate_delta": -0.09027777777777779
+    },
+    "primary": {
+      "grpo": {
+        "cases": 144,
+        "mean_reward": 0.7909561736111111,
+        "pass_rate": 0.3055555555555556,
+        "wrong_side_effecting_actions": 88
+      },
+      "larger": {
+        "cases": 144,
+        "mean_reward": 0.7028305208333333,
+        "pass_rate": 0.041666666666666664,
+        "wrong_side_effecting_actions": 138
+      },
+      "mean_reward_delta": 0.08812565277777784,
+      "paired_case_counts": {
+        "both": 3,
+        "candidate_only": 41,
+        "neither": 97,
+        "reference_only": 3
+      },
+      "pass_rate_delta": 0.2638888888888889
+    },
+    "primary_scenarios": [
+      "current_success_step2",
+      "fresh_retry_step2",
+      "post_retry_success_step3"
+    ],
+    "reference_label": "larger",
+    "schema_version": "1.0"
+  },
+  "grpo_vs_sft": {
+    "by_detector": {
+      "qwen": {
+        "grpo": {
+          "cases": 216,
+          "mean_reward": 0.8677553101851851,
+          "pass_rate": 0.5787037037037037,
+          "wrong_side_effecting_actions": 42
+        },
+        "mean_reward_delta": 0.06196317129629636,
+        "paired_case_counts": {
+          "both": 89,
+          "candidate_only": 36,
+          "neither": 89,
+          "reference_only": 2
+        },
+        "pass_rate_delta": 0.15740740740740744,
+        "sft": {
+          "cases": 216,
+          "mean_reward": 0.8057921388888888,
+          "pass_rate": 0.4212962962962963,
+          "wrong_side_effecting_actions": 35
+        }
+      },
+      "rex": {
+        "grpo": {
+          "cases": 216,
+          "mean_reward": 0.8735731666666666,
+          "pass_rate": 0.5925925925925926,
+          "wrong_side_effecting_actions": 46
+        },
+        "mean_reward_delta": 0.03635871296296289,
+        "paired_case_counts": {
+          "both": 108,
+          "candidate_only": 20,
+          "neither": 84,
+          "reference_only": 4
+        },
+        "pass_rate_delta": 0.07407407407407407,
+        "sft": {
+          "cases": 216,
+          "mean_reward": 0.8372144537037037,
+          "pass_rate": 0.5185185185185185,
+          "wrong_side_effecting_actions": 43
+        }
+      }
+    },
+    "by_scenario": {
+      "budget_exhausted_step2": {
+        "grpo": {
+          "cases": 48,
+          "mean_reward": 0.982186,
+          "pass_rate": 0.9166666666666666,
+          "wrong_side_effecting_actions": 0
+        },
+        "mean_reward_delta": 0.05963156250000001,
+        "paired_case_counts": {
+          "both": 36,
+          "candidate_only": 8,
+          "neither": 1,
+          "reference_only": 3
+        },
+        "pass_rate_delta": 0.10416666666666663,
+        "sft": {
+          "cases": 48,
+          "mean_reward": 0.9225544375,
+          "pass_rate": 0.8125,
+          "wrong_side_effecting_actions": 0
+        }
+      },
+      "conflicting_state_step2": {
+        "grpo": {
+          "cases": 48,
+          "mean_reward": 0.96557975,
+          "pass_rate": 0.9166666666666666,
+          "wrong_side_effecting_actions": 0
+        },
+        "mean_reward_delta": 0.008605062500000038,
+        "paired_case_counts": {
+          "both": 42,
+          "candidate_only": 2,
+          "neither": 3,
+          "reference_only": 1
+        },
+        "pass_rate_delta": 0.02083333333333326,
+        "sft": {
+          "cases": 48,
+          "mean_reward": 0.9569746874999999,
+          "pass_rate": 0.8958333333333334,
+          "wrong_side_effecting_actions": 0
+        }
+      },
+      "current_success_step2": {
+        "grpo": {
+          "cases": 48,
+          "mean_reward": 0.9681159166666666,
+          "pass_rate": 0.9166666666666666,
+          "wrong_side_effecting_actions": 4
+        },
+        "mean_reward_delta": 0.04782612499999994,
+        "paired_case_counts": {
+          "both": 38,
+          "candidate_only": 6,
+          "neither": 4,
+          "reference_only": 0
+        },
+        "pass_rate_delta": 0.125,
+        "sft": {
+          "cases": 48,
+          "mean_reward": 0.9202897916666667,
+          "pass_rate": 0.7916666666666666,
+          "wrong_side_effecting_actions": 10
+        }
+      },
+      "fresh_retry_step2": {
+        "grpo": {
+          "cases": 48,
+          "mean_reward": 0.7014973958333334,
+          "pass_rate": 0.0,
+          "wrong_side_effecting_actions": 41
+        },
+        "mean_reward_delta": 0.004296875000000089,
+        "paired_case_counts": {
+          "both": 0,
+          "candidate_only": 0,
+          "neither": 48,
+          "reference_only": 0
+        },
+        "pass_rate_delta": 0.0,
+        "sft": {
+          "cases": 48,
+          "mean_reward": 0.6972005208333333,
+          "pass_rate": 0.0,
+          "wrong_side_effecting_actions": 34
+        }
+      },
+      "missing_required_state_step2": {
+        "grpo": {
+          "cases": 48,
+          "mean_reward": 0.9652778125,
+          "pass_rate": 0.8958333333333334,
+          "wrong_side_effecting_actions": 0
+        },
+        "mean_reward_delta": 0.16319424999999999,
+        "paired_case_counts": {
+          "both": 24,
+          "candidate_only": 19,
+          "neither": 4,
+          "reference_only": 1
+        },
+        "pass_rate_delta": 0.375,
+        "sft": {
+          "cases": 48,
+          "mean_reward": 0.8020835625,
+          "pass_rate": 0.5208333333333334,
+          "wrong_side_effecting_actions": 0
+        }
+      },
+      "nonretryable_step2": {
+        "grpo": {
+          "cases": 48,
+          "mean_reward": 0.9824879375000001,
+          "pass_rate": 0.9375,
+          "wrong_side_effecting_actions": 0
+        },
+        "mean_reward_delta": 0.11156387500000009,
+        "paired_case_counts": {
+          "both": 32,
+          "candidate_only": 13,
+          "neither": 2,
+          "reference_only": 1
+        },
+        "pass_rate_delta": 0.25,
+        "sft": {
+          "cases": 48,
+          "mean_reward": 0.8709240625,
+          "pass_rate": 0.6875,
+          "wrong_side_effecting_actions": 0
+        }
+      },
+      "post_retry_error_step3": {
+        "grpo": {
+          "cases": 48,
+          "mean_reward": 0.7146484375000001,
+          "pass_rate": 0.020833333333333332,
+          "wrong_side_effecting_actions": 0
+        },
+        "mean_reward_delta": 0.018359375000000067,
+        "paired_case_counts": {
+          "both": 0,
+          "candidate_only": 1,
+          "neither": 47,
+          "reference_only": 0
+        },
+        "pass_rate_delta": 0.020833333333333332,
+        "sft": {
+          "cases": 48,
+          "mean_reward": 0.6962890625,
+          "pass_rate": 0.0,
+          "wrong_side_effecting_actions": 0
+        }
+      },
+      "post_retry_metric_veto_step3": {
+        "grpo": {
+          "cases": 48,
+          "mean_reward": 0.8529296875,
+          "pass_rate": 0.6666666666666666,
+          "wrong_side_effecting_actions": 0
+        },
+        "mean_reward_delta": 0.021354166666666674,
+        "paired_case_counts": {
+          "both": 25,
+          "candidate_only": 7,
+          "neither": 16,
+          "reference_only": 0
+        },
+        "pass_rate_delta": 0.14583333333333326,
+        "sft": {
+          "cases": 48,
+          "mean_reward": 0.8315755208333333,
+          "pass_rate": 0.5208333333333334,
+          "wrong_side_effecting_actions": 0
+        }
+      },
+      "post_retry_success_step3": {
+        "grpo": {
+          "cases": 48,
+          "mean_reward": 0.7032552083333333,
+          "pass_rate": 0.0,
+          "wrong_side_effecting_actions": 43
+        },
+        "mean_reward_delta": 0.007617187499999956,
+        "paired_case_counts": {
+          "both": 0,
+          "candidate_only": 0,
+          "neither": 48,
+          "reference_only": 0
+        },
+        "pass_rate_delta": 0.0,
+        "sft": {
+          "cases": 48,
+          "mean_reward": 0.6956380208333334,
+          "pass_rate": 0.0,
+          "wrong_side_effecting_actions": 34
+        }
+      }
+    },
+    "candidate_label": "grpo",
+    "controls": {
+      "grpo": {
+        "cases": 288,
+        "mean_reward": 0.9105182708333334,
+        "pass_rate": 0.7256944444444444,
+        "wrong_side_effecting_actions": 0
+      },
+      "mean_reward_delta": 0.06378471527777785,
+      "paired_case_counts": {
+        "both": 159,
+        "candidate_only": 50,
+        "neither": 73,
+        "reference_only": 6
+      },
+      "pass_rate_delta": 0.1527777777777778,
+      "sft": {
+        "cases": 288,
+        "mean_reward": 0.8467335555555555,
+        "pass_rate": 0.5729166666666666,
+        "wrong_side_effecting_actions": 0
+      }
+    },
+    "entity_clustered_primary_delta_bootstrap": {
+      "ci95": [
+        0.013888888888888888,
+        0.07638888888888888
+      ],
+      "point_estimate": 0.041666666666666664,
+      "replicates": 10000,
+      "seed": 42
+    },
+    "entity_primary_deltas": {
+      "promv12_ta_entity_001": 0.0,
+      "promv12_ta_entity_002": 0.0,
+      "promv12_ta_entity_003": 0.0,
+      "promv12_ta_entity_004": 0.0,
+      "promv12_ta_entity_005": 0.16666666666666666,
+      "promv12_ta_entity_006": 0.0,
+      "promv12_ta_entity_007": 0.0,
+      "promv12_ta_entity_008": 0.3333333333333333,
+      "promv12_ta_entity_009": 0.0,
+      "promv12_ta_entity_010": 0.0,
+      "promv12_ta_entity_011": 0.0,
+      "promv12_ta_entity_012": 0.0,
+      "promv12_tb_entity_001": 0.0,
+      "promv12_tb_entity_002": 0.0,
+      "promv12_tb_entity_003": 0.0,
+      "promv12_tb_entity_004": 0.0,
+      "promv12_tb_entity_005": 0.16666666666666666,
+      "promv12_tb_entity_006": 0.0,
+      "promv12_tb_entity_007": 0.16666666666666666,
+      "promv12_tb_entity_008": 0.0,
+      "promv12_tb_entity_009": 0.16666666666666666,
+      "promv12_tb_entity_010": 0.0,
+      "promv12_tb_entity_011": 0.0,
+      "promv12_tb_entity_012": 0.0
+    },
+    "independent_unit": "entity_id",
+    "overall": {
+      "grpo": {
+        "cases": 432,
+        "mean_reward": 0.870664238425926,
+        "pass_rate": 0.5856481481481481,
+        "wrong_side_effecting_actions": 88
+      },
+      "mean_reward_delta": 0.049160942129629626,
+      "paired_case_counts": {
+        "both": 197,
+        "candidate_only": 56,
+        "neither": 173,
+        "reference_only": 6
+      },
+      "pass_rate_delta": 0.11574074074074076,
+      "sft": {
+        "cases": 432,
+        "mean_reward": 0.8215032962962964,
+        "pass_rate": 0.4699074074074074,
+        "wrong_side_effecting_actions": 78
+      }
+    },
+    "primary": {
+      "grpo": {
+        "cases": 144,
+        "mean_reward": 0.7909561736111111,
+        "pass_rate": 0.3055555555555556,
+        "wrong_side_effecting_actions": 88
+      },
+      "mean_reward_delta": 0.019913395833333403,
+      "paired_case_counts": {
+        "both": 38,
+        "candidate_only": 6,
+        "neither": 100,
+        "reference_only": 0
+      },
+      "pass_rate_delta": 0.041666666666666685,
+      "sft": {
+        "cases": 144,
+        "mean_reward": 0.7710427777777777,
+        "pass_rate": 0.2638888888888889,
+        "wrong_side_effecting_actions": 78
+      }
+    },
+    "primary_scenarios": [
+      "current_success_step2",
+      "fresh_retry_step2",
+      "post_retry_success_step3"
+    ],
+    "reference_label": "sft",
+    "schema_version": "1.0"
+  },
+  "objective_met": false,
+  "operations": {
+    "grpo": {
+      "clipped_rate": 0.0,
+      "empty_cases": 0,
+      "json_valid_rate": 1.0,
+      "planner_decisions": 1056,
+      "runtime_errors": 0
+    },
+    "larger": {
+      "clipped_rate": 0.010416666666666666,
+      "empty_cases": 0,
+      "json_valid_rate": 1.0,
+      "planner_decisions": 1056,
+      "runtime_errors": 0
+    },
+    "sft": {
+      "clipped_rate": 0.0,
+      "empty_cases": 0,
+      "json_valid_rate": 1.0,
+      "planner_decisions": 1056,
+      "runtime_errors": 0
+    }
+  },
+  "point_estimate_only": false,
+  "schema_version": "1.0",
+  "single_use_sealed_test": true,
+  "status": "objective_not_met",
+  "strong_superiority": false,
+  "study_id": "planner_retry_optimizer_matched_v12_qwen35_4b_v1"
+}

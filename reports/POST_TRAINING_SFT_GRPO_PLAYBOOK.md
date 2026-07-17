@@ -303,6 +303,14 @@ checkpoint 冻结后才物化 sealed test，并对 4B-SFT、选中的 4B-GRPO �
 
 如果 4B-GRPO 的点估计高于 35B，但 entity bootstrap 置信区间跨零，可以报告“本次点估计超过”，不能报告“已稳定优于”。如果未超过，test 仍然只运行一次，下一版必须使用新 test。
 
+### V12 sealed：主指标强胜，完整安全门禁失败
+
+V12 checkpoint-5 在一次性、24-entity、432-case sealed test 上实现了目标的核心部分：primary 完整轨迹率从 SFT 的 `26.39%` 提升到 `30.56%`，entity-paired bootstrap 95% CI 为 `[+1.39pp, +7.64pp]`；同一 primary 指标上 35B-A3B 为 `4.17%`，4B-GRPO 高出 `26.39` 个百分点，95% CI 为 `[+20.83pp, +31.25pp]`。因此可以严格声明：4B-GRPO 在预注册 retry/safe-end primary residual 上稳定超过固定 35B reference。
+
+但最终 `objective_met=false`。control 相对 SFT 提升 `15.28` 个百分点，唯一失败项是错误副作用动作 occurrence 从 `78` 增至 `88`。逐 case 审计显示，GRPO 在 `current_success_step2` 上把受影响 case 从 10 降到 4，却在 `fresh_retry_step2` 从 30 增到 40、`post_retry_success_step3` 从 30 增到 42。所有副作用都是过早调用 `migration_advisor`。
+
+这个结果说明 selection-dev 上 occurrence `32→32` 的通过不能保证新实体上的安全泛化。下一版必须用全新实体，把 fresh-retry/post-retry-success 的“禁止迁移”作为独立主门禁，并同时保留 primary 增益与 control；不能在 V12 sealed 上继续选 checkpoint。
+
 ## 🔧 常见失败与处理
 
 ### SFT 提升，但 GRPO 没有方差
@@ -355,6 +363,7 @@ checkpoint 冻结后才物化 sealed test，并对 4B-SFT、选中的 4B-GRPO �
 | V12 canary | 完成，22/22 运行门禁通过 | 2/2 非零有限梯度；核心 W&B 与 safety reward 完整；峰值显存 13.57 GiB |
 | V12 screen | 完成，22/22 运行/配方检查通过 | 8/8 steps；7 步非零梯度、1 个饱和 batch；候选 checkpoint 2/5/8 |
 | V12 selection-dev | 完成，promote checkpoint-5 | primary +15.28pp，control +25.00pp，错误动作 occurrence 32→32；35B 未参与选择 |
-| V12 sealed comparison | 下一步 | 一次性打开 commitment `6e9413…c149`，同协议比较 SFT/ckpt5/35B |
+| V12 sealed comparison | 完成；主指标强胜、完整 objective 未通过 | GRPO 30.56% > SFT 26.39% > 35B 4.17%；两项 primary CI 均全正；control +15.28pp，但错误副作用 78→88 |
+| V13 安全泛化修复 | 下一步 | 新实体上重点修复 fresh-retry/post-retry-success 的过早迁移，不复用 V12 sealed |
 
 后续每次实验都应更新这张表，并把命令、数据 SHA-256、门禁结论和 Git commit 一起保存。这样你学到的不只是一次训练，而是一套能审计、能复现、也能知道何时不该训练的流程。
