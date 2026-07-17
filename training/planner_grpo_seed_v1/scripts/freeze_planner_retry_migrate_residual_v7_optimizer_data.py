@@ -38,7 +38,9 @@ def freeze_optimizer_data(
     accepted_scenarios_path: Path,
     output_path: Path,
     manifest_path: Path,
+    allowed_optimization_scopes: set[str] | None = None,
 ) -> dict[str, Any]:
+    allowed_scopes = allowed_optimization_scopes or {"primary_residual"}
     decision = load_json(support_decision_path)
     accepted = tuple(
         line.strip()
@@ -90,8 +92,10 @@ def freeze_optimizer_data(
         }
         if observed_pairs != expected_pairs or len(scenario_rows) != len(expected_pairs):
             raise ValueError(f"scenario does not contain one row per entity/detector pair: {scenario}")
-        if any(row.get("optimization_scope") != "primary_residual" for row in scenario_rows):
-            raise ValueError(f"non-primary row selected for optimizer: {scenario}")
+        if any(str(row.get("optimization_scope") or "") not in allowed_scopes for row in scenario_rows):
+            raise ValueError(
+                f"row outside allowed optimization scopes selected for optimizer: {scenario}"
+            )
 
     case_ids = [str(row.get("case_id") or "") for _, row in selected]
     prompt_hashes = [str(row.get("prompt_sha256") or "") for _, row in selected]
@@ -114,6 +118,7 @@ def freeze_optimizer_data(
         "role": "optimization_only",
         "selection_rule": "preregistered stochastic-support gate",
         "optimizer_authorized": True,
+        "allowed_optimization_scopes": sorted(allowed_scopes),
         "accepted_scenarios": list(accepted),
         "rows": len(selected_rows),
         "entities": len(entities),

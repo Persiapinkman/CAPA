@@ -1,0 +1,63 @@
+{
+  "accepted_scenarios": [
+    "current_success_step2",
+    "fresh_retry_step2",
+    "post_retry_success_step3",
+    "post_retry_error_step3",
+    "post_retry_metric_veto_step3",
+    "conflicting_state_step2",
+    "nonretryable_step2",
+    "budget_exhausted_step2",
+    "missing_required_state_step2"
+  ],
+  "allowed_optimization_scopes": [
+    "primary_residual",
+    "stability_control"
+  ],
+  "allowed_step_indices": [
+    2,
+    3
+  ],
+  "created_at": "2026-07-16T23:59:26.519273+00:00",
+  "dataset_id": "planner_retry_anti_forgetting_v10",
+  "distribution": {
+    "detectors": {
+      "qwen": 216,
+      "rex": 216
+    },
+    "scenarios": {
+      "budget_exhausted_step2": 48,
+      "conflicting_state_step2": 48,
+      "current_success_step2": 48,
+      "fresh_retry_step2": 48,
+      "missing_required_state_step2": 48,
+      "nonretryable_step2": 48,
+      "post_retry_error_step3": 48,
+      "post_retry_metric_veto_step3": 48,
+      "post_retry_success_step3": 48
+    },
+    "step_indices": {
+      "2": 288,
+      "3": 144
+    }
+  },
+  "entities": 24,
+  "files": {
+    "accepted_scenarios": "data/datasets/planner_retry_anti_forgetting_v10/accepted_optimizer_scenarios.txt",
+    "source_step_data": "training/planner_grpo_seed_v1/step_data/planner_retry_anti_forgetting_v10_grpo_train_qwen35_4b_nothinking_mixed_steps.jsonl",
+    "step_data": "training/planner_grpo_seed_v1/step_data/planner_retry_anti_forgetting_v10_optimizer_qwen35_4b_nothinking_mixed_steps.jsonl",
+    "support_decision": "experiments/studies/planner_retry_anti_forgetting_v10_qwen35_4b_v1/support_decision.json"
+  },
+  "optimizer_authorized": true,
+  "role": "optimization_only",
+  "rows": 432,
+  "schema_version": "1.0",
+  "selection_rule": "preregistered stochastic-support gate",
+  "sha256": {
+    "accepted_scenarios": "1096390cd5806c3179e8e13cda34dc8d7cd933f509691ee454cda91447a382cd",
+    "source_step_data": "4db089c183aa69ed3155b81b202d7422e0e5aa2380e1c630429205a82823ab9c",
+    "step_data": "4db089c183aa69ed3155b81b202d7422e0e5aa2380e1c630429205a82823ab9c",
+    "support_decision": "4cc840547c399d5bc8abde888aa914314444c7b15af5935d1257dd9037845d77"
+  },
+  "status": "frozen_support_selected_optimizer_data"
+}

@@ -1,0 +1,615 @@
+{
+  "hard_checks": [
+    {
+      "name": "sample_count",
+      "observed": 1728,
+      "operator": "==",
+      "passed": true,
+      "threshold": 1728
+    },
+    {
+      "name": "complete_prompt_groups",
+      "observed": 432,
+      "operator": "==",
+      "passed": true,
+      "threshold": 432
+    },
+    {
+      "name": "duplicate_sample_keys",
+      "observed": 0,
+      "operator": "==",
+      "passed": true,
+      "threshold": 0
+    },
+    {
+      "name": "nonfinite_rewards",
+      "observed": 0,
+      "operator": "==",
+      "passed": true,
+      "threshold": 0
+    },
+    {
+      "name": "json_valid_rate",
+      "observed": 1.0,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.99
+    },
+    {
+      "name": "clipped_rate",
+      "observed": 0.0,
+      "operator": "<=",
+      "passed": true,
+      "threshold": 0.01
+    },
+    {
+      "name": "primary_gold_action_support_rate",
+      "observed": 0.7986111111111112,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.7
+    },
+    {
+      "name": "primary_nonzero_reward_variance_rate",
+      "observed": 0.3402777777777778,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.2
+    },
+    {
+      "name": "control_gold_action_support_rate",
+      "observed": 0.78125,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.5
+    },
+    {
+      "name": "control_nonzero_reward_variance_rate",
+      "observed": 0.3333333333333333,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.2
+    },
+    {
+      "name": "current_success_step2_qwen_gold_support_rate",
+      "observed": 0.75,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.35
+    },
+    {
+      "name": "current_success_step2_qwen_nonzero_variance_groups",
+      "observed": 9,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 3
+    },
+    {
+      "name": "current_success_step2_rex_gold_support_rate",
+      "observed": 0.8333333333333334,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.35
+    },
+    {
+      "name": "current_success_step2_rex_nonzero_variance_groups",
+      "observed": 8,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 3
+    },
+    {
+      "name": "fresh_retry_step2_qwen_gold_support_rate",
+      "observed": 0.875,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.35
+    },
+    {
+      "name": "fresh_retry_step2_qwen_nonzero_variance_groups",
+      "observed": 6,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 3
+    },
+    {
+      "name": "fresh_retry_step2_rex_gold_support_rate",
+      "observed": 0.7916666666666666,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.35
+    },
+    {
+      "name": "fresh_retry_step2_rex_nonzero_variance_groups",
+      "observed": 9,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 3
+    },
+    {
+      "name": "post_retry_success_step3_qwen_gold_support_rate",
+      "observed": 0.6666666666666666,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.35
+    },
+    {
+      "name": "post_retry_success_step3_qwen_nonzero_variance_groups",
+      "observed": 9,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 3
+    },
+    {
+      "name": "post_retry_success_step3_rex_gold_support_rate",
+      "observed": 0.875,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.35
+    },
+    {
+      "name": "post_retry_success_step3_rex_nonzero_variance_groups",
+      "observed": 8,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 3
+    },
+    {
+      "name": "post_retry_error_step3_qwen_gold_support_rate",
+      "observed": 0.9166666666666666,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.35
+    },
+    {
+      "name": "post_retry_error_step3_qwen_nonzero_variance_groups",
+      "observed": 4,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 3
+    },
+    {
+      "name": "post_retry_error_step3_rex_gold_support_rate",
+      "observed": 0.9583333333333334,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.35
+    },
+    {
+      "name": "post_retry_error_step3_rex_nonzero_variance_groups",
+      "observed": 4,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 3
+    },
+    {
+      "name": "post_retry_metric_veto_step3_qwen_gold_support_rate",
+      "observed": 0.7916666666666666,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.35
+    },
+    {
+      "name": "post_retry_metric_veto_step3_qwen_nonzero_variance_groups",
+      "observed": 6,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 3
+    },
+    {
+      "name": "post_retry_metric_veto_step3_rex_gold_support_rate",
+      "observed": 0.8333333333333334,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.35
+    },
+    {
+      "name": "post_retry_metric_veto_step3_rex_nonzero_variance_groups",
+      "observed": 11,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 3
+    },
+    {
+      "name": "conflicting_state_step2_qwen_gold_support_rate",
+      "observed": 0.5,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.35
+    },
+    {
+      "name": "conflicting_state_step2_qwen_nonzero_variance_groups",
+      "observed": 6,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 3
+    },
+    {
+      "name": "conflicting_state_step2_rex_gold_support_rate",
+      "observed": 0.7083333333333334,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.35
+    },
+    {
+      "name": "conflicting_state_step2_rex_nonzero_variance_groups",
+      "observed": 10,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 3
+    },
+    {
+      "name": "nonretryable_step2_qwen_gold_support_rate",
+      "observed": 0.75,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.35
+    },
+    {
+      "name": "nonretryable_step2_qwen_nonzero_variance_groups",
+      "observed": 8,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 3
+    },
+    {
+      "name": "nonretryable_step2_rex_gold_support_rate",
+      "observed": 0.75,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.35
+    },
+    {
+      "name": "nonretryable_step2_rex_nonzero_variance_groups",
+      "observed": 9,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 3
+    },
+    {
+      "name": "budget_exhausted_step2_qwen_gold_support_rate",
+      "observed": 1.0,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.35
+    },
+    {
+      "name": "budget_exhausted_step2_qwen_nonzero_variance_groups",
+      "observed": 11,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 3
+    },
+    {
+      "name": "budget_exhausted_step2_rex_gold_support_rate",
+      "observed": 0.875,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.35
+    },
+    {
+      "name": "budget_exhausted_step2_rex_nonzero_variance_groups",
+      "observed": 9,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 3
+    },
+    {
+      "name": "missing_required_state_step2_qwen_gold_support_rate",
+      "observed": 0.6666666666666666,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.35
+    },
+    {
+      "name": "missing_required_state_step2_qwen_nonzero_variance_groups",
+      "observed": 9,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 3
+    },
+    {
+      "name": "missing_required_state_step2_rex_gold_support_rate",
+      "observed": 0.625,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.35
+    },
+    {
+      "name": "missing_required_state_step2_rex_nonzero_variance_groups",
+      "observed": 9,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 3
+    },
+    {
+      "name": "support_block_A_groups",
+      "observed": 216,
+      "operator": "==",
+      "passed": true,
+      "threshold": 216
+    },
+    {
+      "name": "support_block_A_gold_support_rate",
+      "observed": 0.8703703703703703,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.5
+    },
+    {
+      "name": "support_block_A_nonzero_variance_rate",
+      "observed": 0.3055555555555556,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.15
+    },
+    {
+      "name": "support_block_B_groups",
+      "observed": 216,
+      "operator": "==",
+      "passed": true,
+      "threshold": 216
+    },
+    {
+      "name": "support_block_B_gold_support_rate",
+      "observed": 0.7037037037037037,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.5
+    },
+    {
+      "name": "support_block_B_nonzero_variance_rate",
+      "observed": 0.36574074074074076,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.15
+    }
+  ],
+  "observed": {
+    "by_scenario": {
+      "budget_exhausted_step2": {
+        "gold_action_support_rate": 0.9375,
+        "groups": 48,
+        "mean_reward": 0.7690972222222222,
+        "nonzero_reward_variance_groups": 20,
+        "nonzero_reward_variance_rate": 0.4166666666666667
+      },
+      "conflicting_state_step2": {
+        "gold_action_support_rate": 0.6041666666666666,
+        "groups": 48,
+        "mean_reward": 0.4895833333333333,
+        "nonzero_reward_variance_groups": 16,
+        "nonzero_reward_variance_rate": 0.3333333333333333
+      },
+      "current_success_step2": {
+        "gold_action_support_rate": 0.7916666666666666,
+        "groups": 48,
+        "mean_reward": 0.7032986111111111,
+        "nonzero_reward_variance_groups": 17,
+        "nonzero_reward_variance_rate": 0.3541666666666667
+      },
+      "fresh_retry_step2": {
+        "gold_action_support_rate": 0.8333333333333334,
+        "groups": 48,
+        "mean_reward": 0.7315104166666666,
+        "nonzero_reward_variance_groups": 15,
+        "nonzero_reward_variance_rate": 0.3125
+      },
+      "missing_required_state_step2": {
+        "gold_action_support_rate": 0.6458333333333334,
+        "groups": 48,
+        "mean_reward": 0.5494357638888888,
+        "nonzero_reward_variance_groups": 18,
+        "nonzero_reward_variance_rate": 0.375
+      },
+      "nonretryable_step2": {
+        "gold_action_support_rate": 0.75,
+        "groups": 48,
+        "mean_reward": 0.6357204861111111,
+        "nonzero_reward_variance_groups": 17,
+        "nonzero_reward_variance_rate": 0.3541666666666667
+      },
+      "post_retry_error_step3": {
+        "gold_action_support_rate": 0.9375,
+        "groups": 48,
+        "mean_reward": 0.8948929398148149,
+        "nonzero_reward_variance_groups": 8,
+        "nonzero_reward_variance_rate": 0.16666666666666666
+      },
+      "post_retry_metric_veto_step3": {
+        "gold_action_support_rate": 0.8125,
+        "groups": 48,
+        "mean_reward": 0.6919270833333333,
+        "nonzero_reward_variance_groups": 17,
+        "nonzero_reward_variance_rate": 0.3541666666666667
+      },
+      "post_retry_success_step3": {
+        "gold_action_support_rate": 0.7708333333333334,
+        "groups": 48,
+        "mean_reward": 0.6708333333333334,
+        "nonzero_reward_variance_groups": 17,
+        "nonzero_reward_variance_rate": 0.3541666666666667
+      }
+    },
+    "by_scenario_detector": {
+      "budget_exhausted_step2::qwen": {
+        "gold_action_support_rate": 1.0,
+        "groups": 24,
+        "mean_reward": 0.7727430555555556,
+        "nonzero_reward_variance_groups": 11,
+        "nonzero_reward_variance_rate": 0.4583333333333333
+      },
+      "budget_exhausted_step2::rex": {
+        "gold_action_support_rate": 0.875,
+        "groups": 24,
+        "mean_reward": 0.7654513888888889,
+        "nonzero_reward_variance_groups": 9,
+        "nonzero_reward_variance_rate": 0.375
+      },
+      "conflicting_state_step2::qwen": {
+        "gold_action_support_rate": 0.5,
+        "groups": 24,
+        "mean_reward": 0.453125,
+        "nonzero_reward_variance_groups": 6,
+        "nonzero_reward_variance_rate": 0.25
+      },
+      "conflicting_state_step2::rex": {
+        "gold_action_support_rate": 0.7083333333333334,
+        "groups": 24,
+        "mean_reward": 0.5260416666666666,
+        "nonzero_reward_variance_groups": 10,
+        "nonzero_reward_variance_rate": 0.4166666666666667
+      },
+      "current_success_step2::qwen": {
+        "gold_action_support_rate": 0.75,
+        "groups": 24,
+        "mean_reward": 0.6491319444444444,
+        "nonzero_reward_variance_groups": 9,
+        "nonzero_reward_variance_rate": 0.375
+      },
+      "current_success_step2::rex": {
+        "gold_action_support_rate": 0.8333333333333334,
+        "groups": 24,
+        "mean_reward": 0.7574652777777778,
+        "nonzero_reward_variance_groups": 8,
+        "nonzero_reward_variance_rate": 0.3333333333333333
+      },
+      "fresh_retry_step2::qwen": {
+        "gold_action_support_rate": 0.875,
+        "groups": 24,
+        "mean_reward": 0.7729166666666667,
+        "nonzero_reward_variance_groups": 6,
+        "nonzero_reward_variance_rate": 0.25
+      },
+      "fresh_retry_step2::rex": {
+        "gold_action_support_rate": 0.7916666666666666,
+        "groups": 24,
+        "mean_reward": 0.6901041666666666,
+        "nonzero_reward_variance_groups": 9,
+        "nonzero_reward_variance_rate": 0.375
+      },
+      "missing_required_state_step2::qwen": {
+        "gold_action_support_rate": 0.6666666666666666,
+        "groups": 24,
+        "mean_reward": 0.5448784722222222,
+        "nonzero_reward_variance_groups": 9,
+        "nonzero_reward_variance_rate": 0.375
+      },
+      "missing_required_state_step2::rex": {
+        "gold_action_support_rate": 0.625,
+        "groups": 24,
+        "mean_reward": 0.5539930555555556,
+        "nonzero_reward_variance_groups": 9,
+        "nonzero_reward_variance_rate": 0.375
+      },
+      "nonretryable_step2::qwen": {
+        "gold_action_support_rate": 0.75,
+        "groups": 24,
+        "mean_reward": 0.6451388888888888,
+        "nonzero_reward_variance_groups": 8,
+        "nonzero_reward_variance_rate": 0.3333333333333333
+      },
+      "nonretryable_step2::rex": {
+        "gold_action_support_rate": 0.75,
+        "groups": 24,
+        "mean_reward": 0.6263020833333334,
+        "nonzero_reward_variance_groups": 9,
+        "nonzero_reward_variance_rate": 0.375
+      },
+      "post_retry_error_step3::qwen": {
+        "gold_action_support_rate": 0.9166666666666666,
+        "groups": 24,
+        "mean_reward": 0.8723958333333334,
+        "nonzero_reward_variance_groups": 4,
+        "nonzero_reward_variance_rate": 0.16666666666666666
+      },
+      "post_retry_error_step3::rex": {
+        "gold_action_support_rate": 0.9583333333333334,
+        "groups": 24,
+        "mean_reward": 0.9173900462962963,
+        "nonzero_reward_variance_groups": 4,
+        "nonzero_reward_variance_rate": 0.16666666666666666
+      },
+      "post_retry_metric_veto_step3::qwen": {
+        "gold_action_support_rate": 0.7916666666666666,
+        "groups": 24,
+        "mean_reward": 0.7387152777777778,
+        "nonzero_reward_variance_groups": 6,
+        "nonzero_reward_variance_rate": 0.25
+      },
+      "post_retry_metric_veto_step3::rex": {
+        "gold_action_support_rate": 0.8333333333333334,
+        "groups": 24,
+        "mean_reward": 0.6451388888888888,
+        "nonzero_reward_variance_groups": 11,
+        "nonzero_reward_variance_rate": 0.4583333333333333
+      },
+      "post_retry_success_step3::qwen": {
+        "gold_action_support_rate": 0.6666666666666666,
+        "groups": 24,
+        "mean_reward": 0.5666666666666667,
+        "nonzero_reward_variance_groups": 9,
+        "nonzero_reward_variance_rate": 0.375
+      },
+      "post_retry_success_step3::rex": {
+        "gold_action_support_rate": 0.875,
+        "groups": 24,
+        "mean_reward": 0.775,
+        "nonzero_reward_variance_groups": 8,
+        "nonzero_reward_variance_rate": 0.3333333333333333
+      }
+    },
+    "by_support_block": {
+      "A": {
+        "gold_action_support_rate": 0.8703703703703703,
+        "groups": 216,
+        "mean_reward": 0.7708912037037037,
+        "nonzero_reward_variance_groups": 66,
+        "nonzero_reward_variance_rate": 0.3055555555555556
+      },
+      "B": {
+        "gold_action_support_rate": 0.7037037037037037,
+        "groups": 216,
+        "mean_reward": 0.5927308384773662,
+        "nonzero_reward_variance_groups": 79,
+        "nonzero_reward_variance_rate": 0.36574074074074076
+      }
+    },
+    "clipped_rate": 0.0,
+    "complete_groups": 432,
+    "controls": {
+      "gold_action_support_rate": 0.78125,
+      "groups": 288,
+      "mean_reward": 0.6717761381172839,
+      "nonzero_reward_variance_groups": 96,
+      "nonzero_reward_variance_rate": 0.3333333333333333
+    },
+    "duplicate_sample_keys": 0,
+    "json_valid_rate": 1.0,
+    "nonfinite_rewards": 0,
+    "primary": {
+      "gold_action_support_rate": 0.7986111111111112,
+      "groups": 144,
+      "mean_reward": 0.701880787037037,
+      "nonzero_reward_variance_groups": 49,
+      "nonzero_reward_variance_rate": 0.3402777777777778
+    },
+    "samples": 1728
+  },
+  "on_fail": "Run zero optimizer steps; preserve samples and open a new study version without relaxing or resampling this gate.",
+  "optimizer_authorized": true,
+  "optimizer_scenarios": [
+    "current_success_step2",
+    "fresh_retry_step2",
+    "post_retry_success_step3",
+    "post_retry_error_step3",
+    "post_retry_metric_veto_step3",
+    "conflicting_state_step2",
+    "nonretryable_step2",
+    "budget_exhausted_step2",
+    "missing_required_state_step2"
+  ],
+  "schema_version": "1.0",
+  "status": "pass",
+  "study_id": "planner_retry_anti_forgetting_v10_qwen35_4b_v1"
+}

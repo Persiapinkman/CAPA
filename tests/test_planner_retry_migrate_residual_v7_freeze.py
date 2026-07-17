@@ -85,3 +85,32 @@ def test_freeze_rejects_decision_file_disagreement(tmp_path):
             output_path=tmp_path / "optimizer.jsonl",
             manifest_path=tmp_path / "optimizer.manifest.json",
         )
+
+
+def test_freeze_can_explicitly_include_stability_control_replay(tmp_path):
+    source, decision, accepted = _fixture(tmp_path)
+    scenarios = ["fresh_retry_step2", "nonretryable_step2"]
+    _write_json(
+        decision,
+        {
+            "status": "pass",
+            "optimizer_authorized": True,
+            "optimizer_scenarios": scenarios,
+        },
+    )
+    accepted.write_text("".join(f"{scenario}\n" for scenario in scenarios), encoding="utf-8")
+    output = tmp_path / "optimizer.jsonl"
+    manifest = freeze_optimizer_data(
+        source_path=source,
+        support_decision_path=decision,
+        accepted_scenarios_path=accepted,
+        output_path=output,
+        manifest_path=tmp_path / "optimizer.manifest.json",
+        allowed_optimization_scopes={"primary_residual", "stability_control"},
+    )
+    rows = [json.loads(line) for line in output.read_text().splitlines()]
+    assert len(rows) == 8
+    assert set(manifest["allowed_optimization_scopes"]) == {
+        "primary_residual",
+        "stability_control",
+    }
