@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "created_at": "2026-07-17T07:25:29Z",
+  "status": "target_predictions_complete_before_larger_reference",
+  "sealed_cases_sha256": "6e9413858d6e9cc09672d00d80dbda593e13e190457915498f5240c97b16c149",
+  "models": {
+    "sft": {
+      "rows": 432,
+      "unique_case_ids": 432,
+      "runtime_error_rows": 0,
+      "predictions": "experiments/runs/20260717_qwen35_v12_sealed/sft/predictions.jsonl",
+      "predictions_sha256": "d22468bc01e1a1e7381680863509cf471ca5528f2febbff5ab601d5b8a89b99f"
+    },
+    "grpo": {
+      "rows": 432,
+      "unique_case_ids": 432,
+      "runtime_error_rows": 0,
+      "predictions": "experiments/runs/20260717_qwen35_v12_sealed/grpo/predictions.jsonl",
+      "predictions_sha256": "e56a5ff2ce930002011d1993da68915c7bf6d9ea7d37470c78a80c08f6594c12"
+    }
+  },
+  "blind_state": {
+    "larger_reference_complete": false,
+    "formal_comparison_computed": false,
+    "target_reward_artifacts_inspected": false
+  }
+}
