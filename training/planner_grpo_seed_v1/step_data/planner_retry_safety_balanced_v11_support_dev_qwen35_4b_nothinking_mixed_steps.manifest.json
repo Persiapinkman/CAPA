@@ -1,0 +1,68 @@
+{
+  "allowed_step_indices": [
+    2,
+    3
+  ],
+  "created_at": "2026-07-17T02:06:15Z",
+  "dataset_id": "planner_retry_safety_balanced_v11",
+  "distribution": {
+    "actions": {
+      "end": 96,
+      "migrate": 288,
+      "retry": 48
+    },
+    "entities": 24,
+    "prompt_tokens": {
+      "max": 4431,
+      "mean": 4281.993055555556,
+      "min": 4198,
+      "p50": 4223,
+      "p95": 4422
+    },
+    "rows": 432,
+    "scenarios": {
+      "budget_exhausted_step2": 48,
+      "conflicting_state_step2": 48,
+      "current_success_step2": 48,
+      "fresh_retry_step2": 48,
+      "missing_required_state_step2": 48,
+      "nonretryable_step2": 48,
+      "post_retry_error_step3": 48,
+      "post_retry_metric_veto_step3": 48,
+      "post_retry_success_step3": 48
+    },
+    "steps": {
+      "2": 288,
+      "3": 144
+    },
+    "support_blocks": {
+      "A": 216,
+      "B": 216
+    }
+  },
+  "files": {
+    "cases": [
+      "training/planner_grpo_seed_v1/cases/planner_retry_safety_balanced_v11_support_dev_a_cases.jsonl",
+      "training/planner_grpo_seed_v1/cases/planner_retry_safety_balanced_v11_support_dev_b_cases.jsonl"
+    ],
+    "step_data": "training/planner_grpo_seed_v1/step_data/planner_retry_safety_balanced_v11_support_dev_qwen35_4b_nothinking_mixed_steps.jsonl"
+  },
+  "model_name_or_path": "/raid/zkq/models/Qwen3.5-4B",
+  "role": "support_gate_only",
+  "rows": 432,
+  "schema_version": "1.0",
+  "sha256": {
+    "cases": {
+      "support_dev_a": "614956e1347635004b7b380d258e44291fda7209f2e42e05f7bb5eb20006ad2c",
+      "support_dev_b": "d2227c4aa399269e7ece72493dd63d531ff3101f2d457f0a95ce217e2fc14ad5"
+    },
+    "chat_template": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+    "config": "ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670",
+    "step_data": "3547ff0555ba8dd0d1ce5b00697dbd85feb7ee1820afaf7a060b432008daa5d8",
+    "tokenizer_config": "316230d6a809701f4db5ea8f8fc862bc3a6f3229c937c174e674ff3ca0a64ac8"
+  },
+  "source_splits": [
+    "support_dev_a",
+    "support_dev_b"
+  ]
+}

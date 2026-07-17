@@ -1,0 +1,217 @@
+{
+  "blocked_bundle": "entity × detector family",
+  "case_rows": {
+    "grpo_train": 576,
+    "sealed_test_a": 216,
+    "sealed_test_b": 216,
+    "selection_dev": 216,
+    "support_dev_a": 216,
+    "support_dev_b": 216
+  },
+  "created_at": "2026-07-17T02:06:15Z",
+  "dataset_id": "planner_retry_safety_balanced_v11",
+  "difficulty_family": "v7_anchored_hard_nuisance_safety_balanced",
+  "files": {
+    "audit_report": "data/datasets/planner_retry_safety_balanced_v11/audit_report.json",
+    "builder": "training/planner_grpo_seed_v1/scripts/build_planner_retry_safety_balanced_v11.py",
+    "cases_grpo_train": "training/planner_grpo_seed_v1/cases/planner_retry_safety_balanced_v11_grpo_train_cases.jsonl",
+    "cases_selection_dev": "training/planner_grpo_seed_v1/cases/planner_retry_safety_balanced_v11_selection_dev_cases.jsonl",
+    "cases_support_dev_a": "training/planner_grpo_seed_v1/cases/planner_retry_safety_balanced_v11_support_dev_a_cases.jsonl",
+    "cases_support_dev_b": "training/planner_grpo_seed_v1/cases/planner_retry_safety_balanced_v11_support_dev_b_cases.jsonl",
+    "comparison_contract": "experiments/studies/planner_retry_safety_balanced_v11_qwen35_4b_v1/comparison_contract.json",
+    "fixture_01": "examples/images/planner_retry_safety_balanced_v11/moonwhite_double_ring_isolator.png",
+    "fixture_02": "examples/images/planner_retry_safety_balanced_v11/amber_hex_validation_block.png",
+    "fixture_03": "examples/images/planner_retry_safety_balanced_v11/indigo_cross_limit_tab.png",
+    "fixture_04": "examples/images/planner_retry_safety_balanced_v11/coral_three_spoke_adjuster.png",
+    "fixture_05": "examples/images/planner_retry_safety_balanced_v11/silver_arch_pressure_seat.png",
+    "fixture_06": "examples/images/planner_retry_safety_balanced_v11/peacock_five_star_locator.png",
+    "fixture_07": "examples/images/planner_retry_safety_balanced_v11/tourmaline_double_ring_coupler.png",
+    "fixture_08": "examples/images/planner_retry_safety_balanced_v11/rouge_purple_hex_signoff.png",
+    "fixture_09": "examples/images/planner_retry_safety_balanced_v11/ochre_cross_flow_guide.png",
+    "fixture_10": "examples/images/planner_retry_safety_balanced_v11/frostblue_three_spoke_handwheel.png",
+    "fixture_11": "examples/images/planner_retry_safety_balanced_v11/inkgold_arch_damper.png",
+    "fixture_12": "examples/images/planner_retry_safety_balanced_v11/lemon_five_star_recheck.png",
+    "preregistration": "experiments/studies/planner_retry_safety_balanced_v11_qwen35_4b_v1/preregistration.json",
+    "step_data_grpo_train": "training/planner_grpo_seed_v1/step_data/planner_retry_safety_balanced_v11_grpo_train_qwen35_4b_nothinking_mixed_steps.jsonl",
+    "step_data_selection_dev": "training/planner_grpo_seed_v1/step_data/planner_retry_safety_balanced_v11_selection_dev_qwen35_4b_nothinking_mixed_steps.jsonl",
+    "step_data_support_dev": "training/planner_grpo_seed_v1/step_data/planner_retry_safety_balanced_v11_support_dev_qwen35_4b_nothinking_mixed_steps.jsonl",
+    "step_manifest_grpo_train": "training/planner_grpo_seed_v1/step_data/planner_retry_safety_balanced_v11_grpo_train_qwen35_4b_nothinking_mixed_steps.manifest.json",
+    "step_manifest_selection_dev": "training/planner_grpo_seed_v1/step_data/planner_retry_safety_balanced_v11_selection_dev_qwen35_4b_nothinking_mixed_steps.manifest.json",
+    "step_manifest_support_dev": "training/planner_grpo_seed_v1/step_data/planner_retry_safety_balanced_v11_support_dev_qwen35_4b_nothinking_mixed_steps.manifest.json",
+    "temperature_decision": "experiments/studies/planner_retry_safety_balanced_v11_qwen35_4b_v1/temperature_decision.json"
+  },
+  "independent_unit": "entity_id",
+  "integrity": {
+    "case_validation": "pass",
+    "historical_protected_value_overlap": {
+      "bundle_error_alias": 0,
+      "case_id": 0,
+      "entity_id": 0,
+      "image_fixture_family": 0,
+      "project_entity": 0,
+      "target_entity": 0
+    },
+    "repository_prompt_overlap": 0
+  },
+  "primary_scenarios": [
+    "current_success_step2",
+    "fresh_retry_step2",
+    "post_retry_success_step3"
+  ],
+  "schema_version": "1.0",
+  "sealed_test_commitment": {
+    "cohorts": [
+      "sealed_test_a",
+      "sealed_test_b"
+    ],
+    "entities": 24,
+    "materialized": false,
+    "rows": 432,
+    "sha256": "6158bb77f689333cbfc8cf87712870fd68a9bde2dc7fd6bd4b06b73499bf04a7"
+  },
+  "seed": 2026071711,
+  "sha256": {
+    "audit_report": "f3aea725c0913fa8f010347a098103d3ab6d6cd7df9b94e60b687d62b1686394",
+    "builder": "11d569344b9c6a9e9391281cb7dceddfe12f77afc619c232a3adc1800976c9c3",
+    "cases_grpo_train": "4ff1bb96a62ac09c4caf667ef9453b2ce6dd94df57fa6895f921b1cb749a8332",
+    "cases_selection_dev": "de12ab0cb2bce396873cd5c9137da3e28e88ea050e811ab9ced34b136bb9a606",
+    "cases_support_dev_a": "614956e1347635004b7b380d258e44291fda7209f2e42e05f7bb5eb20006ad2c",
+    "cases_support_dev_b": "d2227c4aa399269e7ece72493dd63d531ff3101f2d457f0a95ce217e2fc14ad5",
+    "comparison_contract": "86da03389fb03ddf54f0fb4b00d139ed7015cd095d460d5666ce47e93b1b671b",
+    "fixture_01": "c3ab733573673b78ac248c26b4c7e86efd6d993e5d717b6cde36558e6dd63c2f",
+    "fixture_02": "14d73079ba2169a53e5f1e0753ef338b90a5114f8374cf3bd837f47380bf534a",
+    "fixture_03": "866c06cbb4ec6d8f2ac74db02553e54b62d51eb421cf40c8822ff8a68ab05650",
+    "fixture_04": "479cc66dc929fd0a3ba6dc471d103e1003a4baeaf2fdedf67a634cfceed290d8",
+    "fixture_05": "a7ce7b2c89aa5421bdd10b766eb5f4585acb93e233c55905e064a05e6143ea9c",
+    "fixture_06": "ff926613155ec77b378e250ae0f063d423d5ce352e8c990e410fabe13042c04a",
+    "fixture_07": "c935a779e6f92f02279d06b93120b0a5cd751e0bfa9ca4d3a388eeea83d64d47",
+    "fixture_08": "35f6f7a82c357913fb7617e3a8836e970da3a88de2665ba6a6acc9ebda8fac39",
+    "fixture_09": "8c623dd1aa6b0cd9bb0a9009981c72902a3d3298a03085fa1fe97549fd708356",
+    "fixture_10": "1bcf0125dacdc246b508abc456b7bb3eb62c14e00bcd8a011636e54a6e667da5",
+    "fixture_11": "0af85b4024442d3d8b8fc2fc72a05ee66132acfb3991f61df915475b0edcfc1e",
+    "fixture_12": "bc3aa1fa3002a27330e9d880c2d6a65474203704431543b585f5a66f60618e3a",
+    "preregistration": "7a7abd5895fe6d211a4132cab900211b094fbe56bef0340f17ff0e87970b94af",
+    "step_data_grpo_train": "a120907e732ad0f39b9e882e04bbb3399f2182bfcfec2620a0a86769a7608e65",
+    "step_data_selection_dev": "9d201996ec8beed3bbfc1f1f5b6c55169c2b5d7d5429296b5ac8ab756f0538c0",
+    "step_data_support_dev": "3547ff0555ba8dd0d1ce5b00697dbd85feb7ee1820afaf7a060b432008daa5d8",
+    "step_manifest_grpo_train": "e658c84b6c86d4e7994eb8072e4524fc3a2cc0062c7034201c8701fd3141929f",
+    "step_manifest_selection_dev": "e38aa14767719efc9e6c793c3625fd21739c3c057fa5df8023f43c8157c9cd14",
+    "step_manifest_support_dev": "f90ff9a41f0e0ce589076d8b8666860dee21c912e298cf1def05d65f94e309ae",
+    "temperature_decision": "d42bd7dc99edb97e4c963008c80624b0c5529684876fa4b7192659cbb5637c5d"
+  },
+  "stability_controls": [
+    "post_retry_error_step3",
+    "post_retry_metric_veto_step3",
+    "conflicting_state_step2",
+    "nonretryable_step2",
+    "budget_exhausted_step2",
+    "missing_required_state_step2"
+  ],
+  "status": "frozen_train_support_selection_test_committed",
+  "step_rows": {
+    "grpo_train": {
+      "actions": {
+        "end": 192,
+        "migrate": 288,
+        "retry": 96
+      },
+      "entities": 24,
+      "prompt_tokens": {
+        "max": 4463,
+        "mean": 4292.236111111111,
+        "min": 4191,
+        "p50": 4238,
+        "p95": 4437
+      },
+      "rows": 576,
+      "scenarios": {
+        "budget_exhausted_step2": 48,
+        "conflicting_state_step2": 48,
+        "current_success_step2": 96,
+        "fresh_retry_step2": 96,
+        "missing_required_state_step2": 48,
+        "nonretryable_step2": 48,
+        "post_retry_error_step3": 48,
+        "post_retry_metric_veto_step3": 48,
+        "post_retry_success_step3": 96
+      },
+      "steps": {
+        "2": 384,
+        "3": 192
+      },
+      "support_blocks": {
+        "none": 576
+      }
+    },
+    "selection_dev": {
+      "actions": {
+        "end": 48,
+        "migrate": 144,
+        "retry": 24
+      },
+      "entities": 12,
+      "prompt_tokens": {
+        "max": 4438,
+        "mean": 4288.305555555556,
+        "min": 4205,
+        "p50": 4231,
+        "p95": 4431
+      },
+      "rows": 216,
+      "scenarios": {
+        "budget_exhausted_step2": 24,
+        "conflicting_state_step2": 24,
+        "current_success_step2": 24,
+        "fresh_retry_step2": 24,
+        "missing_required_state_step2": 24,
+        "nonretryable_step2": 24,
+        "post_retry_error_step3": 24,
+        "post_retry_metric_veto_step3": 24,
+        "post_retry_success_step3": 24
+      },
+      "steps": {
+        "2": 144,
+        "3": 72
+      },
+      "support_blocks": {
+        "none": 216
+      }
+    },
+    "support_dev": {
+      "actions": {
+        "end": 96,
+        "migrate": 288,
+        "retry": 48
+      },
+      "entities": 24,
+      "prompt_tokens": {
+        "max": 4431,
+        "mean": 4281.993055555556,
+        "min": 4198,
+        "p50": 4223,
+        "p95": 4422
+      },
+      "rows": 432,
+      "scenarios": {
+        "budget_exhausted_step2": 48,
+        "conflicting_state_step2": 48,
+        "current_success_step2": 48,
+        "fresh_retry_step2": 48,
+        "missing_required_state_step2": 48,
+        "nonretryable_step2": 48,
+        "post_retry_error_step3": 48,
+        "post_retry_metric_veto_step3": 48,
+        "post_retry_success_step3": 48
+      },
+      "steps": {
+        "2": 288,
+        "3": 144
+      },
+      "support_blocks": {
+        "A": 216,
+        "B": 216
+      }
+    }
+  },
+  "study_id": "planner_retry_safety_balanced_v11_qwen35_4b_v1"
+}

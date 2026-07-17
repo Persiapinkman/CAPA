@@ -114,3 +114,31 @@ def test_freeze_can_explicitly_include_stability_control_replay(tmp_path):
         "primary_residual",
         "stability_control",
     }
+
+
+def test_freeze_accepts_preregistered_scenario_multiplier(tmp_path):
+    source, decision, accepted = _fixture(tmp_path)
+    rows = [json.loads(line) for line in source.read_text().splitlines()]
+    replay = []
+    for row in rows:
+        if row["scenario_id"] != "fresh_retry_step2":
+            continue
+        variant = dict(row)
+        variant["case_id"] += "-replay"
+        variant["prompt_sha256"] += "-replay"
+        replay.append(variant)
+    source.write_text(
+        "".join(json.dumps(row) + "\n" for row in rows + replay),
+        encoding="utf-8",
+    )
+    output = tmp_path / "optimizer.jsonl"
+    manifest = freeze_optimizer_data(
+        source_path=source,
+        support_decision_path=decision,
+        accepted_scenarios_path=accepted,
+        output_path=output,
+        manifest_path=tmp_path / "optimizer.manifest.json",
+        scenario_multipliers={"fresh_retry_step2": 2},
+    )
+    assert manifest["rows"] == 8
+    assert manifest["scenario_multipliers"] == {"fresh_retry_step2": 2}

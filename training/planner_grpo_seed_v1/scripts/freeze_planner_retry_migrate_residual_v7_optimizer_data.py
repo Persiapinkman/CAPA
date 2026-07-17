@@ -39,8 +39,12 @@ def freeze_optimizer_data(
     output_path: Path,
     manifest_path: Path,
     allowed_optimization_scopes: set[str] | None = None,
+    scenario_multipliers: dict[str, int] | None = None,
 ) -> dict[str, Any]:
     allowed_scopes = allowed_optimization_scopes or {"primary_residual"}
+    multipliers = scenario_multipliers or {}
+    if any(int(value) <= 0 for value in multipliers.values()):
+        raise ValueError("scenario multipliers must be positive integers")
     decision = load_json(support_decision_path)
     accepted = tuple(
         line.strip()
@@ -86,12 +90,19 @@ def freeze_optimizer_data(
     expected_pairs = {(entity, detector) for entity in entities for detector in DETECTORS}
     for scenario in accepted:
         scenario_rows = [row for _, row in selected if row.get("scenario_id") == scenario]
-        observed_pairs = {
+        pair_counts = Counter(
             (str(row.get("entity_id") or ""), str(row.get("detector_family") or ""))
             for row in scenario_rows
-        }
-        if observed_pairs != expected_pairs or len(scenario_rows) != len(expected_pairs):
-            raise ValueError(f"scenario does not contain one row per entity/detector pair: {scenario}")
+        )
+        multiplier = int(multipliers.get(scenario, 1))
+        if (
+            set(pair_counts) != expected_pairs
+            or set(pair_counts.values()) != {multiplier}
+        ):
+            raise ValueError(
+                "scenario does not contain the preregistered number of rows per "
+                f"entity/detector pair: {scenario} multiplier={multiplier}"
+            )
         if any(str(row.get("optimization_scope") or "") not in allowed_scopes for row in scenario_rows):
             raise ValueError(
                 f"row outside allowed optimization scopes selected for optimizer: {scenario}"
@@ -120,6 +131,9 @@ def freeze_optimizer_data(
         "optimizer_authorized": True,
         "allowed_optimization_scopes": sorted(allowed_scopes),
         "accepted_scenarios": list(accepted),
+        "scenario_multipliers": {
+            scenario: int(multipliers.get(scenario, 1)) for scenario in accepted
+        },
         "rows": len(selected_rows),
         "entities": len(entities),
         "allowed_step_indices": sorted(step_counts),

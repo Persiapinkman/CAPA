@@ -1,0 +1,64 @@
+{
+  "allowed_step_indices": [
+    2,
+    3
+  ],
+  "created_at": "2026-07-17T02:06:15Z",
+  "dataset_id": "planner_retry_safety_balanced_v11",
+  "distribution": {
+    "actions": {
+      "end": 48,
+      "migrate": 144,
+      "retry": 24
+    },
+    "entities": 12,
+    "prompt_tokens": {
+      "max": 4438,
+      "mean": 4288.305555555556,
+      "min": 4205,
+      "p50": 4231,
+      "p95": 4431
+    },
+    "rows": 216,
+    "scenarios": {
+      "budget_exhausted_step2": 24,
+      "conflicting_state_step2": 24,
+      "current_success_step2": 24,
+      "fresh_retry_step2": 24,
+      "missing_required_state_step2": 24,
+      "nonretryable_step2": 24,
+      "post_retry_error_step3": 24,
+      "post_retry_metric_veto_step3": 24,
+      "post_retry_success_step3": 24
+    },
+    "steps": {
+      "2": 144,
+      "3": 72
+    },
+    "support_blocks": {
+      "none": 216
+    }
+  },
+  "files": {
+    "cases": [
+      "training/planner_grpo_seed_v1/cases/planner_retry_safety_balanced_v11_selection_dev_cases.jsonl"
+    ],
+    "step_data": "training/planner_grpo_seed_v1/step_data/planner_retry_safety_balanced_v11_selection_dev_qwen35_4b_nothinking_mixed_steps.jsonl"
+  },
+  "model_name_or_path": "/raid/zkq/models/Qwen3.5-4B",
+  "role": "checkpoint_selection_only",
+  "rows": 216,
+  "schema_version": "1.0",
+  "sha256": {
+    "cases": {
+      "selection_dev": "de12ab0cb2bce396873cd5c9137da3e28e88ea050e811ab9ced34b136bb9a606"
+    },
+    "chat_template": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+    "config": "ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670",
+    "step_data": "9d201996ec8beed3bbfc1f1f5b6c55169c2b5d7d5429296b5ac8ab756f0538c0",
+    "tokenizer_config": "316230d6a809701f4db5ea8f8fc862bc3a6f3229c937c174e674ff3ca0a64ac8"
+  },
+  "source_splits": [
+    "selection_dev"
+  ]
+}
