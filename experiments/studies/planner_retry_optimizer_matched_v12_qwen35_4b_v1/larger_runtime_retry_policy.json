@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0",
+  "created_at": "2026-07-17T07:55:41Z",
+  "status": "frozen_before_identical_protocol_runtime_retry",
+  "study_id": "planner_retry_optimizer_matched_v12_qwen35_4b_v1",
+  "trigger": {
+    "finalizer_wrote_objective": false,
+    "coverage_rows": 432,
+    "top_level_error_rows": 0,
+    "planner_runtime_errors": 6,
+    "common_error": "ValueError: planner schema parse failed after retry: first=planner response is empty; retry=planner response is empty"
+  },
+  "affected_cases": [
+    {
+      "case_id": "PROMV12-TA-011-QWEN-FR2",
+      "zero_based_index": 10
+    },
+    {
+      "case_id": "PROMV12-TA-006-REX-CS2",
+      "zero_based_index": 91
+    },
+    {
+      "case_id": "PROMV12-TA-006-QWEN-PS3",
+      "zero_based_index": 103
+    },
+    {
+      "case_id": "PROMV12-TA-012-REX-FR2",
+      "zero_based_index": 138
+    },
+    {
+      "case_id": "PROMV12-TA-007-QWEN-FR2",
+      "zero_based_index": 201
+    },
+    {
+      "case_id": "PROMV12-TB-006-QWEN-FR2",
+      "zero_based_index": 388
+    }
+  ],
+  "retry_rule": {
+    "attempts_per_affected_case": 1,
+    "rerun_scope": "complete case trajectory from step 1",
+    "replacement_rule": "Replace all six original case rows with their retry rows if and only if all six retries have top-level errors=0 and Planner runtime_errors=0. Replacement is unconditional on correctness or reward.",
+    "failure_rule": "If any of the six retries still has a runtime error, do not compute the V12 objective and do not make additional selective retries.",
+    "output_root": "experiments/runs/20260717_qwen35_v12_sealed/larger_runtime_retry_once"
+  },
+  "frozen_inference": {
+    "model": "Qwen3.5-35B-A3B",
+    "network_route": "inherit configured HTTP/SOCKS proxy",
+    "transport": "non_stream",
+    "temperature": 0,
+    "top_p": 1,
+    "do_sample": false,
+    "seed": 42,
+    "max_steps": 3,
+    "max_tokens": 2048,
+    "timeout_seconds": 300,
+    "response_format": "repository_current_frozen_at_v12_build"
+  },
+  "blind_state": {
+    "runtime_case_ids_and_error_types_observed": true,
+    "larger_aggregate_verifier_output_available": true,
+    "target_reward_files_created_but_not_inspected": true,
+    "paired_objective_or_bootstrap_computed": false,
+    "retry_outputs_or_rewards_observed": false
+  },
+  "anti_selection_invariants": [
+    "Every case flagged by the finalizer is retried exactly once.",
+    "No passing or non-error case is retried.",
+    "No original/retry row is selected based on action, reward, or correctness.",
+    "The larger reference remains excluded from checkpoint selection."
+  ]
+}
