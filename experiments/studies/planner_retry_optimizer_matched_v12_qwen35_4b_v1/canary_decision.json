@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_retry_optimizer_matched_v12_qwen35_4b_v1",
+  "status": "pass_screen_authorized",
+  "run": "experiments/runs/20260717T044534Z_qwen35_4b_optimizer_matched_v12_canary2_seed42",
+  "wandb_run_id": "we90bs8s",
+  "source_control": {
+    "git_commit": "916c1c09aa3f8c1f98aa48cee48b064dcdade975",
+    "tracked_worktree_dirty": false
+  },
+  "observed": {
+    "exit_code": 0,
+    "optimizer_steps": 2,
+    "generation_events_all_ranks": 64,
+    "diverse_generation_groups_all_ranks": 48,
+    "gradient_checks_all_ranks": 8,
+    "optimizer_events_all_ranks": 8,
+    "missing_gradient_tensors": 0,
+    "nonfinite_gradient_tensors": 0,
+    "steps_with_nonzero_gradient_norm": 2,
+    "maximum_allocated_gib": 13.568495273590088,
+    "minimum_free_gib": 16.05511474609375,
+    "completion_clipped_ratio": 0.0,
+    "mean_reward": 0.8251953125,
+    "mean_reward_std": 0.1432116311043501,
+    "mean_gradient_norm": 0.25971271097660065,
+    "mean_safety_reward": 0.890625,
+    "mean_safety_reward_std": 0.09375,
+    "required_wandb_metrics_present": true,
+    "safety_reward_metrics_present": true
+  },
+  "interpretation": "Both frozen mixed-scenario batches produced finite nonzero gradients and usable group-normalized advantages. Step 1 used LR=0 for the preregistered one-step warmup; step 2 used LR=1e-6 and updated the adapter. Core W&B metrics, the explicit safety reward, memory, and clipping guards all passed.",
+  "screen_authorized": true,
+  "screen_restart": "Restart from the unchanged V10 checkpoint-10 continuation initializer; do not continue from the canary checkpoint.",
+  "screen_contract": {
+    "max_steps": 8,
+    "candidate_checkpoints": [2, 5, 8],
+    "seed": 42,
+    "learning_rate": 0.000001,
+    "warmup_steps": 1,
+    "temperature": 0.9,
+    "top_p": 0.9,
+    "optimizer_rows": 576,
+    "target_action_ratio": "1 non-migration : 1 migration",
+    "reward_weights": {
+      "task_reward": 0.75,
+      "format_reward": 0.05,
+      "no_forbidden_action": 0.2
+    }
+  },
+  "sha256": {
+    "run_config": "0bbe4aa506ffded39f1229d2c3c88e4e98b1c50f862eb727325f1eda3c8c72fe",
+    "run_result": "c84da96face64b684f19f07dbee420497a53736c64f2e017980ab91e7f52f058",
+    "trainer_state": "77c4e345d8be92ebb1838e9be4a9fa619795b56b2c4311c8f7afd086a1887a65",
+    "adapter": "040fc6f69b967b29d9cd3a3c94988fb10e699b499f21b87a9a100759efafae38"
+  }
+}
