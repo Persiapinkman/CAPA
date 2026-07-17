@@ -6,6 +6,7 @@ cd "${ROOT_DIR}"
 
 RUN_MODE="${RUN_MODE:-canary}"
 SUPPORT_DECISION="${SUPPORT_DECISION:-experiments/studies/planner_retry_optimizer_matched_v12_qwen35_4b_v1/support_decision.json}"
+CANARY_HEALTH="${CANARY_HEALTH:-experiments/studies/planner_retry_optimizer_matched_v12_qwen35_4b_v1/canary_health.json}"
 STEP_DATA="${STEP_DATA:-training/planner_grpo_seed_v1/step_data/planner_retry_optimizer_matched_v12_optimizer_qwen35_4b_nothinking_mixed_steps.jsonl}"
 STEP_MANIFEST="${STEP_DATA%.jsonl}.manifest.json"
 ADAPTER_PATH="${ADAPTER_PATH:-experiments/runs/20260717T001316Z_qwen35_4b_anti_forgetting_v10_screen10_seed42/checkpoint-10}"
@@ -31,6 +32,14 @@ case "${RUN_MODE}" in
     exit 2
     ;;
 esac
+
+if [[ "${RUN_MODE}" == "screen" ]]; then
+  [[ -f "${CANARY_HEALTH}" ]] || { echo "Missing V12 canary health decision" >&2; exit 1; }
+  [[ "$(jq -r '.status' "${CANARY_HEALTH}")" == "pass" ]] || {
+    echo "V12 canary health audit did not pass" >&2
+    exit 1
+  }
+fi
 
 if [[ ! -f "${SUPPORT_DECISION}" || ! -f "${STEP_DATA}" || ! -f "${STEP_MANIFEST}" ]]; then
   echo "Missing V12 support decision or frozen optimizer data" >&2
