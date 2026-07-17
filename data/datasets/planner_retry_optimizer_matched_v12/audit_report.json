@@ -1,0 +1,715 @@
+{
+  "case_validation": {
+    "errors": [],
+    "factors": {
+      "grpo_train": {
+        "badges": {
+          "amber": 8,
+          "missing": 8,
+          "red": 8
+        },
+        "bundle_aliases": {
+          "v12matchedtrain_detector_contract_shape_unknown": 6,
+          "v12matchedtrain_detector_control_route_broken": 6,
+          "v12matchedtrain_feature_return_path_lost": 6,
+          "v12matchedtrain_inspection_replay_credit_empty": 6,
+          "v12matchedtrain_probe_ack_window_closed": 6,
+          "v12matchedtrain_probe_state_packet_invalid": 6,
+          "v12matchedtrain_sensor_reply_epoch_late": 6,
+          "v12matchedtrain_vision_capacity_lease_absent": 6
+        },
+        "detectors": {
+          "qwen": 288,
+          "rex": 288
+        },
+        "entities": 24,
+        "entity_style_badge_fixture": {
+          "style1|amber|promv12_ht_mistblue_rings": 1,
+          "style1|amber|promv12_ht_redcopper_hex": 1,
+          "style1|missing|promv12_ht_mistblue_rings": 1,
+          "style1|missing|promv12_ht_redcopper_hex": 1,
+          "style1|red|promv12_ht_mistblue_rings": 1,
+          "style1|red|promv12_ht_redcopper_hex": 1,
+          "style2|amber|promv12_ht_mistblue_rings": 1,
+          "style2|amber|promv12_ht_redcopper_hex": 1,
+          "style2|missing|promv12_ht_mistblue_rings": 1,
+          "style2|missing|promv12_ht_redcopper_hex": 1,
+          "style2|red|promv12_ht_mistblue_rings": 1,
+          "style2|red|promv12_ht_redcopper_hex": 1,
+          "style3|amber|promv12_ht_mistblue_rings": 1,
+          "style3|amber|promv12_ht_redcopper_hex": 1,
+          "style3|missing|promv12_ht_mistblue_rings": 1,
+          "style3|missing|promv12_ht_redcopper_hex": 1,
+          "style3|red|promv12_ht_mistblue_rings": 1,
+          "style3|red|promv12_ht_redcopper_hex": 1,
+          "style4|amber|promv12_ht_mistblue_rings": 1,
+          "style4|amber|promv12_ht_redcopper_hex": 1,
+          "style4|missing|promv12_ht_mistblue_rings": 1,
+          "style4|missing|promv12_ht_redcopper_hex": 1,
+          "style4|red|promv12_ht_mistblue_rings": 1,
+          "style4|red|promv12_ht_redcopper_hex": 1
+        },
+        "fixtures": {
+          "promv12_ht_mistblue_rings": 12,
+          "promv12_ht_redcopper_hex": 12
+        },
+        "scenarios": {
+          "budget_exhausted_step2": 48,
+          "conflicting_state_step2": 48,
+          "current_success_step2": 96,
+          "fresh_retry_step2": 96,
+          "missing_required_state_step2": 48,
+          "nonretryable_step2": 48,
+          "post_retry_error_step3": 48,
+          "post_retry_metric_veto_step3": 48,
+          "post_retry_success_step3": 96
+        },
+        "styles": {
+          "0": 6,
+          "1": 6,
+          "2": 6,
+          "3": 6
+        },
+        "target_actions": {
+          "end": 192,
+          "migrate": 288,
+          "retry": 96
+        },
+        "target_steps": {
+          "2": 384,
+          "3": 192
+        }
+      },
+      "sealed_test_a": {
+        "badges": {
+          "amber": 4,
+          "missing": 4,
+          "red": 4
+        },
+        "bundle_aliases": {
+          "v12sealedalpha_detector_contract_shape_unknown": 3,
+          "v12sealedalpha_detector_control_route_broken": 3,
+          "v12sealedalpha_feature_return_path_lost": 3,
+          "v12sealedalpha_inspection_replay_credit_empty": 3,
+          "v12sealedalpha_probe_ack_window_closed": 3,
+          "v12sealedalpha_probe_state_packet_invalid": 3,
+          "v12sealedalpha_sensor_reply_epoch_late": 3,
+          "v12sealedalpha_vision_capacity_lease_absent": 3
+        },
+        "detectors": {
+          "qwen": 108,
+          "rex": 108
+        },
+        "entities": 12,
+        "entity_style_badge_fixture": {
+          "style1|amber|promv12_ta_icecyan_wheel": 1,
+          "style1|missing|promv12_ta_caramel_cross": 1,
+          "style1|red|promv12_ta_caramel_cross": 1,
+          "style2|amber|promv12_ta_caramel_cross": 1,
+          "style2|missing|promv12_ta_icecyan_wheel": 1,
+          "style2|red|promv12_ta_icecyan_wheel": 1,
+          "style3|amber|promv12_ta_icecyan_wheel": 1,
+          "style3|missing|promv12_ta_caramel_cross": 1,
+          "style3|red|promv12_ta_caramel_cross": 1,
+          "style4|amber|promv12_ta_caramel_cross": 1,
+          "style4|missing|promv12_ta_icecyan_wheel": 1,
+          "style4|red|promv12_ta_icecyan_wheel": 1
+        },
+        "fixtures": {
+          "promv12_ta_caramel_cross": 6,
+          "promv12_ta_icecyan_wheel": 6
+        },
+        "scenarios": {
+          "budget_exhausted_step2": 24,
+          "conflicting_state_step2": 24,
+          "current_success_step2": 24,
+          "fresh_retry_step2": 24,
+          "missing_required_state_step2": 24,
+          "nonretryable_step2": 24,
+          "post_retry_error_step3": 24,
+          "post_retry_metric_veto_step3": 24,
+          "post_retry_success_step3": 24
+        },
+        "styles": {
+          "0": 3,
+          "1": 3,
+          "2": 3,
+          "3": 3
+        },
+        "target_actions": {
+          "end": 48,
+          "migrate": 144,
+          "retry": 24
+        },
+        "target_steps": {
+          "2": 144,
+          "3": 72
+        }
+      },
+      "sealed_test_b": {
+        "badges": {
+          "amber": 4,
+          "missing": 4,
+          "red": 4
+        },
+        "bundle_aliases": {
+          "v12sealedbravo_detector_contract_shape_unknown": 3,
+          "v12sealedbravo_detector_control_route_broken": 3,
+          "v12sealedbravo_feature_return_path_lost": 3,
+          "v12sealedbravo_inspection_replay_credit_empty": 3,
+          "v12sealedbravo_probe_ack_window_closed": 3,
+          "v12sealedbravo_probe_state_packet_invalid": 3,
+          "v12sealedbravo_sensor_reply_epoch_late": 3,
+          "v12sealedbravo_vision_capacity_lease_absent": 3
+        },
+        "detectors": {
+          "qwen": 108,
+          "rex": 108
+        },
+        "entities": 12,
+        "entity_style_badge_fixture": {
+          "style1|amber|promv12_tb_darkbronze_arch": 1,
+          "style1|missing|promv12_tb_goldorange_star": 1,
+          "style1|red|promv12_tb_goldorange_star": 1,
+          "style2|amber|promv12_tb_goldorange_star": 1,
+          "style2|missing|promv12_tb_darkbronze_arch": 1,
+          "style2|red|promv12_tb_darkbronze_arch": 1,
+          "style3|amber|promv12_tb_darkbronze_arch": 1,
+          "style3|missing|promv12_tb_goldorange_star": 1,
+          "style3|red|promv12_tb_goldorange_star": 1,
+          "style4|amber|promv12_tb_goldorange_star": 1,
+          "style4|missing|promv12_tb_darkbronze_arch": 1,
+          "style4|red|promv12_tb_darkbronze_arch": 1
+        },
+        "fixtures": {
+          "promv12_tb_darkbronze_arch": 6,
+          "promv12_tb_goldorange_star": 6
+        },
+        "scenarios": {
+          "budget_exhausted_step2": 24,
+          "conflicting_state_step2": 24,
+          "current_success_step2": 24,
+          "fresh_retry_step2": 24,
+          "missing_required_state_step2": 24,
+          "nonretryable_step2": 24,
+          "post_retry_error_step3": 24,
+          "post_retry_metric_veto_step3": 24,
+          "post_retry_success_step3": 24
+        },
+        "styles": {
+          "0": 3,
+          "1": 3,
+          "2": 3,
+          "3": 3
+        },
+        "target_actions": {
+          "end": 48,
+          "migrate": 144,
+          "retry": 24
+        },
+        "target_steps": {
+          "2": 144,
+          "3": 72
+        }
+      },
+      "selection_dev": {
+        "badges": {
+          "amber": 4,
+          "missing": 4,
+          "red": 4
+        },
+        "bundle_aliases": {
+          "v12selectiondelta_detector_contract_shape_unknown": 3,
+          "v12selectiondelta_detector_control_route_broken": 3,
+          "v12selectiondelta_feature_return_path_lost": 3,
+          "v12selectiondelta_inspection_replay_credit_empty": 3,
+          "v12selectiondelta_probe_ack_window_closed": 3,
+          "v12selectiondelta_probe_state_packet_invalid": 3,
+          "v12selectiondelta_sensor_reply_epoch_late": 3,
+          "v12selectiondelta_vision_capacity_lease_absent": 3
+        },
+        "detectors": {
+          "qwen": 108,
+          "rex": 108
+        },
+        "entities": 12,
+        "entity_style_badge_fixture": {
+          "style1|amber|promv12_vd_lilac_hex": 1,
+          "style1|missing|promv12_vd_turquoisegreen_rings": 1,
+          "style1|red|promv12_vd_turquoisegreen_rings": 1,
+          "style2|amber|promv12_vd_turquoisegreen_rings": 1,
+          "style2|missing|promv12_vd_lilac_hex": 1,
+          "style2|red|promv12_vd_lilac_hex": 1,
+          "style3|amber|promv12_vd_lilac_hex": 1,
+          "style3|missing|promv12_vd_turquoisegreen_rings": 1,
+          "style3|red|promv12_vd_turquoisegreen_rings": 1,
+          "style4|amber|promv12_vd_turquoisegreen_rings": 1,
+          "style4|missing|promv12_vd_lilac_hex": 1,
+          "style4|red|promv12_vd_lilac_hex": 1
+        },
+        "fixtures": {
+          "promv12_vd_lilac_hex": 6,
+          "promv12_vd_turquoisegreen_rings": 6
+        },
+        "scenarios": {
+          "budget_exhausted_step2": 24,
+          "conflicting_state_step2": 24,
+          "current_success_step2": 24,
+          "fresh_retry_step2": 24,
+          "missing_required_state_step2": 24,
+          "nonretryable_step2": 24,
+          "post_retry_error_step3": 24,
+          "post_retry_metric_veto_step3": 24,
+          "post_retry_success_step3": 24
+        },
+        "styles": {
+          "0": 3,
+          "1": 3,
+          "2": 3,
+          "3": 3
+        },
+        "target_actions": {
+          "end": 48,
+          "migrate": 144,
+          "retry": 24
+        },
+        "target_steps": {
+          "2": 144,
+          "3": 72
+        }
+      },
+      "support_dev_a": {
+        "badges": {
+          "amber": 4,
+          "missing": 4,
+          "red": 4
+        },
+        "bundle_aliases": {
+          "v12supportalpha_detector_contract_shape_unknown": 3,
+          "v12supportalpha_detector_control_route_broken": 3,
+          "v12supportalpha_feature_return_path_lost": 3,
+          "v12supportalpha_inspection_replay_credit_empty": 3,
+          "v12supportalpha_probe_ack_window_closed": 3,
+          "v12supportalpha_probe_state_packet_invalid": 3,
+          "v12supportalpha_sensor_reply_epoch_late": 3,
+          "v12supportalpha_vision_capacity_lease_absent": 3
+        },
+        "detectors": {
+          "qwen": 144,
+          "rex": 144
+        },
+        "entities": 12,
+        "entity_style_badge_fixture": {
+          "style1|amber|promv12_sa_crimson_wheel": 1,
+          "style1|missing|promv12_sa_darkcyan_cross": 1,
+          "style1|red|promv12_sa_darkcyan_cross": 1,
+          "style2|amber|promv12_sa_darkcyan_cross": 1,
+          "style2|missing|promv12_sa_crimson_wheel": 1,
+          "style2|red|promv12_sa_crimson_wheel": 1,
+          "style3|amber|promv12_sa_crimson_wheel": 1,
+          "style3|missing|promv12_sa_darkcyan_cross": 1,
+          "style3|red|promv12_sa_darkcyan_cross": 1,
+          "style4|amber|promv12_sa_darkcyan_cross": 1,
+          "style4|missing|promv12_sa_crimson_wheel": 1,
+          "style4|red|promv12_sa_crimson_wheel": 1
+        },
+        "fixtures": {
+          "promv12_sa_crimson_wheel": 6,
+          "promv12_sa_darkcyan_cross": 6
+        },
+        "scenarios": {
+          "budget_exhausted_step2": 24,
+          "conflicting_state_step2": 24,
+          "current_success_step2": 48,
+          "fresh_retry_step2": 48,
+          "missing_required_state_step2": 24,
+          "nonretryable_step2": 24,
+          "post_retry_error_step3": 24,
+          "post_retry_metric_veto_step3": 24,
+          "post_retry_success_step3": 48
+        },
+        "styles": {
+          "0": 3,
+          "1": 3,
+          "2": 3,
+          "3": 3
+        },
+        "target_actions": {
+          "end": 96,
+          "migrate": 144,
+          "retry": 48
+        },
+        "target_steps": {
+          "2": 192,
+          "3": 96
+        }
+      },
+      "support_dev_b": {
+        "badges": {
+          "amber": 4,
+          "missing": 4,
+          "red": 4
+        },
+        "bundle_aliases": {
+          "v12supportbravo_detector_contract_shape_unknown": 3,
+          "v12supportbravo_detector_control_route_broken": 3,
+          "v12supportbravo_feature_return_path_lost": 3,
+          "v12supportbravo_inspection_replay_credit_empty": 3,
+          "v12supportbravo_probe_ack_window_closed": 3,
+          "v12supportbravo_probe_state_packet_invalid": 3,
+          "v12supportbravo_sensor_reply_epoch_late": 3,
+          "v12supportbravo_vision_capacity_lease_absent": 3
+        },
+        "detectors": {
+          "qwen": 144,
+          "rex": 144
+        },
+        "entities": 12,
+        "entity_style_badge_fixture": {
+          "style1|amber|promv12_sb_platinum_arch": 1,
+          "style1|missing|promv12_sb_lakeblue_star": 1,
+          "style1|red|promv12_sb_lakeblue_star": 1,
+          "style2|amber|promv12_sb_lakeblue_star": 1,
+          "style2|missing|promv12_sb_platinum_arch": 1,
+          "style2|red|promv12_sb_platinum_arch": 1,
+          "style3|amber|promv12_sb_platinum_arch": 1,
+          "style3|missing|promv12_sb_lakeblue_star": 1,
+          "style3|red|promv12_sb_lakeblue_star": 1,
+          "style4|amber|promv12_sb_lakeblue_star": 1,
+          "style4|missing|promv12_sb_platinum_arch": 1,
+          "style4|red|promv12_sb_platinum_arch": 1
+        },
+        "fixtures": {
+          "promv12_sb_lakeblue_star": 6,
+          "promv12_sb_platinum_arch": 6
+        },
+        "scenarios": {
+          "budget_exhausted_step2": 24,
+          "conflicting_state_step2": 24,
+          "current_success_step2": 48,
+          "fresh_retry_step2": 48,
+          "missing_required_state_step2": 24,
+          "nonretryable_step2": 24,
+          "post_retry_error_step3": 24,
+          "post_retry_metric_veto_step3": 24,
+          "post_retry_success_step3": 48
+        },
+        "styles": {
+          "0": 3,
+          "1": 3,
+          "2": 3,
+          "3": 3
+        },
+        "target_actions": {
+          "end": 96,
+          "migrate": 144,
+          "retry": 48
+        },
+        "target_steps": {
+          "2": 192,
+          "3": 96
+        }
+      }
+    },
+    "split_overlap": {
+      "grpo_train__sealed_test_a": {
+        "bundle_error_alias": 0,
+        "case_id": 0,
+        "entity_id": 0,
+        "image_fixture_family": 0,
+        "project_entity": 0,
+        "target_entity": 0
+      },
+      "grpo_train__sealed_test_b": {
+        "bundle_error_alias": 0,
+        "case_id": 0,
+        "entity_id": 0,
+        "image_fixture_family": 0,
+        "project_entity": 0,
+        "target_entity": 0
+      },
+      "grpo_train__selection_dev": {
+        "bundle_error_alias": 0,
+        "case_id": 0,
+        "entity_id": 0,
+        "image_fixture_family": 0,
+        "project_entity": 0,
+        "target_entity": 0
+      },
+      "grpo_train__support_dev_a": {
+        "bundle_error_alias": 0,
+        "case_id": 0,
+        "entity_id": 0,
+        "image_fixture_family": 0,
+        "project_entity": 0,
+        "target_entity": 0
+      },
+      "grpo_train__support_dev_b": {
+        "bundle_error_alias": 0,
+        "case_id": 0,
+        "entity_id": 0,
+        "image_fixture_family": 0,
+        "project_entity": 0,
+        "target_entity": 0
+      },
+      "sealed_test_a__sealed_test_b": {
+        "bundle_error_alias": 0,
+        "case_id": 0,
+        "entity_id": 0,
+        "image_fixture_family": 0,
+        "project_entity": 0,
+        "target_entity": 0
+      },
+      "selection_dev__sealed_test_a": {
+        "bundle_error_alias": 0,
+        "case_id": 0,
+        "entity_id": 0,
+        "image_fixture_family": 0,
+        "project_entity": 0,
+        "target_entity": 0
+      },
+      "selection_dev__sealed_test_b": {
+        "bundle_error_alias": 0,
+        "case_id": 0,
+        "entity_id": 0,
+        "image_fixture_family": 0,
+        "project_entity": 0,
+        "target_entity": 0
+      },
+      "support_dev_a__sealed_test_a": {
+        "bundle_error_alias": 0,
+        "case_id": 0,
+        "entity_id": 0,
+        "image_fixture_family": 0,
+        "project_entity": 0,
+        "target_entity": 0
+      },
+      "support_dev_a__sealed_test_b": {
+        "bundle_error_alias": 0,
+        "case_id": 0,
+        "entity_id": 0,
+        "image_fixture_family": 0,
+        "project_entity": 0,
+        "target_entity": 0
+      },
+      "support_dev_a__selection_dev": {
+        "bundle_error_alias": 0,
+        "case_id": 0,
+        "entity_id": 0,
+        "image_fixture_family": 0,
+        "project_entity": 0,
+        "target_entity": 0
+      },
+      "support_dev_a__support_dev_b": {
+        "bundle_error_alias": 0,
+        "case_id": 0,
+        "entity_id": 0,
+        "image_fixture_family": 0,
+        "project_entity": 0,
+        "target_entity": 0
+      },
+      "support_dev_b__sealed_test_a": {
+        "bundle_error_alias": 0,
+        "case_id": 0,
+        "entity_id": 0,
+        "image_fixture_family": 0,
+        "project_entity": 0,
+        "target_entity": 0
+      },
+      "support_dev_b__sealed_test_b": {
+        "bundle_error_alias": 0,
+        "case_id": 0,
+        "entity_id": 0,
+        "image_fixture_family": 0,
+        "project_entity": 0,
+        "target_entity": 0
+      },
+      "support_dev_b__selection_dev": {
+        "bundle_error_alias": 0,
+        "case_id": 0,
+        "entity_id": 0,
+        "image_fixture_family": 0,
+        "project_entity": 0,
+        "target_entity": 0
+      }
+    },
+    "status": "pass",
+    "v12_primary_replay": {
+      "grpo_train": {
+        "rows": 144,
+        "scenarios": {
+          "current_success_step2": 48,
+          "fresh_retry_step2": 48,
+          "post_retry_success_step3": 48
+        }
+      },
+      "sealed_test_a": {
+        "rows": 0,
+        "scenarios": {}
+      },
+      "sealed_test_b": {
+        "rows": 0,
+        "scenarios": {}
+      },
+      "selection_dev": {
+        "rows": 0,
+        "scenarios": {}
+      },
+      "support_dev_a": {
+        "rows": 72,
+        "scenarios": {
+          "current_success_step2": 24,
+          "fresh_retry_step2": 24,
+          "post_retry_success_step3": 24
+        }
+      },
+      "support_dev_b": {
+        "rows": 72,
+        "scenarios": {
+          "current_success_step2": 24,
+          "fresh_retry_step2": 24,
+          "post_retry_success_step3": 24
+        }
+      }
+    },
+    "v6_repository_overlap": {
+      "bundle_error_alias": 0,
+      "case_id": 0,
+      "entity_id": 0,
+      "image_fixture_family": 0,
+      "project_entity": 0,
+      "target_entity": 0
+    }
+  },
+  "created_at": "2026-07-17T03:30:00Z",
+  "dataset_id": "planner_retry_optimizer_matched_v12",
+  "historical_protected_value_overlap": {
+    "bundle_error_alias": 0,
+    "case_id": 0,
+    "entity_id": 0,
+    "image_fixture_family": 0,
+    "project_entity": 0,
+    "target_entity": 0
+  },
+  "repository_prompt_audit": {
+    "checked_files": [
+      "training/planner_grpo_seed_v1/step_data/planner_retry_safety_balanced_v11_support_dev_qwen35_4b_nothinking_mixed_steps.jsonl",
+      "training/planner_grpo_seed_v1/step_data/planner_retry_safe_end_residual_v8_selection_dev_qwen35_4b_nothinking_mixed_steps.jsonl",
+      "training/planner_grpo_seed_v1/step_data/planner_multistep_grpo_value_v5_train_v1_qwen35_4b_support80.jsonl",
+      "training/planner_grpo_seed_v1/step_data/planner_retry_safe_end_hard_residual_v9_selection_dev_qwen35_4b_nothinking_mixed_steps.jsonl",
+      "training/planner_grpo_seed_v1/step_data/planner_retry_migrate_v6_grpo_dev_qwen35_4b_nothinking_step2.jsonl",
+      "training/planner_grpo_seed_v1/step_data/planner_retry_safety_balanced_v11_selection_dev_qwen35_4b_nothinking_mixed_steps.jsonl",
+      "training/planner_grpo_seed_v1/step_data/planner_retry_migrate_residual_v7_grpo_train_qwen35_4b_nothinking_mixed_steps.jsonl",
+      "training/planner_grpo_seed_v1/step_data/planner_retry_anti_forgetting_v10_support_dev_qwen35_4b_nothinking_mixed_steps.jsonl",
+      "training/planner_grpo_seed_v1/step_data/planner_retry_anti_forgetting_v10_optimizer_qwen35_4b_nothinking_mixed_steps.jsonl",
+      "training/planner_grpo_seed_v1/step_data/planner_retry_safe_end_hard_residual_v9_support_dev_qwen35_4b_nothinking_mixed_steps.jsonl",
+      "training/planner_grpo_seed_v1/step_data/planner_retry_anti_forgetting_v10_grpo_train_qwen35_4b_nothinking_mixed_steps.jsonl",
+      "training/planner_grpo_seed_v1/step_data/planner_retry_safe_end_hard_residual_v9_optimizer_qwen35_4b_nothinking_mixed_steps.jsonl",
+      "training/planner_grpo_seed_v1/step_data/planner_retry_safety_balanced_v11_grpo_train_qwen35_4b_nothinking_mixed_steps.jsonl",
+      "training/planner_grpo_seed_v1/step_data/planner_retry_safe_end_residual_v8_grpo_train_qwen35_4b_nothinking_mixed_steps.jsonl",
+      "training/planner_grpo_seed_v1/step_data/planner_retry_migrate_v6_grpo_train_qwen35_4b_nothinking_step2.jsonl",
+      "training/planner_grpo_seed_v1/step_data/planner_retry_anti_forgetting_v10_selection_dev_qwen35_4b_nothinking_mixed_steps.jsonl",
+      "training/planner_grpo_seed_v1/step_data/planner_multistep_grpo_value_v5_train_v1_qwen35_4b_nothinking_step2.jsonl",
+      "training/planner_grpo_seed_v1/step_data/planner_retry_safe_end_residual_v8_support_dev_qwen35_4b_nothinking_mixed_steps.jsonl",
+      "training/planner_grpo_seed_v1/step_data/planner_retry_safe_end_hard_residual_v9_grpo_train_qwen35_4b_nothinking_mixed_steps.jsonl",
+      "training/planner_grpo_seed_v1/step_data/planner_retry_migrate_residual_v7_grpo_dev_qwen35_4b_nothinking_mixed_steps.jsonl"
+    ],
+    "current_prompt_hashes": 1368,
+    "historical_prompt_hashes": 4908,
+    "overlap": 0
+  },
+  "schema_version": "1.0",
+  "sealed_test_commitment": {
+    "cohorts": [
+      "sealed_test_a",
+      "sealed_test_b"
+    ],
+    "entities": 24,
+    "materialized": false,
+    "rows": 432,
+    "sha256": "6e9413858d6e9cc09672d00d80dbda593e13e190457915498f5240c97b16c149"
+  },
+  "step_prompt_audits": {
+    "grpo_train": {
+      "canonical_step_reward": {
+        "max": 1.0,
+        "min": 1.0,
+        "non_unit": 0
+      },
+      "case_id_hits": 0,
+      "duplicate_prompt_hashes": 0,
+      "entity_id_hits": 0,
+      "forbidden_fragment_hits": {
+        "\"_thought\"": 0,
+        "\"external_ref\"": 0,
+        "/raid/": 0,
+        "/tmp/": 0,
+        "按训练样本期望": 0
+      },
+      "max_steps_mismatch": 0,
+      "prompt_tokens": {
+        "max": 4460,
+        "mean": 4292.868055555556,
+        "min": 4196,
+        "p50": 4238,
+        "p95": 4437
+      },
+      "rows": 576,
+      "status": "pass"
+    },
+    "selection_dev": {
+      "canonical_step_reward": {
+        "max": 1.0,
+        "min": 1.0,
+        "non_unit": 0
+      },
+      "case_id_hits": 0,
+      "duplicate_prompt_hashes": 0,
+      "entity_id_hits": 0,
+      "forbidden_fragment_hits": {
+        "\"_thought\"": 0,
+        "\"external_ref\"": 0,
+        "/raid/": 0,
+        "/tmp/": 0,
+        "按训练样本期望": 0
+      },
+      "max_steps_mismatch": 0,
+      "prompt_tokens": {
+        "max": 4434,
+        "mean": 4285.0,
+        "min": 4197,
+        "p50": 4228,
+        "p95": 4426
+      },
+      "rows": 216,
+      "status": "pass"
+    },
+    "support_dev": {
+      "canonical_step_reward": {
+        "max": 1.0,
+        "min": 1.0,
+        "non_unit": 0
+      },
+      "case_id_hits": 0,
+      "duplicate_prompt_hashes": 0,
+      "entity_id_hits": 0,
+      "forbidden_fragment_hits": {
+        "\"_thought\"": 0,
+        "\"external_ref\"": 0,
+        "/raid/": 0,
+        "/tmp/": 0,
+        "按训练样本期望": 0
+      },
+      "max_steps_mismatch": 0,
+      "prompt_tokens": {
+        "max": 4455,
+        "mean": 4287.847222222223,
+        "min": 4190,
+        "p50": 4232,
+        "p95": 4431
+      },
+      "rows": 576,
+      "status": "pass"
+    }
+  }
+}
