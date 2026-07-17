@@ -1,6 +1,6 @@
 # CAPA SFT → GRPO 后训练实战手册
 
-_目标：训练 Qwen3.5-4B，并在预注册的实体隔离 residual benchmark 上与 Qwen3.5-35B-A3B 做同协议比较 · 最后验证：2026-07-16_
+_目标：训练 Qwen3.5-4B，并在预注册的实体隔离 residual benchmark 上与 Qwen3.5-35B-A3B 做同协议比较 · 最后验证：2026-07-17_
 
 ---
 
@@ -162,7 +162,7 @@ RUN_MODE=screen scripts/run_qwen35_4b_retry_safe_end_hard_v9_grpo.sh
 
 ## ⚙️ 阶段四：先 canary，再做 GRPO screen
 
-通过支持门禁后，先运行 5 个 optimizer step。canary 只回答“训练系统和梯度健康吗”，不回答“模型最终提升了吗”。
+通过支持门禁后，先运行少量、预先固定的 optimizer step。canary 只回答“训练系统和梯度健康吗”，不回答“模型最终提升了吗”。V9 使用 5 步，V10 因为从同一 initializer 复现已验证的运行时，只使用 2 步。
 
 CAPA 的 4 卡拓扑固定为：
 
@@ -174,11 +174,62 @@ CAPA 的 4 卡拓扑固定为：
 | `generation_batch_size` | 4 |
 | gradient accumulation | 8 |
 | 每 optimizer step completion 数 | 32 |
-| 初始 learning rate | `5e-6` |
+| V9 learning rate | `5e-6` |
+| V10 learning rate | `2e-6`，warmup 2 steps |
 
 canary 的停止条件：任意非有限 loss/reward/gradient/parameter、trainable gradient 缺失、单卡峰值超过 28 GiB、空闲显存低于 2 GiB，或四类核心 W&B 遥测缺失。
 
-canary 健康后才进入有上限的 screen，例如 40–100 steps，并在预先固定的 checkpoint 上做 `selection_dev` 评测。不要观察一条曲线后临时延长训练；最大 steps 和候选 checkpoint 必须在启动前写入 preregistration。
+canary 健康后才进入有上限的 screen，例如 10、40 或 100 steps，并在预先固定的 checkpoint 上做 `selection_dev` 评测。不要观察一条曲线后临时延长训练；最大 steps 和候选 checkpoint 必须在启动前写入 preregistration。
+
+### “训练健康”不等于“模型可发布”
+
+V9 是这个区别最清楚的反例。它的 40-step screen 在运行层面全部通过：四卡梯度、显存、JSON、截断和 W&B 遥测都正常。但只有 7/40 个 step 有非零梯度；更重要的是，selection-dev 上 checkpoint-40 的 primary 完整轨迹率相对 SFT 提升 `52.78` 个百分点，同时 control 下降 `37.50` 个百分点。它学会了主场景，却灾难性遗忘了六个反事实 control，因此严格判为 `no_promotion`，V9 sealed test 从未物化。
+
+V10 的修改不是继续加步数，而是把三类 primary 与六类 stability control 都放入 optimizer 数据，形成 `1:2` 的主任务/控制回放比例，并把 learning rate 降到 `2e-6`。两个独立 support block 上，primary gold support/方差率为 `79.86%/34.03%`，control 为 `78.13%/33.33%`；10-step screen 的每一步都有非零梯度。
+
+V10 selection 证明 anti-forgetting 有效，但仍判为 `no_promotion`：checkpoint-10 的 primary 相对 SFT 提升 `8.33` 个百分点，control 提升 `19.44` 个百分点，primary entity-bootstrap 95% CI 为 `[+1.39pp, +15.28pp]`；然而错误副作用动作从 35 增至 37，违反“不得新增”门禁。这个结果说明 control pass rate 与逐动作安全约束不能互相替代。V10 sealed test 因此继续保持未物化。
+
+### V10 可复现命令链
+
+下面的顺序体现了权限边界：support 通过前不能冻结 optimizer 数据，selection promote 前不能物化 sealed test。
+
+```bash
+# 1. 构建 train/support/selection；sealed 只写 commitment，不落盘 case
+.venv-qwen35-grpo/bin/python \
+  training/planner_grpo_seed_v1/scripts/build_planner_retry_anti_forgetting_v10.py
+
+# 2. 两个 support block 各采 G=4，并原子执行所有门禁
+scripts/run_qwen35_4b_v10_support.sh
+
+# 3. 门禁通过后才从原始 train step-data 冻结 optimizer-only 数据
+.venv-qwen35-grpo/bin/python \
+  training/planner_grpo_seed_v1/scripts/freeze_planner_retry_anti_forgetting_v10_optimizer_data.py \
+  --source training/planner_grpo_seed_v1/step_data/planner_retry_anti_forgetting_v10_grpo_train_qwen35_4b_nothinking_mixed_steps.jsonl \
+  --support-decision experiments/studies/planner_retry_anti_forgetting_v10_qwen35_4b_v1/support_decision.json \
+  --accepted-scenarios data/datasets/planner_retry_anti_forgetting_v10/accepted_optimizer_scenarios.txt \
+  --output training/planner_grpo_seed_v1/step_data/planner_retry_anti_forgetting_v10_optimizer_qwen35_4b_nothinking_mixed_steps.jsonl \
+  --manifest training/planner_grpo_seed_v1/step_data/planner_retry_anti_forgetting_v10_optimizer_qwen35_4b_nothinking_mixed_steps.manifest.json
+
+# 4. canary 与正式 screen 都从同一个 SFT initializer 独立启动
+RUN_MODE=canary scripts/run_qwen35_4b_retry_anti_forgetting_v10_grpo.sh
+RUN_MODE=screen scripts/run_qwen35_4b_retry_anti_forgetting_v10_grpo.sh
+
+# 5. screen 健康审计；RUN_DIR 替换为实际 screen 目录
+.venv-qwen35-grpo/bin/python \
+  training/planner_grpo_seed_v1/scripts/audit_qwen35_4b_grpo_screen.py \
+  --run-dir "${RUN_DIR}" --expected-steps 10 --world-size 4 \
+  --candidate-checkpoint 2 --candidate-checkpoint 5 --candidate-checkpoint 10 \
+  --output experiments/studies/planner_retry_anti_forgetting_v10_qwen35_4b_v1/screen_health.json
+
+# 6. 只在 selection-dev 比较 SFT 与三个 GRPO checkpoint
+SCREEN_DIR="${RUN_DIR}" scripts/run_qwen35_4b_v10_selection_eval.sh
+
+# 7. 以下两步只有 selection_decision.json=promote 时才被脚本授权
+.venv-qwen35-grpo/bin/python \
+  training/planner_grpo_seed_v1/scripts/prepare_planner_retry_anti_forgetting_v10_sealed_test.py \
+  --screen-dir "${RUN_DIR}"
+scripts/run_qwen35_v10_sealed_eval.sh
+```
 
 ## 📊 如何阅读 W&B，而不是只看 loss
 
@@ -235,15 +286,21 @@ checkpoint 冻结后才物化 sealed test，并对 4B-SFT、选中的 4B-GRPO �
 | 阶段 | 状态 | 证据 |
 | --- | --- | --- |
 | SFT 增益 | 完成 | [V6 training report](../experiments/studies/planner_retry_migrate_v6_qwen35_4b_v1/TRAINING_REPORT.md) |
-| W&B 遥测 | 完成 | `configs/wandb/post_training_v1.json` |
+| W&B 遥测 | 完成，线上 workspace 已验证 | `configs/wandb/post_training_v1_workspace_receipt.json` |
 | V7 support pilot | 完成，门禁失败 | [V7 support result](../experiments/studies/planner_retry_migrate_residual_v7_qwen35_4b_v1/SUPPORT_GATE_RESULT.md) |
 | 35B/4B 场景筛选 | 完成，仅作探索 | `experiments/studies/planner_retry_migrate_residual_v8_qwen35_4b_v1/v7_pilot_decision.json` |
 | V8 support | 完成，方差门禁失败 | `experiments/studies/planner_retry_migrate_residual_v8_qwen35_4b_v1/support_decision.json` |
 | V9 温度校准 | 完成，固定 0.9 | `experiments/studies/planner_retry_safe_end_hard_residual_v9_qwen35_4b_v1/temperature_calibration_decision.json` |
 | V9 数据与 sealed commitment | 完成 | `data/datasets/planner_retry_safe_end_hard_residual_v9/manifest.json` |
 | V9 support | 完成，全部门禁通过 | `experiments/studies/planner_retry_safe_end_hard_residual_v9_qwen35_4b_v1/SUPPORT_GATE_RESULT.md` |
-| GRPO optimizer data | 已授权并冻结 144 条 | `training/planner_grpo_seed_v1/step_data/planner_retry_safe_end_hard_residual_v9_optimizer_qwen35_4b_nothinking_mixed_steps.manifest.json` |
-| GRPO canary | 完成，5/5 steps 健康 | `experiments/studies/planner_retry_safe_end_hard_residual_v9_qwen35_4b_v1/canary_decision.json` |
-| GRPO screen | 已授权，待运行 | 从同一 SFT initializer 重新启动 40 steps；候选 checkpoint 固定为 10/20/40 |
+| V9 GRPO optimizer data | 已授权并冻结 144 条 | `training/planner_grpo_seed_v1/step_data/planner_retry_safe_end_hard_residual_v9_optimizer_qwen35_4b_nothinking_mixed_steps.manifest.json` |
+| V9 GRPO canary | 完成，5/5 steps 健康 | `experiments/studies/planner_retry_safe_end_hard_residual_v9_qwen35_4b_v1/canary_decision.json` |
+| V9 GRPO screen | 完成，运行审计通过 | 40/40 steps；候选 checkpoint 10/20/40 |
+| V9 selection-dev | 完成，`no_promotion` | primary 最高 +52.78pp，但 control 最差 -37.50pp；sealed 未打开 |
+| V10 control-replay support | 完成，全部门禁通过 | 两个独立 block、9 个场景、1728 个 stochastic samples |
+| V10 canary | 完成，2/2 steps 健康 | 与正式 screen 的前两步及 checkpoint SHA-256 完全复现 |
+| V10 GRPO screen | 完成，运行审计通过 | 10/10 steps 均有非零梯度；候选 checkpoint 2/5/10 |
+| V10 selection-dev | 完成，`no_promotion` | primary +8.33pp、control +19.44pp，但副作用动作净增 2；sealed 未打开 |
+| V11 安全加权续训 | 下一步 | 新 selection/sealed 实体；非零 forbidden-action reward；门禁不放宽 |
 
 后续每次实验都应更新这张表，并把命令、数据 SHA-256、门禁结论和 Git commit 一起保存。这样你学到的不只是一次训练，而是一套能审计、能复现、也能知道何时不该训练的流程。
