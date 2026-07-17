@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_retry_optimizer_matched_v12_qwen35_4b_v1",
+  "status": "completed",
+  "sampling_protocol": {
+    "samples_per_prompt": 4,
+    "temperature": 0.9,
+    "top_p": 0.9,
+    "max_new_tokens": 320,
+    "base_seed": 42,
+    "sample_seed_formula": "base_seed + global_row_index * 1009 + sample_index * 9176",
+    "seed_depends_on_shard_count": false
+  },
+  "aborted_execution": {
+    "run": "experiments/runs/20260717_qwen35_4b_v12_support4x_v10ckpt10",
+    "status": "aborted_incomplete_before_outcome_inspection",
+    "reason": "Operational repartition from four to six idle GPUs after observing low throughput; no completion, action, or reward aggregate was inspected.",
+    "samples_at_termination_by_shard": [39, 44, 47, 46],
+    "samples_total": 176,
+    "used_for_gate": false
+  },
+  "repartition_invariance_check": {
+    "shared_samples_compared": 73,
+    "fields_compared": [
+      "case_id",
+      "score",
+      "json_valid",
+      "action_match",
+      "argument_match",
+      "finish_match",
+      "actual_action",
+      "completion_tokens",
+      "natural_eos",
+      "clipped",
+      "completion",
+      "scored_completion"
+    ],
+    "field_mismatches": 0
+  },
+  "accepted_execution": {
+    "run": "experiments/runs/20260717_qwen35_4b_v12_support6x_v10ckpt10",
+    "status": "completed_exit_zero",
+    "samples_by_shard": [384, 384, 384, 384, 384, 384],
+    "samples_total": 2304,
+    "prompt_groups": 576,
+    "used_for_gate": true,
+    "samples_sha256": "c769914a2f24e4f5dbca4346f8a946ace75fe9be545040aa6e39d0121b891afc",
+    "summary_sha256": "d093e419710176c5e679bb4c57b1ca9bf1b7df5be8c1b52cc408f3599d42bfbe"
+  }
+}

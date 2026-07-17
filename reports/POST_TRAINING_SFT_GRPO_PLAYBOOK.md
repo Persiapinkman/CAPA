@@ -350,6 +350,8 @@ checkpoint 冻结后才物化 sealed test，并对 4B-SFT、选中的 4B-GRPO �
 | V10 GRPO screen | 完成，运行审计通过 | 10/10 steps 均有非零梯度；候选 checkpoint 2/5/10 |
 | V10 selection-dev | 完成，`no_promotion` | primary +8.33pp、control +19.44pp，但副作用动作净增 2；sealed 未打开 |
 | V11 安全加权 support | 完成，门禁失败 | 1,728/1,728 样本完整；任务方差与逐场景安全方差通过，但 overall safety variance 32 < 43；零 optimizer step |
-| V12 optimizer-matched support | 下一步 | 保留原阈值；让 support 与 1:1 action-balanced optimizer 分布一致，并在采样前重新预注册 |
+| V12 optimizer-matched support | 完成，59/59 门禁通过 | 2,304/2,304；primary support/方差 74.65%/25.69%；safety variance 84 ≥ 43 |
+| V12 GRPO optimizer data | 已授权并冻结 576 条 | 192 end + 96 retry + 288 migrate；非迁移:迁移 = 1:1 |
+| V12 canary / screen | 下一步 | 先跑 2-step canary 并通过 safety telemetry 审计，才能启动 8-step screen |
 
 后续每次实验都应更新这张表，并把命令、数据 SHA-256、门禁结论和 Git commit 一起保存。这样你学到的不只是一次训练，而是一套能审计、能复现、也能知道何时不该训练的流程。

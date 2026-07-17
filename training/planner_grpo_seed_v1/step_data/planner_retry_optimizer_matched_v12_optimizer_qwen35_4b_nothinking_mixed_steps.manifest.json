@@ -1,0 +1,79 @@
+{
+  "accepted_scenarios": [
+    "current_success_step2",
+    "fresh_retry_step2",
+    "post_retry_success_step3",
+    "post_retry_error_step3",
+    "post_retry_metric_veto_step3",
+    "conflicting_state_step2",
+    "nonretryable_step2",
+    "budget_exhausted_step2",
+    "missing_required_state_step2"
+  ],
+  "allowed_optimization_scopes": [
+    "primary_residual",
+    "stability_control"
+  ],
+  "allowed_step_indices": [
+    2,
+    3
+  ],
+  "created_at": "2026-07-17T04:43:56.739956+00:00",
+  "dataset_id": "planner_retry_optimizer_matched_v12",
+  "distribution": {
+    "detectors": {
+      "qwen": 288,
+      "rex": 288
+    },
+    "scenarios": {
+      "budget_exhausted_step2": 48,
+      "conflicting_state_step2": 48,
+      "current_success_step2": 96,
+      "fresh_retry_step2": 96,
+      "missing_required_state_step2": 48,
+      "nonretryable_step2": 48,
+      "post_retry_error_step3": 48,
+      "post_retry_metric_veto_step3": 48,
+      "post_retry_success_step3": 96
+    },
+    "step_indices": {
+      "2": 384,
+      "3": 192
+    },
+    "target_actions": {
+      "end": 192,
+      "migrate": 288,
+      "retry": 96
+    }
+  },
+  "entities": 24,
+  "files": {
+    "accepted_scenarios": "data/datasets/planner_retry_optimizer_matched_v12/accepted_optimizer_scenarios.txt",
+    "source_step_data": "training/planner_grpo_seed_v1/step_data/planner_retry_optimizer_matched_v12_grpo_train_qwen35_4b_nothinking_mixed_steps.jsonl",
+    "step_data": "training/planner_grpo_seed_v1/step_data/planner_retry_optimizer_matched_v12_optimizer_qwen35_4b_nothinking_mixed_steps.jsonl",
+    "support_decision": "experiments/studies/planner_retry_optimizer_matched_v12_qwen35_4b_v1/support_decision.json"
+  },
+  "optimizer_authorized": true,
+  "role": "optimization_only",
+  "rows": 576,
+  "scenario_multipliers": {
+    "budget_exhausted_step2": 1,
+    "conflicting_state_step2": 1,
+    "current_success_step2": 2,
+    "fresh_retry_step2": 2,
+    "missing_required_state_step2": 1,
+    "nonretryable_step2": 1,
+    "post_retry_error_step3": 1,
+    "post_retry_metric_veto_step3": 1,
+    "post_retry_success_step3": 2
+  },
+  "schema_version": "1.0",
+  "selection_rule": "preregistered stochastic-support gate",
+  "sha256": {
+    "accepted_scenarios": "1096390cd5806c3179e8e13cda34dc8d7cd933f509691ee454cda91447a382cd",
+    "source_step_data": "c144197d932ae0b76dd9596fd5b6f8f2c3bd9594ec97f3cddf2876ba64b37053",
+    "step_data": "c144197d932ae0b76dd9596fd5b6f8f2c3bd9594ec97f3cddf2876ba64b37053",
+    "support_decision": "5298a6dde1891dd48dbfb6c8655e02f9e4a217dd9b5e132701e06d851d7b47cb"
+  },
+  "status": "frozen_support_selected_optimizer_data"
+}
