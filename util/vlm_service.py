@@ -78,14 +78,53 @@ class VLMService:
             extra_body["do_sample"] = do_sample
             kwargs["extra_body"] = extra_body
 
+        stream = os.environ.get("DEMO_OPENAI_STREAM", "0").strip().lower() in {
+            "1",
+            "true",
+            "yes",
+            "on",
+        }
         start = time.perf_counter()
         try:
-            response = self.client.chat.completions.create(
-                model=model,
-                messages=request_messages,
-                response_format=response_format,
-                **kwargs,
-            )
+            if stream:
+                response_stream = self.client.chat.completions.create(
+                    model=model,
+                    messages=request_messages,
+                    response_format=response_format,
+                    stream=True,
+                    **kwargs,
+                )
+                parts: list[str] = []
+                usage = None
+                finish_reason = None
+                response_model = None
+                for chunk in response_stream:
+                    usage = getattr(chunk, "usage", None) or usage
+                    response_model = getattr(chunk, "model", None) or response_model
+                    choices = getattr(chunk, "choices", None)
+                    if not choices:
+                        continue
+                    choice = choices[0]
+                    finish_reason = getattr(choice, "finish_reason", None) or finish_reason
+                    delta = getattr(choice, "delta", None)
+                    content = getattr(delta, "content", None) if delta is not None else None
+                    if isinstance(content, str) and content:
+                        parts.append(content)
+                raw = "".join(parts)
+            else:
+                response = self.client.chat.completions.create(
+                    model=model,
+                    messages=request_messages,
+                    response_format=response_format,
+                    **kwargs,
+                )
+                usage = getattr(response, "usage", None)
+                choice = response.choices[0] if getattr(response, "choices", None) else None
+                finish_reason = (
+                    getattr(choice, "finish_reason", None) if choice is not None else None
+                )
+                response_model = getattr(response, "model", None)
+                raw = response.choices[0].message.content
         except Exception as exc:
             self.last_response_metadata = {
                 "api_call_ms": round((time.perf_counter() - start) * 1000, 3),
@@ -94,17 +133,16 @@ class VLMService:
             }
             raise
         api_call_ms = round((time.perf_counter() - start) * 1000, 3)
-        usage = getattr(response, "usage", None)
-        choice = response.choices[0] if getattr(response, "choices", None) else None
         self.last_response_metadata = {
             "api_call_ms": api_call_ms,
             "input_tokens": getattr(usage, "prompt_tokens", None),
             "output_tokens": getattr(usage, "completion_tokens", None),
             "total_tokens": getattr(usage, "total_tokens", None),
-            "finish_reason": getattr(choice, "finish_reason", None) if choice is not None else None,
-            "model": getattr(response, "model", None),
+            "finish_reason": finish_reason,
+            "model": response_model,
+            "transport": "stream" if stream else "non_stream",
         }
-        return response.choices[0].message.content
+        return raw
 
     def image_to_base64(self, image_path: str, threshold=1024) -> tuple[str, str]:
         with Image.open(image_path) as img:

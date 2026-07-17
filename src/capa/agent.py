@@ -563,6 +563,8 @@ def _merge_planner_usage(metrics: dict, metadata: dict, *, prefix: str = "") -> 
                 metrics[f"{prefix}{dst_key}"] = value
     if metadata.get("finish_reason") is not None:
         metrics[f"{prefix}finish_reason" if prefix else "finish_reason"] = metadata.get("finish_reason")
+    if metadata.get("transport") is not None:
+        metrics[f"{prefix}transport" if prefix else "transport"] = metadata.get("transport")
     if metadata.get("error_type"):
         metrics[f"{prefix}error_type" if prefix else "error_type"] = metadata.get("error_type")
         metrics[f"{prefix}error" if prefix else "error"] = metadata.get("error")

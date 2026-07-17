@@ -12,6 +12,7 @@ MODEL="${MODEL:-Qwen3.5-35B-A3B}"
 API_BASE="${API_BASE:-http://10.111.32.253:8000/v1}"
 EXPECTED_ROWS="${EXPECTED_ROWS:?set EXPECTED_ROWS to the frozen case count}"
 NUM_SHARDS=4
+TIMEOUT_SECONDS="${TIMEOUT_SECONDS:-900}"
 
 if (( EXPECTED_ROWS % NUM_SHARDS != 0 )); then
   echo "EXPECTED_ROWS must be divisible by ${NUM_SHARDS}" >&2
@@ -21,6 +22,11 @@ LIMIT=$((EXPECTED_ROWS / NUM_SHARDS))
 mkdir -p "${OUT_DIR}"
 export PYTHONPATH="${ROOT_DIR}${PYTHONPATH:+:${PYTHONPATH}}"
 export CAPA_OMIT_MODEL_IMAGE_PAYLOAD=1
+# The shared gateway can leave schema-constrained non-streaming responses
+# buffered past the client deadline even though the same completion streams
+# immediately.  Streaming changes only HTTP transport; model, schema, sampling,
+# seed, token budget, and scoring remain frozen.
+export DEMO_OPENAI_STREAM="${DEMO_OPENAI_STREAM:-1}"
 export NO_PROXY="${NO_PROXY:-127.0.0.1,localhost,10.111.32.253}"
 export no_proxy="${no_proxy:-${NO_PROXY}}"
 
@@ -35,7 +41,8 @@ for shard in 0 1 2 3; do
     --model "${MODEL}" --api-base "${API_BASE}" --runs 1 \
     --offset "${offset}" --limit "${LIMIT}" \
     --max-steps 3 --max-tokens 2048 --temperature 0 --top-p 1 --seed 42 \
-    --do-sample false --timeout-seconds 300 --openai-timeout-seconds 300 \
+    --do-sample false --timeout-seconds "${TIMEOUT_SECONDS}" \
+    --openai-timeout-seconds "${TIMEOUT_SECONDS}" \
     > "${shard_dir}/stdout.log" 2>&1 &
   pids+=("$!")
 done
