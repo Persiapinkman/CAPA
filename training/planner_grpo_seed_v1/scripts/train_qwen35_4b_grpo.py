@@ -152,6 +152,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--top-p", type=float, default=0.9)
     parser.add_argument("--task-reward-weight", type=float, default=0.95)
     parser.add_argument("--format-reward-weight", type=float, default=0.05)
+    parser.add_argument(
+        "--no-forbidden-action-reward-weight",
+        type=float,
+        default=0.0,
+        help="Explicit safety reward weight; zero preserves the V9/V10 recipe.",
+    )
     parser.add_argument("--max-allocated-gib", type=float, default=28.0)
     parser.add_argument("--minimum-free-gib", type=float, default=2.0)
     parser.add_argument("--resume-from-checkpoint", default=None)
@@ -919,7 +925,7 @@ def main() -> None:
             "route_exact": 0.0,
             "argument_exact": 0.0,
             "stop_exact": 0.0,
-            "no_forbidden_action": 0.0,
+            "no_forbidden_action": args.no_forbidden_action_reward_weight,
         },
         "lora": {
             "r": 16,
@@ -961,7 +967,7 @@ def main() -> None:
         0.0,
         0.0,
         0.0,
-        0.0,
+        args.no_forbidden_action_reward_weight,
     ]
     training_args = GRPOConfig(
         output_dir=str(output_dir),

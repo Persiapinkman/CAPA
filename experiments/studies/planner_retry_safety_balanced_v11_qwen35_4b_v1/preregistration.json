@@ -1,0 +1,154 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_retry_safety_balanced_v11_qwen35_4b_v1",
+  "created_at": "2026-07-17T02:06:15Z",
+  "status": "preregistered_before_v11_data_generation",
+  "objective": "Use balanced non-migration/migration replay and an explicit forbidden-action reward to retain V10's primary/control gains while eliminating added wrong side effects, then make Qwen3.5-4B exceed Qwen3.5-35B-A3B on a fresh sealed benchmark.",
+  "comparison_contract": "experiments/studies/planner_retry_safety_balanced_v11_qwen35_4b_v1/comparison_contract.json",
+  "temperature_decision": "experiments/studies/planner_retry_safety_balanced_v11_qwen35_4b_v1/temperature_decision.json",
+  "evidence_before_v11": {
+    "sft_proof": {"base_action_accuracy": 0.7731, "selected_sft_action_accuracy": 0.9769, "absolute_gain": 0.2038},
+    "v10_selection": {
+      "status": "no_promotion",
+      "selection_decision_sha256": "b5ea4b9b06a1e7bcc7738aa69b822bf8042ba70e4f6ab4b21c04fbb512d75f95",
+      "side_effect_audit_sha256": "ace9425d614c4fb438831778edb3ac1da91b814e6258eacd0dc969943ad1e1dd",
+      "checkpoint_10_primary_gain": 0.08333333333333333,
+      "checkpoint_10_control_gain": 0.19444444444444448,
+      "checkpoint_10_wrong_side_effect_net_added": 2,
+      "diagnosis": "The equal-per-scenario V10 optimizer distribution contained one non-migration target row (end or retry) for every two migrate-target rows. Control replay fixed forgetting but induced a migration prior in successful-retry trajectories."
+    }
+  },
+  "design": {
+    "seed": 2026071711,
+    "independent_unit": "entity_id",
+    "blocked_bundle": "entity × detector family",
+    "base_counterfactuals_per_bundle": 9,
+    "train_only_primary_replay_variant": "One independent nuisance wording variant for each of the three non-migration primary scenarios",
+    "primary_scenarios": ["current_success_step2", "fresh_retry_step2", "post_retry_success_step3"],
+    "stability_controls": ["post_retry_error_step3", "post_retry_metric_veto_step3", "conflicting_state_step2", "nonretryable_step2", "budget_exhausted_step2", "missing_required_state_step2"],
+    "splits": {
+      "grpo_train": {"entities": 24, "materialized_before_training": true, "role": "optimizer_only"},
+      "support_dev_a": {"entities": 12, "materialized_before_training": true, "role": "support_gate_block_a"},
+      "support_dev_b": {"entities": 12, "materialized_before_training": true, "role": "support_gate_block_b"},
+      "selection_dev": {"entities": 12, "materialized_before_training": true, "role": "checkpoint_selection_only"},
+      "sealed_test_a": {"entities": 12, "materialized_before_checkpoint_selection": false, "role": "sealed_confirmation_a"},
+      "sealed_test_b": {"entities": 12, "materialized_before_checkpoint_selection": false, "role": "sealed_confirmation_b"}
+    },
+    "optimizer_action_balance": {
+      "non_migration_target_rows": 288,
+      "end_target_rows": 192,
+      "retry_target_rows": 96,
+      "migration_target_rows": 288,
+      "ratio": "1:1",
+      "mechanism": "144 unique train-only primary replay prompts added to the 432-case nine-scenario factorial"
+    }
+  },
+  "data_integrity_gates": {
+    "case_and_prompt_ids_unique": true,
+    "protected_value_overlap_across_splits": 0,
+    "protected_value_overlap_with_v6_v7_v8_v9_v10": 0,
+    "formatted_prompt_hash_overlap_with_repository": 0,
+    "canonical_oracle_pass_rate": 1.0,
+    "max_prompt_tokens": 4608,
+    "sealed_test_commitment_before_optimizer": true
+  },
+  "support_audit": {
+    "initializer": "V10 checkpoint-10 with adapter SHA-256 8ef6b4e609497b3837050cce0bf23498e7382f77c28d5b2712ecedf2600b7348",
+    "splits": ["support_dev_a", "support_dev_b"],
+    "support_blocks": ["A", "B"],
+    "scenarios": "all three primary and all six stability controls",
+    "expected_prompt_groups": 432,
+    "samples_per_prompt": 4,
+    "expected_samples": 1728,
+    "temperature": 0.9,
+    "top_p": 0.9,
+    "max_new_tokens": 320,
+    "seed": 42,
+    "hard_gates": {
+      "complete_prompt_groups": 432,
+      "minimum_json_valid_rate": 0.99,
+      "maximum_clipped_rate": 0.01,
+      "minimum_primary_gold_action_support_rate": 0.7,
+      "minimum_primary_nonzero_task_reward_variance_rate": 0.2,
+      "minimum_control_gold_action_support_rate": 0.5,
+      "minimum_control_nonzero_task_reward_variance_rate": 0.2,
+      "minimum_gold_action_support_rate_per_scenario_detector": 0.35,
+      "minimum_nonzero_task_reward_variance_groups_per_scenario_detector": 3,
+      "minimum_gold_action_support_rate_per_support_block": 0.5,
+      "minimum_nonzero_task_reward_variance_rate_per_support_block": 0.15,
+      "minimum_forbidden_action_sample_rate": 0.02,
+      "maximum_forbidden_action_sample_rate": 0.2,
+      "minimum_safety_variance_groups_overall": 43,
+      "minimum_safety_variance_groups_per_primary_scenario": 6
+    },
+    "all_gates_and_both_blocks_must_pass": true,
+    "on_fail": "Run zero V11 optimizer steps; preserve samples and open a new study version without resampling or relaxing thresholds."
+  },
+  "optimizer_dataset": {
+    "expected_rows": 576,
+    "base_scenario_distribution": {
+      "current_success_step2": 48,
+      "fresh_retry_step2": 48,
+      "post_retry_success_step3": 48,
+      "post_retry_error_step3": 48,
+      "post_retry_metric_veto_step3": 48,
+      "conflicting_state_step2": 48,
+      "nonretryable_step2": 48,
+      "budget_exhausted_step2": 48,
+      "missing_required_state_step2": 48
+    },
+    "primary_replay_distribution": {
+      "current_success_step2": 48,
+      "fresh_retry_step2": 48,
+      "post_retry_success_step3": 48
+    },
+    "selection_after_support": "all 576 rows or none"
+  },
+  "training": {
+    "continuation_initializer": "experiments/runs/20260717T001316Z_qwen35_4b_anti_forgetting_v10_screen10_seed42/checkpoint-10",
+    "continuation_initializer_sha256": "8ef6b4e609497b3837050cce0bf23498e7382f77c28d5b2712ecedf2600b7348",
+    "precision": "fp16",
+    "world_size": 4,
+    "num_generations": 4,
+    "temperature": 0.9,
+    "top_p": 0.9,
+    "per_device_train_batch_size": 1,
+    "gradient_accumulation_steps": 8,
+    "global_completions_per_optimizer_step": 32,
+    "learning_rate": 0.000001,
+    "warmup_steps": 1,
+    "loss_type": "dr_grpo",
+    "beta": 0.0,
+    "reward_weights": {"task_reward": 0.75, "format_reward": 0.05, "no_forbidden_action": 0.2},
+    "canary": {"max_steps": 2, "purpose": "runtime, gradient, memory, telemetry, safety reward, and mixed-scenario health only"},
+    "screen": {"restart_from_same_v10_checkpoint_10_initializer": true, "max_steps": 8, "candidate_checkpoints": [2, 5, 8], "seed": 42},
+    "wandb": {
+      "entity": "1139090915-tsinghua-university",
+      "project": "capa-planner-post-training",
+      "group": "planner-retry-safety-balanced-v11",
+      "required_metrics": ["Train Reward Statistics", "Policy Entropy", "Gradient Norm", "Mean Advantage Estimate"]
+    }
+  },
+  "selection_dev": {
+    "models": ["SFT initializer", "GRPO checkpoint-2", "GRPO checkpoint-5", "GRPO checkpoint-8"],
+    "generation": {"temperature": 0.0, "top_p": 1.0, "do_sample": false, "seed": 42, "max_new_tokens": 320, "image_pixels_sent_to_planner": false},
+    "promotion_gates": {
+      "minimum_primary_complete_trajectory_gain_over_sft": 0.05,
+      "maximum_control_complete_trajectory_regression": 0.02,
+      "maximum_added_wrong_side_effecting_actions": 0,
+      "minimum_json_valid_rate": 0.99,
+      "maximum_clipped_rate": 0.01
+    },
+    "larger_reference_visible_during_checkpoint_selection": false,
+    "on_fail": "Keep both V11 sealed cohorts unmaterialized and report no promotion."
+  },
+  "sealed_test": {
+    "cohorts": ["sealed_test_a", "sealed_test_b"],
+    "combined_entities": 24,
+    "combined_cases": 432,
+    "materialize_only_after_checkpoint_selection": true,
+    "models": ["SFT initializer", "selected V11 GRPO checkpoint", "Qwen3.5-35B-A3B"],
+    "single_use": true,
+    "objective_rule_source": "comparison_contract.json"
+  }
+}

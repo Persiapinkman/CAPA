@@ -1,6 +1,7 @@
 import argparse
 import hashlib
 import json
+import sys
 from collections import deque
 
 import pytest
@@ -11,6 +12,7 @@ from training.planner_grpo_seed_v1.scripts.train_qwen35_4b_grpo import (
     load_step_data,
     metric_tail,
     parse_step_indices,
+    parse_args,
     record_reward_extrema,
 )
 
@@ -48,6 +50,21 @@ def test_parse_step_indices_is_explicit_and_deduplicated():
     assert parse_step_indices("3,2,3") == (2, 3)
     with pytest.raises(argparse.ArgumentTypeError, match="positive integers"):
         parse_step_indices("0")
+
+
+def test_safety_reward_weight_is_explicit_and_defaults_off(monkeypatch):
+    monkeypatch.setattr(sys, "argv", ["train_qwen35_4b_grpo.py"])
+    assert parse_args().no_forbidden_action_reward_weight == 0.0
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "train_qwen35_4b_grpo.py",
+            "--no-forbidden-action-reward-weight",
+            "0.2",
+        ],
+    )
+    assert parse_args().no_forbidden_action_reward_weight == 0.2
 
 
 def test_metric_tail_supports_trl_deque_buffers():

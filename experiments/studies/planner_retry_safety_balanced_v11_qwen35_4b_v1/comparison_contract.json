@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_retry_safety_balanced_v11_qwen35_4b_v1",
+  "created_at": "2026-07-17T02:06:15Z",
+  "status": "frozen_before_v11_data_generation",
+  "research_objective": "Continue safety-weighted GRPO from the V10 checkpoint-10 training candidate, improve the original SFT on retry/safe-end residuals without added wrong side-effecting actions, then exceed Qwen3.5-35B-A3B on a fresh entity-disjoint sealed benchmark.",
+  "models": {
+    "target_base": "/raid/zkq/models/Qwen3.5-4B",
+    "target_sft_reference": "experiments/runs/20260716_qwen35_4b_planner_v6_sft_seed42_v1/checkpoint-100",
+    "v11_continuation_initializer": {
+      "path": "experiments/runs/20260717T001316Z_qwen35_4b_anti_forgetting_v10_screen10_seed42/checkpoint-10",
+      "adapter_sha256": "8ef6b4e609497b3837050cce0bf23498e7382f77c28d5b2712ecedf2600b7348",
+      "selection_role": "V10 development feedback only; V11 selection and sealed entities are new"
+    },
+    "larger_reference": {
+      "model_id": "Qwen3.5-35B-A3B",
+      "runtime": "external_openai_compatible_gateway",
+      "required_for_objective": true,
+      "substitution_after_v11_data_generation": "forbidden"
+    }
+  },
+  "common_inference_protocol": {
+    "planner_system_prompt": "repository_current_frozen_at_v11_build",
+    "planner_state_machine": "repository_current_frozen_at_v11_build",
+    "verifier": "training/planner_grpo_seed_v1/scripts/reward_planner_grpo.py",
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "do_sample": false,
+    "seed": 42,
+    "max_steps": 3,
+    "target_max_new_tokens": 320,
+    "reference_max_tokens": 2048,
+    "first_valid_json_scoring": true,
+    "image_path_in_prompt_context": true,
+    "image_pixels_sent_to_planner": false
+  },
+  "units_and_metrics": {
+    "independent_unit": "entity_id",
+    "correlated_measurements": ["detector family", "scenario counterfactual", "repeated generation"],
+    "primary_scope": ["current_success_step2", "fresh_retry_step2", "post_retry_success_step3"],
+    "primary_metric": "mean entity-level complete-trajectory pass rate over both detectors and all primary scenarios",
+    "secondary_metrics": ["control complete-trajectory pass rate", "wrong side-effecting action count", "mean verifier reward", "step action accuracy", "JSON validity", "completion clipping"]
+  },
+  "development_promotion_rule": {
+    "checkpoint_selection_uses_larger_reference": false,
+    "minimum_grpo_minus_sft_primary_gain": 0.05,
+    "maximum_control_pass_rate_regression": 0.02,
+    "maximum_added_wrong_side_effecting_actions": 0,
+    "tie_break_order": ["higher primary entity-level pass rate", "higher control entity-level pass rate", "lower wrong side-effecting action count", "earlier optimizer checkpoint"]
+  },
+  "sealed_test_objective": {
+    "materialize_only_after_checkpoint_selection": true,
+    "runs_per_model": 1,
+    "objective_met_if": [
+      "target_grpo_primary_rate > target_sft_primary_rate",
+      "target_grpo_primary_rate > larger_reference_primary_rate",
+      "target_grpo_control_rate >= target_sft_control_rate - 0.05",
+      "target_grpo_wrong_side_effecting_actions <= target_sft_wrong_side_effecting_actions"
+    ],
+    "strong_superiority_if": "entity-clustered paired bootstrap 95% confidence interval lower bound for target_grpo minus larger_reference is greater than zero",
+    "if_point_estimate_wins_but_interval_crosses_zero": "Report point-estimate superiority only; do not claim stable superiority.",
+    "if_objective_fails": "Do not rerun or rescore the V11 sealed test; open a new study version with a new sealed test."
+  },
+  "anti_leakage_rules": [
+    "V11 train, support, selection, and sealed splits use new protected values and entity IDs disjoint from V6-V10.",
+    "V10 selection outcomes may choose the V11 recipe and continuation initializer but cannot enter V11 train, support, selection, or sealed rows.",
+    "V11 checkpoint selection cannot use the larger reference.",
+    "Support, safety, promotion, and sealed objective thresholds cannot be relaxed after V11 sampling begins."
+  ]
+}

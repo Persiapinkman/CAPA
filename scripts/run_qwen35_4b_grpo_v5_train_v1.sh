@@ -29,6 +29,9 @@ SAVE_STEPS="${SAVE_STEPS:-25}"
 SAVE_TOTAL_LIMIT="${SAVE_TOTAL_LIMIT:-4}"
 GENERATION_TEMPERATURE="${GENERATION_TEMPERATURE:-0.7}"
 GENERATION_TOP_P="${GENERATION_TOP_P:-0.9}"
+TASK_REWARD_WEIGHT="${TASK_REWARD_WEIGHT:-0.95}"
+FORMAT_REWARD_WEIGHT="${FORMAT_REWARD_WEIGHT:-0.05}"
+NO_FORBIDDEN_ACTION_REWARD_WEIGHT="${NO_FORBIDDEN_ACTION_REWARD_WEIGHT:-0.0}"
 
 case "${RUN_MODE}" in
   dry-run)
@@ -157,8 +160,9 @@ common_args=(
   --logging-steps 1
   --temperature "${GENERATION_TEMPERATURE}"
   --top-p "${GENERATION_TOP_P}"
-  --task-reward-weight 0.95
-  --format-reward-weight 0.05
+  --task-reward-weight "${TASK_REWARD_WEIGHT}"
+  --format-reward-weight "${FORMAT_REWARD_WEIGHT}"
+  --no-forbidden-action-reward-weight "${NO_FORBIDDEN_ACTION_REWARD_WEIGHT}"
   --report-to "${REPORT_TO}"
   --run-name "${WANDB_RUN_NAME:-$(basename "${OUTPUT_DIR}")}"
   --wandb-project "${WANDB_PROJECT}"
