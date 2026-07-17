@@ -625,7 +625,7 @@
       "sealed_test_b"
     ],
     "entities": 24,
-    "materialized": false,
+    "materialized": true,
     "rows": 432,
     "sha256": "6e9413858d6e9cc09672d00d80dbda593e13e190457915498f5240c97b16c149"
   },

@@ -1,0 +1,18 @@
+{
+  "combined_test_cases": "/raid/zkq/projects/CAPA/experiments/studies/planner_retry_optimizer_matched_v12_qwen35_4b_v1/sealed_test_data/combined_test_cases.jsonl",
+  "combined_test_sha256": "6e9413858d6e9cc09672d00d80dbda593e13e190457915498f5240c97b16c149",
+  "entities": 24,
+  "larger_reference_used_for_selection": false,
+  "rows": 432,
+  "schema_version": "1.0",
+  "selected": {
+    "adapter": "/raid/zkq/projects/CAPA/experiments/runs/20260717T045432Z_qwen35_4b_optimizer_matched_v12_screen8_seed42/checkpoint-5",
+    "adapter_sha256": "8d0112e0ce067ac479f7245c84be68b875e474dbb37b2df033f88d53e29c1ee3",
+    "checkpoint": 5,
+    "commitment_sha256": "6e9413858d6e9cc09672d00d80dbda593e13e190457915498f5240c97b16c149",
+    "label": "checkpoint-5"
+  },
+  "selection_decision": "/raid/zkq/projects/CAPA/experiments/studies/planner_retry_optimizer_matched_v12_qwen35_4b_v1/selection_decision.json",
+  "selection_decision_sha256": "e610b63a962d75f890c08fa234b1e341f4abea0fb23acaa13cba234623b4806e",
+  "status": "sealed_test_materialized_once"
+}

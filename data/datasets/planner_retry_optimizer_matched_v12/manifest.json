@@ -65,13 +65,13 @@
       "sealed_test_b"
     ],
     "entities": 24,
-    "materialized": false,
+    "materialized": true,
     "rows": 432,
     "sha256": "6e9413858d6e9cc09672d00d80dbda593e13e190457915498f5240c97b16c149"
   },
   "seed": 2026071712,
   "sha256": {
-    "audit_report": "0aeeb8cc23243119b35e3d94b5b36247bb65a1dccfb419fff12c3b1933b4e8f4",
+    "audit_report": "045c3776abde24844783f000dff663953150cc71d7c7f133e685c3806216b010",
     "builder": "c154b172b14dc2bbefcec8233fa02590b19d11b49d3011bbef5030afe986c38f",
     "cases_grpo_train": "c384a216bb87db38640044e508fbf11518fcbe4189373d47e4c2298bc190f456",
     "cases_selection_dev": "35e56a5f8557f1834615322e186a207b922738106c0985ff3f6472533ba22dc3",
