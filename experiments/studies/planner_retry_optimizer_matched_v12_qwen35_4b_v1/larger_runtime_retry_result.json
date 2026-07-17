@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "created_at": "2026-07-17T07:59:20Z",
+  "status": "pass_all_frozen_runtime_retries_replaced",
+  "policy": "experiments/studies/planner_retry_optimizer_matched_v12_qwen35_4b_v1/larger_runtime_retry_policy.json",
+  "policy_sha256": "9b7d3b7a0359b3f7f9fec764b67fc82e5563047e6624765be070abdd29dd5338",
+  "original_predictions": {
+    "path": "experiments/runs/20260717_qwen35_v12_sealed/larger_proxy_retry/predictions.jsonl",
+    "sha256": "3ab875e1805280108bcd5d429f64ca7d1506525d31ff82e245a3b83bdf0b4b30",
+    "planner_runtime_errors": 6
+  },
+  "corrected_predictions": {
+    "path": "experiments/runs/20260717_qwen35_v12_sealed/larger_proxy_retry/predictions_runtime_retried.jsonl",
+    "sha256": "84d618ac96cee21e61440ae5c2aec7acb0c58bc3ba78d12c2616497fd6ddd52b",
+    "rows": 432,
+    "unique_case_ids": 432,
+    "empty_cases": 0,
+    "planner_decisions": 1056,
+    "planner_runtime_errors": 0,
+    "json_valid_rate": 1.0,
+    "clipped_rate": 0.010416666666666666
+  },
+  "retries": {
+    "PROMV12-TA-011-QWEN-FR2": {
+      "zero_based_index": 10,
+      "prediction_sha256": "e12365294a317af928fdd33d58818ef10d068380e7a7fe02b9ad908b7e9b79dc"
+    },
+    "PROMV12-TA-006-REX-CS2": {
+      "zero_based_index": 91,
+      "prediction_sha256": "90263eeae518f3fd368e475576024d3c340979c05894b31f794116d1563aa3b6"
+    },
+    "PROMV12-TA-006-QWEN-PS3": {
+      "zero_based_index": 103,
+      "prediction_sha256": "017f892318faad4ef0e6b6bae5cc62a62f00dd66f9c27be53d74f3d39c0bd9d7"
+    },
+    "PROMV12-TA-012-REX-FR2": {
+      "zero_based_index": 138,
+      "prediction_sha256": "830b51a0568215880ecfc02189102e24b1a073465e9b59d5a0ec9f89462f4ed5"
+    },
+    "PROMV12-TA-007-QWEN-FR2": {
+      "zero_based_index": 201,
+      "prediction_sha256": "f3e74c3de84d69638ee2220e456938ae16f650a9ce755408ee6dc3f83e2ccbd3"
+    },
+    "PROMV12-TB-006-QWEN-FR2": {
+      "zero_based_index": 388,
+      "prediction_sha256": "d5f069c4a41ac6dd64cf870b8898915a6005c0772a0b58d08b85bf15d6c3e403"
+    }
+  },
+  "replacement_invariants": {
+    "all_flagged_cases_retried_once": true,
+    "all_retry_rows_runtime_clean": true,
+    "all_six_rows_replaced": true,
+    "replacement_conditioned_on_correctness_or_reward": false,
+    "original_predictions_overwritten": false,
+    "objective_computed_before_freezing_this_result": false
+  }
+}
