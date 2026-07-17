@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_retry_optimizer_matched_v12_qwen35_4b_v1",
+  "created_at": "2026-07-17T03:30:00Z",
+  "status": "frozen_before_v12_data_generation",
+  "temperature": 0.9,
+  "top_p": 0.9,
+  "decision": "Reuse the frozen V9-V11 sampling distribution; no V12 temperature tuning.",
+  "evidence": "V11 support at temperature 0.9 achieved 81.25% primary gold-action support, 22.22% primary task-reward variance, an 8.22% forbidden-action sample rate, and all three per-primary safety-variance gates. V12 changes only the prospective support composition so it mirrors the optimizer composition."
+}
