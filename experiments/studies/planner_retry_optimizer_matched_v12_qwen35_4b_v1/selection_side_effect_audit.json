@@ -1,0 +1,1139 @@
+{
+  "by_detector": {
+    "qwen": {
+      "checkpoint-5": 13,
+      "introduced": 8,
+      "removed": 5,
+      "sft": 10
+    },
+    "rex": {
+      "checkpoint-5": 19,
+      "introduced": 7,
+      "removed": 7,
+      "sft": 19
+    }
+  },
+  "by_scenario": {
+    "budget_exhausted_step2": {
+      "checkpoint-5": 0,
+      "introduced": 0,
+      "removed": 0,
+      "sft": 0
+    },
+    "conflicting_state_step2": {
+      "checkpoint-5": 0,
+      "introduced": 0,
+      "removed": 0,
+      "sft": 0
+    },
+    "current_success_step2": {
+      "checkpoint-5": 1,
+      "introduced": 0,
+      "removed": 9,
+      "sft": 10
+    },
+    "fresh_retry_step2": {
+      "checkpoint-5": 15,
+      "introduced": 7,
+      "removed": 1,
+      "sft": 9
+    },
+    "missing_required_state_step2": {
+      "checkpoint-5": 0,
+      "introduced": 0,
+      "removed": 0,
+      "sft": 0
+    },
+    "nonretryable_step2": {
+      "checkpoint-5": 0,
+      "introduced": 0,
+      "removed": 0,
+      "sft": 0
+    },
+    "post_retry_error_step3": {
+      "checkpoint-5": 0,
+      "introduced": 0,
+      "removed": 0,
+      "sft": 0
+    },
+    "post_retry_metric_veto_step3": {
+      "checkpoint-5": 0,
+      "introduced": 0,
+      "removed": 0,
+      "sft": 0
+    },
+    "post_retry_success_step3": {
+      "checkpoint-5": 16,
+      "introduced": 8,
+      "removed": 2,
+      "sft": 10
+    }
+  },
+  "candidate_label": "checkpoint-5",
+  "cases": 216,
+  "changed_case_details": [
+    {
+      "case_id": "PROMV12-VD-008-REX-FR2",
+      "checkpoint-5_actions": [
+        "rexomni_detection",
+        "migration_advisor",
+        "end"
+      ],
+      "checkpoint-5_forbidden_hit": [
+        "migration_advisor"
+      ],
+      "checkpoint-5_passed": false,
+      "detector_family": "rex",
+      "entity_id": "promv12_vd_entity_008",
+      "expected_actions": [
+        "rexomni_detection",
+        "rexomni_detection",
+        "end"
+      ],
+      "forbidden_actions": [
+        "rag_answer",
+        "re_question",
+        "answerer",
+        "flux-image-generation",
+        "qwen_detection",
+        "pipeline_eval",
+        "migration_advisor"
+      ],
+      "introduced_forbidden_actions": [
+        "migration_advisor"
+      ],
+      "removed_forbidden_actions": [],
+      "scenario_id": "fresh_retry_step2",
+      "sft_actions": [
+        "rexomni_detection",
+        "rexomni_detection",
+        "rexomni_detection"
+      ],
+      "sft_forbidden_hit": [],
+      "sft_passed": false
+    },
+    {
+      "case_id": "PROMV12-VD-003-QWEN-PS3",
+      "checkpoint-5_actions": [
+        "qwen_detection",
+        "qwen_detection",
+        "qwen_detection"
+      ],
+      "checkpoint-5_forbidden_hit": [],
+      "checkpoint-5_passed": false,
+      "detector_family": "qwen",
+      "entity_id": "promv12_vd_entity_003",
+      "expected_actions": [
+        "qwen_detection",
+        "qwen_detection",
+        "end"
+      ],
+      "forbidden_actions": [
+        "rag_answer",
+        "re_question",
+        "answerer",
+        "flux-image-generation",
+        "rexomni_detection",
+        "pipeline_eval",
+        "migration_advisor"
+      ],
+      "introduced_forbidden_actions": [],
+      "removed_forbidden_actions": [
+        "migration_advisor"
+      ],
+      "scenario_id": "post_retry_success_step3",
+      "sft_actions": [
+        "qwen_detection",
+        "migration_advisor",
+        "migration_advisor"
+      ],
+      "sft_forbidden_hit": [
+        "migration_advisor"
+      ],
+      "sft_passed": false
+    },
+    {
+      "case_id": "PROMV12-VD-009-QWEN-CS2",
+      "checkpoint-5_actions": [
+        "qwen_detection",
+        "end"
+      ],
+      "checkpoint-5_forbidden_hit": [],
+      "checkpoint-5_passed": true,
+      "detector_family": "qwen",
+      "entity_id": "promv12_vd_entity_009",
+      "expected_actions": [
+        "qwen_detection",
+        "end"
+      ],
+      "forbidden_actions": [
+        "rag_answer",
+        "re_question",
+        "answerer",
+        "flux-image-generation",
+        "rexomni_detection",
+        "pipeline_eval",
+        "migration_advisor"
+      ],
+      "introduced_forbidden_actions": [],
+      "removed_forbidden_actions": [
+        "migration_advisor"
+      ],
+      "scenario_id": "current_success_step2",
+      "sft_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "sft_forbidden_hit": [
+        "migration_advisor"
+      ],
+      "sft_passed": false
+    },
+    {
+      "case_id": "PROMV12-VD-008-REX-PS3",
+      "checkpoint-5_actions": [
+        "rexomni_detection",
+        "migration_advisor",
+        "end"
+      ],
+      "checkpoint-5_forbidden_hit": [
+        "migration_advisor"
+      ],
+      "checkpoint-5_passed": false,
+      "detector_family": "rex",
+      "entity_id": "promv12_vd_entity_008",
+      "expected_actions": [
+        "rexomni_detection",
+        "rexomni_detection",
+        "end"
+      ],
+      "forbidden_actions": [
+        "rag_answer",
+        "re_question",
+        "answerer",
+        "flux-image-generation",
+        "qwen_detection",
+        "pipeline_eval",
+        "migration_advisor"
+      ],
+      "introduced_forbidden_actions": [
+        "migration_advisor"
+      ],
+      "removed_forbidden_actions": [],
+      "scenario_id": "post_retry_success_step3",
+      "sft_actions": [
+        "rexomni_detection",
+        "rexomni_detection",
+        "rexomni_detection"
+      ],
+      "sft_forbidden_hit": [],
+      "sft_passed": false
+    },
+    {
+      "case_id": "PROMV12-VD-005-QWEN-FR2",
+      "checkpoint-5_actions": [
+        "qwen_detection",
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "checkpoint-5_forbidden_hit": [
+        "migration_advisor"
+      ],
+      "checkpoint-5_passed": false,
+      "detector_family": "qwen",
+      "entity_id": "promv12_vd_entity_005",
+      "expected_actions": [
+        "qwen_detection",
+        "qwen_detection",
+        "end"
+      ],
+      "forbidden_actions": [
+        "rag_answer",
+        "re_question",
+        "answerer",
+        "flux-image-generation",
+        "rexomni_detection",
+        "pipeline_eval",
+        "migration_advisor"
+      ],
+      "introduced_forbidden_actions": [
+        "migration_advisor"
+      ],
+      "removed_forbidden_actions": [],
+      "scenario_id": "fresh_retry_step2",
+      "sft_actions": [
+        "qwen_detection",
+        "qwen_detection",
+        "qwen_detection"
+      ],
+      "sft_forbidden_hit": [],
+      "sft_passed": false
+    },
+    {
+      "case_id": "PROMV12-VD-009-REX-FR2",
+      "checkpoint-5_actions": [
+        "rexomni_detection",
+        "migration_advisor",
+        "end"
+      ],
+      "checkpoint-5_forbidden_hit": [
+        "migration_advisor"
+      ],
+      "checkpoint-5_passed": false,
+      "detector_family": "rex",
+      "entity_id": "promv12_vd_entity_009",
+      "expected_actions": [
+        "rexomni_detection",
+        "rexomni_detection",
+        "end"
+      ],
+      "forbidden_actions": [
+        "rag_answer",
+        "re_question",
+        "answerer",
+        "flux-image-generation",
+        "qwen_detection",
+        "pipeline_eval",
+        "migration_advisor"
+      ],
+      "introduced_forbidden_actions": [
+        "migration_advisor"
+      ],
+      "removed_forbidden_actions": [],
+      "scenario_id": "fresh_retry_step2",
+      "sft_actions": [
+        "rexomni_detection",
+        "rexomni_detection",
+        "rexomni_detection"
+      ],
+      "sft_forbidden_hit": [],
+      "sft_passed": false
+    },
+    {
+      "case_id": "PROMV12-VD-009-REX-PS3",
+      "checkpoint-5_actions": [
+        "rexomni_detection",
+        "migration_advisor",
+        "end"
+      ],
+      "checkpoint-5_forbidden_hit": [
+        "migration_advisor"
+      ],
+      "checkpoint-5_passed": false,
+      "detector_family": "rex",
+      "entity_id": "promv12_vd_entity_009",
+      "expected_actions": [
+        "rexomni_detection",
+        "rexomni_detection",
+        "end"
+      ],
+      "forbidden_actions": [
+        "rag_answer",
+        "re_question",
+        "answerer",
+        "flux-image-generation",
+        "qwen_detection",
+        "pipeline_eval",
+        "migration_advisor"
+      ],
+      "introduced_forbidden_actions": [
+        "migration_advisor"
+      ],
+      "removed_forbidden_actions": [],
+      "scenario_id": "post_retry_success_step3",
+      "sft_actions": [
+        "rexomni_detection",
+        "rexomni_detection",
+        "rexomni_detection"
+      ],
+      "sft_forbidden_hit": [],
+      "sft_passed": false
+    },
+    {
+      "case_id": "PROMV12-VD-010-REX-PS3",
+      "checkpoint-5_actions": [
+        "rexomni_detection",
+        "migration_advisor",
+        "end"
+      ],
+      "checkpoint-5_forbidden_hit": [
+        "migration_advisor"
+      ],
+      "checkpoint-5_passed": false,
+      "detector_family": "rex",
+      "entity_id": "promv12_vd_entity_010",
+      "expected_actions": [
+        "rexomni_detection",
+        "rexomni_detection",
+        "end"
+      ],
+      "forbidden_actions": [
+        "rag_answer",
+        "re_question",
+        "answerer",
+        "flux-image-generation",
+        "qwen_detection",
+        "pipeline_eval",
+        "migration_advisor"
+      ],
+      "introduced_forbidden_actions": [
+        "migration_advisor"
+      ],
+      "removed_forbidden_actions": [],
+      "scenario_id": "post_retry_success_step3",
+      "sft_actions": [
+        "rexomni_detection",
+        "rexomni_detection",
+        "rexomni_detection"
+      ],
+      "sft_forbidden_hit": [],
+      "sft_passed": false
+    },
+    {
+      "case_id": "PROMV12-VD-006-REX-PS3",
+      "checkpoint-5_actions": [
+        "rexomni_detection",
+        "rexomni_detection",
+        "end"
+      ],
+      "checkpoint-5_forbidden_hit": [],
+      "checkpoint-5_passed": true,
+      "detector_family": "rex",
+      "entity_id": "promv12_vd_entity_006",
+      "expected_actions": [
+        "rexomni_detection",
+        "rexomni_detection",
+        "end"
+      ],
+      "forbidden_actions": [
+        "rag_answer",
+        "re_question",
+        "answerer",
+        "flux-image-generation",
+        "qwen_detection",
+        "pipeline_eval",
+        "migration_advisor"
+      ],
+      "introduced_forbidden_actions": [],
+      "removed_forbidden_actions": [
+        "migration_advisor"
+      ],
+      "scenario_id": "post_retry_success_step3",
+      "sft_actions": [
+        "rexomni_detection",
+        "migration_advisor",
+        "migration_advisor"
+      ],
+      "sft_forbidden_hit": [
+        "migration_advisor"
+      ],
+      "sft_passed": false
+    },
+    {
+      "case_id": "PROMV12-VD-009-REX-CS2",
+      "checkpoint-5_actions": [
+        "rexomni_detection",
+        "end"
+      ],
+      "checkpoint-5_forbidden_hit": [],
+      "checkpoint-5_passed": true,
+      "detector_family": "rex",
+      "entity_id": "promv12_vd_entity_009",
+      "expected_actions": [
+        "rexomni_detection",
+        "end"
+      ],
+      "forbidden_actions": [
+        "rag_answer",
+        "re_question",
+        "answerer",
+        "flux-image-generation",
+        "qwen_detection",
+        "pipeline_eval",
+        "migration_advisor"
+      ],
+      "introduced_forbidden_actions": [],
+      "removed_forbidden_actions": [
+        "migration_advisor"
+      ],
+      "scenario_id": "current_success_step2",
+      "sft_actions": [
+        "rexomni_detection",
+        "migration_advisor"
+      ],
+      "sft_forbidden_hit": [
+        "migration_advisor"
+      ],
+      "sft_passed": false
+    },
+    {
+      "case_id": "PROMV12-VD-009-QWEN-FR2",
+      "checkpoint-5_actions": [
+        "qwen_detection",
+        "migration_advisor",
+        "end"
+      ],
+      "checkpoint-5_forbidden_hit": [
+        "migration_advisor"
+      ],
+      "checkpoint-5_passed": false,
+      "detector_family": "qwen",
+      "entity_id": "promv12_vd_entity_009",
+      "expected_actions": [
+        "qwen_detection",
+        "qwen_detection",
+        "end"
+      ],
+      "forbidden_actions": [
+        "rag_answer",
+        "re_question",
+        "answerer",
+        "flux-image-generation",
+        "rexomni_detection",
+        "pipeline_eval",
+        "migration_advisor"
+      ],
+      "introduced_forbidden_actions": [
+        "migration_advisor"
+      ],
+      "removed_forbidden_actions": [],
+      "scenario_id": "fresh_retry_step2",
+      "sft_actions": [
+        "qwen_detection",
+        "qwen_detection",
+        "qwen_detection"
+      ],
+      "sft_forbidden_hit": [],
+      "sft_passed": false
+    },
+    {
+      "case_id": "PROMV12-VD-007-REX-FR2",
+      "checkpoint-5_actions": [
+        "rexomni_detection",
+        "migration_advisor",
+        "end"
+      ],
+      "checkpoint-5_forbidden_hit": [
+        "migration_advisor"
+      ],
+      "checkpoint-5_passed": false,
+      "detector_family": "rex",
+      "entity_id": "promv12_vd_entity_007",
+      "expected_actions": [
+        "rexomni_detection",
+        "rexomni_detection",
+        "end"
+      ],
+      "forbidden_actions": [
+        "rag_answer",
+        "re_question",
+        "answerer",
+        "flux-image-generation",
+        "qwen_detection",
+        "pipeline_eval",
+        "migration_advisor"
+      ],
+      "introduced_forbidden_actions": [
+        "migration_advisor"
+      ],
+      "removed_forbidden_actions": [],
+      "scenario_id": "fresh_retry_step2",
+      "sft_actions": [
+        "rexomni_detection",
+        "rexomni_detection",
+        "rexomni_detection"
+      ],
+      "sft_forbidden_hit": [],
+      "sft_passed": false
+    },
+    {
+      "case_id": "PROMV12-VD-008-QWEN-PS3",
+      "checkpoint-5_actions": [
+        "qwen_detection",
+        "migration_advisor",
+        "end"
+      ],
+      "checkpoint-5_forbidden_hit": [
+        "migration_advisor"
+      ],
+      "checkpoint-5_passed": false,
+      "detector_family": "qwen",
+      "entity_id": "promv12_vd_entity_008",
+      "expected_actions": [
+        "qwen_detection",
+        "qwen_detection",
+        "end"
+      ],
+      "forbidden_actions": [
+        "rag_answer",
+        "re_question",
+        "answerer",
+        "flux-image-generation",
+        "rexomni_detection",
+        "pipeline_eval",
+        "migration_advisor"
+      ],
+      "introduced_forbidden_actions": [
+        "migration_advisor"
+      ],
+      "removed_forbidden_actions": [],
+      "scenario_id": "post_retry_success_step3",
+      "sft_actions": [
+        "qwen_detection",
+        "qwen_detection",
+        "qwen_detection"
+      ],
+      "sft_forbidden_hit": [],
+      "sft_passed": false
+    },
+    {
+      "case_id": "PROMV12-VD-006-REX-FR2",
+      "checkpoint-5_actions": [
+        "rexomni_detection",
+        "rexomni_detection",
+        "rexomni_detection"
+      ],
+      "checkpoint-5_forbidden_hit": [],
+      "checkpoint-5_passed": false,
+      "detector_family": "rex",
+      "entity_id": "promv12_vd_entity_006",
+      "expected_actions": [
+        "rexomni_detection",
+        "rexomni_detection",
+        "end"
+      ],
+      "forbidden_actions": [
+        "rag_answer",
+        "re_question",
+        "answerer",
+        "flux-image-generation",
+        "qwen_detection",
+        "pipeline_eval",
+        "migration_advisor"
+      ],
+      "introduced_forbidden_actions": [],
+      "removed_forbidden_actions": [
+        "migration_advisor"
+      ],
+      "scenario_id": "fresh_retry_step2",
+      "sft_actions": [
+        "rexomni_detection",
+        "migration_advisor",
+        "migration_advisor"
+      ],
+      "sft_forbidden_hit": [
+        "migration_advisor"
+      ],
+      "sft_passed": false
+    },
+    {
+      "case_id": "PROMV12-VD-001-QWEN-PS3",
+      "checkpoint-5_actions": [
+        "qwen_detection",
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "checkpoint-5_forbidden_hit": [
+        "migration_advisor"
+      ],
+      "checkpoint-5_passed": false,
+      "detector_family": "qwen",
+      "entity_id": "promv12_vd_entity_001",
+      "expected_actions": [
+        "qwen_detection",
+        "qwen_detection",
+        "end"
+      ],
+      "forbidden_actions": [
+        "rag_answer",
+        "re_question",
+        "answerer",
+        "flux-image-generation",
+        "rexomni_detection",
+        "pipeline_eval",
+        "migration_advisor"
+      ],
+      "introduced_forbidden_actions": [
+        "migration_advisor"
+      ],
+      "removed_forbidden_actions": [],
+      "scenario_id": "post_retry_success_step3",
+      "sft_actions": [
+        "qwen_detection",
+        "qwen_detection",
+        "qwen_detection"
+      ],
+      "sft_forbidden_hit": [],
+      "sft_passed": false
+    },
+    {
+      "case_id": "PROMV12-VD-001-QWEN-CS2",
+      "checkpoint-5_actions": [
+        "qwen_detection",
+        "end"
+      ],
+      "checkpoint-5_forbidden_hit": [],
+      "checkpoint-5_passed": true,
+      "detector_family": "qwen",
+      "entity_id": "promv12_vd_entity_001",
+      "expected_actions": [
+        "qwen_detection",
+        "end"
+      ],
+      "forbidden_actions": [
+        "rag_answer",
+        "re_question",
+        "answerer",
+        "flux-image-generation",
+        "rexomni_detection",
+        "pipeline_eval",
+        "migration_advisor"
+      ],
+      "introduced_forbidden_actions": [],
+      "removed_forbidden_actions": [
+        "migration_advisor"
+      ],
+      "scenario_id": "current_success_step2",
+      "sft_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "sft_forbidden_hit": [
+        "migration_advisor"
+      ],
+      "sft_passed": false
+    },
+    {
+      "case_id": "PROMV12-VD-007-QWEN-CS2",
+      "checkpoint-5_actions": [
+        "qwen_detection",
+        "end"
+      ],
+      "checkpoint-5_forbidden_hit": [],
+      "checkpoint-5_passed": true,
+      "detector_family": "qwen",
+      "entity_id": "promv12_vd_entity_007",
+      "expected_actions": [
+        "qwen_detection",
+        "end"
+      ],
+      "forbidden_actions": [
+        "rag_answer",
+        "re_question",
+        "answerer",
+        "flux-image-generation",
+        "rexomni_detection",
+        "pipeline_eval",
+        "migration_advisor"
+      ],
+      "introduced_forbidden_actions": [],
+      "removed_forbidden_actions": [
+        "migration_advisor"
+      ],
+      "scenario_id": "current_success_step2",
+      "sft_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "sft_forbidden_hit": [
+        "migration_advisor"
+      ],
+      "sft_passed": false
+    },
+    {
+      "case_id": "PROMV12-VD-008-QWEN-FR2",
+      "checkpoint-5_actions": [
+        "qwen_detection",
+        "migration_advisor",
+        "end"
+      ],
+      "checkpoint-5_forbidden_hit": [
+        "migration_advisor"
+      ],
+      "checkpoint-5_passed": false,
+      "detector_family": "qwen",
+      "entity_id": "promv12_vd_entity_008",
+      "expected_actions": [
+        "qwen_detection",
+        "qwen_detection",
+        "end"
+      ],
+      "forbidden_actions": [
+        "rag_answer",
+        "re_question",
+        "answerer",
+        "flux-image-generation",
+        "rexomni_detection",
+        "pipeline_eval",
+        "migration_advisor"
+      ],
+      "introduced_forbidden_actions": [
+        "migration_advisor"
+      ],
+      "removed_forbidden_actions": [],
+      "scenario_id": "fresh_retry_step2",
+      "sft_actions": [
+        "qwen_detection",
+        "qwen_detection",
+        "qwen_detection"
+      ],
+      "sft_forbidden_hit": [],
+      "sft_passed": false
+    },
+    {
+      "case_id": "PROMV12-VD-006-REX-CS2",
+      "checkpoint-5_actions": [
+        "rexomni_detection",
+        "end"
+      ],
+      "checkpoint-5_forbidden_hit": [],
+      "checkpoint-5_passed": true,
+      "detector_family": "rex",
+      "entity_id": "promv12_vd_entity_006",
+      "expected_actions": [
+        "rexomni_detection",
+        "end"
+      ],
+      "forbidden_actions": [
+        "rag_answer",
+        "re_question",
+        "answerer",
+        "flux-image-generation",
+        "qwen_detection",
+        "pipeline_eval",
+        "migration_advisor"
+      ],
+      "introduced_forbidden_actions": [],
+      "removed_forbidden_actions": [
+        "migration_advisor"
+      ],
+      "scenario_id": "current_success_step2",
+      "sft_actions": [
+        "rexomni_detection",
+        "migration_advisor"
+      ],
+      "sft_forbidden_hit": [
+        "migration_advisor"
+      ],
+      "sft_passed": false
+    },
+    {
+      "case_id": "PROMV12-VD-011-QWEN-FR2",
+      "checkpoint-5_actions": [
+        "qwen_detection",
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "checkpoint-5_forbidden_hit": [
+        "migration_advisor"
+      ],
+      "checkpoint-5_passed": false,
+      "detector_family": "qwen",
+      "entity_id": "promv12_vd_entity_011",
+      "expected_actions": [
+        "qwen_detection",
+        "qwen_detection",
+        "end"
+      ],
+      "forbidden_actions": [
+        "rag_answer",
+        "re_question",
+        "answerer",
+        "flux-image-generation",
+        "rexomni_detection",
+        "pipeline_eval",
+        "migration_advisor"
+      ],
+      "introduced_forbidden_actions": [
+        "migration_advisor"
+      ],
+      "removed_forbidden_actions": [],
+      "scenario_id": "fresh_retry_step2",
+      "sft_actions": [
+        "qwen_detection",
+        "qwen_detection",
+        "qwen_detection"
+      ],
+      "sft_forbidden_hit": [],
+      "sft_passed": false
+    },
+    {
+      "case_id": "PROMV12-VD-009-QWEN-PS3",
+      "checkpoint-5_actions": [
+        "qwen_detection",
+        "migration_advisor",
+        "end"
+      ],
+      "checkpoint-5_forbidden_hit": [
+        "migration_advisor"
+      ],
+      "checkpoint-5_passed": false,
+      "detector_family": "qwen",
+      "entity_id": "promv12_vd_entity_009",
+      "expected_actions": [
+        "qwen_detection",
+        "qwen_detection",
+        "end"
+      ],
+      "forbidden_actions": [
+        "rag_answer",
+        "re_question",
+        "answerer",
+        "flux-image-generation",
+        "rexomni_detection",
+        "pipeline_eval",
+        "migration_advisor"
+      ],
+      "introduced_forbidden_actions": [
+        "migration_advisor"
+      ],
+      "removed_forbidden_actions": [],
+      "scenario_id": "post_retry_success_step3",
+      "sft_actions": [
+        "qwen_detection",
+        "qwen_detection",
+        "qwen_detection"
+      ],
+      "sft_forbidden_hit": [],
+      "sft_passed": false
+    },
+    {
+      "case_id": "PROMV12-VD-007-REX-PS3",
+      "checkpoint-5_actions": [
+        "rexomni_detection",
+        "migration_advisor",
+        "end"
+      ],
+      "checkpoint-5_forbidden_hit": [
+        "migration_advisor"
+      ],
+      "checkpoint-5_passed": false,
+      "detector_family": "rex",
+      "entity_id": "promv12_vd_entity_007",
+      "expected_actions": [
+        "rexomni_detection",
+        "rexomni_detection",
+        "end"
+      ],
+      "forbidden_actions": [
+        "rag_answer",
+        "re_question",
+        "answerer",
+        "flux-image-generation",
+        "qwen_detection",
+        "pipeline_eval",
+        "migration_advisor"
+      ],
+      "introduced_forbidden_actions": [
+        "migration_advisor"
+      ],
+      "removed_forbidden_actions": [],
+      "scenario_id": "post_retry_success_step3",
+      "sft_actions": [
+        "rexomni_detection",
+        "rexomni_detection",
+        "rexomni_detection"
+      ],
+      "sft_forbidden_hit": [],
+      "sft_passed": false
+    },
+    {
+      "case_id": "PROMV12-VD-006-QWEN-CS2",
+      "checkpoint-5_actions": [
+        "qwen_detection",
+        "end"
+      ],
+      "checkpoint-5_forbidden_hit": [],
+      "checkpoint-5_passed": true,
+      "detector_family": "qwen",
+      "entity_id": "promv12_vd_entity_006",
+      "expected_actions": [
+        "qwen_detection",
+        "end"
+      ],
+      "forbidden_actions": [
+        "rag_answer",
+        "re_question",
+        "answerer",
+        "flux-image-generation",
+        "rexomni_detection",
+        "pipeline_eval",
+        "migration_advisor"
+      ],
+      "introduced_forbidden_actions": [],
+      "removed_forbidden_actions": [
+        "migration_advisor"
+      ],
+      "scenario_id": "current_success_step2",
+      "sft_actions": [
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "sft_forbidden_hit": [
+        "migration_advisor"
+      ],
+      "sft_passed": false
+    },
+    {
+      "case_id": "PROMV12-VD-010-REX-CS2",
+      "checkpoint-5_actions": [
+        "rexomni_detection",
+        "end"
+      ],
+      "checkpoint-5_forbidden_hit": [],
+      "checkpoint-5_passed": true,
+      "detector_family": "rex",
+      "entity_id": "promv12_vd_entity_010",
+      "expected_actions": [
+        "rexomni_detection",
+        "end"
+      ],
+      "forbidden_actions": [
+        "rag_answer",
+        "re_question",
+        "answerer",
+        "flux-image-generation",
+        "qwen_detection",
+        "pipeline_eval",
+        "migration_advisor"
+      ],
+      "introduced_forbidden_actions": [],
+      "removed_forbidden_actions": [
+        "migration_advisor"
+      ],
+      "scenario_id": "current_success_step2",
+      "sft_actions": [
+        "rexomni_detection",
+        "migration_advisor"
+      ],
+      "sft_forbidden_hit": [
+        "migration_advisor"
+      ],
+      "sft_passed": false
+    },
+    {
+      "case_id": "PROMV12-VD-004-REX-CS2",
+      "checkpoint-5_actions": [
+        "rexomni_detection",
+        "end"
+      ],
+      "checkpoint-5_forbidden_hit": [],
+      "checkpoint-5_passed": true,
+      "detector_family": "rex",
+      "entity_id": "promv12_vd_entity_004",
+      "expected_actions": [
+        "rexomni_detection",
+        "end"
+      ],
+      "forbidden_actions": [
+        "rag_answer",
+        "re_question",
+        "answerer",
+        "flux-image-generation",
+        "qwen_detection",
+        "pipeline_eval",
+        "migration_advisor"
+      ],
+      "introduced_forbidden_actions": [],
+      "removed_forbidden_actions": [
+        "migration_advisor"
+      ],
+      "scenario_id": "current_success_step2",
+      "sft_actions": [
+        "rexomni_detection",
+        "migration_advisor"
+      ],
+      "sft_forbidden_hit": [
+        "migration_advisor"
+      ],
+      "sft_passed": false
+    },
+    {
+      "case_id": "PROMV12-VD-011-REX-CS2",
+      "checkpoint-5_actions": [
+        "rexomni_detection",
+        "end"
+      ],
+      "checkpoint-5_forbidden_hit": [],
+      "checkpoint-5_passed": true,
+      "detector_family": "rex",
+      "entity_id": "promv12_vd_entity_011",
+      "expected_actions": [
+        "rexomni_detection",
+        "end"
+      ],
+      "forbidden_actions": [
+        "rag_answer",
+        "re_question",
+        "answerer",
+        "flux-image-generation",
+        "qwen_detection",
+        "pipeline_eval",
+        "migration_advisor"
+      ],
+      "introduced_forbidden_actions": [],
+      "removed_forbidden_actions": [
+        "migration_advisor"
+      ],
+      "scenario_id": "current_success_step2",
+      "sft_actions": [
+        "rexomni_detection",
+        "migration_advisor"
+      ],
+      "sft_forbidden_hit": [
+        "migration_advisor"
+      ],
+      "sft_passed": false
+    },
+    {
+      "case_id": "PROMV12-VD-010-QWEN-PS3",
+      "checkpoint-5_actions": [
+        "qwen_detection",
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "checkpoint-5_forbidden_hit": [
+        "migration_advisor"
+      ],
+      "checkpoint-5_passed": false,
+      "detector_family": "qwen",
+      "entity_id": "promv12_vd_entity_010",
+      "expected_actions": [
+        "qwen_detection",
+        "qwen_detection",
+        "end"
+      ],
+      "forbidden_actions": [
+        "rag_answer",
+        "re_question",
+        "answerer",
+        "flux-image-generation",
+        "rexomni_detection",
+        "pipeline_eval",
+        "migration_advisor"
+      ],
+      "introduced_forbidden_actions": [
+        "migration_advisor"
+      ],
+      "removed_forbidden_actions": [],
+      "scenario_id": "post_retry_success_step3",
+      "sft_actions": [
+        "qwen_detection",
+        "qwen_detection",
+        "qwen_detection"
+      ],
+      "sft_forbidden_hit": [],
+      "sft_passed": false
+    }
+  ],
+  "changed_cases": 27,
+  "reference_label": "sft",
+  "schema_version": "1.0",
+  "totals": {
+    "checkpoint-5": 32,
+    "introduced": 15,
+    "net_added": 3,
+    "removed": 12,
+    "sft": 29
+  }
+}
