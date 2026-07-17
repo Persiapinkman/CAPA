@@ -5,13 +5,15 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "${ROOT_DIR}"
 
 PYTHON_BIN="${PYTHON_BIN:-${ROOT_DIR}/.venv-qwen35-grpo/bin/python}"
-RUN_DIR="${RUN_DIR:-experiments/runs/20260717_qwen35_4b_v12_support4x_v10ckpt10}"
+RUN_DIR="${RUN_DIR:-experiments/runs/20260717_qwen35_4b_v12_support6x_v10ckpt10}"
 STUDY_DIR="experiments/studies/planner_retry_optimizer_matched_v12_qwen35_4b_v1"
 DATASET_DIR="data/datasets/planner_retry_optimizer_matched_v12"
 STEP_DATA="training/planner_grpo_seed_v1/step_data/planner_retry_optimizer_matched_v12_support_dev_qwen35_4b_nothinking_mixed_steps.jsonl"
 ADAPTER="experiments/runs/20260717T001316Z_qwen35_4b_anti_forgetting_v10_screen10_seed42/checkpoint-10"
 EXPECTED_ADAPTER_SHA="8ef6b4e609497b3837050cce0bf23498e7382f77c28d5b2712ecedf2600b7348"
-GPUS=(3 4 5 7)
+SUPPORT_GPUS="${SUPPORT_GPUS:-2,3,4,5,6,7}"
+IFS=',' read -r -a GPUS <<< "${SUPPORT_GPUS}"
+NUM_SHARDS="${#GPUS[@]}"
 
 export PYTHONPATH="${ROOT_DIR}${PYTHONPATH:+:${PYTHONPATH}}"
 [[ -f "${ADAPTER}/adapter_model.safetensors" ]] || { echo "Missing ${ADAPTER}" >&2; exit 1; }
@@ -19,10 +21,15 @@ export PYTHONPATH="${ROOT_DIR}${PYTHONPATH:+:${PYTHONPATH}}"
   echo "V12 continuation initializer hash changed" >&2
   exit 1
 }
+[[ "${NUM_SHARDS}" -gt 0 ]] || { echo "SUPPORT_GPUS selected zero GPUs" >&2; exit 1; }
+[[ "$(printf '%s\n' "${GPUS[@]}" | sort -u | wc -l)" -eq "${NUM_SHARDS}" ]] || {
+  echo "SUPPORT_GPUS contains duplicate GPU indices" >&2
+  exit 1
+}
 [[ ! -e "${RUN_DIR}" ]] || { echo "Refusing to overwrite ${RUN_DIR}" >&2; exit 1; }
 
 pids=()
-for shard in 0 1 2 3; do
+for ((shard=0; shard<NUM_SHARDS; shard++)); do
   shard_dir="${RUN_DIR}/shard${shard}"
   mkdir -p "${shard_dir}"
   CUDA_VISIBLE_DEVICES="${GPUS[$shard]}" "${PYTHON_BIN}" \
@@ -32,7 +39,7 @@ for shard in 0 1 2 3; do
     --step-data "${STEP_DATA}" \
     --samples-out "${shard_dir}/samples.jsonl" \
     --summary-out "${shard_dir}/summary.json" \
-    --shard-index "${shard}" --num-shards 4 \
+    --shard-index "${shard}" --num-shards "${NUM_SHARDS}" \
     --samples-per-prompt 4 --max-new-tokens 320 \
     --temperature 0.9 --top-p 0.9 --seed 42 \
     > "${shard_dir}/stdout.log" 2>&1 &
@@ -46,7 +53,7 @@ done
 [[ "${status}" -eq 0 ]] || { echo "V12 support sampling failed" >&2; exit 1; }
 
 samples=()
-for shard in 0 1 2 3; do
+for ((shard=0; shard<NUM_SHARDS; shard++)); do
   samples+=("${RUN_DIR}/shard${shard}/samples.jsonl")
 done
 
