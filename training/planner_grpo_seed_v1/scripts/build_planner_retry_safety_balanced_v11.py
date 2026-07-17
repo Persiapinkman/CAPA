@@ -108,7 +108,7 @@ FIXTURES = {
         {"target": "孔雀蓝五星定位片", "slug": "peacock_five_star_locator", "family": "prsbv11_sb_peacock_star", "shape": "star", "fg": (35, 126, 154), "bg": (232, 226, 213)},
     ),
     "selection_dev": (
-        {"target": "松石绿双环耦合件", "slug": "turquoise_double_ring_coupler", "family": "prsbv11_vd_turquoise_rings", "shape": "rings", "fg": (47, 155, 139), "bg": (39, 47, 58)},
+        {"target": "碧玺绿双环耦合件", "slug": "tourmaline_double_ring_coupler", "family": "prsbv11_vd_tourmaline_rings", "shape": "rings", "fg": (47, 155, 139), "bg": (39, 47, 58)},
         {"target": "胭脂紫六角签核牌", "slug": "rouge_purple_hex_signoff", "family": "prsbv11_vd_rouge_hex", "shape": "hexagon", "fg": (154, 72, 137), "bg": (232, 226, 213)},
     ),
     "sealed_test_a": (
