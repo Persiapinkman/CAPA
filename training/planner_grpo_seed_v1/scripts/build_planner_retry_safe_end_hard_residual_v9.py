@@ -461,8 +461,17 @@ def main() -> None:
         all_steps = [row for rows in step_rows.values() for row in rows]
         if len({row["prompt_sha256"] for row in all_steps}) != len(all_steps):
             raise ValueError(f"{VERSION_LABEL} formatted train/dev prompts are not unique")
+        # Rebuilding a frozen dataset (for example, when the sealed split is
+        # materialized) must not compare its prompts with derived files from
+        # that same dataset.  V12 freezes an additional ``*_optimizer_*.jsonl``
+        # after the initial build, so excluding only the three files written
+        # above makes the sealed-opening rebuild collide with itself.
+        dataset_owned_step_paths = {
+            path.resolve() for path in STEP_DIR.glob(f"{DATASET_ID}_*.jsonl")
+        }
         prompt_overlap = v7.prompt_repository_overlap(
-            all_steps, {path.resolve() for path in step_paths.values()}
+            all_steps,
+            dataset_owned_step_paths | {path.resolve() for path in step_paths.values()},
         )
         if prompt_overlap["overlap"]:
             raise ValueError(
