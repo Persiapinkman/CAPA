@@ -73,6 +73,25 @@ def operational_metrics(predictions: dict[str, dict[str, Any]]) -> dict[str, Any
     }
 
 
+def validate_prediction_coverage(
+    *,
+    cases: list[dict[str, Any]],
+    predictions: dict[str, dict[str, Any]],
+    label: str,
+) -> None:
+    expected = {str(case["case_id"]) for case in cases}
+    observed = set(predictions)
+    if observed != expected:
+        missing = sorted(expected - observed)
+        unexpected = sorted(observed - expected)
+        raise ValueError(
+            f"{label} prediction coverage mismatch: "
+            f"expected={len(expected)}, observed={len(observed)}, "
+            f"missing={len(missing)}, unexpected={len(unexpected)}, "
+            f"missing_examples={missing[:3]}, unexpected_examples={unexpected[:3]}"
+        )
+
+
 def checkpoint_number(label: str) -> int:
     match = re.search(r"(?:checkpoint[-_])?(\d+)$", label)
     return int(match.group(1)) if match else 10**9
@@ -103,6 +122,9 @@ def select_checkpoint(
     if len({label for label, _, _ in candidates}) != len(candidates):
         raise ValueError("candidate labels must be unique")
 
+    validate_prediction_coverage(
+        cases=cases, predictions=sft_predictions, label="sft"
+    )
     sft_operations = operational_metrics(sft_predictions)
     if sft_operations["runtime_errors"]:
         raise ValueError(
@@ -111,6 +133,9 @@ def select_checkpoint(
         )
     results: list[dict[str, Any]] = []
     for label, path, predictions in candidates:
+        validate_prediction_coverage(
+            cases=cases, predictions=predictions, label=label
+        )
         operations = operational_metrics(predictions)
         if operations["runtime_errors"]:
             raise ValueError(

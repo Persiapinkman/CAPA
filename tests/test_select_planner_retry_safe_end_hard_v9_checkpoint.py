@@ -129,3 +129,20 @@ def test_selection_rejects_planner_runtime_fallbacks():
             bootstrap_replicates=10,
             seed=42,
         )
+
+
+def test_selection_rejects_incomplete_prediction_coverage():
+    cases, sft, predictions = _fixture()
+    predictions[20].pop(cases[0]["case_id"])
+    with pytest.raises(ValueError, match="checkpoint-20 prediction coverage mismatch"):
+        select_checkpoint(
+            preregistration=_preregistration(),
+            cases=cases,
+            sft_predictions=sft,
+            candidates=[
+                (f"checkpoint-{checkpoint}", Path(f"{checkpoint}.jsonl"), rows)
+                for checkpoint, rows in predictions.items()
+            ],
+            bootstrap_replicates=10,
+            seed=42,
+        )

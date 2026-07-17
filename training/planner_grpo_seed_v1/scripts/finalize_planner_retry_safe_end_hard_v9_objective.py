@@ -18,6 +18,10 @@ from training.planner_grpo_seed_v1.scripts.compare_planner_rollout_models import
     index_predictions,
     load_jsonl,
 )
+from training.planner_grpo_seed_v1.scripts.select_planner_retry_safe_end_hard_v9_checkpoint import (  # noqa: E402
+    operational_metrics,
+    validate_prediction_coverage,
+)
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -37,6 +41,19 @@ def finalize_objective(
     bootstrap_replicates: int,
     seed: int,
 ) -> dict[str, Any]:
+    model_predictions = {"sft": sft, "grpo": grpo, "larger": larger}
+    operations: dict[str, dict[str, Any]] = {}
+    for label, predictions in model_predictions.items():
+        validate_prediction_coverage(
+            cases=cases, predictions=predictions, label=label
+        )
+        model_operations = operational_metrics(predictions)
+        if model_operations["runtime_errors"]:
+            raise ValueError(
+                f"{label} sealed predictions contain "
+                f"{model_operations['runtime_errors']} Planner runtime errors"
+            )
+        operations[label] = model_operations
     primary = set(contract["units_and_metrics"]["primary_scope"])
     grpo_vs_sft = compare_rollouts(
         cases=cases,
@@ -77,6 +94,7 @@ def finalize_objective(
         "objective_met": objective_met,
         "strong_superiority": objective_met and float(ci[0]) > 0,
         "point_estimate_only": objective_met and float(ci[0]) <= 0,
+        "operations": operations,
         "grpo_vs_sft": grpo_vs_sft,
         "grpo_vs_larger": grpo_vs_larger,
         "single_use_sealed_test": True,
