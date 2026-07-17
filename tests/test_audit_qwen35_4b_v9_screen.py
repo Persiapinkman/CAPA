@@ -36,3 +36,58 @@ def test_screen_audit_requires_metrics_events_and_checkpoints(tmp_path):
     )
     assert result["status"] == "pass"
     assert all(result["checks"].values())
+
+
+def test_screen_audit_accepts_v10_candidates(tmp_path):
+    steps = 10
+    world = 1
+    candidates = (2, 5, 10)
+    for checkpoint in candidates:
+        path = tmp_path / f"checkpoint-{checkpoint}/adapter_model.safetensors"
+        path.parent.mkdir(parents=True)
+        path.write_bytes(b"x")
+    logs = [
+        {
+            "step": step,
+            "completions/clipped_ratio": 0,
+            **{key: 0.1 for key in REQUIRED_LOG_KEYS},
+        }
+        for step in range(1, steps + 1)
+    ]
+    telemetry = []
+    for _ in range(steps):
+        telemetry.extend(
+            [
+                {
+                    "event": "pre_optimizer_finite_gradient",
+                    "missing_gradient_tensors": 0,
+                    "nonfinite_gradient_tensors": 0,
+                },
+                {
+                    "event": "optimizer_step_end",
+                    "memory": {
+                        "max_allocated_gib": 12,
+                        "device_free_gib": 16,
+                    },
+                },
+            ]
+        )
+        telemetry.extend(
+            {"event": "g3_distribution", "diverse_output_groups": 1}
+            for _ in range(8)
+        )
+    result = audit_screen(
+        result={"status": "completed", "optimizer_steps": steps},
+        config={
+            "source_control": {"tracked_worktree_dirty": False},
+            "observability": {"wandb": {"enabled": True}},
+        },
+        trainer_state={"log_history": logs},
+        telemetry=telemetry,
+        run_dir=tmp_path,
+        expected_steps=steps,
+        world_size=world,
+        candidate_checkpoints=candidates,
+    )
+    assert result["status"] == "pass"
+    assert result["observed"]["checkpoints"] == {2: True, 5: True, 10: True}

@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Audit V9 screen health before any checkpoint is evaluated."""
+"""Audit a Qwen3.5-4B GRPO screen before any checkpoint is evaluated."""
 
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import math
 from pathlib import Path
@@ -39,6 +40,14 @@ def load_jsonl(path: Path) -> list[dict[str, Any]]:
     ]
 
 
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
 def audit_screen(
     *,
     result: dict[str, Any],
@@ -48,6 +57,7 @@ def audit_screen(
     run_dir: Path,
     expected_steps: int = 40,
     world_size: int = 4,
+    candidate_checkpoints: tuple[int, ...] = (10, 20, 40),
 ) -> dict[str, Any]:
     step_logs = [
         row for row in trainer_state.get("log_history", [])
@@ -71,9 +81,12 @@ def audit_screen(
     memory_values = [
         row["memory"] for row in telemetry if isinstance(row.get("memory"), dict)
     ]
+    checkpoint_paths = {
+        checkpoint: run_dir / f"checkpoint-{checkpoint}/adapter_model.safetensors"
+        for checkpoint in candidate_checkpoints
+    }
     checkpoints = {
-        checkpoint: (run_dir / f"checkpoint-{checkpoint}/adapter_model.safetensors").is_file()
-        for checkpoint in (10, 20, 40)
+        checkpoint: path.is_file() for checkpoint, path in checkpoint_paths.items()
     }
     checks = {
         "result_completed": result.get("status") == "completed",
@@ -109,6 +122,11 @@ def audit_screen(
             "missing_metric_values": missing_metric_values,
             "nonfinite_metric_values": nonfinite_metric_values,
             "checkpoints": checkpoints,
+            "checkpoint_adapter_sha256": {
+                checkpoint: sha256_file(path)
+                for checkpoint, path in checkpoint_paths.items()
+                if path.is_file()
+            },
         },
     }
 
@@ -116,12 +134,31 @@ def audit_screen(
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run-dir", type=Path, required=True)
+    parser.add_argument("--expected-steps", type=int, default=40)
+    parser.add_argument("--world-size", type=int, default=4)
+    parser.add_argument(
+        "--candidate-checkpoint",
+        type=int,
+        action="append",
+        dest="candidate_checkpoints",
+        help="Required saved checkpoint; repeat for every selection candidate",
+    )
     parser.add_argument("--output", type=Path, required=True)
     return parser.parse_args()
 
 
 def main() -> None:
     args = parse_args()
+    candidate_checkpoints = tuple(args.candidate_checkpoints or (10, 20, 40))
+    if args.expected_steps <= 0:
+        raise ValueError("expected steps must be positive")
+    if args.world_size <= 0:
+        raise ValueError("world size must be positive")
+    if not candidate_checkpoints or any(step <= 0 for step in candidate_checkpoints):
+        raise ValueError("candidate checkpoints must be positive")
+    if len(set(candidate_checkpoints)) != len(candidate_checkpoints):
+        raise ValueError("candidate checkpoints must be unique")
+    final_checkpoint = max(candidate_checkpoints)
     telemetry = [
         row
         for path in sorted((args.run_dir / "telemetry").glob("rank*.jsonl"))
@@ -130,9 +167,14 @@ def main() -> None:
     payload = audit_screen(
         result=load_json(args.run_dir / "capa_qwen35_grpo_result.json"),
         config=load_json(args.run_dir / "capa_qwen35_grpo_config.json"),
-        trainer_state=load_json(args.run_dir / "checkpoint-40/trainer_state.json"),
+        trainer_state=load_json(
+            args.run_dir / f"checkpoint-{final_checkpoint}/trainer_state.json"
+        ),
         telemetry=telemetry,
         run_dir=args.run_dir,
+        expected_steps=args.expected_steps,
+        world_size=args.world_size,
+        candidate_checkpoints=candidate_checkpoints,
     )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(
