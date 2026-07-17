@@ -353,6 +353,7 @@ checkpoint 冻结后才物化 sealed test，并对 4B-SFT、选中的 4B-GRPO �
 | V12 optimizer-matched support | 完成，59/59 门禁通过 | 2,304/2,304；primary support/方差 74.65%/25.69%；safety variance 84 ≥ 43 |
 | V12 GRPO optimizer data | 已授权并冻结 576 条 | 192 end + 96 retry + 288 migrate；非迁移:迁移 = 1:1 |
 | V12 canary | 完成，22/22 运行门禁通过 | 2/2 非零有限梯度；核心 W&B 与 safety reward 完整；峰值显存 13.57 GiB |
-| V12 screen | 下一步 | 从同一 V10 checkpoint-10 独立重启 8 steps；候选 checkpoint 2/5/8 |
+| V12 screen | 完成，22/22 运行/配方检查通过 | 8/8 steps；7 步非零梯度、1 个饱和 batch；候选 checkpoint 2/5/8 |
+| V12 selection-dev | 下一步 | 同一 216-case 协议比较 SFT 与三个候选；35B 仍不可见 |
 
 后续每次实验都应更新这张表，并把命令、数据 SHA-256、门禁结论和 Git commit 一起保存。这样你学到的不只是一次训练，而是一套能审计、能复现、也能知道何时不该训练的流程。

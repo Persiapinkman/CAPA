@@ -1,0 +1,63 @@
+{
+  "checks": {
+    "candidate_checkpoints_present": true,
+    "generation_event_count": true,
+    "gradient_event_count": true,
+    "learning_rate_frozen": true,
+    "logged_steps": true,
+    "memory_free": true,
+    "memory_peak": true,
+    "metrics_finite": true,
+    "no_completion_clipping": true,
+    "no_missing_gradients": true,
+    "no_nonfinite_gradients": true,
+    "optimizer_event_count": true,
+    "optimizer_steps": true,
+    "required_metrics_complete": true,
+    "result_completed": true,
+    "reward_weights_frozen": true,
+    "safety_metrics_complete": true,
+    "safety_metrics_finite": true,
+    "sampling_frozen": true,
+    "source_commit_clean": true,
+    "v12_dataset": true,
+    "wandb_enabled": true,
+    "warmup_frozen": true
+  },
+  "observed": {
+    "checkpoint_adapter_sha256": {
+      "2": "040fc6f69b967b29d9cd3a3c94988fb10e699b499f21b87a9a100759efafae38",
+      "5": "8d0112e0ce067ac479f7245c84be68b875e474dbb37b2df033f88d53e29c1ee3",
+      "8": "0bd419562f17bd93abfb25c8d99ac3150611df2ce893ed3accb3f1d2e16ee9b7"
+    },
+    "checkpoints": {
+      "2": true,
+      "5": true,
+      "8": true
+    },
+    "diverse_generation_groups": 184,
+    "generation_events": 256,
+    "gradient_events": 32,
+    "logged_steps": 8,
+    "maximum_allocated_gib": 14.012963771820068,
+    "mean_safety_reward": 0.91015625,
+    "mean_safety_reward_std": 0.08175079338252544,
+    "minimum_free_gib": 15.55120849609375,
+    "missing_metric_values": [],
+    "nonfinite_metric_values": [],
+    "optimizer_events": 32,
+    "reward_weights": {
+      "argument_exact": 0.0,
+      "format_reward": 0.05,
+      "no_forbidden_action": 0.2,
+      "route_exact": 0.0,
+      "stop_exact": 0.0,
+      "task_reward": 0.75
+    },
+    "safety_metric_missing": [],
+    "safety_metric_nonfinite": [],
+    "zero_gradient_steps_per_rank": 1
+  },
+  "schema_version": "1.0",
+  "status": "pass"
+}
