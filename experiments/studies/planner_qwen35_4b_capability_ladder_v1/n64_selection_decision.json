@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "study_id": "qwen35_4b_ladder_n64",
+  "status": "selected_before_v15_materialization",
+  "selection_rule": {
+    "learning_rate_grid": [5e-9, 1e-8, 2e-8],
+    "primary": "complete V14 open-development weighted score",
+    "tie_break": "smaller learning rate",
+    "case_level_filtering": false
+  },
+  "selected": {
+    "learning_rate": 2e-8,
+    "optimizer_steps": 1,
+    "adapter_path": "/raid/zkq/artifacts/CAPA/arbor/ladder_n64/grpo_lr_grid_20260720T0745Z/lr2e-8/checkpoint-1",
+    "adapter_sha256": "a962c637746f21ab063677a8da0d1fe0db83fc4cbe5b305b896997e276f3b0c2",
+    "adapter_config_sha256": "2b257f5dc69be3bf706678e7914af84142917c5a40c905d2e124c1562857b456",
+    "training_result_sha256": "6813d138ca320aeacfa0b947c57a085fccb1ec49644902ff929b193947d18789",
+    "training_config_sha256": "2edf09d5a83a3181ba8c940c10196eb6e0b870c5b8eb6320fce58721d7943f31",
+    "training_health": {
+      "completion_clipping_ratio": 0.0,
+      "reward_std": 0.19615797698497772,
+      "advantage_std": 0.43290024717392817,
+      "grad_norm": 0.13672617077827454,
+      "parameter_update_nonzero": true
+    },
+    "development": {
+      "v13_weighted_percent": [100.0, 100.0, 100.0],
+      "v14_weighted_percent": [100.0, 92.6, 92.6],
+      "v15_data_accessed": false
+    }
+  },
+  "comparison_sft_arm": "frozen original Qwen3.5-4B SFT checkpoint-100",
+  "v15_used_for_selection": false
+}

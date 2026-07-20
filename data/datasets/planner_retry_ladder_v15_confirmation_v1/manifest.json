@@ -1,0 +1,39 @@
+{
+  "cases_path": "experiments/studies/planner_retry_ladder_v15_confirmation_v1/sealed_data/v15_confirmation_cases.jsonl",
+  "cases_sha256": "37d9a739585c012041397fba77b995d5842359ba5e23a8e8f8f604578e4ade78",
+  "contamination_audit_path": "experiments/studies/planner_retry_ladder_v15_confirmation_v1/contamination_audit.json",
+  "created_at": "2026-07-20T08:50:00Z",
+  "dataset_id": "planner_retry_ladder_v15_confirmation_v1",
+  "fixture_sha256": {
+    "apricot_double_ring_positioning_tab_v15.png": "83b349c4c154c1db08b634b3cbd65b0c1fdbe88ee6682b610fc8404642d74ec7",
+    "cobalt_star_validation_mark_v15.png": "46389ec4650d98ce6a6912db9439d300d54e133cac18088d2d75e4e76f6b5844"
+  },
+  "generation_spec_path": "experiments/studies/planner_retry_ladder_v15_confirmation_v1/generation_spec.json",
+  "generation_spec_sha256": "93c4ace6954b2cd2614118d8881e4bbb8d7e866cdb7defe1f89000c5033796fb",
+  "model_outputs_used_for_case_selection": false,
+  "resampling_performed": false,
+  "rows": 24,
+  "schema_version": "1.0",
+  "status": "sealed",
+  "study_id": "planner_retry_ladder_v15_confirmation_v1",
+  "v15_opened_for_inference": false,
+  "validation": {
+    "canonical_complete_trajectory_pass_rate": 1.0,
+    "case_ids_sha256": "863d73e6b556434eb3debb6d116af9a2b7d8d6ac3f95b59996d207fae0d42878",
+    "entities": 6,
+    "errors": [],
+    "factorial_cells": 6,
+    "rows": 24,
+    "scenario_counts": {
+      "current_success_step2": 12,
+      "post_retry_metric_veto_step3": 12
+    },
+    "scenario_detector_counts": {
+      "current_success_step2|qwen": 6,
+      "current_success_step2|rex": 6,
+      "post_retry_metric_veto_step3|qwen": 6,
+      "post_retry_metric_veto_step3|rex": 6
+    },
+    "status": "pass"
+  }
+}
