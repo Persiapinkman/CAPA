@@ -1,0 +1,11 @@
+{
+  "exact_overlaps": [],
+  "files_scanned": 553,
+  "model_outputs_used_for_case_selection": false,
+  "protected_tokens": 20,
+  "protected_tokens_sha256": "fff915cb1f2f73c7563c0c8ed6fc972bb3e631b291675e1e6b54d71c3ccc4def",
+  "schema_version": "1.0",
+  "status": "pass",
+  "study_id": "planner_retry_ladder_v14_confirmation_v1",
+  "v13_prediction_or_result_files_used_for_generation": false
+}

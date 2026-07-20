@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0",
+  "amendment_id": "v13_harness_code_amendment_001",
+  "study_id": "planner_retry_ladder_v13_confirmation_v1",
+  "created_at": "2026-07-17T12:21:14Z",
+  "status": "applied_before_opening",
+  "reason": "The absolute-path builder subprocess lacked a repository-root sys.path bootstrap when PYTHONPATH was unset, so it failed during import before reaching its fail-closed materialization guard.",
+  "authorization": "Coordinator-directed portability repair after independent read-only seal review; no V13 model output existed or was accessed.",
+  "code_change": {
+    "path": "training/planner_grpo_seed_v1/scripts/build_planner_retry_ladder_v13_confirmation.py",
+    "old_sha256": "0bd7b3354de9cf8c0bbda2d8cb314546ddfe45d1dc7519fb3c9aa4b0e00945d2",
+    "new_sha256": "ae38efc547e089dbe21ad3b5a14278593075568dfafde1edb26915ec8553a8d6",
+    "change": "Insert the resolved repository root into sys.path before importing the training package.",
+    "data_generation_logic_changed": false,
+    "protocol_logic_changed": false,
+    "analysis_logic_changed": false
+  },
+  "pre_amendment_metadata": {
+    "dataset_manifest_sha256": "039cf48876756afe207b7238ca9d1928b36df5ac80328ec9a3870742729cbe61",
+    "sealed_manifest_sha256": "3c24087860b491f1b1aab2d2ec2d78f180ba7405709fb4a383508821eb343adc"
+  },
+  "immutable_payload_attestation": {
+    "generation_spec_sha256": "89ea0e71ce70308328a960fa2c936671446235f50c258c70706836f95b1ffde8",
+    "sealed_cases_sha256": "2b51fd4bb7faf0c3e5446532bc6e75e084c2d0e1f662e59254eb3412d10c6661",
+    "leakage_audit_sha256": "c7613be8f8918d563f20428d79e54540fda8cbb13428156f7fec6e5f8b5bee14",
+    "contamination_audit_sha256": "5362c5cd0b3a5939c250b871f0f2a8dbefcee44d0515a4eb3ddecfe34d3e902c",
+    "fixture_sha256": {
+      "lotuspink_zigzag_isolation_tab.png": "4863863d28a7373b970ffddf81ca95426c3b975a3d3f7cbaaa1cdc5c253c9dc6",
+      "scalegreen_clover_registration_clasp.png": "57f3e92846c40a4b8dfd5031e466af83b0b0067a9a2adf125631847403dad3cb"
+    },
+    "sealed_cases_regenerated": false,
+    "generation_spec_modified": false,
+    "common_inference_protocol_modified": false,
+    "analysis_ratio_modified": false,
+    "lexicon_alias_or_fixture_modified": false
+  },
+  "seal_state_at_amendment": {
+    "opened": false,
+    "evaluation_authorized": false,
+    "models_evaluated": [],
+    "prediction_files": [],
+    "result_files": []
+  },
+  "required_regression": {
+    "invoke_builder_by_absolute_path_with_pythonpath_unset": true,
+    "expected_unconfirmed_exit": "fail-closed permission error",
+    "expected_repeat_materialization_exit": "overwrite/regeneration forbidden",
+    "sealed_payload_hashes_must_remain_unchanged": true
+  }
+}

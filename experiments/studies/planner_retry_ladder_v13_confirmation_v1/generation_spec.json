@@ -1,0 +1,248 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_retry_ladder_v13_confirmation_v1",
+  "dataset_id": "planner_retry_ladder_v13_confirmation_v1",
+  "created_at": "2026-07-17T12:05:00Z",
+  "status": "preregistered_before_v13_materialization",
+  "purpose": "Single-use blind confirmation of the frozen Qwen3.5 capability ladder on two complete Planner strata.",
+  "design": {
+    "seed": 2026071713,
+    "split": "sealed_confirmation",
+    "independent_unit": "entity_id",
+    "blocked_bundle": "entity_id x detector_family",
+    "entities": 24,
+    "detector_families": [
+      "qwen",
+      "rex"
+    ],
+    "scenarios": [
+      "post_retry_metric_veto_step3",
+      "current_success_step2"
+    ],
+    "cases_per_scenario": 48,
+    "cases_per_scenario_detector": 24,
+    "total_cases": 96,
+    "whole_stratum_rule": "Every scenario contains all 24 entities crossed with both detector families; no case-level inclusion or performance filtering is permitted.",
+    "factor_layout": "Seeded shuffle of the complete 4 query styles x 3 badge conditions x 2 image fixtures factorial across the 24 entities.",
+    "detector_blocking": "Each entity appears once with qwen and once with rex in each scenario.",
+    "resampling": "forbidden",
+    "ratio_adaptation": "forbidden"
+  },
+  "static_content": {
+    "lexicon": {
+      "roots": [
+        "平流层飞艇氦阀舱",
+        "近岸藻场声学浮台",
+        "量子退火低温屏蔽柜",
+        "盐穴储气注采阀岛",
+        "巡天镜遮光筒振动架",
+        "真空管磁浮牵引站"
+      ],
+      "suffixes": [
+        "机读状态终核",
+        "异常选路复签",
+        "重试额度会审",
+        "恢复边界定案"
+      ],
+      "styles": [
+        "请依据这一轮最后写入的机器字段完成唯一动作裁决",
+        "工单标题保留旧告警，本次路由只服从当前键值",
+        "迁移席位虽已预留，仍须先核验最新检测回执",
+        "旧额度摘要不得继承，请逐项读取本轮显式状态"
+      ]
+    },
+    "policy_wording": [
+      "标题、告警摘要和迁移排队文字只构成背景；裁决以本 query 最后一条 observation 的结构化键值为唯一依据。",
+      "gateway_error 非 none 时，仅 retryable=true 且 retry_count=0 允许原检测器重试一次；其他错误状态调用迁移顾问。",
+      "gateway_error=none 时，candidate_count>=1、min_confidence>=0.88、cross_prompt_iou>=0.72 与 domain_shift=low 必须同时成立才结束。",
+      "缺字段、非法值或冲突状态均走保守分支；一次重试后的 observation 只能结束或迁移，禁止再次检测。"
+    ],
+    "error_aliases": {
+      "timeout": [
+        "v13blind_sensor_epoch_drift",
+        "v13blind_probe_ack_deadline"
+      ],
+      "transport": [
+        "v13blind_feature_return_severed",
+        "v13blind_detector_route_unbound"
+      ],
+      "quota": [
+        "v13blind_recheck_credit_closed",
+        "v13blind_vision_lease_withheld"
+      ],
+      "payload": [
+        "v13blind_probe_packet_untyped",
+        "v13blind_detector_schema_unmapped"
+      ]
+    },
+    "fixtures": [
+      {
+        "target": "鳞青四叶定标扣",
+        "slug": "scalegreen_clover_registration_clasp",
+        "family": "prlv13_sc_scalegreen_clover",
+        "shape": "clover",
+        "fg": [
+          61,
+          148,
+          139
+        ],
+        "bg": [
+          34,
+          43,
+          55
+        ],
+        "draw_index": 130
+      },
+      {
+        "target": "藕粉折线隔离片",
+        "slug": "lotuspink_zigzag_isolation_tab",
+        "family": "prlv13_sc_lotuspink_zigzag",
+        "shape": "zigzag",
+        "fg": [
+          213,
+          143,
+          166
+        ],
+        "bg": [
+          236,
+          228,
+          211
+        ],
+        "draw_index": 131
+      }
+    ],
+    "protected_keyword_classes": [
+      "lexicon roots",
+      "lexicon suffixes",
+      "complete query styles",
+      "error aliases",
+      "fixture target names",
+      "fixture slugs",
+      "fixture family IDs"
+    ],
+    "shared_semantic_tokens_exempt_from_keyword_leakage": [
+      "Planner schema field names",
+      "fixed action names",
+      "fixed threshold values",
+      "qwen and rex detector names",
+      "red, amber, and missing badge levels"
+    ]
+  },
+  "id_contract": {
+    "case_id_prefix": "PRLV13-SC",
+    "entity_id_prefix": "prlv13_sc_entity",
+    "group_id_prefix": "prlv13_sc_entity",
+    "template_id_prefix": "prlv13_sealed_confirmation",
+    "case_ids": "96 globally unique values",
+    "entity_ids": "24 independent-unit IDs, each reused only within its four detector/scenario measurements",
+    "group_ids": "48 entity x detector bundle IDs, each shared by exactly the two preregistered scenario counterfactuals",
+    "template_ids": "Eight detector x style schema IDs; reuse within their blocked cells is intentional",
+    "all_id_namespaces_must_be_nonempty_and_disjoint_from_repository_data": true
+  },
+  "anti_leakage_contract": {
+    "reference_scope": [
+      "training/planner_grpo_seed_v1/cases/**/*.jsonl",
+      "training/planner_grpo_seed_v1/step_data/**/*.jsonl",
+      "data/**/*.jsonl",
+      "experiments/studies/**/sealed*_data/**/*.jsonl",
+      "experiments/studies/**/sealed_test_data/**/*.jsonl"
+    ],
+    "required_zero_overlap_fields": [
+      "case_id",
+      "entity_id",
+      "group_id",
+      "counterfactual_bundle_id",
+      "project_entity",
+      "target_entity",
+      "image_fixture_family",
+      "error_alias",
+      "bundle_error_alias",
+      "template_id"
+    ],
+    "sentinel_exemptions": {
+      "error_alias": [
+        "none"
+      ]
+    },
+    "protected_keyword_substring_overlap": 0,
+    "fixture_content_sha256_overlap": 0,
+    "exact_user_query_sha256_overlap": 0,
+    "v12_and_all_materialized_training_support_development_data_required": true,
+    "model_predictions_or_results_are_not_reference_data": true
+  },
+  "common_inference_protocol": {
+    "required_arms": [
+      "qwen35_4b_base",
+      "qwen35_4b_sft",
+      "qwen35_35b_a3b",
+      "qwen35_4b_grpo_final"
+    ],
+    "exact_model_or_adapter_paths_and_sha256_must_be_pinned_at_opening": true,
+    "runs_per_arm": 3,
+    "repeat_ids": [
+      1,
+      2,
+      3
+    ],
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "do_sample": false,
+    "seed": 42,
+    "max_steps": 3,
+    "max_new_tokens": 4096,
+    "maximum_internal_parse_retries_per_decision": 1,
+    "first_valid_json_scoring": true,
+    "strict_complete_trajectory_scoring": true,
+    "image_path_in_prompt_context": true,
+    "image_pixels_sent_to_planner": false,
+    "exact_case_coverage_required": true,
+    "exact_prediction_rows_per_run": 96,
+    "every_case_requires_a_prediction_envelope": true,
+    "missing_prediction_row_or_whole_run_invalidates_confirmation": true,
+    "external_transport_interruption_invalidates_confirmation": true,
+    "first_attempt_clipping_recovered_by_internal_retry_is_telemetry_not_final_failure": true,
+    "final_unresolved_parse_runtime_or_clip_after_internal_retry_scoring": "strict_incorrect_in_fixed_96_case_denominator",
+    "final_unresolved_case_invalidates_complete_run": false,
+    "per_arm_per_run_unresolved_counts_required": [
+      "parse",
+      "runtime",
+      "clip"
+    ],
+    "selective_case_arm_or_run_retry": "forbidden",
+    "post_hoc_runtime_retry_or_rescore": "forbidden"
+  },
+  "analysis_contract": {
+    "primary_metric": "strict_complete_trajectory_pass_rate_percent",
+    "scenario_rates": "Compute each whole-stratum rate over its fixed 48 cases.",
+    "preregistered_weighted_rate_formula": "(7 * post_retry_metric_veto_step3_rate + 1 * current_success_step2_rate) / 8",
+    "scenario_weights": {
+      "post_retry_metric_veto_step3": 7,
+      "current_success_step2": 1
+    },
+    "required_order_on_mean_of_three_runs": "qwen35_4b_base < qwen35_4b_sft < qwen35_35b_a3b < qwen35_4b_grpo_final",
+    "base_mean_ceiling_percent_exclusive": 65.0,
+    "larger_mean_floor_percent_exclusive": 85.0,
+    "larger_each_run_floor_percent_exclusive": 85.0,
+    "grpo_must_exceed_larger_on_mean": true,
+    "alternate_ratios_or_subsets": "forbidden",
+    "missing_or_failed_run_policy": "A missing whole run or prediction row, or an external transport interruption, invalidates confirmation. A present row with final unresolved parse/runtime/clip after the one internal retry remains in the fixed 96 denominator as strict incorrect; report every unresolved count and never selectively rerun."
+  },
+  "sealing_contract": {
+    "single_use": true,
+    "materialize_cases_once": true,
+    "evaluation_authorized_at_generation": false,
+    "opening_receipt_required": true,
+    "all_four_arms_must_be_ready_before_opening": true,
+    "read_partial_results_before_all_arms_finish": false,
+    "modify_cases_spec_protocol_or_ratio_after_sealing": false,
+    "on_integrity_failure": "Invalidate V13 and create a new version; never patch or regenerate V13 in place."
+  },
+  "contamination_isolation": {
+    "historical_v12_results_were_exposed_during_schema_inspection": true,
+    "historical_v12_values_used_to_choose_v13_content": false,
+    "scenario_ratio_counts_and_protocol_source": "Coordinator-frozen task contract before V13 generation.",
+    "lexicon_fixture_alias_and_difficulty_adjustment_from_results": false,
+    "n16_or_n17_outputs_accessed": false,
+    "v13_model_outputs_exist_at_spec_freeze": false
+  }
+}

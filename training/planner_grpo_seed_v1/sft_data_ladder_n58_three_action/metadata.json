@@ -1,0 +1,53 @@
+{
+  "audits": {
+    "sft_dev": {
+      "status": "pass"
+    },
+    "sft_train": {
+      "status": "pass"
+    }
+  },
+  "base_sft_data": "training/planner_grpo_seed_v1/sft_data_ladder_n53_balanced_rule",
+  "base_sft_train_sha256": "9a88f5bbd5ba40118b029566ef6ada64c39ed42ed3172fe881cb109577cfe0a6",
+  "data_policy": {
+    "opened_v13_styles0_1_rows": 48,
+    "training_only_v12_retry_rows_after_balance": 24,
+    "v13_style2_or_style3_accessed": false,
+    "v14_accessed": false
+  },
+  "dataset_id": "planner_retry_ladder_n58_three_action_sft_v1",
+  "dev_duplicates_train_for_loss_health_only": true,
+  "prompt_contract": {
+    "chat_template": "native_qwen35",
+    "completion_only_loss": true,
+    "enable_thinking": false
+  },
+  "retry_source": "training/planner_grpo_seed_v1/step_data/planner_retry_ladder_residual_n30_v1_optimizer_qwen35_4b_nothinking_mixed_steps.jsonl",
+  "retry_source_sha256": "59e427e9f35407e07e582dac730d620a8ce418f9acee7bad1c1ba4ff065a3da4",
+  "rows": {
+    "dev": 72,
+    "train": 72
+  },
+  "schema_version": "1.0",
+  "selection_rule": {
+    "all_n30_fresh_retry_rows": true,
+    "all_n53_balanced_rows": true,
+    "canonical_target_mechanically_derived_from_expected_step": true,
+    "prediction_performance_used": false,
+    "retry_rows_repeated": 2,
+    "style2_or_style3_used": false
+  },
+  "sha256": {
+    "sft_dev": "df170285cce68f4aab369cb9668e30853a8eb630f1853b35eaa6a32d76d1acff",
+    "sft_train": "df170285cce68f4aab369cb9668e30853a8eb630f1853b35eaa6a32d76d1acff"
+  },
+  "source_unique_rows": {
+    "n30_retry": 12,
+    "n53_base": 48
+  },
+  "target_action_counts": {
+    "end": 24,
+    "migrate": 24,
+    "retry": 24
+  }
+}

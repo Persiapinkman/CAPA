@@ -1,0 +1,48 @@
+{
+  "case_ids_sha256": "e3dc9d202c08046dbc01165e3eda6f5651a53c5603dec1d07949ceb6303f6ae4",
+  "development_query_style": 2,
+  "distribution": {
+    "badge_counts": {
+      "amber": 8,
+      "missing": 8,
+      "red": 8
+    },
+    "entities": 6,
+    "image_fixture_counts": {
+      "prlv13_sc_lotuspink_zigzag": 12,
+      "prlv13_sc_scalegreen_clover": 12
+    },
+    "rows": 24,
+    "scenario_counts": {
+      "current_success_step2": 12,
+      "post_retry_metric_veto_step3": 12
+    },
+    "scenario_detector_counts": {
+      "current_success_step2|qwen": 6,
+      "current_success_step2|rex": 6,
+      "post_retry_metric_veto_step3|qwen": 6,
+      "post_retry_metric_veto_step3|rex": 6
+    }
+  },
+  "filter": {
+    "field": "query_style_index",
+    "operator": "equals",
+    "value": 2
+  },
+  "optimizer_query_styles": [
+    0,
+    1
+  ],
+  "output": {
+    "path": "experiments/studies/planner_retry_ladder_v13_confirmation_v1/open_development/n44_query_style2_cases.jsonl",
+    "rows": 24,
+    "sha256": "2217f25b7a4d1582bf4297a303c125e7360e809557b65571f7dfb84183c1f158"
+  },
+  "schema_version": "1.0",
+  "selection_uses_case_id_or_model_result": false,
+  "source_cases": "experiments/studies/planner_retry_ladder_v13_confirmation_v1/sealed_data/v13_confirmation_cases.jsonl",
+  "source_cases_sha256": "2b51fd4bb7faf0c3e5446532bc6e75e084c2d0e1f662e59254eb3412d10c6661",
+  "status": "opened_v13_optimizer_disjoint_development_slice",
+  "study_id": "qwen35_4b_ladder_n44",
+  "v14_data_accessed": false
+}

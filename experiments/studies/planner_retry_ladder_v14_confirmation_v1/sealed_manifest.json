@@ -1,0 +1,39 @@
+{
+  "cases_path": "experiments/studies/planner_retry_ladder_v14_confirmation_v1/sealed_data/v14_confirmation_cases.jsonl",
+  "cases_sha256": "509e700040b8e6d210d87d8358d8f0a14bb4774f8dc37a58076af1993e8787b5",
+  "contamination_audit_path": "experiments/studies/planner_retry_ladder_v14_confirmation_v1/contamination_audit.json",
+  "created_at": "2026-07-20T06:15:00Z",
+  "dataset_id": "planner_retry_ladder_v14_confirmation_v1",
+  "fixture_sha256": {
+    "amber_four_port_flange_v14.png": "961fba8f6c00ddb0e5f88815f0fe2acb1749ffd92e791e1a26203c69c7ea78b7",
+    "indigo_trapezoid_calibration_wedge_v14.png": "060bb983bccc3c033bd99425c349f1c91ee0791d2f5f5d1eb902ce569d51ceab"
+  },
+  "generation_spec_path": "experiments/studies/planner_retry_ladder_v14_confirmation_v1/generation_spec.json",
+  "generation_spec_sha256": "dab266f9c69b668243627f18560c2b194e6b04e2ed419c3e43b5c551900556f0",
+  "model_outputs_used_for_case_selection": false,
+  "resampling_performed": false,
+  "rows": 24,
+  "schema_version": "1.0",
+  "status": "sealed",
+  "study_id": "planner_retry_ladder_v14_confirmation_v1",
+  "v14_opened_for_inference": false,
+  "validation": {
+    "canonical_complete_trajectory_pass_rate": 1.0,
+    "case_ids_sha256": "2e7821dae691b05ef51f2961e37cd10a4ea4d87140288cdf75b4338ce89e2f1d",
+    "entities": 6,
+    "errors": [],
+    "factorial_cells": 6,
+    "rows": 24,
+    "scenario_counts": {
+      "current_success_step2": 12,
+      "post_retry_metric_veto_step3": 12
+    },
+    "scenario_detector_counts": {
+      "current_success_step2|qwen": 6,
+      "current_success_step2|rex": 6,
+      "post_retry_metric_veto_step3|qwen": 6,
+      "post_retry_metric_veto_step3|rex": 6
+    },
+    "status": "pass"
+  }
+}

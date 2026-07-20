@@ -1,0 +1,15 @@
+{
+  "objective": "Maximize the minimum capability-ladder margin on a common CAPA Planner benchmark, subject to base<65%, 35B>85%, and 4B-base<4B-SFT<35B<4B-GRPO.",
+  "metric_direction": "max",
+  "dev_eval": "bash scripts/run_qwen35_4b_capability_ladder_v1_dev.sh",
+  "test_eval": "bash scripts/run_qwen35_4b_capability_ladder_v1_confirmation.sh",
+  "material": "CAPA@ec4e0b7 + Qwen3.5-4B + V6-SFT-ckpt100 + V10-ckpt10/V12-ckpt5 + Qwen3.5-35B-A3B",
+  "branching": 3,
+  "max_depth": 3,
+  "budget_cycles": 30,
+  "cycles_used": 30,
+  "best_node": null,
+  "best_test_score": null,
+  "best_branch_ref": null,
+  "created_at": 1784279082
+}

@@ -1,0 +1,121 @@
+{
+  "analysis_contract": {
+    "alternate_ratios_or_subsets": "forbidden",
+    "base_mean_ceiling_percent_exclusive": 65.0,
+    "grpo_must_exceed_larger_on_mean": true,
+    "larger_each_run_floor_percent_exclusive": 85.0,
+    "larger_mean_floor_percent_exclusive": 85.0,
+    "missing_or_failed_run_policy": "A missing whole run or prediction row, or an external transport interruption, invalidates confirmation. A present row with final unresolved parse/runtime/clip after the one internal retry remains in the fixed 96 denominator as strict incorrect; report every unresolved count and never selectively rerun.",
+    "preregistered_weighted_rate_formula": "(7 * post_retry_metric_veto_step3_rate + 1 * current_success_step2_rate) / 8",
+    "primary_metric": "strict_complete_trajectory_pass_rate_percent",
+    "required_order_on_mean_of_three_runs": "qwen35_4b_base < qwen35_4b_sft < qwen35_35b_a3b < qwen35_4b_grpo_final",
+    "scenario_rates": "Compute each whole-stratum rate over its fixed 48 cases.",
+    "scenario_weights": {
+      "current_success_step2": 1,
+      "post_retry_metric_veto_step3": 7
+    }
+  },
+  "common_inference_protocol": {
+    "do_sample": false,
+    "every_case_requires_a_prediction_envelope": true,
+    "exact_case_coverage_required": true,
+    "exact_model_or_adapter_paths_and_sha256_must_be_pinned_at_opening": true,
+    "exact_prediction_rows_per_run": 96,
+    "external_transport_interruption_invalidates_confirmation": true,
+    "final_unresolved_case_invalidates_complete_run": false,
+    "final_unresolved_parse_runtime_or_clip_after_internal_retry_scoring": "strict_incorrect_in_fixed_96_case_denominator",
+    "first_attempt_clipping_recovered_by_internal_retry_is_telemetry_not_final_failure": true,
+    "first_valid_json_scoring": true,
+    "image_path_in_prompt_context": true,
+    "image_pixels_sent_to_planner": false,
+    "max_new_tokens": 4096,
+    "max_steps": 3,
+    "maximum_internal_parse_retries_per_decision": 1,
+    "missing_prediction_row_or_whole_run_invalidates_confirmation": true,
+    "per_arm_per_run_unresolved_counts_required": [
+      "parse",
+      "runtime",
+      "clip"
+    ],
+    "post_hoc_runtime_retry_or_rescore": "forbidden",
+    "repeat_ids": [
+      1,
+      2,
+      3
+    ],
+    "required_arms": [
+      "qwen35_4b_base",
+      "qwen35_4b_sft",
+      "qwen35_35b_a3b",
+      "qwen35_4b_grpo_final"
+    ],
+    "runs_per_arm": 3,
+    "seed": 42,
+    "selective_case_arm_or_run_retry": "forbidden",
+    "strict_complete_trajectory_scoring": true,
+    "temperature": 0.0,
+    "top_p": 1.0
+  },
+  "contamination_audit": {
+    "path": "experiments/studies/planner_retry_ladder_v13_confirmation_v1/contamination_audit.json",
+    "sha256": "5362c5cd0b3a5939c250b871f0f2a8dbefcee44d0515a4eb3ddecfe34d3e902c",
+    "status": "isolated_with_historical_v12_exposure_disclosed"
+  },
+  "created_at": "2026-07-17T12:05:00Z",
+  "dataset_id": "planner_retry_ladder_v13_confirmation_v1",
+  "dataset_manifest": {
+    "path": "data/datasets/planner_retry_ladder_v13_confirmation_v1/manifest.json",
+    "sha256": "5b2201f02fcefc09317b171b374255765ec49e91e853b8313a9863b8914a104f"
+  },
+  "evaluation_authorized": false,
+  "fail_closed_invariants": {
+    "any_hash_mismatch_invalidates_v13": true,
+    "harness_code_amendments_must_be_explicit_and_pre_opening": true,
+    "missing_arm_or_run_invalidates_confirmation": true,
+    "overwrite_or_regeneration_forbidden": true,
+    "post_seal_case_spec_protocol_or_ratio_mutation_forbidden": true
+  },
+  "generation_spec": {
+    "path": "experiments/studies/planner_retry_ladder_v13_confirmation_v1/generation_spec.json",
+    "sha256": "89ea0e71ce70308328a960fa2c936671446235f50c258c70706836f95b1ffde8"
+  },
+  "harness_code_amendment_001": {
+    "path": "experiments/studies/planner_retry_ladder_v13_confirmation_v1/harness_code_amendment_001.json",
+    "sha256": "07853d51d2dcbbd58f37f074174092ed4cd08ed2d92ca25397bc0ef6f01f41b0",
+    "status": "applied_before_opening",
+    "sealed_cases_regenerated": false,
+    "generation_spec_modified": false,
+    "protocol_or_ratio_modified": false
+  },
+  "leakage_audit": {
+    "path": "data/datasets/planner_retry_ladder_v13_confirmation_v1/leakage_audit.json",
+    "sha256": "c7613be8f8918d563f20428d79e54540fda8cbb13428156f7fec6e5f8b5bee14",
+    "status": "pass"
+  },
+  "materialized": true,
+  "models_evaluated": [],
+  "opened": false,
+  "opening_policy": {
+    "all_four_arms_ready_before_opening": true,
+    "evaluation_command_shipped_with_dataset": false,
+    "opening_receipt_required": true,
+    "partial_result_reading_before_all_arms_complete": false,
+    "receipt_must_pin_all_four_exact_model_or_adapter_paths_and_sha256": true,
+    "runtime_retry_rescore_subset_or_ratio_change": "forbidden",
+    "same_protocol_for_all_arms": true
+  },
+  "opening_receipt": null,
+  "prediction_files": [],
+  "result_files": [],
+  "schema_version": "1.0",
+  "sealed_cases": {
+    "entities": 24,
+    "groups": 48,
+    "path": "experiments/studies/planner_retry_ladder_v13_confirmation_v1/sealed_data/v13_confirmation_cases.jsonl",
+    "rows": 96,
+    "sha256": "2b51fd4bb7faf0c3e5446532bc6e75e084c2d0e1f662e59254eb3412d10c6661"
+  },
+  "single_use": true,
+  "status": "sealed_unopened",
+  "study_id": "planner_retry_ladder_v13_confirmation_v1"
+}

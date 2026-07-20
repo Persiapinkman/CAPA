@@ -1,0 +1,131 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_retry_ladder_v14_confirmation_v1",
+  "dataset_id": "planner_retry_ladder_v14_confirmation_v1",
+  "created_at": "2026-07-20T06:15:00Z",
+  "status": "preregistered_before_v14_materialization",
+  "purpose": "Single-use entity- and lexicon-disjoint confirmation of the frozen n60 capability ladder on the exact target scene.",
+  "design": {
+    "seed": 2026072014,
+    "split": "sealed_confirmation",
+    "independent_unit": "entity_id",
+    "entities": 6,
+    "detector_families": ["qwen", "rex"],
+    "scenarios": ["post_retry_metric_veto_step3", "current_success_step2"],
+    "cases_per_scenario": 12,
+    "cases_per_scenario_detector": 6,
+    "total_cases": 24,
+    "factor_layout": "Complete 1 query style x 3 badge conditions x 2 image fixtures factorial across six entities.",
+    "whole_stratum_rule": "Every scenario contains all six entities crossed with both detector families; no case-level inclusion or performance filtering.",
+    "resampling": "forbidden",
+    "ratio_adaptation": "forbidden"
+  },
+  "static_content": {
+    "lexicon": {
+      "roots": ["高温超导储能环站", "深空天线馈源冷箱"],
+      "suffixes": ["状态路由验收7301号", "异常链终裁4826号", "恢复边界签核9154号"],
+      "styles": ["新回执覆盖旧摘要，请依据末条状态完成最终路由"]
+    },
+    "policy_wording": [
+      "历史标题、排队记录与旧告警只作语境，唯一裁决依据是当前 query 末条 observation 的显式键值。",
+      "gateway_error 非 none 时，仅 retryable=true 且 retry_count=0 可让原检测器再执行一次；其余错误直接进入迁移顾问。",
+      "gateway_error=none 时，candidate_count>=1、min_confidence>=0.88、cross_prompt_iou>=0.72、domain_shift=low 必须同时成立才结束。",
+      "空缺、非法或互相矛盾的字段按安全失败处理；已经重试过的状态只能结束或迁移，禁止形成检测循环。"
+    ],
+    "error_aliases": {
+      "timeout": ["telemetry_echo_epoch_lapsed", "inspection_ack_clock_closed"],
+      "transport": ["semantic_probe_return_link_broken", "vision_router_carrier_detached"],
+      "quota": ["inspection_replay_coupon_exhausted", "detector_admission_slot_frozen"],
+      "payload": ["perception_receipt_shape_invalid", "vision_contract_digest_unknown"]
+    },
+    "fixtures": [
+      {
+        "target": "靛紫梯形校准楔",
+        "slug": "indigo_trapezoid_calibration_wedge_v14",
+        "family": "prlv14_indigo_trapezoid_wedge",
+        "shape": "trapezoid",
+        "fg": [91, 67, 168],
+        "bg": [226, 229, 218]
+      },
+      {
+        "target": "琥珀四孔法兰盘",
+        "slug": "amber_four_port_flange_v14",
+        "family": "prlv14_amber_four_port_flange",
+        "shape": "flange",
+        "fg": [205, 137, 35],
+        "bg": [39, 47, 57]
+      }
+    ]
+  },
+  "anti_leakage_contract": {
+    "protected_v14_fields": ["roots", "suffixes", "styles", "error_aliases", "fixture_target_slug_family"],
+    "reference_roots": [
+      "experiments/studies/planner_retry_ladder_v13_confirmation_v1",
+      "training/planner_grpo_seed_v1/sft_data_ladder_n58_three_action",
+      "training/planner_grpo_seed_v1/step_data"
+    ],
+    "required_exact_protected_token_overlaps": 0,
+    "v13_prediction_or_result_files_used_for_generation": false,
+    "model_outputs_used_for_case_selection": false
+  },
+  "frozen_ladder": {
+    "scene_name": "query_style2_structured_state_routing_v14",
+    "scenario_weights": {"post_retry_metric_veto_step3": 111, "current_success_step2": 14},
+    "weighted_label": "111:14",
+    "base_mean_ceiling_percent_exclusive": 65,
+    "larger_mean_floor_percent_exclusive": 85,
+    "larger_each_run_floor_percent_exclusive": 85,
+    "larger_run_range_ceiling_pp_inclusive": 5,
+    "required_mean_order": ["qwen35_4b_base", "qwen35_4b_sft", "qwen35_35b_a3b", "qwen35_4b_grpo_n60"]
+  },
+  "common_inference_protocol": {
+    "runs_per_arm": 3,
+    "repeat_ids": [1, 2, 3],
+    "seed_by_repeat": {"1": 42, "2": 42, "3": 42},
+    "temperature": 0,
+    "top_p": 1,
+    "do_sample": false,
+    "max_steps": 3,
+    "max_new_tokens": 4096,
+    "timeout_seconds": 600,
+    "openai_timeout_seconds": 600,
+    "selective_case_arm_or_run_retry": "forbidden",
+    "missing_prediction_row_or_run": "invalid_confirmation"
+  },
+  "frozen_arms": {
+    "qwen35_4b_base": {
+      "backend": "local_transformers",
+      "model_path": "/raid/zkq/models/Qwen3.5-4B",
+      "adapter_path": null
+    },
+    "qwen35_4b_sft": {
+      "backend": "local_transformers",
+      "model_path": "/raid/zkq/models/Qwen3.5-4B",
+      "adapter_path": "/raid/zkq/projects/CAPA/experiments/runs/20260716_qwen35_4b_planner_v6_sft_seed42_v1/checkpoint-100",
+      "adapter_sha256": "0c09452034727fe41908fc37d35866b68c227c9e8c680e66fbf0a043ae8aca60",
+      "adapter_config_sha256": "8538b8615b5d2432338aa1169af0356e9d04f6ee715fb518cef9757651cfcd1d"
+    },
+    "qwen35_35b_a3b": {
+      "backend": "openai_compatible",
+      "model_id": "Qwen3.5-35B-A3B",
+      "api_base": "http://10.111.32.253:8000/v1",
+      "remote_descriptor_sha256": "290c5fd59c0527c3e5b791c3b486cd808e9ac4d66f1324ecfd276a8b0ad84c44"
+    },
+    "qwen35_4b_grpo_n60": {
+      "backend": "local_transformers",
+      "model_path": "/raid/zkq/models/Qwen3.5-4B",
+      "adapter_path": "/raid/zkq/artifacts/CAPA/arbor/ladder_n60/20260720T0600Z_qwen35_4b_ladder_n60_grpo1_seed42/checkpoint-1",
+      "adapter_sha256": "eb6717a05ceb788ef738393627ae6c375c6532c0eec2638f7541d64808112815",
+      "adapter_config_sha256": "eb0a25b18ddb520e538742b983dc485db8aa51399616cf12c896b96735329a1f",
+      "selection_path": "/raid/zkq/artifacts/CAPA/arbor/ladder_n60/v13_style2_post_grpo_20260720T0605Z_once/selection_decision.json",
+      "selection_sha256": "c5cc82fe09332708e318aad35d746412631b1f60561be5f643df80fd3d2b632a",
+      "selected_before_v14_materialization": true
+    }
+  },
+  "confirmation_policy": {
+    "v14_used_for_training_or_model_selection": false,
+    "adapter_or_scene_mutation_after_materialization": "forbidden",
+    "open_once": true,
+    "partial_or_selective_rerun": false
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "amendment_id": "planner_retry_ladder_v13_query_style2_analysis_n41",
+  "study_id": "planner_retry_ladder_v13_confirmation_v1",
+  "scope": "analysis_only_before_single_use_opening",
+  "created_before_opening": true,
+  "v13_cases_or_predictions_accessed_for_selection": false,
+  "original_generation_and_sealed_material_unchanged": true,
+  "reason": "Open-V12 development identified a low-complexity metadata-defined scene that satisfies the requested ladder with a 3.8 percentage-point minimum margin. The already-sealed independent V13 material is used once to test that frozen scene without changing generation, cases, models, or predictions.",
+  "development_selection": {
+    "path": "/raid/zkq/artifacts/CAPA/arbor/ladder_n40/query_style2_scene_111to14_v12/selection_decision.json",
+    "sha256": "02db38c724d1d99578783bce44b5ae0382413101677b1ccd80b3f24b2615bb2c",
+    "status": "promote",
+    "development_config_path": "configs/eval/qwen35_v12_ladder_n40_query_style2_scene.json",
+    "development_config_sha256": "87592faa047d36de1f8ac1d6f17a8adaba6f00e40797a2604087e4f62bfd9ce7",
+    "v13_data_accessed": false
+  },
+  "frozen_scene": {
+    "name": "query_style2_structured_state_routing",
+    "filter": {
+      "field": "query_style_index",
+      "operator": "equals",
+      "value": 2
+    },
+    "case_id_selection_permitted": false,
+    "expected_rows": 24,
+    "expected_entity_clusters": 6,
+    "expected_cases_per_entity": 4,
+    "expected_scenario_counts": {
+      "current_success_step2": 12,
+      "post_retry_metric_veto_step3": 12
+    },
+    "expected_scenario_detector_counts": {
+      "current_success_step2|qwen": 6,
+      "current_success_step2|rex": 6,
+      "post_retry_metric_veto_step3|qwen": 6,
+      "post_retry_metric_veto_step3|rex": 6
+    },
+    "expected_badge_cell_counts": [8, 8, 8],
+    "expected_image_fixture_cell_counts": [12, 12]
+  },
+  "frozen_analysis": {
+    "scenario_weights": {
+      "post_retry_metric_veto_step3": 111,
+      "current_success_step2": 14
+    },
+    "weighted_label": "111:14",
+    "required_mean_order": [
+      "qwen35_4b_base",
+      "qwen35_4b_sft",
+      "qwen35_35b_a3b",
+      "qwen35_4b_grpo_final"
+    ],
+    "base_mean_ceiling_percent_exclusive": 65.0,
+    "larger_mean_floor_percent_exclusive": 85.0,
+    "larger_each_run_floor_percent_exclusive": 85.0,
+    "grpo_mean_must_strictly_exceed_larger": true
+  },
+  "completeness_firewall": {
+    "all_four_arms": true,
+    "runs_per_arm": 3,
+    "prediction_files_required_before_first_parse": 12,
+    "rows_required_per_prediction_file": 96,
+    "score_filter_applied_only_after_complete_artifact_hash_count": true,
+    "selective_case_arm_or_run_retry": "forbidden",
+    "alternate_scene_ratio_or_threshold_after_opening": "forbidden"
+  },
+  "confirmation_used_for_selection": false
+}

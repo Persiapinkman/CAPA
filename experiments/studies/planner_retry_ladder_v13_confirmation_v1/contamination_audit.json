@@ -1,0 +1,33 @@
+{
+  "created_at": "2026-07-17T12:05:00Z",
+  "frozen_generation_inputs": {
+    "analysis_ratio": "7:1",
+    "generation_spec": "experiments/studies/planner_retry_ladder_v13_confirmation_v1/generation_spec.json",
+    "generation_spec_sha256": "89ea0e71ce70308328a960fa2c936671446235f50c258c70706836f95b1ffde8",
+    "max_new_tokens": 4096,
+    "scenario_contract": [
+      "post_retry_metric_veto_step3",
+      "current_success_step2"
+    ],
+    "whole_stratum_cases": 48
+  },
+  "historical_v12_schema_inspection": {
+    "historical_v12_is_already_open_development_evidence": true,
+    "historical_v12_numeric_results_used_for_v13_case_content": false,
+    "sealed_objective_was_inadvertently_included_in_a_read_only_design_contract_command": true
+  },
+  "non_adaptation_attestations": {
+    "aliases_changed_from_historical_model_results": false,
+    "difficulty_or_case_counts_changed_from_historical_model_results": false,
+    "fixtures_changed_from_historical_model_results": false,
+    "lexicon_changed_from_historical_model_results": false,
+    "model_inference_calls_during_generation": 0,
+    "n16_or_n17_outputs_accessed": false,
+    "v13_model_outputs_accessed": false,
+    "v13_model_outputs_existed_before_sealing": false
+  },
+  "schema_version": "1.0",
+  "sealed_cases_sha256": "2b51fd4bb7faf0c3e5446532bc6e75e084c2d0e1f662e59254eb3412d10c6661",
+  "status": "isolated_with_historical_v12_exposure_disclosed",
+  "study_id": "planner_retry_ladder_v13_confirmation_v1"
+}
