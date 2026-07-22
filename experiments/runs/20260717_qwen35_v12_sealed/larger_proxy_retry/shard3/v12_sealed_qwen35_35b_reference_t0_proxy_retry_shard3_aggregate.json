@@ -1,0 +1,239 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-07-17T07:50:24.993023+00:00",
+  "cases_path": "/raid/zkq/projects/CAPA/experiments/studies/planner_retry_optimizer_matched_v12_qwen35_4b_v1/sealed_test_data/combined_test_cases.jsonl",
+  "model": "Qwen3.5-35B-A3B",
+  "api_base": "http://10.111.32.253:8000/v1",
+  "report_prefix": "v12_sealed_qwen35_35b_reference_t0_proxy_retry_shard3",
+  "runs": 1,
+  "generation_config": {
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "seed": 42,
+    "do_sample": "false",
+    "max_tokens": 2048,
+    "max_steps": 3,
+    "timeout_seconds": 300,
+    "openai_timeout_seconds": 300
+  },
+  "aggregate": {
+    "mean_score_mean": 0.90473,
+    "mean_score_stdev": 0.0,
+    "pass_rate_mean": 0.694444,
+    "pass_rate_stdev": 0.0,
+    "pass_all_runs_rate": 0.694444,
+    "pass_any_run_rate": 0.694444
+  },
+  "by_category": {
+    "budget_exhausted_step2": {
+      "mean_score_mean": 1.0,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 1.0,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 1.0,
+      "runs": 1
+    },
+    "conflicting_state_step2": {
+      "mean_score_mean": 0.977053,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 0.944444,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 0.944444,
+      "runs": 1
+    },
+    "current_success_step2": {
+      "mean_score_mean": 0.652174,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 0.090909,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 0.090909,
+      "runs": 1
+    },
+    "fresh_retry_step2": {
+      "mean_score_mean": 0.725,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 0.0,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 0.0,
+      "runs": 1
+    },
+    "missing_required_state_step2": {
+      "mean_score_mean": 1.0,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 1.0,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 1.0,
+      "runs": 1
+    },
+    "nonretryable_step2": {
+      "mean_score_mean": 1.0,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 1.0,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 1.0,
+      "runs": 1
+    },
+    "post_retry_error_step3": {
+      "mean_score_mean": 1.0,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 1.0,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 1.0,
+      "runs": 1
+    },
+    "post_retry_metric_veto_step3": {
+      "mean_score_mean": 1.0,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 1.0,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 1.0,
+      "runs": 1
+    },
+    "post_retry_success_step3": {
+      "mean_score_mean": 0.744643,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 0.071429,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 0.071429,
+      "runs": 1
+    }
+  },
+  "prediction_stats": {
+    "empty_decisions_mean": 0.0,
+    "empty_decisions_stdev": 0.0,
+    "decision_count_mean": 260.0,
+    "decision_count_stdev": 0.0,
+    "first_length_truncations_total": 1,
+    "retry_length_truncations_total": 0,
+    "retry_count_total": 1,
+    "actions_total": {
+      "qwen_detection": 74,
+      "migration_advisor": 104,
+      "rexomni_detection": 79,
+      "answerer": 1,
+      "final_answer": 2
+    },
+    "errors_total": {},
+    "fallback_errors_total": {
+      "ValueError": 1
+    }
+  },
+  "timing": {
+    "elapsed_ms": 1945766.288
+  },
+  "reports": [
+    {
+      "reward_report": "/raid/zkq/projects/CAPA/experiments/runs/20260717_qwen35_v12_sealed/larger_proxy_retry/shard3/v12_sealed_qwen35_35b_reference_t0_proxy_retry_shard3_run1_reward.json",
+      "prediction_file": "/raid/zkq/projects/CAPA/experiments/runs/20260717_qwen35_v12_sealed/larger_proxy_retry/shard3/v12_sealed_qwen35_35b_reference_t0_proxy_retry_shard3_run1_predictions.jsonl",
+      "summary": {
+        "cases": 108,
+        "prediction_mode": "provided",
+        "mean_score": 0.90473,
+        "passed": 75,
+        "failed": 33,
+        "pass_rate": 0.694444,
+        "by_category": {
+          "budget_exhausted_step2": {
+            "count": 14,
+            "mean_score": 1.0,
+            "passed": 14,
+            "pass_rate": 1.0
+          },
+          "conflicting_state_step2": {
+            "count": 18,
+            "mean_score": 0.977053,
+            "passed": 17,
+            "pass_rate": 0.944444
+          },
+          "current_success_step2": {
+            "count": 11,
+            "mean_score": 0.652174,
+            "passed": 1,
+            "pass_rate": 0.090909
+          },
+          "fresh_retry_step2": {
+            "count": 9,
+            "mean_score": 0.725,
+            "passed": 0,
+            "pass_rate": 0.0
+          },
+          "missing_required_state_step2": {
+            "count": 13,
+            "mean_score": 1.0,
+            "passed": 13,
+            "pass_rate": 1.0
+          },
+          "nonretryable_step2": {
+            "count": 8,
+            "mean_score": 1.0,
+            "passed": 8,
+            "pass_rate": 1.0
+          },
+          "post_retry_error_step3": {
+            "count": 10,
+            "mean_score": 1.0,
+            "passed": 10,
+            "pass_rate": 1.0
+          },
+          "post_retry_metric_veto_step3": {
+            "count": 11,
+            "mean_score": 1.0,
+            "passed": 11,
+            "pass_rate": 1.0
+          },
+          "post_retry_success_step3": {
+            "count": 14,
+            "mean_score": 0.744643,
+            "passed": 1,
+            "pass_rate": 0.071429
+          }
+        },
+        "used_action_counts": {
+          "qwen_detection": 74,
+          "migration_advisor": 104,
+          "rexomni_detection": 79,
+          "answerer": 1,
+          "end": 2
+        },
+        "premature_stop_cases": 0
+      },
+      "prediction_stats": {
+        "rows": 108,
+        "decision_count": 260,
+        "empty_decisions": 0,
+        "first_length_truncations": 1,
+        "retry_length_truncations": 0,
+        "retry_count": 1,
+        "errors": {},
+        "fallback_errors": {
+          "ValueError": 1
+        },
+        "actions": {
+          "qwen_detection": 74,
+          "migration_advisor": 104,
+          "rexomni_detection": 79,
+          "answerer": 1,
+          "final_answer": 2
+        }
+      }
+    }
+  ],
+  "evaluation_slice": {
+    "source_cases_path": "/raid/zkq/projects/CAPA/experiments/studies/planner_retry_optimizer_matched_v12_qwen35_4b_v1/sealed_test_data/combined_test_cases.jsonl",
+    "source_case_count": 432,
+    "evaluation_cases_path": "/raid/zkq/projects/CAPA/experiments/runs/20260717_qwen35_v12_sealed/larger_proxy_retry/shard3/v12_sealed_qwen35_35b_reference_t0_proxy_retry_shard3_cases_slice.jsonl",
+    "offset": 324,
+    "limit": 108,
+    "evaluated_case_count": 108
+  },
+  "inference_backend": {
+    "type": "openai_compatible",
+    "local_model_path": "",
+    "local_adapter_path": "",
+    "omit_model_image_payload": true
+  },
+  "artifacts": {
+    "case_audit_csv": "/raid/zkq/projects/CAPA/experiments/runs/20260717_qwen35_v12_sealed/larger_proxy_retry/shard3/v12_sealed_qwen35_35b_reference_t0_proxy_retry_shard3_case_audit.csv",
+    "failed_cases_csv": "/raid/zkq/projects/CAPA/experiments/runs/20260717_qwen35_v12_sealed/larger_proxy_retry/shard3/v12_sealed_qwen35_35b_reference_t0_proxy_retry_shard3_failed_cases.csv"
+  }
+}

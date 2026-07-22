@@ -1,0 +1,11 @@
+{
+  "status": "gateway_error",
+  "success": false,
+  "summary": "当前结构化状态：candidate_count=NA；min_confidence=NA；cross_prompt_iou=NA；domain_shift=unknown；gateway_error=selectiondelta_inspection_replay_credit_empty；retryable=true；retry_count=1；overall_badge=amber。说明：展示字段不覆盖结构化值。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "finish_after_tool": false,
+    "label": "松石绿双环耦合件"
+  },
+  "_thought": "最新状态满足错误重试条件，需要复用同一检测器。"
+}

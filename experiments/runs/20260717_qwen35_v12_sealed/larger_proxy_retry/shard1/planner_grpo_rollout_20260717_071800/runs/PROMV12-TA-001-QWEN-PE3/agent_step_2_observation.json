@@ -1,0 +1,11 @@
+{
+  "status": "gateway_error",
+  "success": false,
+  "summary": "当前结构化状态：candidate_count=NA；min_confidence=NA；cross_prompt_iou=NA；domain_shift=unknown；gateway_error=v12sealedalpha_probe_ack_window_closed；retryable=true；retry_count=1；overall_badge=red。说明：展示字段不覆盖结构化值。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "冰青三辐锁紧轮",
+    "finish_after_tool": false
+  },
+  "_thought": "当前observation显示status='gateway_error'，retryable=true且retry_count=0。根据用户query规则'错误状态仅在retryable=true与retry_count=0同时成立时复用原检测器一次'，这是第一次检测失败，应该重试一次原检测器。label保持'冰青三辐锁紧轮'，finish_after_tool设为false（检测结果仍是中间状态，后续需根据结果判断是否结束或转迁移）。"
+}

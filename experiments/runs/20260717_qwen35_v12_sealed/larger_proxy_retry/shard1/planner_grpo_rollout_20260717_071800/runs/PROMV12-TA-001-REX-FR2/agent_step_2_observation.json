@@ -1,0 +1,11 @@
+{
+  "status": "completed",
+  "success": true,
+  "summary": "当前结构化状态：candidate_count=2；min_confidence=0.93；cross_prompt_iou=0.81；domain_shift=low；gateway_error=none；retryable=false；retry_count=1；overall_badge=red。说明：展示字段不覆盖结构化值。",
+  "_action": "rexomni_detection",
+  "_action_input": {
+    "label": "冰青三辐锁紧轮",
+    "finish_after_tool": false
+  },
+  "_thought": "第1步已调用 rexomni_detection，观察结果为 gateway_error 状态。根据用户指令：错误状态仅在 retryable=true 与 retry_count=0 同时成立时复用原检测器一次。当前 retryable=true 且 retry_count=0，满足重试条件，应再次调用原检测器 rexomni_detection 进行重试。检测结果仍为中间状态，后续需根据重试结果判断是否结束或转迁移顾问，因此 finish_after_tool 设为 false。"
+}

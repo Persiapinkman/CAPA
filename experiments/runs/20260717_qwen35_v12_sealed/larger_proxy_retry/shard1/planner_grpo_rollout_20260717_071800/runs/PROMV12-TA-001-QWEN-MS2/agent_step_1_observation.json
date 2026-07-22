@@ -1,0 +1,11 @@
+{
+  "status": "gateway_error",
+  "success": false,
+  "summary": "当前结构化状态：candidate_count=NA；min_confidence=NA；cross_prompt_iou=NA；domain_shift=unknown；gateway_error=v12sealedalpha_probe_ack_window_closed；retry_count=0；overall_badge=red。说明：展示字段不覆盖结构化值。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "冰青三辐锁紧轮",
+    "finish_after_tool": false
+  },
+  "_thought": "用户明确要求先使用Qwen检测附件中的'冰青三辐锁紧轮'，检测结果仅作为中间状态。当前query_trajectories中steps为空，说明尚未调用任何工具。根据规则3和7，单图开放集目标检测应使用qwen_detection或rexomni_detection，用户指定Qwen故选择qwen_detection。finish_after_tool设为false因为检测结果需要后续判断是否迁移。"
+}

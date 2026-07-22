@@ -1,0 +1,11 @@
+{
+  "status": "completed",
+  "success": true,
+  "summary": "当前结构化状态：candidate_count=2；min_confidence=0.93；cross_prompt_iou=0.81；domain_shift=low；gateway_error=none；retryable=false；retry_count=0。说明：展示字段不覆盖结构化值。",
+  "_action": "rexomni_detection",
+  "_action_input": {
+    "finish_after_tool": false,
+    "label": "翡翠绿双环联接件"
+  },
+  "_thought": "先执行用户指定的检测器以取得当前结构化状态。"
+}

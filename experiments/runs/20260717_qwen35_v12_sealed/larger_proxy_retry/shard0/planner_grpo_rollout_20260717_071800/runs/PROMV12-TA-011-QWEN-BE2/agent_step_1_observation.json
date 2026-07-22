@@ -1,0 +1,11 @@
+{
+  "status": "gateway_error",
+  "success": false,
+  "summary": "当前结构化状态：candidate_count=NA；min_confidence=NA；cross_prompt_iou=NA；domain_shift=unknown；gateway_error=v12sealedalpha_vision_capacity_lease_absent；retryable=true；retry_count=1。说明：展示字段不覆盖结构化值。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "焦糖十字分流块",
+    "finish_after_tool": false
+  },
+  "_thought": "当前是第一步，query_trajectories 中的 steps 为空，说明还没有任何工具被调用。用户明确要求先使用Qwen检测附件中的焦糖十字分流块，检测结果仅作为中间状态。根据约束条件，检测器必须设置 finish_after_tool=false，因为检测结果只是中间状态，后续还需要根据检测结果判断是否进入迁移评估。因此选择 qwen_detection 工具，label 为'焦糖十字分流块'，finish_after_tool 设为 false。"
+}

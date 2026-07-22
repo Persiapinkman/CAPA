@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "model": "qwen35-4b-bench",
+  "backend": "vllm_0.10.2_v0_generic_transformers",
+  "completion_probe": {
+    "prompt": "Write one concise sentence explaining why reproducible benchmarks need fixed workloads.",
+    "temperature": 0,
+    "max_tokens": 32,
+    "response": "\n\nuser:replacing the \"\n# 1.\n# 198.\n# 1984.\n# 20",
+    "usage": {
+      "prompt_tokens": 14,
+      "completion_tokens": 32,
+      "total_tokens": 46
+    },
+    "finish_reason": "length"
+  },
+  "chat_probe": {
+    "temperature": 0,
+    "max_tokens": 64,
+    "response": "Thinkinguseruseruseruseruseruseruseruseruseruseruseruseruseruser:user:user:\n# 1.\n# 1.\n# 1.\n# 1.\n# 1.\n# 1.\n# 1.\n# 1.\n# 1",
+    "usage": {
+      "prompt_tokens": 24,
+      "completion_tokens": 64,
+      "total_tokens": 88
+    },
+    "finish_reason": "length"
+  },
+  "human_semantic_review": "fail",
+  "disposition": "All throughput measurements from this backend are diagnostic-only and excluded from the publishable comparison."
+}

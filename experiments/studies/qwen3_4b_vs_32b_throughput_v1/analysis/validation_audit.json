@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "bootstrap": {
+    "unit": "trial",
+    "replicates": 20000,
+    "seed": 20260721,
+    "interval": "percentile_95"
+  },
+  "models": [
+    {
+      "model_label": "Qwen3.5-4B-HF-static",
+      "status": "complete",
+      "formal_trial_count": 30,
+      "valid_trial_count": 30,
+      "request_count": 420,
+      "successful_request_count": 420,
+      "http_error_count": 0,
+      "prompt_token_mismatch_count": 0,
+      "completion_token_mismatch_count": 0,
+      "completion_tokens_total": 53760,
+      "prompt_tokens_total": 483840,
+      "telemetry_error_count": 0,
+      "backend": "transformers_static_batch",
+      "execution_semantics": "two_synchronized_static_batch_waves_per_trial",
+      "server_version_response": null,
+      "model_class": "Qwen3_5ForCausalLM",
+      "sanity": {
+        "valid": true,
+        "model_class": "Qwen3_5ForCausalLM",
+        "input_tokens": 26,
+        "completion_tokens": 30,
+        "duration_s": 2.6219504000619054,
+        "unique_token_ratio": 0.9333333333333333,
+        "text": "Reproducible benchmarks require fixed workloads to ensure that performance measurements remain consistent and comparable across different runs, systems, and timeframes."
+      },
+      "prompt_pool_sha256": "1d2e467dbf0f6201a4929464cc5fd3ba160407f4a6796b2e163c878aae7a9ee7",
+      "client_script_sha256": "ce3a09163b92e7c34fcb831bd78c3f57b81ff78ebf495d9a90506e5a72e6695b"
+    },
+    {
+      "model_label": "Qwen3-32B",
+      "status": "complete",
+      "formal_trial_count": 30,
+      "valid_trial_count": 30,
+      "request_count": 420,
+      "successful_request_count": 420,
+      "http_error_count": 0,
+      "prompt_token_mismatch_count": 0,
+      "completion_token_mismatch_count": 0,
+      "completion_tokens_total": 53760,
+      "prompt_tokens_total": 483840,
+      "telemetry_error_count": 0,
+      "backend": "vllm_openai_service",
+      "execution_semantics": "concurrent_http_requests",
+      "server_version_response": {
+        "version": "0.8.5.post1"
+      },
+      "model_class": null,
+      "sanity": null,
+      "prompt_pool_sha256": "217809f97339a9dd1bd6e39c9105fa3178bfc9486fd724ee8ed4906abc2af788",
+      "client_script_sha256": "d99343c3be98d53c1744058997a4e32f366952460eec0ddcce9a759355985212"
+    }
+  ]
+}

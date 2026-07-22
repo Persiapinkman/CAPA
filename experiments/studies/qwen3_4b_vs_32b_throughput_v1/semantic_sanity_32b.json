@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "model": "qwen3-32b-bench",
+  "backend": "vllm_0.8.5.post1_tp4",
+  "prompt": "Write one concise sentence explaining why reproducible benchmarks need fixed workloads.",
+  "temperature": 0,
+  "max_tokens": 32,
+  "response": " Reproducible benchmarks require fixed workloads to ensure consistent and comparable results across different testing environments and iterations. Reproducible benchmarks require fixed workloads to",
+  "response_sha256": "0deee6ebe781a4788c08e1c3412aa6e1ccab754a64e4e9da7417a5fb560a45af",
+  "usage": {
+    "prompt_tokens": 14,
+    "completion_tokens": 32,
+    "total_tokens": 46
+  },
+  "finish_reason": "length",
+  "human_semantic_review": "pass",
+  "note": "The first sentence is coherent and directly answers the prompt; generation then begins a repeated sentence because max_tokens truncates at 32."
+}

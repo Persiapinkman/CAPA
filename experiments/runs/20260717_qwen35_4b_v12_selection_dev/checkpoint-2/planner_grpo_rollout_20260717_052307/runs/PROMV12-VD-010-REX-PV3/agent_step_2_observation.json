@@ -1,0 +1,13 @@
+{
+  "status": "completed",
+  "success": true,
+  "summary": "当前结构化状态：candidate_count=3；min_confidence=0.94；cross_prompt_iou=0.84；domain_shift=high；gateway_error=none；retryable=false；retry_count=1。说明：展示字段不覆盖结构化值。",
+  "_action": "migration_advisor",
+  "_action_input": {
+    "use_image": true,
+    "use_visual_probe": true,
+    "finish_after_tool": true,
+    "user_query": "自动化集装箱岸桥回执动作定级7317号"
+  },
+  "_thought": "最新状态未满足结束或重试条件，需要进入能力迁移评估。"
+}

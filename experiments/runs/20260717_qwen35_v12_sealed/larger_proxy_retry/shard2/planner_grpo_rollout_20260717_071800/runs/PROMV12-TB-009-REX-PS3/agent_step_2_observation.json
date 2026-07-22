@@ -1,0 +1,11 @@
+{
+  "status": "completed",
+  "success": true,
+  "summary": "当前结构化状态：candidate_count=2；min_confidence=0.93；cross_prompt_iou=0.81；domain_shift=low；gateway_error=none；retryable=false；retry_count=1；overall_badge=red。说明：展示字段不覆盖结构化值。",
+  "_action": "rexomni_detection",
+  "_action_input": {
+    "label": "金橙五星复检片",
+    "finish_after_tool": false
+  },
+  "_thought": "当前 query_trajectories 的 step_1 已调用 rexomni_detection，observation 显示 status='gateway_error'，retryable=true 且 retry_count=0。根据规则'错误状态仅在 retryable=true 与 retry_count=0 同时成立时复用原检测器一次'，可以重试一次。finish_after_tool 应设为 false，因为检测结果只是中间状态，后续需要基于结果判断是否调用迁移顾问。"
+}

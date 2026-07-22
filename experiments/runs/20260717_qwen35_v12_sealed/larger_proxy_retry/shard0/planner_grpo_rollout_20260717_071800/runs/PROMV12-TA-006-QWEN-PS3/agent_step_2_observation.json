@@ -1,0 +1,11 @@
+{
+  "status": "completed",
+  "success": true,
+  "summary": "当前结构化状态：candidate_count=2；min_confidence=0.93；cross_prompt_iou=0.81；domain_shift=low；gateway_error=none；retryable=false；retry_count=1。说明：展示字段不覆盖结构化值。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "冰青三辐锁紧轮",
+    "finish_after_tool": false
+  },
+  "_thought": "当前检测状态为 gateway_error，且 observation 中 retryable=true 与 retry_count=0 同时成立，符合指令中‘错误状态仅在 retryable=true 与 retry_count=0 同时成立时复用原检测器一次’的条件。因此下一步应再次调用 qwen_detection 进行重试，label 保持为‘冰青三辐锁紧轮’，finish_after_tool 设为 false 以便根据重试结果继续规划后续决策。"
+}

@@ -1,0 +1,11 @@
+{
+  "status": "gateway_error",
+  "success": false,
+  "summary": "当前结构化状态：candidate_count=NA；min_confidence=NA；cross_prompt_iou=NA；domain_shift=unknown；gateway_error=v12sealedalpha_probe_ack_window_closed；retryable=true；retry_count=0。说明：展示字段不覆盖结构化值。",
+  "_action": "rexomni_detection",
+  "_action_input": {
+    "label": "焦糖十字分流块",
+    "finish_after_tool": false
+  },
+  "_thought": "当前是第1步，query_trajectories中steps为空，说明尚未执行任何工具调用。用户明确要求先使用Rex-Omni检测附件中的焦糖十字分流块，检测结果仅作为中间状态，后续还需判断是否进入迁移评估。根据规则，检测器必须设置finish_after_tool=false，迁移顾问才设置finish_after_tool=true。因此当前应调用rexomni_detection工具，label为'焦糖十字分流块'，finish_after_tool设为false。"
+}

@@ -1,0 +1,11 @@
+{
+  "status": "gateway_error",
+  "success": false,
+  "summary": "当前结构化状态：candidate_count=NA；min_confidence=NA；cross_prompt_iou=NA；domain_shift=unknown；gateway_error=v12sealedalpha_detector_control_route_broken；retryable=true；retry_count=1；overall_badge=red。说明：展示字段不覆盖结构化值。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "焦糖十字分流块",
+    "finish_after_tool": false
+  },
+  "_thought": "当前已完成 step_1 的 qwen_detection，observation 显示 status='gateway_error'，retryable=true，retry_count=0。根据规则'错误状态仅在 retryable=true 与 retry_count=0 同时成立时复用原检测器一次'，应再次调用 qwen_detection 进行重试。finish_after_tool 设为 false，因为重试后仍需根据结果判断是否进入迁移评估。"
+}

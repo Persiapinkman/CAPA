@@ -1,0 +1,88 @@
+{
+  "summary": {
+    "cases": 1,
+    "prediction_mode": "provided",
+    "mean_score": 0.725,
+    "passed": 0,
+    "failed": 1,
+    "pass_rate": 0.0,
+    "by_category": {
+      "post_retry_success_step3": {
+        "count": 1,
+        "mean_score": 0.725,
+        "passed": 0,
+        "pass_rate": 0.0
+      }
+    },
+    "used_action_counts": {
+      "qwen_detection": 2,
+      "migration_advisor": 1
+    },
+    "premature_stop_cases": 0
+  },
+  "results": [
+    {
+      "case_id": "PROMV12-TA-006-QWEN-PS3",
+      "category": "post_retry_success_step3",
+      "score": 0.725,
+      "passed": false,
+      "raw_score": 2.32,
+      "max_score": 3.2,
+      "forbidden_hit": [
+        "migration_advisor"
+      ],
+      "premature_stop_hit": false,
+      "repeated_tool_hit": false,
+      "skip_required_probe_hit": false,
+      "final_tool_not_finished_hit": false,
+      "used_actions": [
+        "qwen_detection",
+        "qwen_detection",
+        "migration_advisor"
+      ],
+      "step_scores": [
+        {
+          "step": 1,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 2,
+          "score_without_forbidden": 0.9,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 1.0,
+            "action_match": 1.0,
+            "argument_match": 1.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": []
+        },
+        {
+          "step": 3,
+          "score_without_forbidden": 0.12000000000000001,
+          "detail": {
+            "json_valid": 1.0,
+            "decision_type_valid": 0.0,
+            "action_match": 0.0,
+            "argument_match": 0.0,
+            "finish_after_tool": 1.0
+          },
+          "failures": [
+            "decision_type expected 'end', got 'tool'",
+            "action expected 'end', got 'migration_advisor'",
+            "arg 'end_reason' expected 'memory_hit', got ''"
+          ]
+        }
+      ],
+      "parse_ok": true
+    }
+  ]
+}

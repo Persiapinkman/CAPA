@@ -1,0 +1,11 @@
+{
+  "status": "gateway_error",
+  "success": false,
+  "summary": "当前结构化状态：candidate_count=NA；min_confidence=NA；cross_prompt_iou=NA；domain_shift=unknown；gateway_error=v12sealedbravo_probe_ack_window_closed；retryable=true；retry_count=0；overall_badge=red。说明：展示字段不覆盖结构化值。",
+  "_action": "rexomni_detection",
+  "_action_input": {
+    "label": "玄铜弧顶缓冲座",
+    "finish_after_tool": false
+  },
+  "_thought": "用户明确要求使用 Rex-Omni 检测图片中的'玄铜弧顶缓冲座'，且检测结果仅作为中间状态。当前 query_trajectories 中 steps 为空，说明尚未执行任何工具调用。根据规则，单图检测场景应使用 detection 工具，用户指定 Rex-Omni，且 finish_after_tool 应设为 false 因为后续还需要判断是否迁移评估。"
+}

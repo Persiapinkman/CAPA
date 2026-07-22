@@ -1,0 +1,11 @@
+{
+  "status": "gateway_error",
+  "success": false,
+  "summary": "当前结构化状态：candidate_count=NA；min_confidence=NA；cross_prompt_iou=NA；domain_shift=unknown；gateway_error=v12sealedbravo_vision_capacity_lease_absent；retryable=true；retry_count=1；overall_badge=red。说明：展示字段不覆盖结构化值。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "金橙五星复检片",
+    "finish_after_tool": false
+  },
+  "_thought": "根据当前 observation，status 为 gateway_error，success 为 false，retryable=true 且 retry_count=0。根据用户 query 规则，错误状态仅在 retryable=true 与 retry_count=0 同时成立时复用原检测器一次。因此下一步应再次调用 qwen_detection 工具进行重试，finish_after_tool 设为 false（检测结果仅作为中间状态）。"
+}

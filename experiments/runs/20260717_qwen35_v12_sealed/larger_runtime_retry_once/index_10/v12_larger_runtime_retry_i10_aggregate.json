@@ -1,0 +1,114 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-07-17T07:57:05.163438+00:00",
+  "cases_path": "/raid/zkq/projects/CAPA/experiments/studies/planner_retry_optimizer_matched_v12_qwen35_4b_v1/sealed_test_data/combined_test_cases.jsonl",
+  "model": "Qwen3.5-35B-A3B",
+  "api_base": "http://10.111.32.253:8000/v1",
+  "report_prefix": "v12_larger_runtime_retry_i10",
+  "runs": 1,
+  "generation_config": {
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "seed": 42,
+    "do_sample": "false",
+    "max_tokens": 2048,
+    "max_steps": 3,
+    "timeout_seconds": 300,
+    "openai_timeout_seconds": 300
+  },
+  "aggregate": {
+    "mean_score_mean": 0.725,
+    "mean_score_stdev": 0.0,
+    "pass_rate_mean": 0.0,
+    "pass_rate_stdev": 0.0,
+    "pass_all_runs_rate": 0.0,
+    "pass_any_run_rate": 0.0
+  },
+  "by_category": {
+    "fresh_retry_step2": {
+      "mean_score_mean": 0.725,
+      "mean_score_stdev": 0.0,
+      "pass_rate_mean": 0.0,
+      "pass_rate_stdev": 0.0,
+      "pass_all_runs_rate": 0.0,
+      "runs": 1
+    }
+  },
+  "prediction_stats": {
+    "empty_decisions_mean": 0.0,
+    "empty_decisions_stdev": 0.0,
+    "decision_count_mean": 3.0,
+    "decision_count_stdev": 0.0,
+    "first_length_truncations_total": 0,
+    "retry_length_truncations_total": 0,
+    "retry_count_total": 0,
+    "actions_total": {
+      "qwen_detection": 2,
+      "migration_advisor": 1
+    },
+    "errors_total": {},
+    "fallback_errors_total": {}
+  },
+  "timing": {
+    "elapsed_ms": 25995.94
+  },
+  "reports": [
+    {
+      "reward_report": "/raid/zkq/projects/CAPA/experiments/runs/20260717_qwen35_v12_sealed/larger_runtime_retry_once/index_10/v12_larger_runtime_retry_i10_run1_reward.json",
+      "prediction_file": "/raid/zkq/projects/CAPA/experiments/runs/20260717_qwen35_v12_sealed/larger_runtime_retry_once/index_10/v12_larger_runtime_retry_i10_run1_predictions.jsonl",
+      "summary": {
+        "cases": 1,
+        "prediction_mode": "provided",
+        "mean_score": 0.725,
+        "passed": 0,
+        "failed": 1,
+        "pass_rate": 0.0,
+        "by_category": {
+          "fresh_retry_step2": {
+            "count": 1,
+            "mean_score": 0.725,
+            "passed": 0,
+            "pass_rate": 0.0
+          }
+        },
+        "used_action_counts": {
+          "qwen_detection": 2,
+          "migration_advisor": 1
+        },
+        "premature_stop_cases": 0
+      },
+      "prediction_stats": {
+        "rows": 1,
+        "decision_count": 3,
+        "empty_decisions": 0,
+        "first_length_truncations": 0,
+        "retry_length_truncations": 0,
+        "retry_count": 0,
+        "errors": {},
+        "fallback_errors": {},
+        "actions": {
+          "qwen_detection": 2,
+          "migration_advisor": 1
+        }
+      }
+    }
+  ],
+  "evaluation_slice": {
+    "source_cases_path": "/raid/zkq/projects/CAPA/experiments/studies/planner_retry_optimizer_matched_v12_qwen35_4b_v1/sealed_test_data/combined_test_cases.jsonl",
+    "source_case_count": 432,
+    "evaluation_cases_path": "/raid/zkq/projects/CAPA/experiments/runs/20260717_qwen35_v12_sealed/larger_runtime_retry_once/index_10/v12_larger_runtime_retry_i10_cases_slice.jsonl",
+    "offset": 10,
+    "limit": 1,
+    "evaluated_case_count": 1
+  },
+  "inference_backend": {
+    "type": "openai_compatible",
+    "local_model_path": "",
+    "local_adapter_path": "",
+    "omit_model_image_payload": true
+  },
+  "artifacts": {
+    "case_audit_csv": "/raid/zkq/projects/CAPA/experiments/runs/20260717_qwen35_v12_sealed/larger_runtime_retry_once/index_10/v12_larger_runtime_retry_i10_case_audit.csv",
+    "failed_cases_csv": "/raid/zkq/projects/CAPA/experiments/runs/20260717_qwen35_v12_sealed/larger_runtime_retry_once/index_10/v12_larger_runtime_retry_i10_failed_cases.csv"
+  }
+}

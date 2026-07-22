@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-07-21T03:16:00+00:00",
+  "study_id": "qwen3_4b_vs_32b_throughput_v1",
+  "workspace": "/raid/zkq/projects/CAPA",
+  "git": {
+    "commit": "0519493ab6ea8aeed4b61a5350bed3b38734293e",
+    "branch": "main",
+    "worktree_was_dirty_before_study": true
+  },
+  "hardware": {
+    "resource_snapshot": "resource_snapshot.json",
+    "cpu_physical_cores": 40,
+    "cpu_logical_cores": 80,
+    "ram_gb": 503.76,
+    "gpu_model": "Tesla V100-SXM2-32GB",
+    "gpu_count_installed": 8,
+    "gpu_memory_mib_each": 32768,
+    "compute_capability": "7.0",
+    "driver": "550.163.01",
+    "four_b_physical_gpus": [0],
+    "thirty_two_b_physical_gpus": [0, 1, 2, 3]
+  },
+  "software": {
+    "four_b": {
+      "python": "3.10.12",
+      "torch": "2.8.0+cu128",
+      "transformers": "5.13.0.dev0",
+      "backend": "Transformers synchronized static batch",
+      "attention": "SDPA with optional fast linear-attention kernels absent",
+      "cudnn_enabled": false
+    },
+    "thirty_two_b": {
+      "python": "3.10.12",
+      "torch": "2.6.0+cu124",
+      "transformers": "5.13.0",
+      "vllm": "0.8.5.post1",
+      "backend": "vLLM V0 OpenAI service, XFormers, TP=4",
+      "nccl": "2.21.5",
+      "nccl_p2p_disable": true,
+      "nccl_ib_disable": true,
+      "custom_all_reduce_disabled": true
+    }
+  },
+  "models": {
+    "four_b_source": {
+      "path": "/raid/zkq/models/Qwen3.5-4B",
+      "config_sha256": "ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670",
+      "index_sha256": "cf3f798ee02ba45f9622aa8892a47369ab667d0afbf154ee7c2212de42e6302d"
+    },
+    "four_b_valid_text_export": {
+      "path": "/raid/zkq/artifacts/CAPA/bench_models/Qwen3.5-4B-text-only-fp16",
+      "model_class": "Qwen3_5ForCausalLM",
+      "parameter_count": 4205751296,
+      "visual_module_count": 0,
+      "dtype": "torch.float16",
+      "loading_contract_errors": 0,
+      "config_sha256": "e9d2a7d243a0b664e00d1c3d8313286ad1c1142546c474ca2bcc525c486ef891",
+      "index_sha256": "83620b40d724f8b286580b5c7c504222b0bdbdd7dc9f068e565132409c7eec9d"
+    },
+    "thirty_two_b": {
+      "path": "/raid/zkq/models/Qwen3-32B-vllm",
+      "config_sha256": "97e295b63283935788fac5e4f8860862a56d4089538cafc93f0431f2ebe483bb",
+      "index_sha256": "bed42c6c55274bc08a1f616bceb3bcb84b3f02cb6584c573bd18c6519291ecd0"
+    }
+  },
+  "formal_runs": {
+    "four_b": {
+      "raw_file": "raw_4b_hf_static_formal.json",
+      "raw_sha256": "56053f57e123e16e5475982221322ed77811e790368ef4369fa31c851190060d",
+      "created_at": "2026-07-21T03:01:32.665444+00:00",
+      "completed_at": "2026-07-21T03:13:21.436593+00:00",
+      "model_load_duration_s": 4.366459902841598,
+      "semantic_sanity": "embedded in raw_4b_hf_static_formal.json",
+      "benchmark_script_sha256": "ce3a09163b92e7c34fcb831bd78c3f57b81ff78ebf495d9a90506e5a72e6695b",
+      "prompt_pool_sha256": "1d2e467dbf0f6201a4929464cc5fd3ba160407f4a6796b2e163c878aae7a9ee7"
+    },
+    "thirty_two_b": {
+      "raw_file": "raw_32b_formal.json",
+      "raw_sha256": "654e3a4e90c9dc79ec4147799b25df67250ec9ee50a50791bf6504e25e784efb",
+      "created_at": "2026-07-21T02:23:43.870587+00:00",
+      "completed_at": "2026-07-21T02:41:12.139279+00:00",
+      "server_ready_elapsed_s_approx": 84,
+      "weight_load_s": 42.24,
+      "semantic_sanity_file": "semantic_sanity_32b.json",
+      "semantic_sanity_sha256": "cc801c1b6d9513e3b1ae60252fb2f0750342ca602d3e65ebbe96583c38d429b0",
+      "benchmark_script_sha256": "d99343c3be98d53c1744058997a4e32f366952460eec0ddcce9a759355985212",
+      "prompt_pool_sha256": "217809f97339a9dd1bd6e39c9105fa3178bfc9486fd724ee8ed4906abc2af788"
+    }
+  },
+  "analysis": {
+    "summary_file": "analysis/summary.json",
+    "summary_sha256": "74ec000e22d01193f3bef272539a76e0cbe05ba52e3eca9c9529b0d39165da1d",
+    "bootstrap_unit": "trial",
+    "bootstrap_replicates": 20000,
+    "bootstrap_seed": 20260721
+  },
+  "invalid_diagnostics": {
+    "vllm_four_b_raw": "diagnostic_invalid_4b_vllm_formal.json",
+    "vllm_four_b_sanity_file": "invalid_vllm_4b_semantic_sanity.json",
+    "vllm_four_b_sanity_sha256": "12c73ca13ee646ed5e584d821d3a73bfb957d7bbd878ece4aeb77d4cb09d4db5",
+    "reason": "Natural-language completion and chat sanity checks produced repeated malformed text.",
+    "transformers_continuous_batching_log": "server_4b_transformers_cb.log",
+    "continuous_batching_failure": "Invalid group type: linear_attention"
+  }
+}

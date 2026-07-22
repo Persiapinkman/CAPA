@@ -1,0 +1,8 @@
+{
+  "status": "completed",
+  "success": true,
+  "summary": "当前结构化状态：candidate_count=0；min_confidence=0.94；cross_prompt_iou=0.82；domain_shift=low；gateway_error=none；retryable=false；retry_count=1。说明：展示字段不覆盖结构化值。",
+  "_action": "answerer",
+  "_action_input": {},
+  "_thought": "Agent 决策异常：cuDNN error: CUDNN_STATUS_NOT_INITIALIZED。本轮停止工具调用，直接向用户说明。"
+}

@@ -1,0 +1,11 @@
+{
+  "status": "completed",
+  "success": true,
+  "summary": "当前结构化状态：candidate_count=0；min_confidence=0.94；cross_prompt_iou=0.82；domain_shift=low；gateway_error=none；retryable=false；retry_count=1；overall_badge=amber。说明：展示字段不覆盖结构化值。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "金橙五星复检片",
+    "finish_after_tool": false
+  },
+  "_thought": "根据 observation 中的结构化键值：status='gateway_error'，retryable=true，retry_count=0。根据用户 query 规则'错误状态仅在 retryable=true 与 retry_count=0 同时成立时复用原检测器一次'，当前满足重试条件，应复用原检测器 qwen_detection 重试一次。检测器必须设置 finish_after_tool=false，因为重试后还需根据结果判断是否进入迁移评估。"
+}

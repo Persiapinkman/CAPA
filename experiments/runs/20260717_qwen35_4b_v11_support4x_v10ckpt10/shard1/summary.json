@@ -1,0 +1,1170 @@
+{
+  "actual_actions": {
+    "end": 86,
+    "migration_advisor": 265,
+    "qwen_detection": 61,
+    "rexomni_detection": 20
+  },
+  "adapter_path": "/raid/zkq/projects/CAPA/experiments/runs/20260717T001316Z_qwen35_4b_anti_forgetting_v10_screen10_seed42/checkpoint-10",
+  "by_detector_family": {
+    "qwen": {
+      "gold_action_support_rate": 0.8541666666666666,
+      "groups": 48,
+      "mean_distinct_valid_actions": 1.2708333333333333,
+      "mean_reward": 0.7541232638888888,
+      "nonzero_reward_variance_rate": 0.25
+    },
+    "rex": {
+      "gold_action_support_rate": 0.9333333333333333,
+      "groups": 60,
+      "mean_distinct_valid_actions": 1.25,
+      "mean_reward": 0.8422222222222222,
+      "nonzero_reward_variance_rate": 0.25
+    }
+  },
+  "by_target_action_class": {
+    "end": {
+      "gold_action_support_rate": 0.8333333333333334,
+      "groups": 24,
+      "mean_distinct_valid_actions": 1.3333333333333333,
+      "mean_reward": 0.7390625000000001,
+      "nonzero_reward_variance_rate": 0.2916666666666667
+    },
+    "migrate": {
+      "gold_action_support_rate": 0.9444444444444444,
+      "groups": 72,
+      "mean_distinct_valid_actions": 1.2777777777777777,
+      "mean_reward": 0.8280381944444444,
+      "nonzero_reward_variance_rate": 0.2777777777777778
+    },
+    "retry": {
+      "gold_action_support_rate": 0.75,
+      "groups": 12,
+      "mean_distinct_valid_actions": 1.0,
+      "mean_reward": 0.78125,
+      "nonzero_reward_variance_rate": 0.0
+    }
+  },
+  "filters": {
+    "detector_families": [],
+    "scenario_ids": []
+  },
+  "generation": {
+    "max_new_tokens": 320,
+    "samples_per_prompt": 4,
+    "seed": 42,
+    "temperature": 0.9,
+    "top_p": 0.9
+  },
+  "groups_detail": [
+    {
+      "case_id": "PRSBV11-SA-001-QWEN-CF2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SA-001-QWEN-NR2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SA-001-REX-BE2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SA-001-REX-MS2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SA-001-REX-PV3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": false,
+      "reward_mean": 0.18333333333333332,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SA-002-QWEN-FR2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "retry"
+    },
+    {
+      "case_id": "PRSBV11-SA-002-QWEN-PS3",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 2,
+      "gold_action_supported": true,
+      "reward_mean": 0.4,
+      "reward_std": 0.34641016151377546,
+      "samples": 4,
+      "target_action_class": "end"
+    },
+    {
+      "case_id": "PRSBV11-SA-002-REX-CS2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "end"
+    },
+    {
+      "case_id": "PRSBV11-SA-002-REX-PE3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 2,
+      "gold_action_supported": true,
+      "reward_mean": 0.5625,
+      "reward_std": 0.4375,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SA-003-QWEN-CF2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SA-003-QWEN-NR2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SA-003-REX-BE2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SA-003-REX-MS2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SA-003-REX-PV3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 2,
+      "gold_action_supported": true,
+      "reward_mean": 0.3875,
+      "reward_std": 0.3536270398786458,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SA-004-QWEN-FR2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "retry"
+    },
+    {
+      "case_id": "PRSBV11-SA-004-QWEN-PS3",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": false,
+      "reward_mean": 0.2,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "end"
+    },
+    {
+      "case_id": "PRSBV11-SA-004-REX-CS2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "end"
+    },
+    {
+      "case_id": "PRSBV11-SA-004-REX-PE3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 2,
+      "gold_action_supported": true,
+      "reward_mean": 0.5625,
+      "reward_std": 0.4375,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SA-005-QWEN-CF2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SA-005-QWEN-NR2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SA-005-REX-BE2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SA-005-REX-MS2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SA-005-REX-PV3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SA-006-QWEN-FR2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": false,
+      "reward_mean": 0.125,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "retry"
+    },
+    {
+      "case_id": "PRSBV11-SA-006-QWEN-PS3",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "end"
+    },
+    {
+      "case_id": "PRSBV11-SA-006-REX-CS2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "end"
+    },
+    {
+      "case_id": "PRSBV11-SA-006-REX-PE3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SA-007-QWEN-CF2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SA-007-QWEN-NR2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SA-007-REX-BE2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SA-007-REX-MS2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 2,
+      "gold_action_supported": true,
+      "reward_mean": 0.34375,
+      "reward_std": 0.3788861141556919,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SA-007-REX-PV3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": false,
+      "reward_mean": 0.18333333333333332,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SA-008-QWEN-FR2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": false,
+      "reward_mean": 0.125,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "retry"
+    },
+    {
+      "case_id": "PRSBV11-SA-008-QWEN-PS3",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "end"
+    },
+    {
+      "case_id": "PRSBV11-SA-008-REX-CS2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "end"
+    },
+    {
+      "case_id": "PRSBV11-SA-008-REX-PE3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SA-009-QWEN-CF2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SA-009-QWEN-NR2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 2,
+      "gold_action_supported": true,
+      "reward_mean": 0.5625,
+      "reward_std": 0.4375,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SA-009-REX-BE2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 2,
+      "gold_action_supported": true,
+      "reward_mean": 0.78125,
+      "reward_std": 0.3788861141556919,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SA-009-REX-MS2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 2,
+      "gold_action_supported": true,
+      "reward_mean": 0.78125,
+      "reward_std": 0.3788861141556919,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SA-009-REX-PV3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SA-010-QWEN-FR2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": false,
+      "reward_mean": 0.125,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "retry"
+    },
+    {
+      "case_id": "PRSBV11-SA-010-QWEN-PS3",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 2,
+      "gold_action_supported": true,
+      "reward_mean": 0.6,
+      "reward_std": 0.4,
+      "samples": 4,
+      "target_action_class": "end"
+    },
+    {
+      "case_id": "PRSBV11-SA-010-REX-CS2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 0.9583333333333333,
+      "reward_std": 0.041666666666666685,
+      "samples": 4,
+      "target_action_class": "end"
+    },
+    {
+      "case_id": "PRSBV11-SA-010-REX-PE3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SA-011-QWEN-CF2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 2,
+      "gold_action_supported": true,
+      "reward_mean": 0.5625,
+      "reward_std": 0.4375,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SA-011-QWEN-NR2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SA-011-REX-BE2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SA-011-REX-MS2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SA-011-REX-PV3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SA-012-QWEN-FR2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "retry"
+    },
+    {
+      "case_id": "PRSBV11-SA-012-QWEN-PS3",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 3,
+      "gold_action_supported": true,
+      "reward_mean": 0.4,
+      "reward_std": 0.34641016151377546,
+      "samples": 4,
+      "target_action_class": "end"
+    },
+    {
+      "case_id": "PRSBV11-SA-012-REX-CS2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 2,
+      "gold_action_supported": true,
+      "reward_mean": 0.6,
+      "reward_std": 0.4,
+      "samples": 4,
+      "target_action_class": "end"
+    },
+    {
+      "case_id": "PRSBV11-SA-012-REX-PE3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-001-QWEN-CF2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-001-QWEN-NR2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-001-REX-BE2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-001-REX-MS2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-001-REX-PV3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 2,
+      "gold_action_supported": true,
+      "reward_mean": 0.5916666666666667,
+      "reward_std": 0.4083333333333333,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-002-QWEN-FR2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "retry"
+    },
+    {
+      "case_id": "PRSBV11-SB-002-QWEN-PS3",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": false,
+      "reward_mean": 0.2,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "end"
+    },
+    {
+      "case_id": "PRSBV11-SB-002-REX-CS2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 2,
+      "gold_action_supported": false,
+      "reward_mean": 0.2,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "end"
+    },
+    {
+      "case_id": "PRSBV11-SB-002-REX-PE3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-003-QWEN-CF2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 2,
+      "gold_action_supported": true,
+      "reward_mean": 0.5625,
+      "reward_std": 0.4375,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-003-QWEN-NR2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 2,
+      "gold_action_supported": true,
+      "reward_mean": 0.78125,
+      "reward_std": 0.3788861141556919,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-003-REX-BE2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-003-REX-MS2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-003-REX-PV3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 2,
+      "gold_action_supported": true,
+      "reward_mean": 0.34375,
+      "reward_std": 0.3788861141556919,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-004-QWEN-FR2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "retry"
+    },
+    {
+      "case_id": "PRSBV11-SB-004-QWEN-PS3",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 2,
+      "gold_action_supported": true,
+      "reward_mean": 0.6,
+      "reward_std": 0.4,
+      "samples": 4,
+      "target_action_class": "end"
+    },
+    {
+      "case_id": "PRSBV11-SB-004-REX-CS2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "end"
+    },
+    {
+      "case_id": "PRSBV11-SB-004-REX-PE3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-005-QWEN-CF2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 2,
+      "gold_action_supported": true,
+      "reward_mean": 0.34375,
+      "reward_std": 0.3788861141556919,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-005-QWEN-NR2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-005-REX-BE2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-005-REX-MS2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-005-REX-PV3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 2,
+      "gold_action_supported": true,
+      "reward_mean": 0.3875,
+      "reward_std": 0.3536270398786458,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-006-QWEN-FR2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "retry"
+    },
+    {
+      "case_id": "PRSBV11-SB-006-QWEN-PS3",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "end"
+    },
+    {
+      "case_id": "PRSBV11-SB-006-REX-CS2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "end"
+    },
+    {
+      "case_id": "PRSBV11-SB-006-REX-PE3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-007-QWEN-CF2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 2,
+      "gold_action_supported": true,
+      "reward_mean": 0.5625,
+      "reward_std": 0.4375,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-007-QWEN-NR2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-007-REX-BE2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-007-REX-MS2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-007-REX-PV3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 2,
+      "gold_action_supported": true,
+      "reward_mean": 0.7958333333333333,
+      "reward_std": 0.3536270398786458,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-008-QWEN-FR2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "retry"
+    },
+    {
+      "case_id": "PRSBV11-SB-008-QWEN-PS3",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": false,
+      "reward_mean": 0.2,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "end"
+    },
+    {
+      "case_id": "PRSBV11-SB-008-REX-CS2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "end"
+    },
+    {
+      "case_id": "PRSBV11-SB-008-REX-PE3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-009-QWEN-CF2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-009-QWEN-NR2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 2,
+      "gold_action_supported": true,
+      "reward_mean": 0.34375,
+      "reward_std": 0.3788861141556919,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-009-REX-BE2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 2,
+      "gold_action_supported": true,
+      "reward_mean": 0.78125,
+      "reward_std": 0.3788861141556919,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-009-REX-MS2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 2,
+      "gold_action_supported": true,
+      "reward_mean": 0.34375,
+      "reward_std": 0.3788861141556919,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-009-REX-PV3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": false,
+      "reward_mean": 0.18333333333333332,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-010-QWEN-FR2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "retry"
+    },
+    {
+      "case_id": "PRSBV11-SB-010-QWEN-PS3",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "end"
+    },
+    {
+      "case_id": "PRSBV11-SB-010-REX-CS2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "end"
+    },
+    {
+      "case_id": "PRSBV11-SB-010-REX-PE3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-011-QWEN-CF2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": false,
+      "reward_mean": 0.125,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-011-QWEN-NR2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-011-REX-BE2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-011-REX-MS2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-011-REX-PV3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "migrate"
+    },
+    {
+      "case_id": "PRSBV11-SB-012-QWEN-FR2",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "retry"
+    },
+    {
+      "case_id": "PRSBV11-SB-012-QWEN-PS3",
+      "detector_family": "qwen",
+      "distinct_valid_actions": 2,
+      "gold_action_supported": true,
+      "reward_mean": 0.37916666666666665,
+      "reward_std": 0.3103257696894238,
+      "samples": 4,
+      "target_action_class": "end"
+    },
+    {
+      "case_id": "PRSBV11-SB-012-REX-CS2",
+      "detector_family": "rex",
+      "distinct_valid_actions": 1,
+      "gold_action_supported": true,
+      "reward_mean": 1.0,
+      "reward_std": 0.0,
+      "samples": 4,
+      "target_action_class": "end"
+    },
+    {
+      "case_id": "PRSBV11-SB-012-REX-PE3",
+      "detector_family": "rex",
+      "distinct_valid_actions": 2,
+      "gold_action_supported": true,
+      "reward_mean": 0.5625,
+      "reward_std": 0.4375,
+      "samples": 4,
+      "target_action_class": "migrate"
+    }
+  ],
+  "model_name_or_path": "/raid/zkq/models/Qwen3.5-4B",
+  "num_shards": 4,
+  "overall": {
+    "gold_action_support_rate": 0.8981481481481481,
+    "groups": 108,
+    "mean_distinct_valid_actions": 1.2592592592592593,
+    "mean_reward": 0.8030671296296297,
+    "nonzero_reward_variance_rate": 0.25
+  },
+  "prompt_groups": 108,
+  "sample_metrics": {
+    "action_match_rate": 0.7662037037037037,
+    "argument_match_rate": 0.7592592592592593,
+    "clipped_rate": 0.0,
+    "finish_match_rate": 0.8379629629629629,
+    "json_valid_rate": 1.0,
+    "mean_reward": 0.8030671296296297,
+    "natural_eos_rate": 1.0,
+    "nonfinite_rewards": 0
+  },
+  "samples": 432,
+  "samples_per_prompt": [
+    [
+      4,
+      108
+    ]
+  ],
+  "shard_index": 1,
+  "step_data": "/raid/zkq/projects/CAPA/training/planner_grpo_seed_v1/step_data/planner_retry_safety_balanced_v11_support_dev_qwen35_4b_nothinking_mixed_steps.jsonl"
+}

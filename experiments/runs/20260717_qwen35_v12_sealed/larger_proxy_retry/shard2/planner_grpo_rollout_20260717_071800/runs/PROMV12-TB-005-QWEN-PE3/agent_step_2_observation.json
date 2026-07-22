@@ -1,0 +1,11 @@
+{
+  "status": "gateway_error",
+  "success": false,
+  "summary": "当前结构化状态：candidate_count=NA；min_confidence=NA；cross_prompt_iou=NA；domain_shift=unknown；gateway_error=v12sealedbravo_inspection_replay_credit_empty；retryable=true；retry_count=1；overall_badge=red。说明：展示字段不覆盖结构化值。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "玄铜弧顶缓冲座",
+    "finish_after_tool": false
+  },
+  "_thought": "当前是第2步决策。第一步已调用 qwen_detection，observation 显示 status='gateway_error'，retryable=true 且 retry_count=0。根据用户query规则：'错误状态仅在 retryable=true 与 retry_count=0 同时成立时复用原检测器一次'，因此应重试一次 qwen_detection。检测结果仍作为中间状态，finish_after_tool 设为 false。"
+}

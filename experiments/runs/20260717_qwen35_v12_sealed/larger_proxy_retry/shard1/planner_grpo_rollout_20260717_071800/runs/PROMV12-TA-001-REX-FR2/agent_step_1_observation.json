@@ -1,0 +1,11 @@
+{
+  "status": "gateway_error",
+  "success": false,
+  "summary": "当前结构化状态：candidate_count=NA；min_confidence=NA；cross_prompt_iou=NA；domain_shift=unknown；gateway_error=v12sealedalpha_vision_capacity_lease_absent；retryable=true；retry_count=0；overall_badge=red。说明：展示字段不覆盖结构化值。",
+  "_action": "rexomni_detection",
+  "_action_input": {
+    "label": "冰青三辐锁紧轮",
+    "finish_after_tool": false
+  },
+  "_thought": "当前是第1步，query_trajectories 中的 steps 为空，尚未有任何工具调用完成。根据用户明确要求，第一步应使用 Rex-Omni 检测附件中的'冰青三辐锁紧轮'。检测结果仅作为中间状态，后续需要判断是否继续现有能力、结束或进入迁移评估，因此 finish_after_tool 设为 false。"
+}

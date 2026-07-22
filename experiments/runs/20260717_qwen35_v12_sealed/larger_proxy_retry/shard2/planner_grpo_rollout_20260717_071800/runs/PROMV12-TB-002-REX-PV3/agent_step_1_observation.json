@@ -1,0 +1,11 @@
+{
+  "status": "gateway_error",
+  "success": false,
+  "summary": "当前结构化状态：candidate_count=NA；min_confidence=NA；cross_prompt_iou=NA；domain_shift=unknown；gateway_error=v12sealedbravo_inspection_replay_credit_empty；retryable=true；retry_count=0。说明：展示字段不覆盖结构化值。",
+  "_action": "rexomni_detection",
+  "_action_input": {
+    "label": "金橙五星复检片",
+    "finish_after_tool": false
+  },
+  "_thought": "当前 query_trajectories 中 steps 为空，说明尚未调用任何工具。用户明确要求'先使用Rex-Omni检测附件中的金橙五星复检片'，且检测结果仅作为中间状态，后续还需判断是否进入迁移评估。根据规则3和工具库描述，rexomni_detection 适用于单图开放集目标检测场景。用户明确指定 Rex-Omni 模型，因此选择该工具。由于检测结果只是中间状态，后续还需根据检测结果判断是否调用迁移顾问，finish_after_tool 应设为 false。"
+}

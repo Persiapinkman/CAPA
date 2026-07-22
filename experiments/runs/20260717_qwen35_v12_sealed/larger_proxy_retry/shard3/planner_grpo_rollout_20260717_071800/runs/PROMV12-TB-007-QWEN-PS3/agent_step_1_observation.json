@@ -1,0 +1,11 @@
+{
+  "status": "gateway_error",
+  "success": false,
+  "summary": "当前结构化状态：candidate_count=NA；min_confidence=NA；cross_prompt_iou=NA；domain_shift=unknown；gateway_error=v12sealedbravo_detector_contract_shape_unknown；retryable=true；retry_count=0。说明：展示字段不覆盖结构化值。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "玄铜弧顶缓冲座",
+    "finish_after_tool": false
+  },
+  "_thought": "根据用户查询，第一步需要使用Qwen检测附件中的'玄铜弧顶缓冲座'。用户明确指定使用Qwen检测工具，且检测结果仅作为中间状态，后续需要判断是否进入迁移评估。当前步骤索引为1但steps为空，说明尚未执行任何工具调用。根据规则，检测器必须设置finish_after_tool=false，因为检测结果只是中间状态，后续还需要根据检测结果判断是否调用迁移顾问。"
+}

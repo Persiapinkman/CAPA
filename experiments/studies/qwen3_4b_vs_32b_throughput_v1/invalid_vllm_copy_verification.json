@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "original": "/raid/zkq/models/Qwen3.5-4B",
+  "prepared": "/raid/zkq/artifacts/CAPA/bench_models/Qwen3.5-4B-vllm-fp16",
+  "config_differences": {
+    "architectures": {
+      "original": [
+        "Qwen3_5ForConditionalGeneration"
+      ],
+      "prepared": [
+        "TransformersForCausalLM"
+      ]
+    }
+  },
+  "config_change_is_architectures_only": true,
+  "original_index_key_count": 738,
+  "prepared_index_key_count": 723,
+  "removed_mtp_key_count": 15,
+  "removed_mtp_keys": [
+    "mtp.fc.weight",
+    "mtp.layers.0.input_layernorm.weight",
+    "mtp.layers.0.mlp.down_proj.weight",
+    "mtp.layers.0.mlp.gate_proj.weight",
+    "mtp.layers.0.mlp.up_proj.weight",
+    "mtp.layers.0.post_attention_layernorm.weight",
+    "mtp.layers.0.self_attn.k_norm.weight",
+    "mtp.layers.0.self_attn.k_proj.weight",
+    "mtp.layers.0.self_attn.o_proj.weight",
+    "mtp.layers.0.self_attn.q_norm.weight",
+    "mtp.layers.0.self_attn.q_proj.weight",
+    "mtp.layers.0.self_attn.v_proj.weight",
+    "mtp.norm.weight",
+    "mtp.pre_fc_norm_embedding.weight",
+    "mtp.pre_fc_norm_hidden.weight"
+  ],
+  "prepared_index_matches_original_without_mtp": true,
+  "prepared_shard_mtp_key_count": 0,
+  "checked_non_mtp_tensor_count": 723,
+  "mismatched_non_mtp_tensors": [],
+  "logical_non_mtp_weights_identical": true,
+  "original_config_sha256": "ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670",
+  "prepared_config_sha256": "4d74cd0cd87790f762f44337ef6a577a8021107bc26db84881db357ac697be87",
+  "original_index_sha256": "cf3f798ee02ba45f9622aa8892a47369ab667d0afbf154ee7c2212de42e6302d",
+  "prepared_index_sha256": "9647faffe6d23f201ccbd53f0942877d23453e7b5d143ce011109e6ffd893a06",
+  "original_safetensors_bytes": 9319828096,
+  "prepared_safetensors_bytes": 9078627360,
+  "valid": true
+}

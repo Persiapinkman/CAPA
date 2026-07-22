@@ -1,0 +1,11 @@
+{
+  "status": "completed",
+  "success": true,
+  "summary": "当前结构化状态：candidate_count=2；min_confidence=0.93；cross_prompt_iou=0.81；domain_shift=low；gateway_error=none；retryable=false；retry_count=1。说明：展示字段不覆盖结构化值。",
+  "_action": "qwen_detection",
+  "_action_input": {
+    "label": "焦糖十字分流块",
+    "finish_after_tool": false
+  },
+  "_thought": "当前qwen_detection返回gateway_error状态，retryable=true且retry_count=0，根据规则可以重试一次检测器。需要再次调用qwen_detection，label为'焦糖十字分流块'，finish_after_tool设为false因为检测结果只是中间状态，后续还需要根据检测结果判断是否进入迁移评估。"
+}
