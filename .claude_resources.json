@@ -1,11 +1,11 @@
 {
-  "timestamp": "2026-07-19T07:59:35.988827",
+  "timestamp": "2026-07-22T07:19:13.205810",
   "os": {
     "system": "Linux",
     "release": "5.15.0-181-generic",
     "version": "#191-Ubuntu SMP Fri May 22 19:09:02 UTC 2026",
     "machine": "x86_64",
-    "python_version": "3.9.13"
+    "python_version": "3.10.12"
   },
   "cpu": {
     "physical_cores": 40,
@@ -13,22 +13,22 @@
     "max_frequency_mhz": 3600.0,
     "architecture": "x86_64",
     "processor": "x86_64",
-    "current_frequency_mhz": 1.4103375000000011
+    "current_frequency_mhz": 1643.5072625
   },
   "memory": {
     "total_gb": 503.76,
-    "available_gb": 449.58,
-    "used_gb": 50.89,
-    "percent_used": 10.8,
+    "available_gb": 484.28,
+    "used_gb": 19.48,
+    "percent_used": 3.9,
     "swap_total_gb": 8.0,
-    "swap_available_gb": 7.8
+    "swap_available_gb": 7.94
   },
   "disk": {
     "path": "/raid/zkq/projects/CAPA",
     "total_gb": 7095.35,
-    "available_gb": 1966.72,
-    "used_gb": 4771.03,
-    "percent_used": 70.8
+    "available_gb": 1786.26,
+    "used_gb": 4951.49,
+    "percent_used": 73.5
   },
   "gpu": {
     "nvidia_gpus": [

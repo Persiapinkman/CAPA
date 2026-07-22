@@ -1,0 +1,274 @@
+{
+  "schema_version": "1.0",
+  "study_id": "qwen3_32b_v15_posthoc_comparison_v1",
+  "generated_at": "2026-07-22T07:52:27.986006+00:00",
+  "status": "valid",
+  "evidence_role": "posthoc_read_only_extension_on_opened_v15_confirmation_set",
+  "qualification": "Qwen3-32B is a post-hoc read-only extension, not an original preregistered V15 arm.",
+  "input_verification": {
+    "cases_sha256": "37d9a739585c012041397fba77b995d5842359ba5e23a8e8f8f604578e4ade78",
+    "v15_final_report_sha256": "4bc4a819cf6f2291ac125c33b0a42133c679d1dbbb21d1dc54bb0337db8dcfd7",
+    "coverage_errors": []
+  },
+  "runtime_validity": {
+    "top_level_predictions": 72,
+    "runtime_error_cases": 0,
+    "length_finish_count": 0,
+    "parse_retry_count": 0
+  },
+  "usage": {
+    "input_tokens": 770446,
+    "output_tokens": 30730,
+    "api_call_ms_sum": 5053165.354
+  },
+  "qwen3_32b": {
+    "arm": "qwen3_32b",
+    "mean_weighted_strict_percent": 81.4,
+    "per_run_scenario_passed": [
+      {
+        "run": 1,
+        "scenario_passed": {
+          "current_success_step2": 0,
+          "post_retry_metric_veto_step3": 10
+        },
+        "strict_passed": 10,
+        "strict_pass_rate_percent": 41.666666666666664,
+        "weighted_strict_percent": 74.0,
+        "prediction_error_cases": 0
+      },
+      {
+        "run": 2,
+        "scenario_passed": {
+          "current_success_step2": 0,
+          "post_retry_metric_veto_step3": 11
+        },
+        "strict_passed": 11,
+        "strict_pass_rate_percent": 45.833333333333336,
+        "weighted_strict_percent": 81.4,
+        "prediction_error_cases": 0
+      },
+      {
+        "run": 3,
+        "scenario_passed": {
+          "current_success_step2": 0,
+          "post_retry_metric_veto_step3": 12
+        },
+        "strict_passed": 12,
+        "strict_pass_rate_percent": 50.0,
+        "weighted_strict_percent": 88.8,
+        "prediction_error_cases": 0
+      }
+    ],
+    "run1_weighted_strict_percent": 74.0,
+    "run2_weighted_strict_percent": 81.4,
+    "run3_weighted_strict_percent": 88.8,
+    "run_range_pp": 14.799999999999997
+  },
+  "delta_32b_minus_original_arm_mean_pp": {
+    "qwen35_4b_base": 66.60000000000001,
+    "qwen35_4b_sft": 6.711111111111123,
+    "qwen35_35b_a3b": -10.844444444444449,
+    "qwen35_4b_grpo_n64": -18.599999999999994
+  },
+  "combined_table": [
+    {
+      "arm": "qwen35_4b_base",
+      "mean_weighted_strict_percent": 14.800000000000002,
+      "per_run_scenario_passed": [
+        {
+          "prediction_error_cases": 0,
+          "run": 1,
+          "scenario_passed": {
+            "current_success_step2": 0,
+            "post_retry_metric_veto_step3": 2
+          },
+          "weighted_strict_percent": 14.8
+        },
+        {
+          "prediction_error_cases": 0,
+          "run": 2,
+          "scenario_passed": {
+            "current_success_step2": 0,
+            "post_retry_metric_veto_step3": 2
+          },
+          "weighted_strict_percent": 14.8
+        },
+        {
+          "prediction_error_cases": 0,
+          "run": 3,
+          "scenario_passed": {
+            "current_success_step2": 0,
+            "post_retry_metric_veto_step3": 2
+          },
+          "weighted_strict_percent": 14.8
+        }
+      ],
+      "run1_weighted_strict_percent": 14.8,
+      "run2_weighted_strict_percent": 14.8,
+      "run3_weighted_strict_percent": 14.8,
+      "run_range_pp": 0.0
+    },
+    {
+      "arm": "qwen35_4b_sft",
+      "mean_weighted_strict_percent": 74.68888888888888,
+      "per_run_scenario_passed": [
+        {
+          "prediction_error_cases": 0,
+          "run": 1,
+          "scenario_passed": {
+            "current_success_step2": 9,
+            "post_retry_metric_veto_step3": 9
+          },
+          "weighted_strict_percent": 75.0
+        },
+        {
+          "prediction_error_cases": 0,
+          "run": 2,
+          "scenario_passed": {
+            "current_success_step2": 9,
+            "post_retry_metric_veto_step3": 8
+          },
+          "weighted_strict_percent": 67.6
+        },
+        {
+          "prediction_error_cases": 0,
+          "run": 3,
+          "scenario_passed": {
+            "current_success_step2": 8,
+            "post_retry_metric_veto_step3": 10
+          },
+          "weighted_strict_percent": 81.46666666666665
+        }
+      ],
+      "run1_weighted_strict_percent": 75.0,
+      "run2_weighted_strict_percent": 67.6,
+      "run3_weighted_strict_percent": 81.46666666666665,
+      "run_range_pp": 13.86666666666666
+    },
+    {
+      "arm": "qwen35_35b_a3b",
+      "mean_weighted_strict_percent": 92.24444444444445,
+      "per_run_scenario_passed": [
+        {
+          "prediction_error_cases": 0,
+          "run": 1,
+          "scenario_passed": {
+            "current_success_step2": 7,
+            "post_retry_metric_veto_step3": 11
+          },
+          "weighted_strict_percent": 87.93333333333334
+        },
+        {
+          "prediction_error_cases": 0,
+          "run": 2,
+          "scenario_passed": {
+            "current_success_step2": 7,
+            "post_retry_metric_veto_step3": 12
+          },
+          "weighted_strict_percent": 95.33333333333334
+        },
+        {
+          "prediction_error_cases": 0,
+          "run": 3,
+          "scenario_passed": {
+            "current_success_step2": 5,
+            "post_retry_metric_veto_step3": 12
+          },
+          "weighted_strict_percent": 93.46666666666665
+        }
+      ],
+      "run1_weighted_strict_percent": 87.93333333333334,
+      "run2_weighted_strict_percent": 95.33333333333334,
+      "run3_weighted_strict_percent": 93.46666666666665,
+      "run_range_pp": 7.400000000000006
+    },
+    {
+      "arm": "qwen35_4b_grpo_n64",
+      "mean_weighted_strict_percent": 100.0,
+      "per_run_scenario_passed": [
+        {
+          "prediction_error_cases": 0,
+          "run": 1,
+          "scenario_passed": {
+            "current_success_step2": 12,
+            "post_retry_metric_veto_step3": 12
+          },
+          "weighted_strict_percent": 100.0
+        },
+        {
+          "prediction_error_cases": 0,
+          "run": 2,
+          "scenario_passed": {
+            "current_success_step2": 12,
+            "post_retry_metric_veto_step3": 12
+          },
+          "weighted_strict_percent": 100.0
+        },
+        {
+          "prediction_error_cases": 0,
+          "run": 3,
+          "scenario_passed": {
+            "current_success_step2": 12,
+            "post_retry_metric_veto_step3": 12
+          },
+          "weighted_strict_percent": 100.0
+        }
+      ],
+      "run1_weighted_strict_percent": 100.0,
+      "run2_weighted_strict_percent": 100.0,
+      "run3_weighted_strict_percent": 100.0,
+      "run_range_pp": 0.0
+    },
+    {
+      "arm": "qwen3_32b",
+      "mean_weighted_strict_percent": 81.4,
+      "per_run_scenario_passed": [
+        {
+          "run": 1,
+          "scenario_passed": {
+            "current_success_step2": 0,
+            "post_retry_metric_veto_step3": 10
+          },
+          "strict_passed": 10,
+          "strict_pass_rate_percent": 41.666666666666664,
+          "weighted_strict_percent": 74.0,
+          "prediction_error_cases": 0
+        },
+        {
+          "run": 2,
+          "scenario_passed": {
+            "current_success_step2": 0,
+            "post_retry_metric_veto_step3": 11
+          },
+          "strict_passed": 11,
+          "strict_pass_rate_percent": 45.833333333333336,
+          "weighted_strict_percent": 81.4,
+          "prediction_error_cases": 0
+        },
+        {
+          "run": 3,
+          "scenario_passed": {
+            "current_success_step2": 0,
+            "post_retry_metric_veto_step3": 12
+          },
+          "strict_passed": 12,
+          "strict_pass_rate_percent": 50.0,
+          "weighted_strict_percent": 88.8,
+          "prediction_error_cases": 0
+        }
+      ],
+      "run1_weighted_strict_percent": 74.0,
+      "run2_weighted_strict_percent": 81.4,
+      "run3_weighted_strict_percent": 88.8,
+      "run_range_pp": 14.799999999999997
+    }
+  ],
+  "sorted_by_mean_ascending": [
+    "qwen35_4b_base",
+    "qwen35_4b_sft",
+    "qwen3_32b",
+    "qwen35_35b_a3b",
+    "qwen35_4b_grpo_n64"
+  ],
+  "weighted_formula": "(111 * metric_veto_pass_rate + 14 * current_success_pass_rate) / 125"
+}

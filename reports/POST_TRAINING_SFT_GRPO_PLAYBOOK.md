@@ -1,6 +1,6 @@
 # CAPA SFT → GRPO 后训练实战手册
 
-_阅读时间约 45 分钟 · 难度：进阶 · 最后验证：2026-07-20 UTC · 案例范围：Qwen3.5-4B / 35B-A3B，V6–V15，68-node 探索树_
+_阅读时间约 65 分钟 · 难度：进阶 · 最后验证：2026-07-22 UTC · 案例范围：Qwen3.5-4B / 35B-A3B，V6–V15，68-node 探索树；附 Qwen3-32B 事后只读评测_
 
 ---
 
@@ -151,6 +151,245 @@ V15 把这一原则实现为 `6 entities × 2 scenarios × 2 detectors = 24 case
 
 git diff --check
 ```
+
+## 🗃️ 数据实物、split 权限与 Ground Truth 核验
+
+### 先分清两条 SFT 血缘
+
+发布表中的 `Qwen3.5-4B original SFT` 与最终 GRPO 的 SFT initializer 不是同一个 adapter。前者来自 V6 `checkpoint-100`，用于固定的 SFT 对照臂；后者是 n58 三动作定向 SFT `checkpoint-6`，只作为 n64 GRPO 的 warm-start。两条血缘只在 V15 同一评测协议下汇合。
+
+~~~mermaid
+flowchart LR
+    accTitle: CAPA Dataset and Model Lineage
+    accDescr: The original V6 SFT control arm and the targeted SFT to GRPO arm use different training data and only meet on the sealed V15 evaluation
+
+    v6_data[(V6 SFT train/dev)] --> original_sft[Original SFT cp100]
+    original_sft --> v15_test[(V15 sealed test)]
+    opened_v13[(Opened V13 styles 0/1)] --> n58_sft[n58 three-action SFT cp6]
+    n30_pool[(n30 residual pool)] --> n58_sft
+    n58_sft --> v13_style2[V13 style-2 dev]
+    v13_style2 --> n59_gate{n59 support gate}
+    n30_pool --> n59_gate
+    n59_gate --> n64_grpo[n64 one-step GRPO]
+    n64_grpo --> v14_dev[V13 + V14 open dev]
+    v14_dev --> v15_test
+
+    classDef dataset fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e
+    classDef model fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#4c1d95
+    classDef gate fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+    classDef test fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+
+    class v6_data,opened_v13,n30_pool,v13_style2,v14_dev dataset
+    class original_sft,n58_sft,n64_grpo model
+    class n59_gate gate
+    class v15_test test
+~~~
+
+### `train / val / dev / test` 在本项目中的准确含义
+
+本项目没有一个可以笼统称作 `val` 的单一集合。文件名里的 `dev` 至少承担四种不同职责，审计时必须按权限拆开：
+
+| 名称 | 是否更新权重 | 是否选模型 | 能证明什么 | 不能证明什么 |
+| --- | :---: | :---: | --- | --- |
+| `sft_train` / `grpo_train` | 是 | 否 | optimizer 实际见过的监督或 prompt | 泛化 |
+| `loss_health_dev` | 否 | 否 | loss、token accuracy、数值健康 | held-out 策略正确性 |
+| `support_dev` | 否 | 否 | 当前采样配方有 gold support 与 reward 方差 | 更新后一定变好 |
+| `selection_dev` / opened dev | 否 | 是 | checkpoint、LR 的完整轨迹表现 | 最终无偏 test 表现 |
+| `sealed_confirmation` | 否 | 否 | 一次性最终确认 | 继续调参 |
+
+因此，后续若口头使用“val”，必须写成 `loss_health_val`、`support_val` 或 `selection_val` 之一。最终 n58/n64 链路**不存在另一份未披露的传统 val 集**：n58 的文件级 `dev` 是 train 的逐字节副本；V13 style-2 与后来打开的 V14 才是模型选择证据；V15 才是最终 test。
+
+### 历史 V6：original SFT 对照臂的数据
+
+V6 是一套实体级隔离的完整数据版本。原始实验单位是 `entity × detector × error_alias` 反事实 bundle；五个 split 在 `case_id`、实体、项目名、目标物、错误别名、fixture、模板和格式化 prompt hash 上均为零重合。
+
+| Split | 原始轨迹 / 实体 | 展平后的决策行 | 行级 Ground Truth 动作 | 实际用途 |
+| --- | ---: | ---: | --- | --- |
+| SFT train | 600 / 80 | 1,040 | detector 440；migrate 506；end 94 | original SFT 梯度更新 |
+| SFT dev | 150 / 20 | 260 | detector 110；migrate 126；end 24 | 真正 entity-disjoint 的 SFT checkpoint 选择 |
+| GRPO train | 450 / 60 | 360 | detector-retry 120；migrate 240 | step-2 optimizer 候选；V6 support 未授权更新 |
+| GRPO dev | 225 / 30 | 180 | detector-retry 60；migrate 120 | GRPO validation/support，不更新权重 |
+| Sealed test | 450 / 60 | 780 | detector 330；migrate 380；end 70 | 选择冻结后物化的最终评测 |
+
+“原始轨迹”是一条完整 case；“决策行”是把轨迹前缀展平后，让模型只预测下一步。SFT 行包含 canonical `completion`，GRPO 行包含 `expected_step`、`reward_spec` 和 `forbidden_actions`。V6 test 的 450 条 case 因包含 2 步或 3 步轨迹，最终形成 780 条待评分决策行。
+
+V6 的场景组成如下：
+
+| Split | 三类 core case | 六类 guardrail case | case 级终态标签 |
+| --- | ---: | ---: | --- |
+| SFT train | 480 | 120 | migrate 400；retry 160；end 40 |
+| SFT dev | 120 | 30 | migrate 100；retry 40；end 10 |
+| GRPO train | 360 | 90 | migrate 300；retry 120；end 30 |
+| GRPO dev | 180 | 45 | migrate 150；retry 60；end 15 |
+| Sealed test | 360 | 90 | migrate 300；retry 120；end 30 |
+
+三类 core 分别是 `core_retryable_fresh`、`core_nonretryable` 和 `core_budget_exhausted`。六类 guardrail 覆盖初始成功、初始 metric veto、缺字段、冲突字段、陈旧历史但当前成功、陈旧历史但当前错误。
+
+| 展平文件 | Prompt token p50 | p95 | 最大值 |
+| --- | ---: | ---: | ---: |
+| V6 SFT train | 4,260 | 4,460 | 4,601 |
+| V6 SFT dev | 4,249 | 4,451 | 4,590 |
+| V6 GRPO train | 4,255 | 4,268 | 4,272 |
+| V6 GRPO dev | 4,249 | 4,257 | 4,261 |
+| V6 sealed test | 4,271 | 4,471 | 4,607 |
+
+一个容易误审的字段是 SFT 行中的 `target_action_class`。它表示**源 case 的最终分支类别**，不一定等于当前展平行的下一动作。例如下面这行属于最终 migrate 的 case，但 step-1 的监督仍然是先调用 detector：
+
+~~~json
+{
+  "case_id": "PRMV6-ST-001-QWEN-BE",
+  "step_index": 1,
+  "target_action_class": "migrate",
+  "full_expected_actions": ["qwen_detection", "migration_advisor"],
+  "expected_step": {
+    "decision_type": "tool",
+    "action": "qwen_detection",
+    "required_args": {"finish_after_tool": false},
+    "arg_contains": {"label": ["黄色六边巡检牌"]}
+  },
+  "completion": {
+    "thought": "先执行用户指定的检测器以取得当前结构化状态。",
+    "decision_type": "tool",
+    "action": "qwen_detection",
+    "action_input": {
+      "finish_after_tool": false,
+      "label": "黄色六边巡检牌"
+    },
+    "final_answer": ""
+  }
+}
+~~~
+
+人工统计“动作分布”时应解析 `completion.action` 或 `expected_step.action`，不能直接把 `target_action_class` 当作每一行的 assistant 动作。
+
+### 最终成功链路：n58 SFT、n59 support 与 n64 GRPO
+
+| 数据或阶段 | 数量与分布 | 权限 | 在最终链路中的作用 |
+| --- | --- | --- | --- |
+| n58 SFT train | 72 行；retry/migrate/end 各 24 | 更新 SFT 权重 | 48 行来自已打开的 V13 styles 0/1；12 条训练专用 retry 行各复制为 2 份 |
+| n58 `dev.jsonl` | 72 行；SHA 与 train 完全相同 | 只看 loss 健康 | `dev_duplicates_train_for_loss_health_only=true`，不能用于泛化声明 |
+| V13 style-2 dev | 24 case；current/metric 各 12 | 选 checkpoint | n58 cp6/12/18 均 24/24；并列按最早 checkpoint 选 cp6 |
+| n30 residual pool | 32 step 行；retry 12、migrate 12、end 8 | GRPO optimizer pool | 15 个实体；step-2 20 行、step-3 12 行 |
+| n59 trainer-faithful support | 8 prompt × 4 completion = 32 sample | 不更新权重 | 固定首 batch 行号 `[6,13,18,24,22,7,28,31]`，一次采样，不重抽 |
+| n64 GRPO train | 每个 LR 候选只做 1 个 optimizer step | 更新 GRPO 权重 | 同一首 batch；`5e-9 / 1e-8 / 2e-8` 独立初始化，V14 选择 `2e-8` |
+| V14 opened dev | 24 case；current/metric 各 12 | 选 checkpoint/LR | 失败 confirmation 保留后转开发证据，不再称 test |
+| V15 sealed test | 24 case；current/metric 各 12 | 只做最终确认 | 任何训练、support、checkpoint 或 LR 选择均不得读取 |
+
+n58 最终 72 行来自 60 条唯一 source row：V13 styles 0/1 的 48 行负责 `migrate/end`，训练专用 n30 的 12 条 `fresh_retry_step2` 各复制为 2 份，得到 24 条 retry。其动作分布严格为 `24/24/24`；detector family 为 Qwen 38、Rex 34。完整 V13 原有 96 case，即 styles 0/1/2/3 各 24；其中 style-2 的 24 case 单独作为 n58 checkpoint selection，style-3 未进入 n58，V14 在 n58 训练时也没有被访问。
+
+n59 的完整 32-row pool 分布为：
+
+| 场景 | Qwen | Rex | 合计 | Ground Truth |
+| --- | ---: | ---: | ---: | --- |
+| `fresh_retry_step2` | 7 | 5 | 12 | 重试同一 detector |
+| `post_retry_metric_veto_step3` | 7 | 5 | 12 | `migration_advisor` |
+| `current_success_step2` | 4 | 4 | 8 | `end(memory_hit)` |
+
+实际首 batch 只取 8 个 prompt，其中 retry 3、migrate 2、end 3；每个 prompt 采 4 个 completion。n59 得到 JSON 100%、clipping 0、gold action support 100%、4 个非零 reward 方差组，且 `optimizer_updates_performed=0`。只有这个 gate 通过后，n64 才获准用相同 batch 做一次真实更新。
+
+> ⚠️ **可复现性缺口：**n58/n59 metadata 指向主工作树中的 `training/.../planner_retry_ladder_residual_n30_v1_...jsonl`，该相对路径目前不存在；n64 当时使用的是独立工作树 `/raid/zkq/projects/CAPA_arbor_n64`。与 SHA `59e427e9…3da4` 对应的完整 32 行副本仍保存在 `/raid/zkq/artifacts/CAPA/arbor/ladder_n59/.../step_data.jsonl`。复现实验时应先把这个副本和 manifest 重新落入版本化路径，不能只依赖旧绝对路径。
+
+### Ground Truth 如何从 case 变成 SFT 与 GRPO
+
+两类最终场景共享同一个确定性状态机。只读取当前 query 的最后一条 observation：
+
+| 最后一条结构化状态 | Ground Truth 下一步 | 必须满足的参数 |
+| --- | --- | --- |
+| 还没有 detector 回执 | 调用用户指定 detector | `finish_after_tool=false`，label 精确复制 |
+| `gateway_error != none` 且 `retryable=true, retry_count=0` | 重试同一 detector | 不得换 Qwen/Rex，不得 migrate |
+| 错误不可重试或 retry budget 已用完 | `migration_advisor` | image、visual probe、finish 均为 true |
+| `gateway_error=none` 且四项 metric 全过 | `end` | `end_reason=memory_hit` |
+| `gateway_error=none` 但任一 metric 未过 | `migration_advisor` | `user_query` 必须包含 project entity |
+| 字段缺失、类型非法或相互冲突 | `migration_advisor` | 走保守分支 |
+
+四项成功门槛是 `candidate_count>=1`、`min_confidence>=0.88`、`cross_prompt_iou>=0.72`、`domain_shift=low`。已经重试一次后，无论新回执是成功还是 metric veto，都禁止第三次 detector 调用。
+
+case 级 `expected_decisions` 保存完整轨迹；SFT 把每个轨迹前缀变成 `prompt + completion`；GRPO 只保留待优化步骤的 `prompt + expected_step + reward_spec + forbidden_actions`。因此同一条规则可以同时用于监督学习、在线 reward 和最终 complete-trajectory verifier。
+
+### 可直接核验的 SFT 输入与输出
+
+下面是 n58 train 中真实的 retry 样本 `PROMV12-HT-001-QWEN-FR2__retry_balance_repeat_1`。系统 prompt 与工具 schema 来自 `src/capa/prompts.py`；以下是该行 user context 中决定动作的原始字段与 canonical assistant completion：
+
+~~~json
+{
+  "input": {
+    "current_step_index": 2,
+    "query": "旧结论若与最后 observation 冲突，只采用后者：先使用Qwen检测附件中的雾蓝双环止动件，检测结果仅作为中间状态。最终需要判断低温超导储能柜机器回执终核8334号应继续现有能力、结束，还是进入迁移评估。自然语言里的故障等级和预算描述没有路由优先级，只读取本 query 最新 observation 的结构化键值。错误状态仅在 retryable=true 与 retry_count=0 同时成立时复用原检测器一次，否则调用迁移顾问。正常状态需要候选数、置信度、跨提示一致性和域偏移四个门槛全部通过才结束，任一否决项都转迁移。缺省、非法、冲突状态采取保守分支；已经重试一次的结果不能再次触发检测器。检测器必须设置 finish_after_tool=false；迁移顾问使用当前图片和视觉探针并设置 finish_after_tool=true。",
+    "latest_observation": {
+      "status": "gateway_error",
+      "success": false,
+      "summary": "当前结构化状态：candidate_count=NA；min_confidence=NA；cross_prompt_iou=NA；domain_shift=unknown；gateway_error=v12matchedtrain_vision_capacity_lease_absent；retryable=true；retry_count=0；overall_badge=red。说明：展示字段不覆盖结构化值。"
+    }
+  },
+  "ground_truth_completion": {
+    "thought": "当前为首次可重试错误且重试预算未使用，继续调用原检测器一次。",
+    "decision_type": "tool",
+    "action": "qwen_detection",
+    "action_input": {
+      "finish_after_tool": false,
+      "label": "雾蓝双环止动件"
+    },
+    "final_answer": ""
+  }
+}
+~~~
+
+同一 n58 文件中另外两类 canonical completion 是：
+
+| 场景与 case | 最后一条 observation | Canonical 输出 |
+| --- | --- | --- |
+| `post_retry_metric_veto_step3`；`PRLV13-SC-001-QWEN-PV3` | 已重试；`candidate_count=0`，其余 metric 高，`retry_count=1` | `migration_advisor(use_image=true,use_visual_probe=true,finish_after_tool=true,user_query="量子退火低温屏蔽柜机读状态终核2988号")` |
+| `current_success_step2`；`PRLV13-SC-013-QWEN-CS2__balanced_repeat_1` | `2 / 0.93 / 0.81 / low`，`gateway_error=none` | `end(end_reason="memory_hit")` |
+
+三类样本的 prompt 都约 4.2k–4.5k token；n58 train 的 p50 为 4,300，p95 为 4,498，最大 4,504。训练使用原生 Qwen3.5 chat template、`enable_thinking=false` 和 completion-only loss。
+
+### 可直接核验的 GRPO prompt、采样与 reward
+
+n59 首 batch 的 `PROMV12-HT-009-QWEN-FR2` 是一个真实 optimizer prompt。其 `expected_step` 为：
+
+~~~json
+{
+  "scenario_id": "fresh_retry_step2",
+  "previous_action": "qwen_detection",
+  "expected_step": {
+    "decision_type": "tool",
+    "action": "qwen_detection",
+    "required_args": {"finish_after_tool": false},
+    "arg_contains": {"label": ["雾蓝双环止动件"]}
+  },
+  "forbidden_actions": [
+    "rag_answer",
+    "re_question",
+    "answerer",
+    "flux-image-generation",
+    "rexomni_detection",
+    "pipeline_eval",
+    "migration_advisor"
+  ]
+}
+~~~
+
+该 prompt 在 `T=1.3, top_p=0.95` 下的四个真实 completion 中，三个选择正确的 Qwen retry，reward 均为 1.0；一个错误地换成 Rex，虽 JSON、参数和 finish 都合法，但 action 不匹配，reward 为 0.2：
+
+| Rank | 模型动作 | JSON | Action match | Reward |
+| ---: | --- | :---: | :---: | ---: |
+| 0 | `qwen_detection` | 是 | 是 | 1.0 |
+| 1 | `rexomni_detection` | 是 | 否 | 0.2 |
+| 2 | `qwen_detection` | 是 | 是 | 1.0 |
+| 3 | `qwen_detection` | 是 | 是 | 1.0 |
+
+这正是 GRPO 需要的学习信号：不是“模型会随机输出”，而是在同一 prompt 内同时存在合法正确与合法错误动作，reward 能排序。若四个 completion 全为 1.0，SFT 虽好但该组对 GRPO 没有梯度信息；若四个都错且 gold support 为 0，GRPO 也无法可靠发现正确动作。
+
+### 数据与 Ground Truth 的复查入口
+
+- V6 总 manifest：`data/datasets/planner_retry_migrate_v6/manifest.json`
+- V6 原始 case：`training/planner_grpo_seed_v1/cases/planner_retry_migrate_v6_*_cases.jsonl`
+- V6 SFT 展平数据：`training/planner_grpo_seed_v1/sft_data_planner_retry_migrate_v6_qwen35_nothinking/`
+- n58 三动作 SFT：`training/planner_grpo_seed_v1/sft_data_ladder_n58_three_action/`
+- n59 support 审计：`/raid/zkq/artifacts/CAPA/arbor/ladder_n59/three_action_sft_residual_first_batch_t13_20260720T0540Z_once/`
+- V13/V14/V15 case：`experiments/studies/planner_retry_ladder_v{13,14,15}_confirmation_v1/`
+- Prompt 与 schema 构造：`src/capa/prompts.py`、`src/capa/agent.py`
+- 轨迹 scorer：`training/planner_grpo_seed_v1/scripts/reward_planner_grpo.py`
 
 ## ⚙️ 训练与选择工作流
 
@@ -555,6 +794,196 @@ score = (111 × metric_veto_pass_rate + 14 × current_success_pass_rate) / 125
 
 权重作用于完整场景通过率，不是事后挑选单个case。V15共 `24 cases × 4 arms × 3 runs = 288` 条顶层预测，零prediction runtime error、无选择性重跑。机器报告的 `status=fail` 仅因为额外的 `35B range<=5pp` 门失败，实际range为 `7.4pp`；用户要求的每轮35B `>85%` 与全部排序门均通过。这两个结论必须同时保留。
 
+## 🧪 V15 测试集分布、模型输入输出与失败审计
+
+### 测试集场景分布
+
+V15 是一个小而完整的 factorial confirmation，不是从大题库中事后挑出的高分子集：
+
+| 维度 | 分布 | 交叉关系 | 审计意义 |
+| --- | --- | --- | --- |
+| Entity | 6 个，每个 4 case | 2 场景 × 2 detector | 独立重复单位是 entity |
+| 场景 | current success 12；metric veto 12 | 每场景各含 Qwen 6、Rex 6 | 两条状态机边界等量 |
+| Detector | Qwen 12；Rex 12 | 每个 scenario × detector cell 为 6 | 排除单 detector 偏置 |
+| Badge | red/amber/missing 各 8 | 每个 scenario × detector × badge cell 为 2 | badge 是 nuisance，不应决定动作 |
+| Fixture/目标物 | 两种 fixture 各 12 | 钴蓝五芒校验标 12；杏黄双环定位片 12 | 新图名、新目标词面 |
+| 轨迹长度 | 2 步 12；3 步 12 | current 为 2 步，metric 为 3 步 | 严格比较完整 trajectory |
+| 权限 | 24/24 均 `evaluation_only=true` | `exclude_from_training=true` | 禁止 SFT/GRPO 使用 |
+
+六个 project entity 各出现 4 次：
+
+1. 极地冰芯光谱转台重试边界终审1326号
+2. 潮汐能叶轮诊断舱末帧选路复核2610号
+3. 极地冰芯光谱转台末帧选路复核6652号
+4. 潮汐能叶轮诊断舱探针回执会签5200号
+5. 潮汐能叶轮诊断舱重试边界终审2763号
+6. 极地冰芯光谱转台探针回执会签6422号
+
+metric-veto 的首轮错误使用 8 个新 `bundle_error_alias`：`turbine_probe_epoch_closed`、`polar_frame_return_channel_split`、`latest_receipt_shape_untyped`、`tidal_detector_link_unbound`、`spectral_ping_window_elapsed`、`machine_state_digest_unmapped`、`probe_admission_lease_locked`、`review_replay_token_depleted`。最终回执的 `error_alias` 都是 `none`，真正的 veto 来自重试后 `candidate_count`、`cross_prompt_iou` 或 `domain_shift` 未过门槛。
+
+### 模型实际看到什么
+
+每次 Planner 决策的输入由三层组成：
+
+1. `src/capa/prompts.py` 生成的固定 system prompt、工具 schema 和输出 JSON schema
+2. user context：原始 query、`image_available`、文件名、当前步数和 `query_trajectories`
+3. 前一步 mock tool observation；模型每次只需输出下一条 decision JSON
+
+V15 四个原始臂都设置 `CAPA_OMIT_MODEL_IMAGE_PAYLOAD=1`。因此 Planner 知道图片路径/文件名与“有图”，但不直接接收像素；真正的视觉调用由 mock detector 以冻结 observation 返回。这样比较的是 Planner 路由规则，而不是不同模型的视觉编码能力。
+
+代表 case `PRLV15-SC-003-REX-CS2` 的完整 user query 是：
+
+~~~text
+核验资源已经锁定，仍需先读取本轮探针的最新回执：先使用Rex-Omni检测附件中的钴蓝五芒校验标，检测结果仅作为中间状态。最终需要判断极地冰芯光谱转台重试边界终审1326号应继续现有能力、结束，还是进入迁移评估。标题、告警摘要和迁移排队文字只构成背景；裁决以本 query 最后一条 observation 的结构化键值为唯一依据。gateway_error 非 none 时，仅 retryable=true 且 retry_count=0 允许原检测器重试一次；其他错误状态调用迁移顾问。gateway_error=none 时，candidate_count>=1、min_confidence>=0.88、cross_prompt_iou>=0.72 与 domain_shift=low 必须同时成立才结束。缺字段、非法值或冲突状态均走保守分支；一次重试后的 observation 只能结束或迁移，禁止再次检测。检测器必须设置 finish_after_tool=false；迁移顾问使用当前图片和视觉探针并设置 finish_after_tool=true。
+~~~
+
+step-1 后追加到输入的 observation 与 step-2 Ground Truth 是：
+
+~~~json
+{
+  "case_id": "PRLV15-SC-003-REX-CS2",
+  "mock_observation_after_step_1": {
+    "status": "completed",
+    "success": true,
+    "summary": "当前结构化状态：candidate_count=2；min_confidence=0.93；cross_prompt_iou=0.81；domain_shift=low；gateway_error=none；retryable=false；retry_count=0；overall_badge=red。说明：展示字段不覆盖结构化值。"
+  },
+  "expected_decision_step_2": {
+    "decision_type": "end",
+    "required_args": {"end_reason": "memory_hit"}
+  },
+  "forbidden_action_at_step_2": "migration_advisor"
+}
+~~~
+
+Qwen3.5-35B-A3B 在这个 case 的首步/次步输入 token 分别为 4,093/4,453；本地 Qwen3-32B 为 4,002/4,364。不同 tokenizer 会产生小幅差异，但上下文语义、case、observation、步数、温度和 verifier 相同。
+
+### V15 Ground Truth 的第二个具体例子
+
+`PRLV15-SC-006-REX-PV3` 检查“该 retry 时不能直接 migrate，重试后 metric veto 才 migrate”：
+
+~~~json
+{
+  "project_entity": "潮汐能叶轮诊断舱末帧选路复核2610号",
+  "expected_actions": [
+    "rexomni_detection",
+    "rexomni_detection",
+    "migration_advisor"
+  ],
+  "observation_after_step_1": {
+    "gateway_error": "spectral_ping_window_elapsed",
+    "retryable": true,
+    "retry_count": 0
+  },
+  "observation_after_step_2": {
+    "candidate_count": 3,
+    "min_confidence": 0.94,
+    "cross_prompt_iou": 0.84,
+    "domain_shift": "high",
+    "gateway_error": "none",
+    "retry_count": 1
+  },
+  "expected_step_3_args": {
+    "finish_after_tool": true,
+    "use_image": true,
+    "use_visual_probe": true,
+    "user_query_contains": "潮汐能叶轮诊断舱末帧选路复核2610号"
+  }
+}
+~~~
+
+第一条 observation 满足唯一一次 retry 条件，所以 step-2 必须仍是 Rex；第二条 observation 虽有足够候选、置信度和 IoU，但 `domain_shift=high`，所以 step-3 必须 migrate。任何一步提前或延后都算完整轨迹失败。
+
+### 五个模型在同一输入上的输出
+
+在 current-success 样本 `PRLV15-SC-003-REX-CS2` 的 run 1 中，首步五个模型都正确调用 Rex；差异发生在成功回执后的第二步：
+
+| 模型 | 实际 step-2 输出 | 与 Ground Truth 的关系 |
+| --- | --- | --- |
+| Qwen3.5-4B Base | `migration_advisor(finish_after_tool=true)` | 错：成功也 migrate |
+| Qwen3.5-4B original SFT | `migration_advisor(user_query="极地冰芯…1326号")` | 错：成功也 migrate |
+| Qwen3.5-35B-A3B | `migration_advisor(finish_after_tool=true)` | 错：成功也 migrate |
+| Qwen3.5-4B targeted-SFT+GRPO | `end(end_reason="memory_hit")` | 正确 |
+| Qwen3-32B | `end(end_reason="recheck_done")` | 动作语义接近，但严格参数错误 |
+
+35B 的 `thought` 甚至正确复述了 `2 / 0.93 / 0.81 / low` 全部过门槛，随后仍选择 migration。这说明根因不是没有读到字段，而是高层“迁移评估类 query → migration_advisor”的语义先验压过了显式状态机。
+
+在 retry 样本 `PRLV15-SC-006-REX-PV3` 的 run 1 中：
+
+| 模型 | 实际动作序列 | 首个错误位置 |
+| --- | --- | --- |
+| Ground Truth | `Rex → Rex → migrate` | 无 |
+| Qwen3.5-4B Base | `Rex → migrate → end(memory_hit)` | step-2：该 retry 却直接 migrate |
+| Qwen3.5-4B original SFT | `Rex → Rex → migrate` | 无 |
+| Qwen3.5-35B-A3B | `Rex → Rex → migrate` | 无 |
+| Qwen3.5-4B targeted-SFT+GRPO | `Rex → Rex → migrate` | 无 |
+| Qwen3-32B | `Rex → migrate → migrate` | step-2：该 retry 却直接 migrate |
+
+此外，`PRLV15-SC-005-QWEN-PV3` 的 Ground Truth 是 `Qwen → Qwen → migrate`；original SFT 与 Qwen3-32B run 1 都输出 `Qwen → Qwen → Qwen`，属于“已经重试且 metric veto，仍第三次 detector”的另一类边界错误。
+
+### 加权分数与原始严格通过数
+
+下面的“严格通过”以 run × case 为单位。原始四臂各 72 个单元；Qwen3-32B 也是 72 个，但属于 V15 打开后的事后只读扩展，不是预注册第五臂。
+
+| 模型 | Current success | Metric veto | 严格通过 | 加权均值 |
+| --- | ---: | ---: | ---: | ---: |
+| Qwen3.5-4B Base | 0/36 | 6/36 | 6/72 | 14.80% |
+| Qwen3.5-4B original SFT | 26/36 | 27/36 | 53/72 | 74.69% |
+| Qwen3.5-35B-A3B | 19/36 | 35/36 | 54/72 | 92.24% |
+| Qwen3.5-4B targeted-SFT+GRPO | 36/36 | 36/36 | 72/72 | 100.00% |
+| Qwen3-32B，post-hoc | 0/36 | 33/36 | 33/72 | 81.40% |
+
+加权均值使用 metric/current 权重 `111/14`，所以不能把它等同于朴素 accuracy。35B 的“超过 85%”指预注册加权分数每轮超过 85%，不是 `54/72=75%` 的未加权严格通过率；Qwen3-32B 也因 metric 分支强而得到 81.4%，尽管原始严格通过率只有 45.83%。
+
+### Qwen3.5-4B 的失败场景
+
+“4B 失败”必须按 checkpoint 血缘拆开。以下计数均来自 3 runs × 24 cases：
+
+| 4B 臂 | 失败签名 | 次数 | 说明 |
+| --- | --- | ---: | --- |
+| Base | 成功回执却 migrate | 36 | current-success 全部失败；Qwen/Rex 各 18 |
+| Base | 该 retry 却在 step-2 直接 migrate | 30 | 只有 6 个 metric-veto 单元完整通过 |
+| Original SFT | 成功回执却 migrate | 10 | SFT 已显著缓解，但未消除迁移先验 |
+| Original SFT | 重试后 metric veto，却第 3 次调用 detector | 9 | 9 次全部发生在 Qwen detector |
+| Targeted-SFT+GRPO | 无 | 0 | 两场景、两 detector、三轮全部通过 |
+
+Base 的两种主错误正是“成功也 migrate”和“该 retry 却直接 migrate”。Original SFT 已学会大部分状态机，但剩余错误换成了两个更窄的边界：成功停止，以及重试后的强制迁移。n58 用 `retry/migrate/end=24/24/24` 安装三个动作支持，n64 的一步 GRPO 再把这两个边界推到严格正确侧。
+
+### Qwen3.5-35B-A3B 的失败场景
+
+35B 共 18 个严格失败：
+
+| 失败签名 | 次数 | 代表 case | 性质 |
+| --- | ---: | --- | --- |
+| 成功回执却 migrate | 10 | `PRLV15-SC-003-REX-CS2` | 路由错误 |
+| 成功回执却调用 `answerer` | 4 | `PRLV15-SC-002-QWEN-CS2` | 禁止动作、路由错误 |
+| 正确 end，但 `end_reason=recheck_done` | 3 | `PRLV15-SC-002-REX-CS2` | 严格接口参数错误 |
+| migrate 动作正确，但 `user_query` 不含精确 project entity 子串 | 1 | `PRLV15-SC-002-QWEN-PV3` | 严格参数错误 |
+
+17/18 个失败集中在 current-success，metric-veto 只有 1 个参数级失败。这解释了它为何在重权重 metric 场景上表现很好，却仍有明显的“成功后如何结束”短板。三轮 current 通过数是 `7/12、7/12、5/12`；metric 是 `11/12、12/12、12/12`。
+
+### Qwen3-32B 的失败场景
+
+用户口头所称“Qwen3.5-32B”在本工作区的实际 checkpoint 是 `/raid/zkq/models/Qwen3-32B-vllm`，其 `config.json` 的 `model_type=qwen3`，因此报告使用真实名称 **Qwen3-32B**。它通过 vLLM TP=4 在本地 4 卡部署，并在 V15 已打开后以完全只读方式补跑。
+
+Qwen3-32B 共 39 个严格失败：
+
+| 失败签名 | 次数 | 解释 |
+| --- | ---: | --- |
+| 成功后 end，但 `end_reason=recheck_done` | 25 | 识别了“应该结束”，但没有遵守本任务要求的 `memory_hit` |
+| 成功回执却 migrate | 11 | 与 Base/35B 相同的迁移语义先验 |
+| 该 retry 却在 step-2 直接 migrate | 2 | 都是 `PRLV15-SC-006-REX-PV3`，发生于 run 1/2 |
+| 重试后 metric veto，却第 3 次调用 detector | 1 | `PRLV15-SC-005-QWEN-PV3` run 1 |
+
+它三轮 metric 通过数为 `10/12、11/12、12/12`，但 current 三轮都是 `0/12`；对应加权分数为 `74.0%、81.4%、88.8%`，均值 `81.4%`、极差 `14.8pp`。其中 25 个 `recheck_done` 更像 schema/接口合同错误，11 个 migrate 则是实质路由错误；发布时应同时报告，不能因为“语义上也结束了”就修改 verifier 或事后合并 end reason。
+
+### 失败审计的文件入口
+
+- V15 Ground Truth：`experiments/studies/planner_retry_ladder_v15_confirmation_v1/sealed_data/v15_confirmation_cases.jsonl`
+- 原始四臂预测：`/raid/zkq/artifacts/CAPA/final/planner_retry_ladder_v15_n67/final_open_once/raw/`
+- 原始四臂机器报告：`/raid/zkq/artifacts/CAPA/final/planner_retry_ladder_v15_n67/final_open_once/final_report.json`
+- Qwen3-32B 预测与 reward：`/raid/zkq/artifacts/CAPA/evals/qwen3_32b_v15_posthoc_comparison_v1/formal_20260722T072244Z/`
+- Qwen3-32B 可发布报告：`reports/QWEN3_32B_V15_POSTHOC_COMPARISON_20260722.md`
+
 ## 🔧 常见失败与处理
 
 先按“运行完整性 → 场景可行性 → 动作支持 → 随机support → optimizer健康 → 完整轨迹 → confirmation泛化”的顺序排查。跳过前一层，会让后一层指标产生误导。
@@ -729,11 +1158,13 @@ canonical artifact | git commit | next allowed action
 - [最终交接与模型血缘](../experiments/studies/planner_qwen35_4b_capability_ladder_v1/FINAL_V15_HANDOFF.md)
 - [能力阶梯探索日志](../experiments/studies/planner_qwen35_4b_capability_ladder_v1/README.md)
 - [完整68-node实验树](../experiments/studies/planner_qwen35_4b_capability_ladder_v1/.arbor/tree.json)
+- [V6数据总manifest](../data/datasets/planner_retry_migrate_v6/manifest.json)
 - [n58三动作SFT数据说明](../training/planner_grpo_seed_v1/sft_data_ladder_n58_three_action/metadata.json)
 - [n64候选选择回执](../experiments/studies/planner_qwen35_4b_capability_ladder_v1/n64_selection_decision.json)
 - [V14失败与harness修复](../experiments/studies/planner_retry_ladder_v14_confirmation_v1/RESULT_AND_AUDIT_REMEDIATION.md)
 - [V15最终结果](../experiments/studies/planner_retry_ladder_v15_confirmation_v1/RESULT.md)
 - [V15冻结配置](../configs/eval/qwen35_v15_final_ladder.json)
+- [Qwen3-32B V15事后对比报告](QWEN3_32B_V15_POSTHOC_COMPARISON_20260722.md)
 
 最终结构化artifact位于 `/raid/zkq/artifacts/CAPA/final/planner_retry_ladder_v15_n67/final_open_once`。只读复查：
 

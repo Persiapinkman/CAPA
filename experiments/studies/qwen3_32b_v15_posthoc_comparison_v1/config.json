@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0",
+  "study_id": "qwen3_32b_v15_posthoc_comparison_v1",
+  "created_at": "2026-07-22T07:22:44Z",
+  "evidence_role": "posthoc_read_only_extension_on_opened_v15_confirmation_set",
+  "source_git_commit": "a0e8a7cd7f6fa71a8dc31b294eadca8f42231793",
+  "immutable_inputs": {
+    "cases_path": "experiments/studies/planner_retry_ladder_v15_confirmation_v1/sealed_data/v15_confirmation_cases.jsonl",
+    "cases_sha256": "37d9a739585c012041397fba77b995d5842359ba5e23a8e8f8f604578e4ade78",
+    "rows": 24,
+    "v15_manifest_path": "experiments/studies/planner_retry_ladder_v15_confirmation_v1/sealed_manifest.json",
+    "v15_manifest_sha256": "eabf39b49c5c589f53156558a90a9dbc30c6c0a734525bb58fd540f06a6d992f",
+    "v15_config_path": "configs/eval/qwen35_v15_final_ladder.json",
+    "v15_config_sha256": "063932854510fafe7b7952ed8a3f2d937bbdbf98f78710b3dec849b8ebfacae0",
+    "v15_final_report_path": "/raid/zkq/artifacts/CAPA/final/planner_retry_ladder_v15_n67/final_open_once/final_report.json",
+    "v15_final_report_sha256": "4bc4a819cf6f2291ac125c33b0a42133c679d1dbbb21d1dc54bb0337db8dcfd7"
+  },
+  "arm": {
+    "arm_id": "qwen3_32b",
+    "model_label": "Qwen3-32B local FP16 vLLM TP4",
+    "model_path": "/raid/zkq/models/Qwen3-32B-vllm",
+    "served_model_name": "qwen3-32b-v15-posthoc",
+    "metadata_sha256": {
+      "config.json": "97e295b63283935788fac5e4f8860862a56d4089538cafc93f0431f2ebe483bb",
+      "generation_config.json": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2",
+      "model.safetensors.index.json": "bed42c6c55274bc08a1f616bceb3bcb84b3f02cb6584c573bd18c6519291ecd0",
+      "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+      "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+    },
+    "weight_shards": 17,
+    "dtype": "float16",
+    "backend": "vllm_0.8.5.post1_openai_compatible",
+    "tensor_parallel_size": 4,
+    "physical_gpus": [0, 1, 2, 3]
+  },
+  "server": {
+    "api_base": "http://127.0.0.1:18081/v1",
+    "port": 18081,
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "enforce_eager": true,
+    "prefix_caching": false,
+    "chunked_prefill": false,
+    "max_num_batched_tokens": 16384,
+    "max_num_seqs": 8
+  },
+  "inference_protocol": {
+    "runs": 3,
+    "cases_per_run": 24,
+    "fixed_shards": 4,
+    "cases_per_shard": 6,
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "seed": 42,
+    "do_sample": false,
+    "max_steps": 3,
+    "max_tokens": 4096,
+    "timeout_seconds": 600,
+    "openai_timeout_seconds": 600,
+    "omit_model_image_payload": true,
+    "stream": false,
+    "selective_case_or_run_retry": false
+  },
+  "calibration": {
+    "role": "transport_schema_and_length_only_correctness_blind",
+    "offset": 0,
+    "limit": 1,
+    "runs": 1,
+    "semantic_score_used_for_configuration": false,
+    "output_root": "/raid/zkq/artifacts/CAPA/evals/qwen3_32b_v15_posthoc_comparison_v1/calibration_20260722T072244Z"
+  },
+  "formal_execution": {
+    "output_root": "/raid/zkq/artifacts/CAPA/evals/qwen3_32b_v15_posthoc_comparison_v1/formal_20260722T072244Z",
+    "refuse_overwrite": true,
+    "whole_batch_retry_after_infrastructure_failure_only": true
+  },
+  "analysis": {
+    "scenario_weights": {
+      "post_retry_metric_veto_step3": 111,
+      "current_success_step2": 14
+    },
+    "weighted_formula": "(111 * metric_veto_pass_rate + 14 * current_success_pass_rate) / 125",
+    "original_v15_claim_is_immutable": true,
+    "qwen3_32b_is_not_a_preregistered_v15_arm": true
+  }
+}
