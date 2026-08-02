@@ -113,17 +113,58 @@ _更新：2026-08-02。范围：把公司内部 V100 训练栈的 Planner SFT→
 
 ---
 
-## 7. 当前基线（v7, 3-run mean, temperature=0）
+## 7. 主线结果（v7 grpo_dev, 3-run mean, temperature=0）
 
-| 模型 | dev mean_score | stdev | 各类范围 |
+| Arm | dev mean_score | stdev | pass_rate | 备注 |
+|---|---:|---:|---:|---|
+| **4B base** | 0.7634 | 0.0008 | 0.000 | 3-run，`premature_stop=240/240`（路径没走完） |
+| **35B base** | 0.8525 | 0.0055 | 0.000 | 3-run，`premature_stop=12`，唯一 G2=0.789 |
+| **4B SFT (ckpt-100)** | **0.9704** | 0.0015 | **0.549** | 3-run，pass_all_runs=0.513 |
+| 4B SFT + GRPO seed42 | (待评) | — | — | GRPO 训练完成，SFT+GRPO-eval 尚未跑 |
+
+**研究目标 3 个不等式**（当前已验证 2/3）：
+- ✅ **4B base < 4B SFT**：0.763 → 0.970（+0.207，pass 0→0.549）
+- ✅ **4B SFT ≥ 35B base**：0.970 vs 0.852（+11.8 pp）—— 用 12M LoRA 训 400 步就跨过 35B 的零 shot 上限
+- ⏳ **4B SFT+GRPO ≥ 35B base**：需要 GRPO×3 跑完 + eval 才能盖章
+
+**SFT 逐类表现**（`20260802_172017_sft/softbnd_dev`）：
+
+| 类别 | mean_score | pass_all_runs | 说明 |
 |---|---:|---:|---|
-| **4B base** | 0.7634 | 0.0008 | 0.699 (P3) – 0.813 (P5) |
-| **35B base** | 0.8525 | 0.0055 | 0.789 (G2) – 0.885 (G1) |
+| P3_transient_5xx | 1.000 | 1.00 | retry 完美 |
+| P5_second_failure | 1.000 | 1.00 | 二次失败 → migrate 完美 |
+| P4_auth_quota | 0.997 | 0.90 | 硬非重试 |
+| G2_conflict_stale_history | 0.987 | 0.767 | end 决策 |
+| P2_all_gates_ok | 0.957 | 0.00 | mean 高 pass 低（end_reason 差 1 个字段） |
+| G1_first_success_end | 0.957 | 0.00 | 同上 |
+| P6_domain_shift | 0.938 | 0.20 | 唯一低于 0.94 的类 |
+| P1_iou_low_fresh | 0.928 | 0.23 | IoU 阈值判断 |
 
-- 35B 过了 **0.85 数据集健康门**（G2 唯一低于 0.85 的类，容忍）。
-- 4B ~ 35B gap = 9 pp，是 SFT+GRPO 需要补上的空间。
-- `premature_stop_cases`: 4B=240（每 case 都提前停，因为路径没走完），35B=12（大部分收敛）。
-- 产物：`capa_h20/artifacts/CAPA/repro_h20/eval/{base_4b_v7_final_3run, base_35b_v7_final_3run}/`。
+**三场景 SFT vs. base 对照**：
+
+| 场景 | 4B base | 4B SFT | Δ |
+|---|---:|---:|---:|
+| softbnd_dev (mean_score) | 0.7634 | **0.9704** | +0.207 |
+| multistep (mean_score) | 0.8032 | 0.8904 | +0.087 |
+| routing90 (accuracy) | 0.7111 | 0.6296 | **−0.082** |
+
+**routing90 上 SFT 回退** 是可预期的：v7 SFT 数据完全聚焦软边界任务，未混合 routing 类样本；单步路由的正例分布被 SFT 打散。GRPO 阶段可以通过 reward 里 `no_forbidden_action` 项部分挽回，若最终 routing 差距太大再考虑加 mix。
+
+**GRPO seed42（`20260801_grpo_v7_seed42_r3`，100 opt-steps）训练指标**：
+- reward: 4.409 → **5.616**（final），reward_std 0.283 → 0.417
+- `frac_reward_zero_std`: 0.789 → **0.75**（远比 v6 的 1.1% 好，support gate 已解锁）
+- `route_exact / argument_exact`: 0.536 → **0.875**
+- `stop_exact`: 0.714 → **0.969**
+- `no_forbidden_action`: 0.996 → **1.000**
+- `completions/clipped_ratio = 0`（无长度截断）
+- `advantage/positive_fraction=0.125, entropy=0.0166`（可以再涨点温度探索）
+- ⚠️ config 里 `fp16=true, bf16=false`—— 这是 08-01 的 run，脚本自适应改动之前的产物；下一轮 seed42/43/44 会一律 bf16 重跑（结果不会漂太多，但为了纪录一致性走 pipeline 版本）
+
+产物路径：
+- base: `repro_h20/eval/{base_4b_v7_final_3run, base_35b_v7_final_3run}/`
+- SFT ckpt: `repro_h20/sft/20260802_155804_qwen35_4b_planner_v6_sft/checkpoint-100[_merged]`
+- SFT eval: `repro_h20/eval/20260802_172017_sft/{softbnd_dev,multistep,routing90}/`
+- GRPO seed42: `repro_h20/grpo/20260801_grpo_v7_seed42_r3/checkpoint-100[_merged]`
 
 ---
 
@@ -167,17 +208,32 @@ sudo /usr/sbin/atd    # atd 未跑时启动
 5. **rollout 契约是隐式的**：长文本必须放 observation 顶层 key（`detector_response / session_history / technical_notes`），**不能塞 `summary`**（会被 memory projector trim 到 600 char）。
 6. **base 评测里 `premature_stop / answerer 主导` 是 shortcut 早期报警**：softbnd_dev 上大量 `answerer` 意味着 planner 根本没进决策流程，先查 env/服务，别怀疑模型。
 7. **不改上游脚本 > 移植 API**：遇到 trl kwargs 不兼容，先去老 run 的 config 里找 pin 版本；只有当 pin 拉不到时才最小化脚本改动，且改动限定为"向前兼容"。
+8. **`mean_score` 高 ≠ `pass_rate` 高**：v7 SFT ckpt-100 上 G1/P2 类 `mean_score=0.957` 但 `pass_all_runs=0`，因为满分要求 end_reason **字面**匹配私有 literal，SFT 学到了 6/7 项 gold 结构却漏 1 项。这也是为什么 v7 gold 要放宽 `end_reason` 走同义词集——mean 用来看学习曲线，pass 用来看是否 sealed-ready。
+9. **SFT 早停 = 反 hint 过拟合**：v7 SFT 在 step 100 时 `eval_loss=1.8e-4, eval_mean_token_accuracy=1.0`，后续 200/300/400 步只会把 observation 里的显式 hint 短语（"下一步请调用 migration_advisor"）背下来，损伤泛化。`run_h20_repro.sh` 的 `_latest_sft_checkpoint()` 默认取**最早**的 checkpoint 就是这条经验的固化。
 
 ---
 
-## 10. 当前进度快照（2026-08-02）
+## 10. 当前进度快照（2026-08-02 晚）
 
 | 阶段 | 状态 |
 |---|---|
 | v7 数据重生成 + audit + stage 数据 | ✅ |
 | vLLM 服务参数修复 (32768 model_len, 512 completion) | ✅ |
 | base_4b / base_35b v7 3-run 最终基线 | ✅（35B=0.8525 过门槛） |
-| SFT / SFT-eval | ⏳ |
-| GRPO×3 / GRPO-eval | ⏳ |
-| compare / gate | ⏳ |
-| sealed test | ⏳（gate 通过后一次性） |
+| SFT 训练（400 steps，ckpt-100/200/300/400 全存） | ✅ |
+| SFT merge → SFT-eval 3-run 三场景 | ✅（**softbnd=0.970 / multistep=0.890 / routing90=0.630**） |
+| GRPO seed42 训练（100 opt-steps） | ✅（reward 4.4→5.6，`frac_reward_zero_std=0.75`） |
+| GRPO seed42 eval 3-run 三场景 | ⏳ 未启动 |
+| GRPO seed43 / seed44 训练 + eval | ⏳ 未启动 |
+| compare / gate（多 seed paired CI） | ⏳ 未启动 |
+| sealed test（gate 通过后一次性） | ⏳ 未启动 |
+
+**下一步执行清单**（约 1×训练 seed = 75 min，1×三场景 eval = 25 min，全部 GRPO+eval 约 5-6 h）：
+
+```bash
+bash scripts/reproduce/run_h20_repro.sh grpo grpo-eval compare gate
+```
+
+关键决策点：
+1. GRPO seed42 (r3) 用的 config 里 `fp16=true`（08-01 老脚本），pipeline 版本 `run_h20_repro.sh grpo` 会自适应 bf16。**建议**：删掉 `status/grpo-42.done` 让 pipeline 用 bf16 重跑一次 seed42，保证三 seed 一致 → 或者接受 fp16 seed42 的结果，只重跑 43/44。
+2. SFT ckpt-100 是"防过拟合"策略（`_latest_sft_checkpoint` 默认取最早）；ckpt-200/300/400 权重也在盘上，用 `SFT_CHECKPOINT_STEP=200` env 可切换比较。当前 SFT `eval_loss` 在 step 100 时已经 5e-4，再训只会加深 hint literal 过拟合。
