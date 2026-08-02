@@ -182,6 +182,14 @@ def run_case(
     decisions: list[dict[str, Any]] = []
     errors: list[str] = []
     target_steps = min(max_steps, expected_step_count(case))
+    # The planner must be told the SAME max_steps that the case setup pins,
+    # not the default AGENT_MAX_STEPS=10. Otherwise the model sees
+    # "step 2 of 10" at eval time while the SFT / GRPO training data always
+    # said "step 2 of 3", and the model's "am I on the last step?" cue
+    # (which drives finish_after_tool) becomes systematically wrong.
+    setup = case.get("setup") if isinstance(case.get("setup"), dict) else {}
+    case_max_steps = int(setup.get("max_steps") or 0) or agent.AGENT_MAX_STEPS
+    planner_max_steps = min(case_max_steps, target_steps) if target_steps else case_max_steps
 
     for step_index in range(1, target_steps + 1):
         planner_context = ms.ContextBuilder.build_prompt_context(
@@ -199,7 +207,7 @@ def run_case(
                 image_path or None,
                 planner_context=planner_context,
                 step_index=step_index,
-                max_steps=agent.AGENT_MAX_STEPS,
+                max_steps=planner_max_steps,
                 model=model or None,
                 debug_meta={
                     "session_id": str(session.get("session_id") or ""),
