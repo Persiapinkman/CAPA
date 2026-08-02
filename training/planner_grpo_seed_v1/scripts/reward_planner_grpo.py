@@ -203,14 +203,12 @@ def score_expected_step(
         token_list = tokens if isinstance(tokens, list) else [tokens]
         arg_checks += 1
         actual_arg = get_arg(actual, key)
-        if (
-            key == "user_query"
-            and actual_action == "migration_advisor"
-            and str(actual_arg or "").strip()
-            and text_contains_any(actual_arg, token_list)
-        ):
-            arg_hits += 1
-        elif text_contains_all(actual_arg, token_list):
+        # arg_contains uses "any" semantics: the actual argument counts as
+        # matching if it contains ANY of the listed token synonyms. This
+        # matches the natural reading of "contains" and prevents synonym
+        # lists from becoming logical-AND traps (which would force the
+        # planner to emit every synonym at once).
+        if str(actual_arg or "").strip() and text_contains_any(actual_arg, token_list):
             arg_hits += 1
         else:
             failures.append(f"arg {key!r} expected to contain {token_list!r}, got {actual_arg!r}")
