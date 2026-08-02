@@ -1,0 +1,48 @@
+{
+  "cases": "/apdcephfs_hzlf/share_1227201/zkq/projects/CAPA/training/planner_grpo_seed_v1/cases/planner_retry_migrate_v6_grpo_train_cases.jsonl",
+  "created_at": "2026-08-01T03:47:11.651587+00:00",
+  "dataset_id": "planner_retry_migrate_v6",
+  "dataset_manifest_dataset_id": "planner_retry_migrate_v6",
+  "distribution": {
+    "expected_actions": {
+      "migration_advisor": 240,
+      "qwen_detection": 60,
+      "rexomni_detection": 60
+    },
+    "scenarios": {
+      "core_budget_exhausted": 120,
+      "core_nonretryable": 120,
+      "core_retryable_fresh": 120
+    }
+  },
+  "model_name_or_path": "/apdcephfs_hzlf/share_1227201/zkq/capa_h20/models/Qwen3.5-4B",
+  "output": "/apdcephfs_hzlf/share_1227201/zkq/projects/CAPA/training/planner_grpo_seed_v1/step_data/planner_retry_migrate_v6_grpo_train_qwen35_4b_nothinking_step2.jsonl",
+  "prompt_contract": {
+    "chat_template": "native_qwen35",
+    "enable_thinking": false,
+    "eos_token_id": 248046,
+    "max_prompt_tokens_hard_gate": 4608,
+    "pad_token_id": 248044,
+    "suffix": "<|im_start|>assistant\n<think>\n\n</think>\n\n",
+    "token_stats": {
+      "max": 4272,
+      "mean": 4255.933333333333,
+      "min": 4238,
+      "over_limit": 0,
+      "p50": 4255,
+      "p95": 4268,
+      "p99": 4270
+    }
+  },
+  "role": "optimization_only_qwen35_step_data",
+  "rows": 360,
+  "schema_version": "1.0",
+  "sha256": {
+    "cases": "91b71961fda3680f8900169bd133c40a3afa87211390254c385f8ae1509ac62a",
+    "chat_template": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8",
+    "config": "8ba006f74fecfaaeb392872a60f4a480e7ec9860153d2e1b769ec81f9a147f8a",
+    "step_data": "330ec8067ca2788357019a979b525805a09b3bb37d592783e2644012064f0598",
+    "tokenizer_config": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101"
+  },
+  "target_step": 2
+}

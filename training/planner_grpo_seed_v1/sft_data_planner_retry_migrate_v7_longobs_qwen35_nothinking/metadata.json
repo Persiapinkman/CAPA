@@ -1,0 +1,121 @@
+{
+  "audits": {
+    "grpo_dev": {
+      "duplicate_prompt_hashes": 0,
+      "forbidden_fragment_hits": {
+        "\"_thought\"": 0,
+        "\"external_ref\"": 0,
+        "/raid/": 0,
+        "/tmp/": 0,
+        "按训练样本期望": 0
+      },
+      "prompt_tokens": {
+        "max": 6744,
+        "mean": 6512.9875,
+        "min": 6341,
+        "p50": 6499,
+        "p95": 6716
+      },
+      "rows": 240,
+      "source_cases": 240,
+      "status": "pass"
+    },
+    "grpo_train": {
+      "duplicate_prompt_hashes": 0,
+      "forbidden_fragment_hits": {
+        "\"_thought\"": 0,
+        "\"external_ref\"": 0,
+        "/raid/": 0,
+        "/tmp/": 0,
+        "按训练样本期望": 0
+      },
+      "prompt_tokens": {
+        "max": 6791,
+        "mean": 6512.733333333334,
+        "min": 6306,
+        "p50": 6499,
+        "p95": 6714
+      },
+      "rows": 480,
+      "source_cases": 480,
+      "status": "pass"
+    },
+    "sft_dev": {
+      "duplicate_prompt_hashes": 0,
+      "forbidden_fragment_hits": {
+        "\"_thought\"": 0,
+        "\"external_ref\"": 0,
+        "/raid/": 0,
+        "/tmp/": 0,
+        "按训练样本期望": 0
+      },
+      "prompt_tokens": {
+        "max": 6784,
+        "mean": 5079.340625,
+        "min": 3613,
+        "p50": 6340,
+        "p95": 6700
+      },
+      "rows": 320,
+      "source_cases": 160,
+      "status": "pass"
+    },
+    "sft_train": {
+      "duplicate_prompt_hashes": 0,
+      "forbidden_fragment_hits": {
+        "\"_thought\"": 0,
+        "\"external_ref\"": 0,
+        "/raid/": 0,
+        "/tmp/": 0,
+        "按训练样本期望": 0
+      },
+      "prompt_tokens": {
+        "max": 6781,
+        "mean": 5078.7625,
+        "min": 3611,
+        "p50": 6335,
+        "p95": 6671
+      },
+      "rows": 1280,
+      "source_cases": 640,
+      "status": "pass"
+    }
+  },
+  "created_at": "2026-08-01T00:00:00+00:00",
+  "dataset_id": "planner_retry_migrate_v7_longobs",
+  "deduplication": {
+    "rule": "deduplicate identical (prompt_sha256, completion_sha256) pairs across steps",
+    "sft_dev_rows": 320,
+    "sft_train_rows": 1280
+  },
+  "files": {
+    "grpo_dev": "training/planner_grpo_seed_v1/step_data/planner_retry_migrate_v7_longobs_grpo_dev_qwen35_4b_nothinking_step2.jsonl",
+    "grpo_train": "training/planner_grpo_seed_v1/step_data/planner_retry_migrate_v7_longobs_grpo_train_qwen35_4b_nothinking_step2.jsonl",
+    "sft_dev": "training/planner_grpo_seed_v1/sft_data_planner_retry_migrate_v7_longobs_qwen35_nothinking/dev.jsonl",
+    "sft_train": "training/planner_grpo_seed_v1/sft_data_planner_retry_migrate_v7_longobs_qwen35_nothinking/train.jsonl"
+  },
+  "model_name_or_path": "/apdcephfs_hzlf/share_1227201/zkq/capa_h20/models/Qwen3.5-4B",
+  "prompt_contract": {
+    "assistant_suffix": "<|im_start|>assistant\n<think>\n\n</think>\n\n",
+    "chat_template": "native_qwen35",
+    "completion_suffix_sft": "<|im_end|>",
+    "enable_thinking": false,
+    "eos_token_id": 151645,
+    "max_prompt_tokens": 12288,
+    "max_steps": 3,
+    "pad_token_id": 151643
+  },
+  "rows": {
+    "grpo_dev": 240,
+    "grpo_train": 480,
+    "sft_dev": 320,
+    "sft_train": 1280
+  },
+  "schema_version": "1.0",
+  "sha256": {
+    "grpo_dev": "994fe3db862db51ed04ab559046febd6ca0b6786e87a4dc388a8111a01e9327d",
+    "grpo_train": "4da2cce7a56ecd297cec4877d0c3b44448bb0e90c0ea705536d87e0312b48bc4",
+    "sft_dev": "e2a44bd6463f5ddbe5d3ea96620d45e2ddc7e20acaf9b15085465d8812cc73a3",
+    "sft_train": "57d683dbbfb3e4aeaec156c30cf75810269dd62ce3618b7a0d51a7a4f5cac738"
+  }
+}

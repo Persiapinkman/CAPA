@@ -1,0 +1,117 @@
+{
+  "build_seed": 2026080101,
+  "cases_per_entity": 8,
+  "created_at": "2026-08-01T00:00:00+00:00",
+  "dataset_id": "planner_retry_migrate_v7_longobs",
+  "experimental_unit": "entity × scenario × (detector, badge) matched counterfactual bundle",
+  "files": {
+    "grpo_dev": "training/planner_grpo_seed_v1/cases/planner_retry_migrate_v7_longobs_grpo_dev_cases.jsonl",
+    "grpo_train": "training/planner_grpo_seed_v1/cases/planner_retry_migrate_v7_longobs_grpo_train_cases.jsonl",
+    "sft_dev": "training/planner_grpo_seed_v1/cases/planner_retry_migrate_v7_longobs_sft_dev_cases.jsonl",
+    "sft_train": "training/planner_grpo_seed_v1/cases/planner_retry_migrate_v7_longobs_sft_train_cases.jsonl",
+    "test": "training/planner_grpo_seed_v1/cases/planner_retry_migrate_v7_longobs_test_cases.jsonl"
+  },
+  "forbidden_observation_substrings": [
+    "retryable=",
+    "retry_count=",
+    "gateway_error=",
+    "domain_shift=",
+    "candidate_count=",
+    "min_confidence=",
+    "cross_prompt_iou=",
+    "retryable:",
+    "retry_count:"
+  ],
+  "forbidden_query_substrings": [
+    "retryable=",
+    "retry_count",
+    "候选数",
+    "跨提示",
+    "IoU",
+    "域偏移",
+    "fresh retryable"
+  ],
+  "nuisance_shortcut_check": {
+    "mutual_information_badge_vs_target_action": 0.00024727520486197995,
+    "mutual_information_detector_vs_target_action": 0.0,
+    "status": "pass",
+    "threshold": 0.02
+  },
+  "observation": {
+    "approx_tokens_max": 2080,
+    "approx_tokens_mean": 1965.5625,
+    "approx_tokens_min": 1889,
+    "approx_tokens_p50": 1962.0,
+    "approx_tokens_p95": 2045.0,
+    "min_required": 1500
+  },
+  "scenarios": [
+    {
+      "explain": "detector returned candidates but the IoU between the two structured probes is < 0.72; retry budget is fresh (0), so a single retry is legitimate.",
+      "id": "P1_iou_low_fresh",
+      "role": "primary",
+      "target_action_class": "retry"
+    },
+    {
+      "explain": "detector returned exactly one candidate with confidence >= 0.88, IoU >= 0.72, tags do not indicate domain shift; the planner should end.",
+      "id": "P2_all_gates_ok",
+      "role": "primary",
+      "target_action_class": "end"
+    },
+    {
+      "explain": "detector transport reports a 5xx / timeout error class; retry budget fresh; the planner should retry once.",
+      "id": "P3_transient_5xx",
+      "role": "primary",
+      "target_action_class": "retry"
+    },
+    {
+      "explain": "detector transport reports auth/quota class (401/403/429 with 'quota' in message); retry cannot recover; migrate.",
+      "id": "P4_auth_quota",
+      "role": "primary",
+      "target_action_class": "migrate"
+    },
+    {
+      "explain": "session_history shows the same detector was already invoked once and returned the same failure; budget is exhausted, must migrate.",
+      "id": "P5_second_failure",
+      "role": "primary",
+      "target_action_class": "migrate"
+    },
+    {
+      "explain": "detector succeeded but tags include a domain-shift signal ('night_scene', 'thermal_ir', 'sketch_style' etc.); the current asset is not covered, must migrate.",
+      "id": "P6_domain_shift",
+      "role": "primary",
+      "target_action_class": "migrate"
+    },
+    {
+      "explain": "detector returned a clean first-shot success; the planner must NOT reflexively call migrate after any tool result.",
+      "id": "G1_first_success_end",
+      "role": "guardrail",
+      "target_action_class": "end"
+    },
+    {
+      "explain": "the current observation reports failure while a stale history block claims prior success; the planner must trust the current observation and migrate.",
+      "id": "G2_conflict_stale_history",
+      "role": "guardrail",
+      "target_action_class": "migrate"
+    }
+  ],
+  "schema_version": "1.0",
+  "sha256": {
+    "grpo_dev": "1dba0a1da35fa795740a94755eef07959dbdb6749488cf45d62450dfa0a1eb28",
+    "grpo_train": "0eef19c1e7f2fe443db890b2a03937ed8823c10a5552a3ddd1127f57be8459ef",
+    "sft_dev": "65a9025b96cadbf76ff38836695e452178ea4519c82e4f7859e0a5fc168c8be3",
+    "sft_train": "53421bbdd2569d1f8ed644d7f9d30243c7c302c77d96b35f548f580b3698dddc",
+    "test": "7c31f510ed580b38ad602ccdfcbbf113037baf47c02ea3489eecd781b915d9b3"
+  },
+  "split_entity_counts": {
+    "grpo_dev": 30,
+    "grpo_train": 60,
+    "sft_dev": 20,
+    "sft_train": 80,
+    "test": 60
+  },
+  "totals": {
+    "cases": 2000,
+    "entities": 250
+  }
+}

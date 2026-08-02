@@ -1,0 +1,114 @@
+{
+  "schema_version": "1.0",
+  "study_id": "planner_retry_migrate_v7_longobs_qwen35_4b_v1",
+  "created_at": "2026-08-01T00:00:00+00:00",
+  "objective": "Confirm that a long-observation, tokenizer-free-signal version of the retry-vs-migrate soft boundary lets Qwen3.5-4B climb from base < SFT < SFT+GRPO, and that the SFT+GRPO endpoint reaches or exceeds Qwen3.5-35B-A3B base on the same case set.",
+  "dataset": {
+    "id": "planner_retry_migrate_v7_longobs",
+    "manifest": "data/datasets/planner_retry_migrate_v7_longobs/manifest.json",
+    "splits": {
+      "sft_train": {"cases": 640, "entities": 80},
+      "sft_dev": {"cases": 160, "entities": 20},
+      "grpo_train": {"cases": 480, "entities": 60},
+      "grpo_dev": {"cases": 240, "entities": 30},
+      "test": {"cases": 480, "entities": 60, "sealed": true}
+    }
+  },
+  "model_arms": {
+    "base_4b": {
+      "path": "/apdcephfs_hzlf/share_1227201/zkq/capa_h20/models/Qwen3.5-4B",
+      "role": "anchor_lower_bound"
+    },
+    "sft_4b": {
+      "training": "LoRA SFT on planner_retry_migrate_v7_longobs sft_train, select on sft_dev",
+      "role": "primary_effect_first_stage"
+    },
+    "sft_grpo_4b": {
+      "training": "LoRA GRPO on top of sft_4b using grpo_train step-2 prompts, three seeds 42/43/44",
+      "role": "primary_target"
+    },
+    "base_35b": {
+      "path": "/apdcephfs_hzlf/share_1227201/zkq/capa_h20/models/Qwen3.5-35B-A3B",
+      "role": "large_model_reference"
+    }
+  },
+  "evaluation": {
+    "cases_dev": "training/planner_grpo_seed_v1/cases/planner_retry_migrate_v7_longobs_grpo_dev_cases.jsonl",
+    "cases_test_sealed": "training/planner_grpo_seed_v1/cases/planner_retry_migrate_v7_longobs_test_cases.jsonl",
+    "runs_per_arm": 3,
+    "determinism": {"temperature": 0.0, "top_p": 1.0, "seed": 42, "do_sample": false, "max_steps": 3, "max_tokens": 4096},
+    "scorer": "training/planner_grpo_seed_v1/scripts/reward_planner_grpo.py",
+    "aggregation": "case-macro grouped by counterfactual_bundle_id",
+    "confidence_intervals": "bootstrap paired 95% CI, 2000 draws"
+  },
+  "primary_metrics": [
+    "action_match_rate",
+    "mean_rule_reward",
+    "full_trajectory_match_rate"
+  ],
+  "secondary_metrics": [
+    "wrong_side_effecting_actions_mean",
+    "json_valid_rate",
+    "premature_stop_rate",
+    "per_scenario_pass_rate"
+  ],
+  "gates": {
+    "sft_gate_on_grpo_dev": {
+      "condition": "sft_4b.action_match_rate - base_4b.action_match_rate >= 0.15 AND paired 95% CI excludes 0",
+      "on_fail": "abort study, do not run GRPO"
+    },
+    "grpo_support_gate_on_grpo_dev": {
+      "condition": "nonzero_reward_variance_rate >= 0.15 on 4 samples per prompt (v6 had 0.011 and GRPO was skipped)",
+      "on_fail": "abort GRPO, publish SFT-only comparison"
+    },
+    "grpo_effect_gate_on_grpo_dev": {
+      "condition": "for all three seeds, sft_grpo_4b - sft_4b paired 95% CI on action_match_rate excludes 0 AND wrong_side_effecting_actions_mean(sft_grpo_4b) <= wrong_side_effecting_actions_mean(sft_4b)",
+      "on_fail": "reject GRPO promotion, publish SFT-only comparison; sealed test stays closed"
+    },
+    "cross_model_gate_on_grpo_dev": {
+      "condition": "sft_grpo_4b.mean_rule_reward - base_35b.mean_rule_reward paired 95% CI lower bound >= 0",
+      "on_fail": "publish result with explicit caveat that 4B SFT+GRPO does not meet 35B base"
+    },
+    "sealed_test_gate": {
+      "condition": "cross_model_gate passes AND grpo_effect_gate passes",
+      "action_on_pass": "open sealed test exactly once, evaluate the preselected sft_grpo_4b seed-42 checkpoint",
+      "action_on_fail": "sealed test remains closed"
+    }
+  },
+  "target_outcomes": {
+    "narrative": "base_4b < sft_4b < sft_grpo_4b (each transition CI-significant), AND sft_grpo_4b >= base_35b",
+    "quantitative_expectations_grpo_dev": {
+      "base_4b.action_match_rate": ">= 0.35",
+      "sft_4b.action_match_rate": ">= 0.80",
+      "sft_grpo_4b.action_match_rate": ">= 0.90",
+      "base_35b.action_match_rate": "0.55-0.70 (untrained, unknown but bounded)"
+    },
+    "notes": "35B base is untrained on the routing rule set; it does in-context inference over the long observation. 4B SFT+GRPO is expected to internalise the rules and exceed 35B base without training the 35B model (training 35B is infeasible on 4xH20)."
+  },
+  "compute_budget": {
+    "sft_gpu_hours": 1.5,
+    "grpo_gpu_hours_per_seed": 2.0,
+    "eval_gpu_hours_per_arm": 0.3,
+    "total_gpu_hours_incl_base_and_35b_eval": 12.0
+  },
+  "risks_and_mitigations": [
+    {
+      "risk": "SFT saturates on grpo_dev (repeat of v6 pathology)",
+      "detection": "grpo_support_gate on nonzero_reward_variance_rate",
+      "mitigation": "8 scenarios expand the discriminative surface; long observations force information integration; if still saturated, expand P5/P6 with more challenging sub-templates"
+    },
+    {
+      "risk": "SFT-only over-fits on nuisance shortcuts",
+      "detection": "MI(badge, target) and MI(detector, target) already 0 in the manifest; also monitor per-scenario pass rate parity"
+    },
+    {
+      "risk": "GRPO increases wrong-side-effecting actions like v6-Seed44 did",
+      "detection": "wrong_side_effecting_actions_mean guard in grpo_effect_gate"
+    },
+    {
+      "risk": "35B base overshoots SFT+GRPO 4B on some scenarios via in-context reasoning",
+      "detection": "cross_model_gate is a hard gate; if failed, publish caveat and design v8 with harder trace-length / multi-hop scenarios"
+    }
+  ],
+  "sealed_test_commitment": "The 480-case test split is not opened until all preregistered gates pass on grpo_dev. Only the seed-42 sft_grpo_4b checkpoint is eligible for the sealed run. One-shot: repeated eval of the same checkpoint on test is disallowed after the first read."
+}
