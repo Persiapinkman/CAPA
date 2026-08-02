@@ -44,11 +44,11 @@ from training.wandb_observability import mirror_policy_entropy_metric  # noqa: E
 DEFAULT_MODEL = Path("/raid/zkq/models/Qwen3.5-4B")
 DEFAULT_DATA_DIR = ROOT / "training/public_sft_grpo_v1/data/gsm8k_sft32_v1"
 DEFAULT_OUTPUT = ROOT / "experiments/runs/20260715_qwen35_4b_gsm8k_sft32_overfit_v1"
-EXPECTED_MODEL_CLASS = "Qwen3_5ForCausalLM"
-EXPECTED_EOS_ID = 248046
-EXPECTED_PAD_ID = 248044
-EXPECTED_LORA_MODULES = 152
-EXPECTED_TRAINABLE_PARAMS = 14_376_960
+EXPECTED_MODEL_CLASS = os.environ.get("CAPA_EXPECTED_MODEL_CLASS", "Qwen3_5ForCausalLM")
+EXPECTED_EOS_ID = int(os.environ.get("CAPA_EXPECTED_EOS_ID", "248046"))
+EXPECTED_PAD_ID = int(os.environ.get("CAPA_EXPECTED_PAD_ID", "248044"))
+EXPECTED_LORA_MODULES = int(os.environ.get("CAPA_EXPECTED_LORA_MODULES", "152"))
+EXPECTED_TRAINABLE_PARAMS = int(os.environ.get("CAPA_EXPECTED_TRAINABLE_PARAMS", "14376960"))
 TARGET_MODULES = [
     "q_proj",
     "k_proj",

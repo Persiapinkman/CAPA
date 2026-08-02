@@ -146,9 +146,9 @@ common_args=(
   --output-dir "${OUTPUT_DIR}"
   --max-steps "${MAX_STEPS}"
   --seed "${SEED}"
-  --max-prompt-tokens 4608
-  --max-completion-length 320
-  --num-generations 4
+  --max-prompt-tokens "${MAX_PROMPT_TOKENS:-4608}"
+  --max-completion-length "${MAX_COMPLETION_LENGTH:-320}"
+  --num-generations "${NUM_GENERATIONS:-4}"
   --generation-batch-size "${GENERATION_BATCH_SIZE}"
   --expected-world-size "${NUM_PROCESSES}"
   --per-device-train-batch-size 1

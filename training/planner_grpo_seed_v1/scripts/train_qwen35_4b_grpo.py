@@ -66,11 +66,11 @@ DEFAULT_STEP_DATA = (
 )
 DEFAULT_OUTPUT = ROOT / "outputs/planner-grpo-qwen35-4b-v5-train-v1-seed42"
 EXPECTED_DATASET_ID = "planner_multistep_grpo_value_v5_train_v1"
-EXPECTED_MODEL_CLASS = "Qwen3_5ForCausalLM"
-EXPECTED_EOS_ID = 248046
-EXPECTED_PAD_ID = 248044
-EXPECTED_LORA_MODULES = 152
-EXPECTED_TRAINABLE_PARAMS = 14_376_960
+EXPECTED_MODEL_CLASS = os.environ.get("CAPA_EXPECTED_MODEL_CLASS", "Qwen3_5ForCausalLM")
+EXPECTED_EOS_ID = int(os.environ.get("CAPA_EXPECTED_EOS_ID", "248046"))
+EXPECTED_PAD_ID = int(os.environ.get("CAPA_EXPECTED_PAD_ID", "248044"))
+EXPECTED_LORA_MODULES = int(os.environ.get("CAPA_EXPECTED_LORA_MODULES", "152"))
+EXPECTED_TRAINABLE_PARAMS = int(os.environ.get("CAPA_EXPECTED_TRAINABLE_PARAMS", "14376960"))
 NONTHINKING_SUFFIX = "<|im_start|>assistant\n<think>\n\n</think>\n\n"
 TARGET_MODULES = [
     "q_proj",
@@ -953,6 +953,7 @@ def main() -> None:
 
     torch.backends.cudnn.enabled = False
     set_seed(args.seed)
+    _use_bf16 = torch.cuda.is_available() and torch.cuda.is_bf16_supported()
     reward_funcs = [
         make_task_reward(),
         make_batch_format_reward(tokenizer, args.max_completion_length),
@@ -988,11 +989,10 @@ def main() -> None:
         warmup_steps=args.warmup_steps,
         max_steps=args.max_steps,
         max_grad_norm=1.0,
-        fp16=True,
-        bf16=False,
+        fp16=not _use_bf16,
+        bf16=_use_bf16,
         gradient_checkpointing=True,
         gradient_checkpointing_kwargs={"use_reentrant": False},
-        use_cache=False,
         remove_unused_columns=False,
         optim="adamw_torch",
         seed=args.seed,
@@ -1023,7 +1023,6 @@ def main() -> None:
         average_tokens_across_devices=True,
         torch_empty_cache_steps=1,
         torch_compile=False,
-        trust_remote_code=False,
         model_init_kwargs=(
             None
             if adapter_path is not None
@@ -1051,11 +1050,13 @@ def main() -> None:
     if adapter_path is not None:
         base_model = AutoModelForCausalLM.from_pretrained(
             model_path,
-            dtype=torch.float16,
+            dtype=torch.bfloat16 if _use_bf16 else torch.float16,
             attn_implementation="sdpa",
             low_cpu_mem_usage=True,
             trust_remote_code=False,
         )
+        if hasattr(base_model, "config"):
+            base_model.config.use_cache = False
         model_input = PeftModel.from_pretrained(
             base_model,
             adapter_path,
@@ -1083,17 +1084,22 @@ def main() -> None:
         trainer._capa_minimum_free_gib = args.minimum_free_gib
         audit = model_and_lora_audit(trainer.model)
         scaler = trainer.accelerator.scaler
-        if scaler is None or float(scaler.get_scale()) != 1.0:
-            raise RuntimeError(f"unexpected GradScaler: {scaler}")
-        scaler_growth_interval = int(getattr(scaler, "_growth_interval", -1))
-        if scaler_growth_interval != 100000:
-            raise RuntimeError(f"unexpected GradScaler growth_interval={scaler_growth_interval}")
+        # bf16 (H20): GradScaler is None by design; only enforce the fp16 gate.
+        if _use_bf16:
+            scaler_growth_interval = None
+        else:
+            if scaler is None or float(scaler.get_scale()) != 1.0:
+                raise RuntimeError(f"unexpected GradScaler: {scaler}")
+            scaler_growth_interval = int(getattr(scaler, "_growth_interval", -1))
+            if scaler_growth_interval != 100000:
+                raise RuntimeError(f"unexpected GradScaler growth_interval={scaler_growth_interval}")
         if is_main:
             run_config["model_audit"] = audit
-            run_config["grad_scaler"] = {
-                "scale": float(scaler.get_scale()),
-                "growth_interval": scaler_growth_interval,
-            }
+            run_config["grad_scaler"] = (
+                {"scale": None, "growth_interval": None, "note": "bf16-no-scaler"}
+                if _use_bf16 else
+                {"scale": float(scaler.get_scale()), "growth_interval": scaler_growth_interval}
+            )
             write_json(output_dir / "capa_qwen35_grpo_config.json", run_config)
 
         before_fingerprint: dict[str, float | int] | None = None

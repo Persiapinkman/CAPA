@@ -96,7 +96,7 @@ common_args=(
   --data-dir "${DATA_DIR}"
   --output-dir "${OUTPUT_DIR}"
   --expected-world-size "${NUM_PROCESSES}"
-  --max-length 4800
+  --max-length "${MAX_LENGTH:-4800}"
   --max-steps "${MAX_STEPS:-100}"
   --learning-rate "${LEARNING_RATE:-2e-5}"
   --warmup-steps "${WARMUP_STEPS:-5}"
