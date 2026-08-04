@@ -160,6 +160,29 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--max-allocated-gib", type=float, default=28.0)
     parser.add_argument("--minimum-free-gib", type=float, default=2.0)
+    parser.add_argument(
+        "--vanishing-signal-patience",
+        type=int,
+        default=10,
+        help=(
+            "Abort after this many consecutive steps where the group signal is "
+            "degenerate (frac_reward_zero_std >= threshold AND grad_norm == 0). "
+            "0 disables the gate. Guards against the 2026-08-03 zero-update "
+            "busywork mode; see reports/V7_GRPO_SUPPORT_AUDIT_20260803.md."
+        ),
+    )
+    parser.add_argument(
+        "--vanishing-signal-warmup",
+        type=int,
+        default=10,
+        help="Do not evaluate the vanishing-signal gate before this step.",
+    )
+    parser.add_argument(
+        "--vanishing-signal-max-zero-std",
+        type=float,
+        default=0.99,
+        help="frac_reward_zero_std at or above which a step counts as degenerate.",
+    )
     parser.add_argument("--resume-from-checkpoint", default=None)
     parser.add_argument(
         "--report-to",
@@ -698,6 +721,119 @@ class FiniteGradientAndMemoryCallback(TrainerCallback):
         return control
 
 
+class VanishingSignalCallback(TrainerCallback):
+    """Abort a GRPO run that is provably performing zero-update busywork.
+
+    Background (2026-08-03): three concurrent ``seed43`` runs burned 2.5 h x 3
+    on4 GPUs while ``frac_reward_zero_std`` sat at 0.994 and ``grad_norm`` was
+    exactly 0.0 on 21 of 22 logged steps.  The initializer had saturated the
+    optimizer pool, so every group-normalised advantage was degenerate:
+
+        A_i = (r_i - mu_g) / sigma_g,  sigma_g = 0  =>  no gradient
+
+    The project playbook already requires ``optimizer_steps = 0`` when the
+    support gate fails.  This callback enforces the same rule *online*, so a
+    pool that looks fine on paper but is saturated in practice cannot silently
+    consume the cluster.
+
+    The check is deliberately conservative:
+
+    *it only starts after ``warmup_steps`` (early steps legitimately have
+        zero-variance groups while the policy settles);
+    *   it needs ``patience`` consecutive offending steps, so a single
+        saturated batch is tolerated;
+    *   a step offends only when the group signal is *degenerate*, i.e. both
+        ``frac_reward_zero_std >= max_zero_std_frac`` and ``grad_norm == 0``.
+
+    Set ``--vanishing-signal-patience 0`` to disable.
+    """
+
+    def __init__(
+        self,
+        output_dir: Path,
+        *,
+        patience: int,
+        warmup_steps: int,
+        max_zero_std_frac: float,
+    ) -> None:
+        self.output_dir = output_dir
+        self.patience = int(patience)
+        self.warmup_steps = int(warmup_steps)
+        self.max_zero_std_frac = float(max_zero_std_frac)
+        self._streak = 0
+        self._observed: list[dict[str, float]] = []
+
+    def _path(self) -> Path:
+        rank = int(os.environ.get("RANK", "0"))
+        return self.output_dir / "telemetry" / f"rank{rank}.jsonl"
+
+    def on_log(self, args, state, control, logs=None, **kwargs):
+        if self.patience <= 0 or not logs:
+            return control
+        step = int(state.global_step)
+        if step <= self.warmup_steps:
+            return control
+
+        zero_std = logs.get("frac_reward_zero_std")
+        grad_norm = logs.get("grad_norm")
+        if zero_std is None or grad_norm is None:
+            return control
+
+        degenerate = (
+            float(zero_std) >= self.max_zero_std_frac
+            and abs(float(grad_norm)) == 0.0
+        )
+        if not degenerate:
+            self._streak = 0
+            return control
+
+        self._streak += 1
+        self._observed.append(
+            {
+                "global_step": step,
+                "frac_reward_zero_std": float(zero_std),
+                "grad_norm": float(grad_norm),
+                "reward": float(logs.get("reward", float("nan"))),
+                "reward_std": float(logs.get("reward_std", float("nan"))),
+            }
+        )
+        append_jsonl(
+            self._path(),
+            {
+                "timestamp": utc_now(),
+                "event": "vanishing_signal_step",
+                "global_step": step,
+                "streak": self._streak,
+                "patience": self.patience,
+                "frac_reward_zero_std": float(zero_std),
+                "grad_norm": float(grad_norm),
+            },
+        )
+        if self._streak < self.patience:
+            return control
+
+        summary = {
+            "timestamp": utc_now(),
+            "event": "vanishing_signal_abort",
+            "global_step": step,
+            "streak": self._streak,
+            "patience": self.patience,
+            "max_zero_std_frac": self.max_zero_std_frac,
+            "observed": self._observed[-self.patience :],
+        }
+        append_jsonl(self._path(), summary)
+        write_json(self.output_dir / "vanishing_signal_abort.json", summary)
+        raise RuntimeError(
+            "vanishing-signal gate failed: "
+            f"{self._streak} consecutive steps with frac_reward_zero_std >= "
+            f"{self.max_zero_std_frac} and grad_norm == 0 (last step {step}). "
+            "The initializer has saturated this optimizer pool, so GRPO cannot "
+            "learn from it. Re-run the support audit "
+            "(pipelines/eval/audit_grpo_support.py) and change the pool or the "
+            "initializer instead of increasing steps/seeds/temperature."
+        )
+
+
 def model_and_lora_audit(model: Any) -> dict[str, Any]:
     base = model.get_base_model() if hasattr(model, "get_base_model") else model
     if base.__class__.__name__ != EXPECTED_MODEL_CLASS:
@@ -1068,6 +1204,12 @@ def main() -> None:
         max_allocated_gib=args.max_allocated_gib,
         minimum_free_gib=args.minimum_free_gib,
     )
+    signal_callback = VanishingSignalCallback(
+        output_dir=output_dir,
+        patience=args.vanishing_signal_patience,
+        warmup_steps=args.vanishing_signal_warmup,
+        max_zero_std_frac=args.vanishing_signal_max_zero_std,
+    )
     trainer: V100GRPOTrainer | None = None
     failure_path = output_dir / "telemetry" / f"rank{rank}_failure.json"
     try:
@@ -1078,7 +1220,7 @@ def main() -> None:
             train_dataset=dataset,
             processing_class=tokenizer,
             peft_config=peft_config,
-            callbacks=[callback],
+            callbacks=[callback, signal_callback],
         )
         trainer._capa_max_allocated_gib = args.max_allocated_gib
         trainer._capa_minimum_free_gib = args.minimum_free_gib

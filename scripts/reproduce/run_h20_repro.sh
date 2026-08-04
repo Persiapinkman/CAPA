@@ -573,12 +573,60 @@ phase_sft_eval() {
 
 # ---------- GRPO x seeds + eval ---------------------------------------------
 
+phase_support() {
+  # Trainer-faithful GRPO support audit. MUST pass before phase 'grpo'.
+  #
+  # Rationale: on 2026-08-03 the v7 optimizer pool was found fully saturated
+  # (gold_support=1.000, nonzero_variance=0.000) because the routing hint was
+  # never stripped, so three concurrent seed43 runs burned 2.5h x 3 producing
+  # grad_norm=0 on 21/22 steps. The playbook requires optimizer_steps=0 when
+  # support fails; this phase enforces it before any GPU-hours are spent.
+  # See reports/V7_GRPO_SUPPORT_AUDIT_20260803.md
+  SELF_PHASE="support"
+  skip_if_done "support" || return 0
+  require_infer
+  require_file "${GRPO_STEP_TRAIN}"
+
+  local ckpt; ckpt="$(_latest_sft_checkpoint)"
+  [[ -n "${ckpt}" ]] || die "no SFT checkpoint to audit; run phase 'sft' first"
+  local merged="${ckpt%/}_merged"
+  [[ -d "${merged}" ]] || die "merged SFT model missing at ${merged}; run phase 'sft-merge' first"
+
+  local out="${REPRO_ROOT}/support/support_${STAMP}.json"
+  mkdir -p "$(dirname "${out}")"
+
+  stop_vllm
+  serve_local "${merged}" "support_probe"
+  log "support audit pool=${GRPO_STEP_TRAIN}"
+  if run "${INFER_PY}" pipelines/eval/audit_grpo_support.py \
+      --pool "optimizer=${GRPO_STEP_TRAIN}" \
+      --api-base "http://127.0.0.1:${VLLM_4B_PORT}/v1" \
+      --model support_probe \
+      --prompts "${SUPPORT_PROMPTS:-120}" \
+      --generations "${SUPPORT_GENERATIONS:-4}" \
+      --seed "${SUPPORT_SEED:-42}" \
+      --out "${out}"; then
+    log "support audit PASSED -> ${out}"
+    stop_vllm
+    mark_done "support"
+  else
+    stop_vllm
+    log "support audit FAILED -> ${out}"
+    die "support gate failed: optimizer_steps must stay 0. Change the pool or the initializer; do NOT lower thresholds or add seeds/steps/temperature."
+  fi
+}
+
 phase_grpo() {
   SELF_PHASE="grpo"
   skip_if_done "grpo" || return 0
   require_train
   require_file "${GRPO_STEP_TRAIN}"
   require_file "${GRPO_STEP_TRAIN%.jsonl}.manifest.json" "run phase 'prep' first"
+  # Hard prerequisite: never spend GPU-hours on a pool that cannot produce
+  # within-group reward variance. SUPPORT_REQUIRED=0 opts out explicitly.
+  if [[ "${SUPPORT_REQUIRED:-1}" == "1" ]] && ! is_done "support"; then
+    die "support gate not passed; run phase 'support' first (or set SUPPORT_REQUIRED=0 to override deliberately)"
+  fi
   local ckpt; ckpt="$(_latest_sft_checkpoint)"
   [[ -n "${ckpt}" ]] || die "no SFT checkpoint to seed GRPO; run phase 'sft' first"
 
@@ -740,6 +788,8 @@ phase_all_train() {
   phase_sft_merge
   phase_sft_eval
   stop_vllm
+  phase_support
+  stop_vllm
   phase_grpo
   phase_grpo_eval
   stop_vllm
@@ -768,12 +818,13 @@ Training and downstream eval:
   sft                   SFT on planner_retry_migrate_v6 (4x H20)
   sft-merge             merge SFT LoRA to <sft>/checkpoint-*_merged
   sft-eval              serve merged SFT model, 3x eval across 3 scenarios
+  support               trainer-faithful GRPO support audit (HARD GATE before grpo)
   grpo                  GRPO for each seed in $SEEDS on top of SFT checkpoint
   grpo-eval             merge and eval every seed
   compare               case-macro paired compare on softbnd_dev
   gate                  preregistered multi-seed dev gate on softbnd_dev
   sealed                open sealed V6 test once, only if gate passed
-  all-train             prep + sft + sft-merge + sft-eval + grpo + grpo-eval + compare + gate
+  all-train             prep + sft + sft-merge + sft-eval + support + grpo + grpo-eval + compare + gate
 
 Env:
   ART_ROOT=<path>          override artifact root
@@ -781,6 +832,9 @@ Env:
   SEEDS="42 43 44"         GRPO seeds
   DRY_RUN=1                print commands only
   FORCE=1                  overwrite existing phase status
+  SUPPORT_REQUIRED=0       deliberately bypass the support hard gate
+  SUPPORT_PROMPTS=<n>      support audit prompt groups (default 120)
+  CAPA_STRIP_ROUTING_HINT=1  build/train on hint-stripped prompts
 EOF
 }
 
@@ -802,6 +856,7 @@ main() {
       sft)               phase_sft ;;
       sft-merge)         phase_sft_merge ;;
       sft-eval)          phase_sft_eval ;;
+      support)           phase_support ;;
       grpo)              phase_grpo ;;
       grpo-eval)         phase_grpo_eval ;;
       compare)           phase_compare ;;
