@@ -32,7 +32,7 @@ import json
 import os
 import statistics
 import sys
-from collections import Counter
+from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -95,6 +95,12 @@ V7_MAX_PROMPT_TOKENS = 12288
 # hint (that is what the 35B >= 0.85 health gate was measured against), so the
 # switch is per-invocation rather than global.
 STRIP_ROUTING_HINT = os.environ.get("CAPA_STRIP_ROUTING_HINT", "0").strip() in {"1", "true", "yes"}
+
+# Rebalance SFT supervision by target action class. See balance_sft_actions()
+# for why: step-1 is 640 of 1440 rows and all of them are detector calls, so
+# detectors dominate 55.6% of supervision and the policy either fails to learn
+# retry (under-trained) or over-generalises it (over-trained).
+BALANCE_SFT_ACTIONS = os.environ.get("CAPA_SFT_BALANCE_ACTIONS", "0").strip() in {"1", "true", "yes"}
 
 # The builder emits "决策提示：<hint>" as the tail of observation.summary.
 _HINT_PREFIX = "决策提示："
@@ -178,6 +184,103 @@ def _render_row(case: dict[str, Any], step_index: int, tokenizer: Any) -> tuple[
             f"{len(ids)} prompt tokens exceeds hard gate {V7_MAX_PROMPT_TOKENS}"
         )
     return rendered, len(ids)
+
+
+def _action_of_row(row: dict[str, Any]) -> str:
+    exp = json.loads(row["expected_step"])
+    action = exp.get("action") or exp.get("decision_type") or "?"
+    # Collapse the two detector families: what matters for balance is the
+    # *decision* ("probe again") not which vendor implements it.
+    return "detector" if "detection" in str(action) else str(action)
+
+
+def balance_sft_actions(rows: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    """Rebalance SFT supervision by target action (CAPA_SFT_BALANCE_ACTIONS=1).
+
+    Motivation (2026-08-04, reports/V8_SUPPORT_RESULT_20260804.md):
+
+    The v8 SFT set is 1440 rows, of which step-1 contributes 640 -- and every
+    single step-1 target is a detector call, because every trajectory starts by
+    probing.  That is *uninformative* supervision: there is no decision to
+    learn at step 1.  Yet it pushes detectors to 55.6% of all supervision, and
+    the checkpoint sweep shows exactly the damage that causes:
+
+        ckpt-50   retry not yet learned            gold 0.512
+        ckpt-150  detector over-generalised        P6 gold 0.694 -> 0.000,
+                                forbidden_group_rate 0.667
+
+    This is the n52 conditional collapse, and n58 fixed it by mechanically
+    balancing the target action classes (retry/migrate/end = 24/24/24) rather
+    than by training longer.  We do the same here:
+
+    1. Down-sample step-1 rows to ``CAPA_SFT_STEP1_ROWS`` (default 80), keeping
+       the category x detector cells balanced so no stratum disappears.
+    2. Up-sample the minority action classes among the decision rows
+       (step >= 2) to the majority count, by repeating whole rows.  Repeats are
+       marked with ``balance_repeat_index`` so an auditor can find them.
+
+    Down-sampling the majority (migrate) instead of up-sampling the minorities
+    was rejected: P4/P5/G2 currently hold gold 0.92-1.00 and P6 only 0.583, so
+    removing migrate supervision risks breaking the one group that already
+    works.
+    """
+    step1 = [r for r in rows if int(r["step_index"]) == 1]
+    decisions = [r for r in rows if int(r["step_index"]) >= 2]
+
+    # --- 1. balanced down-sample of step-1 -----------------------------------
+    keep_n = int(os.environ.get("CAPA_SFT_STEP1_ROWS", "80"))
+    cells: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
+    for r in step1:
+        action = json.loads(r["expected_step"]).get("action") or ""
+        cells[(str(r.get("category")), str(action))].append(r)
+    for bucket in cells.values():
+        bucket.sort(key=lambda r: str(r.get("case_id")))
+    kept_step1: list[dict[str, Any]] = []
+    cell_keys = sorted(cells)
+    idx = 0
+    while len(kept_step1) < min(keep_n, len(step1)):
+        bucket = cells[cell_keys[idx % len(cell_keys)]]
+        if bucket:
+            kept_step1.append(bucket.pop(0))
+        idx += 1
+        if idx > len(step1) * 2:
+            break
+
+    # --- 2. up-sample minority action classes among decision rows ------------
+    by_action: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for r in decisions:
+        by_action[_action_of_row(r)].append(r)
+    target = max((len(v) for v in by_action.values()), default=0)
+    balanced_decisions: list[dict[str, Any]] = []
+    repeats: dict[str, int] = {}
+    for action, bucket in sorted(by_action.items()):
+        bucket = sorted(bucket, key=lambda r: str(r.get("case_id")))
+        balanced_decisions.extend(bucket)
+        need = max(0, target - len(bucket))
+        for i in range(need):
+            src = bucket[i % len(bucket)]
+            clone = dict(src)
+            clone["balance_repeat_index"] = i // len(bucket) + 1
+            clone["case_id"] = f"{src.get('case_id')}__balrep{clone['balance_repeat_index']}"
+            balanced_decisions.append(clone)
+        repeats[action] = need
+
+    out = kept_step1 + balanced_decisions
+    audit = {
+        "enabled": True,
+        "step1_rows_before": len(step1),
+        "step1_rows_after": len(kept_step1),
+        "step1_target": keep_n,
+        "decision_rows_before": len(decisions),
+        "decision_rows_after": len(balanced_decisions),
+        "upsample_target_per_action": target,
+        "repeats_added": repeats,
+        "action_mix_before": dict(Counter(_action_of_row(r) for r in rows)),
+        "action_mix_after": dict(Counter(_action_of_row(r) for r in out)),
+        "rows_before": len(rows),
+        "rows_after": len(out),
+    }
+    return out, audit
 
 
 def build_sft_rows(cases: list[dict[str, Any]], tokenizer: Any) -> list[dict[str, Any]]:
@@ -317,10 +420,18 @@ def build_grpo_step2_rows(cases: list[dict[str, Any]], tokenizer: Any) -> list[d
 
 def audit_rows(rows: list[dict[str, Any]]) -> dict[str, Any]:
     tokens = sorted(int(r["prompt_token_count"]) for r in rows)
-    prompt_hashes = [r["prompt_sha256"] for r in rows]
+    # Rows created by deliberate action-class up-sampling carry
+    # ``balance_repeat_index`` and are expected to share a prompt hash with
+    # their source row (the n58 recipe repeated minority rows the same way).
+    # They must not trip the accidental-duplicate gate, but they are counted
+    # separately so an auditor can always see how much of the set is repeats.
+    intentional = [r for r in rows if r.get("balance_repeat_index")]
+    organic = [r for r in rows if not r.get("balance_repeat_index")]
+    organic_hashes = [r["prompt_sha256"] for r in organic]
     audit = {
         "rows": len(rows),
-        "duplicate_prompt_hashes": len(prompt_hashes) - len(set(prompt_hashes)),
+        "intentional_repeat_rows": len(intentional),
+        "duplicate_prompt_hashes": len(organic_hashes) - len(set(organic_hashes)),
         "prompt_tokens": {
             "min": tokens[0],
             "p50": tokens[len(tokens) // 2],
@@ -381,6 +492,8 @@ def main() -> int:
     suffix = args.variant_suffix
     if suffix is None:
         suffix = "_nohint" if STRIP_ROUTING_HINT else ""
+        if BALANCE_SFT_ACTIONS:
+            suffix += "_balanced"
     sft_dir = Path(str(SFT_DIR) + suffix)
 
     print(f"[v7-stage] loading tokenizer from {args.model_dir}")
@@ -392,11 +505,20 @@ def main() -> int:
     audits: dict[str, Any] = {}
     files: dict[str, str] = {}
     sha256_map: dict[str, str] = {}
+    balance_audits: dict[str, Any] = {}
 
     # --- SFT ---
     for split in ("sft_train", "sft_dev"):
         cases = load_cases(split)
         rows = build_sft_rows(cases, tokenizer)
+        if BALANCE_SFT_ACTIONS:
+            rows, balance_audit = balance_sft_actions(rows)
+            balance_audits[split] = balance_audit
+            print(
+                f"[v7-stage] {split} action balance: "
+                f"{balance_audit['rows_before']} -> {balance_audit['rows_after']} rows, "
+                f"mix {balance_audit['action_mix_before']} -> {balance_audit['action_mix_after']}"
+            )
         a = audit_rows(rows)
         if a["status"] != "pass":
             raise RuntimeError(f"{split} audit failed: {a}")
@@ -500,6 +622,10 @@ def main() -> int:
         "audits": audits,
         "files": files,
         "sha256": sha256_map,
+        "sft_action_balance": (
+            {"enabled": BALANCE_SFT_ACTIONS, "per_split": balance_audits}
+            if BALANCE_SFT_ACTIONS else {"enabled": False}
+        ),
         "routing_hint": {
             "stripped": STRIP_ROUTING_HINT,
             "env": "CAPA_STRIP_ROUTING_HINT",
