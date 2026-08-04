@@ -1,0 +1,367 @@
+{
+  "tool": "diagnose_grpo_headroom",
+  "purpose": "locate real GRPO headroom (pass_all_runs) vs illusory headroom (mean_score)",
+  "arms": [
+    {
+      "arm": "sft_rescored",
+      "dir": "/apdcephfs_hzlf/share_1227201/zkq/capa_h20/artifacts/CAPA/repro_h20/eval/rescored_anyfix/sft_softbnd",
+      "runs": [
+        "sft_run1_reward.json",
+        "sft_run2_reward.json",
+        "sft_run3_reward.json"
+      ],
+      "n_runs": 3,
+      "cases": 240,
+      "incomplete_cases": 0,
+      "mean_score": 0.98131,
+      "pass_all_runs_rate": 0.7625,
+      "pass_any_run_rate": 0.833333,
+      "flaky_cases": 17,
+      "mean_headroom": 0.01869,
+      "pass_headroom": 0.2375,
+      "headroom_ratio_pass_over_mean": 12.708,
+      "failure_reasons_by_occurrence": {
+        "step2:finish_after_tool": 142,
+        "final_tool_not_finished_hit": 139,
+        "step2:action_match": 3,
+        "step2:argument_match": 3,
+        "repeated_tool_hit": 3,
+        "step1:argument_match": 3
+      },
+      "failure_reasons_by_distinct_case": {
+        "step2:finish_after_tool": 56,
+        "final_tool_not_finished_hit": 55,
+        "repeated_tool_hit": 1,
+        "step1:argument_match": 1,
+        "step2:action_match": 1,
+        "step2:argument_match": 1
+      },
+      "safety_signature_occurrence": {
+        "final_tool_not_finished_hit": 139,
+        "repeated_tool_hit": 3
+      },
+      "by_category": {
+        "G1_first_success_end": {
+          "cases": 30,
+          "mean_score": 1.0,
+          "pass_all_runs_rate": 1.0,
+          "pass_any_run_rate": 1.0,
+          "flaky_cases": 0,
+          "mean_headroom": 0.0,
+          "pass_headroom": 0.0
+        },
+        "G2_conflict_stale_history": {
+          "cases": 30,
+          "mean_score": 0.986956,
+          "pass_all_runs_rate": 0.766667,
+          "pass_any_run_rate": 0.9,
+          "flaky_cases": 4,
+          "mean_headroom": 0.013044,
+          "pass_headroom": 0.233333
+        },
+        "P1_iou_low_fresh": {
+          "cases": 30,
+          "mean_score": 0.928261,
+          "pass_all_runs_rate": 0.233333,
+          "pass_any_run_rate": 0.366667,
+          "flaky_cases": 4,
+          "mean_headroom": 0.071739,
+          "pass_headroom": 0.766667
+        },
+        "P2_all_gates_ok": {
+          "cases": 30,
+          "mean_score": 1.0,
+          "pass_all_runs_rate": 1.0,
+          "pass_any_run_rate": 1.0,
+          "flaky_cases": 0,
+          "mean_headroom": 0.0,
+          "pass_headroom": 0.0
+        },
+        "P3_transient_5xx": {
+          "cases": 30,
+          "mean_score": 1.0,
+          "pass_all_runs_rate": 1.0,
+          "pass_any_run_rate": 1.0,
+          "flaky_cases": 0,
+          "mean_headroom": 0.0,
+          "pass_headroom": 0.0
+        },
+        "P4_auth_quota": {
+          "cases": 30,
+          "mean_score": 0.997101,
+          "pass_all_runs_rate": 0.9,
+          "pass_any_run_rate": 1.0,
+          "flaky_cases": 3,
+          "mean_headroom": 0.002899,
+          "pass_headroom": 0.1
+        },
+        "P5_second_failure": {
+          "cases": 30,
+          "mean_score": 1.0,
+          "pass_all_runs_rate": 1.0,
+          "pass_any_run_rate": 1.0,
+          "flaky_cases": 0,
+          "mean_headroom": 0.0,
+          "pass_headroom": 0.0
+        },
+        "P6_domain_shift": {
+          "cases": 30,
+          "mean_score": 0.938164,
+          "pass_all_runs_rate": 0.2,
+          "pass_any_run_rate": 0.4,
+          "flaky_cases": 6,
+          "mean_headroom": 0.061836,
+          "pass_headroom": 0.8
+        }
+      }
+    },
+    {
+      "arm": "base4b_rescored",
+      "dir": "/apdcephfs_hzlf/share_1227201/zkq/capa_h20/artifacts/CAPA/repro_h20/eval/rescored_anyfix/base4b_softbnd",
+      "runs": [
+        "base4b_run1_reward.json",
+        "base4b_run2_reward.json",
+        "base4b_run3_reward.json"
+      ],
+      "n_runs": 3,
+      "cases": 240,
+      "incomplete_cases": 0,
+      "mean_score": 0.771413,
+      "pass_all_runs_rate": 0.0,
+      "pass_any_run_rate": 0.0,
+      "flaky_cases": 0,
+      "mean_headroom": 0.228587,
+      "pass_headroom": 1.0,
+      "headroom_ratio_pass_over_mean": 4.375,
+      "failure_reasons_by_occurrence": {
+        "step1:finish_after_tool": 720,
+        "premature_stop_hit": 720,
+        "step2:finish_after_tool": 408,
+        "final_tool_not_finished_hit": 408,
+        "step2:action_match": 174,
+        "step2:argument_match": 174,
+        "repeated_tool_hit": 174,
+        "step2:decision_type_valid": 48,
+        "step1:argument_match": 36
+      },
+      "failure_reasons_by_distinct_case": {
+        "premature_stop_hit": 240,
+        "step1:finish_after_tool": 240,
+        "final_tool_not_finished_hit": 144,
+        "step2:finish_after_tool": 144,
+        "repeated_tool_hit": 65,
+        "step2:action_match": 65,
+        "step2:argument_match": 65,
+        "step2:decision_type_valid": 18,
+        "step1:argument_match": 12
+      },
+      "safety_signature_occurrence": {
+        "premature_stop_hit": 720,
+        "final_tool_not_finished_hit": 408,
+        "repeated_tool_hit": 174
+      },
+      "by_category": {
+        "G1_first_success_end": {
+          "cases": 30,
+          "mean_score": 0.776908,
+          "pass_all_runs_rate": 0.0,
+          "pass_any_run_rate": 0.0,
+          "flaky_cases": 0,
+          "mean_headroom": 0.223092,
+          "pass_headroom": 1.0
+        },
+        "G2_conflict_stale_history": {
+          "cases": 30,
+          "mean_score": 0.801449,
+          "pass_all_runs_rate": 0.0,
+          "pass_any_run_rate": 0.0,
+          "flaky_cases": 0,
+          "mean_headroom": 0.198551,
+          "pass_headroom": 1.0
+        },
+        "P1_iou_low_fresh": {
+          "cases": 30,
+          "mean_score": 0.722464,
+          "pass_all_runs_rate": 0.0,
+          "pass_any_run_rate": 0.0,
+          "flaky_cases": 0,
+          "mean_headroom": 0.277536,
+          "pass_headroom": 1.0
+        },
+        "P2_all_gates_ok": {
+          "cases": 30,
+          "mean_score": 0.839323,
+          "pass_all_runs_rate": 0.0,
+          "pass_any_run_rate": 0.0,
+          "flaky_cases": 0,
+          "mean_headroom": 0.160677,
+          "pass_headroom": 1.0
+        },
+        "P3_transient_5xx": {
+          "cases": 30,
+          "mean_score": 0.699275,
+          "pass_all_runs_rate": 0.0,
+          "pass_any_run_rate": 0.0,
+          "flaky_cases": 0,
+          "mean_headroom": 0.300725,
+          "pass_headroom": 1.0
+        },
+        "P4_auth_quota": {
+          "cases": 30,
+          "mean_score": 0.763285,
+          "pass_all_runs_rate": 0.0,
+          "pass_any_run_rate": 0.0,
+          "flaky_cases": 0,
+          "mean_headroom": 0.236715,
+          "pass_headroom": 1.0
+        },
+        "P5_second_failure": {
+          "cases": 30,
+          "mean_score": 0.813044,
+          "pass_all_runs_rate": 0.0,
+          "pass_any_run_rate": 0.0,
+          "flaky_cases": 0,
+          "mean_headroom": 0.186956,
+          "pass_headroom": 1.0
+        },
+        "P6_domain_shift": {
+          "cases": 30,
+          "mean_score": 0.755556,
+          "pass_all_runs_rate": 0.0,
+          "pass_any_run_rate": 0.0,
+          "flaky_cases": 0,
+          "mean_headroom": 0.244444,
+          "pass_headroom": 1.0
+        }
+      }
+    },
+    {
+      "arm": "base35b_rescored",
+      "dir": "/apdcephfs_hzlf/share_1227201/zkq/capa_h20/artifacts/CAPA/repro_h20/eval/rescored_anyfix/base35b_softbnd",
+      "runs": [
+        "base35b_run1_reward.json",
+        "base35b_run2_reward.json",
+        "base35b_run3_reward.json"
+      ],
+      "n_runs": 3,
+      "cases": 240,
+      "incomplete_cases": 0,
+      "mean_score": 0.861352,
+      "pass_all_runs_rate": 0.183333,
+      "pass_any_run_rate": 0.216667,
+      "flaky_cases": 8,
+      "mean_headroom": 0.138648,
+      "pass_headroom": 0.816667,
+      "headroom_ratio_pass_over_mean": 5.89,
+      "failure_reasons_by_occurrence": {
+        "step2:finish_after_tool": 530,
+        "final_tool_not_finished_hit": 450,
+        "repeated_tool_hit": 128,
+        "step2:action_match": 124,
+        "step2:argument_match": 124,
+        "step1:finish_after_tool": 36,
+        "premature_stop_hit": 36,
+        "step2:decision_type_valid": 35,
+        "step1:action_match": 21,
+        "step1:argument_match": 21,
+        "skip_required_probe_hit": 12,
+        "forbidden:rag_answer": 6
+      },
+      "failure_reasons_by_distinct_case": {
+        "step2:finish_after_tool": 177,
+        "final_tool_not_finished_hit": 163,
+        "repeated_tool_hit": 61,
+        "step2:action_match": 60,
+        "step2:argument_match": 60,
+        "step2:decision_type_valid": 16,
+        "premature_stop_hit": 12,
+        "step1:finish_after_tool": 12,
+        "step1:action_match": 7,
+        "step1:argument_match": 7,
+        "skip_required_probe_hit": 4,
+        "forbidden:rag_answer": 2
+      },
+      "safety_signature_occurrence": {
+        "final_tool_not_finished_hit": 450,
+        "repeated_tool_hit": 128,
+        "premature_stop_hit": 36,
+        "skip_required_probe_hit": 12,
+        "forbidden:rag_answer": 6
+      },
+      "by_category": {
+        "G1_first_success_end": {
+          "cases": 30,
+          "mean_score": 0.921111,
+          "pass_all_runs_rate": 0.733333,
+          "pass_any_run_rate": 0.933333,
+          "flaky_cases": 6,
+          "mean_headroom": 0.078889,
+          "pass_headroom": 0.266667
+        },
+        "G2_conflict_stale_history": {
+          "cases": 30,
+          "mean_score": 0.789468,
+          "pass_all_runs_rate": 0.0,
+          "pass_any_run_rate": 0.0,
+          "flaky_cases": 0,
+          "mean_headroom": 0.210532,
+          "pass_headroom": 1.0
+        },
+        "P1_iou_low_fresh": {
+          "cases": 30,
+          "mean_score": 0.881884,
+          "pass_all_runs_rate": 0.0,
+          "pass_any_run_rate": 0.0,
+          "flaky_cases": 0,
+          "mean_headroom": 0.118116,
+          "pass_headroom": 1.0
+        },
+        "P2_all_gates_ok": {
+          "cases": 30,
+          "mean_score": 0.902222,
+          "pass_all_runs_rate": 0.733333,
+          "pass_any_run_rate": 0.8,
+          "flaky_cases": 2,
+          "mean_headroom": 0.097778,
+          "pass_headroom": 0.266667
+        },
+        "P3_transient_5xx": {
+          "cases": 30,
+          "mean_score": 0.880434,
+          "pass_all_runs_rate": 0.0,
+          "pass_any_run_rate": 0.0,
+          "flaky_cases": 0,
+          "mean_headroom": 0.119566,
+          "pass_headroom": 1.0
+        },
+        "P4_auth_quota": {
+          "cases": 30,
+          "mean_score": 0.831159,
+          "pass_all_runs_rate": 0.0,
+          "pass_any_run_rate": 0.0,
+          "flaky_cases": 0,
+          "mean_headroom": 0.168841,
+          "pass_headroom": 1.0
+        },
+        "P5_second_failure": {
+          "cases": 30,
+          "mean_score": 0.849758,
+          "pass_all_runs_rate": 0.0,
+          "pass_any_run_rate": 0.0,
+          "flaky_cases": 0,
+          "mean_headroom": 0.150242,
+          "pass_headroom": 1.0
+        },
+        "P6_domain_shift": {
+          "cases": 30,
+          "mean_score": 0.834782,
+          "pass_all_runs_rate": 0.0,
+          "pass_any_run_rate": 0.0,
+          "flaky_cases": 0,
+          "mean_headroom": 0.165218,
+          "pass_headroom": 1.0
+        }
+      }
+    }
+  ]
+}

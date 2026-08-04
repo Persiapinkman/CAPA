@@ -1,0 +1,4051 @@
+{
+  "tool": "audit_grpo_support",
+  "decision_rule": "all hard gates must pass before any optimizer step is authorised; on failure record optimizer_steps=0 and redesign the pool",
+  "pools": [
+    {
+      "pool": "nohint_pool",
+      "path": "training/planner_grpo_seed_v1/step_data/planner_retry_migrate_v7_longobs_grpo_train_qwen35_4b_nothinking_step2_nohint.jsonl",
+      "sampling": {
+        "model": "nohint_sft50",
+        "temperature": 0.7,
+        "top_p": 0.9,
+        "num_generations": 4,
+        "max_tokens": 320,
+        "seed": 42,
+        "prompt_selection": "category round-robin, seeded shuffle"
+      },
+      "metrics": {
+        "groups": 120,
+        "completions": 480,
+        "json_valid_rate": 0.997917,
+        "clipped_rate": 0.0,
+        "gold_support_rate": 0.620833,
+        "gold_support_group_rate": 0.883333,
+        "nonzero_variance_rate": 0.866667,
+        "frac_reward_zero_std": 0.133333,
+        "reward_mean": 0.658597,
+        "forbidden_group_rate": 0.058333
+      },
+      "gates": {
+        "json_valid": true,
+        "clipping": true,
+        "gold_support": false,
+        "nonzero_variance": true
+      },
+      "passed": false,
+      "thresholds": {
+        "json_valid_min": 0.99,
+        "clipped_max": 0.01,
+        "gold_support_min": 0.8,
+        "nonzero_variance_min": 0.25
+      },
+      "action_distribution": {
+        "migration_advisor": 363,
+        "end": 64,
+        "qwen_detection": 31,
+        "rexomni_detection": 13,
+        "re_question": 6,
+        "<unparsed>": 2,
+        "flux-image-generation": 1
+      },
+      "component_failures": {
+        "finish_after_tool": 224,
+        "argument_match": 182,
+        "action_match": 181,
+        "decision_type_valid": 133
+      },
+      "by_category": {
+        "G1_first_success_end": {
+          "groups": 15,
+          "nonzero_variance_rate": 0.7333,
+          "gold_support_rate": 0.25,
+          "reward_mean": 0.4133
+        },
+        "G2_conflict_stale_history": {
+          "groups": 15,
+          "nonzero_variance_rate": 0.9333,
+          "gold_support_rate": 0.8333,
+          "reward_mean": 0.8173
+        },
+        "P1_iou_low_fresh": {
+          "groups": 15,
+          "nonzero_variance_rate": 0.8,
+          "gold_support_rate": 0.7333,
+          "reward_mean": 0.7153
+        },
+        "P2_all_gates_ok": {
+          "groups": 15,
+          "nonzero_variance_rate": 0.6,
+          "gold_support_rate": 0.1833,
+          "reward_mean": 0.3613
+        },
+        "P3_transient_5xx": {
+          "groups": 15,
+          "nonzero_variance_rate": 1.0,
+          "gold_support_rate": 0.7,
+          "reward_mean": 0.7125
+        },
+        "P4_auth_quota": {
+          "groups": 15,
+          "nonzero_variance_rate": 0.8667,
+          "gold_support_rate": 0.9,
+          "reward_mean": 0.8732
+        },
+        "P5_second_failure": {
+          "groups": 15,
+          "nonzero_variance_rate": 1.0,
+          "gold_support_rate": 0.55,
+          "reward_mean": 0.5938
+        },
+        "P6_domain_shift": {
+          "groups": 15,
+          "nonzero_variance_rate": 1.0,
+          "gold_support_rate": 0.8167,
+          "reward_mean": 0.7819
+        }
+      },
+      "groups": [
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-116-G1_first_success_end",
+          "category": "G1_first_success_end",
+          "rewards": [
+            0.22,
+            0.22,
+            0.22,
+            0.22
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 0.22,
+          "gold_support": false,
+          "gold_support_rate": 0.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-218-G2_conflict_stale_history",
+          "category": "G2_conflict_stale_history",
+          "rewards": [
+            0.9,
+            1.0,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-068-P1_iou_low_fresh",
+          "category": "P1_iou_low_fresh",
+          "rewards": [
+            0.9,
+            0.9,
+            0.9,
+            0.12
+          ],
+          "reward_std": 0.33775,
+          "reward_mean": 0.705,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-050-P2_all_gates_ok",
+          "category": "P2_all_gates_ok",
+          "rewards": [
+            1.0,
+            0.22,
+            0.22,
+            0.22
+          ],
+          "reward_std": 0.33775,
+          "reward_mean": 0.415,
+          "gold_support": true,
+          "gold_support_rate": 0.25,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-245-P3_transient_5xx",
+          "category": "P3_transient_5xx",
+          "rewards": [
+            1.0,
+            1.0,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-173-P4_auth_quota",
+          "category": "P4_auth_quota",
+          "rewards": [
+            1.0,
+            0.9,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-165-P5_second_failure",
+          "category": "P5_second_failure",
+          "rewards": [
+            0.9,
+            1.0,
+            0.9,
+            0.15
+          ],
+          "reward_std": 0.341641,
+          "reward_mean": 0.7375,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-248-P6_domain_shift",
+          "category": "P6_domain_shift",
+          "rewards": [
+            0.9,
+            0.9,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.925,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-081-G1_first_success_end",
+          "category": "G1_first_success_end",
+          "rewards": [
+            1.0,
+            0.22,
+            0.22,
+            1.0
+          ],
+          "reward_std": 0.39,
+          "reward_mean": 0.61,
+          "gold_support": true,
+          "gold_support_rate": 0.5,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-128-G2_conflict_stale_history",
+          "category": "G2_conflict_stale_history",
+          "rewards": [
+            0.9,
+            1.0,
+            0.9,
+            0.9
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.925,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-051-P1_iou_low_fresh",
+          "category": "P1_iou_low_fresh",
+          "rewards": [
+            0.9,
+            1.0,
+            0.12,
+            0.9
+          ],
+          "reward_std": 0.354542,
+          "reward_mean": 0.73,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-068-P2_all_gates_ok",
+          "category": "P2_all_gates_ok",
+          "rewards": [
+            0.22,
+            1.0,
+            0.22,
+            0.22
+          ],
+          "reward_std": 0.33775,
+          "reward_mean": 0.415,
+          "gold_support": true,
+          "gold_support_rate": 0.25,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-218-P3_transient_5xx",
+          "category": "P3_transient_5xx",
+          "rewards": [
+            1.0,
+            0.15,
+            1.0,
+            0.15
+          ],
+          "reward_std": 0.425,
+          "reward_mean": 0.575,
+          "gold_support": true,
+          "gold_support_rate": 0.5,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-049-P4_auth_quota",
+          "category": "P4_auth_quota",
+          "rewards": [
+            0.9,
+            0.0,
+            0.12,
+            0.9
+          ],
+          "reward_std": 0.422137,
+          "reward_mean": 0.48,
+          "gold_support": true,
+          "gold_support_rate": 0.5,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-038-P5_second_failure",
+          "category": "P5_second_failure",
+          "rewards": [
+            0.15,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.368061,
+          "reward_mean": 0.7875,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-048-P6_domain_shift",
+          "category": "P6_domain_shift",
+          "rewards": [
+            0.12,
+            0.9,
+            0.12,
+            0.9
+          ],
+          "reward_std": 0.39,
+          "reward_mean": 0.51,
+          "gold_support": true,
+          "gold_support_rate": 0.5,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-195-G1_first_success_end",
+          "category": "G1_first_success_end",
+          "rewards": [
+            1.0,
+            1.0,
+            0.22,
+            0.22
+          ],
+          "reward_std": 0.39,
+          "reward_mean": 0.61,
+          "gold_support": true,
+          "gold_support_rate": 0.5,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-122-G2_conflict_stale_history",
+          "category": "G2_conflict_stale_history",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            0.9
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-049-P1_iou_low_fresh",
+          "category": "P1_iou_low_fresh",
+          "rewards": [
+            0.9,
+            0.9,
+            0.9,
+            0.9
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 0.9,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-036-P2_all_gates_ok",
+          "category": "P2_all_gates_ok",
+          "rewards": [
+            0.22,
+            0.22,
+            0.22,
+            0.22
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 0.22,
+          "gold_support": false,
+          "gold_support_rate": 0.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-038-P3_transient_5xx",
+          "category": "P3_transient_5xx",
+          "rewards": [
+            1.0,
+            0.9,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-051-P4_auth_quota",
+          "category": "P4_auth_quota",
+          "rewards": [
+            1.0,
+            0.9,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-116-P5_second_failure",
+          "category": "P5_second_failure",
+          "rewards": [
+            0.9,
+            0.15,
+            0.15,
+            0.9
+          ],
+          "reward_std": 0.375,
+          "reward_mean": 0.525,
+          "gold_support": true,
+          "gold_support_rate": 0.5,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-170-P6_domain_shift",
+          "category": "P6_domain_shift",
+          "rewards": [
+            0.12,
+            0.9,
+            0.9,
+            0.9
+          ],
+          "reward_std": 0.33775,
+          "reward_mean": 0.705,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-161-G1_first_success_end",
+          "category": "G1_first_success_end",
+          "rewards": [
+            0.22,
+            0.22,
+            0.22,
+            0.22
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 0.22,
+          "gold_support": false,
+          "gold_support_rate": 0.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-227-G2_conflict_stale_history",
+          "category": "G2_conflict_stale_history",
+          "rewards": [
+            1.0,
+            0.15,
+            0.15,
+            1.0
+          ],
+          "reward_std": 0.425,
+          "reward_mean": 0.575,
+          "gold_support": true,
+          "gold_support_rate": 0.5,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-245-P1_iou_low_fresh",
+          "category": "P1_iou_low_fresh",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            0.9
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-162-P2_all_gates_ok",
+          "category": "P2_all_gates_ok",
+          "rewards": [
+            0.22,
+            0.22,
+            0.22,
+            0.22
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 0.22,
+          "gold_support": false,
+          "gold_support_rate": 0.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-048-P3_transient_5xx",
+          "category": "P3_transient_5xx",
+          "rewards": [
+            0.15,
+            0.15,
+            0.15,
+            0.9
+          ],
+          "reward_std": 0.32476,
+          "reward_mean": 0.3375,
+          "gold_support": true,
+          "gold_support_rate": 0.25,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-174-P4_auth_quota",
+          "category": "P4_auth_quota",
+          "rewards": [
+            1.0,
+            0.9,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-250-P5_second_failure",
+          "category": "P5_second_failure",
+          "rewards": [
+            1.0,
+            0.15,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.368061,
+          "reward_mean": 0.7875,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-066-P6_domain_shift",
+          "category": "P6_domain_shift",
+          "rewards": [
+            0.9,
+            0.12,
+            0.9,
+            0.9
+          ],
+          "reward_std": 0.33775,
+          "reward_mean": 0.705,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-199-G1_first_success_end",
+          "category": "G1_first_success_end",
+          "rewards": [
+            1.0,
+            0.22,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.33775,
+          "reward_mean": 0.805,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-201-G2_conflict_stale_history",
+          "category": "G2_conflict_stale_history",
+          "rewards": [
+            1.0,
+            1.0,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-098-P1_iou_low_fresh",
+          "category": "P1_iou_low_fresh",
+          "rewards": [
+            0.12,
+            0.9,
+            0.9,
+            0.9
+          ],
+          "reward_std": 0.33775,
+          "reward_mean": 0.705,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-039-P2_all_gates_ok",
+          "category": "P2_all_gates_ok",
+          "rewards": [
+            0.22,
+            0.22,
+            0.22,
+            0.22
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 0.22,
+          "gold_support": false,
+          "gold_support_rate": 0.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-227-P3_transient_5xx",
+          "category": "P3_transient_5xx",
+          "rewards": [
+            1.0,
+            0.15,
+            1.0,
+            0.9
+          ],
+          "reward_std": 0.355976,
+          "reward_mean": 0.7625,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-050-P4_auth_quota",
+          "category": "P4_auth_quota",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-205-P5_second_failure",
+          "category": "P5_second_failure",
+          "rewards": [
+            0.9,
+            0.12,
+            1.0,
+            0.9
+          ],
+          "reward_std": 0.354542,
+          "reward_mean": 0.73,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-199-P6_domain_shift",
+          "category": "P6_domain_shift",
+          "rewards": [
+            1.0,
+            0.9,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-007-G1_first_success_end",
+          "category": "G1_first_success_end",
+          "rewards": [
+            0.22,
+            0.12,
+            0.22,
+            0.22
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.195,
+          "gold_support": false,
+          "gold_support_rate": 0.0,
+          "forbidden_any": true,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-051-G2_conflict_stale_history",
+          "category": "G2_conflict_stale_history",
+          "rewards": [
+            1.0,
+            0.9,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-186-P1_iou_low_fresh",
+          "category": "P1_iou_low_fresh",
+          "rewards": [
+            0.12,
+            1.0,
+            0.12,
+            0.9
+          ],
+          "reward_std": 0.416503,
+          "reward_mean": 0.535,
+          "gold_support": true,
+          "gold_support_rate": 0.5,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-174-P2_all_gates_ok",
+          "category": "P2_all_gates_ok",
+          "rewards": [
+            1.0,
+            0.22,
+            0.22,
+            0.22
+          ],
+          "reward_std": 0.33775,
+          "reward_mean": 0.415,
+          "gold_support": true,
+          "gold_support_rate": 0.25,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-141-P3_transient_5xx",
+          "category": "P3_transient_5xx",
+          "rewards": [
+            1.0,
+            1.0,
+            0.9,
+            0.12
+          ],
+          "reward_std": 0.368883,
+          "reward_mean": 0.755,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-120-P4_auth_quota",
+          "category": "P4_auth_quota",
+          "rewards": [
+            1.0,
+            1.0,
+            0.12,
+            1.0
+          ],
+          "reward_std": 0.381051,
+          "reward_mean": 0.78,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-039-P5_second_failure",
+          "category": "P5_second_failure",
+          "rewards": [
+            0.15,
+            0.05,
+            1.0,
+            0.15
+          ],
+          "reward_std": 0.384667,
+          "reward_mean": 0.3375,
+          "gold_support": true,
+          "gold_support_rate": 0.25,
+          "forbidden_any": true,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-180-P6_domain_shift",
+          "category": "P6_domain_shift",
+          "rewards": [
+            0.9,
+            1.0,
+            0.9,
+            0.9
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.925,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-047-G1_first_success_end",
+          "category": "G1_first_success_end",
+          "rewards": [
+            0.22,
+            0.22,
+            0.22,
+            0.22
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 0.22,
+          "gold_support": false,
+          "gold_support_rate": 0.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-215-G2_conflict_stale_history",
+          "category": "G2_conflict_stale_history",
+          "rewards": [
+            1.0,
+            0.9,
+            1.0,
+            0.9
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-157-P1_iou_low_fresh",
+          "category": "P1_iou_low_fresh",
+          "rewards": [
+            0.9,
+            0.9,
+            0.9,
+            0.9
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 0.9,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-205-P2_all_gates_ok",
+          "category": "P2_all_gates_ok",
+          "rewards": [
+            0.22,
+            0.22,
+            0.22,
+            0.22
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 0.22,
+          "gold_support": false,
+          "gold_support_rate": 0.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-122-P3_transient_5xx",
+          "category": "P3_transient_5xx",
+          "rewards": [
+            1.0,
+            1.0,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-161-P4_auth_quota",
+          "category": "P4_auth_quota",
+          "rewards": [
+            1.0,
+            0.15,
+            0.15,
+            0.05
+          ],
+          "reward_std": 0.384667,
+          "reward_mean": 0.3375,
+          "gold_support": true,
+          "gold_support_rate": 0.25,
+          "forbidden_any": true,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-152-P5_second_failure",
+          "category": "P5_second_failure",
+          "rewards": [
+            0.15,
+            1.0,
+            0.15,
+            0.15
+          ],
+          "reward_std": 0.368061,
+          "reward_mean": 0.3625,
+          "gold_support": true,
+          "gold_support_rate": 0.25,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-122-P6_domain_shift",
+          "category": "P6_domain_shift",
+          "rewards": [
+            0.9,
+            1.0,
+            0.05,
+            1.0
+          ],
+          "reward_std": 0.399022,
+          "reward_mean": 0.7375,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": true,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-215-G1_first_success_end",
+          "category": "G1_first_success_end",
+          "rewards": [
+            0.22,
+            0.22,
+            0.22,
+            0.22
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 0.22,
+          "gold_support": false,
+          "gold_support_rate": 0.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-212-G2_conflict_stale_history",
+          "category": "G2_conflict_stale_history",
+          "rewards": [
+            1.0,
+            1.0,
+            0.15,
+            0.9
+          ],
+          "reward_std": 0.355976,
+          "reward_mean": 0.7625,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-116-P1_iou_low_fresh",
+          "category": "P1_iou_low_fresh",
+          "rewards": [
+            1.0,
+            0.9,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-247-P2_all_gates_ok",
+          "category": "P2_all_gates_ok",
+          "rewards": [
+            0.22,
+            0.22,
+            1.0,
+            0.22
+          ],
+          "reward_std": 0.33775,
+          "reward_mean": 0.415,
+          "gold_support": true,
+          "gold_support_rate": 0.25,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-008-P3_transient_5xx",
+          "category": "P3_transient_5xx",
+          "rewards": [
+            0.9,
+            0.9,
+            0.15,
+            0.15
+          ],
+          "reward_std": 0.375,
+          "reward_mean": 0.525,
+          "gold_support": true,
+          "gold_support_rate": 0.5,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-186-P4_auth_quota",
+          "category": "P4_auth_quota",
+          "rewards": [
+            0.9,
+            1.0,
+            0.9,
+            0.9
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.925,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-186-P5_second_failure",
+          "category": "P5_second_failure",
+          "rewards": [
+            0.9,
+            1.0,
+            0.15,
+            1.0
+          ],
+          "reward_std": 0.355976,
+          "reward_mean": 0.7625,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-212-P6_domain_shift",
+          "category": "P6_domain_shift",
+          "rewards": [
+            0.9,
+            1.0,
+            1.0,
+            0.9
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-201-G1_first_success_end",
+          "category": "G1_first_success_end",
+          "rewards": [
+            0.22,
+            0.22,
+            1.0,
+            0.22
+          ],
+          "reward_std": 0.33775,
+          "reward_mean": 0.415,
+          "gold_support": true,
+          "gold_support_rate": 0.25,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-231-G2_conflict_stale_history",
+          "category": "G2_conflict_stale_history",
+          "rewards": [
+            0.15,
+            1.0,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.355976,
+          "reward_mean": 0.7625,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-162-P1_iou_low_fresh",
+          "category": "P1_iou_low_fresh",
+          "rewards": [
+            0.9,
+            0.9,
+            0.12,
+            0.9
+          ],
+          "reward_std": 0.33775,
+          "reward_mean": 0.705,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-128-P2_all_gates_ok",
+          "category": "P2_all_gates_ok",
+          "rewards": [
+            0.22,
+            0.22,
+            0.22,
+            0.22
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 0.22,
+          "gold_support": false,
+          "gold_support_rate": 0.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-155-P3_transient_5xx",
+          "category": "P3_transient_5xx",
+          "rewards": [
+            0.12,
+            0.15,
+            1.0,
+            0.12
+          ],
+          "reward_std": 0.37692,
+          "reward_mean": 0.3475,
+          "gold_support": true,
+          "gold_support_rate": 0.25,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-113-P4_auth_quota",
+          "category": "P4_auth_quota",
+          "rewards": [
+            0.9,
+            1.0,
+            0.9,
+            0.9
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.925,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-170-P5_second_failure",
+          "category": "P5_second_failure",
+          "rewards": [
+            0.15,
+            0.9,
+            1.0,
+            0.15
+          ],
+          "reward_std": 0.401559,
+          "reward_mean": 0.55,
+          "gold_support": true,
+          "gold_support_rate": 0.5,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-250-P6_domain_shift",
+          "category": "P6_domain_shift",
+          "rewards": [
+            0.12,
+            0.9,
+            0.9,
+            0.966667
+          ],
+          "reward_std": 0.348437,
+          "reward_mean": 0.721667,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-039-G1_first_success_end",
+          "category": "G1_first_success_end",
+          "rewards": [
+            1.0,
+            0.22,
+            0.22,
+            0.22
+          ],
+          "reward_std": 0.33775,
+          "reward_mean": 0.415,
+          "gold_support": true,
+          "gold_support_rate": 0.25,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-038-G2_conflict_stale_history",
+          "category": "G2_conflict_stale_history",
+          "rewards": [
+            0.9,
+            1.0,
+            1.0,
+            0.15
+          ],
+          "reward_std": 0.355976,
+          "reward_mean": 0.7625,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-200-P1_iou_low_fresh",
+          "category": "P1_iou_low_fresh",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            0.12
+          ],
+          "reward_std": 0.381051,
+          "reward_mean": 0.78,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-215-P2_all_gates_ok",
+          "category": "P2_all_gates_ok",
+          "rewards": [
+            1.0,
+            1.0,
+            0.22,
+            1.0
+          ],
+          "reward_std": 0.33775,
+          "reward_mean": 0.805,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-174-P3_transient_5xx",
+          "category": "P3_transient_5xx",
+          "rewards": [
+            0.12,
+            0.15,
+            0.05,
+            0.9
+          ],
+          "reward_std": 0.345435,
+          "reward_mean": 0.305,
+          "gold_support": true,
+          "gold_support_rate": 0.25,
+          "forbidden_any": true,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-031-P4_auth_quota",
+          "category": "P4_auth_quota",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-050-P5_second_failure",
+          "category": "P5_second_failure",
+          "rewards": [
+            1.0,
+            0.15,
+            0.12,
+            0.12
+          ],
+          "reward_std": 0.37692,
+          "reward_mean": 0.3475,
+          "gold_support": true,
+          "gold_support_rate": 0.25,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-162-P6_domain_shift",
+          "category": "P6_domain_shift",
+          "rewards": [
+            1.0,
+            0.9,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-036-G1_first_success_end",
+          "category": "G1_first_success_end",
+          "rewards": [
+            0.22,
+            0.22,
+            0.22,
+            1.0
+          ],
+          "reward_std": 0.33775,
+          "reward_mean": 0.415,
+          "gold_support": true,
+          "gold_support_rate": 0.25,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-192-G2_conflict_stale_history",
+          "category": "G2_conflict_stale_history",
+          "rewards": [
+            0.9,
+            0.9,
+            0.05,
+            1.0
+          ],
+          "reward_std": 0.384667,
+          "reward_mean": 0.7125,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": true,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-106-P1_iou_low_fresh",
+          "category": "P1_iou_low_fresh",
+          "rewards": [
+            0.9,
+            0.9,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.925,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-192-P2_all_gates_ok",
+          "category": "P2_all_gates_ok",
+          "rewards": [
+            0.22,
+            1.0,
+            0.22,
+            0.22
+          ],
+          "reward_std": 0.33775,
+          "reward_mean": 0.415,
+          "gold_support": true,
+          "gold_support_rate": 0.25,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-157-P3_transient_5xx",
+          "category": "P3_transient_5xx",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            0.9
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-205-P4_auth_quota",
+          "category": "P4_auth_quota",
+          "rewards": [
+            1.0,
+            0.9,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-230-P5_second_failure",
+          "category": "P5_second_failure",
+          "rewards": [
+            0.15,
+            0.9,
+            0.15,
+            0.9
+          ],
+          "reward_std": 0.375,
+          "reward_mean": 0.525,
+          "gold_support": true,
+          "gold_support_rate": 0.5,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-218-P6_domain_shift",
+          "category": "P6_domain_shift",
+          "rewards": [
+            0.9,
+            0.12,
+            0.9,
+            0.9
+          ],
+          "reward_std": 0.33775,
+          "reward_mean": 0.705,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-205-G1_first_success_end",
+          "category": "G1_first_success_end",
+          "rewards": [
+            0.22,
+            0.22,
+            1.0,
+            0.22
+          ],
+          "reward_std": 0.33775,
+          "reward_mean": 0.415,
+          "gold_support": true,
+          "gold_support_rate": 0.25,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-174-G2_conflict_stale_history",
+          "category": "G2_conflict_stale_history",
+          "rewards": [
+            1.0,
+            0.9,
+            0.15,
+            1.0
+          ],
+          "reward_std": 0.355976,
+          "reward_mean": 0.7625,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-120-P1_iou_low_fresh",
+          "category": "P1_iou_low_fresh",
+          "rewards": [
+            0.12,
+            0.9,
+            1.0,
+            0.12
+          ],
+          "reward_std": 0.416503,
+          "reward_mean": 0.535,
+          "gold_support": true,
+          "gold_support_rate": 0.5,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-081-P2_all_gates_ok",
+          "category": "P2_all_gates_ok",
+          "rewards": [
+            0.22,
+            0.22,
+            1.0,
+            0.22
+          ],
+          "reward_std": 0.33775,
+          "reward_mean": 0.415,
+          "gold_support": true,
+          "gold_support_rate": 0.25,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-116-P3_transient_5xx",
+          "category": "P3_transient_5xx",
+          "rewards": [
+            0.15,
+            0.12,
+            0.15,
+            1.0
+          ],
+          "reward_std": 0.372592,
+          "reward_mean": 0.355,
+          "gold_support": true,
+          "gold_support_rate": 0.25,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-198-P4_auth_quota",
+          "category": "P4_auth_quota",
+          "rewards": [
+            0.9,
+            0.9,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-247-P5_second_failure",
+          "category": "P5_second_failure",
+          "rewards": [
+            1.0,
+            1.0,
+            0.9,
+            0.15
+          ],
+          "reward_std": 0.355976,
+          "reward_mean": 0.7625,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-081-P6_domain_shift",
+          "category": "P6_domain_shift",
+          "rewards": [
+            1.0,
+            0.12,
+            0.12,
+            0.12
+          ],
+          "reward_std": 0.381051,
+          "reward_mean": 0.34,
+          "gold_support": true,
+          "gold_support_rate": 0.25,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-200-G1_first_success_end",
+          "category": "G1_first_success_end",
+          "rewards": [
+            0.22,
+            1.0,
+            0.22,
+            0.22
+          ],
+          "reward_std": 0.33775,
+          "reward_mean": 0.415,
+          "gold_support": true,
+          "gold_support_rate": 0.25,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-141-G2_conflict_stale_history",
+          "category": "G2_conflict_stale_history",
+          "rewards": [
+            0.9,
+            0.9,
+            0.9,
+            0.9
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 0.9,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-038-P1_iou_low_fresh",
+          "category": "P1_iou_low_fresh",
+          "rewards": [
+            0.9,
+            0.9,
+            0.12,
+            1.0
+          ],
+          "reward_std": 0.354542,
+          "reward_mean": 0.73,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-157-P2_all_gates_ok",
+          "category": "P2_all_gates_ok",
+          "rewards": [
+            0.22,
+            0.22,
+            0.22,
+            0.12
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.195,
+          "gold_support": false,
+          "gold_support_rate": 0.0,
+          "forbidden_any": true,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-194-P3_transient_5xx",
+          "category": "P3_transient_5xx",
+          "rewards": [
+            1.0,
+            0.9,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-047-P4_auth_quota",
+          "category": "P4_auth_quota",
+          "rewards": [
+            1.0,
+            0.9,
+            0.9,
+            0.9
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.925,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-200-P5_second_failure",
+          "category": "P5_second_failure",
+          "rewards": [
+            0.15,
+            0.15,
+            0.15,
+            0.12
+          ],
+          "reward_std": 0.01299,
+          "reward_mean": 0.1425,
+          "gold_support": false,
+          "gold_support_rate": 0.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-128-P6_domain_shift",
+          "category": "P6_domain_shift",
+          "rewards": [
+            0.9,
+            0.12,
+            0.9,
+            0.9
+          ],
+          "reward_std": 0.33775,
+          "reward_mean": 0.705,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-031-G1_first_success_end",
+          "category": "G1_first_success_end",
+          "rewards": [
+            0.22,
+            0.22,
+            0.22,
+            1.0
+          ],
+          "reward_std": 0.33775,
+          "reward_mean": 0.415,
+          "gold_support": true,
+          "gold_support_rate": 0.25,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-162-G2_conflict_stale_history",
+          "category": "G2_conflict_stale_history",
+          "rewards": [
+            0.12,
+            0.9,
+            0.12,
+            0.9
+          ],
+          "reward_std": 0.39,
+          "reward_mean": 0.51,
+          "gold_support": true,
+          "gold_support_rate": 0.5,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-198-P1_iou_low_fresh",
+          "category": "P1_iou_low_fresh",
+          "rewards": [
+            0.12,
+            0.12,
+            0.12,
+            0.12
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 0.12,
+          "gold_support": false,
+          "gold_support_rate": 0.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-180-P2_all_gates_ok",
+          "category": "P2_all_gates_ok",
+          "rewards": [
+            1.0,
+            0.22,
+            1.0,
+            0.22
+          ],
+          "reward_std": 0.39,
+          "reward_mean": 0.61,
+          "gold_support": true,
+          "gold_support_rate": 0.5,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-173-P3_transient_5xx",
+          "category": "P3_transient_5xx",
+          "rewards": [
+            0.9,
+            1.0,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-250-P4_auth_quota",
+          "category": "P4_auth_quota",
+          "rewards": [
+            0.9,
+            1.0,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-245-P5_second_failure",
+          "category": "P5_second_failure",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            0.15
+          ],
+          "reward_std": 0.368061,
+          "reward_mean": 0.7875,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-173-P6_domain_shift",
+          "category": "P6_domain_shift",
+          "rewards": [
+            1.0,
+            0.9,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-038-G1_first_success_end",
+          "category": "G1_first_success_end",
+          "rewards": [
+            0.22,
+            1.0,
+            1.0,
+            0.22
+          ],
+          "reward_std": 0.39,
+          "reward_mean": 0.61,
+          "gold_support": true,
+          "gold_support_rate": 0.5,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-120-G2_conflict_stale_history",
+          "category": "G2_conflict_stale_history",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            0.15
+          ],
+          "reward_std": 0.368061,
+          "reward_mean": 0.7875,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-141-P1_iou_low_fresh",
+          "category": "P1_iou_low_fresh",
+          "rewards": [
+            0.9,
+            0.9,
+            0.12,
+            0.12
+          ],
+          "reward_std": 0.39,
+          "reward_mean": 0.51,
+          "gold_support": true,
+          "gold_support_rate": 0.5,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-198-P2_all_gates_ok",
+          "category": "P2_all_gates_ok",
+          "rewards": [
+            0.22,
+            0.22,
+            0.22,
+            0.22
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 0.22,
+          "gold_support": false,
+          "gold_support_rate": 0.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-198-P3_transient_5xx",
+          "category": "P3_transient_5xx",
+          "rewards": [
+            0.9,
+            1.0,
+            0.9,
+            0.9
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.925,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-227-P4_auth_quota",
+          "category": "P4_auth_quota",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            0.9
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-081-P5_second_failure",
+          "category": "P5_second_failure",
+          "rewards": [
+            0.9,
+            1.0,
+            1.0,
+            0.15
+          ],
+          "reward_std": 0.355976,
+          "reward_mean": 0.7625,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-231-P6_domain_shift",
+          "category": "P6_domain_shift",
+          "rewards": [
+            0.9,
+            0.9,
+            1.0,
+            0.9
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.925,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        }
+      ]
+    },
+    {
+      "pool": "hint_pool",
+      "path": "training/planner_grpo_seed_v1/step_data/planner_retry_migrate_v7_longobs_grpo_train_qwen35_4b_nothinking_step2.jsonl",
+      "sampling": {
+        "model": "nohint_sft50",
+        "temperature": 0.7,
+        "top_p": 0.9,
+        "num_generations": 4,
+        "max_tokens": 320,
+        "seed": 42,
+        "prompt_selection": "category round-robin, seeded shuffle"
+      },
+      "metrics": {
+        "groups": 120,
+        "completions": 480,
+        "json_valid_rate": 1.0,
+        "clipped_rate": 0.0,
+        "gold_support_rate": 0.977083,
+        "gold_support_group_rate": 1.0,
+        "nonzero_variance_rate": 0.625,
+        "frac_reward_zero_std": 0.375,
+        "reward_mean": 0.949556,
+        "forbidden_group_rate": 0.0
+      },
+      "gates": {
+        "json_valid": true,
+        "clipping": true,
+        "gold_support": true,
+        "nonzero_variance": true
+      },
+      "passed": true,
+      "thresholds": {
+        "json_valid_min": 0.99,
+        "clipped_max": 0.01,
+        "gold_support_min": 0.8,
+        "nonzero_variance_min": 0.25
+      },
+      "action_distribution": {
+        "migration_advisor": 349,
+        "end": 131
+      },
+      "component_failures": {
+        "finish_after_tool": 156,
+        "argument_match": 12,
+        "decision_type_valid": 11,
+        "action_match": 11
+      },
+      "by_category": {
+        "G1_first_success_end": {
+          "groups": 15,
+          "nonzero_variance_rate": 0.0,
+          "gold_support_rate": 1.0,
+          "reward_mean": 1.0
+        },
+        "G2_conflict_stale_history": {
+          "groups": 15,
+          "nonzero_variance_rate": 0.7333,
+          "gold_support_rate": 0.9833,
+          "reward_mean": 0.9531
+        },
+        "P1_iou_low_fresh": {
+          "groups": 15,
+          "nonzero_variance_rate": 0.9333,
+          "gold_support_rate": 0.9333,
+          "reward_mean": 0.8997
+        },
+        "P2_all_gates_ok": {
+          "groups": 15,
+          "nonzero_variance_rate": 0.0,
+          "gold_support_rate": 1.0,
+          "reward_mean": 1.0
+        },
+        "P3_transient_5xx": {
+          "groups": 15,
+          "nonzero_variance_rate": 0.9333,
+          "gold_support_rate": 1.0,
+          "reward_mean": 0.9617
+        },
+        "P4_auth_quota": {
+          "groups": 15,
+          "nonzero_variance_rate": 0.8667,
+          "gold_support_rate": 1.0,
+          "reward_mean": 0.96
+        },
+        "P5_second_failure": {
+          "groups": 15,
+          "nonzero_variance_rate": 0.7333,
+          "gold_support_rate": 0.9,
+          "reward_mean": 0.887
+        },
+        "P6_domain_shift": {
+          "groups": 15,
+          "nonzero_variance_rate": 0.8,
+          "gold_support_rate": 1.0,
+          "reward_mean": 0.935
+        }
+      },
+      "groups": [
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-116-G1_first_success_end",
+          "category": "G1_first_success_end",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-218-G2_conflict_stale_history",
+          "category": "G2_conflict_stale_history",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-068-P1_iou_low_fresh",
+          "category": "P1_iou_low_fresh",
+          "rewards": [
+            1.0,
+            0.9,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-050-P2_all_gates_ok",
+          "category": "P2_all_gates_ok",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-245-P3_transient_5xx",
+          "category": "P3_transient_5xx",
+          "rewards": [
+            0.9,
+            0.9,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.925,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-173-P4_auth_quota",
+          "category": "P4_auth_quota",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-165-P5_second_failure",
+          "category": "P5_second_failure",
+          "rewards": [
+            1.0,
+            1.0,
+            0.12,
+            1.0
+          ],
+          "reward_std": 0.381051,
+          "reward_mean": 0.78,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-248-P6_domain_shift",
+          "category": "P6_domain_shift",
+          "rewards": [
+            1.0,
+            0.9,
+            1.0,
+            0.9
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-081-G1_first_success_end",
+          "category": "G1_first_success_end",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-128-G2_conflict_stale_history",
+          "category": "G2_conflict_stale_history",
+          "rewards": [
+            0.9,
+            0.9,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-051-P1_iou_low_fresh",
+          "category": "P1_iou_low_fresh",
+          "rewards": [
+            0.9,
+            0.9,
+            0.9,
+            0.9
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 0.9,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-068-P2_all_gates_ok",
+          "category": "P2_all_gates_ok",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-218-P3_transient_5xx",
+          "category": "P3_transient_5xx",
+          "rewards": [
+            1.0,
+            1.0,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-049-P4_auth_quota",
+          "category": "P4_auth_quota",
+          "rewards": [
+            1.0,
+            0.9,
+            1.0,
+            0.9
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-038-P5_second_failure",
+          "category": "P5_second_failure",
+          "rewards": [
+            1.0,
+            1.0,
+            0.9,
+            0.12
+          ],
+          "reward_std": 0.368883,
+          "reward_mean": 0.755,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-048-P6_domain_shift",
+          "category": "P6_domain_shift",
+          "rewards": [
+            1.0,
+            0.9,
+            0.9,
+            0.9
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.925,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-195-G1_first_success_end",
+          "category": "G1_first_success_end",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-122-G2_conflict_stale_history",
+          "category": "G2_conflict_stale_history",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-049-P1_iou_low_fresh",
+          "category": "P1_iou_low_fresh",
+          "rewards": [
+            1.0,
+            0.9,
+            1.0,
+            0.9
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-036-P2_all_gates_ok",
+          "category": "P2_all_gates_ok",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-038-P3_transient_5xx",
+          "category": "P3_transient_5xx",
+          "rewards": [
+            0.9,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-051-P4_auth_quota",
+          "category": "P4_auth_quota",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            0.9
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-116-P5_second_failure",
+          "category": "P5_second_failure",
+          "rewards": [
+            1.0,
+            0.9,
+            0.12,
+            1.0
+          ],
+          "reward_std": 0.368883,
+          "reward_mean": 0.755,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-170-P6_domain_shift",
+          "category": "P6_domain_shift",
+          "rewards": [
+            0.9,
+            0.9,
+            0.9,
+            0.9
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 0.9,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-161-G1_first_success_end",
+          "category": "G1_first_success_end",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-227-G2_conflict_stale_history",
+          "category": "G2_conflict_stale_history",
+          "rewards": [
+            1.0,
+            0.9,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-245-P1_iou_low_fresh",
+          "category": "P1_iou_low_fresh",
+          "rewards": [
+            0.9,
+            1.0,
+            1.0,
+            0.9
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-162-P2_all_gates_ok",
+          "category": "P2_all_gates_ok",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-048-P3_transient_5xx",
+          "category": "P3_transient_5xx",
+          "rewards": [
+            1.0,
+            1.0,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-174-P4_auth_quota",
+          "category": "P4_auth_quota",
+          "rewards": [
+            0.9,
+            1.0,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-250-P5_second_failure",
+          "category": "P5_second_failure",
+          "rewards": [
+            1.0,
+            0.12,
+            1.0,
+            0.9
+          ],
+          "reward_std": 0.368883,
+          "reward_mean": 0.755,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-066-P6_domain_shift",
+          "category": "P6_domain_shift",
+          "rewards": [
+            0.9,
+            0.9,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-199-G1_first_success_end",
+          "category": "G1_first_success_end",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-201-G2_conflict_stale_history",
+          "category": "G2_conflict_stale_history",
+          "rewards": [
+            0.9,
+            1.0,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-098-P1_iou_low_fresh",
+          "category": "P1_iou_low_fresh",
+          "rewards": [
+            0.12,
+            1.0,
+            1.0,
+            0.9
+          ],
+          "reward_std": 0.368883,
+          "reward_mean": 0.755,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-039-P2_all_gates_ok",
+          "category": "P2_all_gates_ok",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-227-P3_transient_5xx",
+          "category": "P3_transient_5xx",
+          "rewards": [
+            0.9,
+            0.9,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.925,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-050-P4_auth_quota",
+          "category": "P4_auth_quota",
+          "rewards": [
+            1.0,
+            0.9,
+            0.9,
+            0.9
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.925,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-205-P5_second_failure",
+          "category": "P5_second_failure",
+          "rewards": [
+            0.9,
+            0.9,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.925,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-199-P6_domain_shift",
+          "category": "P6_domain_shift",
+          "rewards": [
+            1.0,
+            0.9,
+            0.9,
+            0.9
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.925,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-007-G1_first_success_end",
+          "category": "G1_first_success_end",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-051-G2_conflict_stale_history",
+          "category": "G2_conflict_stale_history",
+          "rewards": [
+            0.9,
+            0.9,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.925,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-186-P1_iou_low_fresh",
+          "category": "P1_iou_low_fresh",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            0.9
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-174-P2_all_gates_ok",
+          "category": "P2_all_gates_ok",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-141-P3_transient_5xx",
+          "category": "P3_transient_5xx",
+          "rewards": [
+            0.9,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-120-P4_auth_quota",
+          "category": "P4_auth_quota",
+          "rewards": [
+            1.0,
+            1.0,
+            0.9,
+            0.9
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-039-P5_second_failure",
+          "category": "P5_second_failure",
+          "rewards": [
+            1.0,
+            0.9,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-180-P6_domain_shift",
+          "category": "P6_domain_shift",
+          "rewards": [
+            1.0,
+            1.0,
+            0.9,
+            0.9
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-047-G1_first_success_end",
+          "category": "G1_first_success_end",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-215-G2_conflict_stale_history",
+          "category": "G2_conflict_stale_history",
+          "rewards": [
+            1.0,
+            1.0,
+            0.9,
+            0.12
+          ],
+          "reward_std": 0.368883,
+          "reward_mean": 0.755,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-157-P1_iou_low_fresh",
+          "category": "P1_iou_low_fresh",
+          "rewards": [
+            0.9,
+            0.9,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-205-P2_all_gates_ok",
+          "category": "P2_all_gates_ok",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-122-P3_transient_5xx",
+          "category": "P3_transient_5xx",
+          "rewards": [
+            1.0,
+            0.9,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-161-P4_auth_quota",
+          "category": "P4_auth_quota",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            0.9
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-152-P5_second_failure",
+          "category": "P5_second_failure",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-122-P6_domain_shift",
+          "category": "P6_domain_shift",
+          "rewards": [
+            1.0,
+            0.9,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-215-G1_first_success_end",
+          "category": "G1_first_success_end",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-212-G2_conflict_stale_history",
+          "category": "G2_conflict_stale_history",
+          "rewards": [
+            1.0,
+            0.9,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-116-P1_iou_low_fresh",
+          "category": "P1_iou_low_fresh",
+          "rewards": [
+            0.9,
+            0.9,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.925,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-247-P2_all_gates_ok",
+          "category": "P2_all_gates_ok",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-008-P3_transient_5xx",
+          "category": "P3_transient_5xx",
+          "rewards": [
+            0.9,
+            1.0,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-186-P4_auth_quota",
+          "category": "P4_auth_quota",
+          "rewards": [
+            0.9,
+            1.0,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-186-P5_second_failure",
+          "category": "P5_second_failure",
+          "rewards": [
+            1.0,
+            1.0,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-212-P6_domain_shift",
+          "category": "P6_domain_shift",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            0.9
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-201-G1_first_success_end",
+          "category": "G1_first_success_end",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-231-G2_conflict_stale_history",
+          "category": "G2_conflict_stale_history",
+          "rewards": [
+            0.9,
+            0.9,
+            1.0,
+            0.9
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.925,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-162-P1_iou_low_fresh",
+          "category": "P1_iou_low_fresh",
+          "rewards": [
+            1.0,
+            0.9,
+            1.0,
+            0.9
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-128-P2_all_gates_ok",
+          "category": "P2_all_gates_ok",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-155-P3_transient_5xx",
+          "category": "P3_transient_5xx",
+          "rewards": [
+            1.0,
+            0.9,
+            1.0,
+            0.9
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-113-P4_auth_quota",
+          "category": "P4_auth_quota",
+          "rewards": [
+            0.9,
+            0.9,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-170-P5_second_failure",
+          "category": "P5_second_failure",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-250-P6_domain_shift",
+          "category": "P6_domain_shift",
+          "rewards": [
+            0.9,
+            0.9,
+            0.9,
+            0.9
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 0.9,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-039-G1_first_success_end",
+          "category": "G1_first_success_end",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-038-G2_conflict_stale_history",
+          "category": "G2_conflict_stale_history",
+          "rewards": [
+            0.966667,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.014434,
+          "reward_mean": 0.991667,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-200-P1_iou_low_fresh",
+          "category": "P1_iou_low_fresh",
+          "rewards": [
+            1.0,
+            0.9,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-215-P2_all_gates_ok",
+          "category": "P2_all_gates_ok",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-174-P3_transient_5xx",
+          "category": "P3_transient_5xx",
+          "rewards": [
+            0.9,
+            0.9,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.925,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-031-P4_auth_quota",
+          "category": "P4_auth_quota",
+          "rewards": [
+            1.0,
+            0.9,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-050-P5_second_failure",
+          "category": "P5_second_failure",
+          "rewards": [
+            1.0,
+            0.12,
+            0.12,
+            1.0
+          ],
+          "reward_std": 0.44,
+          "reward_mean": 0.56,
+          "gold_support": true,
+          "gold_support_rate": 0.5,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-162-P6_domain_shift",
+          "category": "P6_domain_shift",
+          "rewards": [
+            0.9,
+            0.9,
+            1.0,
+            0.9
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.925,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-036-G1_first_success_end",
+          "category": "G1_first_success_end",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-192-G2_conflict_stale_history",
+          "category": "G2_conflict_stale_history",
+          "rewards": [
+            1.0,
+            0.9,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-106-P1_iou_low_fresh",
+          "category": "P1_iou_low_fresh",
+          "rewards": [
+            0.9,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-192-P2_all_gates_ok",
+          "category": "P2_all_gates_ok",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-157-P3_transient_5xx",
+          "category": "P3_transient_5xx",
+          "rewards": [
+            1.0,
+            0.9,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-205-P4_auth_quota",
+          "category": "P4_auth_quota",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-230-P5_second_failure",
+          "category": "P5_second_failure",
+          "rewards": [
+            0.9,
+            0.9,
+            0.9,
+            0.9
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 0.9,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-218-P6_domain_shift",
+          "category": "P6_domain_shift",
+          "rewards": [
+            0.9,
+            0.9,
+            0.9,
+            0.9
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 0.9,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-205-G1_first_success_end",
+          "category": "G1_first_success_end",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-174-G2_conflict_stale_history",
+          "category": "G2_conflict_stale_history",
+          "rewards": [
+            0.9,
+            0.9,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-120-P1_iou_low_fresh",
+          "category": "P1_iou_low_fresh",
+          "rewards": [
+            1.0,
+            0.9,
+            1.0,
+            0.12
+          ],
+          "reward_std": 0.368883,
+          "reward_mean": 0.755,
+          "gold_support": true,
+          "gold_support_rate": 0.75,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-081-P2_all_gates_ok",
+          "category": "P2_all_gates_ok",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-116-P3_transient_5xx",
+          "category": "P3_transient_5xx",
+          "rewards": [
+            0.9,
+            1.0,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-198-P4_auth_quota",
+          "category": "P4_auth_quota",
+          "rewards": [
+            1.0,
+            0.9,
+            1.0,
+            0.9
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-247-P5_second_failure",
+          "category": "P5_second_failure",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-081-P6_domain_shift",
+          "category": "P6_domain_shift",
+          "rewards": [
+            1.0,
+            0.9,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-200-G1_first_success_end",
+          "category": "G1_first_success_end",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-141-G2_conflict_stale_history",
+          "category": "G2_conflict_stale_history",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-038-P1_iou_low_fresh",
+          "category": "P1_iou_low_fresh",
+          "rewards": [
+            1.0,
+            0.9,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-157-P2_all_gates_ok",
+          "category": "P2_all_gates_ok",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-194-P3_transient_5xx",
+          "category": "P3_transient_5xx",
+          "rewards": [
+            0.9,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-047-P4_auth_quota",
+          "category": "P4_auth_quota",
+          "rewards": [
+            1.0,
+            0.9,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-200-P5_second_failure",
+          "category": "P5_second_failure",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            0.9
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-128-P6_domain_shift",
+          "category": "P6_domain_shift",
+          "rewards": [
+            1.0,
+            1.0,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-031-G1_first_success_end",
+          "category": "G1_first_success_end",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-162-G2_conflict_stale_history",
+          "category": "G2_conflict_stale_history",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-198-P1_iou_low_fresh",
+          "category": "P1_iou_low_fresh",
+          "rewards": [
+            0.9,
+            0.12,
+            1.0,
+            0.12
+          ],
+          "reward_std": 0.416503,
+          "reward_mean": 0.535,
+          "gold_support": true,
+          "gold_support_rate": 0.5,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-180-P2_all_gates_ok",
+          "category": "P2_all_gates_ok",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-173-P3_transient_5xx",
+          "category": "P3_transient_5xx",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            0.9
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-250-P4_auth_quota",
+          "category": "P4_auth_quota",
+          "rewards": [
+            1.0,
+            1.0,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-245-P5_second_failure",
+          "category": "P5_second_failure",
+          "rewards": [
+            1.0,
+            0.9,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-173-P6_domain_shift",
+          "category": "P6_domain_shift",
+          "rewards": [
+            0.9,
+            0.9,
+            1.0,
+            0.9
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.925,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-038-G1_first_success_end",
+          "category": "G1_first_success_end",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-120-G2_conflict_stale_history",
+          "category": "G2_conflict_stale_history",
+          "rewards": [
+            0.9,
+            0.9,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-141-P1_iou_low_fresh",
+          "category": "P1_iou_low_fresh",
+          "rewards": [
+            0.9,
+            1.0,
+            0.9,
+            1.0
+          ],
+          "reward_std": 0.05,
+          "reward_mean": 0.95,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-198-P2_all_gates_ok",
+          "category": "P2_all_gates_ok",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-198-P3_transient_5xx",
+          "category": "P3_transient_5xx",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.0,
+          "reward_mean": 1.0,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": false
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-227-P4_auth_quota",
+          "category": "P4_auth_quota",
+          "rewards": [
+            0.9,
+            0.9,
+            1.0,
+            0.9
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.925,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-081-P5_second_failure",
+          "category": "P5_second_failure",
+          "rewards": [
+            0.9,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.975,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        },
+        {
+          "case_id": "PRMV7-GRPO_TRAIN-231-P6_domain_shift",
+          "category": "P6_domain_shift",
+          "rewards": [
+            0.9,
+            0.9,
+            1.0,
+            0.9
+          ],
+          "reward_std": 0.043301,
+          "reward_mean": 0.925,
+          "gold_support": true,
+          "gold_support_rate": 1.0,
+          "forbidden_any": false,
+          "nonzero_variance": true
+        }
+      ]
+    }
+  ]
+}

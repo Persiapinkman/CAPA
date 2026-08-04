@@ -1,16 +1,77 @@
 # CAPA H20 实验进展与技术要点
 
-_更新：2026-08-02。范围：把公司内部 V100 训练栈的 Planner SFT→GRPO 复现到 4×H20，用公开权重 + 本地 vLLM。仅记核心要点，不复述细节文档。_
+_更新：2026-08-03。范围：把公司内部 V100 训练栈的 Planner SFT→GRPO 复现到 4×H20，用公开权重 + 本地 vLLM。仅记核心要点，不复述细节文档。_
 
 延伸阅读（本仓库内已有的深度记录）：
 - 复现执行现状：`reports/H20_REPRODUCTION_STATUS.md`
 - 踩坑全集：`reports/H20_V7_LESSONS_LEARNED.md`
 - v7 数据集设计：`reports/H20_V7_LONGOBS_DESIGN.md`
 - 训练心法：`reports/POST_TRAINING_SFT_GRPO_PLAYBOOK.md`
+- **残差定位（08-03）**：`reports/V7_GRPO_HEADROOM_DIAGNOSIS_20260803.md`
+- **support审计与 hint 泄漏根因（08-03）**：`reports/V7_GRPO_SUPPORT_AUDIT_20260803.md`
+
+---
+
+## 0. 08-03 重大修正：routing hint 从未被 strip，v7 GRPO 全程零信号
+
+**这一节推翻本文第 7 节关于 GRPO seed42 的乐观记录，优先阅读。**
+
+`build_planner_retry_migrate_v7_longobs.py` 往 `observation.summary` 注入一句显式
+路由提示（`决策提示：…下一步请调用 migration_advisor …`），其 docstring 声明
+训练时可用 `CAPA_STRIP_ROUTING_HINT=1` 在 `prepare_v7_longobs_stage_data.py` 里剥离。
+**该开关在 08-03 之前从未实现**，全局搜索只能命中那行注释本身。后果：
+
+| 现象 | 数据 |
+|---|---|
+| GRPO optimizer pool 完全饱和 | `gold_support=1.000`、`nonzero_variance=0.000`（120 组 / 8 类全零） |
+| 训练零更新 | seed43遥测 `grad_norm=0` 于 21/22 步，`frac_reward_zero_std=0.994` |
+| 饱和度随 SFT 变强而恶化 | seed42_r3 `0.789` → seed42 pipeline `0.864` → seed43 `0.994` |
+| dev 残差全在 hint 未覆盖的字段 | 42/43 个 P1+P6 失败是 `finish_after_tool=false`，动作/其余参数全对 |
+
+因为 `A_i=(r_i-μ_g)/σ_g` 在 `σ_g=0` 时无梯度，hint 池上的 GRPO 在数学上必然是空转。
+08-03 21:10曾有**三份同 seed43 训练并发**空转 2.5 小时（4卡共享），已终止。
+
+**已落地的修复**：
+
+1. `prepare_v7_longobs_stage_data.py` 实现`CAPA_STRIP_ROUTING_HINT=1`，
+   产物写入 `_nohint` 后缀的独立路径，不覆盖既有已审计产物；
+   manifest/metadata 记录 `routing_hint.stats`（1520/2320 行含 hint）。
+2. 新增 `pipelines/eval/audit_grpo_support.py`：trainer-faithful support 审计
+   （T=0.7 top_p=0.9 G=4，与 trainer 一致），硬门 = JSON≥0.99 / clip≤0.01/
+   gold_support≥0.80 / nonzero_variance≥0.25。
+3. 新增 `pipelines/eval/diagnose_grpo_headroom.py`：把主指标从 `mean_score`
+   切到 `pass_all_runs` 并做失败签名归因。
+4. `train_qwen35_4b_grpo.py` 新增 `VanishingSignalCallback`：连续 N 步
+   `frac_reward_zero_std≥0.99` 且 `grad_norm==0` 即中止并落
+   `vanishing_signal_abort.json`。用 08-03 真实日志回放验证会在第 22 步中止，
+   健康 run（zero_std=0.75, grad>0）不误杀。开关：
+   `--vanishing-signal-patience 0` 关闭。
+
+**剥离hint 后的真实能力地图**（SFT ckpt-100，120 组）：
+
+| 类别 | `nonzero_variance` | `gold_support` | 判定 |
+|---|---:|---:|---|
+| P1_iou_low_fresh | 0.533 | 0.700 | TRAINABLE |
+| P6_domain_shift | 0.267 | 0.867 | TRAINABLE |
+| G1_first_success_end | 0.733 | 0.300 | GOLD_BROKEN |
+| P2_all_gates_ok | 0.333 | 0.117 | GOLD_BROKEN |
+| G2 / P3 / P4 / P5 | 0.000 | 1.000 | SATURATED |
+
+- SATURATED 四类都是**错误路径**（5xx / 认证配额 / 二次失败 / 冲突历史）：
+  剥 hint 后仍满分，说明模型真的从 `error.class_label` 学到了规则，这是 v7
+  数据设计成功的部分，但对 GRPO 零贡献。
+- GOLD_BROKEN 两类都是 `end` 分支：gold support崩到 0.300/0.117，即 SFT 学的
+  是"读到『请直接输出 end』就输出 end"。这类只能补 SFT，不能靠 GRPO 修。
+
+**教训（写进下次preregistration）**：任何"为了让 base 模型过数据集健康门"而
+注入到 observation 的提示，必须在同一个 PR 里实现并**测试**它的 strip 路径；
+否则健康门测的是 base 读提示的能力，而 SFT/GRPO 学的是背提示。判据很简单：
+strip 前后各跑一次 support 审计，若 `nonzero_variance` 从 0 变正，说明泄漏成立。
 
 ---
 
 ## 1. 研究目标一句话
+
 
 在 planner_retry_migrate 软边界任务（retry vs. migrate vs. end）上验证：
 **Qwen3.5-4B base < 4B SFT < 4B SFT+GRPO ≥ Qwen3.5-35B-A3B base**。
@@ -115,12 +176,30 @@ _更新：2026-08-02。范围：把公司内部 V100 训练栈的 Planner SFT→
 
 ## 7. 主线结果（v7 grpo_dev, 3-run mean, temperature=0）
 
+> ⚠️ **08-03 修正**：本节所有数字都是在**含 routing hint**的条件下测得，且 08-02的
+> reward 报告还受一个已修复但未重跑的 verifier bug 影响（`arg_contains` 的 AND
+> trap，提交 `432c186`）。用修复后的 verifier 对**原始预测文件**重打分（零推理成本）
+> 后的正确数字见下表；GRPO seed42 的"reward 4.4→5.6"是在饱和池上的假象，见第 0 节。
+
+| Arm | mean_score 旧 | mean_score 修正 | pass_all_runs 旧 | pass_all_runs 修正 |
+|---|---:|---:|---:|---:|
+| 4B base | 0.7634 | 0.7714 | 0.0000 | 0.0000 |
+| 35B base | 0.8525 | **0.8614** | 0.0000 | **0.1833** |
+| 4B SFT (ckpt-100) | 0.9704 | **0.9813** | 0.5125 | **0.7625** |
+
+三个不等式与35B ≥ 0.85 健康门仍然成立。但要注意 **`pass_headroom` 是
+`mean_headroom` 的 12.7 倍**（0.2375 vs 0.0187）：以 `mean_score` 为 GRPO 主指标时
+只剩 1.87% 空间且恰在饱和区，这是零方差的直接推手。**主指标应为 `pass_all_runs`。**
+
+原始（含 hint、未修verifier）记录保留如下以便追溯：
+
 | Arm | dev mean_score | stdev | pass_rate | 备注 |
 |---|---:|---:|---:|---|
 | **4B base** | 0.7634 | 0.0008 | 0.000 | 3-run，`premature_stop=240/240`（路径没走完） |
 | **35B base** | 0.8525 | 0.0055 | 0.000 | 3-run，`premature_stop=12`，唯一 G2=0.789 |
 | **4B SFT (ckpt-100)** | **0.9704** | 0.0015 | **0.549** | 3-run，pass_all_runs=0.513 |
-| 4B SFT + GRPO seed42 | (待评) | — | — | GRPO 训练完成，SFT+GRPO-eval 尚未跑 |
+| 4B SFT + GRPO seed42 | (作废) | — | — | 池饱和，训练为零更新，见第 0 节 |
+
 
 **研究目标 3 个不等式**（当前已验证 2/3）：
 - ✅ **4B base < 4B SFT**：0.763 → 0.970（+0.207，pass 0→0.549）
