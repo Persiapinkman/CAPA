@@ -1,0 +1,58 @@
+{
+  "cases": "training/planner_grpo_seed_v1/cases/planner_retry_migrate_v7_longobs_grpo_train_cases.jsonl",
+  "created_at": "2026-08-04T02:12:20.520722+00:00",
+  "dataset_id": "planner_retry_migrate_v8_retry3",
+  "distribution": {
+    "expected_actions": {
+      "end": 120,
+      "migration_advisor": 360,
+      "qwen_detection": 60,
+      "rexomni_detection": 60
+    },
+    "scenarios": {
+      "G1_first_success_end": 60,
+      "G2_conflict_stale_history": 60,
+      "P1_iou_low_fresh": 120,
+      "P2_all_gates_ok": 60,
+      "P3_transient_5xx": 120,
+      "P4_auth_quota": 60,
+      "P5_second_failure": 60,
+      "P6_domain_shift": 60
+    }
+  },
+  "model_name_or_path": "/apdcephfs_hzlf/share_1227201/zkq/capa_h20/models/Qwen3.5-4B",
+  "output": "training/planner_grpo_seed_v1/step_data/planner_retry_migrate_v8_retry3_grpo_train_qwen35_4b_nothinking_step23_nohint.jsonl",
+  "prompt_contract": {
+    "chat_template": "native_qwen35",
+    "enable_thinking": false,
+    "eos_token_id": 151645,
+    "max_prompt_tokens_hard_gate": 12288,
+    "pad_token_id": 151643,
+    "suffix": "<|im_start|>assistant\n<think>\n\n</think>\n\n",
+    "token_stats": {
+      "max": 9812,
+      "mean": 7066.556666666666,
+      "min": 6284,
+      "over_limit": 0,
+      "p50": 6516,
+      "p95": 9554
+    }
+  },
+  "role": "optimization_only_qwen35_step_data",
+  "routing_hint": {
+    "env": "CAPA_STRIP_ROUTING_HINT",
+    "fallback": "请根据以上信息判断下一步。",
+    "hint_prefix": "决策提示：",
+    "stripped": true,
+    "variant_suffix": "_nohint"
+  },
+  "rows": 600,
+  "schema_version": "1.0",
+  "sha256": {
+    "cases": "0eef19c1e7f2fe443db890b2a03937ed8823c10a5552a3ddd1127f57be8459ef",
+    "config": "8ba006f74fecfaaeb392872a60f4a480e7ec9860153d2e1b769ec81f9a147f8a",
+    "step_data": "721709cd89ee537c8f982d163de26dba417f70aa766649c2a1d854f605dc3073",
+    "tokenizer_config": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101"
+  },
+  "target_step": 2
+}

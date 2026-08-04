@@ -29,6 +29,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import random
 import re
 import statistics
@@ -47,6 +48,46 @@ for import_root in (ROOT / "src", ROOT, ROOT / "demo"):
 
 
 DATASET_ID = "planner_retry_migrate_v7_longobs"
+
+# --- 3-step retry variant (CAPA_V7_RETRY_3STEP=1)---------------------------
+#
+# Why this switch exists (2026-08-04):
+#
+# v7 collapsed the `retry` target class into a 2-step
+# [detector, migration_advisor] trajectory (see _expected_decisions).  The
+# consequence, measured only after three GRPO runs had already burned GPU
+# hours, is that the *entire* v7 GRPO decision space is 2 actions with a 75/25
+# split:
+#
+#     step-2 gold action     migration_advisor 360 (75%)   end 120 (25%)
+#     cases whose step-2 is a detector:0 / 480
+#
+# So `retry` -- one of the three actions the study claims to teach -- has no
+# gold occurrence anywhere in the dataset.  A 2-action, 75/25 pool saturates
+# almost immediately: GRPO exhausted it in ~30 optimizer steps and thenran
+# 50+ zero-gradient steps (see reports/V7_GRPO_RECOVERY_20260804.md).  This is
+# also a direct violation of the one configuration this project has ever gotten
+# to work: the n58 recipe balanced retry/migrate/end at 24/24/24 and that
+# action-class coverage is what fixed rule induction
+# (reports/POST_TRAINING_SFT_GRPO_PLAYBOOK.md, n52->n58).
+#
+# With CAPA_V7_RETRY_3STEP=1 the P1/P3 `retry` scenarios become genuine 3-step
+# trajectories [detector, same detector, migration_advisor], which:
+#
+#   * restores a 3-action decision space at step 2 (detector 25% /
+#     migration_advisor 50% / end 25%);
+#   * creates a step-3 decision whose correctness depends on a state reached at
+#     step 2 ("the retry budget is now spent"), i.e. real sequential dependence
+#     instead of a single boolean flag;
+#   * lets the forbidden set differ per step -- at step 2 migration_advisor is
+#     premature, at step 3 both detectors are illegal.
+#
+# Everything else (long observations, forbidden-token gate, implicit signals,
+# nuisance MI audit) is inherited unchanged. Output goes to a separate
+# dataset_id so no audited v7 artifact is overwritten.
+RETRY_3STEP = os.environ.get("CAPA_V7_RETRY_3STEP", "0") == "1"
+if RETRY_3STEP:
+    DATASET_ID = "planner_retry_migrate_v8_retry3"
 SCHEMA_VERSION = "1.0"
 BUILD_SEED = 2026080101
 CREATED_AT = "2026-08-01T00:00:00+00:00"
@@ -712,6 +753,43 @@ def build_observation(
 # --- Case assembly ----------------------------------------------------------
 
 
+def _forbidden_actions_by_step(
+    detector: str, scenario: dict[str, Any], n_steps: int
+) -> dict[str, list[str]]:
+    """Per-step forbidden sets for the 3-step retry variant.
+
+    The case-level ``forbidden_actions`` list has to stay permissive enough to
+    contain every gold action in the trajectory, otherwise the trajectory-level
+    verifier would penalise the correct path. But the *step* datasets used by
+    GRPO score one decision at a time, so each of those rows can carry a
+    tighter, state-specific set. That difference is the whole point of the
+    3-step variant:
+
+        step2 (budget fresh) -> migration_advisor is PREMATURE
+        step3 (budget spent) -> both detectors are ILLEGAL
+
+    Keys are stringified step indices to survive JSON round-trips.
+    """
+    base = {"rag_answer", "re_question", "answerer", "flux-image-generation", "pipeline_eval"}
+    all_detectors = {"qwen_detection", "rexomni_detection"}
+    other_detector = all_detectors - {detector}
+    out: dict[str, list[str]] = {}
+    is_retry3 = RETRY_3STEP and scenario["target_action_class"] == "retry" and n_steps == 3
+    # step 1 is always the first detector call.
+    out["1"] = sorted(base | other_detector | {"migration_advisor"})
+    if is_retry3:
+        # Retrying the same detector is gold; migrating now is the error we
+        # want the reward to punish.
+        out["2"] = sorted(base | other_detector | {"migration_advisor"})
+        # Budget spent: no detector of any family may be called again.
+        out["3"] = sorted(base | all_detectors)
+    else:
+        # 2-step case: step 2 is migration_advisor or end, so every detector is
+        # off-limits by then.
+        out["2"] = sorted(base | all_detectors)
+    return out
+
+
 def _forbidden_actions(detector: str) -> list[str]:
     """
     Actions the planner must never emit for THIS case.
@@ -810,20 +888,37 @@ def _expected_decisions(entity: Entity, scenario: dict[str, Any], detector: str)
         "required_args": {"finish_after_tool": False},
     }
     tac = scenario["target_action_class"]
-    if tac in ("retry", "migrate"):
-        # Collapse retry -> [detector, migration_advisor] (2-step). See
-        # docstring above for rationale.
-        step2 = {
-            "action": "migration_advisor",
+    migrate_step = {
+        "action": "migration_advisor",
+        "decision_type": "tool",
+        "arg_contains": {"user_query": query_synonyms},
+        "required_args": {
+            "finish_after_tool": True,
+            "use_image": True,
+            "use_visual_probe": True,
+        },
+    }
+    if tac == "retry" and RETRY_3STEP:
+        # Genuine 3-step retry: probe -> retry the SAME detector -> migrate.
+        #
+        # step2 is the decision this scenario actually exists to teach: the
+        # first observation is shaky (low cross-probe IoU for P1, a transient
+        # 5xx/timeout for P3) but the retry budget is still fresh, so calling
+        # the same detector once more is correct and migrating now is
+        # premature.  step3 is a different decision under a different state:
+        # the budget is spent, so migration is the only legal move.
+        retry_step = {
+            "action": detector,
             "decision_type": "tool",
-            "arg_contains": {"user_query": query_synonyms},
-            "required_args": {
-                "finish_after_tool": True,
-                "use_image": True,
-                "use_visual_probe": True,
-            },
+            "arg_contains": {"label": [entity.target_entity]},
+            "required_args": {"finish_after_tool": False},
         }
-        return [step1, step2]
+        return [step1, retry_step, migrate_step]
+    if tac in ("retry", "migrate"):
+        # Legacy v7 behaviour: collapse retry -> [detector, migration_advisor]
+        # (2-step). See docstring above for the original rationale and the
+        # RETRY_3STEP block for why it was a mistake for GRPO.
+        return [step1, migrate_step]
     if tac == "end":
         step2 = {
             "action": "end",
@@ -834,6 +929,104 @@ def _expected_decisions(entity: Entity, scenario: dict[str, Any], detector: str)
         }
         return [step1, step2]
     raise ValueError(f"unknown target_action_class={tac!r}")
+
+
+def _post_retry_observation(
+    *,
+    entity: Entity,
+    scenario: dict[str, Any],
+    nuisance: Nuisance,
+    detector: str,
+) -> dict[str, Any]:
+    """Observation the planner reads AFTER it has spent its one retry.
+
+    Semantics follow the V15 `post_retry_metric_veto_step3` stratum: the retry
+    itself succeeds at the transport level, so the planner cannot justify a
+    third probe by "it errored again"; but one quality gate is still not met,
+    so ending is also wrong.  The only legal move is migration.
+
+    Two hard constraints inherited from v7:
+
+    1. The forbidden-token gate.  We must never write``retry_count=`` /
+       ``retryable=`` etc.  "The budget is spent" is conveyed *implicitly*, by
+       putting this case's own first attempt into ``session_history`` as a
+       completed prior attempt of the same detector.
+    2. Long observation.  The same session-history / technical-notes filler
+       blocks are reused, so the step-3 prompt has the same shape and length
+       distribution as the step-2 prompt.
+    """
+    rng = _rng("obs_v7_postretry", entity.entity_id, scenario["id"], nuisance.seed_salt, 2)
+    sid = scenario["id"]
+    duration_ms = rng.randint(600, 5400)
+
+    # The retry transported fine, but one gate still fails. Which gate depends
+    # on the scenario so P1 and P3 stay distinguishable at step 3 as well.
+    if sid == "P1_iou_low_fresh":
+        # Second probe agrees no better than the first: IoU stays below the bar.
+        detector_response = _detector_success_payload(
+            rng, entity=entity, detector=detector,
+            n_candidates=rng.choice((1, 2)), confidence_min=0.91,
+            iou_between_probes=0.58, domain_shift_tag=None,
+            duration_ms=duration_ms,
+        )
+    elif sid == "P3_transient_5xx":
+        # Transport recovered, but the recovered result carries a domain-shift
+        # tag, so current capability still cannot own this target.
+        detector_response = _detector_success_payload(
+            rng, entity=entity, detector=detector,
+            n_candidates=rng.choice((1, 2)), confidence_min=0.90,
+            iou_between_probes=0.86,
+            domain_shift_tag=rng.choice(("night_scene", "thermal_ir", "sar_grayscale")),
+            duration_ms=duration_ms,
+        )
+    else:
+        raise ValueError(f"_post_retry_observation called for non-retry scenario {sid!r}")
+
+    # Implicitly encode "the retry has already happened": this case's own first
+    # attempt is now a completed record in session_history.
+    prior_attempts = [
+        {
+            "query_id": f"selfprev_{rng.randrange(10**6):06d}",
+            "text": f"本轮对{entity.target_entity}的首次{detector}调用",
+            "attempted_action": detector,
+            "attempted_arguments": {"label": entity.target_entity},
+            "attempted_result_summary": (
+                "首次调用的结构化响应质量不足（见当时detector_response），"
+                "已在同一轮内立即复用同一检测器补测一次；本 observation 即补测结果。"
+            ),
+            "elapsed_since_seconds": rng.randint(20, 90),
+        }
+    ]
+    session_history = _session_history_block(
+        rng, prior_attempts=prior_attempts, filler_target_tokens=520,
+    )
+    tech_notes = _tech_notes(rng, entity, filler_target_tokens=1040)
+
+    hint_map = {
+        "P1_iou_low_fresh": (
+            "补测后的跨提示 IoU 仍未达标，同一检测器已连续使用两次、无更多补测余量；"
+            "下一步请调用 migration_advisor，禁止再次调用任何检测器。"
+        ),
+        "P3_transient_5xx": (
+            "补测已恢复传输，但结果带域偏移标签且检测器已连续使用两次；"
+            "下一步请调用 migration_advisor，禁止再次调用任何检测器。"
+        ),
+    }
+    routing_hint = hint_map[sid]
+    natural_summary = (
+        f"{detector} 已对 {entity.target_entity} 完成同轮内的第二次调用；"
+        f"本次结构化响应见 detector_response，两次调用的先后关系见 session_history，"
+        f"业务参考资料见 technical_notes。"
+        f"决策提示：{routing_hint}"
+    )
+    return {
+        "success": True,
+        "summary": natural_summary,
+        "detector_response": detector_response,
+        "session_history": session_history,
+        "technical_notes": tech_notes,
+        "tool_call_id": hex(rng.randrange(1 << 60))[2:],
+    }
 
 
 def _mock_observations_for_case(
@@ -852,10 +1045,23 @@ def _mock_observations_for_case(
         step_index=1, detector_label=detector,
     )
     out: list[dict[str, Any]] = [{"after_step": 1, "observation": obs1.observation}]
-    # After the 2-step gold collapse (see _expected_decisions), no scenario
-    # needs a second synthetic observation. The rollout will only call
-    # migration_advisor / end at step 2, both of which are read from the
-    # planner's own state, not from a tool observation.
+    if RETRY_3STEP and scenario["target_action_class"] == "retry":
+        # 3-step retry needs the post-retry observation the planner reads
+        # before its step-3 decision.
+        out.append(
+            {
+                "after_step": 2,
+                "observation": _post_retry_observation(
+                    entity=entity, scenario=scenario,
+                    nuisance=nuisance, detector=detector,
+                ),
+            }
+        )
+        return out
+    # In the legacy 2-step gold collapse no scenario needs a second synthetic
+    # observation: the rollout only calls migration_advisor / end at step 2,
+    # both of which are read from the planner's own state, not from a tool
+    # observation.
     return out
 
 
@@ -902,9 +1108,23 @@ def build_case(
         ),
         "expected_decisions": _expected_decisions(entity, scenario, detector),
         "forbidden_actions": _forbidden_actions(detector),
+        "forbidden_actions_by_step": _forbidden_actions_by_step(
+            detector, scenario, len(_expected_decisions(entity, scenario, detector))
+        ),
         "reward_spec": _reward_spec(),
+        # The step whose decision GRPO optimises. For the 3-step retry variant
+        # BOTH step 2 (retry vs. premature migrate) and step 3 (migrate vs.
+        # illegal third probe) are optimisation targets; the stage-data builder
+        # emits one row per entry.
         "decision_under_test_step": 2,
         "grpo_target_step": 2,
+        "grpo_target_steps": (
+            [2, 3]
+            if RETRY_3STEP
+            and scenario["target_action_class"] == "retry"
+            and len(_expected_decisions(entity, scenario, detector)) == 3
+            else [2]
+        ),
         "sft_eligible": split in ("sft_train", "sft_dev"),
         "grpo_eligible": split in ("grpo_train", "grpo_dev"),
         "training_only": split in ("sft_train", "grpo_train"),
@@ -1049,7 +1269,7 @@ def build_all(min_obs_tokens: int) -> dict[str, Any]:
     DATASET_DIR.mkdir(parents=True, exist_ok=True)
     per_split_paths: dict[str, Path] = {}
     for split, rows in all_cases_by_split.items():
-        p = CASE_DIR / f"planner_retry_migrate_v7_longobs_{split}_cases.jsonl"
+        p = CASE_DIR / f"{DATASET_ID}_{split}_cases.jsonl"
         write_jsonl(p, rows)
         per_split_paths[split] = p
 

@@ -1,0 +1,133 @@
+{
+  "audits": {
+    "grpo_dev": {
+      "duplicate_prompt_hashes": 0,
+      "forbidden_fragment_hits": {
+        "\"_thought\"": 0,
+        "\"external_ref\"": 0,
+        "/raid/": 0,
+        "/tmp/": 0,
+        "按训练样本期望": 0
+      },
+      "prompt_tokens": {
+        "max": 6711,
+        "mean": 6478.4875,
+        "min": 6319,
+        "p50": 6466,
+        "p95": 6679
+      },
+      "rows": 240,
+      "source_cases": 240,
+      "status": "pass"
+    },
+    "grpo_train": {
+      "duplicate_prompt_hashes": 0,
+      "forbidden_fragment_hits": {
+        "\"_thought\"": 0,
+        "\"external_ref\"": 0,
+        "/raid/": 0,
+        "/tmp/": 0,
+        "按训练样本期望": 0
+      },
+      "prompt_tokens": {
+        "max": 6758,
+        "mean": 6478.233333333334,
+        "min": 6284,
+        "p50": 6462,
+        "p95": 6678
+      },
+      "rows": 480,
+      "source_cases": 480,
+      "status": "pass"
+    },
+    "sft_dev": {
+      "duplicate_prompt_hashes": 0,
+      "forbidden_fragment_hits": {
+        "\"_thought\"": 0,
+        "\"external_ref\"": 0,
+        "/raid/": 0,
+        "/tmp/": 0,
+        "按训练样本期望": 0
+      },
+      "prompt_tokens": {
+        "max": 6751,
+        "mean": 5062.090625,
+        "min": 3613,
+        "p50": 6314,
+        "p95": 6667
+      },
+      "rows": 320,
+      "source_cases": 160,
+      "status": "pass"
+    },
+    "sft_train": {
+      "duplicate_prompt_hashes": 0,
+      "forbidden_fragment_hits": {
+        "\"_thought\"": 0,
+        "\"external_ref\"": 0,
+        "/raid/": 0,
+        "/tmp/": 0,
+        "按训练样本期望": 0
+      },
+      "prompt_tokens": {
+        "max": 6748,
+        "mean": 5061.5125,
+        "min": 3611,
+        "p50": 6297,
+        "p95": 6635
+      },
+      "rows": 1280,
+      "source_cases": 640,
+      "status": "pass"
+    }
+  },
+  "created_at": "2026-08-01T00:00:00+00:00",
+  "dataset_id": "planner_retry_migrate_v7_longobs",
+  "deduplication": {
+    "rule": "deduplicate identical (prompt_sha256, completion_sha256) pairs across steps",
+    "sft_dev_rows": 320,
+    "sft_train_rows": 1280
+  },
+  "files": {
+    "grpo_dev": "training/planner_grpo_seed_v1/step_data/planner_retry_migrate_v7_longobs_grpo_dev_qwen35_4b_nothinking_step2_nohint.jsonl",
+    "grpo_train": "training/planner_grpo_seed_v1/step_data/planner_retry_migrate_v7_longobs_grpo_train_qwen35_4b_nothinking_step2_nohint.jsonl",
+    "sft_dev": "training/planner_grpo_seed_v1/sft_data_planner_retry_migrate_v7_longobs_qwen35_nothinking_nohint/dev.jsonl",
+    "sft_train": "training/planner_grpo_seed_v1/sft_data_planner_retry_migrate_v7_longobs_qwen35_nothinking_nohint/train.jsonl"
+  },
+  "model_name_or_path": "/apdcephfs_hzlf/share_1227201/zkq/capa_h20/models/Qwen3.5-4B",
+  "prompt_contract": {
+    "assistant_suffix": "<|im_start|>assistant\n<think>\n\n</think>\n\n",
+    "chat_template": "native_qwen35",
+    "completion_suffix_sft": "<|im_end|>",
+    "enable_thinking": false,
+    "eos_token_id": 151645,
+    "max_prompt_tokens": 12288,
+    "max_steps": 3,
+    "pad_token_id": 151643
+  },
+  "routing_hint": {
+    "env": "CAPA_STRIP_ROUTING_HINT",
+    "fallback": "请根据以上信息判断下一步。",
+    "hint_prefix": "决策提示：",
+    "stats": {
+      "replacements": 1520,
+      "rows": 2320,
+      "rows_with_hint": 1520
+    },
+    "stripped": true,
+    "variant_suffix": "_nohint"
+  },
+  "rows": {
+    "grpo_dev": 240,
+    "grpo_train": 480,
+    "sft_dev": 320,
+    "sft_train": 1280
+  },
+  "schema_version": "1.0",
+  "sha256": {
+    "grpo_dev": "a1854443f611ad56694b9b789adb1aa7843e5db765541a6de9fcf578d67b5115",
+    "grpo_train": "0bb1be8de3e5f7d6c6ee9a601af508193a08ebea51307c9822fe517162b99add",
+    "sft_dev": "a108e2cfdcb5b7890d0ec74a0cf185965b897e7f26eafcd6d87efa6bb08751e6",
+    "sft_train": "5736913fae7ecd48d497de9654684aa107f89768e1e96e25aaba9144a7a8548b"
+  }
+}

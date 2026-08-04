@@ -49,14 +49,18 @@ for import_root in (ROOT / "src", ROOT, ROOT / "demo"):
 from training.planner_grpo_seed_v1.scripts import build_planner_retry_migrate_v6 as v6  # noqa: E402
 
 
-DATASET_ID = "planner_retry_migrate_v7_longobs"
+# Which case family to stage. The 3-step retry variant lives under its own
+# dataset_id so v7 artifacts are never overwritten; select it with
+# CAPA_STAGE_DATASET_ID=planner_retry_migrate_v8_retry3.
+DATASET_ID = os.environ.get(
+    "CAPA_STAGE_DATASET_ID", "planner_retry_migrate_v7_longobs"
+).strip()
 SCHEMA_VERSION = "1.0"
 CREATED_AT = "2026-08-01T00:00:00+00:00"
 
 CASE_DIR = ROOT / "training/planner_grpo_seed_v1/cases"
 SFT_DIR = ROOT / f"training/planner_grpo_seed_v1/sft_data_{DATASET_ID}_qwen35_nothinking"
 STEP_DIR = ROOT / "training/planner_grpo_seed_v1/step_data"
-
 DEFAULT_MODEL = Path(os.environ.get(
     "CAPA_QWEN35_TOKENIZER_DIR",
     "/apdcephfs_hzlf/share_1227201/zkq/capa_h20/models/Qwen3.5-4B",
@@ -65,6 +69,71 @@ DEFAULT_MODEL = Path(os.environ.get(
 # v7 long-observation gate. The v6 builder used 4608; we need headroom for the
 # 1500-4000 token observation payloads.
 V7_MAX_PROMPT_TOKENS = 12288
+
+# ---------------------------------------------------------------------------
+# Routing-hint stripping
+# ---------------------------------------------------------------------------
+#``build_planner_retry_migrate_v7_longobs.py`` injects one explicit routing
+# sentence into ``observation.summary`` so that a *zero-shot* planner can pass
+# the 0.85 dataset-health gate by reading the summary alone.  Its own docstring
+# states that SFT/GRPO training "may strip it via CAPA_STRIP_ROUTING_HINT=1 in
+# prepare_v7_longobs_stage_data.py" -- but that switch was never implemented
+# here, so every SFT and GRPO row shipped with the hint intact.
+#
+# Consequences observed on 2026-08-03:
+#   * SFT ckpt-100 learns to follow the literal hint instead of the
+#     observation content (the v6 "rule field leakage" defect in new clothes).
+#   * The hint names the *action* but never the arguments, so the residual
+#     concentrates on hint-uncovered fields: 42/43 P1+P6 dev failures are
+#     `migration_advisor` with `finish_after_tool=false`.
+#   * The GRPO optimizer pool saturates (frac_reward_zero_std -> 0.994,
+#     grad_norm 0 on 21/22 steps), i.e. no learnable signal remains.
+#
+# Setting ``CAPA_STRIP_ROUTING_HINT=1`` removes the hint sentence from the
+# rendered prompt and replaces it with the neutral fallback wording that the
+# builder uses when no hint exists.  Evaluation data should normally KEEP the
+# hint (that is what the 35B >= 0.85 health gate was measured against), so the
+# switch is per-invocation rather than global.
+STRIP_ROUTING_HINT = os.environ.get("CAPA_STRIP_ROUTING_HINT", "0").strip() in {"1", "true", "yes"}
+
+# The builder emits "决策提示：<hint>" as the tail of observation.summary.
+_HINT_PREFIX = "决策提示："
+_HINT_FALLBACK = "请根据以上信息判断下一步。"
+
+# Populated by ``_render_row`` so the manifest can record what was stripped.
+_HINT_STRIP_STATS: dict[str, int] = {"rows": 0, "rows_with_hint": 0, "replacements": 0}
+
+
+def strip_routing_hint(text: str) -> tuple[str, int]:
+    """Replace every``决策提示：...`` tail with the neutral fallback wording.
+
+    The hint always terminates the summary string, and the summary is embedded
+    in a JSON payload, so the hint runs until the closing quote of the JSON
+    string value.  Returns ``(new_text, replacements)``.
+    """
+    if _HINT_PREFIX not in text:
+        return text, 0
+
+    out: list[str] = []
+    cursor = 0
+    replacements = 0
+    while True:
+        start = text.find(_HINT_PREFIX, cursor)
+        if start < 0:
+            out.append(text[cursor:])
+            break
+        # The summary is a JSON string value; the hint ends at the next
+        # unescaped double quote.
+        end = start
+        while end < len(text):
+            if text[end] == '"' and text[end - 1] != "\\":
+                break
+            end += 1
+        out.append(text[cursor:start])
+        out.append(_HINT_FALLBACK)
+        replacements += 1
+        cursor = end
+    return "".join(out), replacements
 
 
 def sha256_file(path: Path) -> str:
@@ -80,7 +149,7 @@ def sha256_text(text: str) -> str:
 
 
 def load_cases(split: str) -> list[dict[str, Any]]:
-    path = CASE_DIR / f"planner_retry_migrate_v7_longobs_{split}_cases.jsonl"
+    path = CASE_DIR / f"{DATASET_ID}_{split}_cases.jsonl"
     if not path.is_file():
         raise FileNotFoundError(path)
     rows: list[dict[str, Any]] = []
@@ -96,6 +165,12 @@ def _render_row(case: dict[str, Any], step_index: int, tokenizer: Any) -> tuple[
     """Return (rendered_prompt, prompt_token_count) using v6 helpers."""
     pseudo = v6.build_sanitized_pseudo_prompt(case, step_index)
     rendered = v6.render_nonthinking_prompt(tokenizer, pseudo)
+    if STRIP_ROUTING_HINT:
+        rendered, replaced = strip_routing_hint(rendered)
+        _HINT_STRIP_STATS["rows"] += 1
+        _HINT_STRIP_STATS["replacements"] += replaced
+        if replaced:
+            _HINT_STRIP_STATS["rows_with_hint"] += 1
     ids = tokenizer(rendered, add_special_tokens=False)["input_ids"]
     if len(ids) > V7_MAX_PROMPT_TOKENS:
         raise ValueError(
@@ -160,46 +235,84 @@ def build_sft_rows(cases: list[dict[str, Any]], tokenizer: Any) -> list[dict[str
     return out
 
 
-def build_grpo_step2_rows(cases: list[dict[str, Any]], tokenizer: Any) -> list[dict[str, Any]]:
-    """GRPO step-2 rows: one row per case whose ``grpo_target_step`` == 2.
+def _forbidden_for_step(case: dict[str, Any], step_index: int) -> list[Any]:
+    """Per-step forbidden set, falling back to the case-level list.
 
-    step-2 is where the retry-vs-migrate soft boundary lives.
+    The 3-step retry variant (planner_retry_migrate_v8_retry3) ships
+    ``forbidden_actions_by_step`` because the illegal moves differ by state:
+    at step 2 the retry budget is fresh so ``migration_advisor`` is premature,
+    while at step 3 the budget is spent so both detectors are illegal.  Using
+    the case-level union for every row would erase exactly the signal this
+    variant was built to create.
+    """
+    by_step = case.get("forbidden_actions_by_step")
+    if isinstance(by_step, dict):
+        val = by_step.get(str(step_index))
+        if isinstance(val, list):
+            return val
+    return case.get("forbidden_actions") or []
+
+
+def build_grpo_step_rows(cases: list[dict[str, Any]], tokenizer: Any) -> list[dict[str, Any]]:
+    """GRPO optimizer rows: one row per (case, target step).
+
+    v7 emitted step-2 only, because every v7 trajectory was 2 steps long and
+    the step-2 gold action was always ``migration_advisor`` or ``end`` -- a
+    2-action, 75/25 decision space that GRPO exhausts in ~30 optimizer steps.
+
+    Cases may now declare ``grpo_target_steps`` (list) in addition to the
+    legacy scalar ``grpo_target_step``.  For the 3-step retry variant that list
+    is ``[2, 3]``, which yields two rows per retry case:
+
+        step 2 -- retry the same detector (migrating now is premature)
+        step 3 -- migrate (a third probe is illegal)
+
+    The two rows share an ``entity_id``/``group_id`` so entity-level
+    independence is preserved for CI purposes, but they are different decisions
+    under different states.
     """
     out: list[dict[str, Any]] = []
     for case in cases:
-        target_step = int(case.get("grpo_target_step") or 2)
-        if target_step != 2:
-            continue
+        steps = case.get("grpo_target_steps")
+        if not isinstance(steps, list) or not steps:
+            steps = [int(case.get("grpo_target_step") or 2)]
         expected = case.get("expected_decisions") or []
-        if len(expected) < 2:
-            continue
-        exp2 = expected[1]
-        rendered, prompt_tokens = _render_row(case, 2, tokenizer)
-        decision = v6.canonical_decision(case, exp2, step_index=2)
-        row = {
-            "prompt": rendered,
-            "case_id": case.get("case_id"),
-            "dataset_id": DATASET_ID,
-            "category": case.get("category"),
-            "step_index": 2,
-            "expected_step": json.dumps(exp2, ensure_ascii=False, sort_keys=True),
-            "forbidden_actions": json.dumps(case.get("forbidden_actions") or [], ensure_ascii=False, sort_keys=True),
-            "reward_spec": json.dumps(case.get("reward_spec") or {}, ensure_ascii=False, sort_keys=True),
-            "previous_action": v6.expected_action_name(expected[0]),
-            "entity_id": case.get("entity_id"),
-            "group_id": case.get("group_id") or case.get("entity_id"),
-            "template_id": case.get("template_id"),
-            "scenario_id": case.get("scenario_id"),
-            "target_action_class": case.get("target_action_class"),
-            "full_expected_actions": json.dumps(
-                [v6.expected_action_name(step) for step in expected if isinstance(step, dict)],
-                ensure_ascii=False, sort_keys=True,
-            ),
-            "prompt_token_count": prompt_tokens,
-            "prompt_sha256": sha256_text(rendered),
-        }
-        out.append(row)
+        for target_step in (int(s) for s in steps):
+            if len(expected) < target_step or target_step < 2:
+                continue
+            exp = expected[target_step - 1]
+            rendered, prompt_tokens = _render_row(case, target_step, tokenizer)
+            row = {
+                "prompt": rendered,
+                "case_id": case.get("case_id"),
+                "dataset_id": DATASET_ID,
+                "category": case.get("category"),
+                "step_index": target_step,
+                "expected_step": json.dumps(exp, ensure_ascii=False, sort_keys=True),
+                "forbidden_actions": json.dumps(
+                    _forbidden_for_step(case, target_step), ensure_ascii=False, sort_keys=True
+                ),
+                "reward_spec": json.dumps(case.get("reward_spec") or {}, ensure_ascii=False, sort_keys=True),
+                "previous_action": v6.expected_action_name(expected[target_step - 2]),
+                "entity_id": case.get("entity_id"),
+                "group_id": case.get("group_id") or case.get("entity_id"),
+                "template_id": case.get("template_id"),
+                "scenario_id": case.get("scenario_id"),
+                "target_action_class": case.get("target_action_class"),
+                "full_expected_actions": json.dumps(
+                    [v6.expected_action_name(step) for step in expected if isinstance(step, dict)],
+                    ensure_ascii=False, sort_keys=True,
+                ),
+                "prompt_token_count": prompt_tokens,
+                "prompt_sha256": sha256_text(rendered),
+            }
+            out.append(row)
     return out
+
+
+# Backwards-compatible alias: v7 callers import the step2-only name.
+def build_grpo_step2_rows(cases: list[dict[str, Any]], tokenizer: Any) -> list[dict[str, Any]]:
+    return build_grpo_step_rows(cases, tokenizer)
 
 
 def audit_rows(rows: list[dict[str, Any]]) -> dict[str, Any]:
@@ -248,6 +361,15 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--model-dir", type=Path, default=DEFAULT_MODEL)
     parser.add_argument("--max-prompt-tokens", type=int, default=V7_MAX_PROMPT_TOKENS)
+    parser.add_argument(
+        "--variant-suffix",
+        default=None,
+        help=(
+            "Optional filename suffix so a variant build never overwrites the "
+            "already-audited default artifacts. Defaults to '_nohint' when "
+            "CAPA_STRIP_ROUTING_HINT=1, else empty."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -256,7 +378,13 @@ def main() -> int:
     global V7_MAX_PROMPT_TOKENS
     V7_MAX_PROMPT_TOKENS = args.max_prompt_tokens
 
+    suffix = args.variant_suffix
+    if suffix is None:
+        suffix = "_nohint" if STRIP_ROUTING_HINT else ""
+    sft_dir = Path(str(SFT_DIR) + suffix)
+
     print(f"[v7-stage] loading tokenizer from {args.model_dir}")
+    print(f"[v7-stage] strip_routing_hint={STRIP_ROUTING_HINT} variant_suffix={suffix!r}")
     tokenizer = AutoTokenizer.from_pretrained(
         args.model_dir, trust_remote_code=False, use_fast=True, padding_side="right",
     )
@@ -272,7 +400,7 @@ def main() -> int:
         a = audit_rows(rows)
         if a["status"] != "pass":
             raise RuntimeError(f"{split} audit failed: {a}")
-        target = SFT_DIR / f"{split.split('_')[1]}.jsonl"  # train.jsonl / dev.jsonl
+        target = sft_dir / f"{split.split('_')[1]}.jsonl"  # train.jsonl / dev.jsonl
         write_jsonl(target, rows)
         audits[f"sft_{split.split('_')[1]}"] = {**a, "source_cases": len(cases)}
         files[f"sft_{split.split('_')[1]}"] = str(target.relative_to(ROOT))
@@ -282,11 +410,19 @@ def main() -> int:
     # --- GRPO step2 ---
     for split in ("grpo_train", "grpo_dev"):
         cases = load_cases(split)
-        rows = build_grpo_step2_rows(cases, tokenizer)
+        rows = build_grpo_step_rows(cases, tokenizer)
         a = audit_rows(rows)
         if a["status"] != "pass":
             raise RuntimeError(f"{split} audit failed: {a}")
-        target = STEP_DIR / f"planner_retry_migrate_v7_longobs_{split}_qwen35_4b_nothinking_step2.jsonl"
+        # Name the file after the actual target steps: v7 is step2-only, the
+        # 3-step retry variant mixes step2 and step3 in one optimizer pool.
+        step_tag = "step" + "".join(
+            str(x) for x in sorted({int(r["step_index"]) for r in rows})
+        )
+        target = STEP_DIR / (
+            f"{DATASET_ID}_{split}"
+            f"_qwen35_4b_nothinking_{step_tag}{suffix}.jsonl"
+        )
         write_jsonl(target, rows)
         audits[f"grpo_{split.split('_')[1]}"] = {**a, "source_cases": len(cases)}
         files[f"grpo_{split.split('_')[1]}"] = str(target.relative_to(ROOT))
@@ -334,6 +470,13 @@ def main() -> int:
                 "tokenizer_config": sha256_file(tokenizer_dir / "tokenizer_config.json"),
                 "config": sha256_file(tokenizer_dir / "config.json"),
             },
+            "routing_hint": {
+                "stripped": STRIP_ROUTING_HINT,
+                "env": "CAPA_STRIP_ROUTING_HINT",
+                "variant_suffix": suffix,
+                "hint_prefix": _HINT_PREFIX,
+                "fallback": _HINT_FALLBACK,
+            },
         }
         write_json(target.with_suffix(".manifest.json"), manifest)
         print(f"[v7-stage] wrote {target} rows={len(rows)} + manifest sidecar")
@@ -357,6 +500,14 @@ def main() -> int:
         "audits": audits,
         "files": files,
         "sha256": sha256_map,
+        "routing_hint": {
+            "stripped": STRIP_ROUTING_HINT,
+            "env": "CAPA_STRIP_ROUTING_HINT",
+            "variant_suffix": suffix,
+            "hint_prefix": _HINT_PREFIX,
+            "fallback": _HINT_FALLBACK,
+            "stats": dict(_HINT_STRIP_STATS),
+        },
         "deduplication": {
             "rule": "deduplicate identical (prompt_sha256, completion_sha256) pairs across steps",
             "sft_train_rows": audits.get("sft_train", {}).get("rows"),
@@ -364,8 +515,8 @@ def main() -> int:
         },
         "rows": {k: v.get("rows") for k, v in audits.items()},
     }
-    write_json(SFT_DIR / "metadata.json", metadata)
-    print(f"[v7-stage] wrote {SFT_DIR / 'metadata.json'}")
+    write_json(sft_dir / "metadata.json", metadata)
+    print(f"[v7-stage] wrote {sft_dir / 'metadata.json'}")
     print(json.dumps({k: v["rows"] for k, v in audits.items()}, ensure_ascii=False))
     return 0
 
